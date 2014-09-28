@@ -8,12 +8,11 @@
 
 package na.okutane.cpp.llvm;
 
-public class MDString {
+public class MDString extends Value {
   private long swigCPtr;
-  protected boolean swigCMemOwn;
 
   protected MDString(long cPtr, boolean cMemoryOwn) {
-    swigCMemOwn = cMemoryOwn;
+    super(bitreaderJNI.MDString_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -33,6 +32,7 @@ public class MDString {
       }
       swigCPtr = 0;
     }
+    super.delete();
   }
 
   public static MDString get(LLVMContext Context, StringRef Str) {
@@ -61,8 +61,8 @@ public class MDString {
     return bitreaderJNI.MDString_end(swigCPtr, this);
   }
 
-  public static boolean classof(SWIGTYPE_p_llvm__Value V) {
-    return bitreaderJNI.MDString_classof(SWIGTYPE_p_llvm__Value.getCPtr(V));
+  public static boolean classof(Value V) {
+    return bitreaderJNI.MDString_classof(Value.getCPtr(V), V);
   }
 
 }

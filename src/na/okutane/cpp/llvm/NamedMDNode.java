@@ -65,8 +65,8 @@ public class NamedMDNode {
     return new StringRef(bitreaderJNI.NamedMDNode_getName(swigCPtr, this), true);
   }
 
-  public void print(SWIGTYPE_p_llvm__raw_ostream ROS, SWIGTYPE_p_AssemblyAnnotationWriter AAW) {
-    bitreaderJNI.NamedMDNode_print__SWIG_0(swigCPtr, this, SWIGTYPE_p_llvm__raw_ostream.getCPtr(ROS), SWIGTYPE_p_AssemblyAnnotationWriter.getCPtr(AAW));
+  public void print(SWIGTYPE_p_llvm__raw_ostream ROS, SWIGTYPE_p_llvm__AssemblyAnnotationWriter AAW) {
+    bitreaderJNI.NamedMDNode_print__SWIG_0(swigCPtr, this, SWIGTYPE_p_llvm__raw_ostream.getCPtr(ROS), SWIGTYPE_p_llvm__AssemblyAnnotationWriter.getCPtr(AAW));
   }
 
   public void print(SWIGTYPE_p_llvm__raw_ostream ROS) {

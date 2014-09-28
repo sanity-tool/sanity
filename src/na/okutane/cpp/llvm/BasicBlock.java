@@ -8,12 +8,11 @@
 
 package na.okutane.cpp.llvm;
 
-public class BasicBlock {
+public class BasicBlock extends Value {
   private long swigCPtr;
-  protected boolean swigCMemOwn;
 
   protected BasicBlock(long cPtr, boolean cMemoryOwn) {
-    swigCMemOwn = cMemoryOwn;
+    super(bitreaderJNI.BasicBlock_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -33,6 +32,7 @@ public class BasicBlock {
       }
       swigCPtr = 0;
     }
+    super.delete();
   }
 
   public LLVMContext getContext() {
@@ -155,13 +155,13 @@ public class BasicBlock {
     return (cMemberPtr == null) ? null : new SWIGTYPE_m_BasicBlock__llvm__iplistT_llvm__Instruction_t(cMemberPtr, false);
   }
 
-  public SWIGTYPE_p_ValueSymbolTable getValueSymbolTable() {
+  public SWIGTYPE_p_llvm__ValueSymbolTable getValueSymbolTable() {
     long cPtr = bitreaderJNI.BasicBlock_getValueSymbolTable(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_ValueSymbolTable(cPtr, false);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__ValueSymbolTable(cPtr, false);
   }
 
-  public static boolean classof(SWIGTYPE_p_llvm__Value V) {
-    return bitreaderJNI.BasicBlock_classof(SWIGTYPE_p_llvm__Value.getCPtr(V));
+  public static boolean classof(Value V) {
+    return bitreaderJNI.BasicBlock_classof(Value.getCPtr(V), V);
   }
 
   public void dropAllReferences() {

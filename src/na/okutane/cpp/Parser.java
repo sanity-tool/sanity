@@ -2,14 +2,14 @@ package na.okutane.cpp;
 
 import na.okutane.api.Cfg;
 import na.okutane.cpp.llvm.BasicBlock;
-import na.okutane.cpp.llvm.DILocation;
-import na.okutane.cpp.llvm.DIScope;
-import na.okutane.cpp.llvm.DebugLoc;
+import na.okutane.cpp.llvm.ConstantInt;
 import na.okutane.cpp.llvm.Function;
 import na.okutane.cpp.llvm.Instruction;
 import na.okutane.cpp.llvm.MDNode;
+import na.okutane.cpp.llvm.MDString;
 import na.okutane.cpp.llvm.Module;
 import na.okutane.cpp.llvm.StringRef;
+import na.okutane.cpp.llvm.Value;
 import na.okutane.cpp.llvm.bitreader;
 
 import java.io.File;
@@ -39,7 +39,7 @@ public class Parser {
 
             if (result == 0) {
                 Module m = bitreader.parse("/Users/jondoe/IdeaProjects/SA/sanity/tests/result.bc");
-                m.dump();
+                //m.dump();
 
                 int size = bitreader.getModuleFunctionsSize(m);
                 System.out.println("count: " + size);
@@ -54,7 +54,7 @@ public class Parser {
                     processBlock(m, entryBlock);
                     //function.getEntryBlock();
                 }
-                //m.dump();
+                m.dump();
                 m.delete();
                 return null;
             } else {
@@ -74,18 +74,45 @@ public class Parser {
 
     private void processInstruction(Module m, Instruction inst) {
         MDNode node = inst.getMetadata(new StringRef("dbg"));
+        String filename = null;
+        Integer lineNo;
         if (node != null) {
-            DILocation loc = new DILocation(node);
-            long Line = loc.getLineNumber();
-            StringRef File = loc.getFilename();
-            StringRef Dir = loc.getDirectory();
-            System.out.println(File.begin());
+            //deepDump(node);
+            filename = getFilename(node) + ':' + toInt(node.getOperand(0));
+            lineNo = toInt(node.getOperand(0));
         }
 
-        DebugLoc debugLoc = inst.getDebugLoc();
-        MDNode scope = debugLoc.getScope(m.getContext());
-        DIScope scoped = new DIScope(scope);
-        //scoped.
-        System.out.println(inst.getOpcodeName() + " // " + scoped.getFilename().begin() + ':' + debugLoc.getLine());
+        System.out.println(inst.getOpcodeName() + " // " + filename);
+    }
+
+    private void deepDump(MDNode node) {
+        node.dump();
+
+        if (node.getNumOperands() > 2) {
+            Value operand = node.getOperand(2);
+            if (MDNode.classof(operand)) {
+                deepDump(bitreader.toMDNode(operand));
+            } else if (MDString.classof(operand)) {
+                System.err.println(bitreader.toMDString(operand).begin());
+            }
+        }
+    }
+
+    String getFilename(MDNode node) {
+        Value maybeTag = node.getOperand(0);
+        if (ConstantInt.classof(maybeTag)) {
+            int val = toInt(maybeTag);
+            if (val == 786473) {
+                return bitreader.toMDString(node.getOperand(1)).begin();
+            } else {
+                return getFilename(bitreader.toMDNode(node.getOperand(2)));
+            }
+        }
+        return null;
+    }
+
+    private int toInt(Value value) {
+        String s = bitreader.toConstantInt(value).getValue().toString(10, true);
+        return Integer.parseInt(s, 10);
     }
 }

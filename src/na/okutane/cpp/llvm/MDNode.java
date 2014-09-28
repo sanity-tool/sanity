@@ -8,12 +8,11 @@
 
 package na.okutane.cpp.llvm;
 
-public class MDNode {
+public class MDNode extends Value {
   private long swigCPtr;
-  protected boolean swigCMemOwn;
 
   protected MDNode(long cPtr, boolean cMemoryOwn) {
-    swigCMemOwn = cMemoryOwn;
+    super(bitreaderJNI.MDNode_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -29,6 +28,7 @@ public class MDNode {
       }
       swigCPtr = 0;
     }
+    super.delete();
   }
 
   public static MDNode get(LLVMContext Context, SWIGTYPE_p_ArrayRefT_llvm__Value_p_t Vals) {
@@ -55,13 +55,13 @@ public class MDNode {
     bitreaderJNI.MDNode_deleteTemporary(MDNode.getCPtr(N), N);
   }
 
-  public void replaceOperandWith(long i, SWIGTYPE_p_llvm__Value NewVal) {
-    bitreaderJNI.MDNode_replaceOperandWith(swigCPtr, this, i, SWIGTYPE_p_llvm__Value.getCPtr(NewVal));
+  public void replaceOperandWith(long i, Value NewVal) {
+    bitreaderJNI.MDNode_replaceOperandWith(swigCPtr, this, i, Value.getCPtr(NewVal), NewVal);
   }
 
-  public SWIGTYPE_p_llvm__Value getOperand(long i) {
+  public Value getOperand(long i) {
     long cPtr = bitreaderJNI.MDNode_getOperand(swigCPtr, this, i);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__Value(cPtr, false);
+    return (cPtr == 0) ? null : new Value(cPtr, false);
   }
 
   public long getNumOperands() {
@@ -77,12 +77,12 @@ public class MDNode {
     return (cPtr == 0) ? null : new Function(cPtr, false);
   }
 
-  public void Profile(SWIGTYPE_p_FoldingSetNodeID ID) {
-    bitreaderJNI.MDNode_Profile(swigCPtr, this, SWIGTYPE_p_FoldingSetNodeID.getCPtr(ID));
+  public void Profile(SWIGTYPE_p_llvm__FoldingSetNodeID ID) {
+    bitreaderJNI.MDNode_Profile(swigCPtr, this, SWIGTYPE_p_llvm__FoldingSetNodeID.getCPtr(ID));
   }
 
-  public static boolean classof(SWIGTYPE_p_llvm__Value V) {
-    return bitreaderJNI.MDNode_classof(SWIGTYPE_p_llvm__Value.getCPtr(V));
+  public static boolean classof(Value V) {
+    return bitreaderJNI.MDNode_classof(Value.getCPtr(V), V);
   }
 
   public static MDNode getMostGenericTBAA(MDNode A, MDNode B) {

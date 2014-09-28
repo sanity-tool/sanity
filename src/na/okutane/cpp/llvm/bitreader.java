@@ -18,7 +18,143 @@ public class bitreader {
   }
 
   public static SWIGTYPE_p_llvm__hash_code hash_value(StringRef S) {
-    return new SWIGTYPE_p_llvm__hash_code(bitreaderJNI.hash_value(StringRef.getCPtr(S), S), true);
+    return new SWIGTYPE_p_llvm__hash_code(bitreaderJNI.hash_value__SWIG_0(StringRef.getCPtr(S), S), true);
+  }
+
+  public static long getHost_char_bit() {
+    return bitreaderJNI.host_char_bit_get();
+  }
+
+  public static long getIntegerPartWidth() {
+    return bitreaderJNI.integerPartWidth_get();
+  }
+
+  public static APInt smin(APInt A, APInt B) {
+    return new APInt(bitreaderJNI.smin(APInt.getCPtr(A), A, APInt.getCPtr(B), B), true);
+  }
+
+  public static APInt smax(APInt A, APInt B) {
+    return new APInt(bitreaderJNI.smax(APInt.getCPtr(A), A, APInt.getCPtr(B), B), true);
+  }
+
+  public static APInt umin(APInt A, APInt B) {
+    return new APInt(bitreaderJNI.umin(APInt.getCPtr(A), A, APInt.getCPtr(B), B), true);
+  }
+
+  public static APInt umax(APInt A, APInt B) {
+    return new APInt(bitreaderJNI.umax(APInt.getCPtr(A), A, APInt.getCPtr(B), B), true);
+  }
+
+  public static boolean isIntN(long N, APInt APIVal) {
+    return bitreaderJNI.isIntN(N, APInt.getCPtr(APIVal), APIVal);
+  }
+
+  public static boolean isSignedIntN(long N, APInt APIVal) {
+    return bitreaderJNI.isSignedIntN(N, APInt.getCPtr(APIVal), APIVal);
+  }
+
+  public static boolean isMask(long numBits, APInt APIVal) {
+    return bitreaderJNI.isMask(numBits, APInt.getCPtr(APIVal), APIVal);
+  }
+
+  public static boolean isShiftedMask(long numBits, APInt APIVal) {
+    return bitreaderJNI.isShiftedMask(numBits, APInt.getCPtr(APIVal), APIVal);
+  }
+
+  public static APInt byteSwap(APInt APIVal) {
+    return new APInt(bitreaderJNI.byteSwap(APInt.getCPtr(APIVal), APIVal), true);
+  }
+
+  public static long logBase2(APInt APIVal) {
+    return bitreaderJNI.logBase2(APInt.getCPtr(APIVal), APIVal);
+  }
+
+  public static APInt GreatestCommonDivisor(APInt Val1, APInt Val2) {
+    return new APInt(bitreaderJNI.GreatestCommonDivisor(APInt.getCPtr(Val1), Val1, APInt.getCPtr(Val2), Val2), true);
+  }
+
+  public static double RoundAPIntToDouble(APInt APIVal) {
+    return bitreaderJNI.RoundAPIntToDouble(APInt.getCPtr(APIVal), APIVal);
+  }
+
+  public static double RoundSignedAPIntToDouble(APInt APIVal) {
+    return bitreaderJNI.RoundSignedAPIntToDouble(APInt.getCPtr(APIVal), APIVal);
+  }
+
+  public static float RoundAPIntToFloat(APInt APIVal) {
+    return bitreaderJNI.RoundAPIntToFloat(APInt.getCPtr(APIVal), APIVal);
+  }
+
+  public static float RoundSignedAPIntToFloat(APInt APIVal) {
+    return bitreaderJNI.RoundSignedAPIntToFloat(APInt.getCPtr(APIVal), APIVal);
+  }
+
+  public static APInt RoundDoubleToAPInt(double Double, long width) {
+    return new APInt(bitreaderJNI.RoundDoubleToAPInt(Double, width), true);
+  }
+
+  public static APInt RoundFloatToAPInt(float Float, long width) {
+    return new APInt(bitreaderJNI.RoundFloatToAPInt(Float, width), true);
+  }
+
+  public static APInt ashr(APInt LHS, long shiftAmt) {
+    return new APInt(bitreaderJNI.ashr(APInt.getCPtr(LHS), LHS, shiftAmt), true);
+  }
+
+  public static APInt lshr(APInt LHS, long shiftAmt) {
+    return new APInt(bitreaderJNI.lshr(APInt.getCPtr(LHS), LHS, shiftAmt), true);
+  }
+
+  public static APInt shl(APInt LHS, long shiftAmt) {
+    return new APInt(bitreaderJNI.shl(APInt.getCPtr(LHS), LHS, shiftAmt), true);
+  }
+
+  public static APInt sdiv(APInt LHS, APInt RHS) {
+    return new APInt(bitreaderJNI.sdiv(APInt.getCPtr(LHS), LHS, APInt.getCPtr(RHS), RHS), true);
+  }
+
+  public static APInt udiv(APInt LHS, APInt RHS) {
+    return new APInt(bitreaderJNI.udiv(APInt.getCPtr(LHS), LHS, APInt.getCPtr(RHS), RHS), true);
+  }
+
+  public static APInt srem(APInt LHS, APInt RHS) {
+    return new APInt(bitreaderJNI.srem(APInt.getCPtr(LHS), LHS, APInt.getCPtr(RHS), RHS), true);
+  }
+
+  public static APInt urem(APInt LHS, APInt RHS) {
+    return new APInt(bitreaderJNI.urem(APInt.getCPtr(LHS), LHS, APInt.getCPtr(RHS), RHS), true);
+  }
+
+  public static APInt mul(APInt LHS, APInt RHS) {
+    return new APInt(bitreaderJNI.mul(APInt.getCPtr(LHS), LHS, APInt.getCPtr(RHS), RHS), true);
+  }
+
+  public static APInt add(APInt LHS, APInt RHS) {
+    return new APInt(bitreaderJNI.add(APInt.getCPtr(LHS), LHS, APInt.getCPtr(RHS), RHS), true);
+  }
+
+  public static APInt sub(APInt LHS, APInt RHS) {
+    return new APInt(bitreaderJNI.sub(APInt.getCPtr(LHS), LHS, APInt.getCPtr(RHS), RHS), true);
+  }
+
+  public static APInt And(APInt LHS, APInt RHS) {
+    return new APInt(bitreaderJNI.And(APInt.getCPtr(LHS), LHS, APInt.getCPtr(RHS), RHS), true);
+  }
+
+  public static APInt Or(APInt LHS, APInt RHS) {
+    return new APInt(bitreaderJNI.Or(APInt.getCPtr(LHS), LHS, APInt.getCPtr(RHS), RHS), true);
+  }
+
+  public static APInt Xor(APInt LHS, APInt RHS) {
+    return new APInt(bitreaderJNI.Xor(APInt.getCPtr(LHS), LHS, APInt.getCPtr(RHS), RHS), true);
+  }
+
+  public static APInt Not(APInt APIVal) {
+    return new APInt(bitreaderJNI.Not(APInt.getCPtr(APIVal), APIVal), true);
+  }
+
+  public static SWIGTYPE_p_llvm__hash_code hash_value(APInt Arg) {
+    return new SWIGTYPE_p_llvm__hash_code(bitreaderJNI.hash_value__SWIG_1(APInt.getCPtr(Arg), Arg), true);
   }
 
   public static LLVMContext getGlobalContext() {
@@ -31,42 +167,32 @@ public class bitreader {
   }
 
   public static SWIGTYPE_p_LLVMContextRef wrap(SWIGTYPE_p_p_llvm__LLVMContext Tys) {
-    long cPtr = bitreaderJNI.wrap(SWIGTYPE_p_p_llvm__LLVMContext.getCPtr(Tys));
+    long cPtr = bitreaderJNI.wrap__SWIG_0(SWIGTYPE_p_p_llvm__LLVMContext.getCPtr(Tys));
     return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMContextRef(cPtr, false);
   }
 
-  public static DISubprogram getDISubprogram(MDNode Scope) {
-    return new DISubprogram(bitreaderJNI.getDISubprogram(MDNode.getCPtr(Scope), Scope), true);
+  public static SWIGTYPE_p_p_llvm__Type unwrap(SWIGTYPE_p_LLVMTypeRef Tys) {
+    long cPtr = bitreaderJNI.unwrap__SWIG_1(SWIGTYPE_p_LLVMTypeRef.getCPtr(Tys));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_p_llvm__Type(cPtr, false);
   }
 
-  public static DICompositeType getDICompositeType(DIType T) {
-    return new DICompositeType(bitreaderJNI.getDICompositeType(DIType.getCPtr(T), T), true);
+  public static SWIGTYPE_p_LLVMTypeRef wrap(SWIGTYPE_p_p_llvm__Type Tys) {
+    long cPtr = bitreaderJNI.wrap__SWIG_1(SWIGTYPE_p_p_llvm__Type.getCPtr(Tys));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMTypeRef(cPtr, false);
   }
 
-  public static boolean isSubprogramContext(MDNode Context) {
-    return bitreaderJNI.isSubprogramContext(MDNode.getCPtr(Context), Context);
+  public static SWIGTYPE_p_p_llvm__Value unwrap(SWIGTYPE_p_LLVMValueRef Vals) {
+    long cPtr = bitreaderJNI.unwrap__SWIG_2(SWIGTYPE_p_LLVMValueRef.getCPtr(Vals));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_p_llvm__Value(cPtr, false);
   }
 
-  public static NamedMDNode getOrInsertFnSpecificMDNode(Module M, DISubprogram SP) {
-    long cPtr = bitreaderJNI.getOrInsertFnSpecificMDNode(Module.getCPtr(M), M, DISubprogram.getCPtr(SP), SP);
-    return (cPtr == 0) ? null : new NamedMDNode(cPtr, false);
-  }
-
-  public static NamedMDNode getFnSpecificMDNode(Module M, DISubprogram SP) {
-    long cPtr = bitreaderJNI.getFnSpecificMDNode(Module.getCPtr(M), M, DISubprogram.getCPtr(SP), SP);
-    return (cPtr == 0) ? null : new NamedMDNode(cPtr, false);
-  }
-
-  public static DIVariable createInlinedVariable(MDNode DV, MDNode InlinedScope, LLVMContext VMContext) {
-    return new DIVariable(bitreaderJNI.createInlinedVariable(MDNode.getCPtr(DV), DV, MDNode.getCPtr(InlinedScope), InlinedScope, LLVMContext.getCPtr(VMContext), VMContext), true);
-  }
-
-  public static DIVariable cleanseInlinedVariable(MDNode DV, LLVMContext VMContext) {
-    return new DIVariable(bitreaderJNI.cleanseInlinedVariable(MDNode.getCPtr(DV), DV, LLVMContext.getCPtr(VMContext), VMContext), true);
+  public static SWIGTYPE_p_LLVMValueRef wrap(SWIGTYPE_p_p_llvm__Value Vals) {
+    long cPtr = bitreaderJNI.wrap__SWIG_2(SWIGTYPE_p_p_llvm__Value.getCPtr(Vals));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMValueRef(cPtr, false);
   }
 
   public static Module unwrap(SWIGTYPE_p_LLVMModuleProviderRef MP) {
-    long cPtr = bitreaderJNI.unwrap__SWIG_1(SWIGTYPE_p_LLVMModuleProviderRef.getCPtr(MP));
+    long cPtr = bitreaderJNI.unwrap__SWIG_4(SWIGTYPE_p_LLVMModuleProviderRef.getCPtr(MP));
     return (cPtr == 0) ? null : new Module(cPtr, false);
   }
 
@@ -111,6 +237,21 @@ public class bitreader {
   public static Instruction getBasicBlockInstructionsItem(BasicBlock o, int index) {
     long cPtr = bitreaderJNI.getBasicBlockInstructionsItem(BasicBlock.getCPtr(o), o, index);
     return (cPtr == 0) ? null : new Instruction(cPtr, false);
+  }
+
+  public static MDNode toMDNode(Value arg0) {
+    long cPtr = bitreaderJNI.toMDNode(Value.getCPtr(arg0), arg0);
+    return (cPtr == 0) ? null : new MDNode(cPtr, false);
+  }
+
+  public static MDString toMDString(Value arg0) {
+    long cPtr = bitreaderJNI.toMDString(Value.getCPtr(arg0), arg0);
+    return (cPtr == 0) ? null : new MDString(cPtr, false);
+  }
+
+  public static ConstantInt toConstantInt(Value arg0) {
+    long cPtr = bitreaderJNI.toConstantInt(Value.getCPtr(arg0), arg0);
+    return (cPtr == 0) ? null : new ConstantInt(cPtr, false);
   }
 
 }

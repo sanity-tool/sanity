@@ -79,17 +79,17 @@ public class Module {
       return (cPtr == 0) ? null : new MDString(cPtr, false);
     }
   
-    public void setVal(SWIGTYPE_p_llvm__Value value) {
-      bitreaderJNI.Module_ModuleFlagEntry_Val_set(swigCPtr, this, SWIGTYPE_p_llvm__Value.getCPtr(value));
+    public void setVal(Value value) {
+      bitreaderJNI.Module_ModuleFlagEntry_Val_set(swigCPtr, this, Value.getCPtr(value), value);
     }
   
-    public SWIGTYPE_p_llvm__Value getVal() {
+    public Value getVal() {
       long cPtr = bitreaderJNI.Module_ModuleFlagEntry_Val_get(swigCPtr, this);
-      return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__Value(cPtr, false);
+      return (cPtr == 0) ? null : new Value(cPtr, false);
     }
   
-    public ModuleFlagEntry(Module.ModFlagBehavior B, MDString K, SWIGTYPE_p_llvm__Value V) {
-      this(bitreaderJNI.new_Module_ModuleFlagEntry(B.swigValue(), MDString.getCPtr(K), K, SWIGTYPE_p_llvm__Value.getCPtr(V)), true);
+    public ModuleFlagEntry(Module.ModFlagBehavior B, MDString K, Value V) {
+      this(bitreaderJNI.new_Module_ModuleFlagEntry(B.swigValue(), MDString.getCPtr(K), K, Value.getCPtr(V), V), true);
     }
   
   }
@@ -164,29 +164,29 @@ public class Module {
     return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__StructType(cPtr, false);
   }
 
-  public SWIGTYPE_p_llvm__Constant getOrInsertFunction(StringRef Name, SWIGTYPE_p_llvm__FunctionType T, SWIGTYPE_p_AttributeSet AttributeList) {
+  public Constant getOrInsertFunction(StringRef Name, SWIGTYPE_p_llvm__FunctionType T, SWIGTYPE_p_AttributeSet AttributeList) {
     long cPtr = bitreaderJNI.Module_getOrInsertFunction__SWIG_0(swigCPtr, this, StringRef.getCPtr(Name), Name, SWIGTYPE_p_llvm__FunctionType.getCPtr(T), SWIGTYPE_p_AttributeSet.getCPtr(AttributeList));
-    return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__Constant(cPtr, false);
+    return (cPtr == 0) ? null : new Constant(cPtr, false);
   }
 
-  public SWIGTYPE_p_llvm__Constant getOrInsertFunction(StringRef Name, SWIGTYPE_p_llvm__FunctionType T) {
+  public Constant getOrInsertFunction(StringRef Name, SWIGTYPE_p_llvm__FunctionType T) {
     long cPtr = bitreaderJNI.Module_getOrInsertFunction__SWIG_1(swigCPtr, this, StringRef.getCPtr(Name), Name, SWIGTYPE_p_llvm__FunctionType.getCPtr(T));
-    return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__Constant(cPtr, false);
+    return (cPtr == 0) ? null : new Constant(cPtr, false);
   }
 
-  public SWIGTYPE_p_llvm__Constant getOrInsertFunction(StringRef Name, SWIGTYPE_p_AttributeSet AttributeList, SWIGTYPE_p_llvm__Type RetTy) {
-    long cPtr = bitreaderJNI.Module_getOrInsertFunction__SWIG_2(swigCPtr, this, StringRef.getCPtr(Name), Name, SWIGTYPE_p_AttributeSet.getCPtr(AttributeList), SWIGTYPE_p_llvm__Type.getCPtr(RetTy));
-    return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__Constant(cPtr, false);
+  public Constant getOrInsertFunction(StringRef Name, SWIGTYPE_p_AttributeSet AttributeList, Type RetTy) {
+    long cPtr = bitreaderJNI.Module_getOrInsertFunction__SWIG_2(swigCPtr, this, StringRef.getCPtr(Name), Name, SWIGTYPE_p_AttributeSet.getCPtr(AttributeList), Type.getCPtr(RetTy), RetTy);
+    return (cPtr == 0) ? null : new Constant(cPtr, false);
   }
 
-  public SWIGTYPE_p_llvm__Constant getOrInsertFunction(StringRef Name, SWIGTYPE_p_llvm__Type RetTy) {
-    long cPtr = bitreaderJNI.Module_getOrInsertFunction__SWIG_3(swigCPtr, this, StringRef.getCPtr(Name), Name, SWIGTYPE_p_llvm__Type.getCPtr(RetTy));
-    return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__Constant(cPtr, false);
+  public Constant getOrInsertFunction(StringRef Name, Type RetTy) {
+    long cPtr = bitreaderJNI.Module_getOrInsertFunction__SWIG_3(swigCPtr, this, StringRef.getCPtr(Name), Name, Type.getCPtr(RetTy), RetTy);
+    return (cPtr == 0) ? null : new Constant(cPtr, false);
   }
 
-  public SWIGTYPE_p_llvm__Constant getOrInsertTargetIntrinsic(StringRef Name, SWIGTYPE_p_llvm__FunctionType Ty, SWIGTYPE_p_AttributeSet AttributeList) {
+  public Constant getOrInsertTargetIntrinsic(StringRef Name, SWIGTYPE_p_llvm__FunctionType Ty, SWIGTYPE_p_AttributeSet AttributeList) {
     long cPtr = bitreaderJNI.Module_getOrInsertTargetIntrinsic(swigCPtr, this, StringRef.getCPtr(Name), Name, SWIGTYPE_p_llvm__FunctionType.getCPtr(Ty), SWIGTYPE_p_AttributeSet.getCPtr(AttributeList));
-    return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__Constant(cPtr, false);
+    return (cPtr == 0) ? null : new Constant(cPtr, false);
   }
 
   public Function getFunction(StringRef Name) {
@@ -209,14 +209,14 @@ public class Module {
     return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__GlobalVariable(cPtr, false);
   }
 
-  public SWIGTYPE_p_llvm__Constant getOrInsertGlobal(StringRef Name, SWIGTYPE_p_llvm__Type Ty) {
-    long cPtr = bitreaderJNI.Module_getOrInsertGlobal(swigCPtr, this, StringRef.getCPtr(Name), Name, SWIGTYPE_p_llvm__Type.getCPtr(Ty));
-    return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__Constant(cPtr, false);
+  public Constant getOrInsertGlobal(StringRef Name, Type Ty) {
+    long cPtr = bitreaderJNI.Module_getOrInsertGlobal(swigCPtr, this, StringRef.getCPtr(Name), Name, Type.getCPtr(Ty), Ty);
+    return (cPtr == 0) ? null : new Constant(cPtr, false);
   }
 
-  public SWIGTYPE_p_GlobalAlias getNamedAlias(StringRef Name) {
+  public SWIGTYPE_p_llvm__GlobalAlias getNamedAlias(StringRef Name) {
     long cPtr = bitreaderJNI.Module_getNamedAlias(swigCPtr, this, StringRef.getCPtr(Name), Name);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_GlobalAlias(cPtr, false);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__GlobalAlias(cPtr, false);
   }
 
   public NamedMDNode getNamedMetadata(SWIGTYPE_p_llvm__Twine Name) {
@@ -247,8 +247,8 @@ public class Module {
     return (cPtr == 0) ? null : new NamedMDNode(cPtr, false);
   }
 
-  public void addModuleFlag(Module.ModFlagBehavior Behavior, StringRef Key, SWIGTYPE_p_llvm__Value Val) {
-    bitreaderJNI.Module_addModuleFlag__SWIG_0(swigCPtr, this, Behavior.swigValue(), StringRef.getCPtr(Key), Key, SWIGTYPE_p_llvm__Value.getCPtr(Val));
+  public void addModuleFlag(Module.ModFlagBehavior Behavior, StringRef Key, Value Val) {
+    bitreaderJNI.Module_addModuleFlag__SWIG_0(swigCPtr, this, Behavior.swigValue(), StringRef.getCPtr(Key), Key, Value.getCPtr(Val), Val);
   }
 
   public void addModuleFlag(Module.ModFlagBehavior Behavior, StringRef Key, SWIGTYPE_p_uint32_t Val) {
@@ -322,13 +322,13 @@ public class Module {
     return (cMemberPtr == null) ? null : new SWIGTYPE_m_Module__llvm__iplistT_llvm__Function_t(cMemberPtr, false);
   }
 
-  public SWIGTYPE_p_llvm__iplistT_GlobalAlias_t getAliasList() {
-    return new SWIGTYPE_p_llvm__iplistT_GlobalAlias_t(bitreaderJNI.Module_getAliasList__SWIG_0(swigCPtr, this), false);
+  public SWIGTYPE_p_llvm__iplistT_llvm__GlobalAlias_t getAliasList() {
+    return new SWIGTYPE_p_llvm__iplistT_llvm__GlobalAlias_t(bitreaderJNI.Module_getAliasList__SWIG_0(swigCPtr, this), false);
   }
 
-  public static SWIGTYPE_m_Module__llvm__iplistT_GlobalAlias_t getSublistAccess(SWIGTYPE_p_GlobalAlias arg0) {
-    String cMemberPtr = bitreaderJNI.Module_getSublistAccess__SWIG_2(SWIGTYPE_p_GlobalAlias.getCPtr(arg0));
-    return (cMemberPtr == null) ? null : new SWIGTYPE_m_Module__llvm__iplistT_GlobalAlias_t(cMemberPtr, false);
+  public static SWIGTYPE_m_Module__llvm__iplistT_llvm__GlobalAlias_t getSublistAccess(SWIGTYPE_p_llvm__GlobalAlias arg0) {
+    String cMemberPtr = bitreaderJNI.Module_getSublistAccess__SWIG_2(SWIGTYPE_p_llvm__GlobalAlias.getCPtr(arg0));
+    return (cMemberPtr == null) ? null : new SWIGTYPE_m_Module__llvm__iplistT_llvm__GlobalAlias_t(cMemberPtr, false);
   }
 
   public SWIGTYPE_p_llvm__ilistT_llvm__NamedMDNode_t getNamedMDList() {
@@ -340,8 +340,8 @@ public class Module {
     return (cMemberPtr == null) ? null : new SWIGTYPE_m_Module__llvm__ilistT_llvm__NamedMDNode_t(cMemberPtr, false);
   }
 
-  public SWIGTYPE_p_ValueSymbolTable getValueSymbolTable() {
-    return new SWIGTYPE_p_ValueSymbolTable(bitreaderJNI.Module_getValueSymbolTable__SWIG_0(swigCPtr, this), false);
+  public SWIGTYPE_p_llvm__ValueSymbolTable getValueSymbolTable() {
+    return new SWIGTYPE_p_llvm__ValueSymbolTable(bitreaderJNI.Module_getValueSymbolTable__SWIG_0(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_llvm__iplistT_llvm__GlobalVariable_t__iterator global_begin() {
@@ -372,12 +372,12 @@ public class Module {
     return bitreaderJNI.Module_empty(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_llvm__iplistT_GlobalAlias_t__iterator alias_begin() {
-    return new SWIGTYPE_p_llvm__iplistT_GlobalAlias_t__iterator(bitreaderJNI.Module_alias_begin__SWIG_0(swigCPtr, this), true);
+  public SWIGTYPE_p_llvm__iplistT_llvm__GlobalAlias_t__iterator alias_begin() {
+    return new SWIGTYPE_p_llvm__iplistT_llvm__GlobalAlias_t__iterator(bitreaderJNI.Module_alias_begin__SWIG_0(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_llvm__iplistT_GlobalAlias_t__iterator alias_end() {
-    return new SWIGTYPE_p_llvm__iplistT_GlobalAlias_t__iterator(bitreaderJNI.Module_alias_end__SWIG_0(swigCPtr, this), true);
+  public SWIGTYPE_p_llvm__iplistT_llvm__GlobalAlias_t__iterator alias_end() {
+    return new SWIGTYPE_p_llvm__iplistT_llvm__GlobalAlias_t__iterator(bitreaderJNI.Module_alias_end__SWIG_0(swigCPtr, this), true);
   }
 
   public long alias_size() {
@@ -404,8 +404,8 @@ public class Module {
     return bitreaderJNI.Module_named_metadata_empty(swigCPtr, this);
   }
 
-  public void print(SWIGTYPE_p_llvm__raw_ostream OS, SWIGTYPE_p_AssemblyAnnotationWriter AAW) {
-    bitreaderJNI.Module_print(swigCPtr, this, SWIGTYPE_p_llvm__raw_ostream.getCPtr(OS), SWIGTYPE_p_AssemblyAnnotationWriter.getCPtr(AAW));
+  public void print(SWIGTYPE_p_llvm__raw_ostream OS, SWIGTYPE_p_llvm__AssemblyAnnotationWriter AAW) {
+    bitreaderJNI.Module_print(swigCPtr, this, SWIGTYPE_p_llvm__raw_ostream.getCPtr(OS), SWIGTYPE_p_llvm__AssemblyAnnotationWriter.getCPtr(AAW));
   }
 
   public void dump() {

@@ -8,12 +8,11 @@
 
 package na.okutane.cpp.llvm;
 
-public class GlobalValue {
+public class GlobalValue extends Constant {
   private long swigCPtr;
-  protected boolean swigCMemOwn;
 
   protected GlobalValue(long cPtr, boolean cMemoryOwn) {
-    swigCMemOwn = cMemoryOwn;
+    super(bitreaderJNI.GlobalValue_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -33,6 +32,7 @@ public class GlobalValue {
       }
       swigCPtr = 0;
     }
+    super.delete();
   }
 
   public long getAlignment() {
@@ -293,8 +293,8 @@ public class GlobalValue {
     return (cPtr == 0) ? null : new Module(cPtr, false);
   }
 
-  public static boolean classof(SWIGTYPE_p_llvm__Value V) {
-    return bitreaderJNI.GlobalValue_classof(SWIGTYPE_p_llvm__Value.getCPtr(V));
+  public static boolean classof(Value V) {
+    return bitreaderJNI.GlobalValue_classof(Value.getCPtr(V), V);
   }
 
   public final static class LinkageTypes {

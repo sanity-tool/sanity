@@ -50,9 +50,9 @@ public class Function extends GlobalValue {
     return (cPtr == 0) ? null : new Function(cPtr, false);
   }
 
-  public SWIGTYPE_p_llvm__Type getReturnType() {
+  public Type getReturnType() {
     long cPtr = bitreaderJNI.Function_getReturnType(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__Type(cPtr, false);
+    return (cPtr == 0) ? null : new Type(cPtr, false);
   }
 
   public SWIGTYPE_p_llvm__FunctionType getFunctionType() {
@@ -228,13 +228,13 @@ public class Function extends GlobalValue {
     bitreaderJNI.Function_eraseFromParent(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_llvm__iplistT_Argument_t getArgumentList() {
-    return new SWIGTYPE_p_llvm__iplistT_Argument_t(bitreaderJNI.Function_getArgumentList__SWIG_0(swigCPtr, this), false);
+  public SWIGTYPE_p_llvm__iplistT_llvm__Argument_t getArgumentList() {
+    return new SWIGTYPE_p_llvm__iplistT_llvm__Argument_t(bitreaderJNI.Function_getArgumentList__SWIG_0(swigCPtr, this), false);
   }
 
-  public static SWIGTYPE_m_Function__llvm__iplistT_Argument_t getSublistAccess(SWIGTYPE_p_Argument arg0) {
-    String cMemberPtr = bitreaderJNI.Function_getSublistAccess__SWIG_0(SWIGTYPE_p_Argument.getCPtr(arg0));
-    return (cMemberPtr == null) ? null : new SWIGTYPE_m_Function__llvm__iplistT_Argument_t(cMemberPtr, false);
+  public static SWIGTYPE_m_Function__llvm__iplistT_llvm__Argument_t getSublistAccess(SWIGTYPE_p_llvm__Argument arg0) {
+    String cMemberPtr = bitreaderJNI.Function_getSublistAccess__SWIG_0(SWIGTYPE_p_llvm__Argument.getCPtr(arg0));
+    return (cMemberPtr == null) ? null : new SWIGTYPE_m_Function__llvm__iplistT_llvm__Argument_t(cMemberPtr, false);
   }
 
   public SWIGTYPE_p_llvm__iplistT_llvm__BasicBlock_t getBasicBlockList() {
@@ -250,8 +250,8 @@ public class Function extends GlobalValue {
     return new BasicBlock(bitreaderJNI.Function_getEntryBlock__SWIG_0(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_ValueSymbolTable getValueSymbolTable() {
-    return new SWIGTYPE_p_ValueSymbolTable(bitreaderJNI.Function_getValueSymbolTable__SWIG_0(swigCPtr, this), false);
+  public SWIGTYPE_p_llvm__ValueSymbolTable getValueSymbolTable() {
+    return new SWIGTYPE_p_llvm__ValueSymbolTable(bitreaderJNI.Function_getValueSymbolTable__SWIG_0(swigCPtr, this), false);
   }
 
   public SWIGTYPE_p_llvm__iplistT_llvm__BasicBlock_t__iterator begin() {
@@ -278,12 +278,12 @@ public class Function extends GlobalValue {
     return new BasicBlock(bitreaderJNI.Function_back__SWIG_0(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_llvm__iplistT_Argument_t__iterator arg_begin() {
-    return new SWIGTYPE_p_llvm__iplistT_Argument_t__iterator(bitreaderJNI.Function_arg_begin__SWIG_0(swigCPtr, this), true);
+  public SWIGTYPE_p_llvm__iplistT_llvm__Argument_t__iterator arg_begin() {
+    return new SWIGTYPE_p_llvm__iplistT_llvm__Argument_t__iterator(bitreaderJNI.Function_arg_begin__SWIG_0(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_llvm__iplistT_Argument_t__iterator arg_end() {
-    return new SWIGTYPE_p_llvm__iplistT_Argument_t__iterator(bitreaderJNI.Function_arg_end__SWIG_0(swigCPtr, this), true);
+  public SWIGTYPE_p_llvm__iplistT_llvm__Argument_t__iterator arg_end() {
+    return new SWIGTYPE_p_llvm__iplistT_llvm__Argument_t__iterator(bitreaderJNI.Function_arg_end__SWIG_0(swigCPtr, this), true);
   }
 
   public long arg_size() {
@@ -302,8 +302,8 @@ public class Function extends GlobalValue {
     bitreaderJNI.Function_viewCFGOnly(swigCPtr, this);
   }
 
-  public static boolean classof(SWIGTYPE_p_llvm__Value V) {
-    return bitreaderJNI.Function_classof(SWIGTYPE_p_llvm__Value.getCPtr(V));
+  public static boolean classof(Value V) {
+    return bitreaderJNI.Function_classof(Value.getCPtr(V), V);
   }
 
   public void dropAllReferences() {

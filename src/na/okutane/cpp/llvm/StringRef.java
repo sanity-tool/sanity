@@ -219,8 +219,8 @@ public class StringRef {
     return bitreaderJNI.StringRef_count__SWIG_1(swigCPtr, this, StringRef.getCPtr(Str), Str);
   }
 
-  public boolean getAsInteger(long Radix, SWIGTYPE_p_llvm__APInt Result) {
-    return bitreaderJNI.StringRef_getAsInteger(swigCPtr, this, Radix, SWIGTYPE_p_llvm__APInt.getCPtr(Result));
+  public boolean getAsInteger(long Radix, APInt Result) {
+    return bitreaderJNI.StringRef_getAsInteger(swigCPtr, this, Radix, APInt.getCPtr(Result), Result);
   }
 
   public String lower() {

@@ -292,8 +292,8 @@ public class Instruction {
     return bitreaderJNI.Instruction_isUsedOutsideOfBlock(swigCPtr, this, BasicBlock.getCPtr(BB), BB);
   }
 
-  public static boolean classof(SWIGTYPE_p_llvm__Value V) {
-    return bitreaderJNI.Instruction_classof(SWIGTYPE_p_llvm__Value.getCPtr(V));
+  public static boolean classof(Value V) {
+    return bitreaderJNI.Instruction_classof(Value.getCPtr(V), V);
   }
 
   public final static class OperationEquivalenceFlags {
