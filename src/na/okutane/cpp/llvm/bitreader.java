@@ -9,6 +9,18 @@
 package na.okutane.cpp.llvm;
 
 public class bitreader {
+  public static boolean getAsUnsignedInteger(StringRef Str, long Radix, SWIGTYPE_p_unsigned_long_long Result) {
+    return bitreaderJNI.getAsUnsignedInteger(StringRef.getCPtr(Str), Str, Radix, SWIGTYPE_p_unsigned_long_long.getCPtr(Result));
+  }
+
+  public static boolean getAsSignedInteger(StringRef Str, long Radix, SWIGTYPE_p_long_long Result) {
+    return bitreaderJNI.getAsSignedInteger(StringRef.getCPtr(Str), Str, Radix, SWIGTYPE_p_long_long.getCPtr(Result));
+  }
+
+  public static SWIGTYPE_p_llvm__hash_code hash_value(StringRef S) {
+    return new SWIGTYPE_p_llvm__hash_code(bitreaderJNI.hash_value(StringRef.getCPtr(S), S), true);
+  }
+
   public static LLVMContext getGlobalContext() {
     return new LLVMContext(bitreaderJNI.getGlobalContext(), false);
   }
@@ -23,6 +35,36 @@ public class bitreader {
     return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMContextRef(cPtr, false);
   }
 
+  public static DISubprogram getDISubprogram(MDNode Scope) {
+    return new DISubprogram(bitreaderJNI.getDISubprogram(MDNode.getCPtr(Scope), Scope), true);
+  }
+
+  public static DICompositeType getDICompositeType(DIType T) {
+    return new DICompositeType(bitreaderJNI.getDICompositeType(DIType.getCPtr(T), T), true);
+  }
+
+  public static boolean isSubprogramContext(MDNode Context) {
+    return bitreaderJNI.isSubprogramContext(MDNode.getCPtr(Context), Context);
+  }
+
+  public static NamedMDNode getOrInsertFnSpecificMDNode(Module M, DISubprogram SP) {
+    long cPtr = bitreaderJNI.getOrInsertFnSpecificMDNode(Module.getCPtr(M), M, DISubprogram.getCPtr(SP), SP);
+    return (cPtr == 0) ? null : new NamedMDNode(cPtr, false);
+  }
+
+  public static NamedMDNode getFnSpecificMDNode(Module M, DISubprogram SP) {
+    long cPtr = bitreaderJNI.getFnSpecificMDNode(Module.getCPtr(M), M, DISubprogram.getCPtr(SP), SP);
+    return (cPtr == 0) ? null : new NamedMDNode(cPtr, false);
+  }
+
+  public static DIVariable createInlinedVariable(MDNode DV, MDNode InlinedScope, LLVMContext VMContext) {
+    return new DIVariable(bitreaderJNI.createInlinedVariable(MDNode.getCPtr(DV), DV, MDNode.getCPtr(InlinedScope), InlinedScope, LLVMContext.getCPtr(VMContext), VMContext), true);
+  }
+
+  public static DIVariable cleanseInlinedVariable(MDNode DV, LLVMContext VMContext) {
+    return new DIVariable(bitreaderJNI.cleanseInlinedVariable(MDNode.getCPtr(DV), DV, LLVMContext.getCPtr(VMContext), VMContext), true);
+  }
+
   public static Module unwrap(SWIGTYPE_p_LLVMModuleProviderRef MP) {
     long cPtr = bitreaderJNI.unwrap__SWIG_1(SWIGTYPE_p_LLVMModuleProviderRef.getCPtr(MP));
     return (cPtr == 0) ? null : new Module(cPtr, false);
@@ -33,8 +75,8 @@ public class bitreader {
     return (cPtr == 0) ? null : new Module(cPtr, false);
   }
 
-  public static Module getLazyIRFileModule(SWIGTYPE_p_std__string Filename, SWIGTYPE_p_llvm__SMDiagnostic Err, LLVMContext Context) {
-    long cPtr = bitreaderJNI.getLazyIRFileModule(SWIGTYPE_p_std__string.getCPtr(Filename), SWIGTYPE_p_llvm__SMDiagnostic.getCPtr(Err), LLVMContext.getCPtr(Context), Context);
+  public static Module getLazyIRFileModule(String Filename, SWIGTYPE_p_llvm__SMDiagnostic Err, LLVMContext Context) {
+    long cPtr = bitreaderJNI.getLazyIRFileModule(Filename, SWIGTYPE_p_llvm__SMDiagnostic.getCPtr(Err), LLVMContext.getCPtr(Context), Context);
     return (cPtr == 0) ? null : new Module(cPtr, false);
   }
 
@@ -43,14 +85,32 @@ public class bitreader {
     return (cPtr == 0) ? null : new Module(cPtr, false);
   }
 
-  public static Module ParseIRFile(SWIGTYPE_p_std__string Filename, SWIGTYPE_p_llvm__SMDiagnostic Err, LLVMContext Context) {
-    long cPtr = bitreaderJNI.ParseIRFile(SWIGTYPE_p_std__string.getCPtr(Filename), SWIGTYPE_p_llvm__SMDiagnostic.getCPtr(Err), LLVMContext.getCPtr(Context), Context);
+  public static Module ParseIRFile(String Filename, SWIGTYPE_p_llvm__SMDiagnostic Err, LLVMContext Context) {
+    long cPtr = bitreaderJNI.ParseIRFile(Filename, SWIGTYPE_p_llvm__SMDiagnostic.getCPtr(Err), LLVMContext.getCPtr(Context), Context);
     return (cPtr == 0) ? null : new Module(cPtr, false);
   }
 
   public static Module parse(String filename) {
     long cPtr = bitreaderJNI.parse(filename);
     return (cPtr == 0) ? null : new Module(cPtr, false);
+  }
+
+  public static int getModuleFunctionsSize(Module o) {
+    return bitreaderJNI.getModuleFunctionsSize(Module.getCPtr(o), o);
+  }
+
+  public static Function getModuleFunctionsItem(Module o, int index) {
+    long cPtr = bitreaderJNI.getModuleFunctionsItem(Module.getCPtr(o), o, index);
+    return (cPtr == 0) ? null : new Function(cPtr, false);
+  }
+
+  public static int getBasicBlockInstructionsSize(BasicBlock o) {
+    return bitreaderJNI.getBasicBlockInstructionsSize(BasicBlock.getCPtr(o), o);
+  }
+
+  public static Instruction getBasicBlockInstructionsItem(BasicBlock o, int index) {
+    long cPtr = bitreaderJNI.getBasicBlockInstructionsItem(BasicBlock.getCPtr(o), o, index);
+    return (cPtr == 0) ? null : new Instruction(cPtr, false);
   }
 
 }

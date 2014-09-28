@@ -44,8 +44,8 @@ public class LLVMContext {
     this(bitreaderJNI.new_LLVMContext(), true);
   }
 
-  public long getMDKindID(SWIGTYPE_p_llvm__StringRef Name) {
-    return bitreaderJNI.LLVMContext_getMDKindID(swigCPtr, this, SWIGTYPE_p_llvm__StringRef.getCPtr(Name));
+  public long getMDKindID(StringRef Name) {
+    return bitreaderJNI.LLVMContext_getMDKindID(swigCPtr, this, StringRef.getCPtr(Name), Name);
   }
 
   public void getMDKindNames(SWIGTYPE_p_llvm__SmallVectorImplT_llvm__StringRef_t Result) {
@@ -74,8 +74,8 @@ public class LLVMContext {
     bitreaderJNI.LLVMContext_emitError__SWIG_0(swigCPtr, this, LocCookie, SWIGTYPE_p_llvm__Twine.getCPtr(ErrorStr));
   }
 
-  public void emitError(SWIGTYPE_p_llvm__Instruction I, SWIGTYPE_p_llvm__Twine ErrorStr) {
-    bitreaderJNI.LLVMContext_emitError__SWIG_1(swigCPtr, this, SWIGTYPE_p_llvm__Instruction.getCPtr(I), SWIGTYPE_p_llvm__Twine.getCPtr(ErrorStr));
+  public void emitError(Instruction I, SWIGTYPE_p_llvm__Twine ErrorStr) {
+    bitreaderJNI.LLVMContext_emitError__SWIG_1(swigCPtr, this, Instruction.getCPtr(I), I, SWIGTYPE_p_llvm__Twine.getCPtr(ErrorStr));
   }
 
   public void emitError(SWIGTYPE_p_llvm__Twine ErrorStr) {

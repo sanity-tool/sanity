@@ -23,4 +23,4 @@ g++ -c bitreader_wrap.cxx -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_I
 g++ -shared bitreader_wrap.o $LLVM_LIBS /usr/lib/libc.dylib /usr/lib/libc++.dylib /usr/lib/libstdc++.dylib /usr/lib/libtermcap.dylib -o $DLL_NAME
 
 rm *.o
-rm *.cxx
+#rm *.cxx
