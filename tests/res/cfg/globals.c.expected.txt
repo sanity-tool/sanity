@@ -1,6 +1,6 @@
 CFG: writeToGlobalInt
 noop: opcode 'store' not supported
- - no source -
+globals.c:4 I = 1;
 noop: opcode 'ret' not supported
 globals.c:5 }
 
