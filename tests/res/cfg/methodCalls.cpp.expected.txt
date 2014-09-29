@@ -1,0 +1,38 @@
+CFG: _Z18instanceMethodCallP3Foo
+noop: opcode 'alloca' not supported
+ - no source -
+noop: opcode 'store' not supported
+ - no source -
+noop: opcode 'load' not supported
+methodCalls.cpp:8 p->instanceMethod();
+noop: opcode 'call' not supported
+methodCalls.cpp:8 p->instanceMethod();
+noop: opcode 'ret' not supported
+methodCalls.cpp:9 }
+
+CFG: _Z16staticMethodCallv
+noop: opcode 'call' not supported
+methodCalls.cpp:12 Foo::staticMethod();
+noop: opcode 'ret' not supported
+methodCalls.cpp:13 }
+
+CFG: _Z18abstractMethodCallP3Foo
+noop: opcode 'alloca' not supported
+ - no source -
+noop: opcode 'store' not supported
+ - no source -
+noop: opcode 'load' not supported
+methodCalls.cpp:16 p->abstractMethod();
+noop: opcode 'bitcast' not supported
+methodCalls.cpp:16 p->abstractMethod();
+noop: opcode 'load' not supported
+methodCalls.cpp:16 p->abstractMethod();
+noop: opcode 'getelementptr' not supported
+methodCalls.cpp:16 p->abstractMethod();
+noop: opcode 'load' not supported
+methodCalls.cpp:16 p->abstractMethod();
+noop: opcode 'call' not supported
+methodCalls.cpp:16 p->abstractMethod();
+noop: opcode 'ret' not supported
+methodCalls.cpp:17 }
+

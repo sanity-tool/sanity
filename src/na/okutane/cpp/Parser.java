@@ -51,13 +51,15 @@ public class Parser {
                 ArrayList<Cfg> result = new ArrayList<Cfg>(size);
                 for (int i = 0; i < size; i++) {
                     Function function = bitreader.getModuleFunctionsItem(m, i);
-                    function.Materialize();
+                    if (function.isMaterializable()) {
+                        function.Materialize();
 
-                    BasicBlock entryBlock = function.getEntryBlock();
+                        BasicBlock entryBlock = function.getEntryBlock();
 
-                    Cfe entry = processBlock(entryBlock);
+                        Cfe entry = processBlock(entryBlock);
 
-                    result.add(new Cfg(bitreader.getName(function), entry));
+                        result.add(new Cfg(bitreader.getName(function), entry));
+                    }
                 }
                 m.dump();
                 m.delete();
