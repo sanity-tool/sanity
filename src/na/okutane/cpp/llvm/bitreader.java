@@ -221,6 +221,10 @@ public class bitreader {
     return (cPtr == 0) ? null : new Module(cPtr, false);
   }
 
+  public static String getName(GlobalValue gv) {
+    return bitreaderJNI.getName(GlobalValue.getCPtr(gv), gv);
+  }
+
   public static int getModuleFunctionsSize(Module o) {
     return bitreaderJNI.getModuleFunctionsSize(Module.getCPtr(o), o);
   }

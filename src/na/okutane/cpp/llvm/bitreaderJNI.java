@@ -1115,6 +1115,7 @@ public class bitreaderJNI {
   public final static native long ParseIR(long jarg1, long jarg2, long jarg3, LLVMContext jarg3_);
   public final static native long ParseIRFile(String jarg1, long jarg2, long jarg3, LLVMContext jarg3_);
   public final static native long parse(String jarg1);
+  public final static native String getName(long jarg1, GlobalValue jarg1_);
   public final static native int getModuleFunctionsSize(long jarg1, Module jarg1_);
   public final static native long getModuleFunctionsItem(long jarg1, Module jarg1_, int jarg2);
   public final static native int getBasicBlockInstructionsSize(long jarg1, BasicBlock jarg1_);

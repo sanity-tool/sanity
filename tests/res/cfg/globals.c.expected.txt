@@ -1,0 +1,12 @@
+CFG: writeToGlobalInt
+noop: opcode 'store' not supported
+ - no source -
+noop: opcode 'ret' not supported
+globals.c:5 }
+
+CFG: writeToGlobalIntPointer
+noop: opcode 'store' not supported
+globals.c:8 I_P = 0;
+noop: opcode 'ret' not supported
+globals.c:9 }
+

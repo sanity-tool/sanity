@@ -27,6 +27,10 @@ Module *parse(const char *filename) {
     Module *result = getLazyIRFileModule(filename, err, getGlobalContext());
     return result;
 }
+
+const char *getName(GlobalValue *gv) {
+    return gv->getName().begin();
+}
 %}
 
 %define LISTHELPER(type, itemtype, listname, altname)
@@ -94,6 +98,7 @@ llvm::toType * to ## toType(llvm::fromType *);
 %include "llvm/IRReader/IRReader.h"
 
 llvm::Module *parse(const char *filename);
+const char *getName(llvm::GlobalValue *gv);
 
 LISTHELPER(llvm::Module, llvm::Function, getFunctionList, getModuleFunctions);
 LISTHELPER(llvm::BasicBlock, llvm::Instruction, getInstList, getBasicBlockInstructions);
