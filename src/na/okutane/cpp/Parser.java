@@ -33,7 +33,8 @@ public class Parser {
             pb.directory(new File("/Users/jondoe/IdeaProjects/SA/sanity/tests"));
             //pb.command("clang", filename, "-c", "-S", "-emit-llvm", "-gline-tables-only");
 
-            pb.command(getClangParameters(filename));
+            File objFile = File.createTempFile("result", ".bc");
+            pb.command(getClangParameters(filename, objFile.getAbsolutePath()));
 
             pb.inheritIO();
 
@@ -42,7 +43,7 @@ public class Parser {
             int resultCode = process.waitFor();
 
             if (resultCode == 0) {
-                Module m = bitreader.parse("/Users/jondoe/IdeaProjects/SA/sanity/tests/result.bc");
+                Module m = bitreader.parse(objFile.getAbsolutePath());
                 //m.dump();
 
                 int size = bitreader.getModuleFunctionsSize(m);
@@ -60,6 +61,7 @@ public class Parser {
                 }
                 m.dump();
                 m.delete();
+                objFile.delete();
                 return result;
             } else {
                 System.out.println("result: " + resultCode);
@@ -70,7 +72,7 @@ public class Parser {
         return null;
     }
 
-    private String[] getClangParameters(String filename) {
+    private String[] getClangParameters(String filename, String objFile) {
         List<String> parameters = new ArrayList<String>();
 
         if (filename.endsWith(".c")) {
@@ -79,7 +81,7 @@ public class Parser {
             parameters.add("clang++");
         }
 
-        parameters.addAll(Arrays.asList(filename, "-c", "-emit-llvm", "-femit-all-decls", "-gline-tables-only", "-o", "result.bc"));
+        parameters.addAll(Arrays.asList(filename, "-c", "-emit-llvm", "-femit-all-decls", "-gline-tables-only", "-o", objFile));
 
         return parameters.toArray(new String[parameters.size()]);
     }
