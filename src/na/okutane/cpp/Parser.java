@@ -93,10 +93,11 @@ public class Parser {
         Cfe last = null;
         for (int i = 0; i < bitreader.getBasicBlockInstructionsSize(entryBlock); i++) {
             Instruction instruction = bitreader.getBasicBlockInstructionsItem(entryBlock, i);
+            Cfe cfe = instructionParser.parse(instruction);
             if (first == null) {
-                first = last = instructionParser.parse(instruction);
-            } else {
-                last.setNext(instructionParser.parse(instruction));
+                first = last = cfe;
+            } else if (cfe != null) {
+                last.setNext(cfe);
                 last = last.getNext();
             }
         }

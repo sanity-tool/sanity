@@ -183,6 +183,10 @@ public class Value {
     bitreaderJNI.Value_mutateType(swigCPtr, this, Type.getCPtr(Ty), Ty);
   }
 
+  public String toString() {
+    return bitreaderJNI.Value_toString(swigCPtr, this);
+  }
+
   public final static class ValueTy {
     public final static Value.ValueTy ArgumentVal = new Value.ValueTy("ArgumentVal");
     public final static Value.ValueTy BasicBlockVal = new Value.ValueTy("BasicBlockVal");

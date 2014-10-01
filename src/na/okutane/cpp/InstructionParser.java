@@ -1,8 +1,12 @@
 package na.okutane.cpp;
 
+import na.okutane.api.cfg.Assignment;
 import na.okutane.api.cfg.Cfe;
 import na.okutane.api.cfg.UnprocessedElement;
 import na.okutane.cpp.llvm.Instruction;
+import na.okutane.cpp.llvm.StoreInst;
+import na.okutane.cpp.llvm.Value;
+import na.okutane.cpp.llvm.bitreader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -43,16 +47,45 @@ public class InstructionParser {
         Cfe parse(Instruction instruction);
     }
 
+    private static abstract class AbstractParser<K extends Instruction> implements OpcodeParser {
+        @Autowired
+        SourceRangeFactory sourceRangeFactory;
+
+        @Autowired
+        ValueParser valueParser;
+
+        protected abstract K convert(Instruction instruction);
+        protected abstract Cfe parse0(K instruction);
+
+        @Override
+        public final Cfe parse(Instruction instruction) {
+            try {
+                return parse0(convert(instruction));
+            } catch (Throwable e) {
+                return new UnprocessedElement(e.getMessage(), sourceRangeFactory.getSourceRange(instruction));
+            }
+        }
+    }
+
     @Component
-    private static class DummyParser implements OpcodeParser {// todo not needed, just want to make spring happy.
+    private static class StoreInstructionParser extends AbstractParser<StoreInst> {
         @Override
         public String getOpcodeName() {
-            return "dummy";
+            return "store";
         }
 
         @Override
-        public Cfe parse(Instruction instruction) {
-            return null;
+        protected StoreInst convert(Instruction instruction) {
+            return bitreader.toStoreInst(instruction);
+        }
+
+        @Override
+        protected Cfe parse0(StoreInst instruction) {
+            return new Assignment(
+                    valueParser.parseLValue(instruction.getPointerOperand()),
+                    valueParser.parseRValue(instruction.getValueOperand()),
+                    sourceRangeFactory.getSourceRange(instruction)
+            );
         }
     }
 }

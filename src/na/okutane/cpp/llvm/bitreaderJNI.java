@@ -462,6 +462,7 @@ public class bitreaderJNI {
   public final static native long Value_DoPHITranslation__SWIG_0(long jarg1, Value jarg1_, long jarg2, BasicBlock jarg2_, long jarg3, BasicBlock jarg3_);
   public final static native long Value_MaximumAlignment_get();
   public final static native void Value_mutateType(long jarg1, Value jarg1_, long jarg2, Type jarg2_);
+  public final static native String Value_toString(long jarg1, Value jarg1_);
   public final static native long unwrap__SWIG_2(long jarg1);
   public final static native long wrap__SWIG_2(long jarg1);
   public final static native boolean Constant_isNullValue(long jarg1, Constant jarg1_);
@@ -1114,6 +1115,26 @@ public class bitreaderJNI {
   public final static native long getLazyIRFileModule(String jarg1, long jarg2, long jarg3, LLVMContext jarg3_);
   public final static native long ParseIR(long jarg1, long jarg2, long jarg3, LLVMContext jarg3_);
   public final static native long ParseIRFile(String jarg1, long jarg2, long jarg3, LLVMContext jarg3_);
+  public final static native boolean StoreInst_isVolatile(long jarg1, StoreInst jarg1_);
+  public final static native void StoreInst_setVolatile(long jarg1, StoreInst jarg1_, boolean jarg2);
+  public final static native long StoreInst_getAlignment(long jarg1, StoreInst jarg1_);
+  public final static native void StoreInst_setAlignment(long jarg1, StoreInst jarg1_, long jarg2);
+  public final static native long StoreInst_getOrdering(long jarg1, StoreInst jarg1_);
+  public final static native void StoreInst_setOrdering(long jarg1, StoreInst jarg1_, long jarg2);
+  public final static native long StoreInst_getSynchScope(long jarg1, StoreInst jarg1_);
+  public final static native void StoreInst_setSynchScope(long jarg1, StoreInst jarg1_, long jarg2);
+  public final static native boolean StoreInst_isAtomic(long jarg1, StoreInst jarg1_);
+  public final static native void StoreInst_setAtomic__SWIG_0(long jarg1, StoreInst jarg1_, long jarg2, long jarg3);
+  public final static native void StoreInst_setAtomic__SWIG_1(long jarg1, StoreInst jarg1_, long jarg2);
+  public final static native boolean StoreInst_isSimple(long jarg1, StoreInst jarg1_);
+  public final static native boolean StoreInst_isUnordered(long jarg1, StoreInst jarg1_);
+  public final static native long StoreInst_getValueOperand__SWIG_0(long jarg1, StoreInst jarg1_);
+  public final static native long StoreInst_getPointerOperand__SWIG_0(long jarg1, StoreInst jarg1_);
+  public final static native long StoreInst_getPointerOperandIndex();
+  public final static native long StoreInst_getPointerAddressSpace(long jarg1, StoreInst jarg1_);
+  public final static native boolean StoreInst_classof__SWIG_0(long jarg1, Instruction jarg1_);
+  public final static native boolean StoreInst_classof__SWIG_1(long jarg1, Value jarg1_);
+  public final static native void delete_StoreInst(long jarg1);
   public final static native long parse(String jarg1);
   public final static native String getName(long jarg1, GlobalValue jarg1_);
   public final static native int getModuleFunctionsSize(long jarg1, Module jarg1_);
@@ -1123,6 +1144,7 @@ public class bitreaderJNI {
   public final static native long toMDNode(long jarg1, Value jarg1_);
   public final static native long toMDString(long jarg1, Value jarg1_);
   public final static native long toConstantInt(long jarg1, Value jarg1_);
+  public final static native long toStoreInst(long jarg1, Instruction jarg1_);
   public final static native long ConstantInt_SWIGUpcast(long jarg1);
   public final static native long ConstantFP_SWIGUpcast(long jarg1);
   public final static native long ConstantAggregateZero_SWIGUpcast(long jarg1);
@@ -1138,4 +1160,5 @@ public class bitreaderJNI {
   public final static native long BasicBlock_SWIGUpcast(long jarg1);
   public final static native long GlobalValue_SWIGUpcast(long jarg1);
   public final static native long Function_SWIGUpcast(long jarg1);
+  public final static native long StoreInst_SWIGUpcast(long jarg1);
 }

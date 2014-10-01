@@ -1,7 +1,7 @@
 CFG: _Z18instanceMethodCallP3Foo
 noop: opcode 'alloca' not supported
  - no source -
-noop: opcode 'store' not supported
+noop: Can't parse LValue:   %1 = alloca %struct.Foo.0*, align 8
  - no source -
 noop: opcode 'load' not supported
 methodCalls.cpp:8 p->instanceMethod();
@@ -19,7 +19,7 @@ methodCalls.cpp:13 }
 CFG: _Z18abstractMethodCallP3Foo
 noop: opcode 'alloca' not supported
  - no source -
-noop: opcode 'store' not supported
+noop: Can't parse LValue:   %1 = alloca %struct.Foo.0*, align 8
  - no source -
 noop: opcode 'load' not supported
 methodCalls.cpp:16 p->abstractMethod();

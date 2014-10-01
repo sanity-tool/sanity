@@ -5,7 +5,7 @@ noop: opcode 'load' not supported
 binary.c:4 IR = I0 + I1;
 noop: opcode 'add' not supported
 binary.c:4 IR = I0 + I1;
-noop: opcode 'store' not supported
+noop: Can't parse LValue: @IR = internal global i32 0, align 4
 binary.c:4 IR = I0 + I1;
 noop: opcode 'load' not supported
 binary.c:5 IR = I0 - I1;
@@ -13,7 +13,7 @@ noop: opcode 'load' not supported
 binary.c:5 IR = I0 - I1;
 noop: opcode 'sub' not supported
 binary.c:5 IR = I0 - I1;
-noop: opcode 'store' not supported
+noop: Can't parse LValue: @IR = internal global i32 0, align 4
 binary.c:5 IR = I0 - I1;
 noop: opcode 'load' not supported
 binary.c:6 IR = I0 * I1;
@@ -21,7 +21,7 @@ noop: opcode 'load' not supported
 binary.c:6 IR = I0 * I1;
 noop: opcode 'mul' not supported
 binary.c:6 IR = I0 * I1;
-noop: opcode 'store' not supported
+noop: Can't parse LValue: @IR = internal global i32 0, align 4
 binary.c:6 IR = I0 * I1;
 noop: opcode 'load' not supported
 binary.c:7 IR = I0 / I1;
@@ -29,7 +29,7 @@ noop: opcode 'load' not supported
 binary.c:7 IR = I0 / I1;
 noop: opcode 'sdiv' not supported
 binary.c:7 IR = I0 / I1;
-noop: opcode 'store' not supported
+noop: Can't parse LValue: @IR = internal global i32 0, align 4
 binary.c:7 IR = I0 / I1;
 noop: opcode 'load' not supported
 binary.c:8 IR = I0 % I1;
@@ -37,7 +37,7 @@ noop: opcode 'load' not supported
 binary.c:8 IR = I0 % I1;
 noop: opcode 'srem' not supported
 binary.c:8 IR = I0 % I1;
-noop: opcode 'store' not supported
+noop: Can't parse LValue: @IR = internal global i32 0, align 4
 binary.c:8 IR = I0 % I1;
 noop: opcode 'load' not supported
 binary.c:9 IR = I0 & I1;
@@ -45,7 +45,7 @@ noop: opcode 'load' not supported
 binary.c:9 IR = I0 & I1;
 noop: opcode 'and' not supported
 binary.c:9 IR = I0 & I1;
-noop: opcode 'store' not supported
+noop: Can't parse LValue: @IR = internal global i32 0, align 4
 binary.c:9 IR = I0 & I1;
 noop: opcode 'load' not supported
 binary.c:10 IR = I0 | I1;
@@ -53,7 +53,7 @@ noop: opcode 'load' not supported
 binary.c:10 IR = I0 | I1;
 noop: opcode 'or' not supported
 binary.c:10 IR = I0 | I1;
-noop: opcode 'store' not supported
+noop: Can't parse LValue: @IR = internal global i32 0, align 4
 binary.c:10 IR = I0 | I1;
 noop: opcode 'load' not supported
 binary.c:11 IR = I0 ^ I1;
@@ -61,7 +61,7 @@ noop: opcode 'load' not supported
 binary.c:11 IR = I0 ^ I1;
 noop: opcode 'xor' not supported
 binary.c:11 IR = I0 ^ I1;
-noop: opcode 'store' not supported
+noop: Can't parse LValue: @IR = internal global i32 0, align 4
 binary.c:11 IR = I0 ^ I1;
 noop: opcode 'load' not supported
 binary.c:12 IR = I0 << I1;
@@ -69,7 +69,7 @@ noop: opcode 'load' not supported
 binary.c:12 IR = I0 << I1;
 noop: opcode 'shl' not supported
 binary.c:12 IR = I0 << I1;
-noop: opcode 'store' not supported
+noop: Can't parse LValue: @IR = internal global i32 0, align 4
 binary.c:12 IR = I0 << I1;
 noop: opcode 'load' not supported
 binary.c:13 IR = I0 >> I1;
@@ -77,7 +77,7 @@ noop: opcode 'load' not supported
 binary.c:13 IR = I0 >> I1;
 noop: opcode 'ashr' not supported
 binary.c:13 IR = I0 >> I1;
-noop: opcode 'store' not supported
+noop: Can't parse LValue: @IR = internal global i32 0, align 4
 binary.c:13 IR = I0 >> I1;
 noop: opcode 'ret' not supported
 binary.c:14 }

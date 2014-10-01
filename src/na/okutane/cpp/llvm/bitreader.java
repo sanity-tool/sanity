@@ -258,4 +258,9 @@ public class bitreader {
     return (cPtr == 0) ? null : new ConstantInt(cPtr, false);
   }
 
+  public static StoreInst toStoreInst(Instruction arg0) {
+    long cPtr = bitreaderJNI.toStoreInst(Instruction.getCPtr(arg0), arg0);
+    return (cPtr == 0) ? null : new StoreInst(cPtr, false);
+  }
+
 }

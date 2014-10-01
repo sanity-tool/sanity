@@ -14,6 +14,11 @@ public class CfePrinter {
             public void visit(UnprocessedElement element) {
                 sb.append("noop: " + element.getMessage());
             }
+
+            @Override
+            public void visit(Assignment assignment) {
+                sb.append("assign: " + assignment.getLeft() + " = " + assignment.getRight());
+            }
         });
 
         SourceRange sourceRange = cfe.getSourceRange();
