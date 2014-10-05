@@ -8,12 +8,11 @@
 
 package na.okutane.cpp.llvm;
 
-public class Constant {
+public class Constant extends User {
   private long swigCPtr;
-  protected boolean swigCMemOwn;
 
   protected Constant(long cPtr, boolean cMemoryOwn) {
-    swigCMemOwn = cMemoryOwn;
+    super(bitreaderJNI.Constant_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -33,6 +32,7 @@ public class Constant {
       }
       swigCPtr = 0;
     }
+    super.delete();
   }
 
   public boolean isNullValue() {

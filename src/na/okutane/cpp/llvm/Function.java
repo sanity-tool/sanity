@@ -310,8 +310,8 @@ public class Function extends GlobalValue {
     bitreaderJNI.Function_dropAllReferences(swigCPtr, this);
   }
 
-  public boolean hasAddressTaken(SWIGTYPE_p_p_User arg0) {
-    return bitreaderJNI.Function_hasAddressTaken__SWIG_0(swigCPtr, this, SWIGTYPE_p_p_User.getCPtr(arg0));
+  public boolean hasAddressTaken(SWIGTYPE_p_p_llvm__User arg0) {
+    return bitreaderJNI.Function_hasAddressTaken__SWIG_0(swigCPtr, this, SWIGTYPE_p_p_llvm__User.getCPtr(arg0));
   }
 
   public boolean hasAddressTaken() {

@@ -1,0 +1,31 @@
+package na.okutane.api.cfg;
+
+import org.springframework.stereotype.Component;
+
+/**
+ * @author <a href="mailto:dmitriy.matveev@corp.mail.ru">Dmitriy Matveev</a>
+ */
+@Component
+public class GlobalVariableCache {
+    public LValue get(String name) {
+        return new GlobalVar(name);
+    }
+
+    public class GlobalVar implements LValue {
+        private final String name;
+
+        public GlobalVar(String name) {
+
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+}

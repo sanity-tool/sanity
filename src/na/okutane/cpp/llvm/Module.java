@@ -194,19 +194,19 @@ public class Module {
     return (cPtr == 0) ? null : new Function(cPtr, false);
   }
 
-  public SWIGTYPE_p_llvm__GlobalVariable getGlobalVariable(StringRef Name, boolean AllowInternal) {
+  public GlobalVariable getGlobalVariable(StringRef Name, boolean AllowInternal) {
     long cPtr = bitreaderJNI.Module_getGlobalVariable__SWIG_0(swigCPtr, this, StringRef.getCPtr(Name), Name, AllowInternal);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__GlobalVariable(cPtr, false);
+    return (cPtr == 0) ? null : new GlobalVariable(cPtr, false);
   }
 
-  public SWIGTYPE_p_llvm__GlobalVariable getGlobalVariable(StringRef Name) {
+  public GlobalVariable getGlobalVariable(StringRef Name) {
     long cPtr = bitreaderJNI.Module_getGlobalVariable__SWIG_1(swigCPtr, this, StringRef.getCPtr(Name), Name);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__GlobalVariable(cPtr, false);
+    return (cPtr == 0) ? null : new GlobalVariable(cPtr, false);
   }
 
-  public SWIGTYPE_p_llvm__GlobalVariable getNamedGlobal(StringRef Name) {
+  public GlobalVariable getNamedGlobal(StringRef Name) {
     long cPtr = bitreaderJNI.Module_getNamedGlobal(swigCPtr, this, StringRef.getCPtr(Name), Name);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__GlobalVariable(cPtr, false);
+    return (cPtr == 0) ? null : new GlobalVariable(cPtr, false);
   }
 
   public Constant getOrInsertGlobal(StringRef Name, Type Ty) {
@@ -308,8 +308,8 @@ public class Module {
     return new SWIGTYPE_p_llvm__iplistT_llvm__GlobalVariable_t(bitreaderJNI.Module_getGlobalList__SWIG_0(swigCPtr, this), false);
   }
 
-  public static SWIGTYPE_m_Module__llvm__iplistT_llvm__GlobalVariable_t getSublistAccess(SWIGTYPE_p_llvm__GlobalVariable arg0) {
-    String cMemberPtr = bitreaderJNI.Module_getSublistAccess__SWIG_0(SWIGTYPE_p_llvm__GlobalVariable.getCPtr(arg0));
+  public static SWIGTYPE_m_Module__llvm__iplistT_llvm__GlobalVariable_t getSublistAccess(GlobalVariable arg0) {
+    String cMemberPtr = bitreaderJNI.Module_getSublistAccess__SWIG_0(GlobalVariable.getCPtr(arg0), arg0);
     return (cMemberPtr == null) ? null : new SWIGTYPE_m_Module__llvm__iplistT_llvm__GlobalVariable_t(cMemberPtr, false);
   }
 

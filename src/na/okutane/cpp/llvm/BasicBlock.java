@@ -198,9 +198,9 @@ public class BasicBlock extends Value {
     return bitreaderJNI.BasicBlock_isLandingPad(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_llvm__LandingPadInst getLandingPadInst() {
+  public LandingPadInst getLandingPadInst() {
     long cPtr = bitreaderJNI.BasicBlock_getLandingPadInst__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_llvm__LandingPadInst(cPtr, false);
+    return (cPtr == 0) ? null : new LandingPadInst(cPtr, false);
   }
 
 }

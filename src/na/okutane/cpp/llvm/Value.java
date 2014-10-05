@@ -89,17 +89,17 @@ public class Value {
     return bitreaderJNI.Value_use_empty(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_value_use_iteratorT_User_t use_begin() {
-    return new SWIGTYPE_p_value_use_iteratorT_User_t(bitreaderJNI.Value_use_begin__SWIG_0(swigCPtr, this), true);
+  public SWIGTYPE_p_value_use_iteratorT_llvm__User_t use_begin() {
+    return new SWIGTYPE_p_value_use_iteratorT_llvm__User_t(bitreaderJNI.Value_use_begin__SWIG_0(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_value_use_iteratorT_User_t use_end() {
-    return new SWIGTYPE_p_value_use_iteratorT_User_t(bitreaderJNI.Value_use_end__SWIG_0(swigCPtr, this), true);
+  public SWIGTYPE_p_value_use_iteratorT_llvm__User_t use_end() {
+    return new SWIGTYPE_p_value_use_iteratorT_llvm__User_t(bitreaderJNI.Value_use_end__SWIG_0(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_User use_back() {
+  public User use_back() {
     long cPtr = bitreaderJNI.Value_use_back__SWIG_0(swigCPtr, this);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_User(cPtr, false);
+    return (cPtr == 0) ? null : new User(cPtr, false);
   }
 
   public boolean hasOneUse() {

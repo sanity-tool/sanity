@@ -51,32 +51,32 @@ public class StoreInst extends Instruction {
     bitreaderJNI.StoreInst_setAlignment(swigCPtr, this, Align);
   }
 
-  public SWIGTYPE_p_AtomicOrdering getOrdering() {
-    return new SWIGTYPE_p_AtomicOrdering(bitreaderJNI.StoreInst_getOrdering(swigCPtr, this), true);
+  public AtomicOrdering getOrdering() {
+    return AtomicOrdering.swigToEnum(bitreaderJNI.StoreInst_getOrdering(swigCPtr, this));
   }
 
-  public void setOrdering(SWIGTYPE_p_AtomicOrdering Ordering) {
-    bitreaderJNI.StoreInst_setOrdering(swigCPtr, this, SWIGTYPE_p_AtomicOrdering.getCPtr(Ordering));
+  public void setOrdering(AtomicOrdering Ordering) {
+    bitreaderJNI.StoreInst_setOrdering(swigCPtr, this, Ordering.swigValue());
   }
 
-  public SWIGTYPE_p_SynchronizationScope getSynchScope() {
-    return new SWIGTYPE_p_SynchronizationScope(bitreaderJNI.StoreInst_getSynchScope(swigCPtr, this), true);
+  public SynchronizationScope getSynchScope() {
+    return SynchronizationScope.swigToEnum(bitreaderJNI.StoreInst_getSynchScope(swigCPtr, this));
   }
 
-  public void setSynchScope(SWIGTYPE_p_SynchronizationScope xthread) {
-    bitreaderJNI.StoreInst_setSynchScope(swigCPtr, this, SWIGTYPE_p_SynchronizationScope.getCPtr(xthread));
+  public void setSynchScope(SynchronizationScope xthread) {
+    bitreaderJNI.StoreInst_setSynchScope(swigCPtr, this, xthread.swigValue());
   }
 
   public boolean isAtomic() {
     return bitreaderJNI.StoreInst_isAtomic(swigCPtr, this);
   }
 
-  public void setAtomic(SWIGTYPE_p_AtomicOrdering Ordering, SWIGTYPE_p_SynchronizationScope SynchScope) {
-    bitreaderJNI.StoreInst_setAtomic__SWIG_0(swigCPtr, this, SWIGTYPE_p_AtomicOrdering.getCPtr(Ordering), SWIGTYPE_p_SynchronizationScope.getCPtr(SynchScope));
+  public void setAtomic(AtomicOrdering Ordering, SynchronizationScope SynchScope) {
+    bitreaderJNI.StoreInst_setAtomic__SWIG_0(swigCPtr, this, Ordering.swigValue(), SynchScope.swigValue());
   }
 
-  public void setAtomic(SWIGTYPE_p_AtomicOrdering Ordering) {
-    bitreaderJNI.StoreInst_setAtomic__SWIG_1(swigCPtr, this, SWIGTYPE_p_AtomicOrdering.getCPtr(Ordering));
+  public void setAtomic(AtomicOrdering Ordering) {
+    bitreaderJNI.StoreInst_setAtomic__SWIG_1(swigCPtr, this, Ordering.swigValue());
   }
 
   public boolean isSimple() {

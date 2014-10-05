@@ -18,9 +18,10 @@ LLVM_LIBS=/Users/jondoe/Downloads/clang+llvm-3.3-x86_64-apple-darwin12/lib/*.a
 #LLVM_INCLUDE="-I/Users/jondoe/Downloads/llvm-3.5.0.src/include"
 #LLVM_LIBS=/Users/jondoe/Downloads/llvm-3.5.0.src/Release+Asserts/lib/*.a
 
-swig $LLVM_INCLUDE $STD_INCLUDES -c++ -java -outdir $OUTDIR -package na.okutane.cpp.llvm bitreader.i
-g++ -c bitreader_wrap.cxx -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $STD_INCLUDES
+swig $LLVM_INCLUDE $STD_INCLUDES -c++ -java -outdir $OUTDIR -package na.okutane.cpp.llvm -v -debug-tmsearch -debug-tmused bitreader.i > swigout.txt
+swig -E $LLVM_INCLUDE $STD_INCLUDES -c++ -java bitreader.i > swigprep.txt
+g++ -c bitreader_wrap.cxx -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $STD_INCLUDES -ferror-limit=1
 g++ -shared bitreader_wrap.o $LLVM_LIBS /usr/lib/libc.dylib /usr/lib/libc++.dylib /usr/lib/libstdc++.dylib /usr/lib/libtermcap.dylib -o $DLL_NAME
 
 rm *.o
-rm *.cxx
+#rm *.cxx

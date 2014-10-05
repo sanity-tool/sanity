@@ -191,6 +191,11 @@ public class bitreader {
     return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMValueRef(cPtr, false);
   }
 
+  public static Type checkGEPType(Type Ty) {
+    long cPtr = bitreaderJNI.checkGEPType(Type.getCPtr(Ty), Ty);
+    return (cPtr == 0) ? null : new Type(cPtr, false);
+  }
+
   public static Module unwrap(SWIGTYPE_p_LLVMModuleProviderRef MP) {
     long cPtr = bitreaderJNI.unwrap__SWIG_4(SWIGTYPE_p_LLVMModuleProviderRef.getCPtr(MP));
     return (cPtr == 0) ? null : new Module(cPtr, false);
@@ -256,6 +261,16 @@ public class bitreader {
   public static ConstantInt toConstantInt(Value arg0) {
     long cPtr = bitreaderJNI.toConstantInt(Value.getCPtr(arg0), arg0);
     return (cPtr == 0) ? null : new ConstantInt(cPtr, false);
+  }
+
+  public static GlobalVariable toGlobalVariable(Value arg0) {
+    long cPtr = bitreaderJNI.toGlobalVariable(Value.getCPtr(arg0), arg0);
+    return (cPtr == 0) ? null : new GlobalVariable(cPtr, false);
+  }
+
+  public static Instruction toInstruction(Value arg0) {
+    long cPtr = bitreaderJNI.toInstruction(Value.getCPtr(arg0), arg0);
+    return (cPtr == 0) ? null : new Instruction(cPtr, false);
   }
 
   public static StoreInst toStoreInst(Instruction arg0) {

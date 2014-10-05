@@ -8,12 +8,11 @@
 
 package na.okutane.cpp.llvm;
 
-public class Instruction {
+public class Instruction extends User {
   private long swigCPtr;
-  protected boolean swigCMemOwn;
 
   protected Instruction(long cPtr, boolean cMemoryOwn) {
-    swigCMemOwn = cMemoryOwn;
+    super(bitreaderJNI.Instruction_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -33,6 +32,7 @@ public class Instruction {
       }
       swigCPtr = 0;
     }
+    super.delete();
   }
 
   public Instruction use_back() {
