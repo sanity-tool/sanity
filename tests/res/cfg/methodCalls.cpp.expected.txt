@@ -1,38 +1,38 @@
 CFG: _Z18instanceMethodCallP3Foo
-noop: opcode 'alloca' not supported
+noop: opcode 'LLVMAlloca' not supported
  - no source -
-noop: Can't parse LValue:   %1 = alloca %struct.Foo.0*, align 8
+noop: Can't parse LValue:   %1 = alloca %struct.Foo*, align 8
  - no source -
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 methodCalls.cpp:8 p->instanceMethod();
-noop: opcode 'call' not supported
+noop: opcode 'LLVMCall' not supported
 methodCalls.cpp:8 p->instanceMethod();
-noop: opcode 'ret' not supported
+noop: opcode 'LLVMRet' not supported
 methodCalls.cpp:9 }
 
 CFG: _Z16staticMethodCallv
-noop: opcode 'call' not supported
+noop: opcode 'LLVMCall' not supported
 methodCalls.cpp:12 Foo::staticMethod();
-noop: opcode 'ret' not supported
+noop: opcode 'LLVMRet' not supported
 methodCalls.cpp:13 }
 
 CFG: _Z18abstractMethodCallP3Foo
-noop: opcode 'alloca' not supported
+noop: opcode 'LLVMAlloca' not supported
  - no source -
-noop: Can't parse LValue:   %1 = alloca %struct.Foo.0*, align 8
+noop: Can't parse LValue:   %1 = alloca %struct.Foo*, align 8
  - no source -
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 methodCalls.cpp:16 p->abstractMethod();
-noop: opcode 'bitcast' not supported
+noop: opcode 'LLVMBitCast' not supported
 methodCalls.cpp:16 p->abstractMethod();
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 methodCalls.cpp:16 p->abstractMethod();
-noop: opcode 'getelementptr' not supported
+noop: opcode 'LLVMGetElementPtr' not supported
 methodCalls.cpp:16 p->abstractMethod();
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 methodCalls.cpp:16 p->abstractMethod();
-noop: opcode 'call' not supported
+noop: opcode 'LLVMCall' not supported
 methodCalls.cpp:16 p->abstractMethod();
-noop: opcode 'ret' not supported
+noop: opcode 'LLVMRet' not supported
 methodCalls.cpp:17 }
 

@@ -2,10 +2,9 @@ package na.okutane.cpp;
 
 import na.okutane.api.Cfg;
 import na.okutane.api.cfg.Cfe;
-import na.okutane.cpp.llvm.BasicBlock;
-import na.okutane.cpp.llvm.Function;
-import na.okutane.cpp.llvm.Instruction;
-import na.okutane.cpp.llvm.Module;
+import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueBasicBlock;
+import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;
+import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 import na.okutane.cpp.llvm.bitreader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -43,26 +43,32 @@ public class Parser {
             int resultCode = process.waitFor();
 
             if (resultCode == 0) {
-                Module m = bitreader.parse(objFile.getAbsolutePath());
-                //m.dump();
 
-                int size = bitreader.getModuleFunctionsSize(m);
-                System.out.println("count: " + size);
-                ArrayList<Cfg> result = new ArrayList<Cfg>(size);
-                for (int i = 0; i < size; i++) {
-                    Function function = bitreader.getModuleFunctionsItem(m, i);
-                    if (function.isMaterializable()) {
-                        function.Materialize();
+                SWIGTYPE_p_LLVMOpaqueModule m = bitreader.parse(objFile.getAbsolutePath());
 
-                        BasicBlock entryBlock = function.getEntryBlock();
+                if (m == null) {
+                    return Collections.emptyList();
+                }
+
+                bitreader.LLVMDumpModule(m);
+
+                ArrayList<Cfg> result = new ArrayList<Cfg>();
+
+                SWIGTYPE_p_LLVMOpaqueValue function = bitreader.LLVMGetFirstFunction(m);
+
+                while (function != null) {
+                    if (bitreader.LLVMGetFirstBasicBlock(function) != null) {
+
+                        SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock = bitreader.LLVMGetEntryBasicBlock(function);
 
                         Cfe entry = processBlock(entryBlock);
 
-                        result.add(new Cfg(bitreader.getName(function), entry));
+                        result.add(new Cfg(bitreader.LLVMGetValueName(function), entry));
                     }
+                    function = bitreader.LLVMGetNextFunction(function);
                 }
-                m.dump();
-                m.delete();
+                bitreader.LLVMDumpModule(m);
+                bitreader.LLVMDisposeModule(m);
                 objFile.delete();
                 return result;
             } else {
@@ -88,11 +94,12 @@ public class Parser {
         return parameters.toArray(new String[parameters.size()]);
     }
 
-    private Cfe processBlock(BasicBlock entryBlock) {
+    private Cfe processBlock(SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock) {
         Cfe first = null;
         Cfe last = null;
-        for (int i = 0; i < bitreader.getBasicBlockInstructionsSize(entryBlock); i++) {
-            Instruction instruction = bitreader.getBasicBlockInstructionsItem(entryBlock, i);
+
+        SWIGTYPE_p_LLVMOpaqueValue instruction = bitreader.LLVMGetFirstInstruction(entryBlock);
+        while (instruction != null) {
             Cfe cfe = instructionParser.parse(instruction);
             if (first == null) {
                 first = last = cfe;
@@ -100,6 +107,7 @@ public class Parser {
                 last.setNext(cfe);
                 last = last.getNext();
             }
+            instruction = bitreader.LLVMGetNextInstruction(instruction);
         }
 
         return first;

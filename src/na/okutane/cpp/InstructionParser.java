@@ -4,8 +4,8 @@ import na.okutane.api.cfg.Assignment;
 import na.okutane.api.cfg.Cfe;
 import na.okutane.api.cfg.RValue;
 import na.okutane.api.cfg.UnprocessedElement;
-import na.okutane.cpp.llvm.Instruction;
-import na.okutane.cpp.llvm.StoreInst;
+import na.okutane.cpp.llvm.LLVMOpcode;
+import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 import na.okutane.cpp.llvm.bitreader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,124 +18,95 @@ import java.util.Map;
  */
 @Component
 public class InstructionParser {
+    static {
+        System.loadLibrary("irreader");
+    }
+
     @Autowired
     SourceRangeFactory sourceRangeFactory;
 
-    private Map<String, OpcodeParser> parsers;
+    private Map<LLVMOpcode, OpcodeParser> parsers;
 
     private OpcodeParser defaultParser = new OpcodeParser() {
         @Override
-        public String getOpcodeName() {
+        public LLVMOpcode getOpcode() {
             return null;
         }
 
         @Override
-        public Cfe parse(Instruction instruction) {
-            throw new IllegalStateException("opcode '" + instruction.getOpcodeName() + "' not supported");
+        public Cfe parse(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            throw new IllegalStateException("opcode '" + bitreader.LLVMGetInstructionOpcode(instruction) + "' not supported");
         }
 
         @Override
-        public RValue parseValue(Instruction instruction) {
-            throw new IllegalStateException("opcode '" + instruction.getOpcodeName() + "' not supported");
+        public RValue parseValue(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            throw new IllegalStateException("opcode '" + bitreader.LLVMGetInstructionOpcode(instruction) + "' not supported");
         }
     };
 
     @Autowired
     public InstructionParser(OpcodeParser[] parsers) {
-        this.parsers = new HashMap<String, OpcodeParser>();
+        this.parsers = new HashMap<LLVMOpcode, OpcodeParser>();
 
         for (OpcodeParser parser : parsers) {
-            this.parsers.put(parser.getOpcodeName(), parser);
+            this.parsers.put(parser.getOpcode(), parser);
         }
     }
 
-    public Cfe parse(Instruction instruction) {
+    public Cfe parse(SWIGTYPE_p_LLVMOpaqueValue instruction) {
         try {
-            OpcodeParser parser = parsers.getOrDefault(instruction.getOpcodeName(), defaultParser);
+            OpcodeParser parser = parsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
             return parser.parse(instruction);
         } catch (Throwable e) {
             return new UnprocessedElement(e.getMessage(), sourceRangeFactory.getSourceRange(instruction));
         }
     }
 
-    public RValue parseValue(Instruction instruction) {
-        OpcodeParser parser = parsers.getOrDefault(instruction.getOpcodeName(), defaultParser);
+    public RValue parseValue(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        OpcodeParser parser = parsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
         return parser.parseValue(instruction);
     }
 
     private static interface OpcodeParser {
-        String getOpcodeName();
+        LLVMOpcode getOpcode();
 
-        Cfe parse(Instruction instruction);
+        Cfe parse(SWIGTYPE_p_LLVMOpaqueValue instruction);
 
-        RValue parseValue(Instruction instruction);
+        RValue parseValue(SWIGTYPE_p_LLVMOpaqueValue instruction);
     }
 
-    private static abstract class AbstractParser<K extends Instruction> implements OpcodeParser {
+    private static abstract class AbstractParser implements OpcodeParser {
         @Autowired
         SourceRangeFactory sourceRangeFactory;
 
         @Autowired
         ValueParser valueParser;
 
-        protected abstract K convert(Instruction instruction);
-
-        protected Cfe parse0(K instruction) {
-            throw new IllegalStateException("opcode '" + instruction.getOpcodeName() + "' not supported");
-        }
-
-        private RValue parseValue0(K instruction) {
-            throw new IllegalStateException("opcode '" + instruction.getOpcodeName() + "' not supported");
+        @Override
+        public Cfe parse(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            throw new IllegalStateException("opcode '" + bitreader.LLVMGetInstructionOpcode(instruction) + "' not supported");
         }
 
         @Override
-        public final Cfe parse(Instruction instruction) {
-            return parse0(convert(instruction));
-        }
-
-        @Override
-        public RValue parseValue(Instruction instruction) {
-            return parseValue0(convert(instruction));
+        public RValue parseValue(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            throw new IllegalStateException("opcode '" + bitreader.LLVMGetInstructionOpcode(instruction) + "' not supported");
         }
     }
 
     @Component
-    private static class StoreInstructionParser extends AbstractParser<StoreInst> {
+    private static class StoreParser extends AbstractParser {
         @Override
-        public String getOpcodeName() {
-            return "store";
+        public LLVMOpcode getOpcode() {
+            return LLVMOpcode.LLVMStore;
         }
 
         @Override
-        protected StoreInst convert(Instruction instruction) {
-            return bitreader.toStoreInst(instruction);
-        }
-
-        @Override
-        protected Cfe parse0(StoreInst instruction) {
+        public Cfe parse(SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return new Assignment(
-                    valueParser.parseLValue(instruction.getPointerOperand()),
-                    valueParser.parseRValue(instruction.getValueOperand()),
+                    valueParser.parseLValue(bitreader.LLVMGetOperand(instruction, 1)),
+                    valueParser.parseRValue(bitreader.LLVMGetOperand(instruction, 0)),
                     sourceRangeFactory.getSourceRange(instruction)
             );
-        }
-    }
-
-    @Component
-    private static class AddInstructionParser extends AbstractParser<Instruction> {
-        @Override
-        public String getOpcodeName() {
-            return "add";
-        }
-
-        @Override
-        protected Instruction convert(Instruction instruction) {
-            return instruction;
-        }
-
-        @Override
-        protected Cfe parse0(Instruction instruction) {
-            return null;
         }
     }
 }

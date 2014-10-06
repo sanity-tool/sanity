@@ -1,12 +1,12 @@
 CFG: writeToGlobalInt
-noop: Can't parse LValue: @I = internal global i32 0, align 4
+noop: Can't parse RValue: i32 1
 globals.c:4 I = 1;
-noop: opcode 'ret' not supported
+noop: opcode 'LLVMRet' not supported
 globals.c:5 }
 
 CFG: writeToGlobalIntPointer
-noop: Can't parse LValue: @I_P = internal global i32* null, align 8
+noop: Can't parse RValue: i32* null
 globals.c:8 I_P = 0;
-noop: opcode 'ret' not supported
+noop: opcode 'LLVMRet' not supported
 globals.c:9 }
 

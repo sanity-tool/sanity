@@ -3,10 +3,7 @@ package na.okutane.cpp;
 import na.okutane.api.cfg.GlobalVariableCache;
 import na.okutane.api.cfg.LValue;
 import na.okutane.api.cfg.RValue;
-import na.okutane.cpp.llvm.GlobalValue;
-import na.okutane.cpp.llvm.GlobalVariable;
-import na.okutane.cpp.llvm.Instruction;
-import na.okutane.cpp.llvm.Value;
+import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 import na.okutane.cpp.llvm.bitreader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,21 +18,18 @@ public class ValueParser {
     @Autowired
     InstructionParser instructionParser;
 
-    public LValue parseLValue(Value value) {
-        if (GlobalVariable.classof(value)) {
-            //GlobalVariable var = bitreader.toGlobalVariable(value);
-            return globals.get(value.getName().begin());
+    public LValue parseLValue(SWIGTYPE_p_LLVMOpaqueValue value) {
+        if (bitreader.LLVMIsAGlobalVariable(value) != null) {
+            return globals.get(bitreader.LLVMGetValueName(value));
         }
 
-        throw new IllegalStateException("Can't parse LValue: " + value);
+        throw new IllegalStateException("Can't parse LValue: " + bitreader.LLVMPrintValueToString(value));
     }
 
-    public RValue parseRValue(Value value) {
-        if (Instruction.classof(value)) {
-            Instruction inst = bitreader.toInstruction(value);
-
-            return instructionParser.parseValue(inst);
+    public RValue parseRValue(SWIGTYPE_p_LLVMOpaqueValue value) {
+        if (bitreader.LLVMIsAInstruction(value) != null) {
+            return instructionParser.parseValue(value);
         }
-        throw new IllegalStateException("Can't parse RValue: " + value.getValueID());
+        throw new IllegalStateException("Can't parse RValue: " + bitreader.LLVMPrintValueToString(value));
     }
 }

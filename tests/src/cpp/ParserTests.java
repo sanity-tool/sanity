@@ -37,7 +37,6 @@ public class ParserTests extends TestHelper {
     @Override
     public void runTest(String unit, Path pathToExpected) throws Exception {
         Parser parser = context.getBean(Parser.class);
-        parser.parse(unit); // todo there is a bug in parser which don't letting us to have source range for the very first instruction of all files.
         List<Cfg> testResult = parser.parse(unit);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

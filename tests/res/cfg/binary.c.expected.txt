@@ -1,84 +1,84 @@
 CFG: testInt
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:4 IR = I0 + I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:4 IR = I0 + I1;
-noop: opcode 'add' not supported
+noop: opcode 'LLVMAdd' not supported
 binary.c:4 IR = I0 + I1;
-noop: Can't parse LValue: @IR = internal global i32 0, align 4
+noop: opcode 'LLVMAdd' not supported
 binary.c:4 IR = I0 + I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:5 IR = I0 - I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:5 IR = I0 - I1;
-noop: opcode 'sub' not supported
+noop: opcode 'LLVMSub' not supported
 binary.c:5 IR = I0 - I1;
-noop: Can't parse LValue: @IR = internal global i32 0, align 4
+noop: opcode 'LLVMSub' not supported
 binary.c:5 IR = I0 - I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:6 IR = I0 * I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:6 IR = I0 * I1;
-noop: opcode 'mul' not supported
+noop: opcode 'LLVMMul' not supported
 binary.c:6 IR = I0 * I1;
-noop: Can't parse LValue: @IR = internal global i32 0, align 4
+noop: opcode 'LLVMMul' not supported
 binary.c:6 IR = I0 * I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:7 IR = I0 / I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:7 IR = I0 / I1;
-noop: opcode 'sdiv' not supported
+noop: opcode 'LLVMSDiv' not supported
 binary.c:7 IR = I0 / I1;
-noop: Can't parse LValue: @IR = internal global i32 0, align 4
+noop: opcode 'LLVMSDiv' not supported
 binary.c:7 IR = I0 / I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:8 IR = I0 % I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:8 IR = I0 % I1;
-noop: opcode 'srem' not supported
+noop: opcode 'LLVMSRem' not supported
 binary.c:8 IR = I0 % I1;
-noop: Can't parse LValue: @IR = internal global i32 0, align 4
+noop: opcode 'LLVMSRem' not supported
 binary.c:8 IR = I0 % I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:9 IR = I0 & I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:9 IR = I0 & I1;
-noop: opcode 'and' not supported
+noop: opcode 'LLVMAnd' not supported
 binary.c:9 IR = I0 & I1;
-noop: Can't parse LValue: @IR = internal global i32 0, align 4
+noop: opcode 'LLVMAnd' not supported
 binary.c:9 IR = I0 & I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:10 IR = I0 | I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:10 IR = I0 | I1;
-noop: opcode 'or' not supported
+noop: opcode 'LLVMOr' not supported
 binary.c:10 IR = I0 | I1;
-noop: Can't parse LValue: @IR = internal global i32 0, align 4
+noop: opcode 'LLVMOr' not supported
 binary.c:10 IR = I0 | I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:11 IR = I0 ^ I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:11 IR = I0 ^ I1;
-noop: opcode 'xor' not supported
+noop: opcode 'LLVMXor' not supported
 binary.c:11 IR = I0 ^ I1;
-noop: Can't parse LValue: @IR = internal global i32 0, align 4
+noop: opcode 'LLVMXor' not supported
 binary.c:11 IR = I0 ^ I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:12 IR = I0 << I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:12 IR = I0 << I1;
-noop: opcode 'shl' not supported
+noop: opcode 'LLVMShl' not supported
 binary.c:12 IR = I0 << I1;
-noop: Can't parse LValue: @IR = internal global i32 0, align 4
+noop: opcode 'LLVMShl' not supported
 binary.c:12 IR = I0 << I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:13 IR = I0 >> I1;
-noop: opcode 'load' not supported
+noop: opcode 'LLVMLoad' not supported
 binary.c:13 IR = I0 >> I1;
-noop: opcode 'ashr' not supported
+noop: opcode 'LLVMAShr' not supported
 binary.c:13 IR = I0 >> I1;
-noop: Can't parse LValue: @IR = internal global i32 0, align 4
+noop: opcode 'LLVMAShr' not supported
 binary.c:13 IR = I0 >> I1;
-noop: opcode 'ret' not supported
+noop: opcode 'LLVMRet' not supported
 binary.c:14 }
 

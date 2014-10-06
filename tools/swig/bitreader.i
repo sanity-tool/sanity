@@ -1,133 +1,37 @@
 %module bitreader
 
 %{
-#include <string>
+#include "llvm-c/IRReader.h"
 
-#include "llvm/ADT/Hashing.h"
-#include "llvm/ADT/StringRef.h"
-#include "llvm/Support/SourceMgr.h"
-#include "llvm/DebugInfo.h"
-#include "llvm/IR/Type.h"
-#include "llvm/IR/Value.h"
-#include "llvm/IR/Constant.h"
-#include "llvm/IR/Constants.h"
-#include "llvm/IR/Metadata.h"
-#include "llvm/Support/DebugLoc.h"
-#include "llvm/IR/LLVMContext.h"
-#include "llvm/IR/Operator.h"
-#include "llvm/IR/Instruction.h"
-#include "llvm/IR/Instructions.h"
-#include "llvm/IR/BasicBlock.h"
-#include "llvm/IR/Function.h"
-#include "llvm/IR/Module.h"
-#include "llvm/IRReader/IRReader.h"
+LLVMModuleRef parse(const char *path) {
+    LLVMModuleRef m;
+    LLVMMemoryBufferRef membuf;
+    char *errmsg;
+    LLVMContextRef ctx = LLVMGetGlobalContext();
 
-#include "llvm/Support/raw_ostream.h"
-
-using namespace llvm;
-
-Module *parse(const char *filename) {
-    SMDiagnostic err;
-    Module *result = getLazyIRFileModule(filename, err, getGlobalContext());
-    return result;
-}
-
-const char *getName(GlobalValue *gv) {
-    return gv->getName().begin();
-}
-
-%}
-
-%define LISTHELPER(type, itemtype, listname, altname)
-%{
-
-int altname ## Size(type *o) {
-    return o->listname().size();
-}
-
-itemtype *altname ## Item(type *o, int index) {
-    ilist_iterator<itemtype> it = o->listname().begin();
-    while(index) {
-        it++;
-        index--;
+    if (LLVMCreateMemoryBufferWithContentsOfFile(path, &membuf, &errmsg)) {
+        return 0;
     }
-    return it;
-}
-%}
-
-int altname ## Size(type *o);
-itemtype *altname ## Item(type *o, int index);
-
-%enddef
-
-%define DOWNCAST(fromType, toType)
-%{
-toType * to ## toType(fromType *o) {
-    return (toType*)o;
-}
-%}
-
-llvm::toType * to ## toType(llvm::fromType *);
-
-%enddef
-
-#define END_WITH_NULL
-#define DEFINE_SIMPLE_CONVERSION_FUNCTIONS(A, B)
-#define DEFINE_ISA_CONVERSION_FUNCTIONS(A, B)
-#define DEFINE_TRANSPARENT_OPERAND_ACCESSORS(A, B)
-#define LLVM_DELETED_FUNCTION
-#define LLVM_READONLY
-
-%ignore *::operator<<;
-
-%ignore SourceMgr;
-%ignore llvm::GlobalValue::use_empty_except_constants;
-%ignore llvm::ConstantDataSequential;
-
-%include "std_string.i"
-
-%include "llvm/ADT/StringRef.h"
-%include "llvm/ADT/APInt.h"
-%include "llvm/ADT/ilist.h"
-%include "llvm/IR/LLVMContext.h"
-//%include "llvm/DebugInfo.h"
-%include "llvm/IR/Type.h"
-%include "llvm/IR/Value.h"
-%include "llvm/IR/Constant.h"
-%include "llvm/IR/Constants.h"
-%include "llvm/IR/Metadata.h"
-%include "llvm/Support/DebugLoc.h"
-%include "llvm/IR/User.h"
-%include "llvm/IR/Instruction.h"
-//%include "llvm/IR/InstrTypes.h"
-%include "llvm/IR/Instructions.h"
-%include "llvm/IR/BasicBlock.h"
-%include "llvm/IR/GlobalValue.h"
-%include "llvm/IR/GlobalVariable.h"
-%include "llvm/IR/Function.h"
-%include "llvm/IR/Module.h"
-%include "llvm/IRReader/IRReader.h"
-
-using namespace llvm;
-
-%extend llvm::Value {
-    std::string toString() {
-        std::string result;
-        raw_string_ostream out(result);
-        $self->print(out);
-        return out.str();
+    if (LLVMParseIRInContext(ctx, membuf, &m, &errmsg)) {
+        return 0;
     }
-};
+    return m;
+}
 
-llvm::Module *parse(const char *filename);
-const char *getName(llvm::GlobalValue *gv);
+const char *getMDString(LLVMValueRef valueRef) {
+    unsigned int len;
+    return LLVMGetMDString(valueRef, &len);
+}
 
-LISTHELPER(llvm::Module, llvm::Function, getFunctionList, getModuleFunctions);
-LISTHELPER(llvm::BasicBlock, llvm::Instruction, getInstList, getBasicBlockInstructions);
+%}
 
-DOWNCAST(Value, MDNode);
-DOWNCAST(Value, MDString);
-DOWNCAST(Value, ConstantInt);
-DOWNCAST(Value, GlobalVariable);
-DOWNCAST(Value, Instruction);
-DOWNCAST(Instruction, StoreInst);
+#define __STDC_LIMIT_MACROS
+#define __STDC_CONSTANT_MACROS
+
+%include "llvm/Support/DataTypes.h"
+%include "llvm-c/Support.h"
+%include "llvm-c/Core.h"
+%include "llvm-c/IRReader.h"
+
+LLVMModuleRef parse(const char *path);
+const char *getMDString(LLVMValueRef valueRef);
