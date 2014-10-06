@@ -627,4 +627,9 @@ public class bitreaderJNI {
   public final static native int LLVMParseIRInContext(long jarg1, long jarg2, long jarg3, long jarg4);
   public final static native long parse(String jarg1);
   public final static native String getMDString(long jarg1);
+
+  static {
+     System.loadLibrary("irreader");
+  }
+
 }

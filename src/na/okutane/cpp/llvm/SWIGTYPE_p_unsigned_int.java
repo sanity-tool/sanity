@@ -29,7 +29,7 @@ public class SWIGTYPE_p_unsigned_int {
       equal = (((SWIGTYPE_p_unsigned_int)obj).swigCPtr == this.swigCPtr);
     return equal;
   }
-  
+
   public int hashCode() {
      return Long.hashCode(swigCPtr);
   }

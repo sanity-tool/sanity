@@ -48,3 +48,9 @@ const char *getMDString(LLVMValueRef valueRef) {
 
 LLVMModuleRef parse(const char *path);
 const char *getMDString(LLVMValueRef valueRef);
+
+%pragma(java) jniclasscode=%{
+  static {
+     System.loadLibrary("irreader");
+  }
+%}

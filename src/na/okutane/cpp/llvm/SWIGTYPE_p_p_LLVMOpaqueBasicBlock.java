@@ -29,7 +29,7 @@ public class SWIGTYPE_p_p_LLVMOpaqueBasicBlock {
       equal = (((SWIGTYPE_p_p_LLVMOpaqueBasicBlock)obj).swigCPtr == this.swigCPtr);
     return equal;
   }
-  
+
   public int hashCode() {
      return Long.hashCode(swigCPtr);
   }

@@ -24,10 +24,6 @@ public class Parser {
     @Autowired
     InstructionParser instructionParser;
 
-    static {
-        System.loadLibrary("irreader");
-    }
-
     public List<Cfg> parse(String filename) {
         try {
             ProcessBuilder pb = new ProcessBuilder();

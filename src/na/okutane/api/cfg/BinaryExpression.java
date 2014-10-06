@@ -27,7 +27,16 @@ public class BinaryExpression implements RValue {
     }
 
     public enum Operator {
-        Add("+");
+        Add("+"),
+        Sub("-"),
+        Mul("*"),
+        Div("/"),
+        Rem("%"),
+        And("&"),
+        Or("|"),
+        Xor("^"),
+        ShiftLeft("<<"),
+        ShiftRight(">>");
 
         private final String stringValue;
 

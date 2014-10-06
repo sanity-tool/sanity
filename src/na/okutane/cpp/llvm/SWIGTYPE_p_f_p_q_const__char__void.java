@@ -29,7 +29,7 @@ public class SWIGTYPE_p_f_p_q_const__char__void {
       equal = (((SWIGTYPE_p_f_p_q_const__char__void)obj).swigCPtr == this.swigCPtr);
     return equal;
   }
-  
+
   public int hashCode() {
      return Long.hashCode(swigCPtr);
   }

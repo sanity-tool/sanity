@@ -29,7 +29,7 @@ public class SWIGTYPE_p_f_p_struct_LLVMOpaqueContext_p_void__void {
       equal = (((SWIGTYPE_p_f_p_struct_LLVMOpaqueContext_p_void__void)obj).swigCPtr == this.swigCPtr);
     return equal;
   }
-  
+
   public int hashCode() {
      return Long.hashCode(swigCPtr);
   }

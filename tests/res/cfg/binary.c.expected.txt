@@ -3,41 +3,41 @@ assign: tmp0 = I0 + I1
 binary.c:4 IR = I0 + I1;
 assign: IR = tmp0
 binary.c:4 IR = I0 + I1;
-noop: opcode 'LLVMSub' not supported
+assign: tmp1 = I0 - I1
 binary.c:5 IR = I0 - I1;
-noop: opcode 'LLVMSub' not supported
+assign: IR = tmp1
 binary.c:5 IR = I0 - I1;
-noop: opcode 'LLVMMul' not supported
+assign: tmp2 = I0 * I1
 binary.c:6 IR = I0 * I1;
-noop: opcode 'LLVMMul' not supported
+assign: IR = tmp2
 binary.c:6 IR = I0 * I1;
-noop: opcode 'LLVMSDiv' not supported
+assign: tmp3 = I0 / I1
 binary.c:7 IR = I0 / I1;
-noop: opcode 'LLVMSDiv' not supported
+assign: IR = tmp3
 binary.c:7 IR = I0 / I1;
-noop: opcode 'LLVMSRem' not supported
+assign: tmp4 = I0 % I1
 binary.c:8 IR = I0 % I1;
-noop: opcode 'LLVMSRem' not supported
+assign: IR = tmp4
 binary.c:8 IR = I0 % I1;
-noop: opcode 'LLVMAnd' not supported
+assign: tmp5 = I0 & I1
 binary.c:9 IR = I0 & I1;
-noop: opcode 'LLVMAnd' not supported
+assign: IR = tmp5
 binary.c:9 IR = I0 & I1;
-noop: opcode 'LLVMOr' not supported
+assign: tmp6 = I0 | I1
 binary.c:10 IR = I0 | I1;
-noop: opcode 'LLVMOr' not supported
+assign: IR = tmp6
 binary.c:10 IR = I0 | I1;
-noop: opcode 'LLVMXor' not supported
+assign: tmp7 = I0 ^ I1
 binary.c:11 IR = I0 ^ I1;
-noop: opcode 'LLVMXor' not supported
+assign: IR = tmp7
 binary.c:11 IR = I0 ^ I1;
-noop: opcode 'LLVMShl' not supported
+assign: tmp8 = I0 << I1
 binary.c:12 IR = I0 << I1;
-noop: opcode 'LLVMShl' not supported
+assign: IR = tmp8
 binary.c:12 IR = I0 << I1;
-noop: opcode 'LLVMAShr' not supported
+assign: tmp9 = I0 >> I1
 binary.c:13 IR = I0 >> I1;
-noop: opcode 'LLVMAShr' not supported
+assign: IR = tmp9
 binary.c:13 IR = I0 >> I1;
 noop: opcode 'LLVMRet' not supported
 binary.c:14 }

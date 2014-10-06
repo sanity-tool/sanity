@@ -21,16 +21,10 @@ import java.util.Map;
  */
 @Component
 public class InstructionParser {
-    static {
-        System.loadLibrary("irreader");
-    }
-
     @Autowired
     SourceRangeFactory sourceRangeFactory;
 
     private Map<LLVMOpcode, OpcodeParser> parsers;
-
-    private Map<SWIGTYPE_p_LLVMOpaqueValue, LValue> tmpVars = new HashMap<SWIGTYPE_p_LLVMOpaqueValue, LValue>();
 
     private OpcodeParser defaultParser = new OpcodeParser() {
         @Override
@@ -133,11 +127,18 @@ public class InstructionParser {
         }
     }
 
-    @Component
-    private static class AddParser extends AbstractParser {
+    private static class BinaryOperationParser extends AbstractParser {
+        private final LLVMOpcode opcode;
+        private final BinaryExpression.Operator operator;
+
+        public BinaryOperationParser(LLVMOpcode opcode, BinaryExpression.Operator operator) {
+            this.opcode = opcode;
+            this.operator = operator;
+        }
+
         @Override
         public LLVMOpcode getOpcode() {
-            return LLVMOpcode.LLVMAdd;
+            return opcode;
         }
 
         @Override
@@ -147,7 +148,7 @@ public class InstructionParser {
                     tmp,
                     new BinaryExpression(
                             valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
-                            BinaryExpression.Operator.Add,
+                            operator,
                             valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
                     ),
                     sourceRangeFactory.getSourceRange(instruction)
@@ -157,6 +158,76 @@ public class InstructionParser {
         @Override
         public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return ctx.getTmpVar(instruction);
+        }
+    }
+
+    @Component
+    private static class AddParser extends BinaryOperationParser {
+        public AddParser() {
+            super(LLVMOpcode.LLVMAdd, BinaryExpression.Operator.Add);
+        }
+    }
+
+    @Component
+    private static class SubParser extends BinaryOperationParser {
+        public SubParser() {
+            super(LLVMOpcode.LLVMSub, BinaryExpression.Operator.Sub);
+        }
+    }
+
+    @Component
+    private static class MulParser extends BinaryOperationParser {
+        public MulParser() {
+            super(LLVMOpcode.LLVMMul, BinaryExpression.Operator.Mul);
+        }
+    }
+
+    @Component
+    private static class DivParser extends BinaryOperationParser {
+        public DivParser() {
+            super(LLVMOpcode.LLVMSDiv, BinaryExpression.Operator.Div);
+        }
+    }
+
+    @Component
+    private static class RemParser extends BinaryOperationParser {
+        public RemParser() {
+            super(LLVMOpcode.LLVMSRem, BinaryExpression.Operator.Rem);
+        }
+    }
+
+    @Component
+    private static class AndParser extends BinaryOperationParser {
+        public AndParser() {
+            super(LLVMOpcode.LLVMAnd, BinaryExpression.Operator.And);
+        }
+    }
+
+    @Component
+    private static class OrParser extends BinaryOperationParser {
+        public OrParser() {
+            super(LLVMOpcode.LLVMOr, BinaryExpression.Operator.Or);
+        }
+    }
+
+    @Component
+    private static class XorParser extends BinaryOperationParser {
+        public XorParser() {
+            super(LLVMOpcode.LLVMXor, BinaryExpression.Operator.Xor);
+        }
+    }
+
+    @Component
+    private static class ShlParser extends BinaryOperationParser {
+        public ShlParser() {
+            super(LLVMOpcode.LLVMShl, BinaryExpression.Operator.ShiftLeft);
+        }
+    }
+
+    @Component
+    private static class ShrParser extends BinaryOperationParser {
+        public ShrParser() {
+            super(LLVMOpcode.LLVMAShr, BinaryExpression.Operator.ShiftRight);
         }
     }
 }
