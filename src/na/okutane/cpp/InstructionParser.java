@@ -127,6 +127,22 @@ public class InstructionParser {
         }
     }
 
+    @Component
+    private static class RetParser extends AbstractParser {
+        @Override
+        public LLVMOpcode getOpcode() {
+            return LLVMOpcode.LLVMRet;
+        }
+
+        @Override
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            if (bitreader.LLVMGetNumOperands(instruction) == 0) {
+                return null;
+            }
+            return super.parse(ctx, instruction);
+        }
+    }
+
     private static class BinaryOperationParser extends AbstractParser {
         private final LLVMOpcode opcode;
         private final BinaryExpression.Operator operator;

@@ -5,14 +5,10 @@ noop: Can't parse LValue:   %1 = alloca %struct.Foo*, align 8
  - no source -
 noop: opcode 'LLVMCall' not supported
 methodCalls.cpp:8 p->instanceMethod();
-noop: opcode 'LLVMRet' not supported
-methodCalls.cpp:9 }
 
 CFG: _Z16staticMethodCallv
 noop: opcode 'LLVMCall' not supported
 methodCalls.cpp:12 Foo::staticMethod();
-noop: opcode 'LLVMRet' not supported
-methodCalls.cpp:13 }
 
 CFG: _Z18abstractMethodCallP3Foo
 noop: opcode 'LLVMAlloca' not supported
@@ -25,6 +21,4 @@ noop: opcode 'LLVMGetElementPtr' not supported
 methodCalls.cpp:16 p->abstractMethod();
 noop: opcode 'LLVMCall' not supported
 methodCalls.cpp:16 p->abstractMethod();
-noop: opcode 'LLVMRet' not supported
-methodCalls.cpp:17 }
 

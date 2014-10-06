@@ -39,6 +39,4 @@ assign: tmp9 = I0 >> I1
 binary.c:13 IR = I0 >> I1;
 assign: IR = tmp9
 binary.c:13 IR = I0 >> I1;
-noop: opcode 'LLVMRet' not supported
-binary.c:14 }
 
