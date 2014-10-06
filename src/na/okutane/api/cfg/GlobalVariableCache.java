@@ -3,7 +3,7 @@ package na.okutane.api.cfg;
 import org.springframework.stereotype.Component;
 
 /**
- * @author <a href="mailto:dmitriy.matveev@corp.mail.ru">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
  */
 @Component
 public class GlobalVariableCache {

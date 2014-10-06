@@ -1,5 +1,6 @@
 package na.okutane.cpp;
 
+import na.okutane.api.cfg.CfgBuildingCtx;
 import na.okutane.api.cfg.GlobalVariableCache;
 import na.okutane.api.cfg.LValue;
 import na.okutane.api.cfg.RValue;
@@ -18,7 +19,7 @@ public class ValueParser {
     @Autowired
     InstructionParser instructionParser;
 
-    public LValue parseLValue(SWIGTYPE_p_LLVMOpaqueValue value) {
+    public LValue parseLValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue value) {
         if (bitreader.LLVMIsAGlobalVariable(value) != null) {
             return globals.get(bitreader.LLVMGetValueName(value));
         }
@@ -26,9 +27,12 @@ public class ValueParser {
         throw new IllegalStateException("Can't parse LValue: " + bitreader.LLVMPrintValueToString(value));
     }
 
-    public RValue parseRValue(SWIGTYPE_p_LLVMOpaqueValue value) {
+    public RValue parseRValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue value) {
+        if (bitreader.LLVMIsAGlobalVariable(value) != null) {
+            return globals.get(bitreader.LLVMGetValueName(value));
+        }
         if (bitreader.LLVMIsAInstruction(value) != null) {
-            return instructionParser.parseValue(value);
+            return instructionParser.parseValue(ctx, value);
         }
         throw new IllegalStateException("Can't parse RValue: " + bitreader.LLVMPrintValueToString(value));
     }

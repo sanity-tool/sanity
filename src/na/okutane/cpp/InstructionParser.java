@@ -1,7 +1,10 @@
 package na.okutane.cpp;
 
 import na.okutane.api.cfg.Assignment;
+import na.okutane.api.cfg.BinaryExpression;
 import na.okutane.api.cfg.Cfe;
+import na.okutane.api.cfg.CfgBuildingCtx;
+import na.okutane.api.cfg.LValue;
 import na.okutane.api.cfg.RValue;
 import na.okutane.api.cfg.UnprocessedElement;
 import na.okutane.cpp.llvm.LLVMOpcode;
@@ -27,6 +30,8 @@ public class InstructionParser {
 
     private Map<LLVMOpcode, OpcodeParser> parsers;
 
+    private Map<SWIGTYPE_p_LLVMOpaqueValue, LValue> tmpVars = new HashMap<SWIGTYPE_p_LLVMOpaqueValue, LValue>();
+
     private OpcodeParser defaultParser = new OpcodeParser() {
         @Override
         public LLVMOpcode getOpcode() {
@@ -34,12 +39,12 @@ public class InstructionParser {
         }
 
         @Override
-        public Cfe parse(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             throw new IllegalStateException("opcode '" + bitreader.LLVMGetInstructionOpcode(instruction) + "' not supported");
         }
 
         @Override
-        public RValue parseValue(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             throw new IllegalStateException("opcode '" + bitreader.LLVMGetInstructionOpcode(instruction) + "' not supported");
         }
     };
@@ -53,26 +58,26 @@ public class InstructionParser {
         }
     }
 
-    public Cfe parse(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+    public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
         try {
             OpcodeParser parser = parsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
-            return parser.parse(instruction);
+            return parser.parse(ctx, instruction);
         } catch (Throwable e) {
             return new UnprocessedElement(e.getMessage(), sourceRangeFactory.getSourceRange(instruction));
         }
     }
 
-    public RValue parseValue(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+    public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
         OpcodeParser parser = parsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
-        return parser.parseValue(instruction);
+        return parser.parseValue(ctx, instruction);
     }
 
     private static interface OpcodeParser {
         LLVMOpcode getOpcode();
 
-        Cfe parse(SWIGTYPE_p_LLVMOpaqueValue instruction);
+        Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction);
 
-        RValue parseValue(SWIGTYPE_p_LLVMOpaqueValue instruction);
+        RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction);
     }
 
     private static abstract class AbstractParser implements OpcodeParser {
@@ -83,12 +88,12 @@ public class InstructionParser {
         ValueParser valueParser;
 
         @Override
-        public Cfe parse(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             throw new IllegalStateException("opcode '" + bitreader.LLVMGetInstructionOpcode(instruction) + "' not supported");
         }
 
         @Override
-        public RValue parseValue(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             throw new IllegalStateException("opcode '" + bitreader.LLVMGetInstructionOpcode(instruction) + "' not supported");
         }
     }
@@ -101,12 +106,57 @@ public class InstructionParser {
         }
 
         @Override
-        public Cfe parse(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return new Assignment(
-                    valueParser.parseLValue(bitreader.LLVMGetOperand(instruction, 1)),
-                    valueParser.parseRValue(bitreader.LLVMGetOperand(instruction, 0)),
+                    valueParser.parseLValue(ctx, bitreader.LLVMGetOperand(instruction, 1)),
+                    valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
                     sourceRangeFactory.getSourceRange(instruction)
             );
+        }
+    }
+
+    @Component
+    private static class LoadParser extends AbstractParser {
+        @Override
+        public LLVMOpcode getOpcode() {
+            return LLVMOpcode.LLVMLoad;
+        }
+
+        @Override
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            return null;
+        }
+
+        @Override
+        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            return valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
+        }
+    }
+
+    @Component
+    private static class AddParser extends AbstractParser {
+        @Override
+        public LLVMOpcode getOpcode() {
+            return LLVMOpcode.LLVMAdd;
+        }
+
+        @Override
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            LValue tmp = ctx.getTmpVar(instruction);
+            return new Assignment(
+                    tmp,
+                    new BinaryExpression(
+                            valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
+                            BinaryExpression.Operator.Add,
+                            valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
+                    ),
+                    sourceRangeFactory.getSourceRange(instruction)
+            );
+        }
+
+        @Override
+        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            return ctx.getTmpVar(instruction);
         }
     }
 }

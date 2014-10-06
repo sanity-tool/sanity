@@ -22,5 +22,16 @@ public class SWIGTYPE_p_LLVMOpaqueMemoryBuffer {
   protected static long getCPtr(SWIGTYPE_p_LLVMOpaqueMemoryBuffer obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
+
+  public boolean equals(Object obj) {
+    boolean equal = false;
+    if (obj instanceof SWIGTYPE_p_LLVMOpaqueMemoryBuffer)
+      equal = (((SWIGTYPE_p_LLVMOpaqueMemoryBuffer)obj).swigCPtr == this.swigCPtr);
+    return equal;
+  }
+  
+  public int hashCode() {
+     return Long.hashCode(swigCPtr);
+  }
 }
 

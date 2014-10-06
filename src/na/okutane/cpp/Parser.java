@@ -2,6 +2,7 @@ package na.okutane.cpp;
 
 import na.okutane.api.Cfg;
 import na.okutane.api.cfg.Cfe;
+import na.okutane.api.cfg.CfgBuildingCtx;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueBasicBlock;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
@@ -58,10 +59,11 @@ public class Parser {
 
                 while (function != null) {
                     if (bitreader.LLVMGetFirstBasicBlock(function) != null) {
+                        CfgBuildingCtx ctx = new CfgBuildingCtx();
 
                         SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock = bitreader.LLVMGetEntryBasicBlock(function);
 
-                        Cfe entry = processBlock(entryBlock);
+                        Cfe entry = processBlock(ctx, entryBlock);
 
                         result.add(new Cfg(bitreader.LLVMGetValueName(function), entry));
                     }
@@ -94,13 +96,13 @@ public class Parser {
         return parameters.toArray(new String[parameters.size()]);
     }
 
-    private Cfe processBlock(SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock) {
+    private Cfe processBlock(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock) {
         Cfe first = null;
         Cfe last = null;
 
         SWIGTYPE_p_LLVMOpaqueValue instruction = bitreader.LLVMGetFirstInstruction(entryBlock);
         while (instruction != null) {
-            Cfe cfe = instructionParser.parse(instruction);
+            Cfe cfe = instructionParser.parse(ctx, instruction);
             if (first == null) {
                 first = last = cfe;
             } else if (cfe != null) {

@@ -1,80 +1,40 @@
 CFG: testInt
-noop: opcode 'LLVMLoad' not supported
+assign: tmp0 = I0 + I1
 binary.c:4 IR = I0 + I1;
-noop: opcode 'LLVMLoad' not supported
+assign: IR = tmp0
 binary.c:4 IR = I0 + I1;
-noop: opcode 'LLVMAdd' not supported
-binary.c:4 IR = I0 + I1;
-noop: opcode 'LLVMAdd' not supported
-binary.c:4 IR = I0 + I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:5 IR = I0 - I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:5 IR = I0 - I1;
 noop: opcode 'LLVMSub' not supported
 binary.c:5 IR = I0 - I1;
 noop: opcode 'LLVMSub' not supported
 binary.c:5 IR = I0 - I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:6 IR = I0 * I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:6 IR = I0 * I1;
 noop: opcode 'LLVMMul' not supported
 binary.c:6 IR = I0 * I1;
 noop: opcode 'LLVMMul' not supported
 binary.c:6 IR = I0 * I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:7 IR = I0 / I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:7 IR = I0 / I1;
 noop: opcode 'LLVMSDiv' not supported
 binary.c:7 IR = I0 / I1;
 noop: opcode 'LLVMSDiv' not supported
 binary.c:7 IR = I0 / I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:8 IR = I0 % I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:8 IR = I0 % I1;
 noop: opcode 'LLVMSRem' not supported
 binary.c:8 IR = I0 % I1;
 noop: opcode 'LLVMSRem' not supported
 binary.c:8 IR = I0 % I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:9 IR = I0 & I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:9 IR = I0 & I1;
 noop: opcode 'LLVMAnd' not supported
 binary.c:9 IR = I0 & I1;
 noop: opcode 'LLVMAnd' not supported
 binary.c:9 IR = I0 & I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:10 IR = I0 | I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:10 IR = I0 | I1;
 noop: opcode 'LLVMOr' not supported
 binary.c:10 IR = I0 | I1;
 noop: opcode 'LLVMOr' not supported
 binary.c:10 IR = I0 | I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:11 IR = I0 ^ I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:11 IR = I0 ^ I1;
 noop: opcode 'LLVMXor' not supported
 binary.c:11 IR = I0 ^ I1;
 noop: opcode 'LLVMXor' not supported
 binary.c:11 IR = I0 ^ I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:12 IR = I0 << I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:12 IR = I0 << I1;
 noop: opcode 'LLVMShl' not supported
 binary.c:12 IR = I0 << I1;
 noop: opcode 'LLVMShl' not supported
 binary.c:12 IR = I0 << I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:13 IR = I0 >> I1;
-noop: opcode 'LLVMLoad' not supported
-binary.c:13 IR = I0 >> I1;
 noop: opcode 'LLVMAShr' not supported
 binary.c:13 IR = I0 >> I1;
 noop: opcode 'LLVMAShr' not supported
