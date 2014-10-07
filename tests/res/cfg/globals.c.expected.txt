@@ -1,8 +1,8 @@
 CFG: writeToGlobalInt
-noop: Can't parse RValue: i32 1
+assign: I = 1
 globals.c:4 I = 1;
 
 CFG: writeToGlobalIntPointer
-noop: Can't parse RValue: i32* null
+assign: I_P = null
 globals.c:8 I_P = 0;
 

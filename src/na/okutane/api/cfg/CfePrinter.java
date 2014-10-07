@@ -91,6 +91,15 @@ public class CfePrinter implements CfeVisitor {
             print(expression.getRight());
             return;
         }
+        if (value instanceof ConstCache.Const) {
+            ConstCache.Const constant = (ConstCache.Const) value;
+            sb.append(constant.getValue());
+            return;
+        }
+        if (value instanceof ConstCache.NullPtr) {
+            sb.append("null");
+            return;
+        }
         sb.append(value.toString());
     }
 }
