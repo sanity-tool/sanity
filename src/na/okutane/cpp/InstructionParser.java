@@ -2,18 +2,23 @@ package na.okutane.cpp;
 
 import na.okutane.api.cfg.Assignment;
 import na.okutane.api.cfg.BinaryExpression;
+import na.okutane.api.cfg.Call;
 import na.okutane.api.cfg.Cfe;
 import na.okutane.api.cfg.CfgBuildingCtx;
 import na.okutane.api.cfg.LValue;
 import na.okutane.api.cfg.RValue;
 import na.okutane.api.cfg.UnprocessedElement;
 import na.okutane.cpp.llvm.LLVMOpcode;
+import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueType;
+import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueUse;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 import na.okutane.cpp.llvm.bitreader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -139,6 +144,54 @@ public class InstructionParser {
             if (bitreader.LLVMGetNumOperands(instruction) == 0) {
                 return null;
             }
+            return super.parse(ctx, instruction);
+        }
+    }
+
+    @Component
+    private static class AllocaParser extends AbstractParser {
+        @Override
+        public LLVMOpcode getOpcode() {
+            return LLVMOpcode.LLVMAlloca;
+        }
+
+        @Override
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            return null;
+        }
+
+        @Override
+        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            return ctx.getTmpVar(instruction);
+        }
+    }
+
+    @Component
+    private static class CallParser extends AbstractParser {
+        @Override
+        public LLVMOpcode getOpcode() {
+            return LLVMOpcode.LLVMCall;
+        }
+
+        @Override
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            List<RValue> args = new ArrayList<RValue>();
+            int argLen = bitreader.LLVMGetNumOperands(instruction) - 1;
+            for (int i = 0; i < argLen; i++) {
+                args.add(valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
+            }
+            SWIGTYPE_p_LLVMOpaqueValue function = bitreader.LLVMGetOperand(instruction, argLen);
+
+            if (bitreader.LLVMIsAFunction(function) != null) {
+                LValue lvalue = ctx.getTmpVar(instruction);
+                return new Call(
+                        bitreader.LLVMGetValueName(function),
+                        lvalue,
+                        args,
+                        sourceRangeFactory.getSourceRange(instruction)
+                );
+            }
+
             return super.parse(ctx, instruction);
         }
     }

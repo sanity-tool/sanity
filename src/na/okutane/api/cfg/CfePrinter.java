@@ -3,6 +3,8 @@ package na.okutane.api.cfg;
 import na.okutane.api.Cfg;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -72,6 +74,25 @@ public class CfePrinter implements CfeVisitor {
         print(assignment.getLeft());
         sb.append(" = ");
         print(assignment.getRight());
+    }
+
+    @Override
+    public void visit(Call call) {
+        sb.append("call: ");
+        print(call.getlValue());
+        sb.append(" = ").append(call.getName()).append('(');
+
+        List<RValue> args = call.getArgs();
+        if (!args.isEmpty()) {
+            Iterator<RValue> it = args.iterator();
+            print(it.next());
+            while (it.hasNext()) {
+                sb.append(", ");
+                print(it.next());
+            }
+        }
+
+        sb.append(')');
     }
 
     private void print(RValue value) {

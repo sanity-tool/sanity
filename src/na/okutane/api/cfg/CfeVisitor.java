@@ -7,4 +7,6 @@ public interface CfeVisitor {
     void visit(UnprocessedElement element);
 
     void visit(Assignment assignment);
+
+    void visit(Call call);
 }
