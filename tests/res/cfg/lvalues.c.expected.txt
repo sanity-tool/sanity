@@ -1,0 +1,46 @@
+CFG: localAuto
+noop: Can't parse LValue:   %a = alloca i32, align 4
+lvalues.c:2 int a = 1;
+
+CFG: localStatic
+assign: localStatic.a = 2
+lvalues.c:7 a = 2;
+
+CFG: arrayElementAccess
+noop: Can't parse LValue: i32* getelementptr inbounds ([10 x i32]* @ARRAY, i32 0, i64 0)
+lvalues.c:13 ARRAY[0] = 1;
+noop: Can't parse LValue: i32* getelementptr inbounds ([10 x i32]* @ARRAY, i32 0, i64 1)
+lvalues.c:14 ARRAY[1] = 2;
+
+CFG: arrayDeref
+noop: Can't parse LValue: i32* getelementptr inbounds ([10 x i32]* @ARRAY, i32 0, i32 0)
+lvalues.c:18 *ARRAY = 1;
+
+CFG: ptrElementAccess
+noop: opcode 'LLVMGetElementPtr' not supported
+lvalues.c:24 PTR[0] = 1;
+noop: Can't parse LValue:   %2 = getelementptr inbounds i32* %1, i64 0, !dbg !17
+lvalues.c:24 PTR[0] = 1;
+noop: opcode 'LLVMGetElementPtr' not supported
+lvalues.c:25 PTR[1] = 2;
+noop: Can't parse LValue:   %4 = getelementptr inbounds i32* %3, i64 1, !dbg !18
+lvalues.c:25 PTR[1] = 2;
+
+CFG: ptrDeref
+noop: Can't parse LValue:   %1 = load i32** @PTR, align 8, !dbg !17
+lvalues.c:29 *PTR = 1;
+
+CFG: structFieldAccess
+noop: Can't parse LValue: i32* getelementptr inbounds (%struct.anon* @STRUCT, i32 0, i32 0)
+lvalues.c:37 STRUCT.field = 1;
+
+CFG: structPtrFieldAccess
+noop: opcode 'LLVMGetElementPtr' not supported
+lvalues.c:41 (*PTR_STRUCT).field = 1;
+noop: Can't parse LValue:   %2 = getelementptr inbounds %struct.anon* %1, i32 0, i32 0, !dbg !17
+lvalues.c:41 (*PTR_STRUCT).field = 1;
+noop: opcode 'LLVMGetElementPtr' not supported
+lvalues.c:42 PTR_STRUCT->field = 2;
+noop: Can't parse LValue:   %4 = getelementptr inbounds %struct.anon* %3, i32 0, i32 0, !dbg !18
+lvalues.c:42 PTR_STRUCT->field = 2;
+

@@ -1,0 +1,8 @@
+CFG: addressOf
+assign: I_P = I
+unary.c:4 I_P = &I;
+
+CFG: deref
+noop: Can't parse LValue:   %2 = load i32** @I_P, align 8, !dbg !11
+unary.c:8 *I_P = I;
+
