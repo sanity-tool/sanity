@@ -1,11 +1,11 @@
 CFG: _Z18instanceMethodCallP3Foo
 noop: Can't parse LValue:   %1 = alloca %struct.Foo*, align 8
  - no source -
-call: tmp0 = _ZN3Foo14instanceMethodEv(tmp1)
+call: _ZN3Foo14instanceMethodEv(tmp0)
 methodCalls.cpp:8 p->instanceMethod();
 
 CFG: _Z16staticMethodCallv
-call: tmp0 = _ZN3Foo12staticMethodEv()
+call: _ZN3Foo12staticMethodEv()
 methodCalls.cpp:12 Foo::staticMethod();
 
 CFG: _Z18abstractMethodCallP3Foo

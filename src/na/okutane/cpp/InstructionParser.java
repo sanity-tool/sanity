@@ -9,6 +9,7 @@ import na.okutane.api.cfg.LValue;
 import na.okutane.api.cfg.RValue;
 import na.okutane.api.cfg.UnprocessedElement;
 import na.okutane.cpp.llvm.LLVMOpcode;
+import na.okutane.cpp.llvm.LLVMTypeKind;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueType;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueUse;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
@@ -183,7 +184,10 @@ public class InstructionParser {
             SWIGTYPE_p_LLVMOpaqueValue function = bitreader.LLVMGetOperand(instruction, argLen);
 
             if (bitreader.LLVMIsAFunction(function) != null) {
-                LValue lvalue = ctx.getTmpVar(instruction);
+                SWIGTYPE_p_LLVMOpaqueType type = bitreader.LLVMTypeOf(function);
+                type = bitreader.LLVMGetElementType(type);
+                SWIGTYPE_p_LLVMOpaqueType lvalueType = bitreader.LLVMGetReturnType(type);
+                LValue lvalue = bitreader.LLVMGetTypeKind(lvalueType) == LLVMTypeKind.LLVMVoidTypeKind ? null : ctx.getTmpVar(instruction);
                 return new Call(
                         bitreader.LLVMGetValueName(function),
                         lvalue,

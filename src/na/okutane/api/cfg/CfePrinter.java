@@ -79,8 +79,12 @@ public class CfePrinter implements CfeVisitor {
     @Override
     public void visit(Call call) {
         sb.append("call: ");
-        print(call.getlValue());
-        sb.append(" = ").append(call.getName()).append('(');
+        LValue lvalue = call.getlValue();
+        if (lvalue != null) {
+            print(lvalue);
+            sb.append(" = ");
+        }
+        sb.append(call.getName()).append('(');
 
         List<RValue> args = call.getArgs();
         if (!args.isEmpty()) {
