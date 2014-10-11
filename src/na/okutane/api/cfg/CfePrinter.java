@@ -125,6 +125,11 @@ public class CfePrinter implements CfeVisitor {
             sb.append("null");
             return;
         }
+        if (value instanceof Indirection) {
+            sb.append('*');
+            print(((Indirection) value).getPointer());
+            return;
+        }
         sb.append(value.toString());
     }
 }

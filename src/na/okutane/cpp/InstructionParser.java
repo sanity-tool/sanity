@@ -5,6 +5,7 @@ import na.okutane.api.cfg.BinaryExpression;
 import na.okutane.api.cfg.Call;
 import na.okutane.api.cfg.Cfe;
 import na.okutane.api.cfg.CfgBuildingCtx;
+import na.okutane.api.cfg.Indirection;
 import na.okutane.api.cfg.LValue;
 import na.okutane.api.cfg.RValue;
 import na.okutane.api.cfg.UnprocessedElement;
@@ -107,9 +108,11 @@ public class InstructionParser {
 
         @Override
         public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            SWIGTYPE_p_LLVMOpaqueValue pointer = bitreader.LLVMGetOperand(instruction, 1);
+            SWIGTYPE_p_LLVMOpaqueValue value = bitreader.LLVMGetOperand(instruction, 0);
             return new Assignment(
-                    valueParser.parseLValue(ctx, bitreader.LLVMGetOperand(instruction, 1)),
-                    valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
+                    new Indirection(valueParser.parseRValue(ctx, pointer)),
+                    valueParser.parseRValue(ctx, value),
                     sourceRangeFactory.getSourceRange(instruction)
             );
         }
@@ -129,7 +132,7 @@ public class InstructionParser {
 
         @Override
         public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            return valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
+            return new Indirection(valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)));
         }
     }
 

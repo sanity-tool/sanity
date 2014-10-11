@@ -1,7 +1,7 @@
 CFG: _Z18instanceMethodCallP3Foo
-noop: Can't parse LValue:   %1 = alloca %struct.Foo*, align 8
+noop: arguments not supported yet
  - no source -
-call: _ZN3Foo14instanceMethodEv(tmp0)
+call: _ZN3Foo14instanceMethodEv(*tmp0)
 methodCalls.cpp:8 p->instanceMethod();
 
 CFG: _Z16staticMethodCallv
@@ -9,7 +9,7 @@ call: _ZN3Foo12staticMethodEv()
 methodCalls.cpp:12 Foo::staticMethod();
 
 CFG: _Z18abstractMethodCallP3Foo
-noop: Can't parse LValue:   %1 = alloca %struct.Foo*, align 8
+noop: arguments not supported yet
  - no source -
 noop: opcode 'LLVMBitCast' not supported
 methodCalls.cpp:16 p->abstractMethod();
