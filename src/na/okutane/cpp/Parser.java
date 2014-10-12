@@ -55,7 +55,7 @@ public class Parser {
 
                 while (function != null) {
                     if (bitreader.LLVMGetFirstBasicBlock(function) != null) {
-                        CfgBuildingCtx ctx = new CfgBuildingCtx();
+                        CfgBuildingCtx ctx = new CfgBuildingCtx(function);
 
                         SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock = bitreader.LLVMGetEntryBasicBlock(function);
 
@@ -87,7 +87,7 @@ public class Parser {
             parameters.add("clang++");
         }
 
-        parameters.addAll(Arrays.asList(filename, "-c", "-emit-llvm", "-femit-all-decls", "-gline-tables-only", "-o", objFile));
+        parameters.addAll(Arrays.asList(filename, "-c", "-emit-llvm", "-femit-all-decls", "-g", "-o", objFile));
 
         return parameters.toArray(new String[parameters.size()]);
     }

@@ -27,7 +27,7 @@ public class ValueParser {
             return globals.get(bitreader.LLVMGetValueName(value));
         }
         if (bitreader.LLVMIsAArgument(value) != null) {
-            throw new IllegalStateException("arguments not supported yet");
+            return ctx.getParam(value);
         }
         if (bitreader.LLVMIsAFunction(value) != null) {
             throw new IllegalStateException("functions not supported yet");

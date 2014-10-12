@@ -5,6 +5,7 @@ import na.okutane.api.cfg.BinaryExpression;
 import na.okutane.api.cfg.Call;
 import na.okutane.api.cfg.Cfe;
 import na.okutane.api.cfg.CfgBuildingCtx;
+import na.okutane.api.cfg.GlobalVariableCache;
 import na.okutane.api.cfg.Indirection;
 import na.okutane.api.cfg.LValue;
 import na.okutane.api.cfg.RValue;
@@ -12,7 +13,6 @@ import na.okutane.api.cfg.UnprocessedElement;
 import na.okutane.cpp.llvm.LLVMOpcode;
 import na.okutane.cpp.llvm.LLVMTypeKind;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueType;
-import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueUse;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 import na.okutane.cpp.llvm.bitreader;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -181,18 +181,22 @@ public class InstructionParser {
         public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             List<RValue> args = new ArrayList<RValue>();
             int argLen = bitreader.LLVMGetNumOperands(instruction) - 1;
-            for (int i = 0; i < argLen; i++) {
-                args.add(valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
-            }
             SWIGTYPE_p_LLVMOpaqueValue function = bitreader.LLVMGetOperand(instruction, argLen);
 
             if (bitreader.LLVMIsAFunction(function) != null) {
+                String name = bitreader.LLVMGetValueName(function);
+                if (name.startsWith("llvm.dbg")) {
+                    return null;
+                }
                 SWIGTYPE_p_LLVMOpaqueType type = bitreader.LLVMTypeOf(function);
                 type = bitreader.LLVMGetElementType(type);
                 SWIGTYPE_p_LLVMOpaqueType lvalueType = bitreader.LLVMGetReturnType(type);
                 LValue lvalue = bitreader.LLVMGetTypeKind(lvalueType) == LLVMTypeKind.LLVMVoidTypeKind ? null : ctx.getTmpVar(instruction);
+                for (int i = 0; i < argLen; i++) {
+                    args.add(valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
+                }
                 return new Call(
-                        bitreader.LLVMGetValueName(function),
+                        name,
                         lvalue,
                         args,
                         sourceRangeFactory.getSourceRange(instruction)

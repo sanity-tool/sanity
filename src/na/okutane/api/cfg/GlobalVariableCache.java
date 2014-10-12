@@ -11,7 +11,7 @@ public class GlobalVariableCache {
         return new GlobalVar(name);
     }
 
-    public class GlobalVar implements LValue {
+    public static class GlobalVar implements LValue {
         private final String name;
 
         public GlobalVar(String name) {
