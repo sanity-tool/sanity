@@ -21,8 +21,8 @@ public class SourceRangeFactory {
             //deepDump(node);
             String filename = getFilename(node);
             String directory = getDirectory(node);
-            int lineNo = toInt(bitreader.LLVMGetOperand(node, 0));
             if (filename != null) {
+                int lineNo = (int) bitreader.LLVMConstIntGetSExtValue(bitreader.LLVMGetOperand(node, 0));
                 if (new File(filename).isAbsolute()) {
                     return new SourceRange(filename, lineNo);
                 }
@@ -34,7 +34,7 @@ public class SourceRangeFactory {
 
     private String getFilename(SWIGTYPE_p_LLVMOpaqueValue node) {
         SWIGTYPE_p_LLVMOpaqueValue maybeTag = bitreader.LLVMGetOperand(node, 0);
-            int val = toInt(maybeTag);
+        long val = bitreader.LLVMConstIntGetSExtValue(maybeTag);
             if (val == 786473) {
                 SWIGTYPE_p_LLVMOpaqueValue pair = bitreader.LLVMGetOperand(node, 1);
                 SWIGTYPE_p_LLVMOpaqueValue mdString = bitreader.LLVMGetOperand(pair, 0);
@@ -46,7 +46,7 @@ public class SourceRangeFactory {
 
     private String getDirectory(SWIGTYPE_p_LLVMOpaqueValue node) {
         SWIGTYPE_p_LLVMOpaqueValue maybeTag = bitreader.LLVMGetOperand(node, 0);
-            int val = toInt(maybeTag);
+        long val = bitreader.LLVMConstIntGetSExtValue(maybeTag);
             if (val == 786473) {
                 SWIGTYPE_p_LLVMOpaqueValue pair = bitreader.LLVMGetOperand(node, 1);
                 SWIGTYPE_p_LLVMOpaqueValue mdString = bitreader.LLVMGetOperand(pair, 1);
@@ -54,10 +54,5 @@ public class SourceRangeFactory {
             } else {
                 return getDirectory(bitreader.LLVMGetOperand(node, 2));
             }
-    }
-
-    private int toInt(SWIGTYPE_p_LLVMOpaqueValue value) {
-        String s = bitreader.LLVMPrintValueToString(value);
-        return Integer.parseInt(s.split(" ")[1], 10);
     }
 }
