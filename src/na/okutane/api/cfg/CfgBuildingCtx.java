@@ -1,5 +1,6 @@
 package na.okutane.api.cfg;
 
+import na.okutane.cpp.TypeParser;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 import na.okutane.cpp.llvm.bitreader;
 
@@ -10,13 +11,15 @@ import java.util.Map;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
  */
 public class CfgBuildingCtx {
-    Map<SWIGTYPE_p_LLVMOpaqueValue, LValue> params = new HashMap<SWIGTYPE_p_LLVMOpaqueValue, LValue>();
+    private final TypeParser typeParser;
+    Map<SWIGTYPE_p_LLVMOpaqueValue, RValue> params = new HashMap<SWIGTYPE_p_LLVMOpaqueValue, RValue>();
     Map<SWIGTYPE_p_LLVMOpaqueValue, LValue> tmpVars = new HashMap<SWIGTYPE_p_LLVMOpaqueValue, LValue>();
 
-    public CfgBuildingCtx(SWIGTYPE_p_LLVMOpaqueValue function) {
+    public CfgBuildingCtx(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueValue function) {
+        this.typeParser = typeParser;
         SWIGTYPE_p_LLVMOpaqueValue param = bitreader.LLVMGetFirstParam(function);
         while (param != null) {
-            params.put(param, new Parameter(params.size(), bitreader.LLVMGetValueName(param)));
+            params.put(param, new Parameter(params.size(), bitreader.LLVMGetValueName(param), typeParser.parse(bitreader.LLVMTypeOf(param))));
             param = bitreader.LLVMGetNextParam(param);
         }
     }
@@ -24,13 +27,13 @@ public class CfgBuildingCtx {
     public LValue getTmpVar(SWIGTYPE_p_LLVMOpaqueValue instruction) {
         LValue result = tmpVars.get(instruction);
         if (result == null) {
-            result = new TemporaryVar();
+            result = new TemporaryVar(typeParser.parse(bitreader.LLVMTypeOf(instruction)));
             tmpVars.put(instruction, result);
         }
         return result;
     }
 
-    public LValue getParam(SWIGTYPE_p_LLVMOpaqueValue value) {
+    public RValue getParam(SWIGTYPE_p_LLVMOpaqueValue value) {
         return params.get(value);
     }
 }

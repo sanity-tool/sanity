@@ -13,8 +13,6 @@ assign: *tmp0 = p
  - no source -
 noop: opcode 'LLVMBitCast' not supported
 methodCalls.cpp:16 p->abstractMethod();
-noop: opcode 'LLVMGetElementPtr' not supported
-methodCalls.cpp:16 p->abstractMethod();
 noop: opcode 'LLVMCall' not supported
 methodCalls.cpp:16 p->abstractMethod();
 

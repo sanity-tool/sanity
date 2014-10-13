@@ -21,10 +21,12 @@ public class ValueParser {
     ConstCache constants;
     @Autowired
     InstructionParser instructionParser;
+    @Autowired
+    TypeParser typeParser;
 
-    public LValue parseLValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue value) {
+    public RValue parseLValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue value) {
         if (bitreader.LLVMIsAGlobalVariable(value) != null) {
-            return globals.get(bitreader.LLVMGetValueName(value));
+            return globals.get(bitreader.LLVMGetValueName(value), typeParser.parse(bitreader.LLVMTypeOf(value)));
         }
         if (bitreader.LLVMIsAArgument(value) != null) {
             return ctx.getParam(value);
@@ -40,10 +42,10 @@ public class ValueParser {
             return instructionParser.parseValue(ctx, value);
         }
         if (bitreader.LLVMIsAConstantInt(value) != null) {
-            return constants.get(bitreader.LLVMConstIntGetSExtValue(value));
+            return constants.get(bitreader.LLVMConstIntGetSExtValue(value), typeParser.parse(bitreader.LLVMTypeOf(value)));
         }
         if (bitreader.LLVMIsAConstantPointerNull(value) != null) {
-            return constants.getNull();
+            return constants.getNull(typeParser.parse(bitreader.LLVMTypeOf(value)));
         }
         return parseLValue(ctx, value);
     }

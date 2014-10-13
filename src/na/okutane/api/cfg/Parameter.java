@@ -1,13 +1,16 @@
 package na.okutane.api.cfg;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
  */
-public class Parameter implements LValue {
+public class Parameter extends TypedValue {
     private final int index;
     private final String name;
 
-    public Parameter(int index, String name) {
+    public Parameter(int index, String name, Type type) {
+        super(type);
         this.index = index;
         this.name = name;
     }

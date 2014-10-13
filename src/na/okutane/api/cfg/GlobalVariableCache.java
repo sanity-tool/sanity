@@ -7,15 +7,15 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class GlobalVariableCache {
-    public LValue get(String name) {
-        return new GlobalVar(name);
+    public RValue get(String name, Type type) {
+        return new GlobalVar(name, type);
     }
 
-    public static class GlobalVar implements LValue {
+    public static class GlobalVar extends TypedValue {
         private final String name;
 
-        public GlobalVar(String name) {
-
+        public GlobalVar(String name, Type type) {
+            super(type);
             this.name = name;
         }
 

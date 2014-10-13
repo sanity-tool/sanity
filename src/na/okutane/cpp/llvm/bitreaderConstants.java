@@ -15,4 +15,5 @@ public interface bitreaderConstants {
   public final static long INT64_MAX = bitreaderJNI.INT64_MAX_get();
   public final static int INT64_MIN = bitreaderJNI.INT64_MIN_get();
   public final static java.math.BigInteger UINT64_MAX = bitreaderJNI.UINT64_MAX_get();
+  public final static int sizeof_LLVMTypeRef = bitreaderJNI.sizeof_LLVMTypeRef_get();
 }

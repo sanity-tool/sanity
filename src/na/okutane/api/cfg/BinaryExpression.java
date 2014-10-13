@@ -26,6 +26,11 @@ public class BinaryExpression implements RValue {
         return right;
     }
 
+    @Override
+    public Type getType() {
+        throw new IllegalStateException();
+    }
+
     public enum Operator {
         Add("+"),
         Sub("-"),

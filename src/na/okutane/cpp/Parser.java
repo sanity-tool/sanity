@@ -23,6 +23,8 @@ import java.util.List;
 public class Parser {
     @Autowired
     InstructionParser instructionParser;
+    @Autowired
+    TypeParser typeParser;
 
     public List<Cfg> parse(String filename) {
         try {
@@ -54,14 +56,19 @@ public class Parser {
                 SWIGTYPE_p_LLVMOpaqueValue function = bitreader.LLVMGetFirstFunction(m);
 
                 while (function != null) {
-                    if (bitreader.LLVMGetFirstBasicBlock(function) != null) {
-                        CfgBuildingCtx ctx = new CfgBuildingCtx(function);
+                    try {
+                        if (bitreader.LLVMGetFirstBasicBlock(function) != null) {
+                            CfgBuildingCtx ctx = new CfgBuildingCtx(typeParser, function);
 
-                        SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock = bitreader.LLVMGetEntryBasicBlock(function);
+                            SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock = bitreader.LLVMGetEntryBasicBlock(function);
 
-                        Cfe entry = processBlock(ctx, entryBlock);
+                            Cfe entry = processBlock(ctx, entryBlock);
 
-                        result.add(new Cfg(bitreader.LLVMGetValueName(function), entry));
+                            result.add(new Cfg(bitreader.LLVMGetValueName(function), entry));
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Can't parse function");
+                        e.printStackTrace(System.err);
                     }
                     function = bitreader.LLVMGetNextFunction(function);
                 }

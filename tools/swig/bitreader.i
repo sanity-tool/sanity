@@ -23,6 +23,10 @@ const char *getMDString(LLVMValueRef valueRef) {
     return LLVMGetMDString(valueRef, &len);
 }
 
+LLVMTypeRef getType(LLVMTypeRef *types, int i) {
+    return types[i];
+}
+
 %}
 
 %typemap(javacode) SWIGTYPE * %{
@@ -45,6 +49,12 @@ const char *getMDString(LLVMValueRef valueRef) {
 %include "llvm-c/Support.h"
 %include "llvm-c/Core.h"
 %include "llvm-c/IRReader.h"
+
+%include "cmalloc.i"
+%allocators(LLVMTypeRef);
+
+LLVMTypeRef getType(LLVMTypeRef *types, int i);
+
 
 LLVMModuleRef parse(const char *path);
 const char *getMDString(LLVMValueRef valueRef);

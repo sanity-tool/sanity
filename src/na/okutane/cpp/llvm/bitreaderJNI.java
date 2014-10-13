@@ -625,6 +625,12 @@ public class bitreaderJNI {
   public final static native void LLVMStopMultithreaded();
   public final static native int LLVMIsMultithreaded();
   public final static native int LLVMParseIRInContext(long jarg1, long jarg2, long jarg3, long jarg4);
+  public final static native long malloc_LLVMTypeRef(int jarg1);
+  public final static native long calloc_LLVMTypeRef(int jarg1, int jarg2);
+  public final static native long realloc_LLVMTypeRef(long jarg1, int jarg2);
+  public final static native void free_LLVMTypeRef(long jarg1);
+  public final static native int sizeof_LLVMTypeRef_get();
+  public final static native long getType(long jarg1, int jarg2);
   public final static native long parse(String jarg1);
   public final static native String getMDString(long jarg1);
 

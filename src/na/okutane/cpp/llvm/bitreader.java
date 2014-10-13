@@ -2389,6 +2389,30 @@ public class bitreader implements bitreaderConstants {
     return bitreaderJNI.LLVMParseIRInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(ContextRef), SWIGTYPE_p_LLVMOpaqueMemoryBuffer.getCPtr(MemBuf), SWIGTYPE_p_p_LLVMOpaqueModule.getCPtr(OutM), SWIGTYPE_p_p_char.getCPtr(OutMessage));
   }
 
+  public static SWIGTYPE_p_p_LLVMOpaqueType malloc_LLVMTypeRef(int nbytes) {
+    long cPtr = bitreaderJNI.malloc_LLVMTypeRef(nbytes);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_p_LLVMOpaqueType(cPtr, false);
+  }
+
+  public static SWIGTYPE_p_p_LLVMOpaqueType calloc_LLVMTypeRef(int nobj, int sz) {
+    long cPtr = bitreaderJNI.calloc_LLVMTypeRef(nobj, sz);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_p_LLVMOpaqueType(cPtr, false);
+  }
+
+  public static SWIGTYPE_p_p_LLVMOpaqueType realloc_LLVMTypeRef(SWIGTYPE_p_p_LLVMOpaqueType ptr, int nitems) {
+    long cPtr = bitreaderJNI.realloc_LLVMTypeRef(SWIGTYPE_p_p_LLVMOpaqueType.getCPtr(ptr), nitems);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_p_LLVMOpaqueType(cPtr, false);
+  }
+
+  public static void free_LLVMTypeRef(SWIGTYPE_p_p_LLVMOpaqueType ptr) {
+    bitreaderJNI.free_LLVMTypeRef(SWIGTYPE_p_p_LLVMOpaqueType.getCPtr(ptr));
+  }
+
+  public static SWIGTYPE_p_LLVMOpaqueType getType(SWIGTYPE_p_p_LLVMOpaqueType types, int i) {
+    long cPtr = bitreaderJNI.getType(SWIGTYPE_p_p_LLVMOpaqueType.getCPtr(types), i);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
+  }
+
   public static SWIGTYPE_p_LLVMOpaqueModule parse(String path) {
     long cPtr = bitreaderJNI.parse(path);
     return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueModule(cPtr, false);

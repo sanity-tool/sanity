@@ -5,10 +5,14 @@ import na.okutane.api.cfg.BinaryExpression;
 import na.okutane.api.cfg.Call;
 import na.okutane.api.cfg.Cfe;
 import na.okutane.api.cfg.CfgBuildingCtx;
+import na.okutane.api.cfg.ConstCache;
+import na.okutane.api.cfg.GetElementPointer;
+import na.okutane.api.cfg.GetFieldPointer;
 import na.okutane.api.cfg.GlobalVariableCache;
 import na.okutane.api.cfg.Indirection;
 import na.okutane.api.cfg.LValue;
 import na.okutane.api.cfg.RValue;
+import na.okutane.api.cfg.Type;
 import na.okutane.api.cfg.UnprocessedElement;
 import na.okutane.cpp.llvm.LLVMOpcode;
 import na.okutane.cpp.llvm.LLVMTypeKind;
@@ -167,6 +171,48 @@ public class InstructionParser {
         @Override
         public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return ctx.getTmpVar(instruction);
+        }
+    }
+
+    @Component
+    private static class GetElementPtrParser extends AbstractParser {
+        @Override
+        public LLVMOpcode getOpcode() {
+            return LLVMOpcode.LLVMGetElementPtr;
+        }
+
+        @Override
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            return null;
+        }
+
+        @Override
+        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            RValue pointer = valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
+
+            int operandsCount = bitreader.LLVMGetNumOperands(instruction);
+
+            int i = 1;
+            while (i < operandsCount) {
+                pointer = getPointer(pointer, valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
+                i++;
+            }
+
+            return pointer;
+        }
+
+        private RValue getPointer(RValue basePointer, RValue index) {
+            if (basePointer.getType().getElementType() != null) {
+                return new GetElementPointer(basePointer, index);
+            }
+            if (index instanceof ConstCache.Const) {
+                int intIndex = (int) ((ConstCache.Const) index).getValue();
+                Type fieldType = basePointer.getType().getFieldType((int) intIndex);
+                if (fieldType != null) {
+                    return new GetFieldPointer(basePointer, intIndex);
+                }
+            }
+            throw new IllegalStateException("can't index " + basePointer + " by " + index);
         }
     }
 

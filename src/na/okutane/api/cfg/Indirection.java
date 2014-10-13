@@ -13,4 +13,14 @@ public class Indirection implements LValue {
     public RValue getPointer() {
         return pointer;
     }
+
+    @Override
+    public Type getType() {
+        return pointer.getType().getElementType();
+    }
+
+    @Override
+    public String toString() {
+        return '*' + pointer.toString();
+    }
 }

@@ -17,13 +17,9 @@ noop: Can't parse LValue: i32* getelementptr inbounds ([10 x i32]* @ARRAY, i32 0
 lvalues.c:18 *ARRAY = 1;
 
 CFG: ptrElementAccess
-noop: opcode 'LLVMGetElementPtr' not supported
+assign: *(*PTR+0) = 1
 lvalues.c:24 PTR[0] = 1;
-noop: opcode 'LLVMGetElementPtr' not supported
-lvalues.c:24 PTR[0] = 1;
-noop: opcode 'LLVMGetElementPtr' not supported
-lvalues.c:25 PTR[1] = 2;
-noop: opcode 'LLVMGetElementPtr' not supported
+assign: *(*PTR+1) = 2
 lvalues.c:25 PTR[1] = 2;
 
 CFG: ptrDeref
@@ -35,12 +31,8 @@ noop: Can't parse LValue: i32* getelementptr inbounds (%struct.anon* @STRUCT, i3
 lvalues.c:37 STRUCT.field = 1;
 
 CFG: structPtrFieldAccess
-noop: opcode 'LLVMGetElementPtr' not supported
+assign: *((*PTR_STRUCT+0).field0) = 1
 lvalues.c:41 (*PTR_STRUCT).field = 1;
-noop: opcode 'LLVMGetElementPtr' not supported
-lvalues.c:41 (*PTR_STRUCT).field = 1;
-noop: opcode 'LLVMGetElementPtr' not supported
-lvalues.c:42 PTR_STRUCT->field = 2;
-noop: opcode 'LLVMGetElementPtr' not supported
+assign: *((*PTR_STRUCT+0).field0) = 2
 lvalues.c:42 PTR_STRUCT->field = 2;
 

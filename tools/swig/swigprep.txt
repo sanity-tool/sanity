@@ -2848,6 +2848,10 @@ const char *getMDString(LLVMValueRef valueRef) {
     return LLVMGetMDString(valueRef, &len);
 }
 
+LLVMTypeRef getType(LLVMTypeRef *types, int i) {
+    return types[i];
+}
+
 %}
 
 %typemap(javacode) SWIGTYPE * %{
@@ -5979,6 +5983,191 @@ LLVMBool LLVMParseIRInContext(LLVMContextRef ContextRef,
 
 
 %endoffile
+
+%includefile "/usr/local/share/swig/3.0.2/cmalloc.i" %beginfile
+/* -----------------------------------------------------------------------------
+ * cmalloc.i
+ *
+ * SWIG library file containing macros that can be used to create objects using
+ * the C malloc function.
+ * ----------------------------------------------------------------------------- */
+
+%{
+#include <stdlib.h>
+%}
+
+/* %malloc(TYPE [, NAME = TYPE])
+   %calloc(TYPE [, NAME = TYPE])
+   %realloc(TYPE [, NAME = TYPE])
+   %free(TYPE [, NAME = TYPE])
+   %allocators(TYPE [,NAME = TYPE])
+
+   Creates functions for allocating/reallocating memory.
+
+   TYPE *malloc_NAME(int nbytes = sizeof(TYPE);
+   TYPE *calloc_NAME(int nobj=1, int size=sizeof(TYPE));
+   TYPE *realloc_NAME(TYPE *ptr, int nbytes);
+   void free_NAME(TYPE *ptr);
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%endoffile
+/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,97,%allocators@*/
+/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,27,%malloc@*/
+
+
+
+%rename(malloc_LLVMTypeRef) ::malloc(int nbytes);
+
+
+
+%typemap(default) int nbytes "$1 = (int) sizeof(LLVMTypeRef);"
+
+LLVMTypeRef *malloc(int nbytes);
+%typemap(default) int nbytes;
+/*@SWIG@*/
+/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,41,%calloc@*/
+
+
+
+%rename(calloc_LLVMTypeRef) ::calloc(int nobj, int sz);
+
+
+%typemap(default) int sz "$1 = (int) sizeof(LLVMTypeRef);"
+
+
+
+%typemap(default) int nobj "$1 = 1;"
+LLVMTypeRef *calloc(int nobj, int sz);
+%typemap(default) int sz;
+%typemap(default) int nobj;
+/*@SWIG@*/
+/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,58,%realloc@*/
+%insert("header") {
+
+
+
+LLVMTypeRef *realloc_LLVMTypeRef(LLVMTypeRef *ptr, int nitems)
+
+{
+
+return (LLVMTypeRef *) realloc(ptr, nitems*sizeof(LLVMTypeRef));
+
+
+
+}
+}
+
+
+
+LLVMTypeRef *realloc_LLVMTypeRef(LLVMTypeRef *ptr, int nitems);
+
+/*@SWIG@*/
+/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,80,%free@*/
+
+
+
+%rename(free_LLVMTypeRef) ::free(LLVMTypeRef *ptr);
+
+void free(LLVMTypeRef *ptr);
+/*@SWIG@*/
+
+/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,89,%sizeof@*/
+
+
+
+%constant int sizeof_LLVMTypeRef = sizeof(LLVMTypeRef);
+
+/*@SWIG@*/
+
+/*@SWIG@*/;
+
+LLVMTypeRef getType(LLVMTypeRef *types, int i);
+
 
 LLVMModuleRef parse(const char *path);
 const char *getMDString(LLVMValueRef valueRef);
