@@ -23,6 +23,6 @@ public class GetFieldPointer implements LValue {
 
     @Override
     public String toString() {
-        return '(' + pointer.toString() + ".field" + index + ')';
+        return '(' + pointer.toString() + '.' + pointer.getType().getFieldName(index) + ')';
     }
 }

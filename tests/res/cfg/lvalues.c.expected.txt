@@ -31,8 +31,8 @@ noop: Can't parse LValue: i32* getelementptr inbounds (%struct.anon* @STRUCT, i3
 lvalues.c:37 STRUCT.field = 1;
 
 CFG: structPtrFieldAccess
-assign: *((*PTR_STRUCT+0).field0) = 1
+assign: *((*PTR_STRUCT+0).field) = 1
 lvalues.c:41 (*PTR_STRUCT).field = 1;
-assign: *((*PTR_STRUCT+0).field0) = 2
+assign: *((*PTR_STRUCT+0).field) = 2
 lvalues.c:42 PTR_STRUCT->field = 2;
 

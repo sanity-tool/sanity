@@ -27,6 +27,10 @@ LLVMTypeRef getType(LLVMTypeRef *types, int i) {
     return types[i];
 }
 
+LLVMValueRef getValue(LLVMValueRef *values, int i) {
+    return values[i];
+}
+
 %}
 
 %typemap(javacode) SWIGTYPE * %{
@@ -52,9 +56,10 @@ LLVMTypeRef getType(LLVMTypeRef *types, int i) {
 
 %include "cmalloc.i"
 %allocators(LLVMTypeRef);
+%allocators(LLVMValueRef);
 
 LLVMTypeRef getType(LLVMTypeRef *types, int i);
-
+LLVMValueRef getValue(LLVMValueRef *values, int i);
 
 LLVMModuleRef parse(const char *path);
 const char *getMDString(LLVMValueRef valueRef);

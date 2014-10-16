@@ -30,7 +30,7 @@ static void ptrDeref() {
 }
 
 struct {
-    int field
+    int field;
 } STRUCT, *PTR_STRUCT;
 
 static void structFieldAccess() {

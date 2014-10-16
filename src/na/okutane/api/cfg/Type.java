@@ -7,4 +7,6 @@ public interface Type {
     Type getElementType();
 
     Type getFieldType(int index);
+
+    String getFieldName(int index);
 }

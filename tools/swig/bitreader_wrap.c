@@ -213,6 +213,10 @@ LLVMTypeRef getType(LLVMTypeRef *types, int i) {
     return types[i];
 }
 
+LLVMValueRef getValue(LLVMValueRef *values, int i) {
+    return values[i];
+}
+
 
 
 #include <stdlib.h>
@@ -226,6 +230,20 @@ LLVMTypeRef *realloc_LLVMTypeRef(LLVMTypeRef *ptr, int nitems)
 {
 
 return (LLVMTypeRef *) realloc(ptr, nitems*sizeof(LLVMTypeRef));
+
+
+
+}
+
+
+
+
+
+LLVMValueRef *realloc_LLVMValueRef(LLVMValueRef *ptr, int nitems)
+
+{
+
+return (LLVMValueRef *) realloc(ptr, nitems*sizeof(LLVMValueRef));
 
 
 
@@ -10031,6 +10049,77 @@ SWIGEXPORT jint JNICALL Java_na_okutane_cpp_llvm_bitreaderJNI_sizeof_1LLVMTypeRe
 }
 
 
+SWIGEXPORT jlong JNICALL Java_na_okutane_cpp_llvm_bitreaderJNI_malloc_1LLVMValueRef(JNIEnv *jenv, jclass jcls, jint jarg1) {
+  jlong jresult = 0 ;
+  int arg1 ;
+  LLVMValueRef *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = (int) sizeof(LLVMValueRef);
+  arg1 = (int)jarg1; 
+  result = (LLVMValueRef *)malloc(arg1);
+  *(LLVMValueRef **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_na_okutane_cpp_llvm_bitreaderJNI_calloc_1LLVMValueRef(JNIEnv *jenv, jclass jcls, jint jarg1, jint jarg2) {
+  jlong jresult = 0 ;
+  int arg1 ;
+  int arg2 ;
+  LLVMValueRef *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = 1;
+  arg2 = (int) sizeof(LLVMValueRef);
+  arg1 = (int)jarg1; 
+  arg2 = (int)jarg2; 
+  result = (LLVMValueRef *)calloc(arg1,arg2);
+  *(LLVMValueRef **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_na_okutane_cpp_llvm_bitreaderJNI_realloc_1LLVMValueRef(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2) {
+  jlong jresult = 0 ;
+  LLVMValueRef *arg1 = (LLVMValueRef *) 0 ;
+  int arg2 ;
+  LLVMValueRef *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(LLVMValueRef **)&jarg1; 
+  arg2 = (int)jarg2; 
+  result = (LLVMValueRef *)realloc_LLVMValueRef(arg1,arg2);
+  *(LLVMValueRef **)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void JNICALL Java_na_okutane_cpp_llvm_bitreaderJNI_free_1LLVMValueRef(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  LLVMValueRef *arg1 = (LLVMValueRef *) 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(LLVMValueRef **)&jarg1; 
+  free(arg1);
+}
+
+
+SWIGEXPORT jint JNICALL Java_na_okutane_cpp_llvm_bitreaderJNI_sizeof_1LLVMValueRef_1get(JNIEnv *jenv, jclass jcls) {
+  jint jresult = 0 ;
+  int result;
+  
+  (void)jenv;
+  (void)jcls;
+  result = (int)(sizeof(LLVMValueRef));
+  jresult = (jint)result; 
+  return jresult;
+}
+
+
 SWIGEXPORT jlong JNICALL Java_na_okutane_cpp_llvm_bitreaderJNI_getType(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2) {
   jlong jresult = 0 ;
   LLVMTypeRef *arg1 = (LLVMTypeRef *) 0 ;
@@ -10043,6 +10132,22 @@ SWIGEXPORT jlong JNICALL Java_na_okutane_cpp_llvm_bitreaderJNI_getType(JNIEnv *j
   arg2 = (int)jarg2; 
   result = (LLVMTypeRef)getType(arg1,arg2);
   *(LLVMTypeRef *)&jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jlong JNICALL Java_na_okutane_cpp_llvm_bitreaderJNI_getValue(JNIEnv *jenv, jclass jcls, jlong jarg1, jint jarg2) {
+  jlong jresult = 0 ;
+  LLVMValueRef *arg1 = (LLVMValueRef *) 0 ;
+  int arg2 ;
+  LLVMValueRef result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(LLVMValueRef **)&jarg1; 
+  arg2 = (int)jarg2; 
+  result = (LLVMValueRef)getValue(arg1,arg2);
+  *(LLVMValueRef *)&jresult = result; 
   return jresult;
 }
 

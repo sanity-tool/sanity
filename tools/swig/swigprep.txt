@@ -2852,6 +2852,10 @@ LLVMTypeRef getType(LLVMTypeRef *types, int i) {
     return types[i];
 }
 
+LLVMValueRef getValue(LLVMValueRef *values, int i) {
+    return values[i];
+}
+
 %}
 
 %typemap(javacode) SWIGTYPE * %{
@@ -6165,9 +6169,78 @@ void free(LLVMTypeRef *ptr);
 /*@SWIG@*/
 
 /*@SWIG@*/;
+/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,97,%allocators@*/
+/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,27,%malloc@*/
+
+
+
+%rename(malloc_LLVMValueRef) ::malloc(int nbytes);
+
+
+
+%typemap(default) int nbytes "$1 = (int) sizeof(LLVMValueRef);"
+
+LLVMValueRef *malloc(int nbytes);
+%typemap(default) int nbytes;
+/*@SWIG@*/
+/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,41,%calloc@*/
+
+
+
+%rename(calloc_LLVMValueRef) ::calloc(int nobj, int sz);
+
+
+%typemap(default) int sz "$1 = (int) sizeof(LLVMValueRef);"
+
+
+
+%typemap(default) int nobj "$1 = 1;"
+LLVMValueRef *calloc(int nobj, int sz);
+%typemap(default) int sz;
+%typemap(default) int nobj;
+/*@SWIG@*/
+/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,58,%realloc@*/
+%insert("header") {
+
+
+
+LLVMValueRef *realloc_LLVMValueRef(LLVMValueRef *ptr, int nitems)
+
+{
+
+return (LLVMValueRef *) realloc(ptr, nitems*sizeof(LLVMValueRef));
+
+
+
+}
+}
+
+
+
+LLVMValueRef *realloc_LLVMValueRef(LLVMValueRef *ptr, int nitems);
+
+/*@SWIG@*/
+/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,80,%free@*/
+
+
+
+%rename(free_LLVMValueRef) ::free(LLVMValueRef *ptr);
+
+void free(LLVMValueRef *ptr);
+/*@SWIG@*/
+
+/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,89,%sizeof@*/
+
+
+
+%constant int sizeof_LLVMValueRef = sizeof(LLVMValueRef);
+
+/*@SWIG@*/
+
+/*@SWIG@*/;
 
 LLVMTypeRef getType(LLVMTypeRef *types, int i);
-
+LLVMValueRef getValue(LLVMValueRef *values, int i);
 
 LLVMModuleRef parse(const char *path);
 const char *getMDString(LLVMValueRef valueRef);

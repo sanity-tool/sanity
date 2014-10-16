@@ -25,6 +25,8 @@ public class Parser {
     InstructionParser instructionParser;
     @Autowired
     TypeParser typeParser;
+    @Autowired
+    ParserListener[] listeners;
 
     public List<Cfg> parse(String filename) {
         try {
@@ -49,33 +51,42 @@ public class Parser {
                     return Collections.emptyList();
                 }
 
-                bitreader.LLVMDumpModule(m);
-
-                ArrayList<Cfg> result = new ArrayList<Cfg>();
-
-                SWIGTYPE_p_LLVMOpaqueValue function = bitreader.LLVMGetFirstFunction(m);
-
-                while (function != null) {
-                    try {
-                        if (bitreader.LLVMGetFirstBasicBlock(function) != null) {
-                            CfgBuildingCtx ctx = new CfgBuildingCtx(typeParser, function);
-
-                            SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock = bitreader.LLVMGetEntryBasicBlock(function);
-
-                            Cfe entry = processBlock(ctx, entryBlock);
-
-                            result.add(new Cfg(bitreader.LLVMGetValueName(function), entry));
-                        }
-                    } catch (Exception e) {
-                        System.err.println("Can't parse function");
-                        e.printStackTrace(System.err);
-                    }
-                    function = bitreader.LLVMGetNextFunction(function);
+                bitreader.LLVMDumpModule(m); // todo move to separate listener for test/debug
+                for (ParserListener listener : listeners) {
+                    listener.onModuleStarted(m);
                 }
-                bitreader.LLVMDumpModule(m);
-                bitreader.LLVMDisposeModule(m);
-                objFile.delete();
-                return result;
+
+                try {
+                    ArrayList<Cfg> result = new ArrayList<Cfg>();
+
+                    SWIGTYPE_p_LLVMOpaqueValue function = bitreader.LLVMGetFirstFunction(m);
+
+                    while (function != null) {
+                        try {
+                            if (bitreader.LLVMGetFirstBasicBlock(function) != null) {
+                                CfgBuildingCtx ctx = new CfgBuildingCtx(typeParser, function);
+
+                                SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock = bitreader.LLVMGetEntryBasicBlock(function);
+
+                                Cfe entry = processBlock(ctx, entryBlock);
+
+                                result.add(new Cfg(bitreader.LLVMGetValueName(function), entry));
+                            }
+                        } catch (Exception e) {
+                            System.err.println("Can't parse function");
+                            e.printStackTrace(System.err);
+                        }
+                        function = bitreader.LLVMGetNextFunction(function);
+                    }
+
+                    return result;
+                } finally {
+                    for (ParserListener listener : listeners) {
+                        listener.onModuleFinished(m);
+                    }
+                    bitreader.LLVMDisposeModule(m);
+                    objFile.delete();
+                }
             } else {
                 System.out.println("result: " + resultCode);
             }

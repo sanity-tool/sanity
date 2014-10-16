@@ -630,7 +630,13 @@ public class bitreaderJNI {
   public final static native long realloc_LLVMTypeRef(long jarg1, int jarg2);
   public final static native void free_LLVMTypeRef(long jarg1);
   public final static native int sizeof_LLVMTypeRef_get();
+  public final static native long malloc_LLVMValueRef(int jarg1);
+  public final static native long calloc_LLVMValueRef(int jarg1, int jarg2);
+  public final static native long realloc_LLVMValueRef(long jarg1, int jarg2);
+  public final static native void free_LLVMValueRef(long jarg1);
+  public final static native int sizeof_LLVMValueRef_get();
   public final static native long getType(long jarg1, int jarg2);
+  public final static native long getValue(long jarg1, int jarg2);
   public final static native long parse(String jarg1);
   public final static native String getMDString(long jarg1);
 

@@ -19,4 +19,9 @@ public class PointerType implements Type {
     public Type getFieldType(int index) {
         return null;
     }
+
+    @Override
+    public String getFieldName(int index) {
+        return null;
+    }
 }
