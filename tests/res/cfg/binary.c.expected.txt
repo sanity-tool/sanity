@@ -66,3 +66,29 @@ binary.c:22 IR = I0 != I1;
 #0011:	 assign: *IR = tmp5 <exit>
 binary.c:22 IR = I0 != I1;
 
+CFG: testIntLogical
+#0000:	 assign: tmp0 = *I0 != 0
+binary.c:26 IR = I0 && I1;
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+binary.c:26 IR = I0 && I1;
+#0002:	 assign: tmp1 = *I1 != 0
+binary.c:26 IR = I0 && I1;
+#0003:	 noop
+ - no source -
+#0004:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0005:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0006:	 assign: tmp2 = *I0 != 0
+binary.c:27 IR = I0 || I1;
+#0007:	 if: tmp2 then #0008:	 else #0009:	
+binary.c:27 IR = I0 || I1;
+#0008:	 noop
+ - no source -
+#0010:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0011:	 noop: opcode 'LLVMPHI' not supported <exit>
+binary.c:27 IR = I0 || I1;
+#0009:	 assign: tmp3 = *I1 != 0
+binary.c:27 IR = I0 || I1;
+
