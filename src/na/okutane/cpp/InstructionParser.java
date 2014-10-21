@@ -14,6 +14,7 @@ import na.okutane.api.cfg.LValue;
 import na.okutane.api.cfg.RValue;
 import na.okutane.api.cfg.Type;
 import na.okutane.api.cfg.UnprocessedElement;
+import na.okutane.cpp.llvm.LLVMIntPredicate;
 import na.okutane.cpp.llvm.LLVMOpcode;
 import na.okutane.cpp.llvm.LLVMTypeKind;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueType;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BinaryOperator;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
@@ -354,6 +356,78 @@ public class InstructionParser {
     private static class ShrParser extends BinaryOperationParser {
         public ShrParser() {
             super(LLVMOpcode.LLVMAShr, BinaryExpression.Operator.ShiftRight);
+        }
+    }
+
+    @Component
+    private static class ZExtParser extends AbstractParser {
+        @Override
+        public LLVMOpcode getOpcode() {
+            return LLVMOpcode.LLVMZExt;
+        }
+
+        @Override
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            // todo think about source range comparison. if different - it's better to have tmp var assignment to preserve source reference.
+            return null;
+        }
+
+        @Override
+        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            // just return it's operand, it's smaller, so it will fit.
+            return valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
+        }
+    }
+
+    @Component
+    private static class ICmpParser extends AbstractParser {
+        Map<LLVMIntPredicate, BinaryExpression.Operator> predicateOperatorMap = new HashMap<LLVMIntPredicate, BinaryExpression.Operator>();
+
+        public ICmpParser() {
+            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntSLT, BinaryExpression.Operator.Lt);
+            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntSLE, BinaryExpression.Operator.Le);
+            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntSGT, BinaryExpression.Operator.Gt);
+            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntSGE, BinaryExpression.Operator.Ge);
+
+            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntULT, BinaryExpression.Operator.Lt);
+            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntULE, BinaryExpression.Operator.Le);
+            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntUGT, BinaryExpression.Operator.Gt);
+            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntUGE, BinaryExpression.Operator.Ge);
+
+            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntEQ, BinaryExpression.Operator.Eq);
+            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntNE, BinaryExpression.Operator.Ne);
+        }
+
+        @Override
+        public LLVMOpcode getOpcode() {
+            return LLVMOpcode.LLVMICmp;
+        }
+
+        @Override
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            LValue tmp = ctx.getTmpVar(instruction);
+
+            LLVMIntPredicate predicate = bitreader.LLVMGetICmpPredicate(instruction);
+            BinaryExpression.Operator operator = predicateOperatorMap.get(predicate);
+
+            if (operator == null) {
+                throw new IllegalArgumentException(predicate.toString() + " not supported.");
+            }
+
+            return new Assignment(
+                    tmp,
+                    new BinaryExpression(
+                            valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
+                            operator,
+                            valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
+                    ),
+                    sourceRangeFactory.getSourceRange(instruction)
+            );
+        }
+
+        @Override
+        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            return ctx.getTmpVar(instruction);
         }
     }
 }

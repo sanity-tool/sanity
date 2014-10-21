@@ -40,3 +40,29 @@ binary.c:13 IR = I0 >> I1;
 assign: *IR = tmp9
 binary.c:13 IR = I0 >> I1;
 
+CFG: testIntCmp
+assign: tmp0 = *I0 < *I1
+binary.c:17 IR = I0 < I1;
+assign: *IR = tmp0
+binary.c:17 IR = I0 < I1;
+assign: tmp1 = *I0 > *I1
+binary.c:18 IR = I0 > I1;
+assign: *IR = tmp1
+binary.c:18 IR = I0 > I1;
+assign: tmp2 = *I0 <= *I1
+binary.c:19 IR = I0 <= I1;
+assign: *IR = tmp2
+binary.c:19 IR = I0 <= I1;
+assign: tmp3 = *I0 >= *I1
+binary.c:20 IR = I0 >= I1;
+assign: *IR = tmp3
+binary.c:20 IR = I0 >= I1;
+assign: tmp4 = *I0 == *I1
+binary.c:21 IR = I0 == I1;
+assign: *IR = tmp4
+binary.c:21 IR = I0 == I1;
+assign: tmp5 = *I0 != *I1
+binary.c:22 IR = I0 != I1;
+assign: *IR = tmp5
+binary.c:22 IR = I0 != I1;
+

@@ -41,7 +41,14 @@ public class BinaryExpression implements RValue {
         Or("|"),
         Xor("^"),
         ShiftLeft("<<"),
-        ShiftRight(">>");
+        ShiftRight(">>"),
+        Gt(">"),
+        Ge(">="),
+        Lt("<"),
+        Le("<="),
+        Eq("=="),
+        Ne("!=")
+        ;
 
         private final String stringValue;
 
