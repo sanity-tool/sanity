@@ -9,6 +9,7 @@ import na.okutane.api.cfg.ConstCache;
 import na.okutane.api.cfg.GetElementPointer;
 import na.okutane.api.cfg.GetFieldPointer;
 import na.okutane.api.cfg.GlobalVariableCache;
+import na.okutane.api.cfg.IfCondition;
 import na.okutane.api.cfg.Indirection;
 import na.okutane.api.cfg.LValue;
 import na.okutane.api.cfg.RValue;
@@ -252,6 +253,25 @@ public class InstructionParser {
             }
 
             return super.parse(ctx, instruction);
+        }
+    }
+
+    @Component
+    private static class BrParser extends AbstractParser {
+        @Override
+        public LLVMOpcode getOpcode() {
+            return LLVMOpcode.LLVMBr;
+        }
+
+        @Override
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            if (bitreader.LLVMGetNumOperands(instruction) == 1) {
+                return ctx.getLabel(bitreader.LLVMGetOperand(instruction, 0));
+            }
+            RValue condition = valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
+            Cfe thenElement = ctx.getLabel(bitreader.LLVMGetOperand(instruction, 2));
+            Cfe elseElement = ctx.getLabel(bitreader.LLVMGetOperand(instruction, 1));
+            return new IfCondition(condition, thenElement, elseElement, sourceRangeFactory.getSourceRange(instruction));
         }
     }
 

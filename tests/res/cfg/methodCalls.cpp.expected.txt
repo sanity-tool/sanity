@@ -1,18 +1,18 @@
 CFG: _Z18instanceMethodCallP3Foo
-assign: *tmp0 = p
+#0000:	 assign: *tmp0 = p
  - no source -
-call: _ZN3Foo14instanceMethodEv(*tmp0)
+#0001:	 call: _ZN3Foo14instanceMethodEv(*tmp0) <exit>
 methodCalls.cpp:8 p->instanceMethod();
 
 CFG: _Z16staticMethodCallv
-call: _ZN3Foo12staticMethodEv()
+#0000:	 call: _ZN3Foo12staticMethodEv() <exit>
 methodCalls.cpp:12 Foo::staticMethod();
 
 CFG: _Z18abstractMethodCallP3Foo
-assign: *tmp0 = p
+#0000:	 assign: *tmp0 = p
  - no source -
-noop: opcode 'LLVMBitCast' not supported
+#0001:	 noop: opcode 'LLVMBitCast' not supported
 methodCalls.cpp:16 p->abstractMethod();
-noop: opcode 'LLVMCall' not supported
+#0002:	 noop: opcode 'LLVMCall' not supported <exit>
 methodCalls.cpp:16 p->abstractMethod();
 

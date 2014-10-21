@@ -1,38 +1,38 @@
 CFG: localAuto
-assign: *tmp0 = 1
+#0000:	 assign: *tmp0 = 1 <exit>
 lvalues.c:2 int a = 1;
 
 CFG: localStatic
-assign: *localStatic.a = 2
+#0000:	 assign: *localStatic.a = 2 <exit>
 lvalues.c:7 a = 2;
 
 CFG: arrayElementAccess
-noop: Can't parse LValue: i32* getelementptr inbounds ([10 x i32]* @ARRAY, i32 0, i64 0)
+#0000:	 noop: Can't parse LValue: i32* getelementptr inbounds ([10 x i32]* @ARRAY, i32 0, i64 0)
 lvalues.c:13 ARRAY[0] = 1;
-noop: Can't parse LValue: i32* getelementptr inbounds ([10 x i32]* @ARRAY, i32 0, i64 1)
+#0001:	 noop: Can't parse LValue: i32* getelementptr inbounds ([10 x i32]* @ARRAY, i32 0, i64 1) <exit>
 lvalues.c:14 ARRAY[1] = 2;
 
 CFG: arrayDeref
-noop: Can't parse LValue: i32* getelementptr inbounds ([10 x i32]* @ARRAY, i32 0, i32 0)
+#0000:	 noop: Can't parse LValue: i32* getelementptr inbounds ([10 x i32]* @ARRAY, i32 0, i32 0) <exit>
 lvalues.c:18 *ARRAY = 1;
 
 CFG: ptrElementAccess
-assign: *(*PTR+0) = 1
+#0000:	 assign: *(*PTR+0) = 1
 lvalues.c:24 PTR[0] = 1;
-assign: *(*PTR+1) = 2
+#0001:	 assign: *(*PTR+1) = 2 <exit>
 lvalues.c:25 PTR[1] = 2;
 
 CFG: ptrDeref
-assign: **PTR = 1
+#0000:	 assign: **PTR = 1 <exit>
 lvalues.c:29 *PTR = 1;
 
 CFG: structFieldAccess
-noop: Can't parse LValue: i32* getelementptr inbounds (%struct.anon* @STRUCT, i32 0, i32 0)
+#0000:	 noop: Can't parse LValue: i32* getelementptr inbounds (%struct.anon* @STRUCT, i32 0, i32 0) <exit>
 lvalues.c:37 STRUCT.field = 1;
 
 CFG: structPtrFieldAccess
-assign: *((*PTR_STRUCT+0).field) = 1
+#0000:	 assign: *((*PTR_STRUCT+0).field) = 1
 lvalues.c:41 (*PTR_STRUCT).field = 1;
-assign: *((*PTR_STRUCT+0).field) = 2
+#0001:	 assign: *((*PTR_STRUCT+0).field) = 2 <exit>
 lvalues.c:42 PTR_STRUCT->field = 2;
 

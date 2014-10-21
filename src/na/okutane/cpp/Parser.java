@@ -1,5 +1,6 @@
 package na.okutane.cpp;
 
+import na.okutane.CfgUtils;
 import na.okutane.api.Cfg;
 import na.okutane.api.cfg.Cfe;
 import na.okutane.api.cfg.CfgBuildingCtx;
@@ -21,6 +22,8 @@ import java.util.List;
  */
 @Component
 public class Parser {
+    @Autowired
+    CfgUtils cfgUtils;
     @Autowired
     InstructionParser instructionParser;
     @Autowired
@@ -69,6 +72,19 @@ public class Parser {
                                 SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock = bitreader.LLVMGetEntryBasicBlock(function);
 
                                 Cfe entry = processBlock(ctx, entryBlock);
+
+                                SWIGTYPE_p_LLVMOpaqueBasicBlock block = bitreader.LLVMGetFirstBasicBlock(function);
+                                block = bitreader.LLVMGetNextBasicBlock(block);
+                                while (block != null) {
+                                    Cfe blockEntry = processBlock(ctx, block);
+                                    Cfe label = ctx.getLabel(bitreader.LLVMBasicBlockAsValue(block));
+
+                                    label.setNext(blockEntry);
+
+                                    block = bitreader.LLVMGetNextBasicBlock(block);
+                                }
+
+                                entry = cfgUtils.removeNoOps(entry);
 
                                 result.add(new Cfg(bitreader.LLVMGetValueName(function), entry));
                             }

@@ -9,4 +9,8 @@ public interface CfeVisitor {
     void visit(Assignment assignment);
 
     void visit(Call call);
+
+    void visit(IfCondition ifCondition);
+
+    void visit(NoOp noOp);
 }

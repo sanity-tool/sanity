@@ -1,6 +1,7 @@
 package na.okutane.api.cfg;
 
 import na.okutane.cpp.TypeParser;
+import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueBasicBlock;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 import na.okutane.cpp.llvm.bitreader;
 
@@ -14,6 +15,7 @@ public class CfgBuildingCtx {
     private final TypeParser typeParser;
     Map<SWIGTYPE_p_LLVMOpaqueValue, RValue> params = new HashMap<SWIGTYPE_p_LLVMOpaqueValue, RValue>();
     Map<SWIGTYPE_p_LLVMOpaqueValue, LValue> tmpVars = new HashMap<SWIGTYPE_p_LLVMOpaqueValue, LValue>();
+    Map<SWIGTYPE_p_LLVMOpaqueBasicBlock, Cfe> labels = new HashMap<SWIGTYPE_p_LLVMOpaqueBasicBlock, Cfe>();
 
     public CfgBuildingCtx(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueValue function) {
         this.typeParser = typeParser;
@@ -35,5 +37,16 @@ public class CfgBuildingCtx {
 
     public RValue getParam(SWIGTYPE_p_LLVMOpaqueValue value) {
         return params.get(value);
+    }
+
+    public Cfe getLabel(SWIGTYPE_p_LLVMOpaqueValue label) {
+        String str = bitreader.LLVMPrintValueToString(label);
+        SWIGTYPE_p_LLVMOpaqueBasicBlock block = bitreader.LLVMValueAsBasicBlock(label);
+        Cfe result = labels.get(block);
+        if (result == null) {
+            result = new NoOp(null);
+            labels.put(block, result);
+        }
+        return result;
     }
 }

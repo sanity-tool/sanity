@@ -1,8 +1,8 @@
 CFG: writeToGlobalInt
-assign: *I = 1
+#0000:	 assign: *I = 1 <exit>
 globals.c:4 I = 1;
 
 CFG: writeToGlobalIntPointer
-assign: *I_P = null
+#0000:	 assign: *I_P = null <exit>
 globals.c:8 I_P = 0;
 

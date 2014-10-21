@@ -1,0 +1,32 @@
+CFG: testImplicitIf
+#0000:	 assign: tmp0 = *I != 0
+conditions.c:7 if (I) {
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+conditions.c:7 if (I) {
+#0002:	 call: foo()
+conditions.c:8 foo();
+#0003:	 noop <exit>
+ - no source -
+
+CFG: testImplicitIfElse
+#0000:	 assign: tmp0 = *I != 0
+conditions.c:13 if (I) {
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+conditions.c:13 if (I) {
+#0002:	 call: foo()
+conditions.c:14 foo();
+#0004:	 noop <exit>
+ - no source -
+#0003:	 call: bar()
+conditions.c:16 bar();
+
+CFG: testExplicitIf
+#0000:	 assign: tmp0 = *I != 0
+conditions.c:21 if (I != 0) {
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+conditions.c:21 if (I != 0) {
+#0002:	 call: foo()
+conditions.c:22 foo();
+#0003:	 noop <exit>
+ - no source -
+

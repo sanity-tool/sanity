@@ -1,18 +1,21 @@
 package na.okutane.api.cfg;
 
+import na.okutane.CfgUtils;
 import na.okutane.api.Cfg;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
  */
 public class CfePrinter implements CfeVisitor {
     final StringBuilder sb = new StringBuilder();
-    final Map<TemporaryVar, Integer> tmpVars = new HashMap<TemporaryVar, Integer>();
+    final Map<RValue, Integer> tmpVars = new HashMap<RValue, Integer>();
+    final Map<Cfe, Integer> cfeIds = new HashMap<Cfe, Integer>();
 
     private CfePrinter() {
 
@@ -32,7 +35,13 @@ public class CfePrinter implements CfeVisitor {
     }
 
     private CfePrinter print0(Cfe cfe) {
+        sb.append(getId(cfe)).append(' ');
+
         cfe.accept(this);
+
+        if (!(cfe instanceof IfCondition) && cfe.getNext() == null) {
+            sb.append(" <exit>");
+        }
 
         SourceRange sourceRange = cfe.getSourceRange();
         if (sourceRange == null) {
@@ -50,14 +59,14 @@ public class CfePrinter implements CfeVisitor {
 
     public static String print(Cfg cfg) {
         CfePrinter printer = new CfePrinter();
-        Cfe cfe = cfg.getEntry();
 
-        while (cfe != null) {
+        Set<Cfe> cfes = CfgUtils.getAllCfes(cfg.getEntry());
+
+        for (Cfe cfe : cfes) {
             if (!printer.isEmpty()) {
                 printer.printLine();
             }
             printer.print0(cfe);
-            cfe = cfe.getNext();
         }
 
         return printer.toString();
@@ -66,6 +75,11 @@ public class CfePrinter implements CfeVisitor {
     @Override
     public void visit(UnprocessedElement element) {
         sb.append("noop: ").append(element.getMessage());
+    }
+
+    @Override
+    public void visit(NoOp noOp) {
+        sb.append("noop");
     }
 
     @Override
@@ -99,13 +113,16 @@ public class CfePrinter implements CfeVisitor {
         sb.append(')');
     }
 
+    @Override
+    public void visit(IfCondition ifCondition) {
+        sb.append("if: ");
+        print(ifCondition.getCondition());
+        sb.append(" then ").append(getId(ifCondition.getThenElement())).append(" else ").append(getId(ifCondition.getElseElement()));
+    }
+
     private void print(RValue value) {
         if (value instanceof TemporaryVar) {
-            Integer number = tmpVars.get(value);
-            if (number == null) {
-                number = tmpVars.size();
-                tmpVars.put((TemporaryVar) value, number);
-            }
+            Integer number = getOrCreateId(value, tmpVars);
             sb.append("tmp").append(number);
             return;
         }
@@ -131,5 +148,18 @@ public class CfePrinter implements CfeVisitor {
             return;
         }
         sb.append(value.toString());
+    }
+
+    private String getId(Cfe cfe) {
+        return String.format("#%04d:\t", getOrCreateId(cfe, cfeIds));
+    }
+
+    private <K> Integer getOrCreateId(K value, Map<K, Integer> map) {
+        Integer number = map.get(value);
+        if (number == null) {
+            number = map.size();
+            map.put(value, number);
+        }
+        return number;
     }
 }

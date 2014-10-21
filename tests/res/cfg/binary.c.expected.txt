@@ -1,68 +1,68 @@
 CFG: testInt
-assign: tmp0 = *I0 + *I1
+#0000:	 assign: tmp0 = *I0 + *I1
 binary.c:4 IR = I0 + I1;
-assign: *IR = tmp0
+#0001:	 assign: *IR = tmp0
 binary.c:4 IR = I0 + I1;
-assign: tmp1 = *I0 - *I1
+#0002:	 assign: tmp1 = *I0 - *I1
 binary.c:5 IR = I0 - I1;
-assign: *IR = tmp1
+#0003:	 assign: *IR = tmp1
 binary.c:5 IR = I0 - I1;
-assign: tmp2 = *I0 * *I1
+#0004:	 assign: tmp2 = *I0 * *I1
 binary.c:6 IR = I0 * I1;
-assign: *IR = tmp2
+#0005:	 assign: *IR = tmp2
 binary.c:6 IR = I0 * I1;
-assign: tmp3 = *I0 / *I1
+#0006:	 assign: tmp3 = *I0 / *I1
 binary.c:7 IR = I0 / I1;
-assign: *IR = tmp3
+#0007:	 assign: *IR = tmp3
 binary.c:7 IR = I0 / I1;
-assign: tmp4 = *I0 % *I1
+#0008:	 assign: tmp4 = *I0 % *I1
 binary.c:8 IR = I0 % I1;
-assign: *IR = tmp4
+#0009:	 assign: *IR = tmp4
 binary.c:8 IR = I0 % I1;
-assign: tmp5 = *I0 & *I1
+#0010:	 assign: tmp5 = *I0 & *I1
 binary.c:9 IR = I0 & I1;
-assign: *IR = tmp5
+#0011:	 assign: *IR = tmp5
 binary.c:9 IR = I0 & I1;
-assign: tmp6 = *I0 | *I1
+#0012:	 assign: tmp6 = *I0 | *I1
 binary.c:10 IR = I0 | I1;
-assign: *IR = tmp6
+#0013:	 assign: *IR = tmp6
 binary.c:10 IR = I0 | I1;
-assign: tmp7 = *I0 ^ *I1
+#0014:	 assign: tmp7 = *I0 ^ *I1
 binary.c:11 IR = I0 ^ I1;
-assign: *IR = tmp7
+#0015:	 assign: *IR = tmp7
 binary.c:11 IR = I0 ^ I1;
-assign: tmp8 = *I0 << *I1
+#0016:	 assign: tmp8 = *I0 << *I1
 binary.c:12 IR = I0 << I1;
-assign: *IR = tmp8
+#0017:	 assign: *IR = tmp8
 binary.c:12 IR = I0 << I1;
-assign: tmp9 = *I0 >> *I1
+#0018:	 assign: tmp9 = *I0 >> *I1
 binary.c:13 IR = I0 >> I1;
-assign: *IR = tmp9
+#0019:	 assign: *IR = tmp9 <exit>
 binary.c:13 IR = I0 >> I1;
 
 CFG: testIntCmp
-assign: tmp0 = *I0 < *I1
+#0000:	 assign: tmp0 = *I0 < *I1
 binary.c:17 IR = I0 < I1;
-assign: *IR = tmp0
+#0001:	 assign: *IR = tmp0
 binary.c:17 IR = I0 < I1;
-assign: tmp1 = *I0 > *I1
+#0002:	 assign: tmp1 = *I0 > *I1
 binary.c:18 IR = I0 > I1;
-assign: *IR = tmp1
+#0003:	 assign: *IR = tmp1
 binary.c:18 IR = I0 > I1;
-assign: tmp2 = *I0 <= *I1
+#0004:	 assign: tmp2 = *I0 <= *I1
 binary.c:19 IR = I0 <= I1;
-assign: *IR = tmp2
+#0005:	 assign: *IR = tmp2
 binary.c:19 IR = I0 <= I1;
-assign: tmp3 = *I0 >= *I1
+#0006:	 assign: tmp3 = *I0 >= *I1
 binary.c:20 IR = I0 >= I1;
-assign: *IR = tmp3
+#0007:	 assign: *IR = tmp3
 binary.c:20 IR = I0 >= I1;
-assign: tmp4 = *I0 == *I1
+#0008:	 assign: tmp4 = *I0 == *I1
 binary.c:21 IR = I0 == I1;
-assign: *IR = tmp4
+#0009:	 assign: *IR = tmp4
 binary.c:21 IR = I0 == I1;
-assign: tmp5 = *I0 != *I1
+#0010:	 assign: tmp5 = *I0 != *I1
 binary.c:22 IR = I0 != I1;
-assign: *IR = tmp5
+#0011:	 assign: *IR = tmp5 <exit>
 binary.c:22 IR = I0 != I1;
 
