@@ -15,8 +15,10 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
@@ -31,6 +33,7 @@ public class TypeParser implements ParserListener {
 
     private Map<String, List<String>> fieldNamesCache;
     private int anonCount;
+    private Set<SWIGTYPE_p_LLVMOpaqueValue> visited;
 
     private static final TypeKindParser defaultParser = new TypeKindParser() {
         @Override
@@ -47,7 +50,7 @@ public class TypeParser implements ParserListener {
 
     @Autowired
     public TypeParser(TypeKindParser[] parsers) {
-        this.parsers = new HashMap<LLVMTypeKind, TypeKindParser>();
+        this.parsers = new HashMap<>();
 
         for (TypeKindParser parser : parsers) {
             this.parsers.put(parser.getTypeKind(), parser);
@@ -61,7 +64,8 @@ public class TypeParser implements ParserListener {
 
     @Override
     public void onModuleStarted(SWIGTYPE_p_LLVMOpaqueModule module) {
-        fieldNamesCache = new HashMap<String, List<String>>();
+        fieldNamesCache = new HashMap<>();
+        visited = new HashSet<>();
         anonCount = 0;
 
         int arguments = (int) bitreader.LLVMGetNamedMetadataNumOperands(module, "llvm.dbg.cu");
@@ -96,7 +100,15 @@ public class TypeParser implements ParserListener {
     }
 
     protected void visitStructure(SWIGTYPE_p_LLVMOpaqueValue type) {
+        if (!visited.add(type)) {
+            return;
+        }
+
         SWIGTYPE_p_LLVMOpaqueValue members = bitreader.LLVMGetOperand(type, 10);
+
+        if (members == null) {
+            return;
+        }
 
         String name = bitreader.getMDString(bitreader.LLVMGetOperand(type, 3));
 
@@ -145,6 +157,7 @@ public class TypeParser implements ParserListener {
     @Override
     public void onModuleFinished(SWIGTYPE_p_LLVMOpaqueModule module) {
         fieldNamesCache = null;
+        visited = null;
     }
 
     List<String> getFieldNames(SWIGTYPE_p_LLVMOpaqueType type) {

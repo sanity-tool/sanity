@@ -1,0 +1,12 @@
+CFG: id2cf
+#0000:	 assign: *tmp0 = cf
+ - no source -
+#0001:	 noop: opcode 'LLVMRet' not supported <exit>
+objc_object.m:11 return ((void*)0);
+
+CFG: cf2id
+#0000:	 assign: *tmp0 = X
+ - no source -
+#0001:	 noop: opcode 'LLVMRet' not supported <exit>
+objc_object.m:15 return ((void*)0);
+

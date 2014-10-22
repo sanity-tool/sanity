@@ -57,7 +57,7 @@ public class ParserTests extends TestHelper {
     }
 
     private static boolean isClangSupported(File file) {
-        return file.getName().endsWith(".c") || file.getName().endsWith(".cpp");
+        return file.getName().endsWith(".c") || file.getName().endsWith(".cpp") || file.getName().endsWith(".m");
     }
 
     @Override
