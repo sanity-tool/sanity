@@ -3,6 +3,7 @@ package cpp;
 import junit.framework.TestSuite;
 import na.okutane.api.Cfg;
 import na.okutane.api.cfg.CfePrinter;
+import na.okutane.cpp.ParseException;
 import na.okutane.cpp.Parser;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -26,11 +27,36 @@ public class ParserTests extends TestHelper {
 
         new ParserTests().fillWithTests(suite, "cfg");
 
+        TestSuite parseErrors = new TestSuite("parse errors");
+        new TestHelper() {
+            @Override
+            protected boolean matches(File file) {
+                return isClangSupported(file);
+            }
+
+            @Override
+            public void runTest(String unit, Path pathToExpected) throws Exception {
+                Parser parser = context.getBean(Parser.class);
+                try {
+                    parser.parse(unit);
+                    throw new IllegalStateException("should have failed");
+                } catch (ParseException e) {
+                    check(pathToExpected, e.toString());
+                }
+
+            }
+        }.fillWithTests(parseErrors, "errors/cfg");
+        suite.addTest(parseErrors);
+
         return suite;
     }
 
     @Override
     protected boolean matches(File file) {
+        return isClangSupported(file);
+    }
+
+    private static boolean isClangSupported(File file) {
         return file.getName().endsWith(".c") || file.getName().endsWith(".cpp");
     }
 

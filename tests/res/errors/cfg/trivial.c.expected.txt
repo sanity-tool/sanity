@@ -1,0 +1,8 @@
+na.okutane.cpp.ParseException: resultCode = [1], error = [/Users/jondoe/IdeaProjects/SA/sanity/tests/res/errors/cfg/trivial.c:1:1: error: unknown type name 'a'
+a
+^
+/Users/jondoe/IdeaProjects/SA/sanity/tests/res/errors/cfg/trivial.c:1:2: error: expected identifier or '('
+a
+ ^
+2 errors generated.
+]

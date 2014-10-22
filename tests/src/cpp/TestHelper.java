@@ -26,6 +26,7 @@ public abstract class TestHelper {
         for (final File f : file.listFiles()) {
             if (f.isDirectory()) {
                 TestSuite inner = new TestSuite(f.getName());
+                fillWithTests(inner, f);
                 suite.addTest(inner);
             } else {
                 if (matches(f)) {
