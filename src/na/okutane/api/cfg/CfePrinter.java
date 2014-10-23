@@ -14,8 +14,8 @@ import java.util.Set;
  */
 public class CfePrinter implements CfeVisitor {
     final StringBuilder sb = new StringBuilder();
-    final Map<RValue, Integer> tmpVars = new HashMap<RValue, Integer>();
-    final Map<Cfe, Integer> cfeIds = new HashMap<Cfe, Integer>();
+    final Map<RValue, Integer> tmpVars = new HashMap<>();
+    final Map<Cfe, Integer> cfeIds = new HashMap<>();
 
     private CfePrinter() {
 
@@ -98,7 +98,13 @@ public class CfePrinter implements CfeVisitor {
             print(lvalue);
             sb.append(" = ");
         }
-        sb.append(call.getName()).append('(');
+        RValue function = call.getFunction();
+        if (function instanceof ConstCache.FunctionAddress) {
+            sb.append(((ConstCache.FunctionAddress) function).getName());
+        } else {
+            print(function);
+        }
+        sb.append('(');
 
         List<RValue> args = call.getArgs();
         if (!args.isEmpty()) {
@@ -145,6 +151,22 @@ public class CfePrinter implements CfeVisitor {
         if (value instanceof Indirection) {
             sb.append('*');
             print(((Indirection) value).getPointer());
+            return;
+        }
+        if (value instanceof GetElementPointer) {
+            sb.append('(');
+            print(((GetElementPointer) value).getPointer());
+            sb.append('+');
+            print(((GetElementPointer) value).getIndex());
+            sb.append(')');
+            return;
+        }
+        if (value instanceof GetFieldPointer) {
+            sb.append('(');
+            print(((GetFieldPointer) value).getPointer());
+            sb.append('.');
+            sb.append(((GetFieldPointer) value).getPointer().getType().getFieldName(((GetFieldPointer) value).getIndex()));
+            sb.append(')');
             return;
         }
         sb.append(value.toString());

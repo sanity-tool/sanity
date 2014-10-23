@@ -11,8 +11,8 @@ methodCalls.cpp:12 Foo::staticMethod();
 CFG: _Z18abstractMethodCallP3Foo
 #0000:	 assign: *tmp0 = p
  - no source -
-#0001:	 noop: opcode 'LLVMBitCast' not supported
+#0001:	 assign: tmp1 = *tmp0
 methodCalls.cpp:16 p->abstractMethod();
-#0002:	 noop: opcode 'LLVMCall' not supported <exit>
+#0002:	 call: *(*tmp1+0)(*tmp0) <exit>
 methodCalls.cpp:16 p->abstractMethod();
 

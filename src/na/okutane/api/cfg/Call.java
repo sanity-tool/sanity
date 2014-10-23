@@ -6,19 +6,19 @@ import java.util.List;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
  */
 public class Call extends Cfe {
-    private final String name;
+    private final RValue function;
     private final LValue lValue;
     private final List<RValue> args;
 
-    public Call(String name, LValue lValue, List<RValue> args, SourceRange sourceRange) {
+    public Call(RValue function, LValue lValue, List<RValue> args, SourceRange sourceRange) {
         super(sourceRange);
-        this.name = name;
+        this.function = function;
         this.lValue = lValue;
         this.args = args;
     }
 
-    public String getName() {
-        return name;
+    public RValue getFunction() {
+        return function;
     }
 
     public LValue getlValue() {

@@ -16,6 +16,10 @@ public class GetFieldPointer implements LValue {
         return pointer;
     }
 
+    public int getIndex() {
+        return index;
+    }
+
     @Override
     public Type getType() {
         return pointer.getType().getFieldType(index);

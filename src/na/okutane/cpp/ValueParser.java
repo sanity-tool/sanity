@@ -31,9 +31,6 @@ public class ValueParser {
         if (bitreader.LLVMIsAArgument(value) != null) {
             return ctx.getParam(value);
         }
-        if (bitreader.LLVMIsAFunction(value) != null) {
-            throw new IllegalStateException("functions not supported yet");
-        }
         throw new IllegalStateException("Can't parse LValue: " + bitreader.LLVMPrintValueToString(value));
     }
 
@@ -46,6 +43,9 @@ public class ValueParser {
         }
         if (bitreader.LLVMIsAConstantPointerNull(value) != null) {
             return constants.getNull(typeParser.parse(bitreader.LLVMTypeOf(value)));
+        }
+        if (bitreader.LLVMIsAFunction(value) != null) {
+            return constants.getFunction(bitreader.LLVMGetValueName(value), typeParser.parse(bitreader.LLVMTypeOf(value)));
         }
         return parseLValue(ctx, value);
     }

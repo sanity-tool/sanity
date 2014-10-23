@@ -15,6 +15,10 @@ public class ConstCache {
         return new NullPtr(type);
     }
 
+    public RValue getFunction(String name, Type type) {
+        return new FunctionAddress(name, type);
+    }
+
     public static class NullPtr extends TypedValue {
         public NullPtr(Type type) {
             super(type);
@@ -36,6 +40,24 @@ public class ConstCache {
         @Override
         public String toString() {
             return Long.toString(value);
+        }
+    }
+
+    public static class FunctionAddress extends TypedValue {
+        private final String name;
+
+        public FunctionAddress(String name, Type type) {
+            super(type);
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String toString() {
+            return '@' + name;
         }
     }
 }

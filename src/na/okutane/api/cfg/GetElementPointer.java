@@ -16,6 +16,10 @@ public class GetElementPointer implements LValue {
         return pointer;
     }
 
+    public RValue getIndex() {
+        return index;
+    }
+
     @Override
     public Type getType() {
         return pointer.getType().getElementType();

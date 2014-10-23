@@ -13,9 +13,9 @@ import java.util.Map;
  */
 public class CfgBuildingCtx {
     private final TypeParser typeParser;
-    Map<SWIGTYPE_p_LLVMOpaqueValue, RValue> params = new HashMap<SWIGTYPE_p_LLVMOpaqueValue, RValue>();
-    Map<SWIGTYPE_p_LLVMOpaqueValue, LValue> tmpVars = new HashMap<SWIGTYPE_p_LLVMOpaqueValue, LValue>();
-    Map<SWIGTYPE_p_LLVMOpaqueBasicBlock, Cfe> labels = new HashMap<SWIGTYPE_p_LLVMOpaqueBasicBlock, Cfe>();
+    Map<SWIGTYPE_p_LLVMOpaqueValue, RValue> params = new HashMap<>();
+    Map<SWIGTYPE_p_LLVMOpaqueValue, LValue> tmpVars = new HashMap<>();
+    Map<SWIGTYPE_p_LLVMOpaqueBasicBlock, Cfe> labels = new HashMap<>();
 
     public CfgBuildingCtx(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueValue function) {
         this.typeParser = typeParser;
@@ -40,7 +40,6 @@ public class CfgBuildingCtx {
     }
 
     public Cfe getLabel(SWIGTYPE_p_LLVMOpaqueValue label) {
-        String str = bitreader.LLVMPrintValueToString(label);
         SWIGTYPE_p_LLVMOpaqueBasicBlock block = bitreader.LLVMValueAsBasicBlock(label);
         Cfe result = labels.get(block);
         if (result == null) {

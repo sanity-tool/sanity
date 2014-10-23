@@ -8,7 +8,6 @@ import na.okutane.api.cfg.CfgBuildingCtx;
 import na.okutane.api.cfg.ConstCache;
 import na.okutane.api.cfg.GetElementPointer;
 import na.okutane.api.cfg.GetFieldPointer;
-import na.okutane.api.cfg.GlobalVariableCache;
 import na.okutane.api.cfg.IfCondition;
 import na.okutane.api.cfg.Indirection;
 import na.okutane.api.cfg.LValue;
@@ -28,7 +27,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BinaryOperator;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
@@ -59,7 +57,7 @@ public class InstructionParser {
 
     @Autowired
     public InstructionParser(OpcodeParser[] parsers) {
-        this.parsers = new HashMap<LLVMOpcode, OpcodeParser>();
+        this.parsers = new HashMap<>();
 
         for (OpcodeParser parser : parsers) {
             this.parsers.put(parser.getOpcode(), parser);
@@ -210,7 +208,7 @@ public class InstructionParser {
             }
             if (index instanceof ConstCache.Const) {
                 int intIndex = (int) ((ConstCache.Const) index).getValue();
-                Type fieldType = basePointer.getType().getFieldType((int) intIndex);
+                Type fieldType = basePointer.getType().getFieldType(intIndex);
                 if (fieldType != null) {
                     return new GetFieldPointer(basePointer, intIndex);
                 }
@@ -228,7 +226,7 @@ public class InstructionParser {
 
         @Override
         public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            List<RValue> args = new ArrayList<RValue>();
+            List<RValue> args = new ArrayList<>();
             int argLen = bitreader.LLVMGetNumOperands(instruction) - 1;
             SWIGTYPE_p_LLVMOpaqueValue function = bitreader.LLVMGetOperand(instruction, argLen);
 
@@ -237,22 +235,26 @@ public class InstructionParser {
                 if (name.startsWith("llvm.dbg")) {
                     return null;
                 }
-                SWIGTYPE_p_LLVMOpaqueType type = bitreader.LLVMTypeOf(function);
-                type = bitreader.LLVMGetElementType(type);
-                SWIGTYPE_p_LLVMOpaqueType lvalueType = bitreader.LLVMGetReturnType(type);
-                LValue lvalue = bitreader.LLVMGetTypeKind(lvalueType) == LLVMTypeKind.LLVMVoidTypeKind ? null : ctx.getTmpVar(instruction);
-                for (int i = 0; i < argLen; i++) {
-                    args.add(valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
-                }
-                return new Call(
-                        name,
-                        lvalue,
-                        args,
-                        sourceRangeFactory.getSourceRange(instruction)
-                );
             }
 
-            return super.parse(ctx, instruction);
+            SWIGTYPE_p_LLVMOpaqueType type = bitreader.LLVMTypeOf(function);
+            type = bitreader.LLVMGetElementType(type);
+            SWIGTYPE_p_LLVMOpaqueType lvalueType = bitreader.LLVMGetReturnType(type);
+            LValue lvalue = bitreader.LLVMGetTypeKind(lvalueType) == LLVMTypeKind.LLVMVoidTypeKind ? null : ctx.getTmpVar(instruction);
+            for (int i = 0; i < argLen; i++) {
+                args.add(valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
+            }
+            return new Call(
+                    valueParser.parseRValue(ctx, function),
+                    lvalue,
+                    args,
+                    sourceRangeFactory.getSourceRange(instruction)
+            );
+        }
+
+        @Override
+        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            return ctx.getTmpVar(instruction);
         }
     }
 
@@ -380,6 +382,29 @@ public class InstructionParser {
     }
 
     @Component
+    private static class BitCastParser extends AbstractParser {
+        @Override
+        public LLVMOpcode getOpcode() {
+            return LLVMOpcode.LLVMBitCast;
+        }
+
+        @Override
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            LValue tmp = ctx.getTmpVar(instruction);
+            return new Assignment(
+                    tmp,
+                    valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
+                    sourceRangeFactory.getSourceRange(instruction)
+            );
+        }
+
+        @Override
+        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            return ctx.getTmpVar(instruction);
+        }
+    }
+
+    @Component
     private static class ZExtParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
@@ -401,7 +426,7 @@ public class InstructionParser {
 
     @Component
     private static class ICmpParser extends AbstractParser {
-        Map<LLVMIntPredicate, BinaryExpression.Operator> predicateOperatorMap = new HashMap<LLVMIntPredicate, BinaryExpression.Operator>();
+        Map<LLVMIntPredicate, BinaryExpression.Operator> predicateOperatorMap = new HashMap<>();
 
         public ICmpParser() {
             predicateOperatorMap.put(LLVMIntPredicate.LLVMIntSLT, BinaryExpression.Operator.Lt);

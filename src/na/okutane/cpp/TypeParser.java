@@ -244,6 +244,9 @@ public class TypeParser implements ParserListener {
 
                     @Override
                     public Type getFieldType(int index) {
+                        if (index >= fieldTypes.size()) {
+                            throw new IllegalStateException("bad");
+                        }
                         return fieldTypes.get(index);
                     }
 
