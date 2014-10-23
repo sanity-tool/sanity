@@ -1,5 +1,6 @@
 package na.okutane.cpp;
 
+import na.okutane.api.cfg.ArrayType;
 import na.okutane.api.cfg.PointerType;
 import na.okutane.api.cfg.Type;
 import na.okutane.cpp.llvm.LLVMTypeKind;
@@ -197,6 +198,19 @@ public class TypeParser implements ParserListener {
         @Override
         public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
             return new PointerType(typeParser.parse(bitreader.LLVMGetElementType(type)));
+        }
+    }
+
+    @Component
+    private static class ArrayParser implements TypeKindParser {
+        @Override
+        public LLVMTypeKind getTypeKind() {
+            return LLVMTypeKind.LLVMArrayTypeKind;
+        }
+
+        @Override
+        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
+            return new ArrayType(typeParser.parse(bitreader.LLVMGetElementType(type)), bitreader.LLVMGetArrayLength(type));
         }
     }
 

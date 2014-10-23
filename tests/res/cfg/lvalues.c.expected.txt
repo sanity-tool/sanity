@@ -7,13 +7,13 @@ CFG: localStatic
 lvalues.c:7 a = 2;
 
 CFG: arrayElementAccess
-#0000:	 noop: Can't parse LLVMArrayTypeKind
+#0000:	 assign: *ARRAY = 1
 lvalues.c:13 ARRAY[0] = 1;
-#0001:	 noop: Can't parse LLVMArrayTypeKind <exit>
+#0001:	 assign: *(ARRAY+1) = 2 <exit>
 lvalues.c:14 ARRAY[1] = 2;
 
 CFG: arrayDeref
-#0000:	 noop: Can't parse LLVMArrayTypeKind <exit>
+#0000:	 assign: *ARRAY = 1 <exit>
 lvalues.c:18 *ARRAY = 1;
 
 CFG: ptrElementAccess

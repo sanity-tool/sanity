@@ -39,7 +39,7 @@ CFG: _ZN3BarC2Ev
  - no source -
 #0003:	 assign: tmp2 = *tmp0
  - no source -
-#0004:	 noop: Can't parse LLVMArrayTypeKind <exit>
+#0004:	 assign: *tmp2 = (_ZTV3Bar+2) <exit>
  - no source -
 
 CFG: _ZN3FooC2Ev
@@ -47,6 +47,6 @@ CFG: _ZN3FooC2Ev
  - no source -
 #0001:	 assign: tmp1 = *tmp0
  - no source -
-#0002:	 noop: Can't parse LLVMArrayTypeKind <exit>
+#0002:	 assign: *tmp1 = (_ZTV3Foo+2) <exit>
  - no source -
 
