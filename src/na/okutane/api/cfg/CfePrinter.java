@@ -154,11 +154,16 @@ public class CfePrinter implements CfeVisitor {
             return;
         }
         if (value instanceof GetElementPointer) {
-            sb.append('(');
-            print(((GetElementPointer) value).getPointer());
-            sb.append('+');
-            print(((GetElementPointer) value).getIndex());
-            sb.append(')');
+            RValue index = ((GetElementPointer) value).getIndex();
+            if (index instanceof ConstCache.Const && ((ConstCache.Const) index).getValue() == 0) {
+                print(((GetElementPointer) value).getPointer());
+            } else {
+                sb.append('(');
+                print(((GetElementPointer) value).getPointer());
+                sb.append('+');
+                print(index);
+                sb.append(')');
+            }
             return;
         }
         if (value instanceof GetFieldPointer) {

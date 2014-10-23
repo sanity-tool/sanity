@@ -78,6 +78,11 @@ public class InstructionParser {
         return parser.parseValue(ctx, instruction);
     }
 
+    public RValue parseConst(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue value) {
+        OpcodeParser parser = parsers.getOrDefault(bitreader.LLVMGetConstOpcode(value), defaultParser);
+        return parser.parseValue(ctx, value);
+    }
+
     private static interface OpcodeParser {
         LLVMOpcode getOpcode();
 

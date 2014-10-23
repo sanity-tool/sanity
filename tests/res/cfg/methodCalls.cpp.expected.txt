@@ -13,7 +13,7 @@ CFG: _Z18abstractMethodCallP3Foo
  - no source -
 #0001:	 assign: tmp1 = *tmp0
 methodCalls.cpp:16 p->abstractMethod();
-#0002:	 call: *(*tmp1+0)(*tmp0) <exit>
+#0002:	 call: **tmp1(*tmp0) <exit>
 methodCalls.cpp:16 p->abstractMethod();
 
 CFG: _Z7testBarv
@@ -39,7 +39,7 @@ CFG: _ZN3BarC2Ev
  - no source -
 #0003:	 assign: tmp2 = *tmp0
  - no source -
-#0004:	 noop: Can't parse LValue: i8** getelementptr inbounds ([3 x i8*]* @_ZTV3Bar, i64 0, i64 2) <exit>
+#0004:	 noop: Can't parse LLVMArrayTypeKind <exit>
  - no source -
 
 CFG: _ZN3FooC2Ev
@@ -47,6 +47,6 @@ CFG: _ZN3FooC2Ev
  - no source -
 #0001:	 assign: tmp1 = *tmp0
  - no source -
-#0002:	 noop: Can't parse LValue: i8** getelementptr inbounds ([3 x i8*]* @_ZTV3Foo, i64 0, i64 2) <exit>
+#0002:	 noop: Can't parse LLVMArrayTypeKind <exit>
  - no source -
 

@@ -7,17 +7,17 @@ CFG: localStatic
 lvalues.c:7 a = 2;
 
 CFG: arrayElementAccess
-#0000:	 noop: Can't parse LValue: i32* getelementptr inbounds ([10 x i32]* @ARRAY, i32 0, i64 0)
+#0000:	 noop: Can't parse LLVMArrayTypeKind
 lvalues.c:13 ARRAY[0] = 1;
-#0001:	 noop: Can't parse LValue: i32* getelementptr inbounds ([10 x i32]* @ARRAY, i32 0, i64 1) <exit>
+#0001:	 noop: Can't parse LLVMArrayTypeKind <exit>
 lvalues.c:14 ARRAY[1] = 2;
 
 CFG: arrayDeref
-#0000:	 noop: Can't parse LValue: i32* getelementptr inbounds ([10 x i32]* @ARRAY, i32 0, i32 0) <exit>
+#0000:	 noop: Can't parse LLVMArrayTypeKind <exit>
 lvalues.c:18 *ARRAY = 1;
 
 CFG: ptrElementAccess
-#0000:	 assign: *(*PTR+0) = 1
+#0000:	 assign: **PTR = 1
 lvalues.c:24 PTR[0] = 1;
 #0001:	 assign: *(*PTR+1) = 2 <exit>
 lvalues.c:25 PTR[1] = 2;
@@ -27,12 +27,12 @@ CFG: ptrDeref
 lvalues.c:29 *PTR = 1;
 
 CFG: structFieldAccess
-#0000:	 noop: Can't parse LValue: i32* getelementptr inbounds (%struct.anon* @STRUCT, i32 0, i32 0) <exit>
+#0000:	 assign: *(STRUCT.field) = 1 <exit>
 lvalues.c:37 STRUCT.field = 1;
 
 CFG: structPtrFieldAccess
-#0000:	 assign: *((*PTR_STRUCT+0).field) = 1
+#0000:	 assign: *(*PTR_STRUCT.field) = 1
 lvalues.c:41 (*PTR_STRUCT).field = 1;
-#0001:	 assign: *((*PTR_STRUCT+0).field) = 2 <exit>
+#0001:	 assign: *(*PTR_STRUCT.field) = 2 <exit>
 lvalues.c:42 PTR_STRUCT->field = 2;
 
