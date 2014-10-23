@@ -16,3 +16,37 @@ methodCalls.cpp:16 p->abstractMethod();
 #0002:	 call: *(*tmp1+0)(*tmp0) <exit>
 methodCalls.cpp:16 p->abstractMethod();
 
+CFG: _Z7testBarv
+#0000:	 call: _ZN3BarC1Ev(tmp0)
+methodCalls.cpp:24 Bar bar;
+#0001:	 assign: tmp1 = tmp0
+methodCalls.cpp:25 abstractMethodCall(&bar);
+#0002:	 call: _Z18abstractMethodCallP3Foo(tmp1) <exit>
+methodCalls.cpp:25 abstractMethodCall(&bar);
+
+CFG: _ZN3BarC1Ev
+#0000:	 assign: *tmp0 = this
+ - no source -
+#0001:	 call: _ZN3BarC2Ev(*tmp0) <exit>
+ - no source -
+
+CFG: _ZN3BarC2Ev
+#0000:	 assign: *tmp0 = this
+ - no source -
+#0001:	 assign: tmp1 = *tmp0
+ - no source -
+#0002:	 call: _ZN3FooC2Ev(tmp1)
+ - no source -
+#0003:	 assign: tmp2 = *tmp0
+ - no source -
+#0004:	 noop: Can't parse LValue: i8** getelementptr inbounds ([3 x i8*]* @_ZTV3Bar, i64 0, i64 2) <exit>
+ - no source -
+
+CFG: _ZN3FooC2Ev
+#0000:	 assign: *tmp0 = this
+ - no source -
+#0001:	 assign: tmp1 = *tmp0
+ - no source -
+#0002:	 noop: Can't parse LValue: i8** getelementptr inbounds ([3 x i8*]* @_ZTV3Foo, i64 0, i64 2) <exit>
+ - no source -
+

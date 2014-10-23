@@ -15,3 +15,12 @@ void staticMethodCall() {
 void abstractMethodCall(Foo *p) {
 	p->abstractMethod();
 }
+
+struct Bar : public Foo {
+    void abstractMethod();
+};
+
+void testBar() {
+    Bar bar;
+    abstractMethodCall(&bar);
+}

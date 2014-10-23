@@ -76,7 +76,7 @@ public class TypeParser implements ParserListener {
             for (int i = 0; i < arguments; i++) {
                 // process compile units
                 SWIGTYPE_p_LLVMOpaqueValue compileUnitMD = bitreader.getValue(values, i);
-                if (checkTag(compileUnitMD, DW_TAG_compile_unit)) {
+                if (LlvmUtils.checkTag(compileUnitMD, DW_TAG_compile_unit)) {
                     visit(compileUnitMD);
                 } else {
                     throw new IllegalStateException("not a compilation unit: " + bitreader.LLVMPrintValueToString(compileUnitMD));
@@ -85,18 +85,6 @@ public class TypeParser implements ParserListener {
         } finally {
             bitreader.free_LLVMValueRef(values);
         }
-    }
-
-    private static boolean checkTag(SWIGTYPE_p_LLVMOpaqueValue node, long tag) {
-        if (bitreader.LLVMIsAMDNode(node) == null) {
-            return false;
-        }
-        SWIGTYPE_p_LLVMOpaqueValue maybeTag = bitreader.LLVMGetOperand(node, 0);
-        if (bitreader.LLVMIsAConstantInt(maybeTag) != null) {
-            long val = bitreader.LLVMConstIntGetSExtValue(maybeTag);
-            return val == tag;
-        }
-        return false;
     }
 
     protected void visitStructure(SWIGTYPE_p_LLVMOpaqueValue type) {
@@ -127,7 +115,7 @@ public class TypeParser implements ParserListener {
 
         for (int i = 0; i < bitreader.LLVMGetNumOperands(members); i++) {
             SWIGTYPE_p_LLVMOpaqueValue node = bitreader.LLVMGetOperand(members, i);
-            if (checkTag(node, DW_TAG_member)) {
+            if (LlvmUtils.checkTag(node, DW_TAG_member)) {
                 String fieldName = bitreader.getMDString(bitreader.LLVMGetOperand(node, 3));
                 fieldNames.add(fieldName);
             }
@@ -143,7 +131,7 @@ public class TypeParser implements ParserListener {
             return;
         }
 
-        if (checkTag(node, DW_TAG_structure_type)) {
+        if (LlvmUtils.checkTag(node, DW_TAG_structure_type)) {
             visitStructure(node);
             return;
         }
