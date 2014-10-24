@@ -396,9 +396,19 @@ public class InstructionParser {
         @Override
         public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             LValue tmp = ctx.getTmpVar(instruction);
+            RValue operand = valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
+            Type tmpType = tmp.getType();
+            Type fieldType = operand.getType().getFieldType(0);
+            if (tmpType.equals(fieldType)) {
+                return new Assignment(
+                    tmp,
+                    new GetFieldPointer(operand, 0),
+                    sourceRangeFactory.getSourceRange(instruction)
+                );
+            }
             return new Assignment(
                     tmp,
-                    valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
+                    operand,
                     sourceRangeFactory.getSourceRange(instruction)
             );
         }
@@ -480,4 +490,59 @@ public class InstructionParser {
             return ctx.getTmpVar(instruction);
         }
     }
+
+//    @Component
+//    private static class FCmpParser extends AbstractParser {
+//        Map<LLVMRealPredicate, BinaryExpression.Operator> predicateOperatorMap = new HashMap<>();
+//
+//        public FCmpParser() {
+//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOLT, BinaryExpression.Operator.Lt);
+//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOLE, BinaryExpression.Operator.Le);
+//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOGT, BinaryExpression.Operator.Gt);
+//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOGE, BinaryExpression.Operator.Ge);
+//
+//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealULT, BinaryExpression.Operator.Lt);
+//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealULE, BinaryExpression.Operator.Le);
+//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealUGT, BinaryExpression.Operator.Gt);
+//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealUGE, BinaryExpression.Operator.Ge);
+//
+//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOEQ, BinaryExpression.Operator.Eq);
+//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealONE, BinaryExpression.Operator.Ne);
+//
+//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealUEQ, BinaryExpression.Operator.Eq);
+//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealUNE, BinaryExpression.Operator.Ne);
+//        }
+//
+//        @Override
+//        public LLVMOpcode getOpcode() {
+//            return LLVMOpcode.LLVMFCmp;
+//        }
+//
+//        @Override
+//        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+//            LValue tmp = ctx.getTmpVar(instruction);
+//
+//            LLVMRealPredicate predicate;
+//            BinaryExpression.Operator operator = predicateOperatorMap.get(predicate);
+//
+//            if (operator == null) {
+//                throw new IllegalArgumentException(predicate.toString() + " not supported.");
+//            }
+//
+//            return new Assignment(
+//                    tmp,
+//                    new BinaryExpression(
+//                            valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
+//                            operator,
+//                            valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
+//                    ),
+//                    sourceRangeFactory.getSourceRange(instruction)
+//            );
+//        }
+//
+//        @Override
+//        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+//            return ctx.getTmpVar(instruction);
+//        }
+//    }
 }
