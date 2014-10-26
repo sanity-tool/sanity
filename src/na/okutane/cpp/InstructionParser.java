@@ -397,15 +397,6 @@ public class InstructionParser {
         public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             LValue tmp = ctx.getTmpVar(instruction);
             RValue operand = valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
-            Type tmpType = tmp.getType();
-            Type fieldType = operand.getType().getFieldType(0);
-            if (tmpType.equals(fieldType)) {
-                return new Assignment(
-                    tmp,
-                    new GetFieldPointer(operand, 0),
-                    sourceRangeFactory.getSourceRange(instruction)
-                );
-            }
             return new Assignment(
                     tmp,
                     operand,

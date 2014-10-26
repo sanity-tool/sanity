@@ -1,0 +1,52 @@
+CFG: testWhile
+#0000:	 assign: *I = 0
+loops.c:6 I = 0;
+#0001:	 noop
+ - no source -
+#0002:	 assign: tmp0 = *I < 5
+loops.c:7 while(I < 5) {
+#0003:	 if: tmp0 then #0004:	 else <exit>
+loops.c:7 while(I < 5) {
+#0004:	 call: foo()
+loops.c:8 foo();
+#0005:	 assign: tmp1 = *I + 1
+loops.c:9 I++;
+#0006:	 assign: *I = tmp1
+loops.c:9 I++;
+
+CFG: testDoWhile
+#0000:	 assign: *I = 0
+loops.c:14 I = 0;
+#0001:	 noop
+ - no source -
+#0002:	 call: foo()
+loops.c:16 foo();
+#0003:	 assign: tmp0 = *I + 1
+loops.c:17 I++;
+#0004:	 assign: *I = tmp0
+loops.c:17 I++;
+#0005:	 assign: tmp1 = *I + 1
+loops.c:18 } while (I++);
+#0006:	 assign: *I = tmp1
+loops.c:18 } while (I++);
+#0007:	 assign: tmp2 = *I != 0
+loops.c:18 } while (I++);
+#0008:	 if: tmp2 then #0001:	 else <exit>
+loops.c:18 } while (I++);
+
+CFG: testFor
+#0000:	 assign: *I = 0
+loops.c:22 for (I = 0; I < 5; I++) {
+#0001:	 noop
+ - no source -
+#0002:	 assign: tmp0 = *I < 5
+loops.c:22 for (I = 0; I < 5; I++) {
+#0003:	 if: tmp0 then #0004:	 else <exit>
+loops.c:22 for (I = 0; I < 5; I++) {
+#0004:	 call: foo()
+loops.c:23 foo();
+#0005:	 assign: tmp1 = *I + 1
+loops.c:22 for (I = 0; I < 5; I++) {
+#0006:	 assign: *I = tmp1
+loops.c:22 for (I = 0; I < 5; I++) {
+

@@ -178,6 +178,9 @@ public class CfePrinter implements CfeVisitor {
     }
 
     private String getId(Cfe cfe) {
+        if (cfe == null) {
+            return "<exit>";
+        }
         return String.format("#%04d:\t", getOrCreateId(cfe, cfeIds));
     }
 

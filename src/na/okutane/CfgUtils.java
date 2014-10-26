@@ -23,6 +23,9 @@ public class CfgUtils {
 
     private static void collect(Set<Cfe> cfes, Cfe cfe) {
         // todo rewrite it :)
+        if (cfe == null) {
+            return;
+        }
         if (cfes.add(cfe)) {
             if (cfe instanceof IfCondition) {
                 collect(cfes, ((IfCondition) cfe).getThenElement());
