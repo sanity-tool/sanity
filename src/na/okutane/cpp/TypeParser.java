@@ -33,6 +33,7 @@ public class TypeParser implements ParserListener {
     private final Map<LLVMTypeKind, TypeKindParser> parsers;
 
     private Map<String, List<String>> fieldNamesCache;
+    private Map<SWIGTYPE_p_LLVMOpaqueType, Type> structCache;
     private int anonCount;
     private Set<SWIGTYPE_p_LLVMOpaqueValue> visited;
 
@@ -66,6 +67,7 @@ public class TypeParser implements ParserListener {
     @Override
     public void onModuleStarted(SWIGTYPE_p_LLVMOpaqueModule module) {
         fieldNamesCache = new HashMap<>();
+        structCache = new HashMap<>();
         visited = new HashSet<>();
         anonCount = 0;
 
@@ -146,12 +148,21 @@ public class TypeParser implements ParserListener {
     @Override
     public void onModuleFinished(SWIGTYPE_p_LLVMOpaqueModule module) {
         fieldNamesCache = null;
+        structCache = null;
         visited = null;
     }
 
-    List<String> getFieldNames(SWIGTYPE_p_LLVMOpaqueType type) {
+    private List<String> getFieldNames(SWIGTYPE_p_LLVMOpaqueType type) {
         String typeName = bitreader.LLVMGetStructName(type);
         return fieldNamesCache.get(typeName);
+    }
+
+    private Type get(SWIGTYPE_p_LLVMOpaqueType type) {
+        return structCache.get(type);
+    }
+
+    private void cache(SWIGTYPE_p_LLVMOpaqueType type, Type struct) {
+        structCache.put(type, struct);
     }
 
     private static interface TypeKindParser {
@@ -223,6 +234,11 @@ public class TypeParser implements ParserListener {
 
         @Override
         public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
+            Type cached = typeParser.get(type);
+            if (cached != null) {
+                return cached;
+            }
+
             int fields = (int)bitreader.LLVMCountStructElementTypes(type);
             SWIGTYPE_p_p_LLVMOpaqueType fieldsBuff = bitreader.calloc_LLVMTypeRef(fields, bitreaderConstants.sizeof_LLVMTypeRef);
             try {
@@ -231,14 +247,10 @@ public class TypeParser implements ParserListener {
                 // DW_TAG_structure_type
 
                 final List<Type> fieldTypes = new ArrayList<Type>();
-                for (int i = 0; i < fields; i++) {
-                    Type fieldType = typeParser.parse(bitreader.getType(fieldsBuff, i));
-                    fieldTypes.add(fieldType);
-                }
 
                 final List<String> fieldNames = typeParser.getFieldNames(type);
 
-                return new Type() {
+                Type struct = new Type() {
                     @Override
                     public Type getElementType() {
                         return null;
@@ -260,6 +272,15 @@ public class TypeParser implements ParserListener {
                         return "field" + index;
                     }
                 };
+
+                typeParser.cache(type, struct);
+
+                for (int i = 0; i < fields; i++) {
+                    Type fieldType = typeParser.parse(bitreader.getType(fieldsBuff, i));
+                    fieldTypes.add(fieldType);
+                }
+
+                return struct;
             } finally {
                 bitreader.free_LLVMTypeRef(fieldsBuff);
             }

@@ -1,0 +1,4 @@
+CFG: switchToNext
+#0000:	 assign: *PLIST = *(*PLIST.next) <exit>
+list.c:6 PLIST = PLIST->next;
+

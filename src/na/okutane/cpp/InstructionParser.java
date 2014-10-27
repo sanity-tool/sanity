@@ -69,7 +69,7 @@ public class InstructionParser {
             OpcodeParser parser = parsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
             return parser.parse(ctx, instruction);
         } catch (Throwable e) {
-            return new UnprocessedElement(e.getMessage(), sourceRangeFactory.getSourceRange(instruction));
+            return new UnprocessedElement(e.getMessage() == null ? e.getClass().getName() : e.getMessage(), sourceRangeFactory.getSourceRange(instruction));
         }
     }
 
