@@ -2,6 +2,7 @@ package na.okutane.cpp;
 
 import na.okutane.api.cfg.ArrayType;
 import na.okutane.api.cfg.PointerType;
+import na.okutane.api.cfg.Primitive;
 import na.okutane.api.cfg.Type;
 import na.okutane.cpp.llvm.LLVMTypeKind;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;
@@ -180,22 +181,21 @@ public class TypeParser implements ParserListener {
 
         @Override
         public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
-            return new Type() {
-                @Override
-                public Type getElementType() {
-                    return null;
-                }
+            return new Primitive();
+        }
 
-                @Override
-                public Type getFieldType(int index) {
-                    return null;
-                }
+    }
 
-                @Override
-                public String getFieldName(int index) {
-                    return null;
-                }
-            };
+    @Component
+    private static class VoidParser implements TypeKindParser {
+        @Override
+        public LLVMTypeKind getTypeKind() {
+            return LLVMTypeKind.LLVMVoidTypeKind;
+        }
+
+        @Override
+        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
+            return new Primitive();
         }
     }
 
@@ -314,4 +314,5 @@ public class TypeParser implements ParserListener {
             };
         }
     }
+
 }

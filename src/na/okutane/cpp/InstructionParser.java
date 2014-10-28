@@ -176,7 +176,7 @@ public class InstructionParser {
 
         @Override
         public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            return ctx.getTmpVar(instruction);
+            return ctx.getOrCreateTmpVar(instruction);
         }
     }
 
@@ -235,6 +235,9 @@ public class InstructionParser {
             int argLen = bitreader.LLVMGetNumOperands(instruction) - 1;
             SWIGTYPE_p_LLVMOpaqueValue function = bitreader.LLVMGetOperand(instruction, argLen);
 
+            if (bitreader.LLVMIsAConstantExpr(function) != null) {
+                function = bitreader.LLVMGetOperand(function, 0);
+            }
             if (bitreader.LLVMIsAFunction(function) != null) {
                 String name = bitreader.LLVMGetValueName(function);
                 if (name.startsWith("llvm.dbg")) {
@@ -245,7 +248,7 @@ public class InstructionParser {
             SWIGTYPE_p_LLVMOpaqueType type = bitreader.LLVMTypeOf(function);
             type = bitreader.LLVMGetElementType(type);
             SWIGTYPE_p_LLVMOpaqueType lvalueType = bitreader.LLVMGetReturnType(type);
-            LValue lvalue = bitreader.LLVMGetTypeKind(lvalueType) == LLVMTypeKind.LLVMVoidTypeKind ? null : ctx.getTmpVar(instruction);
+            LValue lvalue = bitreader.LLVMGetTypeKind(lvalueType) == LLVMTypeKind.LLVMVoidTypeKind ? null : ctx.getOrCreateTmpVar(instruction);
             for (int i = 0; i < argLen; i++) {
                 args.add(valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
             }
@@ -298,7 +301,7 @@ public class InstructionParser {
 
         @Override
         public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            LValue tmp = ctx.getTmpVar(instruction);
+            LValue tmp = ctx.getOrCreateTmpVar(instruction);
             return new Assignment(
                     tmp,
                     new BinaryExpression(
@@ -395,7 +398,7 @@ public class InstructionParser {
 
         @Override
         public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            LValue tmp = ctx.getTmpVar(instruction);
+            LValue tmp = ctx.getOrCreateTmpVar(instruction);
             RValue operand = valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
             return new Assignment(
                     tmp,
@@ -456,7 +459,7 @@ public class InstructionParser {
 
         @Override
         public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            LValue tmp = ctx.getTmpVar(instruction);
+            LValue tmp = ctx.getOrCreateTmpVar(instruction);
 
             LLVMIntPredicate predicate = bitreader.LLVMGetICmpPredicate(instruction);
             BinaryExpression.Operator operator = predicateOperatorMap.get(predicate);

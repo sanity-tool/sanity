@@ -26,11 +26,19 @@ public class CfgBuildingCtx {
         }
     }
 
-    public LValue getTmpVar(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+    public LValue getOrCreateTmpVar(SWIGTYPE_p_LLVMOpaqueValue instruction) {
         LValue result = tmpVars.get(instruction);
         if (result == null) {
             result = new TemporaryVar(typeParser.parse(bitreader.LLVMTypeOf(instruction)));
             tmpVars.put(instruction, result);
+        }
+        return result;
+    }
+
+    public LValue getTmpVar(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        LValue result = tmpVars.get(instruction);
+        if (result == null) {
+            throw new IllegalStateException("not created yet");
         }
         return result;
     }

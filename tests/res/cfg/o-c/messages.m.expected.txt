@@ -5,7 +5,7 @@ CFG: -[MyObject useSelf]
  - no source -
 #0002:	 assign: tmp2 = *tmp0
 messages.m:8 [self foo];
-#0003:	 call: tmp3(tmp2, *L_OBJC_SELECTOR_REFERENCES_) <exit>
+#0003:	 call: tmp3 = objc_msgSend(tmp2, *L_OBJC_SELECTOR_REFERENCES_) <exit>
 messages.m:8 [self foo];
 
 CFG: -[MyChild foo]
@@ -21,28 +21,28 @@ messages.m:17 [super foo];
 messages.m:17 [super foo];
 #0005:	 assign: *(tmp3.field1) = tmp4
 messages.m:17 [super foo];
-#0006:	 call: tmp5(tmp3, *L_OBJC_SELECTOR_REFERENCES_) <exit>
+#0006:	 call: tmp5 = objc_msgSendSuper2(tmp3, *L_OBJC_SELECTOR_REFERENCES_) <exit>
 messages.m:17 [super foo];
 
 CFG: testNew
 #0000:	 assign: tmp0 = *L_OBJC_CLASSLIST_REFERENCES_$_
 messages.m:24 OBJ = [MyObject new];
-#0001:	 call: tmp1 = tmp2(tmp0, *L_OBJC_SELECTOR_REFERENCES_4)
+#0001:	 call: tmp1 = objc_msgSend(tmp0, *L_OBJC_SELECTOR_REFERENCES_4)
 messages.m:24 OBJ = [MyObject new];
-#0002:	 assign: tmp3 = tmp1
+#0002:	 assign: tmp2 = tmp1
 messages.m:24 OBJ = [MyObject new];
-#0003:	 assign: *OBJ = tmp3 <exit>
+#0003:	 assign: *OBJ = tmp2 <exit>
 messages.m:24 OBJ = [MyObject new];
 
 CFG: testAllocInit
 #0000:	 assign: tmp0 = *L_OBJC_CLASSLIST_REFERENCES_$_
 messages.m:28 OBJ = [[MyObject alloc] init];
-#0001:	 call: tmp1 = tmp2(tmp0, *L_OBJC_SELECTOR_REFERENCES_6)
+#0001:	 call: tmp1 = objc_msgSend(tmp0, *L_OBJC_SELECTOR_REFERENCES_6)
 messages.m:28 OBJ = [[MyObject alloc] init];
-#0002:	 call: tmp3 = tmp2(tmp1, *L_OBJC_SELECTOR_REFERENCES_8)
+#0002:	 call: tmp2 = objc_msgSend(tmp1, *L_OBJC_SELECTOR_REFERENCES_8)
 messages.m:28 OBJ = [[MyObject alloc] init];
-#0003:	 assign: tmp4 = tmp3
+#0003:	 assign: tmp3 = tmp2
 messages.m:28 OBJ = [[MyObject alloc] init];
-#0004:	 assign: *OBJ = tmp4 <exit>
+#0004:	 assign: *OBJ = tmp3 <exit>
 messages.m:28 OBJ = [[MyObject alloc] init];
 
