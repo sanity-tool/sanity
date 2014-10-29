@@ -86,3 +86,15 @@ memory.cpp:26 delete[] PSTRUCT2;
 #0003:	 noop: opcode 'LLVMInvoke' not supported <exit>
 memory.cpp:25 delete PSTRUCT;
 
+CFG: <module init>
+#0000:	 assign: *P = null
+ - no source -
+#0001:	 assign: *P2 = null
+ - no source -
+#0002:	 assign: *P3 = null
+ - no source -
+#0003:	 assign: *PSTRUCT = null
+ - no source -
+#0004:	 assign: *PSTRUCT2 = null <exit>
+ - no source -
+

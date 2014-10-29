@@ -11,6 +11,10 @@ public class ConstCache {
         return new Const(value, type);
     }
 
+    public RValue get(String s, Type type) {
+        return new StringConst(s, type);
+    }
+
     public RValue getNull(Type type) {
         return new NullPtr(type);
     }
@@ -40,6 +44,24 @@ public class ConstCache {
         @Override
         public String toString() {
             return Long.toString(value);
+        }
+    }
+
+    public static class StringConst extends TypedValue {
+        private final String value;
+
+        public StringConst(String value, Type type) {
+            super(type);
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return '"' + value + '"';
         }
     }
 

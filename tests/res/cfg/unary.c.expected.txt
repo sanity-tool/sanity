@@ -6,3 +6,9 @@ CFG: deref
 #0000:	 assign: **I_P = *I <exit>
 unary.c:8 *I_P = I;
 
+CFG: <module init>
+#0000:	 assign: *I = 0
+ - no source -
+#0001:	 assign: *I_P = null <exit>
+ - no source -
+

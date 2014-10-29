@@ -2,8 +2,17 @@ package na.okutane.cpp;
 
 import na.okutane.CfgUtils;
 import na.okutane.api.Cfg;
+import na.okutane.api.cfg.Assignment;
 import na.okutane.api.cfg.Cfe;
 import na.okutane.api.cfg.CfgBuildingCtx;
+import na.okutane.api.cfg.ConstCache;
+import na.okutane.api.cfg.GetElementPointer;
+import na.okutane.api.cfg.GetFieldPointer;
+import na.okutane.api.cfg.Indirection;
+import na.okutane.api.cfg.LValue;
+import na.okutane.api.cfg.Primitive;
+import na.okutane.api.cfg.RValue;
+import na.okutane.api.cfg.Type;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueBasicBlock;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
@@ -33,7 +42,11 @@ public class Parser {
     @Autowired
     TypeParser typeParser;
     @Autowired
+    ValueParser valueParser;
+    @Autowired
     ParserListener[] listeners;
+    @Autowired
+    ConstCache constants;
 
     public List<Cfg> parse(String filename) throws ParseException {
         try {
@@ -69,7 +82,6 @@ public class Parser {
                             ArrayList<Cfg> result = new ArrayList<>();
 
                             SWIGTYPE_p_LLVMOpaqueValue function = bitreader.LLVMGetFirstFunction(m);
-
                             while (function != null) {
                                 try {
                                     if (bitreader.LLVMGetFirstBasicBlock(function) != null) {
@@ -95,10 +107,15 @@ public class Parser {
                                         result.add(new Cfg(bitreader.LLVMGetValueName(function), entry));
                                     }
                                 } catch (Exception e) {
-                                    System.err.println("Can't parse function");
+                                    System.err.println("Can't parse function: " + bitreader.LLVMGetValueName(function));
                                     e.printStackTrace(System.err);
                                 }
                                 function = bitreader.LLVMGetNextFunction(function);
+                            }
+
+                            Cfe entry = parseGlobalInitializers(m);
+                            if (entry != null) {
+                                result.add(new Cfg("<module init>", entry));
                             }
 
                             return result;
@@ -117,6 +134,67 @@ public class Parser {
         } catch (InterruptedException | IOException e) {
             throw new ParseException(e);
         }
+    }
+
+    protected Cfe parseGlobalInitializers(SWIGTYPE_p_LLVMOpaqueModule module) {
+        Cfe first = null;
+        Cfe last = null;
+
+        SWIGTYPE_p_LLVMOpaqueValue global = bitreader.LLVMGetFirstGlobal(module);
+        while (global != null) {
+            try {
+                SWIGTYPE_p_LLVMOpaqueValue initializer = bitreader.LLVMGetInitializer(global);
+                if (initializer != null) {
+                    Cfe cfe;
+                    LValue globalToInitialize = new Indirection(valueParser.parseLValue(null, global));
+                    if (bitreader.LLVMIsAConstantStruct(initializer) != null) {
+                        cfe = null;
+                        int n = bitreader.LLVMGetNumOperands(initializer);
+                        while (n-- > 0) {
+                            SWIGTYPE_p_LLVMOpaqueValue fieldInit = bitreader.LLVMGetOperand(initializer, n);
+                            RValue rValue = valueParser.parseRValue(null, fieldInit);
+
+                            Cfe fieldInitCfe = new Assignment(new Indirection(new GetFieldPointer(globalToInitialize, n)), rValue, null);
+                            fieldInitCfe.setNext(cfe);
+                            cfe = fieldInitCfe;
+                        }
+                    } else if (bitreader.LLVMIsAConstantArray(initializer) != null) {
+                        cfe = null;
+                        int n = bitreader.LLVMGetNumOperands(initializer);
+                        while (n-- > 0) {
+                            SWIGTYPE_p_LLVMOpaqueValue elementInit = bitreader.LLVMGetOperand(initializer, n);
+                            RValue rValue = valueParser.parseRValue(null, elementInit);
+
+                            Cfe fieldInitCfe = new Assignment(new Indirection(new GetElementPointer(globalToInitialize, constants.get(n, new Primitive()))), rValue, null);
+                            fieldInitCfe.setNext(cfe);
+                            cfe = fieldInitCfe;
+                        }
+                    } else if (bitreader.LLVMIsAConstantDataArray(initializer) != null) {
+                        Type type = typeParser.parse(bitreader.LLVMTypeOf(initializer));
+                        String s = bitreader.GetDataArrayString(initializer);
+                        if (s != null) {
+                            cfe = new Assignment(globalToInitialize, constants.get(s, type), null);
+                        } else {
+                            cfe = null;
+                        }
+                    } else {
+                        cfe = new Assignment(globalToInitialize, valueParser.parseRValue(null, initializer), null);
+                    }
+                    if (first == null) {
+                        first = last = cfe;
+                    } else if (cfe != null) {
+                        last.setNext(cfe);
+                        last = last.getNext();
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("Can't parse global: " + bitreader.LLVMGetValueName(global));
+                e.printStackTrace(System.err);
+            }
+            global = bitreader.LLVMGetNextGlobal(global);
+        }
+
+        return first;
     }
 
     private String[] getClangParameters(String filename, String objFile) {

@@ -2,3 +2,7 @@ CFG: switchToNext
 #0000:	 assign: *PLIST = *(*PLIST.next) <exit>
 list.c:6 PLIST = PLIST->next;
 
+CFG: <module init>
+#0000:	 assign: *PLIST = null <exit>
+ - no source -
+

@@ -1194,3 +1194,53 @@ binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0001:	 noop: opcode 'LLVMFCmp' not supported <exit>
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 
+CFG: <module init>
+#0000:	 assign: *C0 = 0
+ - no source -
+#0001:	 assign: *C1 = 0
+ - no source -
+#0002:	 assign: *CR = 0
+ - no source -
+#0003:	 assign: *UC0 = 0
+ - no source -
+#0004:	 assign: *UC1 = 0
+ - no source -
+#0005:	 assign: *UCR = 0
+ - no source -
+#0006:	 assign: *S0 = 0
+ - no source -
+#0007:	 assign: *S1 = 0
+ - no source -
+#0008:	 assign: *SR = 0
+ - no source -
+#0009:	 assign: *US0 = 0
+ - no source -
+#0010:	 assign: *US1 = 0
+ - no source -
+#0011:	 assign: *USR = 0
+ - no source -
+#0012:	 assign: *I0 = 0
+ - no source -
+#0013:	 assign: *I1 = 0
+ - no source -
+#0014:	 assign: *IR = 0
+ - no source -
+#0015:	 assign: *UI0 = 0
+ - no source -
+#0016:	 assign: *UI1 = 0
+ - no source -
+#0017:	 assign: *UIR = 0
+ - no source -
+#0018:	 assign: *L0 = 0
+ - no source -
+#0019:	 assign: *L1 = 0
+ - no source -
+#0020:	 assign: *LR = 0
+ - no source -
+#0021:	 assign: *UL0 = 0
+ - no source -
+#0022:	 assign: *UL1 = 0
+ - no source -
+#0023:	 assign: *ULR = 0 <exit>
+ - no source -
+

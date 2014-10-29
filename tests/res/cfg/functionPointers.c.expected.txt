@@ -8,3 +8,7 @@ CFG: callFromPointer
 #0000:	 call: *FPTR() <exit>
 functionPointers.c:11 FPTR();
 
+CFG: <module init>
+#0000:	 assign: *FPTR = null <exit>
+ - no source -
+

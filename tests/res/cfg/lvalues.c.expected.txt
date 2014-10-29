@@ -36,3 +36,11 @@ lvalues.c:41 (*PTR_STRUCT).field = 1;
 #0001:	 assign: *(*PTR_STRUCT.field) = 2 <exit>
 lvalues.c:42 PTR_STRUCT->field = 2;
 
+CFG: <module init>
+#0000:	 assign: *localStatic.a = 1
+ - no source -
+#0001:	 assign: *PTR = null
+ - no source -
+#0002:	 assign: *PTR_STRUCT = null <exit>
+ - no source -
+

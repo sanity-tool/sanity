@@ -31,6 +31,8 @@ LLVMValueRef getValue(LLVMValueRef *values, int i) {
     return values[i];
 }
 
+const char *GetDataArrayString(LLVMValueRef Val);
+
 %}
 
 %typemap(javacode) SWIGTYPE * %{
@@ -63,6 +65,7 @@ LLVMValueRef getValue(LLVMValueRef *values, int i);
 
 LLVMModuleRef parse(const char *path);
 const char *getMDString(LLVMValueRef valueRef);
+const char* GetDataArrayString(LLVMValueRef Val);
 
 %pragma(java) jniclasscode=%{
   static {

@@ -2446,4 +2446,8 @@ public class bitreader implements bitreaderConstants {
     return bitreaderJNI.getMDString(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(valueRef));
   }
 
+  public static String GetDataArrayString(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    return bitreaderJNI.GetDataArrayString(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+  }
+
 }

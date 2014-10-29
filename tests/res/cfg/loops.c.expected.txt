@@ -50,3 +50,7 @@ loops.c:22 for (I = 0; I < 5; I++) {
 #0006:	 assign: *I = tmp1
 loops.c:22 for (I = 0; I < 5; I++) {
 
+CFG: <module init>
+#0000:	 assign: *I = 0 <exit>
+ - no source -
+

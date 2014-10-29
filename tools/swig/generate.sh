@@ -22,10 +22,13 @@ LLVM_LIBS=/Users/jondoe/E/llvm-libs/Release/lib/*.a
 #LLVM_INCLUDE="-I/Users/jondoe/Downloads/llvm-3.5.0.src/include"
 #LLVM_LIBS=/Users/jondoe/Downloads/llvm-3.5.0.src/Release+Asserts/lib/*.a
 
+DEBUG=-g
+
 swig $LLVM_INCLUDE $STD_INCLUDES -java -outdir $OUTDIR -package na.okutane.cpp.llvm -v -debug-tmsearch -debug-tmused bitreader.i > swigout.txt
 swig -E $LLVM_INCLUDE $STD_INCLUDES -java bitreader.i > swigprep.txt
-gcc -c bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $STD_INCLUDES -ferror-limit=1
-gcc -shared bitreader_wrap.o $LLVM_LIBS /usr/lib/libc.dylib /usr/lib/libc++.dylib /usr/lib/libstdc++.dylib /usr/lib/libtermcap.dylib -o $DLL_NAME
+gcc -c bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $STD_INCLUDES -ferror-limit=1 $DEBUG
+g++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE -ferror-limit=1 -std=gnu++11 $DEBUG
+gcc -shared bitreader_wrap.o helpers.o $LLVM_LIBS /usr/lib/libc.dylib /usr/lib/libc++.dylib /usr/lib/libstdc++.dylib /usr/lib/libtermcap.dylib -o $DLL_NAME
 
 rm *.o
 #rm *.cxx

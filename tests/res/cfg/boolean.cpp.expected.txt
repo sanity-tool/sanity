@@ -4,3 +4,11 @@ boolean.cpp:4 BR = B0 && B1;
 #0001:	 noop: opcode 'LLVMTrunc' not supported <exit>
 boolean.cpp:4 BR = B0 && B1;
 
+CFG: <module init>
+#0000:	 assign: *_ZL2BR = 0
+ - no source -
+#0001:	 assign: *_ZL2B0 = 0
+ - no source -
+#0002:	 assign: *_ZL2B1 = 0 <exit>
+ - no source -
+

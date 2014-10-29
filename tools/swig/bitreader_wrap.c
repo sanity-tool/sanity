@@ -217,6 +217,8 @@ LLVMValueRef getValue(LLVMValueRef *values, int i) {
     return values[i];
 }
 
+const char *GetDataArrayString(LLVMValueRef Val);
+
 
 
 #include <stdlib.h>
@@ -10180,6 +10182,20 @@ SWIGEXPORT jstring JNICALL Java_na_okutane_cpp_llvm_bitreaderJNI_getMDString(JNI
   (void)jcls;
   arg1 = *(LLVMValueRef *)&jarg1; 
   result = (char *)getMDString(arg1);
+  if (result) jresult = (*jenv)->NewStringUTF(jenv, (const char *)result);
+  return jresult;
+}
+
+
+SWIGEXPORT jstring JNICALL Java_na_okutane_cpp_llvm_bitreaderJNI_GetDataArrayString(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  jstring jresult = 0 ;
+  LLVMValueRef arg1 = (LLVMValueRef) 0 ;
+  char *result = 0 ;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(LLVMValueRef *)&jarg1; 
+  result = (char *)GetDataArrayString(arg1);
   if (result) jresult = (*jenv)->NewStringUTF(jenv, (const char *)result);
   return jresult;
 }

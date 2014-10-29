@@ -639,6 +639,7 @@ public class bitreaderJNI {
   public final static native long getValue(long jarg1, int jarg2);
   public final static native long parse(String jarg1);
   public final static native String getMDString(long jarg1);
+  public final static native String GetDataArrayString(long jarg1);
 
   static {
      System.loadLibrary("irreader");

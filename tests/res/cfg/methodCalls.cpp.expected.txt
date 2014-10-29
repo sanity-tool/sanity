@@ -50,3 +50,13 @@ CFG: _ZN3FooC2Ev
 #0002:	 assign: *tmp1 = (_ZTV3Foo+2) <exit>
  - no source -
 
+CFG: <module init>
+#0000:	 assign: **_ZTV3Foo = null
+ - no source -
+#0001:	 assign: *_ZTS3Foo = "3Foo"
+ - no source -
+#0002:	 assign: *(*_ZTI3Foo.field0) = (_ZTVN10__cxxabiv117__class_type_infoE+2)
+ - no source -
+#0003:	 assign: *(*_ZTI3Foo.field1) = _ZTS3Foo <exit>
+ - no source -
+
