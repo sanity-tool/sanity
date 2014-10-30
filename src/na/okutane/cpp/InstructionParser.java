@@ -16,6 +16,7 @@ import na.okutane.api.cfg.Type;
 import na.okutane.api.cfg.UnprocessedElement;
 import na.okutane.cpp.llvm.LLVMIntPredicate;
 import na.okutane.cpp.llvm.LLVMOpcode;
+import na.okutane.cpp.llvm.LLVMRealPredicate;
 import na.okutane.cpp.llvm.LLVMTypeKind;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueType;
 import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
@@ -492,58 +493,58 @@ public class InstructionParser {
         }
     }
 
-//    @Component
-//    private static class FCmpParser extends AbstractParser {
-//        Map<LLVMRealPredicate, BinaryExpression.Operator> predicateOperatorMap = new HashMap<>();
-//
-//        public FCmpParser() {
-//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOLT, BinaryExpression.Operator.Lt);
-//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOLE, BinaryExpression.Operator.Le);
-//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOGT, BinaryExpression.Operator.Gt);
-//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOGE, BinaryExpression.Operator.Ge);
-//
-//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealULT, BinaryExpression.Operator.Lt);
-//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealULE, BinaryExpression.Operator.Le);
-//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealUGT, BinaryExpression.Operator.Gt);
-//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealUGE, BinaryExpression.Operator.Ge);
-//
-//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOEQ, BinaryExpression.Operator.Eq);
-//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealONE, BinaryExpression.Operator.Ne);
-//
-//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealUEQ, BinaryExpression.Operator.Eq);
-//            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealUNE, BinaryExpression.Operator.Ne);
-//        }
-//
-//        @Override
-//        public LLVMOpcode getOpcode() {
-//            return LLVMOpcode.LLVMFCmp;
-//        }
-//
-//        @Override
-//        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-//            LValue tmp = ctx.getTmpVar(instruction);
-//
-//            LLVMRealPredicate predicate;
-//            BinaryExpression.Operator operator = predicateOperatorMap.get(predicate);
-//
-//            if (operator == null) {
-//                throw new IllegalArgumentException(predicate.toString() + " not supported.");
-//            }
-//
-//            return new Assignment(
-//                    tmp,
-//                    new BinaryExpression(
-//                            valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
-//                            operator,
-//                            valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
-//                    ),
-//                    sourceRangeFactory.getSourceRange(instruction)
-//            );
-//        }
-//
-//        @Override
-//        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-//            return ctx.getTmpVar(instruction);
-//        }
-//    }
+    @Component
+    private static class FCmpParser extends AbstractParser {
+        Map<LLVMRealPredicate, BinaryExpression.Operator> predicateOperatorMap = new HashMap<>();
+
+        public FCmpParser() {
+            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOLT, BinaryExpression.Operator.Lt);
+            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOLE, BinaryExpression.Operator.Le);
+            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOGT, BinaryExpression.Operator.Gt);
+            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOGE, BinaryExpression.Operator.Ge);
+
+            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealULT, BinaryExpression.Operator.Lt);
+            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealULE, BinaryExpression.Operator.Le);
+            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealUGT, BinaryExpression.Operator.Gt);
+            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealUGE, BinaryExpression.Operator.Ge);
+
+            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOEQ, BinaryExpression.Operator.Eq);
+            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealONE, BinaryExpression.Operator.Ne);
+
+            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealUEQ, BinaryExpression.Operator.Eq);
+            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealUNE, BinaryExpression.Operator.Ne);
+        }
+
+        @Override
+        public LLVMOpcode getOpcode() {
+            return LLVMOpcode.LLVMFCmp;
+        }
+
+        @Override
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            LValue tmp = ctx.getOrCreateTmpVar(instruction);
+
+            LLVMRealPredicate predicate = bitreader.GetFCmpPredicate(instruction);
+            BinaryExpression.Operator operator = predicateOperatorMap.get(predicate);
+
+            if (operator == null) {
+                throw new IllegalArgumentException(predicate.toString() + " not supported.");
+            }
+
+            return new Assignment(
+                    tmp,
+                    new BinaryExpression(
+                            valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
+                            operator,
+                            valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
+                    ),
+                    sourceRangeFactory.getSourceRange(instruction)
+            );
+        }
+
+        @Override
+        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            return ctx.getTmpVar(instruction);
+        }
+    }
 }

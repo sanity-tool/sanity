@@ -183,7 +183,32 @@ public class TypeParser implements ParserListener {
         public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
             return new Primitive();
         }
+    }
 
+    @Component
+    private static class FloatParser implements TypeKindParser {
+        @Override
+        public LLVMTypeKind getTypeKind() {
+            return LLVMTypeKind.LLVMFloatTypeKind;
+        }
+
+        @Override
+        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
+            return new Primitive();
+        }
+    }
+
+    @Component
+    private static class DoubleParser implements TypeKindParser {
+        @Override
+        public LLVMTypeKind getTypeKind() {
+            return LLVMTypeKind.LLVMDoubleTypeKind;
+        }
+
+        @Override
+        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
+            return new Primitive();
+        }
     }
 
     @Component

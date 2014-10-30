@@ -32,6 +32,7 @@ LLVMValueRef getValue(LLVMValueRef *values, int i) {
 }
 
 const char *GetDataArrayString(LLVMValueRef Val);
+LLVMRealPredicate GetFCmpPredicate(LLVMValueRef Inst);
 
 %}
 
@@ -66,6 +67,7 @@ LLVMValueRef getValue(LLVMValueRef *values, int i);
 LLVMModuleRef parse(const char *path);
 const char *getMDString(LLVMValueRef valueRef);
 const char* GetDataArrayString(LLVMValueRef Val);
+LLVMRealPredicate GetFCmpPredicate(LLVMValueRef Inst);
 
 %pragma(java) jniclasscode=%{
   static {

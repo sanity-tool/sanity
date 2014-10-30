@@ -218,6 +218,7 @@ LLVMValueRef getValue(LLVMValueRef *values, int i) {
 }
 
 const char *GetDataArrayString(LLVMValueRef Val);
+LLVMRealPredicate GetFCmpPredicate(LLVMValueRef Inst);
 
 
 
@@ -10197,6 +10198,20 @@ SWIGEXPORT jstring JNICALL Java_na_okutane_cpp_llvm_bitreaderJNI_GetDataArrayStr
   arg1 = *(LLVMValueRef *)&jarg1; 
   result = (char *)GetDataArrayString(arg1);
   if (result) jresult = (*jenv)->NewStringUTF(jenv, (const char *)result);
+  return jresult;
+}
+
+
+SWIGEXPORT jint JNICALL Java_na_okutane_cpp_llvm_bitreaderJNI_GetFCmpPredicate(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  jint jresult = 0 ;
+  LLVMValueRef arg1 = (LLVMValueRef) 0 ;
+  LLVMRealPredicate result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(LLVMValueRef *)&jarg1; 
+  result = (LLVMRealPredicate)GetFCmpPredicate(arg1);
+  jresult = (jint)result; 
   return jresult;
 }
 
