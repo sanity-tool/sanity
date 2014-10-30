@@ -22,6 +22,6 @@ public class PointerType implements Type {
 
     @Override
     public String getFieldName(int index) {
-        return null;
+        throw new IllegalStateException("not struct");
     }
 }
