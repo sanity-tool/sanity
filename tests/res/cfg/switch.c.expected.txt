@@ -1,0 +1,44 @@
+CFG: testSwitchWithDefault
+#0000:	 switch: *I default #0001:	 1 -> #0002:	 2 -> #0003:	
+switch.c:4 switch (I) {
+#0001:	 call: tmp0 = fooDefault()
+switch.c:12 fooDefault();
+#0004:	 noop
+ - no source -
+#0005:	 call: tmp1 = fooAfter() <exit>
+switch.c:14 fooAfter();
+#0002:	 call: tmp2 = foo1()
+switch.c:6 foo1();
+#0003:	 call: tmp3 = foo2()
+switch.c:9 foo2();
+
+CFG: testSwitchNoDefault
+#0000:	 switch: *I default #0001:	 1 -> #0002:	 2 -> #0003:	
+switch.c:18 switch (I) {
+#0001:	 noop
+ - no source -
+#0004:	 call: tmp0 = fooAfter() <exit>
+switch.c:26 fooAfter();
+#0002:	 call: tmp1 = foo1()
+switch.c:20 foo1();
+#0003:	 call: tmp2 = foo2()
+switch.c:23 foo2();
+
+CFG: testSwitchFallthrough
+#0000:	 switch: *I default #0001:	 1 -> #0002:	 2 -> #0003:	
+switch.c:30 switch (I) {
+#0001:	 noop
+ - no source -
+#0004:	 call: tmp0 = fooAfter() <exit>
+switch.c:36 fooAfter();
+#0002:	 call: tmp1 = foo1()
+switch.c:32 foo1();
+#0003:	 noop
+ - no source -
+#0005:	 call: tmp2 = foo2()
+switch.c:34 foo2();
+
+CFG: <module init>
+#0000:	 assign: *I = 0 <exit>
+ - no source -
+

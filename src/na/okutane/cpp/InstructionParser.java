@@ -12,6 +12,7 @@ import na.okutane.api.cfg.IfCondition;
 import na.okutane.api.cfg.Indirection;
 import na.okutane.api.cfg.LValue;
 import na.okutane.api.cfg.RValue;
+import na.okutane.api.cfg.Switch;
 import na.okutane.api.cfg.Type;
 import na.okutane.api.cfg.UnprocessedElement;
 import na.okutane.cpp.llvm.LLVMIntPredicate;
@@ -26,6 +27,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -285,6 +287,30 @@ public class InstructionParser {
             Cfe thenElement = ctx.getLabel(bitreader.LLVMGetOperand(instruction, 2));
             Cfe elseElement = ctx.getLabel(bitreader.LLVMGetOperand(instruction, 1));
             return new IfCondition(condition, thenElement, elseElement, sourceRangeFactory.getSourceRange(instruction));
+        }
+    }
+
+    @Component
+    private static class SwitchParser extends AbstractParser {
+        @Override
+        public LLVMOpcode getOpcode() {
+            return LLVMOpcode.LLVMSwitch;
+        }
+
+        @Override
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            RValue controlValue = valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
+            Cfe defaultCase = ctx.getLabel(bitreader.LLVMGetOperand(instruction, 1));
+
+            Map<RValue, Cfe> cases = new LinkedHashMap<>();
+
+            int i = 2;
+            while (i + 1 < bitreader.LLVMGetNumOperands(instruction)) {
+                cases.put(valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)), ctx.getLabel(bitreader.LLVMGetOperand(instruction, i + 1)));
+                i = i + 2;
+            }
+
+            return new Switch(controlValue, defaultCase, cases, sourceRangeFactory.getSourceRange(instruction));
         }
     }
 

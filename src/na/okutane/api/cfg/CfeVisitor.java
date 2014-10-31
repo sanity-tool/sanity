@@ -12,5 +12,7 @@ public interface CfeVisitor {
 
     void visit(IfCondition ifCondition);
 
+    void visit(Switch switchElement);
+
     void visit(NoOp noOp);
 }

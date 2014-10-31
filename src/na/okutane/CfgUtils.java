@@ -3,6 +3,8 @@ package na.okutane;
 import na.okutane.api.cfg.Cfe;
 import na.okutane.api.cfg.IfCondition;
 import na.okutane.api.cfg.NoOp;
+import na.okutane.api.cfg.RValue;
+import na.okutane.api.cfg.Switch;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -30,6 +32,11 @@ public class CfgUtils {
             if (cfe instanceof IfCondition) {
                 collect(cfes, ((IfCondition) cfe).getThenElement());
                 collect(cfes, ((IfCondition) cfe).getElseElement());
+            } else if (cfe instanceof Switch) {
+                collect(cfes, ((Switch) cfe).getDefaultCase());
+                for (Cfe caseLabel : ((Switch) cfe).getCases().values()) {
+                    collect(cfes, caseLabel);
+                }
             } else if (cfe.getNext() != null) {
                 collect(cfes, cfe.getNext());
             }
@@ -47,6 +54,11 @@ public class CfgUtils {
                 if (cfe instanceof IfCondition) {
                     addUsage(usages, ((IfCondition) cfe).getThenElement());
                     addUsage(usages, ((IfCondition) cfe).getElseElement());
+                } else if (cfe instanceof Switch) {
+                    addUsage(usages, ((Switch) cfe).getDefaultCase());
+                    for (Cfe caseLabel : ((Switch) cfe).getCases().values()) {
+                        addUsage(usages, caseLabel);
+                    }
                 } else {
                     addUsage(usages, cfe.getNext());
                 }
@@ -64,6 +76,19 @@ public class CfgUtils {
                     if (isSingleUsedNoOp(usages, elseElement)) {
                         ifCondition.setElseElement(elseElement.getNext());
                         modified = true;
+                    }
+                } else if (cfe instanceof Switch) {
+                    Switch switchElement = (Switch) cfe;
+                    Cfe defaultElement = switchElement.getDefaultCase();
+                    if (isSingleUsedNoOp(usages, defaultElement)) {
+                        switchElement.setDefaultCase(defaultElement.getNext());
+                        modified = true;
+                    }
+                    for (Map.Entry<RValue, Cfe> caseDef : switchElement.getCases().entrySet()) {
+                        Cfe caseLabel = caseDef.getValue();
+                        if (isSingleUsedNoOp(usages, caseLabel)) {
+                            caseDef.setValue(caseLabel.getNext());
+                        }
                     }
                 } else {
                     if (isSingleUsedNoOp(usages, cfe.getNext())) {

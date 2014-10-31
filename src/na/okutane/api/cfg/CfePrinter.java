@@ -39,7 +39,7 @@ public class CfePrinter implements CfeVisitor {
 
         cfe.accept(this);
 
-        if (!(cfe instanceof IfCondition) && cfe.getNext() == null) {
+        if (!(cfe instanceof IfCondition || cfe instanceof Switch) && cfe.getNext() == null) {
             sb.append(" <exit>");
         }
 
@@ -124,6 +124,18 @@ public class CfePrinter implements CfeVisitor {
         sb.append("if: ");
         print(ifCondition.getCondition());
         sb.append(" then ").append(getId(ifCondition.getThenElement())).append(" else ").append(getId(ifCondition.getElseElement()));
+    }
+
+    @Override
+    public void visit(Switch switchElement) {
+        sb.append("switch: ");
+        print(switchElement.getControl());
+        sb.append(" default ").append(getId(switchElement.getDefaultCase()));
+        for (Map.Entry<RValue, Cfe> entry : switchElement.getCases().entrySet()) {
+            sb.append(' ');
+            print(entry.getKey());
+            sb.append(" -> ").append(getId(entry.getValue()));
+        }
     }
 
     private void print(RValue value) {
