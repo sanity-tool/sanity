@@ -1073,125 +1073,173 @@ binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 CFG: testFloat
 #0000:	 noop: opcode 'LLVMFAdd' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0001:	 noop: Can't parse LLVMFloatTypeKind
+#0001:	 noop: opcode 'LLVMFAdd' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0002:	 noop: opcode 'LLVMFSub' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0003:	 noop: Can't parse LLVMFloatTypeKind
+#0003:	 noop: opcode 'LLVMFSub' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0004:	 noop: opcode 'LLVMFMul' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0005:	 noop: Can't parse LLVMFloatTypeKind
+#0005:	 noop: opcode 'LLVMFMul' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0006:	 noop: opcode 'LLVMFDiv' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0007:	 noop: Can't parse LLVMFloatTypeKind <exit>
+#0007:	 noop: opcode 'LLVMFDiv' not supported <exit>
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 
 CFG: testFloatCmp
-#0000:	 noop: opcode 'LLVMFCmp' not supported
+#0000:	 assign: tmp0 = *F0 < *F1
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0001:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0002:	 noop: Can't parse LLVMFloatTypeKind
+#0002:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0003:	 noop: opcode 'LLVMFCmp' not supported
+#0003:	 assign: tmp1 = *F0 > *F1
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0004:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0005:	 noop: Can't parse LLVMFloatTypeKind
+#0005:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0006:	 noop: opcode 'LLVMFCmp' not supported
+#0006:	 assign: tmp2 = *F0 <= *F1
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0007:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0008:	 noop: Can't parse LLVMFloatTypeKind
+#0008:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0009:	 noop: opcode 'LLVMFCmp' not supported
+#0009:	 assign: tmp3 = *F0 >= *F1
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0010:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0011:	 noop: Can't parse LLVMFloatTypeKind
+#0011:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0012:	 noop: opcode 'LLVMFCmp' not supported
+#0012:	 assign: tmp4 = *F0 == *F1
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0013:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0014:	 noop: Can't parse LLVMFloatTypeKind
+#0014:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0015:	 noop: opcode 'LLVMFCmp' not supported
+#0015:	 assign: tmp5 = *F0 != *F1
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0016:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0017:	 noop: Can't parse LLVMFloatTypeKind <exit>
+#0017:	 noop: opcode 'LLVMSIToFP' not supported <exit>
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 
 CFG: testFloatLogical
-#0000:	 noop: opcode 'LLVMFCmp' not supported
+#0000:	 noop: bitreader::LLVMIsAConstantFP
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0001:	 noop: opcode 'LLVMFCmp' not supported <exit>
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
+#0002:	 noop: bitreader::LLVMIsAConstantFP
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
+#0003:	 noop
+ - no source -
+#0004:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0005:	 noop: opcode 'LLVMSIToFP' not supported
+ - no source -
+#0006:	 noop: opcode 'LLVMSIToFP' not supported
+ - no source -
+#0007:	 noop: bitreader::LLVMIsAConstantFP
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
+#0008:	 if: tmp1 then #0009:	 else #0010:	
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
+#0009:	 noop
+ - no source -
+#0011:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0012:	 noop: opcode 'LLVMSIToFP' not supported
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
+#0013:	 noop: opcode 'LLVMSIToFP' not supported <exit>
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
+#0010:	 noop: bitreader::LLVMIsAConstantFP
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 
 CFG: testDouble
 #0000:	 noop: opcode 'LLVMFAdd' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0001:	 noop: Can't parse LLVMDoubleTypeKind
+#0001:	 noop: opcode 'LLVMFAdd' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0002:	 noop: opcode 'LLVMFSub' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0003:	 noop: Can't parse LLVMDoubleTypeKind
+#0003:	 noop: opcode 'LLVMFSub' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0004:	 noop: opcode 'LLVMFMul' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0005:	 noop: Can't parse LLVMDoubleTypeKind
+#0005:	 noop: opcode 'LLVMFMul' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0006:	 noop: opcode 'LLVMFDiv' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0007:	 noop: Can't parse LLVMDoubleTypeKind <exit>
+#0007:	 noop: opcode 'LLVMFDiv' not supported <exit>
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 
 CFG: testDoubleCmp
-#0000:	 noop: opcode 'LLVMFCmp' not supported
+#0000:	 assign: tmp0 = *D0 < *D1
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0001:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0002:	 noop: Can't parse LLVMDoubleTypeKind
+#0002:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0003:	 noop: opcode 'LLVMFCmp' not supported
+#0003:	 assign: tmp1 = *D0 > *D1
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0004:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0005:	 noop: Can't parse LLVMDoubleTypeKind
+#0005:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0006:	 noop: opcode 'LLVMFCmp' not supported
+#0006:	 assign: tmp2 = *D0 <= *D1
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0007:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0008:	 noop: Can't parse LLVMDoubleTypeKind
+#0008:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0009:	 noop: opcode 'LLVMFCmp' not supported
+#0009:	 assign: tmp3 = *D0 >= *D1
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0010:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0011:	 noop: Can't parse LLVMDoubleTypeKind
+#0011:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0012:	 noop: opcode 'LLVMFCmp' not supported
+#0012:	 assign: tmp4 = *D0 == *D1
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0013:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0014:	 noop: Can't parse LLVMDoubleTypeKind
+#0014:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0015:	 noop: opcode 'LLVMFCmp' not supported
+#0015:	 assign: tmp5 = *D0 != *D1
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0016:	 noop: opcode 'LLVMSIToFP' not supported
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0017:	 noop: Can't parse LLVMDoubleTypeKind <exit>
+#0017:	 noop: opcode 'LLVMSIToFP' not supported <exit>
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 
 CFG: testDoubleLogical
-#0000:	 noop: opcode 'LLVMFCmp' not supported
+#0000:	 noop: bitreader::LLVMIsAConstantFP
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0001:	 noop: opcode 'LLVMFCmp' not supported <exit>
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
+#0002:	 noop: bitreader::LLVMIsAConstantFP
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
+#0003:	 noop
+ - no source -
+#0004:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0005:	 noop: opcode 'LLVMSIToFP' not supported
+ - no source -
+#0006:	 noop: opcode 'LLVMSIToFP' not supported
+ - no source -
+#0007:	 noop: bitreader::LLVMIsAConstantFP
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
+#0008:	 if: tmp1 then #0009:	 else #0010:	
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
+#0009:	 noop
+ - no source -
+#0011:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0012:	 noop: opcode 'LLVMSIToFP' not supported
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
+#0013:	 noop: opcode 'LLVMSIToFP' not supported <exit>
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
+#0010:	 noop: bitreader::LLVMIsAConstantFP
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 
 CFG: <module init>
