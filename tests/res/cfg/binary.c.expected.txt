@@ -1071,21 +1071,21 @@ binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 
 CFG: testFloat
-#0000:	 noop: opcode 'LLVMFAdd' not supported
+#0000:	 assign: tmp0 = *F0 + *F1
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0001:	 noop: opcode 'LLVMFAdd' not supported
+#0001:	 assign: *FR = tmp0
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0002:	 noop: opcode 'LLVMFSub' not supported
+#0002:	 assign: tmp1 = *F0 - *F1
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0003:	 noop: opcode 'LLVMFSub' not supported
+#0003:	 assign: *FR = tmp1
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0004:	 noop: opcode 'LLVMFMul' not supported
+#0004:	 assign: tmp2 = *F0 * *F1
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0005:	 noop: opcode 'LLVMFMul' not supported
+#0005:	 assign: *FR = tmp2
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0006:	 noop: opcode 'LLVMFDiv' not supported
+#0006:	 assign: tmp3 = *F0 / *F1
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0007:	 noop: opcode 'LLVMFDiv' not supported <exit>
+#0007:	 assign: *FR = tmp3 <exit>
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 
 CFG: testFloatCmp
@@ -1157,21 +1157,21 @@ binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 
 CFG: testDouble
-#0000:	 noop: opcode 'LLVMFAdd' not supported
+#0000:	 assign: tmp0 = *D0 + *D1
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0001:	 noop: opcode 'LLVMFAdd' not supported
+#0001:	 assign: *DR = tmp0
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0002:	 noop: opcode 'LLVMFSub' not supported
+#0002:	 assign: tmp1 = *D0 - *D1
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0003:	 noop: opcode 'LLVMFSub' not supported
+#0003:	 assign: *DR = tmp1
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0004:	 noop: opcode 'LLVMFMul' not supported
+#0004:	 assign: tmp2 = *D0 * *D1
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0005:	 noop: opcode 'LLVMFMul' not supported
+#0005:	 assign: *DR = tmp2
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0006:	 noop: opcode 'LLVMFDiv' not supported
+#0006:	 assign: tmp3 = *D0 / *D1
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0007:	 noop: opcode 'LLVMFDiv' not supported <exit>
+#0007:	 assign: *DR = tmp3 <exit>
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 
 CFG: testDoubleCmp

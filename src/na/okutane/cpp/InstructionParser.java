@@ -26,10 +26,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
@@ -43,8 +45,8 @@ public class InstructionParser {
 
     private OpcodeParser defaultParser = new AbstractParser() {
         @Override
-        public LLVMOpcode getOpcode() {
-            return null;
+        public Set<LLVMOpcode> getOpcodes() {
+            return Collections.emptySet();
         }
     };
 
@@ -53,7 +55,9 @@ public class InstructionParser {
         this.parsers = new HashMap<>();
 
         for (OpcodeParser parser : parsers) {
-            this.parsers.put(parser.getOpcode(), parser);
+            for (LLVMOpcode opcode : parser.getOpcodes()) {
+                this.parsers.put(opcode, parser);
+            }
         }
     }
 
@@ -77,7 +81,7 @@ public class InstructionParser {
     }
 
     private static interface OpcodeParser {
-        LLVMOpcode getOpcode();
+        Set<LLVMOpcode> getOpcodes();
 
         Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction);
 
@@ -92,6 +96,15 @@ public class InstructionParser {
 
         @Autowired
         ValueParser valueParser;
+
+        @Override
+        public Set<LLVMOpcode> getOpcodes() {
+            return Collections.singleton(getOpcode());
+        }
+
+        public LLVMOpcode getOpcode() {
+            return null;
+        }
 
         @Override
         public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
@@ -314,18 +327,27 @@ public class InstructionParser {
         }
     }
 
+    @Component
     private static class BinaryOperationParser extends AbstractParser {
-        private final LLVMOpcode opcode;
-        private final BinaryExpression.Operator operator;
+        private final Map<LLVMOpcode, BinaryExpression.Operator> opcodeOperatorMap;
 
+        public BinaryOperationParser() {
+            opcodeOperatorMap = new HashMap<>();
+            opcodeOperatorMap.put(LLVMOpcode.LLVMFAdd, BinaryExpression.Operator.Add);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMFSub, BinaryExpression.Operator.Sub);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMFMul, BinaryExpression.Operator.Mul);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMFDiv, BinaryExpression.Operator.Div);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMFRem, BinaryExpression.Operator.Rem);
+        }
+
+        @Deprecated
         public BinaryOperationParser(LLVMOpcode opcode, BinaryExpression.Operator operator) {
-            this.opcode = opcode;
-            this.operator = operator;
+            opcodeOperatorMap = Collections.singletonMap(opcode, operator);
         }
 
         @Override
-        public LLVMOpcode getOpcode() {
-            return opcode;
+        public Set<LLVMOpcode> getOpcodes() {
+            return opcodeOperatorMap.keySet();
         }
 
         @Override
@@ -335,7 +357,7 @@ public class InstructionParser {
                     tmp,
                     new BinaryExpression(
                             valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
-                            operator,
+                            opcodeOperatorMap.get(bitreader.LLVMGetInstructionOpcode(instruction)),
                             valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
                     ),
                     sourceRangeFactory.getSourceRange(instruction)
