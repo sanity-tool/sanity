@@ -11,6 +11,10 @@ public class ConstCache {
         return new Const(value, type);
     }
 
+    public RValue get(double value, Type type) {
+        return new RealConst(value, type);
+    }
+
     public RValue get(String s, Type type) {
         return new StringConst(s, type);
     }
@@ -44,6 +48,24 @@ public class ConstCache {
         @Override
         public String toString() {
             return Long.toString(value);
+        }
+    }
+
+    public static class RealConst extends TypedValue {
+        private final double value;
+
+        public RealConst(double value, Type type) {
+            super(type);
+            this.value = value;
+        }
+
+        public double getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return Double.toString(value);
         }
     }
 

@@ -219,6 +219,7 @@ LLVMValueRef getValue(LLVMValueRef *values, int i) {
 
 const char *GetDataArrayString(LLVMValueRef Val);
 LLVMRealPredicate GetFCmpPredicate(LLVMValueRef Inst);
+double GetConstantFPDoubleValue(LLVMValueRef ConstantVal);
 
 
 
@@ -10212,6 +10213,20 @@ SWIGEXPORT jint JNICALL Java_na_okutane_cpp_llvm_bitreaderJNI_GetFCmpPredicate(J
   arg1 = *(LLVMValueRef *)&jarg1; 
   result = (LLVMRealPredicate)GetFCmpPredicate(arg1);
   jresult = (jint)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT jdouble JNICALL Java_na_okutane_cpp_llvm_bitreaderJNI_GetConstantFPDoubleValue(JNIEnv *jenv, jclass jcls, jlong jarg1) {
+  jdouble jresult = 0 ;
+  LLVMValueRef arg1 = (LLVMValueRef) 0 ;
+  double result;
+  
+  (void)jenv;
+  (void)jcls;
+  arg1 = *(LLVMValueRef *)&jarg1; 
+  result = (double)GetConstantFPDoubleValue(arg1);
+  jresult = (jdouble)result; 
   return jresult;
 }
 

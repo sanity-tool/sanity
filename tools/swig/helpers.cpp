@@ -47,4 +47,8 @@ LLVMRealPredicate GetFCmpPredicate(LLVMValueRef Inst) {
   return (LLVMRealPredicate)0;
 }
 
+double GetConstantFPDoubleValue(LLVMValueRef ConstantVal) {
+  return unwrap<ConstantFP>(ConstantVal)->getValueAPF().convertToDouble();
+}
+
 }

@@ -641,6 +641,7 @@ public class bitreaderJNI {
   public final static native String getMDString(long jarg1);
   public final static native String GetDataArrayString(long jarg1);
   public final static native int GetFCmpPredicate(long jarg1);
+  public final static native double GetConstantFPDoubleValue(long jarg1);
 
   static {
      System.loadLibrary("irreader");

@@ -49,6 +49,9 @@ public class ValueParser {
         if (bitreader.LLVMIsAConstantInt(value) != null) {
             return constants.get(bitreader.LLVMConstIntGetSExtValue(value), typeParser.parse(bitreader.LLVMTypeOf(value)));
         }
+        if (bitreader.LLVMIsAConstantFP(value) != null) {
+            return constants.get(bitreader.GetConstantFPDoubleValue(value), typeParser.parse(bitreader.LLVMTypeOf(value)));
+        }
         if (bitreader.LLVMIsAConstantPointerNull(value) != null) {
             return constants.getNull(typeParser.parse(bitreader.LLVMTypeOf(value)));
         }
@@ -57,8 +60,6 @@ public class ValueParser {
         check(value, bitreader::LLVMIsAConstantArray, "bitreader::LLVMIsAConstantArray");
         check(value, bitreader::LLVMIsAConstantDataArray, "bitreader::LLVMIsAConstantDataArray");
         check(value, bitreader::LLVMIsAConstantDataSequential, "bitreader::LLVMIsAConstantDataSequential");
-        check(value, bitreader::LLVMIsAConstantExpr, "bitreader::LLVMIsAConstantExpr");
-        check(value, bitreader::LLVMIsAConstantFP, "bitreader::LLVMIsAConstantFP");
         check(value, bitreader::LLVMIsAConstantDataVector, "bitreader::LLVMIsAConstantDataVector");
         if (bitreader.LLVMIsAFunction(value) != null) {
             return constants.getFunction(bitreader.LLVMGetValueName(value), typeParser.parse(bitreader.LLVMTypeOf(value)));

@@ -1127,11 +1127,11 @@ binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 
 CFG: testFloatLogical
-#0000:	 noop: bitreader::LLVMIsAConstantFP
+#0000:	 assign: tmp0 = *F0 != 0.0
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0001:	 if: tmp0 then #0002:	 else #0003:	
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0002:	 noop: bitreader::LLVMIsAConstantFP
+#0002:	 assign: tmp1 = *F1 != 0.0
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0003:	 noop
  - no source -
@@ -1141,9 +1141,9 @@ binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
  - no source -
 #0006:	 noop: opcode 'LLVMSIToFP' not supported
  - no source -
-#0007:	 noop: bitreader::LLVMIsAConstantFP
+#0007:	 assign: tmp2 = *F0 != 0.0
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0008:	 if: tmp1 then #0009:	 else #0010:	
+#0008:	 if: tmp2 then #0009:	 else #0010:	
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0009:	 noop
  - no source -
@@ -1153,7 +1153,7 @@ binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0013:	 noop: opcode 'LLVMSIToFP' not supported <exit>
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0010:	 noop: bitreader::LLVMIsAConstantFP next: #0009:	
+#0010:	 assign: tmp3 = *F1 != 0.0 next: #0009:	
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 
 CFG: testDouble
@@ -1213,11 +1213,11 @@ binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 
 CFG: testDoubleLogical
-#0000:	 noop: bitreader::LLVMIsAConstantFP
+#0000:	 assign: tmp0 = *D0 != 0.0
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0001:	 if: tmp0 then #0002:	 else #0003:	
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0002:	 noop: bitreader::LLVMIsAConstantFP
+#0002:	 assign: tmp1 = *D1 != 0.0
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0003:	 noop
  - no source -
@@ -1227,9 +1227,9 @@ binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
  - no source -
 #0006:	 noop: opcode 'LLVMSIToFP' not supported
  - no source -
-#0007:	 noop: bitreader::LLVMIsAConstantFP
+#0007:	 assign: tmp2 = *D0 != 0.0
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0008:	 if: tmp1 then #0009:	 else #0010:	
+#0008:	 if: tmp2 then #0009:	 else #0010:	
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0009:	 noop
  - no source -
@@ -1239,7 +1239,7 @@ binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0013:	 noop: opcode 'LLVMSIToFP' not supported <exit>
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0010:	 noop: bitreader::LLVMIsAConstantFP next: #0009:	
+#0010:	 assign: tmp3 = *D1 != 0.0 next: #0009:	
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 
 CFG: <module init>
@@ -1289,6 +1289,18 @@ CFG: <module init>
  - no source -
 #0022:	 assign: *UL1 = 0
  - no source -
-#0023:	 assign: *ULR = 0 <exit>
+#0023:	 assign: *ULR = 0
+ - no source -
+#0024:	 assign: *F0 = 0.0
+ - no source -
+#0025:	 assign: *F1 = 0.0
+ - no source -
+#0026:	 assign: *FR = 0.0
+ - no source -
+#0027:	 assign: *D0 = 0.0
+ - no source -
+#0028:	 assign: *D1 = 0.0
+ - no source -
+#0029:	 assign: *DR = 0.0 <exit>
  - no source -
 

@@ -2454,4 +2454,8 @@ public class bitreader implements bitreaderConstants {
     return LLVMRealPredicate.swigToEnum(bitreaderJNI.GetFCmpPredicate(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Inst)));
   }
 
+  public static double GetConstantFPDoubleValue(SWIGTYPE_p_LLVMOpaqueValue ConstantVal) {
+    return bitreaderJNI.GetConstantFPDoubleValue(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal));
+  }
+
 }
