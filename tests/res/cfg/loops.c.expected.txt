@@ -11,7 +11,7 @@ loops.c:7 while(I < 5) {
 loops.c:8 foo();
 #0005:	 assign: tmp1 = *I + 1
 loops.c:9 I++;
-#0006:	 assign: *I = tmp1
+#0006:	 assign: *I = tmp1 next: #0001:	
 loops.c:9 I++;
 
 CFG: testDoWhile
@@ -47,7 +47,7 @@ loops.c:22 for (I = 0; I < 5; I++) {
 loops.c:23 foo();
 #0005:	 assign: tmp1 = *I + 1
 loops.c:22 for (I = 0; I < 5; I++) {
-#0006:	 assign: *I = tmp1
+#0006:	 assign: *I = tmp1 next: #0001:	
 loops.c:22 for (I = 0; I < 5; I++) {
 
 CFG: <module init>

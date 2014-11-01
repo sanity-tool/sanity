@@ -197,7 +197,7 @@ binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0013:	 noop: opcode 'LLVMSExt' not supported
 binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
-#0017:	 noop: opcode 'LLVMSExt' not supported
+#0017:	 noop: opcode 'LLVMSExt' not supported next: #0012:	
 binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 
 CFG: testUChar
@@ -327,7 +327,7 @@ binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0013:	 noop: opcode 'LLVMTrunc' not supported <exit>
 binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
-#0010:	 assign: tmp3 = *UC1 != 0
+#0010:	 assign: tmp3 = *UC1 != 0 next: #0009:	
 binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 
 CFG: testShort
@@ -529,7 +529,7 @@ binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0013:	 noop: opcode 'LLVMSExt' not supported
 binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
-#0017:	 noop: opcode 'LLVMSExt' not supported
+#0017:	 noop: opcode 'LLVMSExt' not supported next: #0012:	
 binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 
 CFG: testUShort
@@ -659,7 +659,7 @@ binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0013:	 noop: opcode 'LLVMTrunc' not supported <exit>
 binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
-#0010:	 assign: tmp3 = *US1 != 0
+#0010:	 assign: tmp3 = *US1 != 0 next: #0009:	
 binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 
 CFG: testInt
@@ -753,7 +753,7 @@ binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
  - no source -
 #0011:	 noop: opcode 'LLVMPHI' not supported <exit>
 binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
-#0009:	 assign: tmp3 = *I1 != 0
+#0009:	 assign: tmp3 = *I1 != 0 next: #0008:	
 binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 
 CFG: testUInt
@@ -847,7 +847,7 @@ binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
  - no source -
 #0011:	 noop: opcode 'LLVMPHI' not supported <exit>
 binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
-#0009:	 assign: tmp3 = *UI1 != 0
+#0009:	 assign: tmp3 = *UI1 != 0 next: #0008:	
 binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 
 CFG: testLong
@@ -957,7 +957,7 @@ binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0013:	 noop: opcode 'LLVMSExt' not supported <exit>
 binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
-#0010:	 assign: tmp3 = *L1 != 0
+#0010:	 assign: tmp3 = *L1 != 0 next: #0009:	
 binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 
 CFG: testULong
@@ -1067,7 +1067,7 @@ binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0013:	 noop: opcode 'LLVMSExt' not supported <exit>
 binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
-#0010:	 assign: tmp3 = *UL1 != 0
+#0010:	 assign: tmp3 = *UL1 != 0 next: #0009:	
 binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 
 CFG: testFloat
@@ -1153,7 +1153,7 @@ binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0013:	 noop: opcode 'LLVMSIToFP' not supported <exit>
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0010:	 noop: bitreader::LLVMIsAConstantFP
+#0010:	 noop: bitreader::LLVMIsAConstantFP next: #0009:	
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 
 CFG: testDouble
@@ -1239,7 +1239,7 @@ binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0013:	 noop: opcode 'LLVMSIToFP' not supported <exit>
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0010:	 noop: bitreader::LLVMIsAConstantFP
+#0010:	 noop: bitreader::LLVMIsAConstantFP next: #0009:	
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 
 CFG: <module init>

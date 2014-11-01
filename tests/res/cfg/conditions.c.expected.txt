@@ -17,7 +17,7 @@ conditions.c:13 if (I) {
 conditions.c:14 foo();
 #0004:	 noop <exit>
  - no source -
-#0003:	 call: bar()
+#0003:	 call: bar() next: #0004:	
 conditions.c:16 bar();
 
 CFG: testExplicitIf

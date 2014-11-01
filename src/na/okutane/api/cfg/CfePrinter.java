@@ -4,6 +4,7 @@ import na.okutane.CfgUtils;
 import na.okutane.api.Cfg;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ public class CfePrinter implements CfeVisitor {
     final StringBuilder sb = new StringBuilder();
     final Map<RValue, Integer> tmpVars = new HashMap<>();
     final Map<Cfe, Integer> cfeIds = new HashMap<>();
+    final Set<Cfe> printed = new HashSet<>();
 
     private CfePrinter() {
 
@@ -36,11 +38,17 @@ public class CfePrinter implements CfeVisitor {
 
     private CfePrinter print0(Cfe cfe) {
         sb.append(getId(cfe)).append(' ');
+        printed.add(cfe);
 
         cfe.accept(this);
 
-        if (!(cfe instanceof IfCondition || cfe instanceof Switch) && cfe.getNext() == null) {
-            sb.append(" <exit>");
+        if (!(cfe instanceof IfCondition || cfe instanceof Switch)) {
+            if (cfe.getNext() == null) {
+                sb.append(" <exit>");
+            }
+            if (printed.contains(cfe.getNext())) {
+                sb.append(" next: ").append(getId(cfe.getNext()));
+            }
         }
 
         SourceRange sourceRange = cfe.getSourceRange();

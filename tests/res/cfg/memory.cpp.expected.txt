@@ -35,11 +35,11 @@ memory.cpp:11 delete[] P2;
  - no source -
 #0007:	 assign: tmp2 = *P2
 memory.cpp:11 delete[] P2;
-#0008:	 call: _ZdaPv(tmp2)
+#0008:	 call: _ZdaPv(tmp2) next: #0006:	
 memory.cpp:11 delete[] P2;
 #0003:	 assign: tmp3 = *P
 memory.cpp:10 delete P;
-#0009:	 call: _ZdlPv(tmp3)
+#0009:	 call: _ZdlPv(tmp3) next: #0002:	
 memory.cpp:10 delete P;
 
 CFG: _ZL13testNewStructv
@@ -77,7 +77,7 @@ memory.cpp:26 delete[] PSTRUCT2;
 memory.cpp:26 delete[] PSTRUCT2;
 #0009:	 if: tmp4 then #0010:	 else #0011:	
 memory.cpp:26 delete[] PSTRUCT2;
-#0010:	 call: _ZdaPv((tmp2+-8))
+#0010:	 call: _ZdaPv((tmp2+-8)) next: #0005:	
 memory.cpp:26 delete[] PSTRUCT2;
 #0011:	 noop: opcode 'LLVMPHI' not supported
 memory.cpp:26 delete[] PSTRUCT2;
