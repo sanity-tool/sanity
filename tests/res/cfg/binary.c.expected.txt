@@ -1242,6 +1242,92 @@ binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0010:	 assign: tmp3 = *D1 != 0.0 next: #0009:	
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 
+CFG: testLongDouble
+#0000:	 assign: tmp0 = *LD0 + *LD1
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0001:	 assign: *LDR = tmp0
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0002:	 assign: tmp1 = *LD0 - *LD1
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0003:	 assign: *LDR = tmp1
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0004:	 assign: tmp2 = *LD0 * *LD1
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0005:	 assign: *LDR = tmp2
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0006:	 assign: tmp3 = *LD0 / *LD1
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0007:	 assign: *LDR = tmp3 <exit>
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+
+CFG: testLongDoubleCmp
+#0000:	 assign: tmp0 = *LD0 < *LD1
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0001:	 noop: opcode 'LLVMSIToFP' not supported
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0002:	 noop: opcode 'LLVMSIToFP' not supported
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0003:	 assign: tmp1 = *LD0 > *LD1
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0004:	 noop: opcode 'LLVMSIToFP' not supported
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0005:	 noop: opcode 'LLVMSIToFP' not supported
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0006:	 assign: tmp2 = *LD0 <= *LD1
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0007:	 noop: opcode 'LLVMSIToFP' not supported
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0008:	 noop: opcode 'LLVMSIToFP' not supported
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0009:	 assign: tmp3 = *LD0 >= *LD1
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0010:	 noop: opcode 'LLVMSIToFP' not supported
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0011:	 noop: opcode 'LLVMSIToFP' not supported
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0012:	 assign: tmp4 = *LD0 == *LD1
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0013:	 noop: opcode 'LLVMSIToFP' not supported
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0014:	 noop: opcode 'LLVMSIToFP' not supported
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0015:	 assign: tmp5 = *LD0 != *LD1
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0016:	 noop: opcode 'LLVMSIToFP' not supported
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0017:	 noop: opcode 'LLVMSIToFP' not supported <exit>
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+
+CFG: testLongDoubleLogical
+#0000:	 assign: tmp0 = *LD0 != 0.0
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0002:	 assign: tmp1 = *LD1 != 0.0
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0003:	 noop
+ - no source -
+#0004:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0005:	 noop: opcode 'LLVMSIToFP' not supported
+ - no source -
+#0006:	 noop: opcode 'LLVMSIToFP' not supported
+ - no source -
+#0007:	 assign: tmp2 = *LD0 != 0.0
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0008:	 if: tmp2 then #0009:	 else #0010:	
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0009:	 noop
+ - no source -
+#0011:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0012:	 noop: opcode 'LLVMSIToFP' not supported
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0013:	 noop: opcode 'LLVMSIToFP' not supported <exit>
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0010:	 assign: tmp3 = *LD1 != 0.0 next: #0009:	
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+
 CFG: <module init>
 #0000:	 assign: *C0 = 0
  - no source -
@@ -1301,6 +1387,12 @@ CFG: <module init>
  - no source -
 #0028:	 assign: *D1 = 0.0
  - no source -
-#0029:	 assign: *DR = 0.0 <exit>
+#0029:	 assign: *DR = 0.0
+ - no source -
+#0030:	 assign: *LD0 = 0.0
+ - no source -
+#0031:	 assign: *LD1 = 0.0
+ - no source -
+#0032:	 assign: *LDR = 0.0 <exit>
  - no source -
 

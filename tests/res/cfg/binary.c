@@ -65,3 +65,4 @@ static void test##ID##Logical() { \
 
 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 MAKE_ALL_FLOAT_TESTS(double, Double, D)
+MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)

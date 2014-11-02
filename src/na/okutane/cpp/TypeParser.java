@@ -212,6 +212,19 @@ public class TypeParser implements ParserListener {
     }
 
     @Component
+    private static class FP80Parser implements TypeKindParser {
+        @Override
+        public LLVMTypeKind getTypeKind() {
+            return LLVMTypeKind.LLVMX86_FP80TypeKind;
+        }
+
+        @Override
+        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
+            return new Primitive();
+        }
+    }
+
+    @Component
     private static class VoidParser implements TypeKindParser {
         @Override
         public LLVMTypeKind getTypeKind() {
