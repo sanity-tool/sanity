@@ -26,7 +26,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,6 +34,8 @@ import java.util.List;
  */
 @Component
 public class Parser {
+    @Autowired
+    ClangParametersFactory parametersFactory;
     @Autowired
     CfgUtils cfgUtils;
     @Autowired
@@ -56,7 +57,7 @@ public class Parser {
 
             try (TempFileWrapper objFile = new TempFileWrapper("result", ".bc")) {
                 try (TempFileWrapper errFile = new TempFileWrapper("result", ".err")) {
-                    pb.command(getClangParameters(filename, objFile.getAbsolutePath()));
+                    pb.command(parametersFactory.getParameters(filename, objFile.getAbsolutePath()));
 
                     pb.inheritIO();
                     pb.redirectError(ProcessBuilder.Redirect.to(errFile.getFile()));
@@ -66,7 +67,6 @@ public class Parser {
                     int resultCode = process.waitFor();
 
                     if (resultCode == 0) {
-
                         SWIGTYPE_p_LLVMOpaqueModule m = bitreader.parse(objFile.getAbsolutePath());
 
                         if (m == null) {
@@ -195,20 +195,6 @@ public class Parser {
         }
 
         return first;
-    }
-
-    private String[] getClangParameters(String filename, String objFile) {
-        List<String> parameters = new ArrayList<>();
-
-        if (filename.endsWith(".c")) {
-            parameters.add("clang");
-        } else {
-            parameters.add("clang++");
-        }
-
-        parameters.addAll(Arrays.asList(filename, "-c", "-emit-llvm", "-femit-all-decls", "-g", "-o", objFile));
-
-        return parameters.toArray(new String[parameters.size()]);
     }
 
     private Cfe processBlock(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock) {
