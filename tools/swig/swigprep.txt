@@ -2878,7 +2878,7 @@ double GetConstantFPDoubleValue(LLVMValueRef ConstantVal);
 
 
 
-%includefile "/Users/jondoe/E/llvm-libs/include/llvm/Support/DataTypes.h" %beginfile
+%includefile "/Users/jondoe/Downloads/llvm-3.5.0.src_hacked/include/llvm/Support/DataTypes.h" %beginfile
 /* include/llvm/Support/DataTypes.h.  Generated from DataTypes.h.in by configure.  */
 /*===-- include/Support/DataTypes.h - Define fixed size types -----*- C -*-===*\
 |*                                                                            *|
@@ -3010,7 +3010,7 @@ double GetConstantFPDoubleValue(LLVMValueRef ConstantVal);
 
 
 %endoffile
-%includefile "/Users/jondoe/Downloads/llvm-3.5.0.src/include/llvm-c/Support.h" %beginfile
+%includefile "/Users/jondoe/Downloads/llvm-3.5.0.src_hacked/include/llvm-c/Support.h" %beginfile
 /*===-- llvm-c/Support.h - Support C Interface --------------------*- C -*-===*\
 |*                                                                            *|
 |*                     The LLVM Compiler Infrastructure                       *|
@@ -3066,7 +3066,7 @@ LLVMBool LLVMLoadLibraryPermanently(const char* Filename);
 
 
 %endoffile
-%includefile "/Users/jondoe/Downloads/llvm-3.5.0.src/include/llvm-c/Core.h" %beginfile
+%includefile "/Users/jondoe/Downloads/llvm-3.5.0.src_hacked/include/llvm-c/Core.h" %beginfile
 /*===-- llvm-c/Core.h - Core Library C Interface ------------------*- C -*-===*\
 |*                                                                            *|
 |*                     The LLVM Compiler Infrastructure                       *|
@@ -5949,7 +5949,7 @@ LLVMBool LLVMIsMultithreaded(void);
 
 
 %endoffile
-%includefile "/Users/jondoe/Downloads/llvm-3.5.0.src/include/llvm-c/IRReader.h" %beginfile
+%includefile "/Users/jondoe/Downloads/llvm-3.5.0.src_hacked/include/llvm-c/IRReader.h" %beginfile
 /*===-- llvm-c/IRReader.h - IR Reader C Interface -----------------*- C -*-===*\
 |*                                                                            *|
 |*                     The LLVM Compiler Infrastructure                       *|

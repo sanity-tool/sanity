@@ -11,8 +11,8 @@ STD_INCLUDES="-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.plat
 DLL_NAME=libirreader.jnilib
 
 #use release build of llvm
-LLVM_INCLUDE="-I/Users/jondoe/E/llvm-libs/include -I/Users/jondoe/Downloads/llvm-3.5.0.src/include"
-LLVM_LIBS=/Users/jondoe/E/llvm-libs/Release/lib/*.a
+LLVM_INCLUDE="-I/Users/jondoe/Downloads/llvm-3.5.0.src_hacked/include"
+LLVM_LIBS=/Users/jondoe/Downloads/llvm-3.5.0.src_hacked/Release+Asserts/lib/*.a
 
 #use clang
 #LLVM_INCLUDE="-I/Users/jondoe/Downloads/llvm-3.5.0.src/include"

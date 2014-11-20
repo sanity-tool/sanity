@@ -1,4 +1,5 @@
 #include "llvm-c/Core.h"
+#include "llvm/ADT/APFloat.h"
 #include "llvm/Bitcode/ReaderWriter.h"
 #include "llvm/IR/Attributes.h"
 #include "llvm/IR/CallSite.h"
@@ -47,8 +48,25 @@ LLVMRealPredicate GetFCmpPredicate(LLVMValueRef Inst) {
   return (LLVMRealPredicate)0;
 }
 
+#define checkSemantics(kind) if (semantics == (const llvm::fltSemantics*)&llvm::APFloat::kind) \
+    fprintf(stderr, "semantics not supported: %s\n", #kind);
+
 double GetConstantFPDoubleValue(LLVMValueRef ConstantVal) {
-  return unwrap<ConstantFP>(ConstantVal)->getValueAPF().convertToDouble();
+  const APFloat &apf = unwrap<ConstantFP>(ConstantVal)->getValueAPF();
+  /*const llvm::fltSemantics *semantics = &apf.getSemantics();
+  if (semantics == (const llvm::fltSemantics*)&llvm::APFloat::IEEEdouble) {
+    return apf.convertToDouble();
+  }
+  if (semantics == (const llvm::fltSemantics*)&llvm::APFloat::IEEEsingle) {
+    return apf.convertToFloat();
+  }
+
+  checkSemantics(IEEEhalf);
+  checkSemantics(IEEEquad);
+  checkSemantics(PPCDoubleDouble);
+  checkSemantics(x87DoubleExtended);*/
+
+  return apf.bitcastToAPInt().bitsToDouble();
 }
 
 }
