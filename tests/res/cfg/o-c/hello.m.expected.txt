@@ -573,13 +573,13 @@ CFG: CGRectMake
  - no source -
 #0003:	 assign: *tmp3 = height
  - no source -
-#0004:	 noop: can't index (((na.okutane.api.cfg.TemporaryVar@50f6ac94+0).origin).x) by 0
+#0004:	 noop: can't index ((tmp0.origin).x) by 0
 CGGeometry.h:292 rect.origin.x = x; rect.origin.y = y;
-#0005:	 noop: can't index (((na.okutane.api.cfg.TemporaryVar@50f6ac94+0).origin).x) by 1
+#0005:	 noop: can't index ((tmp0.origin).x) by 1
 CGGeometry.h:292 rect.origin.x = x; rect.origin.y = y;
-#0006:	 noop: can't index (((na.okutane.api.cfg.TemporaryVar@50f6ac94+0).size).width) by 0
+#0006:	 noop: can't index ((tmp0.size).width) by 0
 CGGeometry.h:293 rect.size.width = width; rect.size.height = height;
-#0007:	 noop: can't index (((na.okutane.api.cfg.TemporaryVar@50f6ac94+0).size).width) by 1
+#0007:	 noop: can't index ((tmp0.size).width) by 1
 CGGeometry.h:293 rect.size.width = width; rect.size.height = height;
 #0008:	 assign: tmp4 = agg.result
 CGGeometry.h:294 return rect;

@@ -4,6 +4,7 @@ import na.okutane.api.cfg.Assignment;
 import na.okutane.api.cfg.BinaryExpression;
 import na.okutane.api.cfg.Call;
 import na.okutane.api.cfg.Cfe;
+import na.okutane.api.cfg.CfePrinter;
 import na.okutane.api.cfg.CfgBuildingCtx;
 import na.okutane.api.cfg.ConstCache;
 import na.okutane.api.cfg.GetElementPointer;
@@ -236,7 +237,7 @@ public class InstructionParser {
                     return new GetFieldPointer(basePointer, intIndex);
                 }
             }
-            throw new IllegalStateException("can't index " + basePointer + " by " + index);
+            throw new IllegalStateException("can't index " + CfePrinter.printValue(basePointer) + " by " + index);
         }
     }
 

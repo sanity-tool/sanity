@@ -80,6 +80,14 @@ public class CfePrinter implements CfeVisitor {
         return printer.toString();
     }
 
+    public static String printValue(RValue value) {
+        CfePrinter printer = new CfePrinter();
+
+        printer.print(value);
+
+        return printer.toString();
+    }
+
     @Override
     public void visit(UnprocessedElement element) {
         sb.append("noop: ").append(element.getMessage());
