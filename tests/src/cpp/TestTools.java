@@ -20,7 +20,16 @@ public class TestTools {
         return (filename, objFile) -> {
             List<String> parameters = new ArrayList<>();
 
-            if (filename.endsWith(".ll")) {
+            if (filename.endsWith(".swift")) {
+                parameters.add("swiftc");
+
+                parameters.add("-emit-bc");
+                parameters.add("-g");
+                parameters.add("-o");
+                parameters.add(objFile);
+
+                parameters.add(filename);
+            } else if (filename.endsWith(".ll")) {
                 parameters.add(llvmAssembler);
 
                 parameters.add("-o=" + objFile);

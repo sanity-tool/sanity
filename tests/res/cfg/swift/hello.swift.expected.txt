@@ -1,0 +1,44 @@
+CFG: top_level_code
+#0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 13, -1)
+ - no source -
+#0001:	 noop: opcode 'LLVMExtractValue' not supported
+ - no source -
+#0002:	 noop: opcode 'LLVMExtractValue' not supported
+ - no source -
+#0003:	 noop: opcode 'LLVMExtractValue' not supported
+ - no source -
+#0004:	 noop: can't index (((tmp0.field0).field0).field0) by 0
+ - no source -
+#0005:	 noop: bad
+ - no source -
+#0006:	 noop: bad
+ - no source -
+#0007:	 noop: opcode 'LLVMExtractValue' not supported
+ - no source -
+#0008:	 assign: tmp1 = tmp2
+ - no source -
+#0009:	 call: _TFSs7printlnU__FQ_T_(tmp1, (_TMdSS.field1)) <exit>
+ - no source -
+
+CFG: main
+#0000:	 call: tmp0 = _TFSsa6C_ARGCVSs5Int32()
+ - no source -
+#0001:	 assign: tmp1 = tmp0
+ - no source -
+#0002:	 assign: *tmp1 = argc
+ - no source -
+#0003:	 call: tmp2 = _TFSsa6C_ARGVGVSs20UnsafeMutablePointerGS_VSs4Int8__()
+ - no source -
+#0004:	 assign: tmp3 = tmp2
+ - no source -
+#0005:	 assign: *tmp3 = argv
+ - no source -
+#0006:	 call: top_level_code()
+ - no source -
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: <module init>
+#0000:	 assign: * = "Hello, world!" <exit>
+ - no source -
+
