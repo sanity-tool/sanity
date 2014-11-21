@@ -1,0 +1,38 @@
+CFG: testFloatFRem
+#0000:	 assign: tmp0 = *F0 % *F1
+ - no source -
+#0001:	 assign: *FR = tmp0 <exit>
+ - no source -
+
+CFG: testDoubleFRem
+#0000:	 assign: tmp0 = *D0 % *D1
+ - no source -
+#0001:	 assign: *DR = tmp0 <exit>
+ - no source -
+
+CFG: testFP80FRem
+#0000:	 assign: tmp0 = *LD0 % *LD1
+ - no source -
+#0001:	 assign: *LDR = tmp0 <exit>
+ - no source -
+
+CFG: <module init>
+#0000:	 assign: *F0 = 0.0
+ - no source -
+#0001:	 assign: *F1 = 0.0
+ - no source -
+#0002:	 assign: *FR = 0.0
+ - no source -
+#0003:	 assign: *D0 = 0.0
+ - no source -
+#0004:	 assign: *D1 = 0.0
+ - no source -
+#0005:	 assign: *DR = 0.0
+ - no source -
+#0006:	 assign: *LD0 = 0.0
+ - no source -
+#0007:	 assign: *LD1 = 0.0
+ - no source -
+#0008:	 assign: *LDR = 0.0 <exit>
+ - no source -
+

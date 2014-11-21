@@ -13,19 +13,28 @@ import java.util.List;
  */
 @Configuration
 public class TestTools {
+    String llvmAssembler = System.getProperty("sanity.llvm-as", "llvm-as");
+
     @Bean
     ClangParametersFactory createClangParametersFactory() {
         return (filename, objFile) -> {
             List<String> parameters = new ArrayList<>();
 
-            parameters.add("clang");
+            if (filename.endsWith(".ll")) {
+                parameters.add(llvmAssembler);
 
-            if (filename.endsWith("hello.m")) {
-                parameters.add("-framework");
-                parameters.add("Foundation");
+                parameters.add("-o=" + objFile);
+                parameters.add(filename);
+            } else {
+                parameters.add("clang");
+
+                if (filename.endsWith("hello.m")) {
+                    parameters.add("-framework");
+                    parameters.add("Foundation");
+                }
+
+                parameters.addAll(Arrays.asList(filename, "-c", "-emit-llvm", "-femit-all-decls", "-g", "-o", objFile));
             }
-
-            parameters.addAll(Arrays.asList(filename, "-c", "-emit-llvm", "-femit-all-decls", "-g", "-o", objFile));
 
             return parameters.toArray(new String[parameters.size()]);
         };
