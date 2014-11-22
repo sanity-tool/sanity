@@ -17,13 +17,8 @@ import java.util.List;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
  */
 public class ParserTests extends TestHelper {
-    private static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-    static {
-        context.refresh();
-    }
-
     public static TestSuite suite() {
-        TestSuite suite = new TestSuite();
+        TestSuite suite = new TestSuite("parser");
 
         new ParserTests().fillWithTests(suite, "cfg");
 
@@ -31,7 +26,7 @@ public class ParserTests extends TestHelper {
         new TestHelper() {
             @Override
             protected boolean matches(File file) {
-                return isClangSupported(file);
+                return isSupported(file);
             }
 
             @Override
@@ -53,10 +48,10 @@ public class ParserTests extends TestHelper {
 
     @Override
     protected boolean matches(File file) {
-        return isClangSupported(file);
+        return isSupported(file);
     }
 
-    private static boolean isClangSupported(File file) {
+    private static boolean isSupported(File file) {
         return file.getName().endsWith(".c") || file.getName().endsWith(".cpp") || file.getName().endsWith(".m") || file.getName().endsWith(".ll") || file.getName().endsWith(".swift");
     }
 

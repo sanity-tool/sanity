@@ -165,7 +165,7 @@ public class Parser {
                             SWIGTYPE_p_LLVMOpaqueValue elementInit = bitreader.LLVMGetOperand(initializer, n);
                             RValue rValue = valueParser.parseRValue(null, elementInit);
 
-                            Cfe fieldInitCfe = new Assignment(new Indirection(new GetElementPointer(globalToInitialize, constants.get(n, new Primitive()))), rValue, null);
+                            Cfe fieldInitCfe = new Assignment(new Indirection(new GetElementPointer(globalToInitialize, constants.get(n, typeParser.parse(bitreader.LLVMIntType(32))))), rValue, null);
                             fieldInitCfe.setNext(cfe);
                             cfe = fieldInitCfe;
                         }

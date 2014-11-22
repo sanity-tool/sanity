@@ -24,4 +24,9 @@ public class PointerType implements Type {
     public String getFieldName(int index) {
         throw new IllegalStateException("not struct");
     }
+
+    @Override
+    public String toString() {
+        return elementType.toString() + '*';
+    }
 }

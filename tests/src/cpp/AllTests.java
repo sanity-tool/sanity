@@ -10,6 +10,7 @@ public class AllTests {
         TestSuite suite = new TestSuite("All");
 
         suite.addTest(ParserTests.suite());
+        suite.addTest(CallsMapTests.suite());
 
         return suite;
     }

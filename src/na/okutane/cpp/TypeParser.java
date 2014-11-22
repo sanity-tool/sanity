@@ -181,7 +181,7 @@ public class TypeParser implements ParserListener {
 
         @Override
         public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
-            return new Primitive();
+            return new Primitive("int" + bitreader.LLVMGetIntTypeWidth(type));
         }
     }
 
@@ -194,7 +194,7 @@ public class TypeParser implements ParserListener {
 
         @Override
         public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
-            return new Primitive();
+            return new Primitive("float");
         }
     }
 
@@ -207,7 +207,7 @@ public class TypeParser implements ParserListener {
 
         @Override
         public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
-            return new Primitive();
+            return new Primitive("double");
         }
     }
 
@@ -220,7 +220,7 @@ public class TypeParser implements ParserListener {
 
         @Override
         public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
-            return new Primitive();
+            return new Primitive("long double");
         }
     }
 
@@ -233,7 +233,7 @@ public class TypeParser implements ParserListener {
 
         @Override
         public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
-            return new Primitive();
+            return new Primitive("void");
         }
     }
 
@@ -277,6 +277,7 @@ public class TypeParser implements ParserListener {
                 return cached;
             }
 
+            String name = bitreader.LLVMGetStructName(type);
             int fields = (int)bitreader.LLVMCountStructElementTypes(type);
             SWIGTYPE_p_p_LLVMOpaqueType fieldsBuff = bitreader.calloc_LLVMTypeRef(fields, bitreaderConstants.sizeof_LLVMTypeRef);
             try {
@@ -309,6 +310,11 @@ public class TypeParser implements ParserListener {
                         }
                         return "field" + index;
                     }
+
+                    @Override
+                    public String toString() {
+                        return name;
+                    }
                 };
 
                 typeParser.cache(type, struct);
@@ -334,6 +340,21 @@ public class TypeParser implements ParserListener {
 
         @Override
         public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
+            int params = (int) bitreader.LLVMCountParamTypes(type);
+            final Type returnType = typeParser.parse(bitreader.LLVMGetReturnType(type));
+            final Type[] paramsType = new Type[params];
+            if (params != 0) {
+                SWIGTYPE_p_p_LLVMOpaqueType paramsBuff = bitreader.calloc_LLVMTypeRef(params, bitreader.sizeof_LLVMTypeRef);
+                try {
+                    bitreader.LLVMGetParamTypes(type, paramsBuff);
+                    for (int i = 0; i < params; i++) {
+                        paramsType[i] = typeParser.parse(bitreader.getType(paramsBuff, i));
+                    }
+                } finally {
+                    bitreader.free_LLVMTypeRef(paramsBuff);
+                }
+            }
+
             return new Type() {
                 @Override
                 public Type getElementType() {
@@ -348,6 +369,20 @@ public class TypeParser implements ParserListener {
                 @Override
                 public String getFieldName(int index) {
                     return null;
+                }
+
+                @Override
+                public String toString() {
+                    StringBuilder sb = new StringBuilder(returnType.toString());
+                    sb.append(" (");
+                    if (paramsType.length != 0) {
+                        sb.append(paramsType[0]);
+                        for (int i = 1; i < paramsType.length; i++) {
+                            sb.append(", ").append(paramsType[i]);
+                        }
+                    }
+                    sb.append(')');
+                    return sb.toString();
                 }
             };
         }
