@@ -125,9 +125,7 @@ public class TypeParser implements ParserListener {
             }
         }
 
-        if (fieldNamesCache.put(typeName, fieldNames) != null) {
-            throw new IllegalStateException("Fields already stored for " + typeName);
-        }
+        fieldNamesCache.put(typeName, fieldNames);
     }
 
     protected void visit(SWIGTYPE_p_LLVMOpaqueValue node) {

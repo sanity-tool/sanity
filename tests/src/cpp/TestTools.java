@@ -4,6 +4,7 @@ import na.okutane.cpp.ClangParametersFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +28,8 @@ public class TestTools {
                 parameters.add("-g");
                 parameters.add("-o");
                 parameters.add(objFile);
+                parameters.add("-module-name");
+                parameters.add(new File(filename).getName());
 
                 parameters.add(filename);
             } else if (filename.endsWith(".ll")) {
