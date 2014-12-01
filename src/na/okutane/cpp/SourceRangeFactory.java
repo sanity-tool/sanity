@@ -13,7 +13,11 @@ import java.io.File;
 @Component
 public class SourceRangeFactory {
     public static final int DW_TAG_file_type = 786473;
+    public static final int DW_TAG_lexical_block = 786443;
     public static final int DW_TAG_subprogram = 786478;
+
+    private static final int FILE_INDEX = 0;
+    private static final int DIRECTORY_INDEX = 1;
 
     public SourceRange getSourceRange(SWIGTYPE_p_LLVMOpaqueValue instruction) {
 
@@ -22,9 +26,12 @@ public class SourceRangeFactory {
 
         if (node != null) {
             //deepDump(node);
-            String filename = getFilename(node);
-            String directory = getDirectory(node);
-            if (filename != null) {
+
+            SWIGTYPE_p_LLVMOpaqueValue pair = getPair(node);
+
+            if (pair != null) {
+                String filename = bitreader.getMDString(bitreader.LLVMGetOperand(pair, 0));
+                String directory = bitreader.getMDString(bitreader.LLVMGetOperand(pair, 1));
                 int lineNo = (int) bitreader.LLVMConstIntGetSExtValue(bitreader.LLVMGetOperand(node, 0));
                 if (new File(filename).isAbsolute()) {
                     return new SourceRange(filename, lineNo);
@@ -35,7 +42,7 @@ public class SourceRangeFactory {
         return null;
     }
 
-    private String getFilename(SWIGTYPE_p_LLVMOpaqueValue node) {
+    private SWIGTYPE_p_LLVMOpaqueValue getPair(SWIGTYPE_p_LLVMOpaqueValue node) {
         if (node == null) {
             return null;
         }
@@ -43,29 +50,10 @@ public class SourceRangeFactory {
             return null;
         }
 
-        if (LlvmUtils.checkTag(node, DW_TAG_file_type)) {
-            SWIGTYPE_p_LLVMOpaqueValue pair = bitreader.LLVMGetOperand(node, 1);
-            SWIGTYPE_p_LLVMOpaqueValue mdString = bitreader.LLVMGetOperand(pair, 0);
-            return bitreader.getMDString(mdString);
+        if (LlvmUtils.checkTag(node, DW_TAG_file_type) || LlvmUtils.checkTag(node, DW_TAG_lexical_block)) {
+            return bitreader.LLVMGetOperand(node, 1);
         } else {
-            return getFilename(bitreader.LLVMGetOperand(node, 2));
-        }
-    }
-
-    private String getDirectory(SWIGTYPE_p_LLVMOpaqueValue node) {
-        if (node == null) {
-            return null;
-        }
-        if (bitreader.LLVMIsAMDNode(node) == null) {
-            return null;
-        }
-
-        if (LlvmUtils.checkTag(node, DW_TAG_file_type)) {
-            SWIGTYPE_p_LLVMOpaqueValue pair = bitreader.LLVMGetOperand(node, 1);
-            SWIGTYPE_p_LLVMOpaqueValue mdString = bitreader.LLVMGetOperand(pair, 1);
-            return bitreader.getMDString(mdString);
-        } else {
-            return getDirectory(bitreader.LLVMGetOperand(node, 2));
+            return getPair(bitreader.LLVMGetOperand(node, 2));
         }
     }
 }

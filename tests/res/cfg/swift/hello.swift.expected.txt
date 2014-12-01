@@ -1,24 +1,24 @@
 CFG: top_level_code
 #0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 13, -1)
- - no source -
+hello.swift:1 println("Hello, world!")
 #0001:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+hello.swift:1 println("Hello, world!")
 #0002:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+hello.swift:1 println("Hello, world!")
 #0003:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+hello.swift:1 println("Hello, world!")
 #0004:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+hello.swift:1 println("Hello, world!")
 #0005:	 noop: bad
- - no source -
+hello.swift:1 println("Hello, world!")
 #0006:	 noop: bad
- - no source -
+hello.swift:1 println("Hello, world!")
 #0007:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+hello.swift:1 println("Hello, world!")
 #0008:	 assign: tmp1 = tmp2
- - no source -
+hello.swift:1 println("Hello, world!")
 #0009:	 call: _TFSs7printlnU__FQ_T_(tmp1, (_TMdSS.field1)) <exit>
- - no source -
+hello.swift:1 println("Hello, world!")
 
 CFG: main
 #0000:	 call: tmp0 = _TFSsa6C_ARGCVSs5Int32()

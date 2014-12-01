@@ -3,141 +3,141 @@ CFG: top_level_code
 
 CFG: _TF4main5forInFT_T_
 #0000:	 call: tmp0 = swift_allocObject((metadata.field2), 64, 7)
- - no source -
+controlFlow.swift:2 let individualScores = [75, 43, 103, 87, 12]
 #0001:	 assign: tmp1 = (tmp0+1)
- - no source -
+controlFlow.swift:2 let individualScores = [75, 43, 103, 87, 12]
 #0002:	 assign: *tmp1 = 5
- - no source -
+controlFlow.swift:2 let individualScores = [75, 43, 103, 87, 12]
 #0003:	 assign: tmp2 = tmp0
- - no source -
+controlFlow.swift:2 let individualScores = [75, 43, 103, 87, 12]
 #0004:	 assign: tmp3 = (tmp2+24)
- - no source -
+controlFlow.swift:2 let individualScores = [75, 43, 103, 87, 12]
 #0005:	 assign: tmp4 = tmp3
- - no source -
+controlFlow.swift:2 let individualScores = [75, 43, 103, 87, 12]
 #0006:	 call: llvm.memset.p0i8.i64(tmp4, 0, 40, 8, 0)
- - no source -
+controlFlow.swift:2 let individualScores = [75, 43, 103, 87, 12]
 #0007:	 assign: *(tmp3.field0) = 75
- - no source -
+controlFlow.swift:2 let individualScores = [75, 43, 103, 87, 12]
 #0008:	 noop: can't index ((tmp0+1).field0) by 0
- - no source -
+controlFlow.swift:2 let individualScores = [75, 43, 103, 87, 12]
 #0009:	 noop: can't index ((tmp0+2).field0) by 0
- - no source -
+controlFlow.swift:2 let individualScores = [75, 43, 103, 87, 12]
 #0010:	 noop: can't index ((tmp0+3).field0) by 0
- - no source -
+controlFlow.swift:2 let individualScores = [75, 43, 103, 87, 12]
 #0011:	 noop: can't index ((tmp0+4).field0) by 0
- - no source -
+controlFlow.swift:2 let individualScores = [75, 43, 103, 87, 12]
 #0012:	 assign: tmp5 = tmp3
- - no source -
+controlFlow.swift:2 let individualScores = [75, 43, 103, 87, 12]
 #0013:	 call: tmp6 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp5, tmp0, 5, (_TMdSi.field1))
- - no source -
+controlFlow.swift:2 let individualScores = [75, 43, 103, 87, 12]
 #0014:	 call: tmp7 = _TFSaCU__fMGSaQ__Ft12arrayLiteralGSaQ___GSaQ__(tmp6, (_TMdSi.field1))
- - no source -
+controlFlow.swift:2 let individualScores = [75, 43, 103, 87, 12]
 #0015:	 assign: *tmp8 = tmp7
- - no source -
+controlFlow.swift:2 let individualScores = [75, 43, 103, 87, 12]
 #0016:	 assign: *(tmp9.field0) = 0
- - no source -
+controlFlow.swift:3 var teamScore = 0
 #0017:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0018:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0019:	 call: tmp10 = _TFSa8generateU__fGSaQ__FT_GVSs17IndexingGeneratorGSaQ___(tmp7, (_TMdSi.field1))
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0020:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0021:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0022:	 assign: tmp11 = ((((tmp12.field0).field0).field0).field0)
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0023:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0024:	 noop: can't index ((tmp0.field1).field0) by 0
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0025:	 assign: tmp13 = tmp12
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0026:	 call: tmp14 = _TMaGVSs17IndexingGeneratorGSaSi__()
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0027:	 assign: tmp15 = tmp16
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0028:	 call: _TFVSs17IndexingGenerator4nextUSs15_CollectionType_USs16ForwardIndexType_Ss18_SignedIntegerType_Ss33_BuiltinIntegerLiteralConvertible____fRGS_Q__FT_GSqQQ_8_Element_(tmp15, tmp13, tmp14)
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0029:	 assign: tmp17 = tmp16
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0030:	 assign: tmp18 = (tmp16.field1)
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0031:	 assign: tmp19 = tmp20
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0032:	 assign: *tmp19 = *tmp17
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0033:	 assign: tmp21 = (tmp20.field1)
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0034:	 assign: *tmp21 = *tmp18
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0035:	 assign: tmp22 = tmp20
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0036:	 call: tmp23 = _TFSsoi2neU__FTGSqQ__VSs26_OptionalNilComparisonType_Sb(tmp22, (_TMdSi.field1))
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0037:	 if: tmp23 then #0038:	 else #0039:	
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0038:	 assign: tmp24 = tmp16
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0040:	 assign: tmp25 = (tmp16.field1)
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0041:	 assign: tmp26 = tmp27
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0042:	 assign: *tmp26 = *tmp24
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0043:	 assign: tmp28 = (tmp27.field1)
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0044:	 assign: *tmp28 = *tmp25
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0045:	 assign: tmp29 = tmp27
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0046:	 assign: tmp30 = (tmp27.field1)
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0047:	 switch: *tmp30 default #0048:	 0 -> #0049:	 -1 -> #0050:	
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0048:	 noop
  - no source -
 #0051:	 noop: opcode 'LLVMUnreachable' not supported <exit>
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0049:	 assign: tmp31 = tmp27
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0052:	 assign: *tmp32 = *(tmp31.field0)
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0053:	 assign: tmp33 = *(tmp31.field0) > 50
- - no source -
+controlFlow.swift:5 if score > 50 {
 #0054:	 if: tmp33 then #0055:	 else #0056:	
- - no source -
+controlFlow.swift:5 if score > 50 {
 #0055:	 call: tmp34 = llvm.sadd.with.overflow.i64(*(tmp9.field0), 3)
- - no source -
+controlFlow.swift:6 teamScore += 3
 #0057:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:6 teamScore += 3
 #0058:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:6 teamScore += 3
 #0059:	 noop: opcode 'LLVMExtractValue' not supported <exit>
- - no source -
+controlFlow.swift:6 teamScore += 3
 #0056:	 call: tmp35 = llvm.sadd.with.overflow.i64(*(tmp9.field0), 1)
- - no source -
+controlFlow.swift:8 teamScore += 1
 #0060:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:8 teamScore += 1
 #0061:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:8 teamScore += 1
 #0062:	 noop: opcode 'LLVMExtractValue' not supported <exit>
- - no source -
+controlFlow.swift:8 teamScore += 1
 #0050:	 switch: *tmp29 default #0048:	 0 -> #0063:	
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0063:	 call: _TFSs18_fatalErrorMessageFTVSs12StaticStringS_S_Su_T_(, 11, 2, , 57, 2, , 87, 2, 102)
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0064:	 noop: opcode 'LLVMUnreachable' not supported <exit>
- - no source -
+controlFlow.swift:4 for score in individualScores {
 #0039:	 assign: tmp36 = ((((tmp12.field0).field0).field0).field0)
- - no source -
+controlFlow.swift:11 }
 #0065:	 call: swift_release(*tmp36)
- - no source -
+controlFlow.swift:11 }
 #0066:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:11 }
 #0067:	 noop: opcode 'LLVMIntToPtr' not supported <exit>
- - no source -
+controlFlow.swift:11 }
 
 CFG: arraydestroy
 #0000:	 assign: tmp0 = (+1)
@@ -207,443 +207,443 @@ CFG: _TMaGSaSi_
 
 CFG: _TF4main12missingValueFT_T_
 #0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 5, -1)
- - no source -
+controlFlow.swift:14 var optionalString: String? = "Hello"
 #0001:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:14 var optionalString: String? = "Hello"
 #0002:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:14 var optionalString: String? = "Hello"
 #0003:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:14 var optionalString: String? = "Hello"
 #0004:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:14 var optionalString: String? = "Hello"
 #0005:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:14 var optionalString: String? = "Hello"
 #0006:	 assign: tmp1 = tmp2
- - no source -
+controlFlow.swift:14 var optionalString: String? = "Hello"
 #0007:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+controlFlow.swift:14 var optionalString: String? = "Hello"
 #0008:	 noop: bad
- - no source -
+controlFlow.swift:14 var optionalString: String? = "Hello"
 #0009:	 noop: bad
- - no source -
+controlFlow.swift:14 var optionalString: String? = "Hello"
 #0010:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:14 var optionalString: String? = "Hello"
 #0011:	 assign: tmp3 = (tmp2.field1)
- - no source -
+controlFlow.swift:14 var optionalString: String? = "Hello"
 #0012:	 assign: *tmp3 = 0
- - no source -
+controlFlow.swift:14 var optionalString: String? = "Hello"
 #0013:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:14 var optionalString: String? = "Hello"
 #0014:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:14 var optionalString: String? = "Hello"
 #0015:	 assign: tmp4 = tmp5
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0016:	 assign: tmp6 = tmp2
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0017:	 assign: tmp7 = tmp2
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0018:	 assign: tmp8 = (tmp2.field1)
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0019:	 assign: tmp9 = *tmp8 == 0
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0020:	 if: tmp9 then #0021:	 else #0022:	
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0021:	 assign: tmp10 = (((tmp4.field0).field0).field0)
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0023:	 assign: tmp11 = (((tmp6.field0).field0).field0)
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0024:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp10, tmp11, 8, 8, 0)
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0025:	 noop: bad
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0026:	 noop: bad
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0027:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp12, tmp13, 8, 8, 0)
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0028:	 noop: bad
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0029:	 noop: bad
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0030:	 call: swift_unknownRetain(*tmp14)
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0031:	 assign: *tmp15 = *tmp14
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0032:	 assign: tmp16 = (tmp5.field1)
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0033:	 assign: *tmp16 = 0
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0034:	 noop
  - no source -
 #0035:	 assign: tmp17 = tmp18
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0036:	 assign: *tmp17 = 0
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0037:	 assign: tmp19 = (tmp18.field1)
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0038:	 assign: *tmp19 = -1
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0039:	 assign: tmp20 = tmp18
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0040:	 assign: tmp21 = (tmp18.field1)
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0041:	 assign: tmp22 = tmp23
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0042:	 assign: *tmp22 = *tmp20
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0043:	 assign: tmp24 = (tmp23.field1)
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0044:	 assign: *tmp24 = *tmp21
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0045:	 assign: tmp25 = tmp5
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0046:	 assign: tmp26 = tmp23
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0047:	 call: tmp27 = _TFSsoi2eeUSs9Equatable__FTGSqQ__GSqQ___Sb(tmp25, tmp26, (_TMdSS.field1), _TWPSSSs9Equatable)
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0048:	 call: tmp28 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 14, -1)
- - no source -
+controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0049:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0050:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0051:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0052:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0053:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0054:	 assign: tmp29 = tmp30
- - no source -
+controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0055:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0056:	 noop: bad
- - no source -
+controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0057:	 noop: bad
- - no source -
+controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0058:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0059:	 assign: tmp31 = (tmp30.field1)
- - no source -
+controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0060:	 assign: *tmp31 = 0
- - no source -
+controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0061:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0062:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0063:	 call: tmp32 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 6, -1)
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0064:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0065:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0066:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0067:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0068:	 noop: bad
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0069:	 noop: bad
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0070:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0071:	 assign: tmp33 = tmp30
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0072:	 assign: tmp34 = (tmp30.field1)
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0073:	 assign: tmp35 = *tmp34 == 0
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0074:	 if: tmp35 then #0075:	 else #0076:	
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0075:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0077:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0078:	 noop: opcode 'LLVMLShr' not supported
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0079:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0080:	 noop: opcode 'LLVMLShr' not supported
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0081:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0082:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0083:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:18 var greeting = "Hello!"
 #0076:	 noop
  - no source -
 #0084:	 assign: tmp36 = *tmp34 == 0
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0085:	 if: tmp36 then #0086:	 else #0087:	
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0086:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0088:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0089:	 noop: opcode 'LLVMLShr' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0090:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0091:	 noop: opcode 'LLVMLShr' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0092:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0093:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0094:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0087:	 noop
  - no source -
 #0095:	 assign: tmp37 = tmp38
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0096:	 assign: *tmp37 = *tmp33
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0097:	 assign: tmp39 = (tmp38.field1)
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0098:	 assign: *tmp39 = *tmp34
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0099:	 assign: tmp40 = tmp38
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0100:	 call: tmp41 = _TFSsoi2neU__FTGSqQ__VSs26_OptionalNilComparisonType_Sb(tmp40, (_TMdSS.field1))
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0101:	 if: tmp41 then #0102:	 else #0103:	
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0102:	 assign: tmp42 = *tmp34 == 0
- - no source -
+controlFlow.swift:22 }
 #0104:	 if: tmp42 then #0105:	 else #0106:	
- - no source -
+controlFlow.swift:22 }
 #0105:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+controlFlow.swift:22 }
 #0107:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:22 }
 #0108:	 noop: opcode 'LLVMLShr' not supported
- - no source -
+controlFlow.swift:22 }
 #0109:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+controlFlow.swift:22 }
 #0110:	 noop: opcode 'LLVMLShr' not supported
- - no source -
+controlFlow.swift:22 }
 #0111:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+controlFlow.swift:22 }
 #0112:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:22 }
 #0113:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:22 }
 #0106:	 noop
  - no source -
 #0114:	 assign: tmp43 = tmp44
- - no source -
+controlFlow.swift:22 }
 #0115:	 assign: *tmp43 = *tmp33
- - no source -
+controlFlow.swift:22 }
 #0116:	 assign: tmp45 = (tmp44.field1)
- - no source -
+controlFlow.swift:22 }
 #0117:	 assign: *tmp45 = *tmp34
- - no source -
+controlFlow.swift:22 }
 #0118:	 assign: tmp46 = tmp44
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0119:	 assign: tmp47 = (tmp44.field1)
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0120:	 switch: *tmp47 default #0121:	 0 -> #0122:	 -1 -> #0123:	
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0121:	 noop
  - no source -
 #0124:	 noop: opcode 'LLVMUnreachable' not supported <exit>
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0122:	 assign: tmp48 = tmp44
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0125:	 noop: bad
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0126:	 assign: tmp49 = *tmp34 == 0
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0127:	 if: tmp49 then #0128:	 else #0129:	
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0128:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0130:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0131:	 noop: opcode 'LLVMLShr' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0132:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0133:	 noop: opcode 'LLVMLShr' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0134:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0135:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0136:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0129:	 noop
  - no source -
 #0137:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0138:	 noop: bad
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0139:	 assign: *(tmp50.field2) = *tmp51
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0140:	 call: tmp52 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0141:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0142:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0143:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0144:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0145:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0146:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0147:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0148:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0149:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0150:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0151:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0152:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0153:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0154:	 call: tmp53 = swift_allocObject((metadata2.field2), 72, 7)
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0155:	 assign: tmp54 = (tmp53+1)
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0156:	 assign: *tmp54 = 2
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0157:	 assign: tmp55 = tmp53
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0158:	 assign: tmp56 = (tmp55+24)
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0159:	 assign: tmp57 = tmp56
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0160:	 call: llvm.memset.p0i8.i64(tmp57, 0, 48, 8, 0)
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0161:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0162:	 noop: bad
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0163:	 noop: bad
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0164:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0165:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0166:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0167:	 assign: tmp58 = (((((tmp56+1).field0).field0).field0)+2)
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0168:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0169:	 assign: tmp59 = tmp56
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0170:	 call: tmp60 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp59, tmp53, 2, (_TMdSS.field1))
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0171:	 call: tmp61 = _TFSS30convertFromStringInterpolationfMSSFtGSaSS__SS(tmp60)
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0172:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0173:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0174:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0175:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0176:	 noop: bad
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0177:	 noop: bad
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0178:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0179:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0180:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:20 greeting = "Hello, \(name)"
 #0181:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:21 }
 #0182:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:21 }
 #0183:	 noop
  - no source -
 #0184:	 noop: bad
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0185:	 call: swift_unknownRelease(*tmp62)
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0186:	 assign: tmp63 = tmp30
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0187:	 assign: tmp64 = (tmp30.field1)
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0188:	 assign: tmp65 = *tmp64 == 0
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0189:	 if: tmp65 then #0190:	 else #0191:	
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0190:	 assign: tmp66 = tmp30
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0192:	 noop: bad
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0193:	 call: swift_unknownRelease(*tmp67)
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0191:	 noop
  - no source -
 #0194:	 assign: tmp68 = tmp2
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0195:	 assign: tmp69 = (tmp2.field1)
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0196:	 assign: tmp70 = *tmp69 == 0
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0197:	 if: tmp70 then #0198:	 else #0199:	
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0198:	 assign: tmp71 = tmp2
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0200:	 noop: bad
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0201:	 call: swift_unknownRelease(*tmp72)
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0199:	 noop <exit>
  - no source -
 #0123:	 switch: *tmp46 default #0121:	 0 -> #0202:	
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0202:	 call: _TFSs18_fatalErrorMessageFTVSs12StaticStringS_S_Su_T_(, 11, 2, , 57, 2, , 87, 2, 102)
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0203:	 noop: opcode 'LLVMUnreachable' not supported <exit>
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0103:	 assign: tmp73 = *tmp34 == 0
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0204:	 if: tmp73 then #0205:	 else #0206:	
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0205:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0207:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0208:	 noop: opcode 'LLVMLShr' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0209:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0210:	 noop: opcode 'LLVMLShr' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0211:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0212:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0213:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:19 if let name = optionalName {
 #0206:	 noop next: #0183:	
  - no source -
 #0022:	 assign: tmp74 = tmp2
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0214:	 assign: tmp75 = (tmp2.field1)
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0215:	 assign: tmp76 = tmp5
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0216:	 assign: *tmp76 = *tmp74
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0217:	 assign: tmp77 = (tmp5.field1)
- - no source -
+controlFlow.swift:15 optionalString == nil
 #0218:	 assign: *tmp77 = *tmp75 next: #0034:	
- - no source -
+controlFlow.swift:15 optionalString == nil
 
 CFG: arraydestroy1
 #0000:	 assign: tmp0 = (+1)
@@ -679,459 +679,459 @@ CFG: arraydestroy1
 
 CFG: _TF4main10vegetablesFT_T_
 #0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 10, -1)
- - no source -
+controlFlow.swift:25 let vegetable = "red pepper"
 #0001:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:25 let vegetable = "red pepper"
 #0002:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:25 let vegetable = "red pepper"
 #0003:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:25 let vegetable = "red pepper"
 #0004:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:25 let vegetable = "red pepper"
 #0005:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:25 let vegetable = "red pepper"
 #0006:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:25 let vegetable = "red pepper"
 #0007:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:26 switch vegetable {
 #0008:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:26 switch vegetable {
 #0009:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0010:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0011:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0012:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0013:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0014:	 call: tmp1 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 6, -1)
- - no source -
+controlFlow.swift:27 case "celery":
 #0015:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0016:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0017:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0018:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0019:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0020:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0021:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0022:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+controlFlow.swift:27 case "celery":
 #0023:	 noop: bad
- - no source -
+controlFlow.swift:27 case "celery":
 #0024:	 noop: bad
- - no source -
+controlFlow.swift:27 case "celery":
 #0025:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0026:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0027:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0028:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+controlFlow.swift:27 case "celery":
 #0029:	 noop: bad
- - no source -
+controlFlow.swift:27 case "celery":
 #0030:	 noop: bad
- - no source -
+controlFlow.swift:27 case "celery":
 #0031:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0032:	 assign: tmp2 = *_TWPSSSs9Equatable
- - no source -
+controlFlow.swift:27 case "celery":
 #0033:	 assign: tmp3 = tmp4
- - no source -
+controlFlow.swift:27 case "celery":
 #0034:	 assign: tmp5 = tmp6
- - no source -
+controlFlow.swift:27 case "celery":
 #0035:	 call: tmp7 = tmp2(tmp3, tmp5, (_TMdSS.field1), (_TMdSS.field1))
- - no source -
+controlFlow.swift:27 case "celery":
 #0036:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0037:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0038:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0039:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0040:	 if: tmp7 then #0041:	 else #0042:	
- - no source -
+controlFlow.swift:27 case "celery":
 #0041:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0043:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0044:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0045:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0046:	 call: tmp8 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 40, -1)
- - no source -
+controlFlow.swift:28 let vegetableComment = "Add some raisins and make ants on a log."
 #0047:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:28 let vegetableComment = "Add some raisins and make ants on a log."
 #0048:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:28 let vegetableComment = "Add some raisins and make ants on a log."
 #0049:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:28 let vegetableComment = "Add some raisins and make ants on a log."
 #0050:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:28 let vegetableComment = "Add some raisins and make ants on a log."
 #0051:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:28 let vegetableComment = "Add some raisins and make ants on a log."
 #0052:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:28 let vegetableComment = "Add some raisins and make ants on a log."
 #0053:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0054:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0055:	 noop
  - no source -
 #0056:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:33 default:
 #0057:	 noop: opcode 'LLVMIntToPtr' not supported <exit>
- - no source -
+controlFlow.swift:33 default:
 #0042:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0058:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:27 case "celery":
 #0059:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0060:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0061:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0062:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0063:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0064:	 call: tmp9 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 8, -1)
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0065:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0066:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0067:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0068:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0069:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0070:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0071:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0072:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0073:	 noop: bad
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0074:	 noop: bad
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0075:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0076:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0077:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0078:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0079:	 noop: bad
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0080:	 noop: bad
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0081:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0082:	 assign: tmp10 = *_TWPSSSs9Equatable
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0083:	 assign: tmp11 = tmp12
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0084:	 assign: tmp13 = tmp14
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0085:	 call: tmp15 = tmp10(tmp11, tmp13, (_TMdSS.field1), (_TMdSS.field1))
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0086:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0087:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0088:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0089:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0090:	 if: tmp15 then #0091:	 else #0092:	
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0091:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0093:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0094:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0095:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0096:	 noop
  - no source -
 #0097:	 call: tmp16 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 36, -1)
- - no source -
+controlFlow.swift:30 let vegetableComment = "That would make a good tea sandwich."
 #0098:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:30 let vegetableComment = "That would make a good tea sandwich."
 #0099:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:30 let vegetableComment = "That would make a good tea sandwich."
 #0100:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:30 let vegetableComment = "That would make a good tea sandwich."
 #0101:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:30 let vegetableComment = "That would make a good tea sandwich."
 #0102:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:30 let vegetableComment = "That would make a good tea sandwich."
 #0103:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:30 let vegetableComment = "That would make a good tea sandwich."
 #0104:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0105:	 noop: opcode 'LLVMIntToPtr' not supported next: #0055:	
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0092:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0106:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0107:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0108:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0109:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0110:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0111:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0112:	 call: tmp17 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 10, -1)
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0113:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0114:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0115:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0116:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0117:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0118:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0119:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0120:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0121:	 noop: bad
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0122:	 noop: bad
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0123:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0124:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0125:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0126:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0127:	 noop: bad
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0128:	 noop: bad
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0129:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0130:	 assign: tmp18 = *_TWPSSSs9Equatable
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0131:	 assign: tmp19 = tmp20
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0132:	 assign: tmp21 = tmp22
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0133:	 call: tmp23 = tmp18(tmp19, tmp21, (_TMdSS.field1), (_TMdSS.field1))
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0134:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0135:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0136:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0137:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0138:	 if: tmp23 then #0139:	 else #0140:	
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0139:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0141:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0142:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0143:	 noop: opcode 'LLVMIntToPtr' not supported next: #0096:	
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0140:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0144:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:29 case "cucumber", "watercress":
 #0145:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0146:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0147:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0148:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0149:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0150:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0151:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0152:	 call: tmp24 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 6, -1)
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0153:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0154:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0155:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0156:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0157:	 if: tmp25 then #0158:	 else #0159:	
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0158:	 call: tmp26 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 14, -1)
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0160:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0161:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0162:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0163:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0164:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0165:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0166:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0167:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0168:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0169:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0170:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0171:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0172:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0173:	 call: tmp27 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 1, -1)
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0174:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0175:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0176:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0177:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0178:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0179:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0180:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0181:	 call: tmp28 = swift_allocObject((metadata4.field2), 96, 7)
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0182:	 assign: tmp29 = (tmp28+1)
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0183:	 assign: *tmp29 = 3
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0184:	 assign: tmp30 = tmp28
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0185:	 assign: tmp31 = (tmp30+24)
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0186:	 assign: tmp32 = tmp31
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0187:	 call: llvm.memset.p0i8.i64(tmp32, 0, 72, 8, 0)
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0188:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0189:	 noop: bad
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0190:	 noop: bad
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0191:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0192:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0193:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0194:	 assign: tmp33 = (((((tmp31+1).field0).field0).field0)+2)
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0195:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0196:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0197:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0198:	 assign: tmp34 = (((((tmp31+2).field0).field0).field0)+2)
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0199:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0200:	 assign: tmp35 = tmp31
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0201:	 call: tmp36 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp35, tmp28, 3, (_TMdSS.field1))
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0202:	 call: tmp37 = _TFSS30convertFromStringInterpolationfMSSFtGSaSS__SS(tmp36)
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0203:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0204:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0205:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0206:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0207:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0208:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0209:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0210:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0211:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0212:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0213:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0214:	 noop: opcode 'LLVMIntToPtr' not supported next: #0055:	
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0159:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0215:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0216:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:33 default:
 #0217:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:33 default:
 #0218:	 call: tmp38 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 31, -1)
- - no source -
+controlFlow.swift:34 let vegetableComment = "Everything tastes good in soup."
 #0219:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:34 let vegetableComment = "Everything tastes good in soup."
 #0220:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:34 let vegetableComment = "Everything tastes good in soup."
 #0221:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:34 let vegetableComment = "Everything tastes good in soup."
 #0222:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:34 let vegetableComment = "Everything tastes good in soup."
 #0223:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:34 let vegetableComment = "Everything tastes good in soup."
 #0224:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:34 let vegetableComment = "Everything tastes good in soup."
 #0225:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+controlFlow.swift:33 default:
 #0226:	 noop: opcode 'LLVMIntToPtr' not supported next: #0055:	
- - no source -
+controlFlow.swift:33 default:
 
 CFG: arraydestroy3
 #0000:	 assign: tmp0 = (+1)
@@ -1167,193 +1167,193 @@ CFG: arraydestroy3
 
 CFG: _TF4main7numbersFT_T_
 #0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 5, -1)
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0001:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0002:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0003:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0004:	 call: tmp1 = swift_allocObject((metadata6.field2), 72, 7)
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0005:	 assign: tmp2 = (tmp1+1)
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0006:	 assign: *tmp2 = 6
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0007:	 assign: tmp3 = tmp1
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0008:	 assign: tmp4 = (tmp3+24)
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0009:	 assign: tmp5 = tmp4
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0010:	 call: llvm.memset.p0i8.i64(tmp5, 0, 48, 8, 0)
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0011:	 assign: *(tmp4.field0) = 2
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0012:	 noop: can't index ((tmp0+1).field0) by 0
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0013:	 noop: can't index ((tmp0+2).field0) by 0
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0014:	 noop: can't index ((tmp0+3).field0) by 0
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0015:	 noop: can't index ((tmp0+4).field0) by 0
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0016:	 noop: can't index ((tmp0+5).field0) by 0
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0017:	 assign: tmp6 = tmp4
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0018:	 call: tmp7 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp6, tmp1, 6, (_TMdSi.field1))
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0019:	 call: tmp8 = _TFSaCU__fMGSaQ__Ft12arrayLiteralGSaQ___GSaQ__(tmp7, (_TMdSi.field1))
- - no source -
+controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0020:	 call: tmp9 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 9, -1)
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0021:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0022:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0023:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0024:	 call: tmp10 = swift_allocObject((metadata8.field2), 72, 7)
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0025:	 assign: tmp11 = (tmp10+1)
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0026:	 assign: *tmp11 = 6
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0027:	 assign: tmp12 = tmp10
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0028:	 assign: tmp13 = (tmp12+24)
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0029:	 assign: tmp14 = tmp13
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0030:	 call: llvm.memset.p0i8.i64(tmp14, 0, 48, 8, 0)
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0031:	 assign: *(tmp13.field0) = 1
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0032:	 noop: can't index ((tmp0+1).field0) by 0
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0033:	 noop: can't index ((tmp0+2).field0) by 0
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0034:	 noop: can't index ((tmp0+3).field0) by 0
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0035:	 noop: can't index ((tmp0+4).field0) by 0
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0036:	 noop: can't index ((tmp0+5).field0) by 0
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0037:	 assign: tmp15 = tmp13
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0038:	 call: tmp16 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp15, tmp10, 6, (_TMdSi.field1))
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0039:	 call: tmp17 = _TFSaCU__fMGSaQ__Ft12arrayLiteralGSaQ___GSaQ__(tmp16, (_TMdSi.field1))
- - no source -
+controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0040:	 call: tmp18 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 6, -1)
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0041:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0042:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0043:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0044:	 call: tmp19 = swift_allocObject((metadata10.field2), 64, 7)
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0045:	 assign: tmp20 = (tmp19+1)
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0046:	 assign: *tmp20 = 5
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0047:	 assign: tmp21 = tmp19
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0048:	 assign: tmp22 = (tmp21+24)
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0049:	 assign: tmp23 = tmp22
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0050:	 call: llvm.memset.p0i8.i64(tmp23, 0, 40, 8, 0)
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0051:	 assign: *(tmp22.field0) = 1
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0052:	 noop: can't index ((tmp0+1).field0) by 0
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0053:	 noop: can't index ((tmp0+2).field0) by 0
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0054:	 noop: can't index ((tmp0+3).field0) by 0
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0055:	 noop: can't index ((tmp0+4).field0) by 0
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0056:	 assign: tmp24 = tmp22
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0057:	 call: tmp25 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp24, tmp19, 5, (_TMdSi.field1))
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0058:	 call: tmp26 = _TFSaCU__fMGSaQ__Ft12arrayLiteralGSaQ___GSaQ__(tmp25, (_TMdSi.field1))
- - no source -
+controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0059:	 call: tmp27 = swift_allocObject((metadata12.field2), 120, 7)
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0060:	 assign: tmp28 = (tmp27+1)
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0061:	 assign: *tmp28 = 3
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0062:	 assign: tmp29 = tmp27
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0063:	 assign: tmp30 = (tmp29+24)
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0064:	 assign: tmp31 = tmp30
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0065:	 call: llvm.memset.p0i8.i64(tmp31, 0, 96, 8, 0)
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0066:	 noop: can't index ((((tmp0.field0).field0).field0).field0) by 0
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0067:	 noop: can't index (((((tmp0.field0).field0).field0).field0)+1) by 0
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0068:	 assign: tmp32 = (((((tmp30.field0).field0).field0).field0)+2)
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0069:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0070:	 assign: tmp33 = ((((tmp30.field1).field0).field0).field0)
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0071:	 assign: *tmp33 = tmp8
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0072:	 noop: can't index (((((tmp0+1).field0).field0).field0).field0) by 0
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0073:	 noop: can't index (((((tmp0+1).field0).field0).field0).field0) by 1
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0074:	 noop: can't index (((((tmp0+1).field0).field0).field0).field0) by 2
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0075:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0076:	 noop: bad
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0077:	 assign: *tmp34 = tmp17
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0078:	 noop: can't index (((((tmp0+2).field0).field0).field0).field0) by 0
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0079:	 noop: can't index (((((tmp0+2).field0).field0).field0).field0) by 1
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0080:	 noop: can't index (((((tmp0+2).field0).field0).field0).field0) by 2
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0081:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0082:	 noop: bad
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0083:	 assign: *tmp35 = tmp26
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0084:	 assign: tmp36 = tmp30
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0085:	 call: tmp37 = _TMaTSSGSaSi__()
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0086:	 call: tmp38 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp36, tmp27, 3, tmp37)
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0087:	 call: tmp39 = _TMaGSaSi_()
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0088:	 call: tmp40 = _TFVSs10DictionaryCUSs8Hashable___fMGS_Q_Q0__Ft17dictionaryLiteralGSaTQ_Q0____GS_Q_Q0__(tmp38, (_TMdSS.field1), _TWPSSSs8Hashable, tmp39)
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0089:	 assign: *tmp41 = tmp40
- - no source -
+controlFlow.swift:39 let interestingNumbers = [
 #0090:	 assign: *(tmp42.field0) = 0
- - no source -
+controlFlow.swift:44 var largest = 0
 #0091:	 noop: opcode 'LLVMLShr' not supported
- - no source -
+controlFlow.swift:45 for (kind, numbers) in interestingNumbers {
 #0092:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+controlFlow.swift:45 for (kind, numbers) in interestingNumbers {
 #0093:	 noop: opcode 'LLVMTrunc' not supported <exit>
- - no source -
+controlFlow.swift:45 for (kind, numbers) in interestingNumbers {
 
 CFG: arraydestroy5
 #0000:	 assign: tmp0 = (+1)
@@ -1461,145 +1461,145 @@ CFG: _TMaGVSs19DictionaryGeneratorSSGSaSi__
 
 CFG: _TF4main4loopFT_T_
 #0000:	 assign: *(tmp0.field0) = 2
- - no source -
+controlFlow.swift:55 var n = 2
 #0001:	 assign: tmp1 = *(tmp0.field0) < 100
- - no source -
+controlFlow.swift:56 while n < 100 {
 #0002:	 if: tmp1 then #0003:	 else #0004:	
- - no source -
+controlFlow.swift:56 while n < 100 {
 #0003:	 call: tmp2 = llvm.smul.with.overflow.i64(*(tmp0.field0), 2)
- - no source -
+controlFlow.swift:57 n = n * 2
 #0005:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:57 n = n * 2
 #0006:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:57 n = n * 2
 #0007:	 noop: opcode 'LLVMExtractValue' not supported <exit>
- - no source -
+controlFlow.swift:57 n = n * 2
 #0004:	 assign: *(tmp3.field0) = 2
- - no source -
+controlFlow.swift:60 var m = 2
 #0008:	 call: tmp4 = llvm.smul.with.overflow.i64(*(tmp3.field0), 2)
- - no source -
+controlFlow.swift:62 m = m * 2
 #0009:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:62 m = m * 2
 #0010:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:62 m = m * 2
 #0011:	 noop: opcode 'LLVMExtractValue' not supported <exit>
- - no source -
+controlFlow.swift:62 m = m * 2
 
 CFG: _TF4main5loopsFT_T_
 #0000:	 assign: *(tmp0.field0) = 0
- - no source -
+controlFlow.swift:67 var firstForLoop = 0
 #0001:	 assign: *(tmp1.field0) = 0
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0002:	 assign: *(tmp2.field0) = 4
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0003:	 assign: tmp3 = *(_TWPSiSs10Comparable+2)
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0004:	 assign: tmp4 = tmp1
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0005:	 assign: tmp5 = tmp2
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0006:	 call: tmp6 = tmp3(tmp4, tmp5, (_TMdSi.field1), (_TMdSi.field1))
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0007:	 call: tmp7 = llvm.expect.i1(tmp6, -1)
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0008:	 if: tmp7 then #0009:	 else #0010:	
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0009:	 noop: can't index ((tmp0.field0).field0) by 0
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0011:	 noop: can't index ((tmp0.field1).field0) by 0
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0012:	 assign: tmp8 = tmp9
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0013:	 assign: tmp10 = tmp11
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0014:	 call: _TFVSs5Range8generateUSs16ForwardIndexType_USs18_SignedIntegerType_Ss33_BuiltinIntegerLiteralConvertible___fGS_Q__FT_GVSs14RangeGeneratorQ__(tmp10, tmp8, (_TMdSi.field1), _TWPSiSs16ForwardIndexType, (_TMdSi.field1), _TWPSiSs18_SignedIntegerType, (_TMdSi.field1), _TWPSiSs33_BuiltinIntegerLiteralConvertible, (_TMdSi.field1))
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0015:	 assign: tmp12 = tmp11
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0016:	 call: tmp13 = _TMaGVSs14RangeGeneratorSi_()
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0017:	 assign: tmp14 = tmp15
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0018:	 call: _TFVSs14RangeGenerator4nextUSs16ForwardIndexType_USs18_SignedIntegerType_Ss33_BuiltinIntegerLiteralConvertible___fRGS_Q__FT_GSqQ__(tmp14, tmp12, tmp13)
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0019:	 assign: tmp16 = tmp15
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0020:	 assign: tmp17 = (tmp15.field1)
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0021:	 assign: tmp18 = tmp19
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0022:	 assign: *tmp18 = *tmp16
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0023:	 assign: tmp20 = (tmp19.field1)
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0024:	 assign: *tmp20 = *tmp17
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0025:	 assign: tmp21 = tmp19
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0026:	 call: tmp22 = _TFSsoi2neU__FTGSqQ__VSs26_OptionalNilComparisonType_Sb(tmp21, (_TMdSi.field1))
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0027:	 if: tmp22 then #0028:	 else #0029:	
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0028:	 assign: tmp23 = tmp15
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0030:	 assign: tmp24 = (tmp15.field1)
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0031:	 assign: tmp25 = tmp26
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0032:	 assign: *tmp25 = *tmp23
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0033:	 assign: tmp27 = (tmp26.field1)
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0034:	 assign: *tmp27 = *tmp24
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0035:	 assign: tmp28 = tmp26
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0036:	 assign: tmp29 = (tmp26.field1)
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0037:	 switch: *tmp29 default #0038:	 0 -> #0039:	 -1 -> #0040:	
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0038:	 noop
  - no source -
 #0041:	 noop: opcode 'LLVMUnreachable' not supported <exit>
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0039:	 assign: tmp30 = tmp26
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0042:	 assign: *tmp31 = *(tmp30.field0)
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0043:	 call: tmp32 = llvm.sadd.with.overflow.i64(*(tmp0.field0), *(tmp30.field0))
- - no source -
+controlFlow.swift:69 firstForLoop += i
 #0044:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:69 firstForLoop += i
 #0045:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:69 firstForLoop += i
 #0046:	 noop: opcode 'LLVMExtractValue' not supported <exit>
- - no source -
+controlFlow.swift:69 firstForLoop += i
 #0040:	 switch: *tmp28 default #0038:	 0 -> #0047:	
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0047:	 call: _TFSs18_fatalErrorMessageFTVSs12StaticStringS_S_Su_T_(, 11, 2, , 57, 2, , 87, 2, 102)
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0048:	 noop: opcode 'LLVMUnreachable' not supported <exit>
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0029:	 assign: *(tmp33.field0) = 0
- - no source -
+controlFlow.swift:72 var secondForLoop = 0
 #0049:	 assign: *(tmp34.field0) = 0
- - no source -
+controlFlow.swift:73 for var i = 0; i < 4; ++i {
 #0050:	 assign: tmp35 = *(tmp34.field0) < 4
- - no source -
+controlFlow.swift:73 for var i = 0; i < 4; ++i {
 #0051:	 if: tmp35 then #0052:	 else <exit>
- - no source -
+controlFlow.swift:73 for var i = 0; i < 4; ++i {
 #0052:	 call: tmp36 = llvm.sadd.with.overflow.i64(*(tmp33.field0), *(tmp34.field0))
- - no source -
+controlFlow.swift:74 secondForLoop += i
 #0053:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:74 secondForLoop += i
 #0054:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+controlFlow.swift:74 secondForLoop += i
 #0055:	 noop: opcode 'LLVMExtractValue' not supported <exit>
- - no source -
+controlFlow.swift:74 secondForLoop += i
 #0010:	 call: _TFSs18_fatalErrorMessageFTVSs12StaticStringS_S_Su_T_(, 11, 2, , 33, 2, , 84, 2, 221)
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 #0056:	 noop: opcode 'LLVMUnreachable' not supported <exit>
- - no source -
+controlFlow.swift:68 for i in 0..<4 {
 
 CFG: _TMaGVSs14RangeGeneratorSi_
 #0000:	 assign: tmp0 = *_TMLGVSs14RangeGeneratorSi_ == null

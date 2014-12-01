@@ -3,279 +3,279 @@ CFG: top_level_code
 
 CFG: _TF4main10testVarLetFT_T_
 #0000:	 assign: *(tmp0.field0) = 42
- - no source -
+simpleValues.swift:2 var myVariable = 42
 #0001:	 assign: *(tmp0.field0) = 50
- - no source -
+simpleValues.swift:3 myVariable = 50
 #0002:	 assign: *tmp1 = 42 <exit>
- - no source -
+simpleValues.swift:4 let myConstant = 42
 
 CFG: _TF4main20testImplicitExplicitFT_T_
 #0000:	 assign: *tmp0 = 70
- - no source -
+simpleValues.swift:8 let implicitInteger = 70
 #0001:	 assign: *tmp1 = 70.0
- - no source -
+simpleValues.swift:9 let implicitDouble = 70.0
 #0002:	 assign: *tmp2 = 70.0 <exit>
- - no source -
+simpleValues.swift:10 let explicitDouble: Double = 70
 
 CFG: _TF4main10testStringFT_T_
 #0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 13, -1)
- - no source -
+simpleValues.swift:14 let label = "The width is "
 #0001:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:14 let label = "The width is "
 #0002:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:14 let label = "The width is "
 #0003:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:14 let label = "The width is "
 #0004:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:14 let label = "The width is "
 #0005:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:14 let label = "The width is "
 #0006:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:14 let label = "The width is "
 #0007:	 assign: *tmp1 = 94
- - no source -
+simpleValues.swift:15 let width = 94
 #0008:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:16 let widthLabel = label + String(width)
 #0009:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:16 let widthLabel = label + String(width)
 #0010:	 assign: *(tmp2.field0) = 94
- - no source -
+simpleValues.swift:16 let widthLabel = label + String(width)
 #0011:	 assign: tmp3 = tmp2
- - no source -
+simpleValues.swift:16 let widthLabel = label + String(width)
 #0012:	 call: tmp4 = _TFSSCfMSSUSs18_SignedIntegerType_USs33_BuiltinIntegerLiteralConvertible__FQ_SS(tmp3, (_TMdSi.field1), _TWPSiSs18_SignedIntegerType, (_TMdSi.field1), _TWPSiSs33_BuiltinIntegerLiteralConvertible)
- - no source -
+simpleValues.swift:16 let widthLabel = label + String(width)
 #0013:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:16 let widthLabel = label + String(width)
 #0014:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:16 let widthLabel = label + String(width)
 #0015:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:16 let widthLabel = label + String(width)
 #0016:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:16 let widthLabel = label + String(width)
 #0017:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:16 let widthLabel = label + String(width)
 #0018:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:16 let widthLabel = label + String(width)
 #0019:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:16 let widthLabel = label + String(width)
 #0020:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:16 let widthLabel = label + String(width)
 #0021:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:16 let widthLabel = label + String(width)
 #0022:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:16 let widthLabel = label + String(width)
 #0023:	 assign: *tmp5 = 3
- - no source -
+simpleValues.swift:18 let apples = 3
 #0024:	 assign: *tmp6 = 5
- - no source -
+simpleValues.swift:19 let oranges = 5
 #0025:	 call: tmp7 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0026:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0027:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0028:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0029:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0030:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0031:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0032:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0033:	 call: tmp8 = _TFSS37convertFromStringInterpolationSegmentfMSSFSiSS(3)
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0034:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0035:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0036:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0037:	 call: tmp9 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 8, -1)
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0038:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0039:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0040:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0041:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0042:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0043:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0044:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0045:	 call: tmp10 = swift_allocObject((metadata.field2), 96, 7)
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0046:	 assign: tmp11 = (tmp10+1)
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0047:	 assign: *tmp11 = 3
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0048:	 assign: tmp12 = tmp10
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0049:	 assign: tmp13 = (tmp12+24)
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0050:	 assign: tmp14 = tmp13
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0051:	 call: llvm.memset.p0i8.i64(tmp14, 0, 72, 8, 0)
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0052:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0053:	 noop: bad
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0054:	 noop: bad
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0055:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0056:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0057:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0058:	 assign: tmp15 = (((((tmp13+1).field0).field0).field0)+2)
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0059:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0060:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0061:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0062:	 assign: tmp16 = (((((tmp13+2).field0).field0).field0)+2)
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0063:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0064:	 assign: tmp17 = tmp13
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0065:	 call: tmp18 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp17, tmp10, 3, (_TMdSS.field1))
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0066:	 call: tmp19 = _TFSS30convertFromStringInterpolationfMSSFtGSaSS__SS(tmp18)
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0067:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0068:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0069:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0070:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0071:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0072:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0073:	 call: tmp20 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0074:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0075:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0076:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0077:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0078:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0079:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0080:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0081:	 call: tmp21 = _TFSS37convertFromStringInterpolationSegmentfMSSFSiSS(8)
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0082:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0083:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0084:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0085:	 call: tmp22 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 17, -1)
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0086:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0087:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0088:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0089:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0090:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0091:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0092:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0093:	 call: tmp23 = swift_allocObject((metadata2.field2), 96, 7)
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0094:	 assign: tmp24 = (tmp23+1)
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0095:	 assign: *tmp24 = 3
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0096:	 assign: tmp25 = tmp23
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0097:	 assign: tmp26 = (tmp25+24)
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0098:	 assign: tmp27 = tmp26
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0099:	 call: llvm.memset.p0i8.i64(tmp27, 0, 72, 8, 0)
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0100:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0101:	 noop: bad
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0102:	 noop: bad
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0103:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0104:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0105:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0106:	 assign: tmp28 = (((((tmp26+1).field0).field0).field0)+2)
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0107:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0108:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0109:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0110:	 assign: tmp29 = (((((tmp26+2).field0).field0).field0)+2)
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0111:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0112:	 assign: tmp30 = tmp26
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0113:	 call: tmp31 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp30, tmp23, 3, (_TMdSS.field1))
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0114:	 call: tmp32 = _TFSS30convertFromStringInterpolationfMSSFtGSaSS__SS(tmp31)
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0115:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0116:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0117:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0118:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0119:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0120:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0121:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0122:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0123:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0124:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0125:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0126:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0127:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0128:	 noop: opcode 'LLVMIntToPtr' not supported <exit>
- - no source -
+simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 
 CFG: arraydestroy
 #0000:	 assign: tmp0 = (+1)
@@ -343,351 +343,351 @@ CFG: arraydestroy1
 
 CFG: _TF4main22testArraysDictionariesFT_T_
 #0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0001:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0002:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0003:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0004:	 call: tmp1 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 5, -1)
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0005:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0006:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0007:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0008:	 call: tmp2 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 6, -1)
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0009:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0010:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0011:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0012:	 call: tmp3 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 10, -1)
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0013:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0014:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0015:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0016:	 call: tmp4 = swift_allocObject((metadata4.field2), 120, 7)
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0017:	 assign: tmp5 = (tmp4+1)
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0018:	 assign: *tmp5 = 4
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0019:	 assign: tmp6 = tmp4
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0020:	 assign: tmp7 = (tmp6+24)
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0021:	 assign: tmp8 = tmp7
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0022:	 call: llvm.memset.p0i8.i64(tmp8, 0, 96, 8, 0)
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0023:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0024:	 noop: bad
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0025:	 noop: bad
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0026:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0027:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0028:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0029:	 assign: tmp9 = (((((tmp7+1).field0).field0).field0)+2)
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0030:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0031:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0032:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0033:	 assign: tmp10 = (((((tmp7+2).field0).field0).field0)+2)
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0034:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0035:	 noop: can't index ((((tmp0+3).field0).field0).field0) by 0
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0036:	 noop: can't index (((((tmp0+3).field0).field0).field0)+1) by 0
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0037:	 assign: tmp11 = (((((tmp7+3).field0).field0).field0)+2)
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0038:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0039:	 assign: tmp12 = tmp7
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0040:	 call: tmp13 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp12, tmp4, 4, (_TMdSS.field1))
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0041:	 call: tmp14 = _TFSaCU__fMGSaQ__Ft12arrayLiteralGSaQ___GSaQ__(tmp13, (_TMdSS.field1))
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0042:	 assign: tmp15 = (((tmp16.field0).field0).field0)
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0043:	 assign: *tmp15 = tmp14
- - no source -
+simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0044:	 call: tmp17 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 15, -1)
- - no source -
+simpleValues.swift:26 shoppingList[1] = "bottle of water"
 #0045:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:26 shoppingList[1] = "bottle of water"
 #0046:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:26 shoppingList[1] = "bottle of water"
 #0047:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:26 shoppingList[1] = "bottle of water"
 #0048:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+simpleValues.swift:26 shoppingList[1] = "bottle of water"
 #0049:	 noop: bad
- - no source -
+simpleValues.swift:26 shoppingList[1] = "bottle of water"
 #0050:	 noop: bad
- - no source -
+simpleValues.swift:26 shoppingList[1] = "bottle of water"
 #0051:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:26 shoppingList[1] = "bottle of water"
 #0052:	 assign: tmp18 = tmp19
- - no source -
+simpleValues.swift:26 shoppingList[1] = "bottle of water"
 #0053:	 call: tmp20 = _TMaGSaSS_()
- - no source -
+simpleValues.swift:26 shoppingList[1] = "bottle of water"
 #0054:	 call: _TFSas9subscriptFSiQ_(tmp18, 1, tmp16, tmp20)
- - no source -
+simpleValues.swift:26 shoppingList[1] = "bottle of water"
 #0055:	 call: tmp21 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
- - no source -
+simpleValues.swift:29 "Malcolm": "Captain",
 #0056:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:29 "Malcolm": "Captain",
 #0057:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:29 "Malcolm": "Captain",
 #0058:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:29 "Malcolm": "Captain",
 #0059:	 call: tmp22 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
- - no source -
+simpleValues.swift:29 "Malcolm": "Captain",
 #0060:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:29 "Malcolm": "Captain",
 #0061:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:29 "Malcolm": "Captain",
 #0062:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:29 "Malcolm": "Captain",
 #0063:	 call: tmp23 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 6, -1)
- - no source -
+simpleValues.swift:30 "Kaylee": "Mechanic",
 #0064:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:30 "Kaylee": "Mechanic",
 #0065:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:30 "Kaylee": "Mechanic",
 #0066:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:30 "Kaylee": "Mechanic",
 #0067:	 call: tmp24 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 8, -1)
- - no source -
+simpleValues.swift:30 "Kaylee": "Mechanic",
 #0068:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:30 "Kaylee": "Mechanic",
 #0069:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:30 "Kaylee": "Mechanic",
 #0070:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:30 "Kaylee": "Mechanic",
 #0071:	 call: tmp25 = swift_allocObject((metadata6.field2), 120, 7)
- - no source -
+simpleValues.swift:28 var occupations = [
 #0072:	 assign: tmp26 = (tmp25+1)
- - no source -
+simpleValues.swift:28 var occupations = [
 #0073:	 assign: *tmp26 = 2
- - no source -
+simpleValues.swift:28 var occupations = [
 #0074:	 assign: tmp27 = tmp25
- - no source -
+simpleValues.swift:28 var occupations = [
 #0075:	 assign: tmp28 = (tmp27+24)
- - no source -
+simpleValues.swift:28 var occupations = [
 #0076:	 assign: tmp29 = tmp28
- - no source -
+simpleValues.swift:28 var occupations = [
 #0077:	 call: llvm.memset.p0i8.i64(tmp29, 0, 96, 8, 0)
- - no source -
+simpleValues.swift:28 var occupations = [
 #0078:	 noop: can't index ((((tmp0.field0).field0).field0).field0) by 0
- - no source -
+simpleValues.swift:28 var occupations = [
 #0079:	 noop: can't index (((((tmp0.field0).field0).field0).field0)+1) by 0
- - no source -
+simpleValues.swift:28 var occupations = [
 #0080:	 assign: tmp30 = (((((tmp28.field0).field0).field0).field0)+2)
- - no source -
+simpleValues.swift:28 var occupations = [
 #0081:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:28 var occupations = [
 #0082:	 noop: can't index ((((tmp0.field1).field0).field0).field0) by 0
- - no source -
+simpleValues.swift:28 var occupations = [
 #0083:	 noop: can't index (((((tmp0.field1).field0).field0).field0)+1) by 0
- - no source -
+simpleValues.swift:28 var occupations = [
 #0084:	 assign: tmp31 = (((((tmp28.field1).field0).field0).field0)+2)
- - no source -
+simpleValues.swift:28 var occupations = [
 #0085:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:28 var occupations = [
 #0086:	 noop: can't index (((((tmp0+1).field0).field0).field0).field0) by 0
- - no source -
+simpleValues.swift:28 var occupations = [
 #0087:	 noop: can't index (((((tmp0+1).field0).field0).field0).field0) by 1
- - no source -
+simpleValues.swift:28 var occupations = [
 #0088:	 noop: can't index (((((tmp0+1).field0).field0).field0).field0) by 2
- - no source -
+simpleValues.swift:28 var occupations = [
 #0089:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:28 var occupations = [
 #0090:	 noop: bad
- - no source -
+simpleValues.swift:28 var occupations = [
 #0091:	 noop: bad
- - no source -
+simpleValues.swift:28 var occupations = [
 #0092:	 noop: bad
- - no source -
+simpleValues.swift:28 var occupations = [
 #0093:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:28 var occupations = [
 #0094:	 assign: tmp32 = tmp28
- - no source -
+simpleValues.swift:28 var occupations = [
 #0095:	 call: tmp33 = _TMaTSSSS_()
- - no source -
+simpleValues.swift:28 var occupations = [
 #0096:	 call: tmp34 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp32, tmp25, 2, tmp33)
- - no source -
+simpleValues.swift:28 var occupations = [
 #0097:	 call: tmp35 = _TFVSs10DictionaryCUSs8Hashable___fMGS_Q_Q0__Ft17dictionaryLiteralGSaTQ_Q0____GS_Q_Q0__(tmp34, (_TMdSS.field1), _TWPSSSs8Hashable, (_TMdSS.field1))
- - no source -
+simpleValues.swift:28 var occupations = [
 #0098:	 assign: tmp36 = (tmp37.field0)
- - no source -
+simpleValues.swift:28 var occupations = [
 #0099:	 assign: *tmp36 = tmp35
- - no source -
+simpleValues.swift:28 var occupations = [
 #0100:	 call: tmp38 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 16, -1)
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0101:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0102:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0103:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0104:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0105:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0106:	 assign: tmp39 = tmp40
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0107:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0108:	 noop: bad
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0109:	 noop: bad
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0110:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0111:	 assign: tmp41 = (tmp40.field1)
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0112:	 assign: *tmp41 = 0
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0113:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0114:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0115:	 assign: tmp42 = tmp40
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0116:	 assign: tmp43 = (tmp40.field1)
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0117:	 call: tmp44 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 5, -1)
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0118:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0119:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0120:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0121:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0122:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0123:	 assign: tmp45 = tmp46
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0124:	 assign: *tmp45 = *tmp42
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0125:	 assign: tmp47 = (tmp46.field1)
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0126:	 assign: *tmp47 = *tmp43
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0127:	 noop: can't index (((tmp0.field0).field0).field0) by 0
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0128:	 noop: bad
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0129:	 noop: bad
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0130:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0131:	 assign: tmp48 = tmp46
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0132:	 assign: tmp49 = tmp50
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0133:	 call: tmp51 = _TMaGVSs10DictionarySSSS_()
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0134:	 call: _TFVSs10Dictionarys9subscriptFQ_GSqQ0__(tmp48, tmp49, tmp37, tmp51)
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0135:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0136:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0137:	 call: tmp52 = _TFSaCU__fMGSaQ__FT_GSaQ__((_TMdSS.field1))
- - no source -
+simpleValues.swift:34 let emptyArray = [String]()
 #0138:	 assign: *tmp53 = tmp52
- - no source -
+simpleValues.swift:34 let emptyArray = [String]()
 #0139:	 call: tmp54 = _TFVSs10DictionaryCUSs8Hashable___fMGS_Q_Q0__FT_GS_Q_Q0__((_TMdSS.field1), _TWPSSSs8Hashable, (_TMdSf.field1))
- - no source -
+simpleValues.swift:35 let emptyDictionary = [String: Float]()
 #0140:	 assign: *tmp55 = tmp54
- - no source -
+simpleValues.swift:35 let emptyDictionary = [String: Float]()
 #0141:	 call: tmp56 = swift_allocObject((metadata8.field2), 24, 7)
- - no source -
+simpleValues.swift:37 shoppingList = []
 #0142:	 assign: tmp57 = (tmp56+1)
- - no source -
+simpleValues.swift:37 shoppingList = []
 #0143:	 assign: *tmp57 = 0
- - no source -
+simpleValues.swift:37 shoppingList = []
 #0144:	 assign: tmp58 = tmp56
- - no source -
+simpleValues.swift:37 shoppingList = []
 #0145:	 assign: tmp59 = (tmp58+24)
- - no source -
+simpleValues.swift:37 shoppingList = []
 #0146:	 assign: tmp60 = tmp59
- - no source -
+simpleValues.swift:37 shoppingList = []
 #0147:	 call: llvm.memset.p0i8.i64(tmp60, 0, 0, 8, 0)
- - no source -
+simpleValues.swift:37 shoppingList = []
 #0148:	 assign: tmp61 = tmp59
- - no source -
+simpleValues.swift:37 shoppingList = []
 #0149:	 call: tmp62 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp61, tmp56, 0, (_TMdSS.field1))
- - no source -
+simpleValues.swift:37 shoppingList = []
 #0150:	 call: tmp63 = _TFSaCU__fMGSaQ__Ft12arrayLiteralGSaQ___GSaQ__(tmp62, (_TMdSS.field1))
- - no source -
+simpleValues.swift:37 shoppingList = []
 #0151:	 assign: tmp64 = (((tmp16.field0).field0).field0)
- - no source -
+simpleValues.swift:37 shoppingList = []
 #0152:	 assign: tmp65 = (((tmp16.field0).field0).field0)
- - no source -
+simpleValues.swift:37 shoppingList = []
 #0153:	 assign: *tmp65 = tmp63
- - no source -
+simpleValues.swift:37 shoppingList = []
 #0154:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:37 shoppingList = []
 #0155:	 noop: opcode 'LLVMIntToPtr' not supported
- - no source -
+simpleValues.swift:37 shoppingList = []
 #0156:	 call: tmp66 = swift_allocObject((metadata10.field2), 24, 7)
- - no source -
+simpleValues.swift:38 occupations = [:]
 #0157:	 assign: tmp67 = (tmp66+1)
- - no source -
+simpleValues.swift:38 occupations = [:]
 #0158:	 assign: *tmp67 = 0
- - no source -
+simpleValues.swift:38 occupations = [:]
 #0159:	 assign: tmp68 = tmp66
- - no source -
+simpleValues.swift:38 occupations = [:]
 #0160:	 assign: tmp69 = (tmp68+24)
- - no source -
+simpleValues.swift:38 occupations = [:]
 #0161:	 assign: tmp70 = tmp69
- - no source -
+simpleValues.swift:38 occupations = [:]
 #0162:	 call: llvm.memset.p0i8.i64(tmp70, 0, 0, 8, 0)
- - no source -
+simpleValues.swift:38 occupations = [:]
 #0163:	 assign: tmp71 = tmp69
- - no source -
+simpleValues.swift:38 occupations = [:]
 #0164:	 call: tmp72 = _TMaTSSSS_()
- - no source -
+simpleValues.swift:38 occupations = [:]
 #0165:	 call: tmp73 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp71, tmp66, 0, tmp72)
- - no source -
+simpleValues.swift:38 occupations = [:]
 #0166:	 call: tmp74 = _TFVSs10DictionaryCUSs8Hashable___fMGS_Q_Q0__Ft17dictionaryLiteralGSaTQ_Q0____GS_Q_Q0__(tmp73, (_TMdSS.field1), _TWPSSSs8Hashable, (_TMdSS.field1))
- - no source -
+simpleValues.swift:38 occupations = [:]
 #0167:	 assign: tmp75 = (tmp37.field0)
- - no source -
+simpleValues.swift:38 occupations = [:]
 #0168:	 assign: tmp76 = (tmp37.field0)
- - no source -
+simpleValues.swift:38 occupations = [:]
 #0169:	 assign: *tmp76 = tmp74
- - no source -
+simpleValues.swift:38 occupations = [:]
 #0170:	 noop: opcode 'LLVMLShr' not supported
- - no source -
+simpleValues.swift:38 occupations = [:]
 #0171:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+simpleValues.swift:38 occupations = [:]
 #0172:	 noop: opcode 'LLVMTrunc' not supported <exit>
- - no source -
+simpleValues.swift:38 occupations = [:]
 
 CFG: arraydestroy3
 #0000:	 assign: tmp0 = (+1)
