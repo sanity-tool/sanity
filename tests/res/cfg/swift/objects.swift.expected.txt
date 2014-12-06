@@ -8,117 +8,81 @@ CFG: _TFC4main5Shape17simpleDescriptionfS0_FT_SS
  - no source -
 #0002:	 call: tmp2 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 13, -1)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0003:	 noop: opcode 'LLVMExtractValue' not supported
+#0003:	 call: tmp3 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp2.field0), (tmp2.field0), (tmp2.field0))
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0004:	 noop: opcode 'LLVMExtractValue' not supported
+#0004:	 assign: tmp4 = 
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0005:	 noop: opcode 'LLVMExtractValue' not supported
+#0005:	 call: swift_retain_noresult(tmp4)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0006:	 noop: opcode 'LLVMExtractValue' not supported
+#0006:	 assign: tmp5 = 
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0007:	 noop: opcode 'LLVMExtractValue' not supported
+#0007:	 assign: tmp6 = *tmp5
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0008:	 noop: opcode 'LLVMExtractValue' not supported
+#0008:	 assign: tmp7 = *(tmp6+9)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0009:	 noop: opcode 'LLVMExtractValue' not supported
+#0009:	 assign: tmp8 = tmp7
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0010:	 assign: tmp3 = 
+#0010:	 call: tmp9 = tmp8()
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0011:	 call: swift_retain_noresult(tmp3)
+#0011:	 call: tmp10 = _TFSS37convertFromStringInterpolationSegmentfMSSFSiSS(tmp9)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0012:	 assign: tmp4 = 
+#0012:	 call: tmp11 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0013:	 assign: tmp5 = *tmp4
+#0013:	 call: tmp12 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp11.field0), (tmp11.field0), (tmp11.field0))
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0014:	 assign: tmp6 = *(tmp5+9)
+#0014:	 call: tmp13 = swift_allocObject((metadata.field2), 96, 7)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0015:	 assign: tmp7 = tmp6
+#0015:	 assign: tmp14 = (tmp13+1)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0016:	 call: tmp8 = tmp7()
+#0016:	 assign: *tmp14 = 3
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0017:	 call: tmp9 = _TFSS37convertFromStringInterpolationSegmentfMSSFSiSS(tmp8)
+#0017:	 assign: tmp15 = tmp13
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0018:	 noop: opcode 'LLVMExtractValue' not supported
+#0018:	 assign: tmp16 = (tmp15+24)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0019:	 noop: opcode 'LLVMExtractValue' not supported
+#0019:	 assign: tmp17 = tmp16
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0020:	 noop: opcode 'LLVMExtractValue' not supported
+#0020:	 call: llvm.memset.p0i8.i64(tmp17, 0, 72, 8, 0)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0021:	 call: tmp10 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
+#0021:	 noop: can't index (((tmp0.field0).field0).field0) by 0
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0022:	 noop: opcode 'LLVMExtractValue' not supported
+#0022:	 noop: bad
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0023:	 noop: opcode 'LLVMExtractValue' not supported
+#0023:	 noop: bad
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0024:	 noop: opcode 'LLVMExtractValue' not supported
+#0024:	 assign: *tmp18 = (tmp3.field0)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0025:	 noop: opcode 'LLVMExtractValue' not supported
+#0025:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0026:	 noop: opcode 'LLVMExtractValue' not supported
+#0026:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0027:	 noop: opcode 'LLVMExtractValue' not supported
+#0027:	 assign: tmp19 = (((((tmp16+1).field0).field0).field0)+2)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0028:	 noop: opcode 'LLVMExtractValue' not supported
+#0028:	 assign: *tmp19 = (tmp10.field0)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0029:	 call: tmp11 = swift_allocObject((metadata.field2), 96, 7)
+#0029:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0030:	 assign: tmp12 = (tmp11+1)
+#0030:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0031:	 assign: *tmp12 = 3
+#0031:	 assign: tmp20 = (((((tmp16+2).field0).field0).field0)+2)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0032:	 assign: tmp13 = tmp11
+#0032:	 assign: *tmp20 = (tmp12.field0)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0033:	 assign: tmp14 = (tmp13+24)
+#0033:	 assign: tmp21 = tmp16
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0034:	 assign: tmp15 = tmp14
+#0034:	 call: tmp22 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp21, tmp13, 3, (_TMdSS.field1))
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0035:	 call: llvm.memset.p0i8.i64(tmp15, 0, 72, 8, 0)
+#0035:	 call: tmp23 = _TFSS30convertFromStringInterpolationfMSSFtGSaSS__SS(tmp22)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0036:	 noop: can't index (((tmp0.field0).field0).field0) by 0
+#0036:	 call: swift_release()
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0037:	 noop: bad
+#0037:	 noop: opcode 'LLVMInsertValue' not supported
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0038:	 noop: bad
+#0038:	 noop: opcode 'LLVMInsertValue' not supported
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0039:	 noop: opcode 'LLVMExtractValue' not supported
+#0039:	 noop: opcode 'LLVMInsertValue' not supported
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0040:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0041:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0042:	 assign: tmp16 = (((((tmp14+1).field0).field0).field0)+2)
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0043:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0044:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0045:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0046:	 assign: tmp17 = (((((tmp14+2).field0).field0).field0)+2)
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0047:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0048:	 assign: tmp18 = tmp14
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0049:	 call: tmp19 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp18, tmp11, 3, (_TMdSS.field1))
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0050:	 call: tmp20 = _TFSS30convertFromStringInterpolationfMSSFtGSaSS__SS(tmp19)
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0051:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0052:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0053:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0054:	 call: swift_release()
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0055:	 noop: opcode 'LLVMInsertValue' not supported
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0056:	 noop: opcode 'LLVMInsertValue' not supported
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0057:	 noop: opcode 'LLVMInsertValue' not supported
-objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0058:	 noop: opcode 'LLVMRet' not supported <exit>
+#0040:	 noop: opcode 'LLVMRet' not supported <exit>
 objects.swift:4 return "A shape with \(numberOfSides) sides."
 
 CFG: arraydestroy
@@ -294,25 +258,19 @@ objects.swift:11 var shapeDescription = shape.simpleDescription()
 objects.swift:11 var shapeDescription = shape.simpleDescription()
 #0014:	 call: tmp11 = tmp10(tmp1)
 objects.swift:11 var shapeDescription = shape.simpleDescription()
-#0015:	 noop: opcode 'LLVMExtractValue' not supported
+#0015:	 noop: can't index (((tmp0.field0).field0).field0) by 0
 objects.swift:11 var shapeDescription = shape.simpleDescription()
-#0016:	 noop: opcode 'LLVMExtractValue' not supported
+#0016:	 noop: bad
 objects.swift:11 var shapeDescription = shape.simpleDescription()
-#0017:	 noop: opcode 'LLVMExtractValue' not supported
+#0017:	 noop: bad
 objects.swift:11 var shapeDescription = shape.simpleDescription()
-#0018:	 noop: can't index (((tmp0.field0).field0).field0) by 0
+#0018:	 assign: *tmp12 = (tmp11.field0)
 objects.swift:11 var shapeDescription = shape.simpleDescription()
-#0019:	 noop: bad
+#0019:	 noop: opcode 'LLVMIntToPtr' not supported
 objects.swift:11 var shapeDescription = shape.simpleDescription()
-#0020:	 noop: bad
+#0020:	 noop: opcode 'LLVMIntToPtr' not supported
 objects.swift:11 var shapeDescription = shape.simpleDescription()
-#0021:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:11 var shapeDescription = shape.simpleDescription()
-#0022:	 noop: opcode 'LLVMIntToPtr' not supported
-objects.swift:11 var shapeDescription = shape.simpleDescription()
-#0023:	 noop: opcode 'LLVMIntToPtr' not supported
-objects.swift:11 var shapeDescription = shape.simpleDescription()
-#0024:	 call: swift_release(tmp1) <exit>
+#0021:	 call: swift_release(tmp1) <exit>
 objects.swift:11 var shapeDescription = shape.simpleDescription()
 
 CFG: _TFC4main10NamedShapecfMS0_FT4nameSS_S0_
@@ -398,115 +356,79 @@ CFG: _TFC4main10NamedShape17simpleDescriptionfS0_FT_SS
  - no source -
 #0002:	 call: tmp2 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 13, -1)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0003:	 noop: opcode 'LLVMExtractValue' not supported
+#0003:	 call: tmp3 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp2.field0), (tmp2.field0), (tmp2.field0))
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0004:	 noop: opcode 'LLVMExtractValue' not supported
+#0004:	 assign: tmp4 = 
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0005:	 noop: opcode 'LLVMExtractValue' not supported
+#0005:	 call: swift_retain_noresult(tmp4)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0006:	 noop: opcode 'LLVMExtractValue' not supported
+#0006:	 assign: tmp5 = *((.field0).field0)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0007:	 noop: opcode 'LLVMExtractValue' not supported
+#0007:	 assign: tmp6 = *(tmp5+9)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0008:	 noop: opcode 'LLVMExtractValue' not supported
+#0008:	 assign: tmp7 = tmp6
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0009:	 noop: opcode 'LLVMExtractValue' not supported
+#0009:	 call: tmp8 = tmp7()
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0010:	 assign: tmp3 = 
+#0010:	 call: tmp9 = _TFSS37convertFromStringInterpolationSegmentfMSSFSiSS(tmp8)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0011:	 call: swift_retain_noresult(tmp3)
+#0011:	 call: tmp10 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0012:	 assign: tmp4 = *((.field0).field0)
+#0012:	 call: tmp11 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp10.field0), (tmp10.field0), (tmp10.field0))
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0013:	 assign: tmp5 = *(tmp4+9)
+#0013:	 call: tmp12 = swift_allocObject((metadata2.field2), 96, 7)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0014:	 assign: tmp6 = tmp5
+#0014:	 assign: tmp13 = (tmp12+1)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0015:	 call: tmp7 = tmp6()
+#0015:	 assign: *tmp13 = 3
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0016:	 call: tmp8 = _TFSS37convertFromStringInterpolationSegmentfMSSFSiSS(tmp7)
+#0016:	 assign: tmp14 = tmp12
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0017:	 noop: opcode 'LLVMExtractValue' not supported
+#0017:	 assign: tmp15 = (tmp14+24)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0018:	 noop: opcode 'LLVMExtractValue' not supported
+#0018:	 assign: tmp16 = tmp15
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0019:	 noop: opcode 'LLVMExtractValue' not supported
+#0019:	 call: llvm.memset.p0i8.i64(tmp16, 0, 72, 8, 0)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0020:	 call: tmp9 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
+#0020:	 noop: can't index (((tmp0.field0).field0).field0) by 0
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0021:	 noop: opcode 'LLVMExtractValue' not supported
+#0021:	 noop: bad
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0022:	 noop: opcode 'LLVMExtractValue' not supported
+#0022:	 noop: bad
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0023:	 noop: opcode 'LLVMExtractValue' not supported
+#0023:	 assign: *tmp17 = (tmp3.field0)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0024:	 noop: opcode 'LLVMExtractValue' not supported
+#0024:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0025:	 noop: opcode 'LLVMExtractValue' not supported
+#0025:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0026:	 noop: opcode 'LLVMExtractValue' not supported
+#0026:	 assign: tmp18 = (((((tmp15+1).field0).field0).field0)+2)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0027:	 noop: opcode 'LLVMExtractValue' not supported
+#0027:	 assign: *tmp18 = (tmp9.field0)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0028:	 call: tmp10 = swift_allocObject((metadata2.field2), 96, 7)
+#0028:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0029:	 assign: tmp11 = (tmp10+1)
+#0029:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0030:	 assign: *tmp11 = 3
+#0030:	 assign: tmp19 = (((((tmp15+2).field0).field0).field0)+2)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0031:	 assign: tmp12 = tmp10
+#0031:	 assign: *tmp19 = (tmp11.field0)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0032:	 assign: tmp13 = (tmp12+24)
+#0032:	 assign: tmp20 = tmp15
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0033:	 assign: tmp14 = tmp13
+#0033:	 call: tmp21 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp20, tmp12, 3, (_TMdSS.field1))
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0034:	 call: llvm.memset.p0i8.i64(tmp14, 0, 72, 8, 0)
+#0034:	 call: tmp22 = _TFSS30convertFromStringInterpolationfMSSFtGSaSS__SS(tmp21)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0035:	 noop: can't index (((tmp0.field0).field0).field0) by 0
+#0035:	 call: swift_release()
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0036:	 noop: bad
+#0036:	 noop: opcode 'LLVMInsertValue' not supported
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0037:	 noop: bad
+#0037:	 noop: opcode 'LLVMInsertValue' not supported
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0038:	 noop: opcode 'LLVMExtractValue' not supported
+#0038:	 noop: opcode 'LLVMInsertValue' not supported
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0039:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0040:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0041:	 assign: tmp15 = (((((tmp13+1).field0).field0).field0)+2)
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0042:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0043:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0044:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0045:	 assign: tmp16 = (((((tmp13+2).field0).field0).field0)+2)
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0046:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0047:	 assign: tmp17 = tmp13
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0048:	 call: tmp18 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp17, tmp10, 3, (_TMdSS.field1))
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0049:	 call: tmp19 = _TFSS30convertFromStringInterpolationfMSSFtGSaSS__SS(tmp18)
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0050:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0051:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0052:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0053:	 call: swift_release()
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0054:	 noop: opcode 'LLVMInsertValue' not supported
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0055:	 noop: opcode 'LLVMInsertValue' not supported
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0056:	 noop: opcode 'LLVMInsertValue' not supported
-objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0057:	 noop: opcode 'LLVMRet' not supported <exit>
+#0039:	 noop: opcode 'LLVMRet' not supported <exit>
 objects.swift:23 return "A shape with \(numberOfSides) sides."
 
 CFG: arraydestroy1
@@ -840,115 +762,79 @@ CFG: _TFC4main6Square17simpleDescriptionfS0_FT_SS
  - no source -
 #0002:	 call: tmp2 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 30, -1)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0003:	 noop: opcode 'LLVMExtractValue' not supported
+#0003:	 call: tmp3 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp2.field0), (tmp2.field0), (tmp2.field0))
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0004:	 noop: opcode 'LLVMExtractValue' not supported
+#0004:	 assign: tmp4 = 
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0005:	 noop: opcode 'LLVMExtractValue' not supported
+#0005:	 call: swift_retain_noresult(tmp4)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0006:	 noop: opcode 'LLVMExtractValue' not supported
+#0006:	 assign: tmp5 = *((.field0).field0)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0007:	 noop: opcode 'LLVMExtractValue' not supported
+#0007:	 assign: tmp6 = *(tmp5+19)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0008:	 noop: opcode 'LLVMExtractValue' not supported
+#0008:	 assign: tmp7 = tmp6
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0009:	 noop: opcode 'LLVMExtractValue' not supported
+#0009:	 call: tmp8 = tmp7()
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0010:	 assign: tmp3 = 
+#0010:	 call: tmp9 = _TFSS37convertFromStringInterpolationSegmentfMSSFSdSS(tmp8)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0011:	 call: swift_retain_noresult(tmp3)
+#0011:	 call: tmp10 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 1, -1)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0012:	 assign: tmp4 = *((.field0).field0)
+#0012:	 call: tmp11 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp10.field0), (tmp10.field0), (tmp10.field0))
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0013:	 assign: tmp5 = *(tmp4+19)
+#0013:	 call: tmp12 = swift_allocObject((metadata4.field2), 96, 7)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0014:	 assign: tmp6 = tmp5
+#0014:	 assign: tmp13 = (tmp12+1)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0015:	 call: tmp7 = tmp6()
+#0015:	 assign: *tmp13 = 3
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0016:	 call: tmp8 = _TFSS37convertFromStringInterpolationSegmentfMSSFSdSS(tmp7)
+#0016:	 assign: tmp14 = tmp12
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0017:	 noop: opcode 'LLVMExtractValue' not supported
+#0017:	 assign: tmp15 = (tmp14+24)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0018:	 noop: opcode 'LLVMExtractValue' not supported
+#0018:	 assign: tmp16 = tmp15
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0019:	 noop: opcode 'LLVMExtractValue' not supported
+#0019:	 call: llvm.memset.p0i8.i64(tmp16, 0, 72, 8, 0)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0020:	 call: tmp9 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 1, -1)
+#0020:	 noop: can't index (((tmp0.field0).field0).field0) by 0
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0021:	 noop: opcode 'LLVMExtractValue' not supported
+#0021:	 noop: bad
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0022:	 noop: opcode 'LLVMExtractValue' not supported
+#0022:	 noop: bad
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0023:	 noop: opcode 'LLVMExtractValue' not supported
+#0023:	 assign: *tmp17 = (tmp3.field0)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0024:	 noop: opcode 'LLVMExtractValue' not supported
+#0024:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0025:	 noop: opcode 'LLVMExtractValue' not supported
+#0025:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0026:	 noop: opcode 'LLVMExtractValue' not supported
+#0026:	 assign: tmp18 = (((((tmp15+1).field0).field0).field0)+2)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0027:	 noop: opcode 'LLVMExtractValue' not supported
+#0027:	 assign: *tmp18 = (tmp9.field0)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0028:	 call: tmp10 = swift_allocObject((metadata4.field2), 96, 7)
+#0028:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0029:	 assign: tmp11 = (tmp10+1)
+#0029:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0030:	 assign: *tmp11 = 3
+#0030:	 assign: tmp19 = (((((tmp15+2).field0).field0).field0)+2)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0031:	 assign: tmp12 = tmp10
+#0031:	 assign: *tmp19 = (tmp11.field0)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0032:	 assign: tmp13 = (tmp12+24)
+#0032:	 assign: tmp20 = tmp15
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0033:	 assign: tmp14 = tmp13
+#0033:	 call: tmp21 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp20, tmp12, 3, (_TMdSS.field1))
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0034:	 call: llvm.memset.p0i8.i64(tmp14, 0, 72, 8, 0)
+#0034:	 call: tmp22 = _TFSS30convertFromStringInterpolationfMSSFtGSaSS__SS(tmp21)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0035:	 noop: can't index (((tmp0.field0).field0).field0) by 0
+#0035:	 call: swift_release()
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0036:	 noop: bad
+#0036:	 noop: opcode 'LLVMInsertValue' not supported
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0037:	 noop: bad
+#0037:	 noop: opcode 'LLVMInsertValue' not supported
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0038:	 noop: opcode 'LLVMExtractValue' not supported
+#0038:	 noop: opcode 'LLVMInsertValue' not supported
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0039:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0040:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0041:	 assign: tmp15 = (((((tmp13+1).field0).field0).field0)+2)
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0042:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0043:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0044:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0045:	 assign: tmp16 = (((((tmp13+2).field0).field0).field0)+2)
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0046:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0047:	 assign: tmp17 = tmp13
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0048:	 call: tmp18 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp17, tmp10, 3, (_TMdSS.field1))
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0049:	 call: tmp19 = _TFSS30convertFromStringInterpolationfMSSFtGSaSS__SS(tmp18)
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0050:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0051:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0052:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0053:	 call: swift_release()
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0054:	 noop: opcode 'LLVMInsertValue' not supported
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0055:	 noop: opcode 'LLVMInsertValue' not supported
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0056:	 noop: opcode 'LLVMInsertValue' not supported
-objects.swift:41 return "A square with sides of length \(sideLength)."
-#0057:	 noop: opcode 'LLVMRet' not supported <exit>
+#0039:	 noop: opcode 'LLVMRet' not supported <exit>
 objects.swift:41 return "A square with sides of length \(sideLength)."
 
 CFG: arraydestroy3
@@ -1136,51 +1022,39 @@ CFG: _TF4main10testSquareFT_T_
 objects.swift:46 let test = Square(sideLength: 5.2, name: "my test square")
 #0001:	 call: tmp1 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 14, -1)
 objects.swift:46 let test = Square(sideLength: 5.2, name: "my test square")
-#0002:	 noop: opcode 'LLVMExtractValue' not supported
+#0002:	 call: tmp2 = _TFC4main6SquareCfMS0_FT10sideLengthSd4nameSS_S0_(5.2, (tmp1.field0), (tmp1.field0), (tmp1.field0), tmp0)
 objects.swift:46 let test = Square(sideLength: 5.2, name: "my test square")
-#0003:	 noop: opcode 'LLVMExtractValue' not supported
+#0003:	 assign: *tmp3 = tmp2
 objects.swift:46 let test = Square(sideLength: 5.2, name: "my test square")
-#0004:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:46 let test = Square(sideLength: 5.2, name: "my test square")
-#0005:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:46 let test = Square(sideLength: 5.2, name: "my test square")
-#0006:	 assign: *tmp2 = tmp3
-objects.swift:46 let test = Square(sideLength: 5.2, name: "my test square")
-#0007:	 assign: tmp4 = tmp3
+#0004:	 assign: tmp4 = tmp2
 objects.swift:47 test.area()
-#0008:	 call: swift_retain_noresult(tmp4)
+#0005:	 call: swift_retain_noresult(tmp4)
 objects.swift:47 test.area()
-#0009:	 assign: tmp5 = *((tmp3.field0).field0)
+#0006:	 assign: tmp5 = *((tmp2.field0).field0)
 objects.swift:47 test.area()
-#0010:	 assign: tmp6 = *(tmp5+23)
+#0007:	 assign: tmp6 = *(tmp5+23)
 objects.swift:47 test.area()
-#0011:	 assign: tmp7 = tmp6
+#0008:	 assign: tmp7 = tmp6
 objects.swift:47 test.area()
-#0012:	 call: tmp8 = tmp7(tmp3)
+#0009:	 call: tmp8 = tmp7(tmp2)
 objects.swift:47 test.area()
-#0013:	 assign: tmp9 = tmp3
+#0010:	 assign: tmp9 = tmp2
 objects.swift:48 test.simpleDescription()
-#0014:	 call: swift_retain_noresult(tmp9)
+#0011:	 call: swift_retain_noresult(tmp9)
 objects.swift:48 test.simpleDescription()
-#0015:	 assign: tmp10 = *((tmp3.field0).field0)
+#0012:	 assign: tmp10 = *((tmp2.field0).field0)
 objects.swift:48 test.simpleDescription()
-#0016:	 assign: tmp11 = *(tmp10+16)
+#0013:	 assign: tmp11 = *(tmp10+16)
 objects.swift:48 test.simpleDescription()
-#0017:	 assign: tmp12 = tmp11
+#0014:	 assign: tmp12 = tmp11
 objects.swift:48 test.simpleDescription()
-#0018:	 call: tmp13 = tmp12(tmp3)
+#0015:	 call: tmp13 = tmp12(tmp2)
 objects.swift:48 test.simpleDescription()
-#0019:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:48 test.simpleDescription()
-#0020:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:48 test.simpleDescription()
-#0021:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:48 test.simpleDescription()
-#0022:	 noop: opcode 'LLVMIntToPtr' not supported
+#0016:	 noop: opcode 'LLVMIntToPtr' not supported
 objects.swift:49 }
-#0023:	 noop: opcode 'LLVMIntToPtr' not supported
+#0017:	 noop: opcode 'LLVMIntToPtr' not supported
 objects.swift:49 }
-#0024:	 call: swift_release(tmp3) <exit>
+#0018:	 call: swift_release(tmp2) <exit>
 objects.swift:49 }
 
 CFG: _TFC4main19EquilateralTrianglecfMS0_FT10sideLengthSd4nameSS_S0_
@@ -1346,115 +1220,79 @@ CFG: _TFC4main19EquilateralTriangle17simpleDescriptionfS0_FT_SS
  - no source -
 #0002:	 call: tmp2 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 45, -1)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0003:	 noop: opcode 'LLVMExtractValue' not supported
+#0003:	 call: tmp3 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp2.field0), (tmp2.field0), (tmp2.field0))
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0004:	 noop: opcode 'LLVMExtractValue' not supported
+#0004:	 assign: tmp4 = 
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0005:	 noop: opcode 'LLVMExtractValue' not supported
+#0005:	 call: swift_retain_noresult(tmp4)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0006:	 noop: opcode 'LLVMExtractValue' not supported
+#0006:	 assign: tmp5 = *((.field0).field0)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0007:	 noop: opcode 'LLVMExtractValue' not supported
+#0007:	 assign: tmp6 = *(tmp5+19)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0008:	 noop: opcode 'LLVMExtractValue' not supported
+#0008:	 assign: tmp7 = tmp6
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0009:	 noop: opcode 'LLVMExtractValue' not supported
+#0009:	 call: tmp8 = tmp7()
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0010:	 assign: tmp3 = 
+#0010:	 call: tmp9 = _TFSS37convertFromStringInterpolationSegmentfMSSFSdSS(tmp8)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0011:	 call: swift_retain_noresult(tmp3)
+#0011:	 call: tmp10 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 1, -1)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0012:	 assign: tmp4 = *((.field0).field0)
+#0012:	 call: tmp11 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp10.field0), (tmp10.field0), (tmp10.field0))
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0013:	 assign: tmp5 = *(tmp4+19)
+#0013:	 call: tmp12 = swift_allocObject((metadata9.field2), 96, 7)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0014:	 assign: tmp6 = tmp5
+#0014:	 assign: tmp13 = (tmp12+1)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0015:	 call: tmp7 = tmp6()
+#0015:	 assign: *tmp13 = 3
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0016:	 call: tmp8 = _TFSS37convertFromStringInterpolationSegmentfMSSFSdSS(tmp7)
+#0016:	 assign: tmp14 = tmp12
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0017:	 noop: opcode 'LLVMExtractValue' not supported
+#0017:	 assign: tmp15 = (tmp14+24)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0018:	 noop: opcode 'LLVMExtractValue' not supported
+#0018:	 assign: tmp16 = tmp15
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0019:	 noop: opcode 'LLVMExtractValue' not supported
+#0019:	 call: llvm.memset.p0i8.i64(tmp16, 0, 72, 8, 0)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0020:	 call: tmp9 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 1, -1)
+#0020:	 noop: can't index (((tmp0.field0).field0).field0) by 0
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0021:	 noop: opcode 'LLVMExtractValue' not supported
+#0021:	 noop: bad
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0022:	 noop: opcode 'LLVMExtractValue' not supported
+#0022:	 noop: bad
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0023:	 noop: opcode 'LLVMExtractValue' not supported
+#0023:	 assign: *tmp17 = (tmp3.field0)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0024:	 noop: opcode 'LLVMExtractValue' not supported
+#0024:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0025:	 noop: opcode 'LLVMExtractValue' not supported
+#0025:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0026:	 noop: opcode 'LLVMExtractValue' not supported
+#0026:	 assign: tmp18 = (((((tmp15+1).field0).field0).field0)+2)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0027:	 noop: opcode 'LLVMExtractValue' not supported
+#0027:	 assign: *tmp18 = (tmp9.field0)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0028:	 call: tmp10 = swift_allocObject((metadata9.field2), 96, 7)
+#0028:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0029:	 assign: tmp11 = (tmp10+1)
+#0029:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0030:	 assign: *tmp11 = 3
+#0030:	 assign: tmp19 = (((((tmp15+2).field0).field0).field0)+2)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0031:	 assign: tmp12 = tmp10
+#0031:	 assign: *tmp19 = (tmp11.field0)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0032:	 assign: tmp13 = (tmp12+24)
+#0032:	 assign: tmp20 = tmp15
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0033:	 assign: tmp14 = tmp13
+#0033:	 call: tmp21 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp20, tmp12, 3, (_TMdSS.field1))
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0034:	 call: llvm.memset.p0i8.i64(tmp14, 0, 72, 8, 0)
+#0034:	 call: tmp22 = _TFSS30convertFromStringInterpolationfMSSFtGSaSS__SS(tmp21)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0035:	 noop: can't index (((tmp0.field0).field0).field0) by 0
+#0035:	 call: swift_release()
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0036:	 noop: bad
+#0036:	 noop: opcode 'LLVMInsertValue' not supported
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0037:	 noop: bad
+#0037:	 noop: opcode 'LLVMInsertValue' not supported
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0038:	 noop: opcode 'LLVMExtractValue' not supported
+#0038:	 noop: opcode 'LLVMInsertValue' not supported
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0039:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0040:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0041:	 assign: tmp15 = (((((tmp13+1).field0).field0).field0)+2)
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0042:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0043:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0044:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0045:	 assign: tmp16 = (((((tmp13+2).field0).field0).field0)+2)
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0046:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0047:	 assign: tmp17 = tmp13
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0048:	 call: tmp18 = _TFSa20convertFromHeapArrayU__fMGSaQ__FTBp5ownerBo5countBw_GSaQ__(tmp17, tmp10, 3, (_TMdSS.field1))
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0049:	 call: tmp19 = _TFSS30convertFromStringInterpolationfMSSFtGSaSS__SS(tmp18)
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0050:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0051:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0052:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0053:	 call: swift_release()
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0054:	 noop: opcode 'LLVMInsertValue' not supported
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0055:	 noop: opcode 'LLVMInsertValue' not supported
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0056:	 noop: opcode 'LLVMInsertValue' not supported
-objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0057:	 noop: opcode 'LLVMRet' not supported <exit>
+#0039:	 noop: opcode 'LLVMRet' not supported <exit>
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
 
 CFG: _TFC4main19EquilateralTriangled
@@ -1596,57 +1434,51 @@ CFG: _TF4main12testTriangleFT_T_
 objects.swift:75 var triangle = EquilateralTriangle(sideLength: 3.1, name: "a triangle")
 #0001:	 call: tmp1 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 10, -1)
 objects.swift:75 var triangle = EquilateralTriangle(sideLength: 3.1, name: "a triangle")
-#0002:	 noop: opcode 'LLVMExtractValue' not supported
+#0002:	 call: tmp2 = _TFC4main19EquilateralTriangleCfMS0_FT10sideLengthSd4nameSS_S0_(3.1, (tmp1.field0), (tmp1.field0), (tmp1.field0), tmp0)
 objects.swift:75 var triangle = EquilateralTriangle(sideLength: 3.1, name: "a triangle")
-#0003:	 noop: opcode 'LLVMExtractValue' not supported
+#0003:	 assign: *tmp3 = tmp2
 objects.swift:75 var triangle = EquilateralTriangle(sideLength: 3.1, name: "a triangle")
-#0004:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:75 var triangle = EquilateralTriangle(sideLength: 3.1, name: "a triangle")
-#0005:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:75 var triangle = EquilateralTriangle(sideLength: 3.1, name: "a triangle")
-#0006:	 assign: *tmp2 = tmp3
-objects.swift:75 var triangle = EquilateralTriangle(sideLength: 3.1, name: "a triangle")
-#0007:	 assign: tmp4 = tmp3
+#0004:	 assign: tmp4 = tmp2
 objects.swift:76 var perimeter = triangle.perimeter
-#0008:	 call: swift_retain_noresult(tmp4)
+#0005:	 call: swift_retain_noresult(tmp4)
 objects.swift:76 var perimeter = triangle.perimeter
-#0009:	 assign: tmp5 = *((tmp3.field0).field0)
+#0006:	 assign: tmp5 = *((tmp2.field0).field0)
 objects.swift:76 var perimeter = triangle.perimeter
-#0010:	 assign: tmp6 = *(tmp5+23)
+#0007:	 assign: tmp6 = *(tmp5+23)
 objects.swift:76 var perimeter = triangle.perimeter
-#0011:	 assign: tmp7 = tmp6
+#0008:	 assign: tmp7 = tmp6
 objects.swift:76 var perimeter = triangle.perimeter
-#0012:	 call: tmp8 = tmp7(tmp3)
+#0009:	 call: tmp8 = tmp7(tmp2)
 objects.swift:76 var perimeter = triangle.perimeter
-#0013:	 assign: *(tmp9.field0) = tmp8
+#0010:	 assign: *(tmp9.field0) = tmp8
 objects.swift:76 var perimeter = triangle.perimeter
-#0014:	 assign: tmp10 = tmp3
+#0011:	 assign: tmp10 = tmp2
 objects.swift:77 triangle.perimeter = 9.9
-#0015:	 call: swift_retain_noresult(tmp10)
+#0012:	 call: swift_retain_noresult(tmp10)
 objects.swift:77 triangle.perimeter = 9.9
-#0016:	 assign: tmp11 = *((tmp3.field0).field0)
+#0013:	 assign: tmp11 = *((tmp2.field0).field0)
 objects.swift:77 triangle.perimeter = 9.9
-#0017:	 assign: tmp12 = *(tmp11+24)
+#0014:	 assign: tmp12 = *(tmp11+24)
 objects.swift:77 triangle.perimeter = 9.9
-#0018:	 assign: tmp13 = tmp12
+#0015:	 assign: tmp13 = tmp12
 objects.swift:77 triangle.perimeter = 9.9
-#0019:	 call: tmp13(9.9, tmp3)
+#0016:	 call: tmp13(9.9, tmp2)
 objects.swift:77 triangle.perimeter = 9.9
-#0020:	 assign: tmp14 = tmp3
+#0017:	 assign: tmp14 = tmp2
 objects.swift:78 var sideLength = triangle.sideLength
-#0021:	 call: swift_retain_noresult(tmp14)
+#0018:	 call: swift_retain_noresult(tmp14)
 objects.swift:78 var sideLength = triangle.sideLength
-#0022:	 assign: tmp15 = *((tmp3.field0).field0)
+#0019:	 assign: tmp15 = *((tmp2.field0).field0)
 objects.swift:78 var sideLength = triangle.sideLength
-#0023:	 assign: tmp16 = *(tmp15+19)
+#0020:	 assign: tmp16 = *(tmp15+19)
 objects.swift:78 var sideLength = triangle.sideLength
-#0024:	 assign: tmp17 = tmp16
+#0021:	 assign: tmp17 = tmp16
 objects.swift:78 var sideLength = triangle.sideLength
-#0025:	 call: tmp18 = tmp17(tmp3)
+#0022:	 call: tmp18 = tmp17(tmp2)
 objects.swift:78 var sideLength = triangle.sideLength
-#0026:	 assign: *(tmp19.field0) = tmp18
+#0023:	 assign: *(tmp19.field0) = tmp18
 objects.swift:78 var sideLength = triangle.sideLength
-#0027:	 call: swift_release(tmp3) <exit>
+#0024:	 call: swift_release(tmp2) <exit>
 objects.swift:78 var sideLength = triangle.sideLength
 
 CFG: _TFC4main17TriangleAndSquarew8triangleCS_19EquilateralTriangle
@@ -2002,107 +1834,95 @@ CFG: _TF4main18testTriangleSquareFT_T_
 objects.swift:99 var triangleAndSquare = TriangleAndSquare(size: 10, name: "another test shape")
 #0001:	 call: tmp1 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 18, -1)
 objects.swift:99 var triangleAndSquare = TriangleAndSquare(size: 10, name: "another test shape")
-#0002:	 noop: opcode 'LLVMExtractValue' not supported
+#0002:	 call: tmp2 = _TFC4main17TriangleAndSquareCfMS0_FT4sizeSd4nameSS_S0_(10.0, (tmp1.field0), (tmp1.field0), (tmp1.field0), tmp0)
 objects.swift:99 var triangleAndSquare = TriangleAndSquare(size: 10, name: "another test shape")
-#0003:	 noop: opcode 'LLVMExtractValue' not supported
+#0003:	 assign: *tmp3 = tmp2
 objects.swift:99 var triangleAndSquare = TriangleAndSquare(size: 10, name: "another test shape")
-#0004:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:99 var triangleAndSquare = TriangleAndSquare(size: 10, name: "another test shape")
-#0005:	 noop: opcode 'LLVMExtractValue' not supported
-objects.swift:99 var triangleAndSquare = TriangleAndSquare(size: 10, name: "another test shape")
-#0006:	 assign: *tmp2 = tmp3
-objects.swift:99 var triangleAndSquare = TriangleAndSquare(size: 10, name: "another test shape")
-#0007:	 assign: tmp4 = tmp3
+#0004:	 assign: tmp4 = tmp2
 objects.swift:100 var sideLength = triangleAndSquare.square.sideLength
-#0008:	 call: swift_retain_noresult(tmp4)
+#0005:	 call: swift_retain_noresult(tmp4)
 objects.swift:100 var sideLength = triangleAndSquare.square.sideLength
-#0009:	 assign: tmp5 = *((tmp3.field0).field0)
+#0006:	 assign: tmp5 = *((tmp2.field0).field0)
 objects.swift:100 var sideLength = triangleAndSquare.square.sideLength
-#0010:	 assign: tmp6 = *(tmp5+12)
+#0007:	 assign: tmp6 = *(tmp5+12)
 objects.swift:100 var sideLength = triangleAndSquare.square.sideLength
-#0011:	 assign: tmp7 = tmp6
+#0008:	 assign: tmp7 = tmp6
 objects.swift:100 var sideLength = triangleAndSquare.square.sideLength
-#0012:	 call: tmp8 = tmp7(tmp3)
+#0009:	 call: tmp8 = tmp7(tmp2)
 objects.swift:100 var sideLength = triangleAndSquare.square.sideLength
-#0013:	 assign: tmp9 = *((tmp8.field0).field0)
+#0010:	 assign: tmp9 = *((tmp8.field0).field0)
 objects.swift:100 var sideLength = triangleAndSquare.square.sideLength
-#0014:	 assign: tmp10 = *(tmp9+19)
+#0011:	 assign: tmp10 = *(tmp9+19)
 objects.swift:100 var sideLength = triangleAndSquare.square.sideLength
-#0015:	 assign: tmp11 = tmp10
+#0012:	 assign: tmp11 = tmp10
 objects.swift:100 var sideLength = triangleAndSquare.square.sideLength
-#0016:	 call: tmp12 = tmp11(tmp8)
+#0013:	 call: tmp12 = tmp11(tmp8)
 objects.swift:100 var sideLength = triangleAndSquare.square.sideLength
-#0017:	 assign: *(tmp13.field0) = tmp12
+#0014:	 assign: *(tmp13.field0) = tmp12
 objects.swift:100 var sideLength = triangleAndSquare.square.sideLength
-#0018:	 assign: tmp14 = tmp3
+#0015:	 assign: tmp14 = tmp2
 objects.swift:101 sideLength = triangleAndSquare.triangle.sideLength
-#0019:	 call: swift_retain_noresult(tmp14)
+#0016:	 call: swift_retain_noresult(tmp14)
 objects.swift:101 sideLength = triangleAndSquare.triangle.sideLength
-#0020:	 assign: tmp15 = *((tmp3.field0).field0)
+#0017:	 assign: tmp15 = *((tmp2.field0).field0)
 objects.swift:101 sideLength = triangleAndSquare.triangle.sideLength
-#0021:	 assign: tmp16 = *(tmp15+9)
+#0018:	 assign: tmp16 = *(tmp15+9)
 objects.swift:101 sideLength = triangleAndSquare.triangle.sideLength
-#0022:	 assign: tmp17 = tmp16
+#0019:	 assign: tmp17 = tmp16
 objects.swift:101 sideLength = triangleAndSquare.triangle.sideLength
-#0023:	 call: tmp18 = tmp17(tmp3)
+#0020:	 call: tmp18 = tmp17(tmp2)
 objects.swift:101 sideLength = triangleAndSquare.triangle.sideLength
-#0024:	 assign: tmp19 = *((tmp18.field0).field0)
+#0021:	 assign: tmp19 = *((tmp18.field0).field0)
 objects.swift:101 sideLength = triangleAndSquare.triangle.sideLength
-#0025:	 assign: tmp20 = *(tmp19+19)
+#0022:	 assign: tmp20 = *(tmp19+19)
 objects.swift:101 sideLength = triangleAndSquare.triangle.sideLength
-#0026:	 assign: tmp21 = tmp20
+#0023:	 assign: tmp21 = tmp20
 objects.swift:101 sideLength = triangleAndSquare.triangle.sideLength
-#0027:	 call: tmp22 = tmp21(tmp18)
+#0024:	 call: tmp22 = tmp21(tmp18)
 objects.swift:101 sideLength = triangleAndSquare.triangle.sideLength
-#0028:	 assign: *(tmp13.field0) = tmp22
+#0025:	 assign: *(tmp13.field0) = tmp22
 objects.swift:101 sideLength = triangleAndSquare.triangle.sideLength
-#0029:	 call: tmp23 = _TMaC4main6Square()
+#0026:	 call: tmp23 = _TMaC4main6Square()
 objects.swift:102 triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
-#0030:	 call: tmp24 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 13, -1)
+#0027:	 call: tmp24 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 13, -1)
 objects.swift:102 triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
-#0031:	 noop: opcode 'LLVMExtractValue' not supported
+#0028:	 call: tmp25 = _TFC4main6SquareCfMS0_FT10sideLengthSd4nameSS_S0_(50.0, (tmp24.field0), (tmp24.field0), (tmp24.field0), tmp23)
 objects.swift:102 triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
-#0032:	 noop: opcode 'LLVMExtractValue' not supported
+#0029:	 assign: tmp26 = tmp2
 objects.swift:102 triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
-#0033:	 noop: opcode 'LLVMExtractValue' not supported
+#0030:	 call: swift_retain_noresult(tmp26)
 objects.swift:102 triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
-#0034:	 noop: opcode 'LLVMExtractValue' not supported
+#0031:	 assign: tmp27 = *((tmp2.field0).field0)
 objects.swift:102 triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
-#0035:	 assign: tmp25 = tmp3
+#0032:	 assign: tmp28 = *(tmp27+13)
 objects.swift:102 triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
-#0036:	 call: swift_retain_noresult(tmp25)
+#0033:	 assign: tmp29 = tmp28
 objects.swift:102 triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
-#0037:	 assign: tmp26 = *((tmp3.field0).field0)
+#0034:	 call: tmp29(tmp25, tmp2)
 objects.swift:102 triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
-#0038:	 assign: tmp27 = *(tmp26+13)
-objects.swift:102 triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
-#0039:	 assign: tmp28 = tmp27
-objects.swift:102 triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
-#0040:	 call: tmp28(tmp29, tmp3)
-objects.swift:102 triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
-#0041:	 assign: tmp30 = tmp3
+#0035:	 assign: tmp30 = tmp2
 objects.swift:103 sideLength = triangleAndSquare.triangle.sideLength
-#0042:	 call: swift_retain_noresult(tmp30)
+#0036:	 call: swift_retain_noresult(tmp30)
 objects.swift:103 sideLength = triangleAndSquare.triangle.sideLength
-#0043:	 assign: tmp31 = *((tmp3.field0).field0)
+#0037:	 assign: tmp31 = *((tmp2.field0).field0)
 objects.swift:103 sideLength = triangleAndSquare.triangle.sideLength
-#0044:	 assign: tmp32 = *(tmp31+9)
+#0038:	 assign: tmp32 = *(tmp31+9)
 objects.swift:103 sideLength = triangleAndSquare.triangle.sideLength
-#0045:	 assign: tmp33 = tmp32
+#0039:	 assign: tmp33 = tmp32
 objects.swift:103 sideLength = triangleAndSquare.triangle.sideLength
-#0046:	 call: tmp34 = tmp33(tmp3)
+#0040:	 call: tmp34 = tmp33(tmp2)
 objects.swift:103 sideLength = triangleAndSquare.triangle.sideLength
-#0047:	 assign: tmp35 = *((tmp34.field0).field0)
+#0041:	 assign: tmp35 = *((tmp34.field0).field0)
 objects.swift:103 sideLength = triangleAndSquare.triangle.sideLength
-#0048:	 assign: tmp36 = *(tmp35+19)
+#0042:	 assign: tmp36 = *(tmp35+19)
 objects.swift:103 sideLength = triangleAndSquare.triangle.sideLength
-#0049:	 assign: tmp37 = tmp36
+#0043:	 assign: tmp37 = tmp36
 objects.swift:103 sideLength = triangleAndSquare.triangle.sideLength
-#0050:	 call: tmp38 = tmp37(tmp34)
+#0044:	 call: tmp38 = tmp37(tmp34)
 objects.swift:103 sideLength = triangleAndSquare.triangle.sideLength
-#0051:	 assign: *(tmp13.field0) = tmp38
+#0045:	 assign: *(tmp13.field0) = tmp38
 objects.swift:103 sideLength = triangleAndSquare.triangle.sideLength
-#0052:	 call: swift_release(tmp3) <exit>
+#0046:	 call: swift_release(tmp2) <exit>
 objects.swift:103 sideLength = triangleAndSquare.triangle.sideLength
 
 CFG: _TFC4main7Counter11incrementByfS0_FTSi13numberOfTimesSi_T_
@@ -2138,20 +1958,46 @@ objects.swift:109 count += amount * times
 objects.swift:109 count += amount * times
 #0015:	 call: tmp14 = tmp13(tmp8, )
 objects.swift:109 count += amount * times
-#0016:	 noop: opcode 'LLVMExtractValue' not supported
+#0016:	 assign: tmp15 = (tmp14.field0)
 objects.swift:109 count += amount * times
-#0017:	 noop: opcode 'LLVMExtractValue' not supported
+#0017:	 call: tmp16 = llvm.smul.with.overflow.i64(, )
 objects.swift:109 count += amount * times
-#0018:	 noop: opcode 'LLVMExtractValue' not supported
+#0018:	 if: (tmp16.field0) then #0019:	 else #0020:	
 objects.swift:109 count += amount * times
-#0019:	 call: tmp15 = llvm.smul.with.overflow.i64(, )
+#0019:	 noop
+ - no source -
+#0021:	 call: llvm.trap()
 objects.swift:109 count += amount * times
-#0020:	 noop: opcode 'LLVMExtractValue' not supported
+#0022:	 noop: opcode 'LLVMUnreachable' not supported <exit>
 objects.swift:109 count += amount * times
-#0021:	 noop: opcode 'LLVMExtractValue' not supported
+#0020:	 call: tmp17 = llvm.sadd.with.overflow.i64(*(tmp15.field0), (tmp16.field0))
 objects.swift:109 count += amount * times
-#0022:	 noop: opcode 'LLVMExtractValue' not supported <exit>
+#0023:	 if: (tmp17.field0) then #0019:	 else #0024:	
 objects.swift:109 count += amount * times
+#0024:	 assign: *(tmp15.field0) = (tmp17.field0)
+objects.swift:109 count += amount * times
+#0025:	 if: (tmp14.field0) then #0026:	 else #0027:	
+objects.swift:109 count += amount * times
+#0026:	 assign: tmp18 = 
+objects.swift:109 count += amount * times
+#0028:	 call: swift_retain_noresult(tmp18)
+objects.swift:109 count += amount * times
+#0029:	 assign: tmp19 = 
+objects.swift:109 count += amount * times
+#0030:	 assign: tmp20 = *tmp19
+objects.swift:109 count += amount * times
+#0031:	 assign: tmp21 = *(tmp20+10)
+objects.swift:109 count += amount * times
+#0032:	 assign: tmp22 = tmp21
+objects.swift:109 count += amount * times
+#0033:	 call: tmp22(*(tmp15.field0), )
+objects.swift:109 count += amount * times
+#0027:	 noop
+ - no source -
+#0034:	 call: swift_release()
+objects.swift:110 }
+#0035:	 call: swift_release() <exit>
+objects.swift:110 }
 
 CFG: _TFC4main7Counterd
 #0000:	 assign: *tmp0 = 
@@ -2272,111 +2118,105 @@ CFG: _TF4main18testOptionalSquareFT_T_
 objects.swift:119 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
 #0001:	 call: tmp1 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 15, -1)
 objects.swift:119 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
-#0002:	 noop: opcode 'LLVMExtractValue' not supported
+#0002:	 call: tmp2 = _TFC4main6SquareCfMS0_FT10sideLengthSd4nameSS_S0_(2.5, (tmp1.field0), (tmp1.field0), (tmp1.field0), tmp0)
 objects.swift:119 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
-#0003:	 noop: opcode 'LLVMExtractValue' not supported
+#0003:	 assign: tmp3 = tmp2
 objects.swift:119 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
-#0004:	 noop: opcode 'LLVMExtractValue' not supported
+#0004:	 call: swift_retain_noresult(tmp3)
 objects.swift:119 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
-#0005:	 noop: opcode 'LLVMExtractValue' not supported
+#0005:	 assign: tmp4 = tmp5
 objects.swift:119 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
-#0006:	 assign: tmp2 = tmp3
+#0006:	 assign: *tmp4 = tmp2
 objects.swift:119 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
-#0007:	 call: swift_retain_noresult(tmp2)
+#0007:	 call: swift_release(tmp2)
 objects.swift:119 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
-#0008:	 assign: tmp4 = tmp5
+#0008:	 assign: tmp6 = tmp5
 objects.swift:119 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
-#0009:	 assign: *tmp4 = tmp3
+#0009:	 assign: *tmp7 = *tmp6
 objects.swift:119 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
-#0010:	 call: swift_release(tmp3)
-objects.swift:119 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
-#0011:	 assign: tmp6 = tmp5
-objects.swift:119 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
-#0012:	 assign: *tmp7 = *tmp6
-objects.swift:119 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
+#0010:	 noop: opcode 'LLVMIntToPtr' not supported
+objects.swift:120 let sideLength = optionalSquare?.sideLength
+#0011:	 noop: opcode 'LLVMIntToPtr' not supported
+objects.swift:120 let sideLength = optionalSquare?.sideLength
+#0012:	 noop: opcode 'LLVMIntToPtr' not supported
+objects.swift:120 let sideLength = optionalSquare?.sideLength
 #0013:	 noop: opcode 'LLVMIntToPtr' not supported
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0014:	 noop: opcode 'LLVMIntToPtr' not supported
+#0014:	 assign: tmp8 = tmp9
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0015:	 noop: opcode 'LLVMIntToPtr' not supported
+#0015:	 assign: *tmp8 = *tmp6
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0016:	 noop: opcode 'LLVMIntToPtr' not supported
+#0016:	 assign: tmp10 = tmp9
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0017:	 assign: tmp8 = tmp9
+#0017:	 call: tmp11 = _TMaC4main6Square()
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0018:	 assign: *tmp8 = *tmp6
+#0018:	 call: tmp12 = _TFSsoi2neU__FTGSqQ__VSs26_OptionalNilComparisonType_Sb(tmp10, tmp11)
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0019:	 assign: tmp10 = tmp9
+#0019:	 if: tmp12 then #0020:	 else #0021:	
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0020:	 call: tmp11 = _TMaC4main6Square()
-objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0021:	 call: tmp12 = _TFSsoi2neU__FTGSqQ__VSs26_OptionalNilComparisonType_Sb(tmp10, tmp11)
-objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0022:	 if: tmp12 then #0023:	 else #0024:	
-objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0023:	 noop: opcode 'LLVMIntToPtr' not supported
+#0020:	 noop: opcode 'LLVMIntToPtr' not supported
 objects.swift:121 }
-#0025:	 noop: opcode 'LLVMIntToPtr' not supported
+#0022:	 noop: opcode 'LLVMIntToPtr' not supported
 objects.swift:121 }
-#0026:	 assign: tmp13 = tmp14
+#0023:	 assign: tmp13 = tmp14
 objects.swift:121 }
-#0027:	 assign: *tmp13 = *tmp6
+#0024:	 assign: *tmp13 = *tmp6
 objects.swift:121 }
-#0028:	 assign: tmp15 = tmp14
+#0025:	 assign: tmp15 = tmp14
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0029:	 switch: *tmp15 default #0030:	 0 -> #0031:	
+#0026:	 switch: *tmp15 default #0027:	 0 -> #0028:	
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0030:	 assign: tmp16 = tmp14
+#0027:	 assign: tmp16 = tmp14
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0032:	 noop: opcode 'LLVMIntToPtr' not supported
+#0029:	 noop: opcode 'LLVMIntToPtr' not supported
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0033:	 noop: opcode 'LLVMIntToPtr' not supported
+#0030:	 noop: opcode 'LLVMIntToPtr' not supported
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0034:	 assign: tmp17 = *((*tmp16.field0).field0)
+#0031:	 assign: tmp17 = *((*tmp16.field0).field0)
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0035:	 assign: tmp18 = *(tmp17+19)
+#0032:	 assign: tmp18 = *(tmp17+19)
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0036:	 assign: tmp19 = tmp18
+#0033:	 assign: tmp19 = tmp18
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0037:	 call: tmp20 = tmp19(*tmp16)
+#0034:	 call: tmp20 = tmp19(*tmp16)
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0038:	 assign: tmp21 = tmp22
+#0035:	 assign: tmp21 = tmp22
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0039:	 assign: *(tmp21.field0) = tmp20
+#0036:	 assign: *(tmp21.field0) = tmp20
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0040:	 assign: tmp23 = (tmp22.field1)
+#0037:	 assign: tmp23 = (tmp22.field1)
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0041:	 assign: *tmp23 = 0
+#0038:	 assign: *tmp23 = 0
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0042:	 noop
+#0039:	 noop
  - no source -
-#0043:	 assign: tmp24 = tmp22
+#0040:	 assign: tmp24 = tmp22
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0044:	 assign: tmp25 = (tmp22.field1)
+#0041:	 assign: tmp25 = (tmp22.field1)
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0045:	 assign: *(tmp26.field0) = *tmp24
+#0042:	 assign: *(tmp26.field0) = *tmp24
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0046:	 assign: *(tmp26.field1) = *tmp25
+#0043:	 assign: *(tmp26.field1) = *tmp25
+objects.swift:120 let sideLength = optionalSquare?.sideLength
+#0044:	 noop: opcode 'LLVMIntToPtr' not supported
+objects.swift:121 }
+#0045:	 noop: opcode 'LLVMIntToPtr' not supported <exit>
+objects.swift:121 }
+#0028:	 call: _TFSs18_fatalErrorMessageFTVSs12StaticStringS_S_Su_T_(, 11, 2, , 57, 2, , 87, 2, 102)
+objects.swift:120 let sideLength = optionalSquare?.sideLength
+#0046:	 noop: opcode 'LLVMUnreachable' not supported <exit>
+objects.swift:120 let sideLength = optionalSquare?.sideLength
+#0021:	 noop: opcode 'LLVMIntToPtr' not supported
 objects.swift:120 let sideLength = optionalSquare?.sideLength
 #0047:	 noop: opcode 'LLVMIntToPtr' not supported
-objects.swift:121 }
-#0048:	 noop: opcode 'LLVMIntToPtr' not supported <exit>
-objects.swift:121 }
-#0031:	 call: _TFSs18_fatalErrorMessageFTVSs12StaticStringS_S_Su_T_(, 11, 2, , 57, 2, , 87, 2, 102)
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0049:	 noop: opcode 'LLVMUnreachable' not supported <exit>
+#0048:	 assign: tmp27 = tmp22
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0024:	 noop: opcode 'LLVMIntToPtr' not supported
+#0049:	 assign: *tmp27 = 0
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0050:	 noop: opcode 'LLVMIntToPtr' not supported
+#0050:	 assign: tmp28 = (tmp22.field1)
 objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0051:	 assign: tmp27 = tmp22
-objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0052:	 assign: *tmp27 = 0
-objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0053:	 assign: tmp28 = (tmp22.field1)
-objects.swift:120 let sideLength = optionalSquare?.sideLength
-#0054:	 assign: *tmp28 = -1 next: #0042:	
+#0051:	 assign: *tmp28 = -1 next: #0039:	
 objects.swift:120 let sideLength = optionalSquare?.sideLength
 
 CFG: _TTRXFo_dGVSs19UnsafeBufferPointerVSs5UInt8__dT__XFo_dGS_S0___iT__
@@ -2536,21 +2376,19 @@ CFG: get_field_types_Shape
  - no source -
 #0007:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
  - no source -
-#0008:	 noop: opcode 'LLVMExtractValue' not supported
+#0008:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
  - no source -
-#0009:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
-#0010:	 if: tmp3 then #0003:	 else #0011:	
+#0009:	 if: tmp3 then #0003:	 else #0010:	
  - no source -
 #0003:	 noop
  - no source -
-#0012:	 noop: opcode 'LLVMPHI' not supported
+#0011:	 noop: opcode 'LLVMPHI' not supported
  - no source -
-#0013:	 noop: opcode 'LLVMRet' not supported <exit>
+#0012:	 noop: opcode 'LLVMRet' not supported <exit>
  - no source -
-#0011:	 call: swift_slowDealloc(tmp1, 8, 7)
+#0010:	 call: swift_slowDealloc(tmp1, 8, 7)
  - no source -
-#0014:	 noop: opcode 'LLVMIntToPtr' not supported next: #0003:	
+#0013:	 noop: opcode 'LLVMIntToPtr' not supported next: #0003:	
  - no source -
 
 CFG: get_field_types_NamedShape
@@ -2570,21 +2408,19 @@ CFG: get_field_types_NamedShape
  - no source -
 #0008:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
  - no source -
-#0009:	 noop: opcode 'LLVMExtractValue' not supported
+#0009:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
  - no source -
-#0010:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
-#0011:	 if: tmp3 then #0003:	 else #0012:	
+#0010:	 if: tmp3 then #0003:	 else #0011:	
  - no source -
 #0003:	 noop
  - no source -
-#0013:	 noop: opcode 'LLVMPHI' not supported
+#0012:	 noop: opcode 'LLVMPHI' not supported
  - no source -
-#0014:	 noop: opcode 'LLVMRet' not supported <exit>
+#0013:	 noop: opcode 'LLVMRet' not supported <exit>
  - no source -
-#0012:	 call: swift_slowDealloc(tmp1, 16, 7)
+#0011:	 call: swift_slowDealloc(tmp1, 16, 7)
  - no source -
-#0015:	 noop: opcode 'LLVMIntToPtr' not supported next: #0003:	
+#0014:	 noop: opcode 'LLVMIntToPtr' not supported next: #0003:	
  - no source -
 
 CFG: get_field_types_Square
@@ -2602,21 +2438,19 @@ CFG: get_field_types_Square
  - no source -
 #0007:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
  - no source -
-#0008:	 noop: opcode 'LLVMExtractValue' not supported
+#0008:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
  - no source -
-#0009:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
-#0010:	 if: tmp3 then #0003:	 else #0011:	
+#0009:	 if: tmp3 then #0003:	 else #0010:	
  - no source -
 #0003:	 noop
  - no source -
-#0012:	 noop: opcode 'LLVMPHI' not supported
+#0011:	 noop: opcode 'LLVMPHI' not supported
  - no source -
-#0013:	 noop: opcode 'LLVMRet' not supported <exit>
+#0012:	 noop: opcode 'LLVMRet' not supported <exit>
  - no source -
-#0011:	 call: swift_slowDealloc(tmp1, 8, 7)
+#0010:	 call: swift_slowDealloc(tmp1, 8, 7)
  - no source -
-#0014:	 noop: opcode 'LLVMIntToPtr' not supported next: #0003:	
+#0013:	 noop: opcode 'LLVMIntToPtr' not supported next: #0003:	
  - no source -
 
 CFG: get_field_types_EquilateralTriangle
@@ -2634,21 +2468,19 @@ CFG: get_field_types_EquilateralTriangle
  - no source -
 #0007:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
  - no source -
-#0008:	 noop: opcode 'LLVMExtractValue' not supported
+#0008:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
  - no source -
-#0009:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
-#0010:	 if: tmp3 then #0003:	 else #0011:	
+#0009:	 if: tmp3 then #0003:	 else #0010:	
  - no source -
 #0003:	 noop
  - no source -
-#0012:	 noop: opcode 'LLVMPHI' not supported
+#0011:	 noop: opcode 'LLVMPHI' not supported
  - no source -
-#0013:	 noop: opcode 'LLVMRet' not supported <exit>
+#0012:	 noop: opcode 'LLVMRet' not supported <exit>
  - no source -
-#0011:	 call: swift_slowDealloc(tmp1, 8, 7)
+#0010:	 call: swift_slowDealloc(tmp1, 8, 7)
  - no source -
-#0014:	 noop: opcode 'LLVMIntToPtr' not supported next: #0003:	
+#0013:	 noop: opcode 'LLVMIntToPtr' not supported next: #0003:	
  - no source -
 
 CFG: get_field_types_TriangleAndSquare
@@ -2672,21 +2504,19 @@ CFG: get_field_types_TriangleAndSquare
  - no source -
 #0010:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
  - no source -
-#0011:	 noop: opcode 'LLVMExtractValue' not supported
+#0011:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
  - no source -
-#0012:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
-#0013:	 if: tmp5 then #0003:	 else #0014:	
+#0012:	 if: tmp5 then #0003:	 else #0013:	
  - no source -
 #0003:	 noop
  - no source -
-#0015:	 noop: opcode 'LLVMPHI' not supported
+#0014:	 noop: opcode 'LLVMPHI' not supported
  - no source -
-#0016:	 noop: opcode 'LLVMRet' not supported <exit>
+#0015:	 noop: opcode 'LLVMRet' not supported <exit>
  - no source -
-#0014:	 call: swift_slowDealloc(tmp1, 16, 7)
+#0013:	 call: swift_slowDealloc(tmp1, 16, 7)
  - no source -
-#0017:	 noop: opcode 'LLVMIntToPtr' not supported next: #0003:	
+#0016:	 noop: opcode 'LLVMIntToPtr' not supported next: #0003:	
  - no source -
 
 CFG: get_field_types_Counter
@@ -2704,21 +2534,19 @@ CFG: get_field_types_Counter
  - no source -
 #0007:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
  - no source -
-#0008:	 noop: opcode 'LLVMExtractValue' not supported
+#0008:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
  - no source -
-#0009:	 noop: opcode 'LLVMExtractValue' not supported
- - no source -
-#0010:	 if: tmp3 then #0003:	 else #0011:	
+#0009:	 if: tmp3 then #0003:	 else #0010:	
  - no source -
 #0003:	 noop
  - no source -
-#0012:	 noop: opcode 'LLVMPHI' not supported
+#0011:	 noop: opcode 'LLVMPHI' not supported
  - no source -
-#0013:	 noop: opcode 'LLVMRet' not supported <exit>
+#0012:	 noop: opcode 'LLVMRet' not supported <exit>
  - no source -
-#0011:	 call: swift_slowDealloc(tmp1, 8, 7)
+#0010:	 call: swift_slowDealloc(tmp1, 8, 7)
  - no source -
-#0014:	 noop: opcode 'LLVMIntToPtr' not supported next: #0003:	
+#0013:	 noop: opcode 'LLVMIntToPtr' not supported next: #0003:	
  - no source -
 
 CFG: main

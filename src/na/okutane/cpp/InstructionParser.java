@@ -242,6 +242,58 @@ public class InstructionParser {
     }
 
     @Component
+    private static class ExtractValueParser extends AbstractParser {
+        @Autowired
+        ConstCache constants;
+
+        @Override
+        public LLVMOpcode getOpcode() {
+            return LLVMOpcode.LLVMExtractValue;
+        }
+
+        @Override
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            return null;
+        }
+
+        @Override
+        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            RValue pointer = valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
+
+            pointer = getPointer(pointer, constants.get(0, null));
+
+            int operandsCount = bitreader.LLVMGetNumOperands(instruction);
+
+            int i = 1;
+            while (i < operandsCount) {
+                pointer = getPointer(pointer, valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
+                i++;
+            }
+
+            return pointer;
+        }
+
+        @Override
+        public RValue parseConst(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
+            return parseValue(ctx, constant);
+        }
+
+        private RValue getPointer(RValue basePointer, RValue index) {
+            if (basePointer.getType().getElementType() != null) {
+                return new GetElementPointer(basePointer, index);
+            }
+            if (index instanceof ConstCache.Const) {
+                int intIndex = (int) ((ConstCache.Const) index).getValue();
+                Type fieldType = basePointer.getType().getFieldType(intIndex);
+                if (fieldType != null) {
+                    return new GetFieldPointer(basePointer, intIndex);
+                }
+            }
+            throw new IllegalStateException("can't index " + CfePrinter.printValue(basePointer) + " by " + index);
+        }
+    }
+
+    @Component
     private static class CallParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
