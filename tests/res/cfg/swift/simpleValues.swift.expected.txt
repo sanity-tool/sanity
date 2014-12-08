@@ -18,7 +18,7 @@ simpleValues.swift:9 let implicitDouble = 70.0
 simpleValues.swift:10 let explicitDouble: Double = 70
 
 CFG: _TF4main10testStringFT_T_
-#0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 13, -1)
+#0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global0, 13, -1)
 simpleValues.swift:14 let label = "The width is "
 #0001:	 assign: *(tmp1.field0) = (tmp0.field0)
 simpleValues.swift:14 let label = "The width is "
@@ -50,13 +50,13 @@ simpleValues.swift:16 let widthLabel = label + String(width)
 simpleValues.swift:18 let apples = 3
 #0015:	 assign: *tmp9 = 5
 simpleValues.swift:19 let oranges = 5
-#0016:	 call: tmp10 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
+#0016:	 call: tmp10 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global1, 7, -1)
 simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0017:	 call: tmp11 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp10.field0), (tmp10.field0), (tmp10.field0))
 simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0018:	 call: tmp12 = _TFSS37convertFromStringInterpolationSegmentfMSSFSiSS(3)
 simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
-#0019:	 call: tmp13 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 8, -1)
+#0019:	 call: tmp13 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global2, 8, -1)
 simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0020:	 call: tmp14 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp13.field0), (tmp13.field0), (tmp13.field0))
 simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
@@ -110,13 +110,13 @@ simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
 #0045:	 assign: *(tmp26.field2) = (tmp25.field0)
 simpleValues.swift:20 let appleSummary = "I have \(apples) apples."
-#0046:	 call: tmp27 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
+#0046:	 call: tmp27 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global3, 7, -1)
 simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0047:	 call: tmp28 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp27.field0), (tmp27.field0), (tmp27.field0))
 simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0048:	 call: tmp29 = _TFSS37convertFromStringInterpolationSegmentfMSSFSiSS(8)
 simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
-#0049:	 call: tmp30 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 17, -1)
+#0049:	 call: tmp30 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global4, 17, -1)
 simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
 #0050:	 call: tmp31 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp30.field0), (tmp30.field0), (tmp30.field0))
 simpleValues.swift:21 let fruitSummary = "I have \(apples + oranges) pieces of fruit."
@@ -252,13 +252,13 @@ CFG: arraydestroy1
  - no source -
 
 CFG: _TF4main22testArraysDictionariesFT_T_
-#0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
+#0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global5, 7, -1)
 simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
-#0001:	 call: tmp1 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 5, -1)
+#0001:	 call: tmp1 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global6, 5, -1)
 simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
-#0002:	 call: tmp2 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 6, -1)
+#0002:	 call: tmp2 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global7, 6, -1)
 simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
-#0003:	 call: tmp3 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 10, -1)
+#0003:	 call: tmp3 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global8, 10, -1)
 simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0004:	 call: tmp4 = swift_allocObject((metadata4.field2), 120, 7)
 simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
@@ -316,7 +316,7 @@ simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue pa
 simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
 #0031:	 assign: *tmp16 = tmp15
 simpleValues.swift:25 var shoppingList = ["catfish", "water", "tulips", "blue paint"]
-#0032:	 call: tmp18 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 15, -1)
+#0032:	 call: tmp18 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global9, 15, -1)
 simpleValues.swift:26 shoppingList[1] = "bottle of water"
 #0033:	 noop: can't index (((tmp0.field0).field0).field0) by 0
 simpleValues.swift:26 shoppingList[1] = "bottle of water"
@@ -332,13 +332,13 @@ simpleValues.swift:26 shoppingList[1] = "bottle of water"
 simpleValues.swift:26 shoppingList[1] = "bottle of water"
 #0039:	 call: _TFSas9subscriptFSiQ_(tmp20, 1, tmp17, tmp22)
 simpleValues.swift:26 shoppingList[1] = "bottle of water"
-#0040:	 call: tmp23 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
+#0040:	 call: tmp23 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global10, 7, -1)
 simpleValues.swift:29 "Malcolm": "Captain",
-#0041:	 call: tmp24 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
+#0041:	 call: tmp24 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global11, 7, -1)
 simpleValues.swift:29 "Malcolm": "Captain",
-#0042:	 call: tmp25 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 6, -1)
+#0042:	 call: tmp25 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global12, 6, -1)
 simpleValues.swift:30 "Kaylee": "Mechanic",
-#0043:	 call: tmp26 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 8, -1)
+#0043:	 call: tmp26 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global13, 8, -1)
 simpleValues.swift:30 "Kaylee": "Mechanic",
 #0044:	 call: tmp27 = swift_allocObject((metadata6.field2), 120, 7)
 simpleValues.swift:28 var occupations = [
@@ -398,7 +398,7 @@ simpleValues.swift:28 var occupations = [
 simpleValues.swift:28 var occupations = [
 #0072:	 assign: *tmp40 = tmp39
 simpleValues.swift:28 var occupations = [
-#0073:	 call: tmp42 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 16, -1)
+#0073:	 call: tmp42 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global14, 16, -1)
 simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0074:	 noop: opcode 'LLVMIntToPtr' not supported
 simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
@@ -426,7 +426,7 @@ simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0086:	 assign: tmp48 = (tmp44.field1)
 simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
-#0087:	 call: tmp49 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 5, -1)
+#0087:	 call: tmp49 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global15, 5, -1)
 simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
 #0088:	 noop: opcode 'LLVMIntToPtr' not supported
 simpleValues.swift:32 occupations["Jayne"] = "Public Relations"
@@ -736,39 +736,39 @@ CFG: main
  - no source -
 
 CFG: <module init>
-#0000:	 assign: * = "The width is "
+#0000:	 assign: *global16 = "The width is "
  - no source -
-#0001:	 assign: * = "I have "
+#0001:	 assign: *global17 = "I have "
  - no source -
-#0002:	 assign: * = " apples."
+#0002:	 assign: *global18 = " apples."
  - no source -
-#0003:	 assign: * = " pieces of fruit."
+#0003:	 assign: *global19 = " pieces of fruit."
  - no source -
-#0004:	 assign: * = "catfish"
+#0004:	 assign: *global20 = "catfish"
  - no source -
-#0005:	 assign: * = "water"
+#0005:	 assign: *global21 = "water"
  - no source -
-#0006:	 assign: * = "tulips"
+#0006:	 assign: *global22 = "tulips"
  - no source -
-#0007:	 assign: * = "blue paint"
+#0007:	 assign: *global23 = "blue paint"
  - no source -
-#0008:	 assign: * = "bottle of water"
+#0008:	 assign: *global24 = "bottle of water"
  - no source -
 #0009:	 assign: *_TMLGSaSS_ = null
  - no source -
-#0010:	 assign: * = "Malcolm"
+#0010:	 assign: *global25 = "Malcolm"
  - no source -
-#0011:	 assign: * = "Captain"
+#0011:	 assign: *global26 = "Captain"
  - no source -
-#0012:	 assign: * = "Kaylee"
+#0012:	 assign: *global27 = "Kaylee"
  - no source -
-#0013:	 assign: * = "Mechanic"
+#0013:	 assign: *global28 = "Mechanic"
  - no source -
 #0014:	 assign: *_TMLTSSSS_ = null
  - no source -
-#0015:	 assign: * = "Public Relations"
+#0015:	 assign: *global29 = "Public Relations"
  - no source -
-#0016:	 assign: * = "Jayne"
+#0016:	 assign: *global30 = "Jayne"
  - no source -
 #0017:	 assign: *_TMLGVSs10DictionarySSSS_ = null
  - no source -

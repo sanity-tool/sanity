@@ -128,7 +128,7 @@ controlFlow.swift:8 teamScore += 1
 controlFlow.swift:8 teamScore += 1
 #0049:	 switch: *tmp29 default #0047:	 0 -> #0064:	
 controlFlow.swift:4 for score in individualScores {
-#0064:	 call: _TFSs18_fatalErrorMessageFTVSs12StaticStringS_S_Su_T_(, 11, 2, , 57, 2, , 87, 2, 102)
+#0064:	 call: _TFSs18_fatalErrorMessageFTVSs12StaticStringS_S_Su_T_(global0, 11, 2, global1, 57, 2, global2, 86, 2, 102)
 controlFlow.swift:4 for score in individualScores {
 #0065:	 noop: opcode 'LLVMUnreachable' not supported <exit>
 controlFlow.swift:4 for score in individualScores {
@@ -208,7 +208,7 @@ CFG: _TMaGSaSi_
  - no source -
 
 CFG: _TF4main12missingValueFT_T_
-#0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 5, -1)
+#0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global3, 5, -1)
 controlFlow.swift:14 var optionalString: String? = "Hello"
 #0001:	 noop: opcode 'LLVMIntToPtr' not supported
 controlFlow.swift:14 var optionalString: String? = "Hello"
@@ -296,7 +296,7 @@ controlFlow.swift:15 optionalString == nil
 controlFlow.swift:15 optionalString == nil
 #0044:	 call: tmp28 = _TFSsoi2eeUSs9Equatable__FTGSqQ__GSqQ___Sb(tmp26, tmp27, (_TMdSS.field1), _TWPSSSs9Equatable)
 controlFlow.swift:15 optionalString == nil
-#0045:	 call: tmp29 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 14, -1)
+#0045:	 call: tmp29 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global4, 14, -1)
 controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0046:	 noop: opcode 'LLVMIntToPtr' not supported
 controlFlow.swift:17 var optionalName: String? = "John Appleseed"
@@ -320,7 +320,7 @@ controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 controlFlow.swift:17 var optionalName: String? = "John Appleseed"
 #0056:	 noop: opcode 'LLVMIntToPtr' not supported
 controlFlow.swift:17 var optionalName: String? = "John Appleseed"
-#0057:	 call: tmp34 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 6, -1)
+#0057:	 call: tmp34 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global5, 6, -1)
 controlFlow.swift:18 var greeting = "Hello!"
 #0058:	 noop: can't index (((tmp0.field0).field0).field0) by 0
 controlFlow.swift:18 var greeting = "Hello!"
@@ -464,7 +464,7 @@ controlFlow.swift:19 if let name = optionalName {
 controlFlow.swift:19 if let name = optionalName {
 #0130:	 assign: *(tmp53.field2) = *tmp54
 controlFlow.swift:19 if let name = optionalName {
-#0131:	 call: tmp55 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
+#0131:	 call: tmp55 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global9, 7, -1)
 controlFlow.swift:20 greeting = "Hello, \(name)"
 #0132:	 call: tmp56 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp55.field0), (tmp55.field0), (tmp55.field0))
 controlFlow.swift:20 greeting = "Hello, \(name)"
@@ -566,7 +566,7 @@ controlFlow.swift:19 if let name = optionalName {
  - no source -
 #0114:	 switch: *tmp49 default #0112:	 0 -> #0181:	
 controlFlow.swift:19 if let name = optionalName {
-#0181:	 call: _TFSs18_fatalErrorMessageFTVSs12StaticStringS_S_Su_T_(, 11, 2, , 57, 2, , 87, 2, 102)
+#0181:	 call: _TFSs18_fatalErrorMessageFTVSs12StaticStringS_S_Su_T_(global6, 11, 2, global7, 57, 2, global8, 86, 2, 102)
 controlFlow.swift:19 if let name = optionalName {
 #0182:	 noop: opcode 'LLVMUnreachable' not supported <exit>
 controlFlow.swift:19 if let name = optionalName {
@@ -638,7 +638,7 @@ CFG: arraydestroy1
  - no source -
 
 CFG: _TF4main10vegetablesFT_T_
-#0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 10, -1)
+#0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global10, 10, -1)
 controlFlow.swift:25 let vegetable = "red pepper"
 #0001:	 assign: *(tmp1.field0) = (tmp0.field0)
 controlFlow.swift:25 let vegetable = "red pepper"
@@ -660,7 +660,7 @@ controlFlow.swift:27 case "celery":
 controlFlow.swift:27 case "celery":
 #0010:	 assign: *(tmp2.field2) = (tmp0.field0)
 controlFlow.swift:27 case "celery":
-#0011:	 call: tmp3 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 6, -1)
+#0011:	 call: tmp3 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global11, 6, -1)
 controlFlow.swift:27 case "celery":
 #0012:	 noop: opcode 'LLVMIntToPtr' not supported
 controlFlow.swift:27 case "celery":
@@ -716,7 +716,7 @@ controlFlow.swift:27 case "celery":
 controlFlow.swift:27 case "celery":
 #0039:	 noop: opcode 'LLVMIntToPtr' not supported
 controlFlow.swift:27 case "celery":
-#0040:	 call: tmp12 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 40, -1)
+#0040:	 call: tmp12 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global12, 40, -1)
 controlFlow.swift:28 let vegetableComment = "Add some raisins and make ants on a log."
 #0041:	 assign: *(tmp13.field0) = (tmp12.field0)
 controlFlow.swift:28 let vegetableComment = "Add some raisins and make ants on a log."
@@ -748,7 +748,7 @@ controlFlow.swift:29 case "cucumber", "watercress":
 controlFlow.swift:29 case "cucumber", "watercress":
 #0054:	 assign: *(tmp14.field2) = (tmp0.field0)
 controlFlow.swift:29 case "cucumber", "watercress":
-#0055:	 call: tmp15 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 8, -1)
+#0055:	 call: tmp15 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global13, 8, -1)
 controlFlow.swift:29 case "cucumber", "watercress":
 #0056:	 noop: opcode 'LLVMIntToPtr' not supported
 controlFlow.swift:29 case "cucumber", "watercress":
@@ -806,7 +806,7 @@ controlFlow.swift:29 case "cucumber", "watercress":
 controlFlow.swift:29 case "cucumber", "watercress":
 #0084:	 noop
  - no source -
-#0085:	 call: tmp24 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 36, -1)
+#0085:	 call: tmp24 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global15, 36, -1)
 controlFlow.swift:30 let vegetableComment = "That would make a good tea sandwich."
 #0086:	 assign: *(tmp25.field0) = (tmp24.field0)
 controlFlow.swift:30 let vegetableComment = "That would make a good tea sandwich."
@@ -832,7 +832,7 @@ controlFlow.swift:29 case "cucumber", "watercress":
 controlFlow.swift:29 case "cucumber", "watercress":
 #0096:	 assign: *(tmp26.field2) = (tmp0.field0)
 controlFlow.swift:29 case "cucumber", "watercress":
-#0097:	 call: tmp27 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 10, -1)
+#0097:	 call: tmp27 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global14, 10, -1)
 controlFlow.swift:29 case "cucumber", "watercress":
 #0098:	 noop: opcode 'LLVMIntToPtr' not supported
 controlFlow.swift:29 case "cucumber", "watercress":
@@ -906,13 +906,13 @@ controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0133:	 noop: opcode 'LLVMIntToPtr' not supported
 controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
-#0134:	 call: tmp37 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 6, -1)
+#0134:	 call: tmp37 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global16, 6, -1)
 controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0135:	 call: tmp38 = _TFSS9hasSuffixfSSFSSSb((tmp37.field0), (tmp37.field0), (tmp37.field0), (tmp0.field0), (tmp0.field0), (tmp0.field0))
 controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 #0136:	 if: tmp38 then #0137:	 else #0138:	
 controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
-#0137:	 call: tmp39 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 14, -1)
+#0137:	 call: tmp39 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global17, 14, -1)
 controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0139:	 call: tmp40 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp39.field0), (tmp39.field0), (tmp39.field0))
 controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
@@ -922,7 +922,7 @@ controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0142:	 call: tmp41 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp0.field0), (tmp0.field0), (tmp0.field0))
 controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
-#0143:	 call: tmp42 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 1, -1)
+#0143:	 call: tmp42 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global18, 1, -1)
 controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
 #0144:	 call: tmp43 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp42.field0), (tmp42.field0), (tmp42.field0))
 controlFlow.swift:32 let vegetableComment = "Is it a spicy \(x)?"
@@ -996,7 +996,7 @@ controlFlow.swift:31 case let x where x.hasSuffix("pepper"):
 controlFlow.swift:33 default:
 #0178:	 noop: opcode 'LLVMIntToPtr' not supported
 controlFlow.swift:33 default:
-#0179:	 call: tmp56 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 31, -1)
+#0179:	 call: tmp56 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global19, 31, -1)
 controlFlow.swift:34 let vegetableComment = "Everything tastes good in soup."
 #0180:	 assign: *(tmp57.field0) = (tmp56.field0)
 controlFlow.swift:34 let vegetableComment = "Everything tastes good in soup."
@@ -1042,7 +1042,7 @@ CFG: arraydestroy3
  - no source -
 
 CFG: _TF4main7numbersFT_T_
-#0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 5, -1)
+#0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global20, 5, -1)
 controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0001:	 call: tmp1 = swift_allocObject((metadata6.field2), 72, 7)
 controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
@@ -1076,7 +1076,7 @@ controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
 #0016:	 call: tmp8 = _TFSaCU__fMGSaQ__Ft12arrayLiteralGSaQ___GSaQ__(tmp7, (_TMdSi.field1))
 controlFlow.swift:40 "Prime": [2, 3, 5, 7, 11, 13],
-#0017:	 call: tmp9 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 9, -1)
+#0017:	 call: tmp9 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global21, 9, -1)
 controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0018:	 call: tmp10 = swift_allocObject((metadata8.field2), 72, 7)
 controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
@@ -1110,7 +1110,7 @@ controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
 #0033:	 call: tmp17 = _TFSaCU__fMGSaQ__Ft12arrayLiteralGSaQ___GSaQ__(tmp16, (_TMdSi.field1))
 controlFlow.swift:41 "Fibonacci": [1, 1, 2, 3, 5, 8],
-#0034:	 call: tmp18 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 6, -1)
+#0034:	 call: tmp18 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global22, 6, -1)
 controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
 #0035:	 call: tmp19 = swift_allocObject((metadata10.field2), 64, 7)
 controlFlow.swift:42 "Square": [1, 4, 9, 16, 25],
@@ -1450,7 +1450,7 @@ controlFlow.swift:70 }
 controlFlow.swift:69 firstForLoop += i
 #0041:	 switch: *tmp28 default #0039:	 0 -> #0050:	
 controlFlow.swift:68 for i in 0..<4 {
-#0050:	 call: _TFSs18_fatalErrorMessageFTVSs12StaticStringS_S_Su_T_(, 11, 2, , 57, 2, , 87, 2, 102)
+#0050:	 call: _TFSs18_fatalErrorMessageFTVSs12StaticStringS_S_Su_T_(global32, 11, 2, global33, 57, 2, global34, 86, 2, 102)
 controlFlow.swift:68 for i in 0..<4 {
 #0051:	 noop: opcode 'LLVMUnreachable' not supported <exit>
 controlFlow.swift:68 for i in 0..<4 {
@@ -1476,7 +1476,7 @@ controlFlow.swift:73 for var i = 0; i < 4; ++i {
 controlFlow.swift:73 for var i = 0; i < 4; ++i {
 #0061:	 assign: *(tmp34.field0) = (tmp37.field0) next: #0053:	
 controlFlow.swift:73 for var i = 0; i < 4; ++i {
-#0010:	 call: _TFSs18_fatalErrorMessageFTVSs12StaticStringS_S_Su_T_(, 11, 2, , 33, 2, , 84, 2, 221)
+#0010:	 call: _TFSs18_fatalErrorMessageFTVSs12StaticStringS_S_Su_T_(global29, 11, 2, global30, 33, 2, global31, 83, 2, 221)
 controlFlow.swift:68 for i in 0..<4 {
 #0062:	 noop: opcode 'LLVMUnreachable' not supported <exit>
 controlFlow.swift:68 for i in 0..<4 {
@@ -1536,53 +1536,53 @@ CFG: <module init>
  - no source -
 #0001:	 assign: *_TMLGSaSi_ = null
  - no source -
-#0002:	 assign: * = "unexpectedly found nil while unwrapping an Optional value"
+#0002:	 assign: *global35 = "unexpectedly found nil while unwrapping an Optional value"
  - no source -
-#0003:	 assign: * = "/SourceCache/swiftlang/swiftlang-600.0.54.20/src/tools/swift/stdlib/core/Optional.swift"
+#0003:	 assign: *global36 = "/SourceCache/swiftlang/swiftlang-600.0.56.1/src/tools/swift/stdlib/core/Optional.swift"
  - no source -
-#0004:	 assign: * = "fatal error"
+#0004:	 assign: *global37 = "fatal error"
  - no source -
-#0005:	 assign: * = "Hello"
+#0005:	 assign: *global38 = "Hello"
  - no source -
-#0006:	 assign: * = "John Appleseed"
+#0006:	 assign: *global39 = "John Appleseed"
  - no source -
-#0007:	 assign: * = "Hello!"
+#0007:	 assign: *global40 = "Hello!"
  - no source -
-#0008:	 assign: * = "Hello, "
+#0008:	 assign: *global41 = "Hello, "
  - no source -
-#0009:	 assign: * = "red pepper"
+#0009:	 assign: *global42 = "red pepper"
  - no source -
-#0010:	 assign: * = "celery"
+#0010:	 assign: *global43 = "celery"
  - no source -
-#0011:	 assign: * = "cucumber"
+#0011:	 assign: *global44 = "cucumber"
  - no source -
-#0012:	 assign: * = "watercress"
+#0012:	 assign: *global45 = "watercress"
  - no source -
-#0013:	 assign: * = "pepper"
+#0013:	 assign: *global46 = "pepper"
  - no source -
-#0014:	 assign: * = "Everything tastes good in soup."
+#0014:	 assign: *global47 = "Everything tastes good in soup."
  - no source -
-#0015:	 assign: * = "Is it a spicy "
+#0015:	 assign: *global48 = "Is it a spicy "
  - no source -
-#0016:	 assign: * = "?"
+#0016:	 assign: *global49 = "?"
  - no source -
-#0017:	 assign: * = "That would make a good tea sandwich."
+#0017:	 assign: *global50 = "That would make a good tea sandwich."
  - no source -
-#0018:	 assign: * = "Add some raisins and make ants on a log."
+#0018:	 assign: *global51 = "Add some raisins and make ants on a log."
  - no source -
-#0019:	 assign: * = "Prime"
+#0019:	 assign: *global52 = "Prime"
  - no source -
-#0020:	 assign: * = "Fibonacci"
+#0020:	 assign: *global53 = "Fibonacci"
  - no source -
-#0021:	 assign: * = "Square"
+#0021:	 assign: *global54 = "Square"
  - no source -
 #0022:	 assign: *_TMLTSSGSaSi__ = null
  - no source -
 #0023:	 assign: *_TMLGVSs19DictionaryGeneratorSSGSaSi__ = null
  - no source -
-#0024:	 assign: * = "Can't form Range with end < start"
+#0024:	 assign: *global55 = "Can't form Range with end < start"
  - no source -
-#0025:	 assign: * = "/SourceCache/swiftlang/swiftlang-600.0.54.20/src/tools/swift/stdlib/core/Range.swift"
+#0025:	 assign: *global56 = "/SourceCache/swiftlang/swiftlang-600.0.56.1/src/tools/swift/stdlib/core/Range.swift"
  - no source -
 #0026:	 assign: *_TMLGVSs14RangeGeneratorSi_ = null
  - no source -

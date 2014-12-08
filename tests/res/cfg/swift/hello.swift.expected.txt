@@ -1,5 +1,5 @@
 CFG: top_level_code
-#0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 13, -1)
+#0000:	 call: tmp0 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global0, 13, -1)
 hello.swift:1 println("Hello, world!")
 #0001:	 noop: can't index (((tmp0.field0).field0).field0) by 0
 hello.swift:1 println("Hello, world!")
@@ -33,6 +33,6 @@ CFG: main
  - no source -
 
 CFG: <module init>
-#0000:	 assign: * = "Hello, world!" <exit>
+#0000:	 assign: *global1 = "Hello, world!" <exit>
  - no source -
 

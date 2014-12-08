@@ -6,7 +6,7 @@ CFG: _TFC4main5Shape17simpleDescriptionfS0_FT_SS
  - no source -
 #0001:	 assign: *tmp1 = 
  - no source -
-#0002:	 call: tmp2 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 13, -1)
+#0002:	 call: tmp2 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global0, 13, -1)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
 #0003:	 call: tmp3 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp2.field0), (tmp2.field0), (tmp2.field0))
 objects.swift:4 return "A shape with \(numberOfSides) sides."
@@ -26,7 +26,7 @@ objects.swift:4 return "A shape with \(numberOfSides) sides."
 objects.swift:4 return "A shape with \(numberOfSides) sides."
 #0011:	 call: tmp10 = _TFSS37convertFromStringInterpolationSegmentfMSSFSiSS(tmp9)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
-#0012:	 call: tmp11 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
+#0012:	 call: tmp11 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global1, 7, -1)
 objects.swift:4 return "A shape with \(numberOfSides) sides."
 #0013:	 call: tmp12 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp11.field0), (tmp11.field0), (tmp11.field0))
 objects.swift:4 return "A shape with \(numberOfSides) sides."
@@ -354,7 +354,7 @@ CFG: _TFC4main10NamedShape17simpleDescriptionfS0_FT_SS
  - no source -
 #0001:	 assign: *tmp1 = 
  - no source -
-#0002:	 call: tmp2 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 13, -1)
+#0002:	 call: tmp2 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global2, 13, -1)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
 #0003:	 call: tmp3 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp2.field0), (tmp2.field0), (tmp2.field0))
 objects.swift:23 return "A shape with \(numberOfSides) sides."
@@ -372,7 +372,7 @@ objects.swift:23 return "A shape with \(numberOfSides) sides."
 objects.swift:23 return "A shape with \(numberOfSides) sides."
 #0010:	 call: tmp9 = _TFSS37convertFromStringInterpolationSegmentfMSSFSiSS(tmp8)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
-#0011:	 call: tmp10 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 7, -1)
+#0011:	 call: tmp10 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global3, 7, -1)
 objects.swift:23 return "A shape with \(numberOfSides) sides."
 #0012:	 call: tmp11 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp10.field0), (tmp10.field0), (tmp10.field0))
 objects.swift:23 return "A shape with \(numberOfSides) sides."
@@ -760,7 +760,7 @@ CFG: _TFC4main6Square17simpleDescriptionfS0_FT_SS
  - no source -
 #0001:	 assign: *tmp1 = 
  - no source -
-#0002:	 call: tmp2 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 30, -1)
+#0002:	 call: tmp2 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global4, 30, -1)
 objects.swift:41 return "A square with sides of length \(sideLength)."
 #0003:	 call: tmp3 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp2.field0), (tmp2.field0), (tmp2.field0))
 objects.swift:41 return "A square with sides of length \(sideLength)."
@@ -778,7 +778,7 @@ objects.swift:41 return "A square with sides of length \(sideLength)."
 objects.swift:41 return "A square with sides of length \(sideLength)."
 #0010:	 call: tmp9 = _TFSS37convertFromStringInterpolationSegmentfMSSFSdSS(tmp8)
 objects.swift:41 return "A square with sides of length \(sideLength)."
-#0011:	 call: tmp10 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 1, -1)
+#0011:	 call: tmp10 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global5, 1, -1)
 objects.swift:41 return "A square with sides of length \(sideLength)."
 #0012:	 call: tmp11 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp10.field0), (tmp10.field0), (tmp10.field0))
 objects.swift:41 return "A square with sides of length \(sideLength)."
@@ -972,13 +972,13 @@ CFG: _TFC4main6SquarecfMS0_FT4nameSS_S0_
 objects.swift:27 class Square: NamedShape {
 #0009:	 assign: tmp5 = tmp4
 objects.swift:27 class Square: NamedShape {
-#0010:	 assign: *((tmp5.field1).field0) = 
+#0010:	 assign: *((tmp5.field1).field0) = global6
 objects.swift:27 class Square: NamedShape {
 #0011:	 assign: *(((tmp5.field1).field0)+1) = 11
 objects.swift:27 class Square: NamedShape {
 #0012:	 assign: *(((tmp5.field1).field0)+2) = 2
 objects.swift:27 class Square: NamedShape {
-#0013:	 assign: *((tmp5.field2).field0) = 
+#0013:	 assign: *((tmp5.field2).field0) = global7
 objects.swift:27 class Square: NamedShape {
 #0014:	 assign: *(((tmp5.field2).field0)+1) = 70
 objects.swift:27 class Square: NamedShape {
@@ -1020,7 +1020,7 @@ CFG: _TPA__TFFSs26_unimplemented_initializerFTVSs12StaticString8initNameS_4fileS
 CFG: _TF4main10testSquareFT_T_
 #0000:	 call: tmp0 = _TMaC4main6Square()
 objects.swift:46 let test = Square(sideLength: 5.2, name: "my test square")
-#0001:	 call: tmp1 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 14, -1)
+#0001:	 call: tmp1 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global8, 14, -1)
 objects.swift:46 let test = Square(sideLength: 5.2, name: "my test square")
 #0002:	 call: tmp2 = _TFC4main6SquareCfMS0_FT10sideLengthSd4nameSS_S0_(5.2, (tmp1.field0), (tmp1.field0), (tmp1.field0), tmp0)
 objects.swift:46 let test = Square(sideLength: 5.2, name: "my test square")
@@ -1218,7 +1218,7 @@ CFG: _TFC4main19EquilateralTriangle17simpleDescriptionfS0_FT_SS
  - no source -
 #0001:	 assign: *tmp1 = 
  - no source -
-#0002:	 call: tmp2 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 45, -1)
+#0002:	 call: tmp2 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global9, 45, -1)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
 #0003:	 call: tmp3 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp2.field0), (tmp2.field0), (tmp2.field0))
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
@@ -1236,7 +1236,7 @@ objects.swift:70 return "An equilateral triangle with sides of length \(sideLeng
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
 #0010:	 call: tmp9 = _TFSS37convertFromStringInterpolationSegmentfMSSFSdSS(tmp8)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
-#0011:	 call: tmp10 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 1, -1)
+#0011:	 call: tmp10 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global10, 1, -1)
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
 #0012:	 call: tmp11 = _TFSS37convertFromStringInterpolationSegmentfMSSFSSSS((tmp10.field0), (tmp10.field0), (tmp10.field0))
 objects.swift:70 return "An equilateral triangle with sides of length \(sideLength)."
@@ -1398,13 +1398,13 @@ CFG: _TFC4main19EquilateralTrianglecfMS0_FT4nameSS_S0_
 objects.swift:51 class EquilateralTriangle: NamedShape {
 #0009:	 assign: tmp5 = tmp4
 objects.swift:51 class EquilateralTriangle: NamedShape {
-#0010:	 assign: *((tmp5.field1).field0) = 
+#0010:	 assign: *((tmp5.field1).field0) = global11
 objects.swift:51 class EquilateralTriangle: NamedShape {
 #0011:	 assign: *(((tmp5.field1).field0)+1) = 11
 objects.swift:51 class EquilateralTriangle: NamedShape {
 #0012:	 assign: *(((tmp5.field1).field0)+2) = 2
 objects.swift:51 class EquilateralTriangle: NamedShape {
-#0013:	 assign: *((tmp5.field2).field0) = 
+#0013:	 assign: *((tmp5.field2).field0) = global12
 objects.swift:51 class EquilateralTriangle: NamedShape {
 #0014:	 assign: *(((tmp5.field2).field0)+1) = 70
 objects.swift:51 class EquilateralTriangle: NamedShape {
@@ -1432,7 +1432,7 @@ objects.swift:51 class EquilateralTriangle: NamedShape {
 CFG: _TF4main12testTriangleFT_T_
 #0000:	 call: tmp0 = _TMaC4main19EquilateralTriangle()
 objects.swift:75 var triangle = EquilateralTriangle(sideLength: 3.1, name: "a triangle")
-#0001:	 call: tmp1 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 10, -1)
+#0001:	 call: tmp1 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global13, 10, -1)
 objects.swift:75 var triangle = EquilateralTriangle(sideLength: 3.1, name: "a triangle")
 #0002:	 call: tmp2 = _TFC4main19EquilateralTriangleCfMS0_FT10sideLengthSd4nameSS_S0_(3.1, (tmp1.field0), (tmp1.field0), (tmp1.field0), tmp0)
 objects.swift:75 var triangle = EquilateralTriangle(sideLength: 3.1, name: "a triangle")
@@ -1832,7 +1832,7 @@ CFG: _TFC4main17TriangleAndSquareD
 CFG: _TF4main18testTriangleSquareFT_T_
 #0000:	 call: tmp0 = _TMaC4main17TriangleAndSquare()
 objects.swift:99 var triangleAndSquare = TriangleAndSquare(size: 10, name: "another test shape")
-#0001:	 call: tmp1 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 18, -1)
+#0001:	 call: tmp1 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global14, 18, -1)
 objects.swift:99 var triangleAndSquare = TriangleAndSquare(size: 10, name: "another test shape")
 #0002:	 call: tmp2 = _TFC4main17TriangleAndSquareCfMS0_FT4sizeSd4nameSS_S0_(10.0, (tmp1.field0), (tmp1.field0), (tmp1.field0), tmp0)
 objects.swift:99 var triangleAndSquare = TriangleAndSquare(size: 10, name: "another test shape")
@@ -1884,7 +1884,7 @@ objects.swift:101 sideLength = triangleAndSquare.triangle.sideLength
 objects.swift:101 sideLength = triangleAndSquare.triangle.sideLength
 #0026:	 call: tmp23 = _TMaC4main6Square()
 objects.swift:102 triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
-#0027:	 call: tmp24 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 13, -1)
+#0027:	 call: tmp24 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global15, 13, -1)
 objects.swift:102 triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
 #0028:	 call: tmp25 = _TFC4main6SquareCfMS0_FT10sideLengthSd4nameSS_S0_(50.0, (tmp24.field0), (tmp24.field0), (tmp24.field0), tmp23)
 objects.swift:102 triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
@@ -2116,7 +2116,7 @@ objects.swift:115 counter.incrementBy(2, numberOfTimes: 7)
 CFG: _TF4main18testOptionalSquareFT_T_
 #0000:	 call: tmp0 = _TMaC4main6Square()
 objects.swift:119 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
-#0001:	 call: tmp1 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(, 15, -1)
+#0001:	 call: tmp1 = _TFSSCfMSSFT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global16, 15, -1)
 objects.swift:119 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
 #0002:	 call: tmp2 = _TFC4main6SquareCfMS0_FT10sideLengthSd4nameSS_S0_(2.5, (tmp1.field0), (tmp1.field0), (tmp1.field0), tmp0)
 objects.swift:119 let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
@@ -2202,7 +2202,7 @@ objects.swift:120 let sideLength = optionalSquare?.sideLength
 objects.swift:121 }
 #0045:	 noop: opcode 'LLVMIntToPtr' not supported <exit>
 objects.swift:121 }
-#0028:	 call: _TFSs18_fatalErrorMessageFTVSs12StaticStringS_S_Su_T_(, 11, 2, , 57, 2, , 87, 2, 102)
+#0028:	 call: _TFSs18_fatalErrorMessageFTVSs12StaticStringS_S_Su_T_(global17, 11, 2, global18, 57, 2, global19, 86, 2, 102)
 objects.swift:120 let sideLength = optionalSquare?.sideLength
 #0046:	 noop: opcode 'LLVMUnreachable' not supported <exit>
 objects.swift:120 let sideLength = optionalSquare?.sideLength
@@ -2568,53 +2568,53 @@ CFG: main
  - no source -
 
 CFG: <module init>
-#0000:	 assign: * = "A shape with "
+#0000:	 assign: *global20 = "A shape with "
  - no source -
-#0001:	 assign: * = " sides."
+#0001:	 assign: *global21 = " sides."
  - no source -
-#0002:	 assign: * = "A square with sides of length "
+#0002:	 assign: *global22 = "A square with sides of length "
  - no source -
-#0003:	 assign: * = "."
+#0003:	 assign: *global23 = "."
  - no source -
-#0004:	 assign: * = "main.Square"
+#0004:	 assign: *global24 = "main.Square"
  - no source -
-#0005:	 assign: * = "init(name:)"
+#0005:	 assign: *global25 = "init(name:)"
  - no source -
-#0006:	 assign: * = "/Users/jondoe/IdeaProjects/SA/sanity/tests/res/cfg/swift/objects.swift"
+#0006:	 assign: *global26 = "/Users/jondoe/IdeaProjects/SA/sanity/tests/res/cfg/swift/objects.swift"
  - no source -
-#0007:	 assign: * = "my test square"
+#0007:	 assign: *global27 = "my test square"
  - no source -
-#0008:	 assign: * = "An equilateral triangle with sides of length "
+#0008:	 assign: *global28 = "An equilateral triangle with sides of length "
  - no source -
-#0009:	 assign: * = "main.EquilateralTriangle"
+#0009:	 assign: *global29 = "main.EquilateralTriangle"
  - no source -
-#0010:	 assign: * = "a triangle"
+#0010:	 assign: *global30 = "a triangle"
  - no source -
-#0011:	 assign: * = "another test shape"
+#0011:	 assign: *global31 = "another test shape"
  - no source -
-#0012:	 assign: * = "larger square"
+#0012:	 assign: *global32 = "larger square"
  - no source -
-#0013:	 assign: * = "optional square"
+#0013:	 assign: *global33 = "optional square"
  - no source -
-#0014:	 assign: * = "unexpectedly found nil while unwrapping an Optional value"
+#0014:	 assign: *global34 = "unexpectedly found nil while unwrapping an Optional value"
  - no source -
-#0015:	 assign: * = "/SourceCache/swiftlang/swiftlang-600.0.54.20/src/tools/swift/stdlib/core/Optional.swift"
+#0015:	 assign: *global35 = "/SourceCache/swiftlang/swiftlang-600.0.56.1/src/tools/swift/stdlib/core/Optional.swift"
  - no source -
-#0016:	 assign: * = "fatal error"
+#0016:	 assign: *global36 = "fatal error"
  - no source -
 #0017:	 assign: *_TWvdvC4main5Shape13numberOfSidesSi = 16
  - no source -
-#0018:	 assign: * = "numberOfSides"
+#0018:	 assign: *global37 = "numberOfSides"
  - no source -
-#0019:	 assign: * = "_TtC4main5Shape"
+#0019:	 assign: *global39 = "_TtC4main5Shape"
  - no source -
 #0020:	 assign: *(*_METACLASS_DATA__TtC4main5Shape.field0) = 129
  - no source -
 #0021:	 assign: *(*_DATA__TtC4main5Shape.field0) = 128
  - no source -
-#0022:	 assign: * = "C4main5Shape"
+#0022:	 assign: *global42 = "C4main5Shape"
  - no source -
-#0023:	 assign: * = "numberOfSides"
+#0023:	 assign: *global43 = "numberOfSides"
  - no source -
 #0024:	 assign: *field_type_vector_Shape = null
  - no source -
@@ -2636,17 +2636,17 @@ CFG: <module init>
  - no source -
 #0033:	 assign: *_TWvdvC4main10NamedShape4nameSS = 24
  - no source -
-#0034:	 assign: * = "name"
+#0034:	 assign: *global46 = "name"
  - no source -
-#0035:	 assign: * = "_TtC4main10NamedShape"
+#0035:	 assign: *global47 = "_TtC4main10NamedShape"
  - no source -
 #0036:	 assign: *(*_METACLASS_DATA__TtC4main10NamedShape.field0) = 129
  - no source -
 #0037:	 assign: *(*_DATA__TtC4main10NamedShape.field0) = 128
  - no source -
-#0038:	 assign: * = "C4main10NamedShape"
+#0038:	 assign: *global50 = "C4main10NamedShape"
  - no source -
-#0039:	 assign: * = "numberOfSides"
+#0039:	 assign: *global51 = "numberOfSides"
  - no source -
 #0040:	 assign: *field_type_vector_NamedShape = null
  - no source -
@@ -2672,17 +2672,17 @@ CFG: <module init>
  - no source -
 #0051:	 assign: *_TWvdvC4main6Square10sideLengthSd = 48
  - no source -
-#0052:	 assign: * = "sideLength"
+#0052:	 assign: *global54 = "sideLength"
  - no source -
-#0053:	 assign: * = "_TtC4main6Square"
+#0053:	 assign: *global55 = "_TtC4main6Square"
  - no source -
 #0054:	 assign: *(*_METACLASS_DATA__TtC4main6Square.field0) = 129
  - no source -
 #0055:	 assign: *(*_DATA__TtC4main6Square.field0) = 128
  - no source -
-#0056:	 assign: * = "C4main6Square"
+#0056:	 assign: *global58 = "C4main6Square"
  - no source -
-#0057:	 assign: * = "sideLength"
+#0057:	 assign: *global59 = "sideLength"
  - no source -
 #0058:	 assign: *field_type_vector_Square = null
  - no source -
@@ -2702,13 +2702,13 @@ CFG: <module init>
  - no source -
 #0066:	 assign: *_TWvdvC4main19EquilateralTriangle10sideLengthSd = 48
  - no source -
-#0067:	 assign: * = "_TtC4main19EquilateralTriangle"
+#0067:	 assign: *global62 = "_TtC4main19EquilateralTriangle"
  - no source -
 #0068:	 assign: *(*_METACLASS_DATA__TtC4main19EquilateralTriangle.field0) = 129
  - no source -
 #0069:	 assign: *(*_DATA__TtC4main19EquilateralTriangle.field0) = 128
  - no source -
-#0070:	 assign: * = "C4main19EquilateralTriangle"
+#0070:	 assign: *global65 = "C4main19EquilateralTriangle"
  - no source -
 #0071:	 assign: *field_type_vector_EquilateralTriangle = null
  - no source -
@@ -2732,21 +2732,21 @@ CFG: <module init>
  - no source -
 #0081:	 assign: *_TWvdvC4main17TriangleAndSquare8triangleCS_19EquilateralTriangle = 16
  - no source -
-#0082:	 assign: * = "triangle"
+#0082:	 assign: *global68 = "triangle"
  - no source -
 #0083:	 assign: *_TWvdvC4main17TriangleAndSquare6squareCS_6Square = 24
  - no source -
-#0084:	 assign: * = "square"
+#0084:	 assign: *global69 = "square"
  - no source -
-#0085:	 assign: * = "_TtC4main17TriangleAndSquare"
+#0085:	 assign: *global70 = "_TtC4main17TriangleAndSquare"
  - no source -
 #0086:	 assign: *(*_METACLASS_DATA__TtC4main17TriangleAndSquare.field0) = 129
  - no source -
 #0087:	 assign: *(*_DATA__TtC4main17TriangleAndSquare.field0) = 128
  - no source -
-#0088:	 assign: * = "C4main17TriangleAndSquare"
+#0088:	 assign: *global73 = "C4main17TriangleAndSquare"
  - no source -
-#0089:	 assign: * = "triangle"
+#0089:	 assign: *global74 = "triangle"
  - no source -
 #0090:	 assign: *field_type_vector_TriangleAndSquare = null
  - no source -
@@ -2770,17 +2770,17 @@ CFG: <module init>
  - no source -
 #0100:	 assign: *_TWvdvC4main7Counter5countSi = 16
  - no source -
-#0101:	 assign: * = "count"
+#0101:	 assign: *global77 = "count"
  - no source -
-#0102:	 assign: * = "_TtC4main7Counter"
+#0102:	 assign: *global78 = "_TtC4main7Counter"
  - no source -
 #0103:	 assign: *(*_METACLASS_DATA__TtC4main7Counter.field0) = 129
  - no source -
 #0104:	 assign: *(*_DATA__TtC4main7Counter.field0) = 128
  - no source -
-#0105:	 assign: * = "C4main7Counter"
+#0105:	 assign: *global81 = "C4main7Counter"
  - no source -
-#0106:	 assign: * = "count"
+#0106:	 assign: *global82 = "count"
  - no source -
 #0107:	 assign: *field_type_vector_Counter = null
  - no source -
