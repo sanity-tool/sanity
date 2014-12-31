@@ -1,6 +1,6 @@
 int *GLOBAL;
 
-void testCondition() {
+void testSimple() {
 	GLOBAL = 0;
 	*GLOBAL = 1;
 }
