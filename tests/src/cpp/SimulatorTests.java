@@ -70,6 +70,7 @@ public class SimulatorTests extends TestHelper {
                     RValue function = call.getFunction();
                     if (function.toString().contains("dump")) {
                         state.dump(ps);
+                        ps.println();
                     }
                 }
             };
@@ -77,22 +78,6 @@ public class SimulatorTests extends TestHelper {
             while (simulator.hasUnfinished()) {
                 simulator.advanceAll();
             }
-        }
-
-        for (Map.Entry<String, List<Cfe>> entry : callsMap.getStaticCalls().entrySet()) {
-            ps.println("CFG: " + entry.getKey());
-            for (Cfe cfe : entry.getValue()) {
-                ps.println(CfePrinter.print(cfe));
-            }
-            ps.println();
-        }
-
-        for (Map.Entry<Type, List<Cfe>> entry : callsMap.getCompatibleCalls().entrySet()) {
-            ps.println("Type: " + entry.getKey());
-            for (Cfe cfe : entry.getValue()) {
-                ps.println(CfePrinter.print(cfe));
-            }
-            ps.println();
         }
 
         String actual = baos.toString();

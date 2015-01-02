@@ -1,0 +1,46 @@
+#0000:	 assign: tmp0 = *I != 0
+conditions.c:4 if (I);
+#0001:	 if: tmp0 then #0002:	 else #0002:	
+conditions.c:4 if (I);
+#0002:	 noop
+ - no source -
+#0003:	 call: tmp1 = dump() <exit>
+conditions.c:5 dump();
+
+#0000:	 assign: tmp0 = *I != 0
+conditions.c:4 if (I);
+#0001:	 if: tmp0 then #0002:	 else #0002:	
+conditions.c:4 if (I);
+#0002:	 noop
+ - no source -
+#0003:	 call: tmp1 = dump() <exit>
+conditions.c:5 dump();
+
+#0000:	 assign: *tmp0 = p
+ - no source -
+#0001:	 assign: tmp1 = *tmp0 != null
+conditions.c:9 if (p);
+#0002:	 if: tmp1 then #0003:	 else #0003:	
+conditions.c:9 if (p);
+#0003:	 noop
+ - no source -
+#0004:	 call: tmp2 = dump() <exit>
+conditions.c:10 dump();
+
+#0000:	 assign: *tmp0 = p
+ - no source -
+#0001:	 assign: tmp1 = *tmp0 != null
+conditions.c:9 if (p);
+#0002:	 if: tmp1 then #0003:	 else #0003:	
+conditions.c:9 if (p);
+#0003:	 noop
+ - no source -
+#0004:	 call: tmp2 = dump() <exit>
+conditions.c:10 dump();
+
+#0000:	 call: dumper() <exit>
+methodEnterings.c:6 dumper();
+
+#0000:	 call: tmp0 = dump() <exit>
+methodExit.c:2 dump();
+

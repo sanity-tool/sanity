@@ -11,6 +11,7 @@ import na.okutane.api.cfg.NoOp;
 import na.okutane.api.cfg.Switch;
 import na.okutane.api.cfg.UnprocessedElement;
 
+import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -40,21 +41,27 @@ public class Simulator {
         for (MachineState state : states) {
             newStates.addAll(state.advance());
         }
+        if (newStates.size() == 3) {
+            throw new IllegalStateException();
+        }
         states = newStates;
     }
 
     protected class MachineState implements CfeVisitor {
         final Deque<Cfe> path;
-        List<MachineState> paths = new ArrayList<>();
+        List<MachineState> paths;
 
         public MachineState(Cfe position) {
             path = new ArrayDeque<>();
             path.add(position);
+            if (path.size() == 100) {
+                throw new IllegalStateException();
+            }
         }
 
         public MachineState(Deque<Cfe> path, Cfe position) {
             this.path = new ArrayDeque<>(path);
-            path.add(position);
+            this.path.add(position);
         }
 
         public Cfe getPosition() {
@@ -97,7 +104,7 @@ public class Simulator {
         public void visit(IfCondition ifCondition) {
             paths = Arrays.asList(
                     new MachineState(path, ifCondition.getThenElement()),
-                    new MachineState(path, ifCondition.getThenElement())
+                    new MachineState(path, ifCondition.getElseElement())
             );
         }
 
@@ -116,10 +123,15 @@ public class Simulator {
         }
 
         public void dump(PrintStream stream) {
-            for (Cfe cfe : path) {
-                stream.append(CfePrinter.print(cfe));
-            }
-            stream.append("\n");
+            stream.println(CfePrinter.printAll(path));
+        }
+
+        @Override
+        public String toString() {
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            PrintStream ps = new PrintStream(baos);
+            dump(ps);
+            return baos.toString();
         }
     }
 

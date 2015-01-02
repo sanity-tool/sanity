@@ -3,6 +3,7 @@ package na.okutane.api.cfg;
 import na.okutane.CfgUtils;
 import na.okutane.api.Cfg;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -18,10 +19,6 @@ public class CfePrinter implements CfeVisitor {
     final Map<RValue, Integer> tmpVars = new HashMap<>();
     final Map<Cfe, Integer> cfeIds = new HashMap<>();
     final Set<Cfe> printed = new HashSet<>();
-
-    private CfePrinter() {
-
-    }
 
     @Override
     public String toString() {
@@ -66,9 +63,13 @@ public class CfePrinter implements CfeVisitor {
     }
 
     public static String print(Cfg cfg) {
-        CfePrinter printer = new CfePrinter();
-
         Set<Cfe> cfes = CfgUtils.getAllCfes(cfg.getEntry());
+
+        return printAll(cfes);
+    }
+
+    public static String printAll(Collection<Cfe> cfes) {
+        CfePrinter printer = new CfePrinter();
 
         for (Cfe cfe : cfes) {
             if (!printer.isEmpty()) {
