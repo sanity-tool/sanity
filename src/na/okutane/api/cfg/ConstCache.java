@@ -27,13 +27,13 @@ public class ConstCache {
         return new FunctionAddress(name, type);
     }
 
-    public static class NullPtr extends TypedValue {
+    public static class NullPtr extends TypedValue implements Value {
         public NullPtr(Type type) {
             super(type);
         }
     }
 
-    public static class Const extends TypedValue {
+    public static class Const extends TypedValue implements Value {
         private final long value;
 
         public Const(long value, Type type) {
@@ -51,7 +51,7 @@ public class ConstCache {
         }
     }
 
-    public static class RealConst extends TypedValue {
+    public static class RealConst extends TypedValue implements Value {
         private final double value;
 
         public RealConst(double value, Type type) {
@@ -69,7 +69,7 @@ public class ConstCache {
         }
     }
 
-    public static class StringConst extends TypedValue {
+    public static class StringConst extends TypedValue implements Value {
         private final String value;
 
         public StringConst(String value, Type type) {
@@ -87,7 +87,7 @@ public class ConstCache {
         }
     }
 
-    public static class FunctionAddress extends TypedValue {
+    public static class FunctionAddress extends TypedValue implements Value {
         private final String name;
 
         public FunctionAddress(String name, Type type) {

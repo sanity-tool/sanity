@@ -8,6 +8,7 @@ import na.okutane.api.cfg.CfePrinter;
 import na.okutane.api.cfg.CfeVisitor;
 import na.okutane.api.cfg.IfCondition;
 import na.okutane.api.cfg.NoOp;
+import na.okutane.api.cfg.RValue;
 import na.okutane.api.cfg.Switch;
 import na.okutane.api.cfg.UnprocessedElement;
 
@@ -19,6 +20,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author <a href="mailto:dmitriy.matveev@corp.mail.ru">Dmitriy Matveev</a>
@@ -41,27 +43,24 @@ public class Simulator {
         for (MachineState state : states) {
             newStates.addAll(state.advance());
         }
-        if (newStates.size() == 3) {
-            throw new IllegalStateException();
-        }
         states = newStates;
     }
 
     protected class MachineState implements CfeVisitor {
         final Deque<Cfe> path;
+        Memory memory;
         List<MachineState> paths;
 
         public MachineState(Cfe position) {
             path = new ArrayDeque<>();
+            memory = new Memory();
             path.add(position);
-            if (path.size() == 100) {
-                throw new IllegalStateException();
-            }
         }
 
-        public MachineState(Deque<Cfe> path, Cfe position) {
+        public MachineState(Deque<Cfe> path, Cfe position, Memory memory) {
             this.path = new ArrayDeque<>(path);
             this.path.add(position);
+            this.memory = memory;
         }
 
         public Cfe getPosition() {
@@ -69,11 +68,22 @@ public class Simulator {
         }
 
         public List<MachineState> advance() {
-            getPosition().accept(this);
-            return paths;
+            Cfe position = getPosition();
+            try {
+                position.accept(this);
+                return paths;
+            } catch (Throwable e) {
+                onError(position, e);
+                return Collections.emptyList();
+            }
         }
 
         public void visitSimple(Cfe element) {
+            if (memory == null) {
+                // memory has been corrupted.
+                paths = Collections.emptyList();
+                return;
+            }
             Cfe next = element.getNext();
             if (next != null) {
                 path.add(element.getNext());
@@ -91,6 +101,7 @@ public class Simulator {
 
         @Override
         public void visit(Assignment assignment) {
+            memory = memory.putValue(assignment.getLeft(), memory.getValue(assignment.getRight()));
             visitSimple(assignment);
         }
 
@@ -102,18 +113,20 @@ public class Simulator {
 
         @Override
         public void visit(IfCondition ifCondition) {
+            // todo memory.getValue to check if branch known
             paths = Arrays.asList(
-                    new MachineState(path, ifCondition.getThenElement()),
-                    new MachineState(path, ifCondition.getElseElement())
+                    new MachineState(path, ifCondition.getThenElement(), memory), // todo memory.putValue(ifCondition.getControlValue(), true)
+                    new MachineState(path, ifCondition.getElseElement(), memory)  // todo memory.putValue(ifCondition.getControlValue(), false)
             );
         }
 
         @Override
         public void visit(Switch switchElement) {
+            // todo memory.getValue to check if case known
             paths = new ArrayList<>(switchElement.getCases().size() + 1);
-            paths.add(new MachineState(path, switchElement.getDefaultCase()));
-            for (Cfe e : switchElement.getCases().values()) {
-                paths.add(new MachineState(path, e));
+            paths.add(new MachineState(path, switchElement.getDefaultCase(), memory)); // todo memory.putValue(switchElement.getControlValue(), not(switchElement.getCases().keys()))
+            for (Map.Entry<RValue, Cfe> e : switchElement.getCases().entrySet()) {
+                paths.add(new MachineState(path, e.getValue(), memory)); // todo memory.putValue(switchElement.getControlValue(), e.getKey())
             }
         }
 
@@ -123,6 +136,8 @@ public class Simulator {
         }
 
         public void dump(PrintStream stream) {
+            memory.dump(stream);
+            stream.println("Path:");
             stream.println(CfePrinter.printAll(path));
         }
 
@@ -133,6 +148,10 @@ public class Simulator {
             dump(ps);
             return baos.toString();
         }
+    }
+
+    protected void onError(Cfe cfe, Throwable e) {
+
     }
 
     protected void onMethodCall(Call call, MachineState state) {

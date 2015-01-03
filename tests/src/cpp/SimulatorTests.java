@@ -73,6 +73,13 @@ public class SimulatorTests extends TestHelper {
                         ps.println();
                     }
                 }
+
+                @Override
+                protected void onError(Cfe cfe, Throwable e) {
+                    ps.println(CfePrinter.print(cfe));
+                    ps.println(e);
+                    ps.println();
+                }
             };
 
             while (simulator.hasUnfinished()) {
