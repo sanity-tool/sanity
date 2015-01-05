@@ -14,7 +14,7 @@ CFG: _ZN3FooC2Ev
 #0000:	 call: _ZN3FooC2Ev(tmp0)
  - no source -
 
-Type: void (struct.Foo.34*)
+Type: void (struct.Foo.74*)
 #0000:	 call: **tmp0(*tmp1) <exit>
 methodCalls.cpp:16 p->abstractMethod();
 
