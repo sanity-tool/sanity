@@ -30,7 +30,7 @@ public class Simulator {
     CallsMap callsMap;
 
     public Simulator(Cfg cfg, CallsMap callsMap) {
-        states.add(new MachineState(cfg.getEntry()));
+        states.add(createState().init(cfg.getEntry()));
         this.callsMap = callsMap;
     }
 
@@ -47,20 +47,30 @@ public class Simulator {
     }
 
     protected class MachineState implements CfeVisitor {
-        final Deque<Cfe> path;
+        Deque<Cfe> path;
         Memory memory;
         List<MachineState> paths;
 
-        public MachineState(Cfe position) {
+        public MachineState init(Cfe position) {
             path = new ArrayDeque<>();
             memory = new Memory();
             path.add(position);
+            return this;
         }
 
-        public MachineState(Deque<Cfe> path, Cfe position, Memory memory) {
+        public MachineState init(Deque<Cfe> path, Cfe position, Memory memory) {
             this.path = new ArrayDeque<>(path);
             this.path.add(position);
             this.memory = memory;
+            return this;
+        }
+
+        public Memory getMemory() {
+            return memory;
+        }
+
+        public Deque<Cfe> getPath() {
+            return path;
         }
 
         public Cfe getPosition() {
@@ -108,15 +118,14 @@ public class Simulator {
         @Override
         public void visit(Call call) {
             visitSimple(call);
-            onMethodCall(call, this);
         }
 
         @Override
         public void visit(IfCondition ifCondition) {
             // todo memory.getValue to check if branch known
             paths = Arrays.asList(
-                    new MachineState(path, ifCondition.getThenElement(), memory), // todo memory.putValue(ifCondition.getControlValue(), true)
-                    new MachineState(path, ifCondition.getElseElement(), memory)  // todo memory.putValue(ifCondition.getControlValue(), false)
+                    createState().init(path, ifCondition.getThenElement(), memory), // todo memory.putValue(ifCondition.getControlValue(), true)
+                    createState().init(path, ifCondition.getElseElement(), memory)  // todo memory.putValue(ifCondition.getControlValue(), false)
             );
         }
 
@@ -124,9 +133,9 @@ public class Simulator {
         public void visit(Switch switchElement) {
             // todo memory.getValue to check if case known
             paths = new ArrayList<>(switchElement.getCases().size() + 1);
-            paths.add(new MachineState(path, switchElement.getDefaultCase(), memory)); // todo memory.putValue(switchElement.getControlValue(), not(switchElement.getCases().keys()))
+            paths.add(createState().init(path, switchElement.getDefaultCase(), memory)); // todo memory.putValue(switchElement.getControlValue(), not(switchElement.getCases().keys()))
             for (Map.Entry<RValue, Cfe> e : switchElement.getCases().entrySet()) {
-                paths.add(new MachineState(path, e.getValue(), memory)); // todo memory.putValue(switchElement.getControlValue(), e.getKey())
+                paths.add(createState().init(path, e.getValue(), memory)); // todo memory.putValue(switchElement.getControlValue(), e.getKey())
             }
         }
 
@@ -150,11 +159,10 @@ public class Simulator {
         }
     }
 
-    protected void onError(Cfe cfe, Throwable e) {
-
+    protected MachineState createState() {
+        return new MachineState();
     }
 
-    protected void onMethodCall(Call call, MachineState state) {
-
+    protected void onError(Cfe cfe, Throwable e) {
     }
 }

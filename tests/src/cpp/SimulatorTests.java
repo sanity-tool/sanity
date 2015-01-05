@@ -66,12 +66,18 @@ public class SimulatorTests extends TestHelper {
 
             Simulator simulator = new Simulator(cfg, callsMap) {
                 @Override
-                protected void onMethodCall(Call call, Simulator.MachineState state) {
-                    RValue function = call.getFunction();
-                    if (function.toString().contains("dump")) {
-                        state.dump(ps);
-                        ps.println();
-                    }
+                protected MachineState createState() {
+                    return new MachineState() {
+                        @Override
+                        public void visit(Call call) {
+                            RValue function = call.getFunction();
+                            if (function.toString().equals("@dump")) {
+                                dump(ps);
+                                ps.println();
+                            }
+                            super.visit(call);
+                        }
+                    };
                 }
 
                 @Override

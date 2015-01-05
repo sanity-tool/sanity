@@ -22,7 +22,7 @@ public class Memory implements Cloneable {
         if (rValue instanceof Indirection) {
             Value pointer = getValue(((Indirection) rValue).getPointer());
             if (pointer instanceof ConstCache.NullPtr) {
-                return null;
+                return null; // corruption
             }
 
             Memory result;
@@ -41,6 +41,14 @@ public class Memory implements Cloneable {
     }
 
     public Value getValue(RValue rValue) {
+        if (rValue instanceof Indirection) {
+            Value pointer = getValue(((Indirection) rValue).getPointer());
+            if (pointer instanceof ConstCache.NullPtr) {
+                return null; // todo corruption
+            }
+
+            return heap.computeIfAbsent(pointer, unused -> new UnknownValue("U_" + heap.size()));
+        }
         if (rValue instanceof Value) {
             return (Value) rValue;
         }

@@ -17,10 +17,6 @@ java.lang.IllegalStateException: Don't know how to get value from BinaryExpressi
 java.lang.IllegalStateException: Don't know how to get value from Parameter
 
 Path:
-#0000:	 call: dumper() <exit>
-methodEnterings.c:6 dumper();
-
-Path:
 #0000:	 call: tmp0 = dump() <exit>
 methodExit.c:2 dump();
 

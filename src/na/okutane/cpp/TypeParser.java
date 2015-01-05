@@ -33,6 +33,8 @@ public class TypeParser implements ParserListener {
     public static final int DW_TAG_compile_unit = 786449;
     private final Map<LLVMTypeKind, TypeKindParser> parsers;
 
+    private Map<SWIGTYPE_p_LLVMOpaqueType, Type> typesCache;
+
     private Map<String, List<String>> fieldNamesCache;
     private Map<SWIGTYPE_p_LLVMOpaqueType, Type> structCache;
     private int anonCount;
@@ -62,13 +64,14 @@ public class TypeParser implements ParserListener {
 
     public Type parse(SWIGTYPE_p_LLVMOpaqueType type) {
         LLVMTypeKind typeKind = bitreader.LLVMGetTypeKind(type);
-        return parsers.getOrDefault(typeKind, defaultParser).parse(this, type);
+        return typesCache.computeIfAbsent(type, key -> parsers.getOrDefault(typeKind, defaultParser).parse(this, key));
     }
 
     @Override
     public void onModuleStarted(SWIGTYPE_p_LLVMOpaqueModule module) {
         fieldNamesCache = new HashMap<>();
         structCache = new HashMap<>();
+        typesCache = new HashMap<>();
         visited = new HashSet<>();
         anonCount = 0;
 
