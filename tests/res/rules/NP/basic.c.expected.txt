@@ -1,0 +1,8 @@
+#0000:	 assign: *tmp0 = null
+basic.c:2 int *p = 0;
+java.lang.IllegalStateException: Don't know how to get value from TemporaryVar
+
+#0000:	 assign: *tmp0 = p
+ - no source -
+java.lang.IllegalStateException: Don't know how to get value from TemporaryVar
+

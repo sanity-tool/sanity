@@ -1,0 +1,5 @@
+Violation: tmp0 is null
+objects.cpp:13 GPFOO = 0;
+objects.cpp:14 GPFOO->baz();
+objects.cpp:14 GPFOO->baz();
+

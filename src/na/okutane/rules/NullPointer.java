@@ -6,11 +6,14 @@ import na.okutane.api.Cfg;
 import na.okutane.api.cfg.Assignment;
 import na.okutane.api.cfg.Call;
 import na.okutane.api.cfg.Cfe;
+import na.okutane.api.cfg.CfePrinter;
 import na.okutane.api.cfg.ConstCache;
+import na.okutane.api.cfg.GetElementPointer;
 import na.okutane.api.cfg.IfCondition;
 import na.okutane.api.cfg.Indirection;
 import na.okutane.api.cfg.RValue;
 import na.okutane.api.cfg.Switch;
+import na.okutane.simulation.SimulationException;
 
 import java.util.Collection;
 import java.util.Deque;
@@ -39,7 +42,9 @@ public class NullPointer {
 
                     @Override
                     public void visit(Switch switchElement) {
-                        checkIndirection(switchElement.getControl());
+                        if (checkIndirection(switchElement.getControl())) {
+                            return;
+                        }
                         super.visit(switchElement);
                     }
 
@@ -53,18 +58,31 @@ public class NullPointer {
                         super.visit(call);
                     }
 
-                    private void checkIndirection(RValue rValue) {
+                    private boolean checkIndirection(RValue rValue) {
                         if (rValue instanceof Indirection) {
                             RValue pointer = ((Indirection) rValue).getPointer();
-                            checkForNull(pointer);
-                            checkIndirection(pointer);
+                            if (checkIndirection(pointer) || checkForNull(pointer)) {
+                                return true;
+                            }
                         }
+                        if (rValue instanceof GetElementPointer) {
+                            RValue pointer = ((GetElementPointer) rValue).getPointer();
+                            RValue index = ((GetElementPointer) rValue).getIndex();
+                            return checkIndirection(pointer) || checkIndirection(index);
+                        }
+                        return false;
                     }
 
-                    private void checkForNull(RValue pointer) {
-                        if (getMemory().getValue(pointer) instanceof ConstCache.NullPtr) {
-                            reportViolation(pointer + " is null", getPath());
+                    private boolean checkForNull(RValue pointer) {
+                        try {
+                            if (getMemory().getValue(pointer) instanceof ConstCache.NullPtr) {
+                                reportViolation(CfePrinter.printValue(pointer) + " is null", getPath());
+                                return true;
+                            }
+                        } catch (SimulationException e) {
+                            throw new IllegalStateException(e);
                         }
+                        return false;
                     }
                 };
             }

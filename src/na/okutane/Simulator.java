@@ -11,6 +11,7 @@ import na.okutane.api.cfg.NoOp;
 import na.okutane.api.cfg.RValue;
 import na.okutane.api.cfg.Switch;
 import na.okutane.api.cfg.UnprocessedElement;
+import na.okutane.simulation.SimulationException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -78,6 +79,7 @@ public class Simulator {
         }
 
         public List<MachineState> advance() {
+            paths = Collections.emptyList();
             Cfe position = getPosition();
             try {
                 position.accept(this);
@@ -111,7 +113,12 @@ public class Simulator {
 
         @Override
         public void visit(Assignment assignment) {
-            memory = memory.putValue(assignment.getLeft(), memory.getValue(assignment.getRight()));
+            try {
+                memory = memory.putValue(assignment.getLeft(), memory.getValue(assignment.getRight()));
+            } catch (SimulationException e) {
+                paths = Collections.emptyList();
+                return;
+            }
             visitSimple(assignment);
         }
 
