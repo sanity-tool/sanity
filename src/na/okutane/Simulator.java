@@ -31,7 +31,10 @@ public class Simulator {
     CallsMap callsMap;
 
     public Simulator(Cfg cfg, CallsMap callsMap) {
-        states.add(createState().init(cfg.getEntry()));
+        Cfe entry = cfg.getEntry();
+        if (entry != null) {
+            states.add(createState().init(entry));
+        }
         this.callsMap = callsMap;
     }
 

@@ -1,0 +1,12 @@
+#0000:	 assign: *(tmp0.field0) = null
+unsafe.swift:2 var p: UnsafePointer<Int> = nil;
+java.lang.IllegalStateException: Don't know how to get value from GetFieldPointer
+
+#0000:	 assign: *(tmp0.field0) = null
+unsafe.swift:7 var p: UnsafeMutablePointer<Int> = nil;
+java.lang.IllegalStateException: Don't know how to get value from GetFieldPointer
+
+#0000:	 assign: **llvm.used = @_TF4main18testReadFromUnsafeFT_T_
+ - no source -
+java.lang.UnsupportedOperationException
+
