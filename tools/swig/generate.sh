@@ -16,12 +16,14 @@ STD_INCLUDES="-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.plat
 
 DLL_NAME=libirreader.jnilib
 
-#wget -nc http://llvm.org/releases/3.5.0/llvm-3.5.0.src.tar.xz
-#tar xf llvm-3.5.0.src.tar.xz
-#cd llvm-3.5.0.src
-#./configure
+apt-get install gcc-4.7
+wget -nc http://llvm.org/releases/3.5.0/llvm-3.5.0.src.tar.xz
+tar xf llvm-3.5.0.src.tar.xz
+cd llvm-3.5.0.src
+./configure
+make install
 
-apt-get install llvm
+#apt-get install llvm
 
 #use release build of llvm
 LLVM_INCLUDE="-I/Users/jondoe/Downloads/llvm-3.5.0.src_hacked/include"
