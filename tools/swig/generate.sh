@@ -2,15 +2,26 @@
 # Exit on failure
 set -e
 
+apt-get -qq update
+apt-get install -y swig
+
 OUTDIR="../../src/main/java/na/okutane/cpp/llvm"
 
-rm $OUTDIR/*.java
+rm $OUTDIR/*.java || echo already removed
 
-JAVA_INCLUDES="-I/Library/Java/JavaVirtualMachines/jdk1.8.0_05.jdk/Contents/Home/include/ -I/Library/Java/JavaVirtualMachines/jdk1.8.0_05.jdk/Contents/Home/include/darwin/"
+JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
+#JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin/"
 
 STD_INCLUDES="-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/include/ -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/usr/include/c++/4.2.1/"
 
 DLL_NAME=libirreader.jnilib
+
+#wget -nc http://llvm.org/releases/3.5.0/llvm-3.5.0.src.tar.xz
+#tar xf llvm-3.5.0.src.tar.xz
+#cd llvm-3.5.0.src
+#./configure
+
+apt-get install llvm
 
 #use release build of llvm
 LLVM_INCLUDE="-I/Users/jondoe/Downloads/llvm-3.5.0.src_hacked/include"
