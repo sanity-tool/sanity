@@ -1,6 +1,8 @@
 #!/bin/sh
+# Exit on failure
+set -e
 
-OUTDIR="../../src/na/okutane/cpp/llvm"
+OUTDIR="../../src/main/java/na/okutane/cpp/llvm"
 
 rm $OUTDIR/*.java
 
