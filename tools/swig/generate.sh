@@ -21,7 +21,7 @@ JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
 
 STD_INCLUDES=
 
-DLL_NAME=libirreader.jnilib
+DLL_NAME=irreader.so
 
 #sudo apt-get install gcc-4.7
 #wget -nc http://llvm.org/releases/3.5.0/llvm-3.5.0.src.tar.xz
@@ -52,7 +52,7 @@ swig $LLVM_INCLUDE -java -outdir $OUTDIR -package na.okutane.cpp.llvm -v -debug-
 swig -E $LLVM_INCLUDE $STD_INCLUDES -java bitreader.i > swigprep.txt
 gcc -c bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $STD_INCLUDES $DEBUG
 g++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $DEBUG
-gcc -shared bitreader_wrap.o helpers.o $LLVM_LIBS /usr/lib/libc.dylib /usr/lib/libc++.dylib /usr/lib/libstdc++.dylib /usr/lib/libtermcap.dylib -o $DLL_NAME
+gcc -shared bitreader_wrap.o helpers.o $LLVM_LIBS -o $DLL_NAME
 
 #rm *.o
 #rm *.cxx
