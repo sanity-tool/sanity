@@ -1,3 +1,5 @@
+sudo: required
+
 language: java
 notifications:
   email: false
