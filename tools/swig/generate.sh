@@ -2,8 +2,8 @@
 # Exit on failure
 set -e
 
-apt-get -qq update
-apt-get install -y swig
+sudo apt-get -qq update
+sudo apt-get install -y swig
 
 OUTDIR="../../src/main/java/na/okutane/cpp/llvm"
 
@@ -16,7 +16,7 @@ STD_INCLUDES="-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.plat
 
 DLL_NAME=libirreader.jnilib
 
-apt-get install gcc-4.7
+sudo apt-get install gcc-4.7
 wget -nc http://llvm.org/releases/3.5.0/llvm-3.5.0.src.tar.xz
 tar xf llvm-3.5.0.src.tar.xz
 cd llvm-3.5.0.src
