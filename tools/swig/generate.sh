@@ -2,6 +2,13 @@
 # Exit on failure
 set -e
 
+llvm-config –includedir
+
+llvm-config –components
+llvm-config –libdir
+llvm-config –cxxflags
+llvm-config –ldflags
+
 sudo apt-get -qq update
 sudo apt-get install -y swig
 
