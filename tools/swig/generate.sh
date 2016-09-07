@@ -1,6 +1,6 @@
 #!/bin/sh
 # Exit on failure
-#set -e
+set -e
 
 llvm-config --includedir
 
@@ -48,7 +48,7 @@ DEBUG=-g
 
 echo "swig $LLVM_INCLUDE -java -outdir $OUTDIR -package na.okutane.cpp.llvm -v -debug-tmsearch -debug-tmused bitreader.i"
 
-swig $LLVM_INCLUDE -java -outdir $OUTDIR -package na.okutane.cpp.llvm -v -debug-tmsearch -debug-tmused bitreader.i
+swig $LLVM_INCLUDE -java -outdir java -package na.okutane.cpp.llvm -v -debug-tmsearch -debug-tmused bitreader.i
 swig -E $LLVM_INCLUDE $STD_INCLUDES -java bitreader.i > swigprep.txt
 
 gcc -c bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $STD_INCLUDES $DEBUG
