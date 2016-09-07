@@ -33,9 +33,9 @@
                 </executions>
                 <configuration>
                     <executable>sh</executable>
-                    <!-- optional -->
                     <workingDirectory>${pom.basedir}/tools/swig</workingDirectory>
                     <arguments>
+		    	<argument>-v</argument>
                         <argument>generate.sh</argument>
                     </arguments>
                 </configuration>
