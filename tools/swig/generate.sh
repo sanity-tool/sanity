@@ -1,6 +1,6 @@
 #!/bin/sh
 # Exit on failure
-set -e
+#set -e
 
 llvm-config --includedir
 
