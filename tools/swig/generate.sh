@@ -76,7 +76,7 @@ clang -c bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_I
 
 clang++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $CPPFLAGS -fPIC
 
-clang++ -shared bitreader_wrap.o helpers.o -o $DLL_NAME $LDFLAGS $LIBS $STD_LIBS
+clang -shared bitreader_wrap.o helpers.o -o $DLL_NAME $LDFLAGS $LIBS $STD_LIBS
 
 ldd $DLL_NAME
 nm --dynamic --undefined-only $DLL_NAME
