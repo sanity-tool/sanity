@@ -55,6 +55,7 @@ double GetConstantFPDoubleValue(LLVMValueRef ConstantVal);
 #define __STDC_CONSTANT_MACROS
 
 %include "llvm/Support/DataTypes.h"
+%include "llvm-c/Types.h"
 %include "llvm-c/Support.h"
 %include "llvm-c/Core.h"
 %include "llvm-c/IRReader.h"

@@ -9,8 +9,8 @@
 package na.okutane.cpp.llvm;
 
 public class bitreader implements bitreaderConstants {
-  public static SWIGTYPE_p_LLVMBool LLVMLoadLibraryPermanently(String Filename) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMLoadLibraryPermanently(Filename), true);
+  public static int LLVMLoadLibraryPermanently(String Filename) {
+    return bitreaderJNI.LLVMLoadLibraryPermanently(Filename);
   }
 
   public static void LLVMParseCommandLineOptions(int argc, SWIGTYPE_p_p_char argv, String Overview) {
@@ -26,8 +26,8 @@ public class bitreader implements bitreaderConstants {
     bitreaderJNI.LLVMAddSymbol(symbolName, SWIGTYPE_p_void.getCPtr(symbolValue));
   }
 
-  public static void LLVMInitializeCore(SWIGTYPE_p_LLVMPassRegistryRef R) {
-    bitreaderJNI.LLVMInitializeCore(SWIGTYPE_p_LLVMPassRegistryRef.getCPtr(R));
+  public static void LLVMInitializeCore(SWIGTYPE_p_LLVMOpaquePassRegistry R) {
+    bitreaderJNI.LLVMInitializeCore(SWIGTYPE_p_LLVMOpaquePassRegistry.getCPtr(R));
   }
 
   public static void LLVMShutdown() {
@@ -42,2170 +42,2545 @@ public class bitreader implements bitreaderConstants {
     bitreaderJNI.LLVMDisposeMessage(Message);
   }
 
-  public static SWIGTYPE_p_LLVMContextRef LLVMContextCreate() {
-    return new SWIGTYPE_p_LLVMContextRef(bitreaderJNI.LLVMContextCreate(), true);
+  public static SWIGTYPE_p_LLVMOpaqueContext LLVMContextCreate() {
+    long cPtr = bitreaderJNI.LLVMContextCreate();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueContext(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMContextRef LLVMGetGlobalContext() {
-    return new SWIGTYPE_p_LLVMContextRef(bitreaderJNI.LLVMGetGlobalContext(), true);
+  public static SWIGTYPE_p_LLVMOpaqueContext LLVMGetGlobalContext() {
+    long cPtr = bitreaderJNI.LLVMGetGlobalContext();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueContext(cPtr, false);
   }
 
-  public static void LLVMContextSetDiagnosticHandler(SWIGTYPE_p_LLVMContextRef C, SWIGTYPE_p_f_LLVMDiagnosticInfoRef_p_void__void Handler, SWIGTYPE_p_void DiagnosticContext) {
-    bitreaderJNI.LLVMContextSetDiagnosticHandler(SWIGTYPE_p_LLVMContextRef.getCPtr(C), SWIGTYPE_p_f_LLVMDiagnosticInfoRef_p_void__void.getCPtr(Handler), SWIGTYPE_p_void.getCPtr(DiagnosticContext));
+  public static void LLVMContextSetDiagnosticHandler(SWIGTYPE_p_LLVMOpaqueContext C, SWIGTYPE_p_f_p_struct_LLVMOpaqueDiagnosticInfo_p_void__void Handler, SWIGTYPE_p_void DiagnosticContext) {
+    bitreaderJNI.LLVMContextSetDiagnosticHandler(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C), SWIGTYPE_p_f_p_struct_LLVMOpaqueDiagnosticInfo_p_void__void.getCPtr(Handler), SWIGTYPE_p_void.getCPtr(DiagnosticContext));
   }
 
-  public static void LLVMContextSetYieldCallback(SWIGTYPE_p_LLVMContextRef C, SWIGTYPE_p_f_LLVMContextRef_p_void__void Callback, SWIGTYPE_p_void OpaqueHandle) {
-    bitreaderJNI.LLVMContextSetYieldCallback(SWIGTYPE_p_LLVMContextRef.getCPtr(C), SWIGTYPE_p_f_LLVMContextRef_p_void__void.getCPtr(Callback), SWIGTYPE_p_void.getCPtr(OpaqueHandle));
+  public static void LLVMContextSetYieldCallback(SWIGTYPE_p_LLVMOpaqueContext C, SWIGTYPE_p_f_p_struct_LLVMOpaqueContext_p_void__void Callback, SWIGTYPE_p_void OpaqueHandle) {
+    bitreaderJNI.LLVMContextSetYieldCallback(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C), SWIGTYPE_p_f_p_struct_LLVMOpaqueContext_p_void__void.getCPtr(Callback), SWIGTYPE_p_void.getCPtr(OpaqueHandle));
   }
 
-  public static void LLVMContextDispose(SWIGTYPE_p_LLVMContextRef C) {
-    bitreaderJNI.LLVMContextDispose(SWIGTYPE_p_LLVMContextRef.getCPtr(C));
+  public static void LLVMContextDispose(SWIGTYPE_p_LLVMOpaqueContext C) {
+    bitreaderJNI.LLVMContextDispose(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
   }
 
-  public static String LLVMGetDiagInfoDescription(SWIGTYPE_p_LLVMDiagnosticInfoRef DI) {
-    return bitreaderJNI.LLVMGetDiagInfoDescription(SWIGTYPE_p_LLVMDiagnosticInfoRef.getCPtr(DI));
+  public static String LLVMGetDiagInfoDescription(SWIGTYPE_p_LLVMOpaqueDiagnosticInfo DI) {
+    return bitreaderJNI.LLVMGetDiagInfoDescription(SWIGTYPE_p_LLVMOpaqueDiagnosticInfo.getCPtr(DI));
   }
 
-  public static LLVMDiagnosticSeverity LLVMGetDiagInfoSeverity(SWIGTYPE_p_LLVMDiagnosticInfoRef DI) {
-    return LLVMDiagnosticSeverity.swigToEnum(bitreaderJNI.LLVMGetDiagInfoSeverity(SWIGTYPE_p_LLVMDiagnosticInfoRef.getCPtr(DI)));
+  public static LLVMDiagnosticSeverity LLVMGetDiagInfoSeverity(SWIGTYPE_p_LLVMOpaqueDiagnosticInfo DI) {
+    return LLVMDiagnosticSeverity.swigToEnum(bitreaderJNI.LLVMGetDiagInfoSeverity(SWIGTYPE_p_LLVMOpaqueDiagnosticInfo.getCPtr(DI)));
   }
 
-  public static long LLVMGetMDKindIDInContext(SWIGTYPE_p_LLVMContextRef C, String Name, long SLen) {
-    return bitreaderJNI.LLVMGetMDKindIDInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C), Name, SLen);
+  public static long LLVMGetMDKindIDInContext(SWIGTYPE_p_LLVMOpaqueContext C, String Name, long SLen) {
+    return bitreaderJNI.LLVMGetMDKindIDInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C), Name, SLen);
   }
 
   public static long LLVMGetMDKindID(String Name, long SLen) {
     return bitreaderJNI.LLVMGetMDKindID(Name, SLen);
   }
 
-  public static SWIGTYPE_p_LLVMModuleRef LLVMModuleCreateWithName(String ModuleID) {
-    return new SWIGTYPE_p_LLVMModuleRef(bitreaderJNI.LLVMModuleCreateWithName(ModuleID), true);
+  public static SWIGTYPE_p_LLVMOpaqueModule LLVMModuleCreateWithName(String ModuleID) {
+    long cPtr = bitreaderJNI.LLVMModuleCreateWithName(ModuleID);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueModule(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMModuleRef LLVMModuleCreateWithNameInContext(String ModuleID, SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMModuleRef(bitreaderJNI.LLVMModuleCreateWithNameInContext(ModuleID, SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueModule LLVMModuleCreateWithNameInContext(String ModuleID, SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMModuleCreateWithNameInContext(ModuleID, SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueModule(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMModuleRef LLVMCloneModule(SWIGTYPE_p_LLVMModuleRef M) {
-    return new SWIGTYPE_p_LLVMModuleRef(bitreaderJNI.LLVMCloneModule(SWIGTYPE_p_LLVMModuleRef.getCPtr(M)), true);
+  public static SWIGTYPE_p_LLVMOpaqueModule LLVMCloneModule(SWIGTYPE_p_LLVMOpaqueModule M) {
+    long cPtr = bitreaderJNI.LLVMCloneModule(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueModule(cPtr, false);
   }
 
-  public static void LLVMDisposeModule(SWIGTYPE_p_LLVMModuleRef M) {
-    bitreaderJNI.LLVMDisposeModule(SWIGTYPE_p_LLVMModuleRef.getCPtr(M));
+  public static void LLVMDisposeModule(SWIGTYPE_p_LLVMOpaqueModule M) {
+    bitreaderJNI.LLVMDisposeModule(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M));
   }
 
-  public static String LLVMGetDataLayout(SWIGTYPE_p_LLVMModuleRef M) {
-    return bitreaderJNI.LLVMGetDataLayout(SWIGTYPE_p_LLVMModuleRef.getCPtr(M));
+  public static String LLVMGetDataLayout(SWIGTYPE_p_LLVMOpaqueModule M) {
+    return bitreaderJNI.LLVMGetDataLayout(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M));
   }
 
-  public static void LLVMSetDataLayout(SWIGTYPE_p_LLVMModuleRef M, String Triple) {
-    bitreaderJNI.LLVMSetDataLayout(SWIGTYPE_p_LLVMModuleRef.getCPtr(M), Triple);
+  public static void LLVMSetDataLayout(SWIGTYPE_p_LLVMOpaqueModule M, String Triple) {
+    bitreaderJNI.LLVMSetDataLayout(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M), Triple);
   }
 
-  public static String LLVMGetTarget(SWIGTYPE_p_LLVMModuleRef M) {
-    return bitreaderJNI.LLVMGetTarget(SWIGTYPE_p_LLVMModuleRef.getCPtr(M));
+  public static String LLVMGetTarget(SWIGTYPE_p_LLVMOpaqueModule M) {
+    return bitreaderJNI.LLVMGetTarget(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M));
   }
 
-  public static void LLVMSetTarget(SWIGTYPE_p_LLVMModuleRef M, String Triple) {
-    bitreaderJNI.LLVMSetTarget(SWIGTYPE_p_LLVMModuleRef.getCPtr(M), Triple);
+  public static void LLVMSetTarget(SWIGTYPE_p_LLVMOpaqueModule M, String Triple) {
+    bitreaderJNI.LLVMSetTarget(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M), Triple);
   }
 
-  public static void LLVMDumpModule(SWIGTYPE_p_LLVMModuleRef M) {
-    bitreaderJNI.LLVMDumpModule(SWIGTYPE_p_LLVMModuleRef.getCPtr(M));
+  public static void LLVMDumpModule(SWIGTYPE_p_LLVMOpaqueModule M) {
+    bitreaderJNI.LLVMDumpModule(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M));
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMPrintModuleToFile(SWIGTYPE_p_LLVMModuleRef M, String Filename, SWIGTYPE_p_p_char ErrorMessage) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMPrintModuleToFile(SWIGTYPE_p_LLVMModuleRef.getCPtr(M), Filename, SWIGTYPE_p_p_char.getCPtr(ErrorMessage)), true);
+  public static int LLVMPrintModuleToFile(SWIGTYPE_p_LLVMOpaqueModule M, String Filename, SWIGTYPE_p_p_char ErrorMessage) {
+    return bitreaderJNI.LLVMPrintModuleToFile(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M), Filename, SWIGTYPE_p_p_char.getCPtr(ErrorMessage));
   }
 
-  public static String LLVMPrintModuleToString(SWIGTYPE_p_LLVMModuleRef M) {
-    return bitreaderJNI.LLVMPrintModuleToString(SWIGTYPE_p_LLVMModuleRef.getCPtr(M));
+  public static String LLVMPrintModuleToString(SWIGTYPE_p_LLVMOpaqueModule M) {
+    return bitreaderJNI.LLVMPrintModuleToString(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M));
   }
 
-  public static void LLVMSetModuleInlineAsm(SWIGTYPE_p_LLVMModuleRef M, String Asm) {
-    bitreaderJNI.LLVMSetModuleInlineAsm(SWIGTYPE_p_LLVMModuleRef.getCPtr(M), Asm);
+  public static void LLVMSetModuleInlineAsm(SWIGTYPE_p_LLVMOpaqueModule M, String Asm) {
+    bitreaderJNI.LLVMSetModuleInlineAsm(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M), Asm);
   }
 
-  public static SWIGTYPE_p_LLVMContextRef LLVMGetModuleContext(SWIGTYPE_p_LLVMModuleRef M) {
-    return new SWIGTYPE_p_LLVMContextRef(bitreaderJNI.LLVMGetModuleContext(SWIGTYPE_p_LLVMModuleRef.getCPtr(M)), true);
+  public static SWIGTYPE_p_LLVMOpaqueContext LLVMGetModuleContext(SWIGTYPE_p_LLVMOpaqueModule M) {
+    long cPtr = bitreaderJNI.LLVMGetModuleContext(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueContext(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMGetTypeByName(SWIGTYPE_p_LLVMModuleRef M, String Name) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMGetTypeByName(SWIGTYPE_p_LLVMModuleRef.getCPtr(M), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMGetTypeByName(SWIGTYPE_p_LLVMOpaqueModule M, String Name) {
+    long cPtr = bitreaderJNI.LLVMGetTypeByName(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static long LLVMGetNamedMetadataNumOperands(SWIGTYPE_p_LLVMModuleRef M, String name) {
-    return bitreaderJNI.LLVMGetNamedMetadataNumOperands(SWIGTYPE_p_LLVMModuleRef.getCPtr(M), name);
+  public static long LLVMGetNamedMetadataNumOperands(SWIGTYPE_p_LLVMOpaqueModule M, String name) {
+    return bitreaderJNI.LLVMGetNamedMetadataNumOperands(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M), name);
   }
 
-  public static void LLVMGetNamedMetadataOperands(SWIGTYPE_p_LLVMModuleRef M, String name, SWIGTYPE_p_LLVMValueRef Dest) {
-    bitreaderJNI.LLVMGetNamedMetadataOperands(SWIGTYPE_p_LLVMModuleRef.getCPtr(M), name, SWIGTYPE_p_LLVMValueRef.getCPtr(Dest));
+  public static void LLVMGetNamedMetadataOperands(SWIGTYPE_p_LLVMOpaqueModule M, String name, SWIGTYPE_p_p_LLVMOpaqueValue Dest) {
+    bitreaderJNI.LLVMGetNamedMetadataOperands(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M), name, SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(Dest));
   }
 
-  public static void LLVMAddNamedMetadataOperand(SWIGTYPE_p_LLVMModuleRef M, String name, SWIGTYPE_p_LLVMValueRef Val) {
-    bitreaderJNI.LLVMAddNamedMetadataOperand(SWIGTYPE_p_LLVMModuleRef.getCPtr(M), name, SWIGTYPE_p_LLVMValueRef.getCPtr(Val));
+  public static void LLVMAddNamedMetadataOperand(SWIGTYPE_p_LLVMOpaqueModule M, String name, SWIGTYPE_p_LLVMOpaqueValue Val) {
+    bitreaderJNI.LLVMAddNamedMetadataOperand(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M), name, SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMAddFunction(SWIGTYPE_p_LLVMModuleRef M, String Name, SWIGTYPE_p_LLVMTypeRef FunctionTy) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMAddFunction(SWIGTYPE_p_LLVMModuleRef.getCPtr(M), Name, SWIGTYPE_p_LLVMTypeRef.getCPtr(FunctionTy)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMAddFunction(SWIGTYPE_p_LLVMOpaqueModule M, String Name, SWIGTYPE_p_LLVMOpaqueType FunctionTy) {
+    long cPtr = bitreaderJNI.LLVMAddFunction(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M), Name, SWIGTYPE_p_LLVMOpaqueType.getCPtr(FunctionTy));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetNamedFunction(SWIGTYPE_p_LLVMModuleRef M, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetNamedFunction(SWIGTYPE_p_LLVMModuleRef.getCPtr(M), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetNamedFunction(SWIGTYPE_p_LLVMOpaqueModule M, String Name) {
+    long cPtr = bitreaderJNI.LLVMGetNamedFunction(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetFirstFunction(SWIGTYPE_p_LLVMModuleRef M) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetFirstFunction(SWIGTYPE_p_LLVMModuleRef.getCPtr(M)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetFirstFunction(SWIGTYPE_p_LLVMOpaqueModule M) {
+    long cPtr = bitreaderJNI.LLVMGetFirstFunction(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetLastFunction(SWIGTYPE_p_LLVMModuleRef M) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetLastFunction(SWIGTYPE_p_LLVMModuleRef.getCPtr(M)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetLastFunction(SWIGTYPE_p_LLVMOpaqueModule M) {
+    long cPtr = bitreaderJNI.LLVMGetLastFunction(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetNextFunction(SWIGTYPE_p_LLVMValueRef Fn) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetNextFunction(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetNextFunction(SWIGTYPE_p_LLVMOpaqueValue Fn) {
+    long cPtr = bitreaderJNI.LLVMGetNextFunction(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetPreviousFunction(SWIGTYPE_p_LLVMValueRef Fn) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetPreviousFunction(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetPreviousFunction(SWIGTYPE_p_LLVMOpaqueValue Fn) {
+    long cPtr = bitreaderJNI.LLVMGetPreviousFunction(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static LLVMTypeKind LLVMGetTypeKind(SWIGTYPE_p_LLVMTypeRef Ty) {
-    return LLVMTypeKind.swigToEnum(bitreaderJNI.LLVMGetTypeKind(SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty)));
+  public static LLVMTypeKind LLVMGetTypeKind(SWIGTYPE_p_LLVMOpaqueType Ty) {
+    return LLVMTypeKind.swigToEnum(bitreaderJNI.LLVMGetTypeKind(SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty)));
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMTypeIsSized(SWIGTYPE_p_LLVMTypeRef Ty) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMTypeIsSized(SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty)), true);
+  public static int LLVMTypeIsSized(SWIGTYPE_p_LLVMOpaqueType Ty) {
+    return bitreaderJNI.LLVMTypeIsSized(SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty));
   }
 
-  public static SWIGTYPE_p_LLVMContextRef LLVMGetTypeContext(SWIGTYPE_p_LLVMTypeRef Ty) {
-    return new SWIGTYPE_p_LLVMContextRef(bitreaderJNI.LLVMGetTypeContext(SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty)), true);
+  public static SWIGTYPE_p_LLVMOpaqueContext LLVMGetTypeContext(SWIGTYPE_p_LLVMOpaqueType Ty) {
+    long cPtr = bitreaderJNI.LLVMGetTypeContext(SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueContext(cPtr, false);
   }
 
-  public static void LLVMDumpType(SWIGTYPE_p_LLVMTypeRef Val) {
-    bitreaderJNI.LLVMDumpType(SWIGTYPE_p_LLVMTypeRef.getCPtr(Val));
+  public static void LLVMDumpType(SWIGTYPE_p_LLVMOpaqueType Val) {
+    bitreaderJNI.LLVMDumpType(SWIGTYPE_p_LLVMOpaqueType.getCPtr(Val));
   }
 
-  public static String LLVMPrintTypeToString(SWIGTYPE_p_LLVMTypeRef Val) {
-    return bitreaderJNI.LLVMPrintTypeToString(SWIGTYPE_p_LLVMTypeRef.getCPtr(Val));
+  public static String LLVMPrintTypeToString(SWIGTYPE_p_LLVMOpaqueType Val) {
+    return bitreaderJNI.LLVMPrintTypeToString(SWIGTYPE_p_LLVMOpaqueType.getCPtr(Val));
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMInt1TypeInContext(SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMInt1TypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMInt1TypeInContext(SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMInt1TypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMInt8TypeInContext(SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMInt8TypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMInt8TypeInContext(SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMInt8TypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMInt16TypeInContext(SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMInt16TypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMInt16TypeInContext(SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMInt16TypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMInt32TypeInContext(SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMInt32TypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMInt32TypeInContext(SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMInt32TypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMInt64TypeInContext(SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMInt64TypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMInt64TypeInContext(SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMInt64TypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMInt128TypeInContext(SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMInt128TypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMInt128TypeInContext(SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMInt128TypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMIntTypeInContext(SWIGTYPE_p_LLVMContextRef C, long NumBits) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMIntTypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C), NumBits), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMIntTypeInContext(SWIGTYPE_p_LLVMOpaqueContext C, long NumBits) {
+    long cPtr = bitreaderJNI.LLVMIntTypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C), NumBits);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMInt1Type() {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMInt1Type(), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMInt1Type() {
+    long cPtr = bitreaderJNI.LLVMInt1Type();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMInt8Type() {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMInt8Type(), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMInt8Type() {
+    long cPtr = bitreaderJNI.LLVMInt8Type();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMInt16Type() {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMInt16Type(), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMInt16Type() {
+    long cPtr = bitreaderJNI.LLVMInt16Type();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMInt32Type() {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMInt32Type(), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMInt32Type() {
+    long cPtr = bitreaderJNI.LLVMInt32Type();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMInt64Type() {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMInt64Type(), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMInt64Type() {
+    long cPtr = bitreaderJNI.LLVMInt64Type();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMInt128Type() {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMInt128Type(), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMInt128Type() {
+    long cPtr = bitreaderJNI.LLVMInt128Type();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMIntType(long NumBits) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMIntType(NumBits), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMIntType(long NumBits) {
+    long cPtr = bitreaderJNI.LLVMIntType(NumBits);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static long LLVMGetIntTypeWidth(SWIGTYPE_p_LLVMTypeRef IntegerTy) {
-    return bitreaderJNI.LLVMGetIntTypeWidth(SWIGTYPE_p_LLVMTypeRef.getCPtr(IntegerTy));
+  public static long LLVMGetIntTypeWidth(SWIGTYPE_p_LLVMOpaqueType IntegerTy) {
+    return bitreaderJNI.LLVMGetIntTypeWidth(SWIGTYPE_p_LLVMOpaqueType.getCPtr(IntegerTy));
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMHalfTypeInContext(SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMHalfTypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMHalfTypeInContext(SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMHalfTypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMFloatTypeInContext(SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMFloatTypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMFloatTypeInContext(SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMFloatTypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMDoubleTypeInContext(SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMDoubleTypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMDoubleTypeInContext(SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMDoubleTypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMX86FP80TypeInContext(SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMX86FP80TypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMX86FP80TypeInContext(SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMX86FP80TypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMFP128TypeInContext(SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMFP128TypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMFP128TypeInContext(SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMFP128TypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMPPCFP128TypeInContext(SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMPPCFP128TypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMPPCFP128TypeInContext(SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMPPCFP128TypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMHalfType() {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMHalfType(), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMHalfType() {
+    long cPtr = bitreaderJNI.LLVMHalfType();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMFloatType() {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMFloatType(), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMFloatType() {
+    long cPtr = bitreaderJNI.LLVMFloatType();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMDoubleType() {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMDoubleType(), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMDoubleType() {
+    long cPtr = bitreaderJNI.LLVMDoubleType();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMX86FP80Type() {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMX86FP80Type(), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMX86FP80Type() {
+    long cPtr = bitreaderJNI.LLVMX86FP80Type();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMFP128Type() {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMFP128Type(), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMFP128Type() {
+    long cPtr = bitreaderJNI.LLVMFP128Type();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMPPCFP128Type() {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMPPCFP128Type(), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMPPCFP128Type() {
+    long cPtr = bitreaderJNI.LLVMPPCFP128Type();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMFunctionType(SWIGTYPE_p_LLVMTypeRef ReturnType, SWIGTYPE_p_LLVMTypeRef ParamTypes, long ParamCount, SWIGTYPE_p_LLVMBool IsVarArg) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMFunctionType(SWIGTYPE_p_LLVMTypeRef.getCPtr(ReturnType), SWIGTYPE_p_LLVMTypeRef.getCPtr(ParamTypes), ParamCount, SWIGTYPE_p_LLVMBool.getCPtr(IsVarArg)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMFunctionType(SWIGTYPE_p_LLVMOpaqueType ReturnType, SWIGTYPE_p_p_LLVMOpaqueType ParamTypes, long ParamCount, int IsVarArg) {
+    long cPtr = bitreaderJNI.LLVMFunctionType(SWIGTYPE_p_LLVMOpaqueType.getCPtr(ReturnType), SWIGTYPE_p_p_LLVMOpaqueType.getCPtr(ParamTypes), ParamCount, IsVarArg);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMIsFunctionVarArg(SWIGTYPE_p_LLVMTypeRef FunctionTy) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMIsFunctionVarArg(SWIGTYPE_p_LLVMTypeRef.getCPtr(FunctionTy)), true);
+  public static int LLVMIsFunctionVarArg(SWIGTYPE_p_LLVMOpaqueType FunctionTy) {
+    return bitreaderJNI.LLVMIsFunctionVarArg(SWIGTYPE_p_LLVMOpaqueType.getCPtr(FunctionTy));
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMGetReturnType(SWIGTYPE_p_LLVMTypeRef FunctionTy) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMGetReturnType(SWIGTYPE_p_LLVMTypeRef.getCPtr(FunctionTy)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMGetReturnType(SWIGTYPE_p_LLVMOpaqueType FunctionTy) {
+    long cPtr = bitreaderJNI.LLVMGetReturnType(SWIGTYPE_p_LLVMOpaqueType.getCPtr(FunctionTy));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static long LLVMCountParamTypes(SWIGTYPE_p_LLVMTypeRef FunctionTy) {
-    return bitreaderJNI.LLVMCountParamTypes(SWIGTYPE_p_LLVMTypeRef.getCPtr(FunctionTy));
+  public static long LLVMCountParamTypes(SWIGTYPE_p_LLVMOpaqueType FunctionTy) {
+    return bitreaderJNI.LLVMCountParamTypes(SWIGTYPE_p_LLVMOpaqueType.getCPtr(FunctionTy));
   }
 
-  public static void LLVMGetParamTypes(SWIGTYPE_p_LLVMTypeRef FunctionTy, SWIGTYPE_p_LLVMTypeRef Dest) {
-    bitreaderJNI.LLVMGetParamTypes(SWIGTYPE_p_LLVMTypeRef.getCPtr(FunctionTy), SWIGTYPE_p_LLVMTypeRef.getCPtr(Dest));
+  public static void LLVMGetParamTypes(SWIGTYPE_p_LLVMOpaqueType FunctionTy, SWIGTYPE_p_p_LLVMOpaqueType Dest) {
+    bitreaderJNI.LLVMGetParamTypes(SWIGTYPE_p_LLVMOpaqueType.getCPtr(FunctionTy), SWIGTYPE_p_p_LLVMOpaqueType.getCPtr(Dest));
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMStructTypeInContext(SWIGTYPE_p_LLVMContextRef C, SWIGTYPE_p_LLVMTypeRef ElementTypes, long ElementCount, SWIGTYPE_p_LLVMBool Packed) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMStructTypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C), SWIGTYPE_p_LLVMTypeRef.getCPtr(ElementTypes), ElementCount, SWIGTYPE_p_LLVMBool.getCPtr(Packed)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMStructTypeInContext(SWIGTYPE_p_LLVMOpaqueContext C, SWIGTYPE_p_p_LLVMOpaqueType ElementTypes, long ElementCount, int Packed) {
+    long cPtr = bitreaderJNI.LLVMStructTypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C), SWIGTYPE_p_p_LLVMOpaqueType.getCPtr(ElementTypes), ElementCount, Packed);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMStructType(SWIGTYPE_p_LLVMTypeRef ElementTypes, long ElementCount, SWIGTYPE_p_LLVMBool Packed) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMStructType(SWIGTYPE_p_LLVMTypeRef.getCPtr(ElementTypes), ElementCount, SWIGTYPE_p_LLVMBool.getCPtr(Packed)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMStructType(SWIGTYPE_p_p_LLVMOpaqueType ElementTypes, long ElementCount, int Packed) {
+    long cPtr = bitreaderJNI.LLVMStructType(SWIGTYPE_p_p_LLVMOpaqueType.getCPtr(ElementTypes), ElementCount, Packed);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMStructCreateNamed(SWIGTYPE_p_LLVMContextRef C, String Name) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMStructCreateNamed(SWIGTYPE_p_LLVMContextRef.getCPtr(C), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMStructCreateNamed(SWIGTYPE_p_LLVMOpaqueContext C, String Name) {
+    long cPtr = bitreaderJNI.LLVMStructCreateNamed(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static String LLVMGetStructName(SWIGTYPE_p_LLVMTypeRef Ty) {
-    return bitreaderJNI.LLVMGetStructName(SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty));
+  public static String LLVMGetStructName(SWIGTYPE_p_LLVMOpaqueType Ty) {
+    return bitreaderJNI.LLVMGetStructName(SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty));
   }
 
-  public static void LLVMStructSetBody(SWIGTYPE_p_LLVMTypeRef StructTy, SWIGTYPE_p_LLVMTypeRef ElementTypes, long ElementCount, SWIGTYPE_p_LLVMBool Packed) {
-    bitreaderJNI.LLVMStructSetBody(SWIGTYPE_p_LLVMTypeRef.getCPtr(StructTy), SWIGTYPE_p_LLVMTypeRef.getCPtr(ElementTypes), ElementCount, SWIGTYPE_p_LLVMBool.getCPtr(Packed));
+  public static void LLVMStructSetBody(SWIGTYPE_p_LLVMOpaqueType StructTy, SWIGTYPE_p_p_LLVMOpaqueType ElementTypes, long ElementCount, int Packed) {
+    bitreaderJNI.LLVMStructSetBody(SWIGTYPE_p_LLVMOpaqueType.getCPtr(StructTy), SWIGTYPE_p_p_LLVMOpaqueType.getCPtr(ElementTypes), ElementCount, Packed);
   }
 
-  public static long LLVMCountStructElementTypes(SWIGTYPE_p_LLVMTypeRef StructTy) {
-    return bitreaderJNI.LLVMCountStructElementTypes(SWIGTYPE_p_LLVMTypeRef.getCPtr(StructTy));
+  public static long LLVMCountStructElementTypes(SWIGTYPE_p_LLVMOpaqueType StructTy) {
+    return bitreaderJNI.LLVMCountStructElementTypes(SWIGTYPE_p_LLVMOpaqueType.getCPtr(StructTy));
   }
 
-  public static void LLVMGetStructElementTypes(SWIGTYPE_p_LLVMTypeRef StructTy, SWIGTYPE_p_LLVMTypeRef Dest) {
-    bitreaderJNI.LLVMGetStructElementTypes(SWIGTYPE_p_LLVMTypeRef.getCPtr(StructTy), SWIGTYPE_p_LLVMTypeRef.getCPtr(Dest));
+  public static void LLVMGetStructElementTypes(SWIGTYPE_p_LLVMOpaqueType StructTy, SWIGTYPE_p_p_LLVMOpaqueType Dest) {
+    bitreaderJNI.LLVMGetStructElementTypes(SWIGTYPE_p_LLVMOpaqueType.getCPtr(StructTy), SWIGTYPE_p_p_LLVMOpaqueType.getCPtr(Dest));
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMStructGetTypeAtIndex(SWIGTYPE_p_LLVMTypeRef StructTy, long i) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMStructGetTypeAtIndex(SWIGTYPE_p_LLVMTypeRef.getCPtr(StructTy), i), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMStructGetTypeAtIndex(SWIGTYPE_p_LLVMOpaqueType StructTy, long i) {
+    long cPtr = bitreaderJNI.LLVMStructGetTypeAtIndex(SWIGTYPE_p_LLVMOpaqueType.getCPtr(StructTy), i);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMIsPackedStruct(SWIGTYPE_p_LLVMTypeRef StructTy) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMIsPackedStruct(SWIGTYPE_p_LLVMTypeRef.getCPtr(StructTy)), true);
+  public static int LLVMIsPackedStruct(SWIGTYPE_p_LLVMOpaqueType StructTy) {
+    return bitreaderJNI.LLVMIsPackedStruct(SWIGTYPE_p_LLVMOpaqueType.getCPtr(StructTy));
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMIsOpaqueStruct(SWIGTYPE_p_LLVMTypeRef StructTy) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMIsOpaqueStruct(SWIGTYPE_p_LLVMTypeRef.getCPtr(StructTy)), true);
+  public static int LLVMIsOpaqueStruct(SWIGTYPE_p_LLVMOpaqueType StructTy) {
+    return bitreaderJNI.LLVMIsOpaqueStruct(SWIGTYPE_p_LLVMOpaqueType.getCPtr(StructTy));
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMGetElementType(SWIGTYPE_p_LLVMTypeRef Ty) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMGetElementType(SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMGetElementType(SWIGTYPE_p_LLVMOpaqueType Ty) {
+    long cPtr = bitreaderJNI.LLVMGetElementType(SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMArrayType(SWIGTYPE_p_LLVMTypeRef ElementType, long ElementCount) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMArrayType(SWIGTYPE_p_LLVMTypeRef.getCPtr(ElementType), ElementCount), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMArrayType(SWIGTYPE_p_LLVMOpaqueType ElementType, long ElementCount) {
+    long cPtr = bitreaderJNI.LLVMArrayType(SWIGTYPE_p_LLVMOpaqueType.getCPtr(ElementType), ElementCount);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static long LLVMGetArrayLength(SWIGTYPE_p_LLVMTypeRef ArrayTy) {
-    return bitreaderJNI.LLVMGetArrayLength(SWIGTYPE_p_LLVMTypeRef.getCPtr(ArrayTy));
+  public static long LLVMGetArrayLength(SWIGTYPE_p_LLVMOpaqueType ArrayTy) {
+    return bitreaderJNI.LLVMGetArrayLength(SWIGTYPE_p_LLVMOpaqueType.getCPtr(ArrayTy));
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMPointerType(SWIGTYPE_p_LLVMTypeRef ElementType, long AddressSpace) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMPointerType(SWIGTYPE_p_LLVMTypeRef.getCPtr(ElementType), AddressSpace), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMPointerType(SWIGTYPE_p_LLVMOpaqueType ElementType, long AddressSpace) {
+    long cPtr = bitreaderJNI.LLVMPointerType(SWIGTYPE_p_LLVMOpaqueType.getCPtr(ElementType), AddressSpace);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static long LLVMGetPointerAddressSpace(SWIGTYPE_p_LLVMTypeRef PointerTy) {
-    return bitreaderJNI.LLVMGetPointerAddressSpace(SWIGTYPE_p_LLVMTypeRef.getCPtr(PointerTy));
+  public static long LLVMGetPointerAddressSpace(SWIGTYPE_p_LLVMOpaqueType PointerTy) {
+    return bitreaderJNI.LLVMGetPointerAddressSpace(SWIGTYPE_p_LLVMOpaqueType.getCPtr(PointerTy));
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMVectorType(SWIGTYPE_p_LLVMTypeRef ElementType, long ElementCount) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMVectorType(SWIGTYPE_p_LLVMTypeRef.getCPtr(ElementType), ElementCount), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMVectorType(SWIGTYPE_p_LLVMOpaqueType ElementType, long ElementCount) {
+    long cPtr = bitreaderJNI.LLVMVectorType(SWIGTYPE_p_LLVMOpaqueType.getCPtr(ElementType), ElementCount);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static long LLVMGetVectorSize(SWIGTYPE_p_LLVMTypeRef VectorTy) {
-    return bitreaderJNI.LLVMGetVectorSize(SWIGTYPE_p_LLVMTypeRef.getCPtr(VectorTy));
+  public static long LLVMGetVectorSize(SWIGTYPE_p_LLVMOpaqueType VectorTy) {
+    return bitreaderJNI.LLVMGetVectorSize(SWIGTYPE_p_LLVMOpaqueType.getCPtr(VectorTy));
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMVoidTypeInContext(SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMVoidTypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMVoidTypeInContext(SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMVoidTypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMLabelTypeInContext(SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMLabelTypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMLabelTypeInContext(SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMLabelTypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMX86MMXTypeInContext(SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMX86MMXTypeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMX86MMXTypeInContext(SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMX86MMXTypeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMVoidType() {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMVoidType(), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMVoidType() {
+    long cPtr = bitreaderJNI.LLVMVoidType();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMLabelType() {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMLabelType(), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMLabelType() {
+    long cPtr = bitreaderJNI.LLVMLabelType();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMX86MMXType() {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMX86MMXType(), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMX86MMXType() {
+    long cPtr = bitreaderJNI.LLVMX86MMXType();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef LLVMTypeOf(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.LLVMTypeOf(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueType LLVMTypeOf(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMTypeOf(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static String LLVMGetValueName(SWIGTYPE_p_LLVMValueRef Val) {
-    return bitreaderJNI.LLVMGetValueName(SWIGTYPE_p_LLVMValueRef.getCPtr(Val));
+  public static String LLVMGetValueName(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    return bitreaderJNI.LLVMGetValueName(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
   }
 
-  public static void LLVMSetValueName(SWIGTYPE_p_LLVMValueRef Val, String Name) {
-    bitreaderJNI.LLVMSetValueName(SWIGTYPE_p_LLVMValueRef.getCPtr(Val), Name);
+  public static void LLVMSetValueName(SWIGTYPE_p_LLVMOpaqueValue Val, String Name) {
+    bitreaderJNI.LLVMSetValueName(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), Name);
   }
 
-  public static void LLVMDumpValue(SWIGTYPE_p_LLVMValueRef Val) {
-    bitreaderJNI.LLVMDumpValue(SWIGTYPE_p_LLVMValueRef.getCPtr(Val));
+  public static void LLVMDumpValue(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    bitreaderJNI.LLVMDumpValue(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
   }
 
-  public static String LLVMPrintValueToString(SWIGTYPE_p_LLVMValueRef Val) {
-    return bitreaderJNI.LLVMPrintValueToString(SWIGTYPE_p_LLVMValueRef.getCPtr(Val));
+  public static String LLVMPrintValueToString(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    return bitreaderJNI.LLVMPrintValueToString(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
   }
 
-  public static void LLVMReplaceAllUsesWith(SWIGTYPE_p_LLVMValueRef OldVal, SWIGTYPE_p_LLVMValueRef NewVal) {
-    bitreaderJNI.LLVMReplaceAllUsesWith(SWIGTYPE_p_LLVMValueRef.getCPtr(OldVal), SWIGTYPE_p_LLVMValueRef.getCPtr(NewVal));
+  public static void LLVMReplaceAllUsesWith(SWIGTYPE_p_LLVMOpaqueValue OldVal, SWIGTYPE_p_LLVMOpaqueValue NewVal) {
+    bitreaderJNI.LLVMReplaceAllUsesWith(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(OldVal), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(NewVal));
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMIsConstant(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMIsConstant(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static int LLVMIsConstant(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    return bitreaderJNI.LLVMIsConstant(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMIsUndef(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMIsUndef(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static int LLVMIsUndef(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    return bitreaderJNI.LLVMIsUndef(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAArgument(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAArgument(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAArgument(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAArgument(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsABasicBlock(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsABasicBlock(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsABasicBlock(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsABasicBlock(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAInlineAsm(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAInlineAsm(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAInlineAsm(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAInlineAsm(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAUser(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAUser(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAUser(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAUser(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAConstant(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAConstant(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAConstant(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAConstant(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsABlockAddress(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsABlockAddress(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsABlockAddress(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsABlockAddress(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAConstantAggregateZero(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAConstantAggregateZero(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAConstantAggregateZero(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAConstantAggregateZero(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAConstantArray(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAConstantArray(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAConstantArray(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAConstantArray(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAConstantDataSequential(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAConstantDataSequential(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAConstantDataSequential(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAConstantDataSequential(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAConstantDataArray(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAConstantDataArray(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAConstantDataArray(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAConstantDataArray(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAConstantDataVector(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAConstantDataVector(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAConstantDataVector(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAConstantDataVector(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAConstantExpr(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAConstantExpr(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAConstantExpr(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAConstantExpr(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAConstantFP(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAConstantFP(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAConstantFP(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAConstantFP(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAConstantInt(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAConstantInt(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAConstantInt(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAConstantInt(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAConstantPointerNull(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAConstantPointerNull(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAConstantPointerNull(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAConstantPointerNull(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAConstantStruct(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAConstantStruct(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAConstantStruct(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAConstantStruct(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAConstantTokenNone(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAConstantTokenNone(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAConstantTokenNone(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAConstantTokenNone(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAConstantVector(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAConstantVector(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAConstantVector(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAConstantVector(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAGlobalValue(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAGlobalValue(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAGlobalValue(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAGlobalValue(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAGlobalAlias(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAGlobalAlias(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAGlobalAlias(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAGlobalAlias(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAGlobalObject(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAGlobalObject(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAGlobalObject(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAGlobalObject(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAFunction(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAFunction(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAFunction(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAFunction(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAGlobalVariable(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAGlobalVariable(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAGlobalVariable(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAGlobalVariable(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAUndefValue(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAUndefValue(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAUndefValue(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAUndefValue(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAInstruction(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAInstruction(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAInstruction(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAInstruction(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsABinaryOperator(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsABinaryOperator(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsABinaryOperator(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsABinaryOperator(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsACallInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsACallInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsACallInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsACallInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAIntrinsicInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAIntrinsicInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAIntrinsicInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAIntrinsicInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsADbgInfoIntrinsic(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsADbgInfoIntrinsic(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsADbgInfoIntrinsic(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsADbgInfoIntrinsic(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsADbgDeclareInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsADbgDeclareInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsADbgDeclareInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsADbgDeclareInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAMemIntrinsic(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAMemIntrinsic(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAMemIntrinsic(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAMemIntrinsic(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAMemCpyInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAMemCpyInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAMemCpyInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAMemCpyInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAMemMoveInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAMemMoveInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAMemMoveInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAMemMoveInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAMemSetInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAMemSetInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAMemSetInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAMemSetInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsACmpInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsACmpInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsACmpInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsACmpInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAFCmpInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAFCmpInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAFCmpInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAFCmpInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAICmpInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAICmpInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAICmpInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAICmpInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAExtractElementInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAExtractElementInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAExtractElementInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAExtractElementInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAGetElementPtrInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAGetElementPtrInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAGetElementPtrInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAGetElementPtrInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAInsertElementInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAInsertElementInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAInsertElementInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAInsertElementInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAInsertValueInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAInsertValueInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAInsertValueInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAInsertValueInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsALandingPadInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsALandingPadInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsALandingPadInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsALandingPadInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAPHINode(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAPHINode(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAPHINode(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAPHINode(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsASelectInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsASelectInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsASelectInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsASelectInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAShuffleVectorInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAShuffleVectorInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAShuffleVectorInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAShuffleVectorInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAStoreInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAStoreInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAStoreInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAStoreInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsATerminatorInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsATerminatorInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsATerminatorInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsATerminatorInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsABranchInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsABranchInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsABranchInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsABranchInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAIndirectBrInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAIndirectBrInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAIndirectBrInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAIndirectBrInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAInvokeInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAInvokeInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAInvokeInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAInvokeInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAReturnInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAReturnInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAReturnInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAReturnInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsASwitchInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsASwitchInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsASwitchInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsASwitchInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAUnreachableInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAUnreachableInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAUnreachableInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAUnreachableInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAResumeInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAResumeInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAResumeInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAResumeInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsACleanupReturnInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsACleanupReturnInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsACleanupReturnInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsACleanupReturnInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsACatchReturnInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsACatchReturnInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsACatchReturnInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsACatchReturnInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAFuncletPadInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAFuncletPadInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAFuncletPadInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAFuncletPadInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsACatchPadInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsACatchPadInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsACatchPadInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsACatchPadInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsACleanupPadInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsACleanupPadInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsACleanupPadInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsACleanupPadInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAUnaryInstruction(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAUnaryInstruction(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAUnaryInstruction(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAUnaryInstruction(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAAllocaInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAAllocaInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAAllocaInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAAllocaInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsACastInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsACastInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsACastInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsACastInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAAddrSpaceCastInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAAddrSpaceCastInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAAddrSpaceCastInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAAddrSpaceCastInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsABitCastInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsABitCastInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsABitCastInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsABitCastInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAFPExtInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAFPExtInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAFPExtInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAFPExtInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAFPToSIInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAFPToSIInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAFPToSIInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAFPToSIInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAFPToUIInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAFPToUIInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAFPToUIInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAFPToUIInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAFPTruncInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAFPTruncInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAFPTruncInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAFPTruncInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAIntToPtrInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAIntToPtrInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAIntToPtrInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAIntToPtrInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAPtrToIntInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAPtrToIntInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAPtrToIntInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAPtrToIntInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsASExtInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsASExtInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsASExtInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsASExtInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsASIToFPInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsASIToFPInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsASIToFPInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsASIToFPInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsATruncInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsATruncInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsATruncInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsATruncInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAUIToFPInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAUIToFPInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAUIToFPInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAUIToFPInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAZExtInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAZExtInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAZExtInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAZExtInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAExtractValueInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAExtractValueInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAExtractValueInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAExtractValueInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsALoadInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsALoadInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsALoadInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsALoadInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAVAArgInst(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAVAArgInst(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAVAArgInst(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAVAArgInst(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAMDNode(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAMDNode(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAMDNode(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAMDNode(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMIsAMDString(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMIsAMDString(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMIsAMDString(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMIsAMDString(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMUseRef LLVMGetFirstUse(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMUseRef(bitreaderJNI.LLVMGetFirstUse(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueUse LLVMGetFirstUse(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMGetFirstUse(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueUse(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMUseRef LLVMGetNextUse(SWIGTYPE_p_LLVMUseRef U) {
-    return new SWIGTYPE_p_LLVMUseRef(bitreaderJNI.LLVMGetNextUse(SWIGTYPE_p_LLVMUseRef.getCPtr(U)), true);
+  public static SWIGTYPE_p_LLVMOpaqueUse LLVMGetNextUse(SWIGTYPE_p_LLVMOpaqueUse U) {
+    long cPtr = bitreaderJNI.LLVMGetNextUse(SWIGTYPE_p_LLVMOpaqueUse.getCPtr(U));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueUse(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetUser(SWIGTYPE_p_LLVMUseRef U) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetUser(SWIGTYPE_p_LLVMUseRef.getCPtr(U)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetUser(SWIGTYPE_p_LLVMOpaqueUse U) {
+    long cPtr = bitreaderJNI.LLVMGetUser(SWIGTYPE_p_LLVMOpaqueUse.getCPtr(U));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetUsedValue(SWIGTYPE_p_LLVMUseRef U) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetUsedValue(SWIGTYPE_p_LLVMUseRef.getCPtr(U)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetUsedValue(SWIGTYPE_p_LLVMOpaqueUse U) {
+    long cPtr = bitreaderJNI.LLVMGetUsedValue(SWIGTYPE_p_LLVMOpaqueUse.getCPtr(U));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetOperand(SWIGTYPE_p_LLVMValueRef Val, long Index) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetOperand(SWIGTYPE_p_LLVMValueRef.getCPtr(Val), Index), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetOperand(SWIGTYPE_p_LLVMOpaqueValue Val, long Index) {
+    long cPtr = bitreaderJNI.LLVMGetOperand(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), Index);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMUseRef LLVMGetOperandUse(SWIGTYPE_p_LLVMValueRef Val, long Index) {
-    return new SWIGTYPE_p_LLVMUseRef(bitreaderJNI.LLVMGetOperandUse(SWIGTYPE_p_LLVMValueRef.getCPtr(Val), Index), true);
+  public static SWIGTYPE_p_LLVMOpaqueUse LLVMGetOperandUse(SWIGTYPE_p_LLVMOpaqueValue Val, long Index) {
+    long cPtr = bitreaderJNI.LLVMGetOperandUse(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), Index);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueUse(cPtr, false);
   }
 
-  public static void LLVMSetOperand(SWIGTYPE_p_LLVMValueRef User, long Index, SWIGTYPE_p_LLVMValueRef Val) {
-    bitreaderJNI.LLVMSetOperand(SWIGTYPE_p_LLVMValueRef.getCPtr(User), Index, SWIGTYPE_p_LLVMValueRef.getCPtr(Val));
+  public static void LLVMSetOperand(SWIGTYPE_p_LLVMOpaqueValue User, long Index, SWIGTYPE_p_LLVMOpaqueValue Val) {
+    bitreaderJNI.LLVMSetOperand(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(User), Index, SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
   }
 
-  public static int LLVMGetNumOperands(SWIGTYPE_p_LLVMValueRef Val) {
-    return bitreaderJNI.LLVMGetNumOperands(SWIGTYPE_p_LLVMValueRef.getCPtr(Val));
+  public static int LLVMGetNumOperands(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    return bitreaderJNI.LLVMGetNumOperands(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstNull(SWIGTYPE_p_LLVMTypeRef Ty) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstNull(SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstNull(SWIGTYPE_p_LLVMOpaqueType Ty) {
+    long cPtr = bitreaderJNI.LLVMConstNull(SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstAllOnes(SWIGTYPE_p_LLVMTypeRef Ty) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstAllOnes(SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstAllOnes(SWIGTYPE_p_LLVMOpaqueType Ty) {
+    long cPtr = bitreaderJNI.LLVMConstAllOnes(SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetUndef(SWIGTYPE_p_LLVMTypeRef Ty) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetUndef(SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetUndef(SWIGTYPE_p_LLVMOpaqueType Ty) {
+    long cPtr = bitreaderJNI.LLVMGetUndef(SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMIsNull(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMIsNull(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static int LLVMIsNull(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    return bitreaderJNI.LLVMIsNull(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstPointerNull(SWIGTYPE_p_LLVMTypeRef Ty) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstPointerNull(SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstPointerNull(SWIGTYPE_p_LLVMOpaqueType Ty) {
+    long cPtr = bitreaderJNI.LLVMConstPointerNull(SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstInt(SWIGTYPE_p_LLVMTypeRef IntTy, java.math.BigInteger N, SWIGTYPE_p_LLVMBool SignExtend) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstInt(SWIGTYPE_p_LLVMTypeRef.getCPtr(IntTy), N, SWIGTYPE_p_LLVMBool.getCPtr(SignExtend)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstInt(SWIGTYPE_p_LLVMOpaqueType IntTy, java.math.BigInteger N, int SignExtend) {
+    long cPtr = bitreaderJNI.LLVMConstInt(SWIGTYPE_p_LLVMOpaqueType.getCPtr(IntTy), N, SignExtend);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstIntOfArbitraryPrecision(SWIGTYPE_p_LLVMTypeRef IntTy, long NumWords, SWIGTYPE_p_uint64_t Words) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstIntOfArbitraryPrecision(SWIGTYPE_p_LLVMTypeRef.getCPtr(IntTy), NumWords, SWIGTYPE_p_uint64_t.getCPtr(Words)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstIntOfArbitraryPrecision(SWIGTYPE_p_LLVMOpaqueType IntTy, long NumWords, SWIGTYPE_p_uint64_t Words) {
+    long cPtr = bitreaderJNI.LLVMConstIntOfArbitraryPrecision(SWIGTYPE_p_LLVMOpaqueType.getCPtr(IntTy), NumWords, SWIGTYPE_p_uint64_t.getCPtr(Words));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstIntOfString(SWIGTYPE_p_LLVMTypeRef IntTy, String Text, SWIGTYPE_p_uint8_t Radix) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstIntOfString(SWIGTYPE_p_LLVMTypeRef.getCPtr(IntTy), Text, SWIGTYPE_p_uint8_t.getCPtr(Radix)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstIntOfString(SWIGTYPE_p_LLVMOpaqueType IntTy, String Text, SWIGTYPE_p_uint8_t Radix) {
+    long cPtr = bitreaderJNI.LLVMConstIntOfString(SWIGTYPE_p_LLVMOpaqueType.getCPtr(IntTy), Text, SWIGTYPE_p_uint8_t.getCPtr(Radix));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstIntOfStringAndSize(SWIGTYPE_p_LLVMTypeRef IntTy, String Text, long SLen, SWIGTYPE_p_uint8_t Radix) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstIntOfStringAndSize(SWIGTYPE_p_LLVMTypeRef.getCPtr(IntTy), Text, SLen, SWIGTYPE_p_uint8_t.getCPtr(Radix)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstIntOfStringAndSize(SWIGTYPE_p_LLVMOpaqueType IntTy, String Text, long SLen, SWIGTYPE_p_uint8_t Radix) {
+    long cPtr = bitreaderJNI.LLVMConstIntOfStringAndSize(SWIGTYPE_p_LLVMOpaqueType.getCPtr(IntTy), Text, SLen, SWIGTYPE_p_uint8_t.getCPtr(Radix));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstReal(SWIGTYPE_p_LLVMTypeRef RealTy, double N) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstReal(SWIGTYPE_p_LLVMTypeRef.getCPtr(RealTy), N), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstReal(SWIGTYPE_p_LLVMOpaqueType RealTy, double N) {
+    long cPtr = bitreaderJNI.LLVMConstReal(SWIGTYPE_p_LLVMOpaqueType.getCPtr(RealTy), N);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstRealOfString(SWIGTYPE_p_LLVMTypeRef RealTy, String Text) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstRealOfString(SWIGTYPE_p_LLVMTypeRef.getCPtr(RealTy), Text), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstRealOfString(SWIGTYPE_p_LLVMOpaqueType RealTy, String Text) {
+    long cPtr = bitreaderJNI.LLVMConstRealOfString(SWIGTYPE_p_LLVMOpaqueType.getCPtr(RealTy), Text);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstRealOfStringAndSize(SWIGTYPE_p_LLVMTypeRef RealTy, String Text, long SLen) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstRealOfStringAndSize(SWIGTYPE_p_LLVMTypeRef.getCPtr(RealTy), Text, SLen), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstRealOfStringAndSize(SWIGTYPE_p_LLVMOpaqueType RealTy, String Text, long SLen) {
+    long cPtr = bitreaderJNI.LLVMConstRealOfStringAndSize(SWIGTYPE_p_LLVMOpaqueType.getCPtr(RealTy), Text, SLen);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static java.math.BigInteger LLVMConstIntGetZExtValue(SWIGTYPE_p_LLVMValueRef ConstantVal) {
-    return bitreaderJNI.LLVMConstIntGetZExtValue(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal));
+  public static java.math.BigInteger LLVMConstIntGetZExtValue(SWIGTYPE_p_LLVMOpaqueValue ConstantVal) {
+    return bitreaderJNI.LLVMConstIntGetZExtValue(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal));
   }
 
-  public static long LLVMConstIntGetSExtValue(SWIGTYPE_p_LLVMValueRef ConstantVal) {
-    return bitreaderJNI.LLVMConstIntGetSExtValue(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal));
+  public static long LLVMConstIntGetSExtValue(SWIGTYPE_p_LLVMOpaqueValue ConstantVal) {
+    return bitreaderJNI.LLVMConstIntGetSExtValue(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal));
   }
 
-  public static double LLVMConstRealGetDouble(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMBool losesInfo) {
-    return bitreaderJNI.LLVMConstRealGetDouble(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMBool.getCPtr(losesInfo));
+  public static double LLVMConstRealGetDouble(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_int losesInfo) {
+    return bitreaderJNI.LLVMConstRealGetDouble(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_int.getCPtr(losesInfo));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstStringInContext(SWIGTYPE_p_LLVMContextRef C, String Str, long Length, SWIGTYPE_p_LLVMBool DontNullTerminate) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstStringInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C), Str, Length, SWIGTYPE_p_LLVMBool.getCPtr(DontNullTerminate)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstStringInContext(SWIGTYPE_p_LLVMOpaqueContext C, String Str, long Length, int DontNullTerminate) {
+    long cPtr = bitreaderJNI.LLVMConstStringInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C), Str, Length, DontNullTerminate);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstString(String Str, long Length, SWIGTYPE_p_LLVMBool DontNullTerminate) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstString(Str, Length, SWIGTYPE_p_LLVMBool.getCPtr(DontNullTerminate)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstString(String Str, long Length, int DontNullTerminate) {
+    long cPtr = bitreaderJNI.LLVMConstString(Str, Length, DontNullTerminate);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMIsConstantString(SWIGTYPE_p_LLVMValueRef c) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMIsConstantString(SWIGTYPE_p_LLVMValueRef.getCPtr(c)), true);
+  public static int LLVMIsConstantString(SWIGTYPE_p_LLVMOpaqueValue c) {
+    return bitreaderJNI.LLVMIsConstantString(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(c));
   }
 
-  public static String LLVMGetAsString(SWIGTYPE_p_LLVMValueRef c, SWIGTYPE_p_size_t out) {
-    return bitreaderJNI.LLVMGetAsString(SWIGTYPE_p_LLVMValueRef.getCPtr(c), SWIGTYPE_p_size_t.getCPtr(out));
+  public static String LLVMGetAsString(SWIGTYPE_p_LLVMOpaqueValue c, SWIGTYPE_p_size_t out) {
+    return bitreaderJNI.LLVMGetAsString(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(c), SWIGTYPE_p_size_t.getCPtr(out));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstStructInContext(SWIGTYPE_p_LLVMContextRef C, SWIGTYPE_p_LLVMValueRef ConstantVals, long Count, SWIGTYPE_p_LLVMBool Packed) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstStructInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C), SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVals), Count, SWIGTYPE_p_LLVMBool.getCPtr(Packed)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstStructInContext(SWIGTYPE_p_LLVMOpaqueContext C, SWIGTYPE_p_p_LLVMOpaqueValue ConstantVals, long Count, int Packed) {
+    long cPtr = bitreaderJNI.LLVMConstStructInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C), SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(ConstantVals), Count, Packed);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstStruct(SWIGTYPE_p_LLVMValueRef ConstantVals, long Count, SWIGTYPE_p_LLVMBool Packed) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstStruct(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVals), Count, SWIGTYPE_p_LLVMBool.getCPtr(Packed)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstStruct(SWIGTYPE_p_p_LLVMOpaqueValue ConstantVals, long Count, int Packed) {
+    long cPtr = bitreaderJNI.LLVMConstStruct(SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(ConstantVals), Count, Packed);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstArray(SWIGTYPE_p_LLVMTypeRef ElementTy, SWIGTYPE_p_LLVMValueRef ConstantVals, long Length) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstArray(SWIGTYPE_p_LLVMTypeRef.getCPtr(ElementTy), SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVals), Length), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstArray(SWIGTYPE_p_LLVMOpaqueType ElementTy, SWIGTYPE_p_p_LLVMOpaqueValue ConstantVals, long Length) {
+    long cPtr = bitreaderJNI.LLVMConstArray(SWIGTYPE_p_LLVMOpaqueType.getCPtr(ElementTy), SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(ConstantVals), Length);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstNamedStruct(SWIGTYPE_p_LLVMTypeRef StructTy, SWIGTYPE_p_LLVMValueRef ConstantVals, long Count) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstNamedStruct(SWIGTYPE_p_LLVMTypeRef.getCPtr(StructTy), SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVals), Count), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstNamedStruct(SWIGTYPE_p_LLVMOpaqueType StructTy, SWIGTYPE_p_p_LLVMOpaqueValue ConstantVals, long Count) {
+    long cPtr = bitreaderJNI.LLVMConstNamedStruct(SWIGTYPE_p_LLVMOpaqueType.getCPtr(StructTy), SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(ConstantVals), Count);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetElementAsConstant(SWIGTYPE_p_LLVMValueRef c, long idx) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetElementAsConstant(SWIGTYPE_p_LLVMValueRef.getCPtr(c), idx), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetElementAsConstant(SWIGTYPE_p_LLVMOpaqueValue c, long idx) {
+    long cPtr = bitreaderJNI.LLVMGetElementAsConstant(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(c), idx);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstVector(SWIGTYPE_p_LLVMValueRef ScalarConstantVals, long Size) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstVector(SWIGTYPE_p_LLVMValueRef.getCPtr(ScalarConstantVals), Size), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstVector(SWIGTYPE_p_p_LLVMOpaqueValue ScalarConstantVals, long Size) {
+    long cPtr = bitreaderJNI.LLVMConstVector(SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(ScalarConstantVals), Size);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static LLVMOpcode LLVMGetConstOpcode(SWIGTYPE_p_LLVMValueRef ConstantVal) {
-    return LLVMOpcode.swigToEnum(bitreaderJNI.LLVMGetConstOpcode(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal)));
+  public static LLVMOpcode LLVMGetConstOpcode(SWIGTYPE_p_LLVMOpaqueValue ConstantVal) {
+    return LLVMOpcode.swigToEnum(bitreaderJNI.LLVMGetConstOpcode(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal)));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMAlignOf(SWIGTYPE_p_LLVMTypeRef Ty) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMAlignOf(SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMAlignOf(SWIGTYPE_p_LLVMOpaqueType Ty) {
+    long cPtr = bitreaderJNI.LLVMAlignOf(SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMSizeOf(SWIGTYPE_p_LLVMTypeRef Ty) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMSizeOf(SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMSizeOf(SWIGTYPE_p_LLVMOpaqueType Ty) {
+    long cPtr = bitreaderJNI.LLVMSizeOf(SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstNeg(SWIGTYPE_p_LLVMValueRef ConstantVal) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstNeg(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstNeg(SWIGTYPE_p_LLVMOpaqueValue ConstantVal) {
+    long cPtr = bitreaderJNI.LLVMConstNeg(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstNSWNeg(SWIGTYPE_p_LLVMValueRef ConstantVal) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstNSWNeg(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstNSWNeg(SWIGTYPE_p_LLVMOpaqueValue ConstantVal) {
+    long cPtr = bitreaderJNI.LLVMConstNSWNeg(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstNUWNeg(SWIGTYPE_p_LLVMValueRef ConstantVal) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstNUWNeg(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstNUWNeg(SWIGTYPE_p_LLVMOpaqueValue ConstantVal) {
+    long cPtr = bitreaderJNI.LLVMConstNUWNeg(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstFNeg(SWIGTYPE_p_LLVMValueRef ConstantVal) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstFNeg(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstFNeg(SWIGTYPE_p_LLVMOpaqueValue ConstantVal) {
+    long cPtr = bitreaderJNI.LLVMConstFNeg(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstNot(SWIGTYPE_p_LLVMValueRef ConstantVal) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstNot(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstNot(SWIGTYPE_p_LLVMOpaqueValue ConstantVal) {
+    long cPtr = bitreaderJNI.LLVMConstNot(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstAdd(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstAdd(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstAdd(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstAdd(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstNSWAdd(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstNSWAdd(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstNSWAdd(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstNSWAdd(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstNUWAdd(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstNUWAdd(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstNUWAdd(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstNUWAdd(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstFAdd(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstFAdd(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstFAdd(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstFAdd(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstSub(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstSub(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstSub(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstSub(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstNSWSub(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstNSWSub(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstNSWSub(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstNSWSub(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstNUWSub(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstNUWSub(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstNUWSub(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstNUWSub(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstFSub(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstFSub(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstFSub(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstFSub(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstMul(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstMul(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstMul(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstMul(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstNSWMul(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstNSWMul(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstNSWMul(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstNSWMul(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstNUWMul(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstNUWMul(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstNUWMul(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstNUWMul(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstFMul(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstFMul(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstFMul(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstFMul(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstUDiv(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstUDiv(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstUDiv(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstUDiv(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstSDiv(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstSDiv(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstSDiv(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstSDiv(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstExactSDiv(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstExactSDiv(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstExactSDiv(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstExactSDiv(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstFDiv(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstFDiv(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstFDiv(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstFDiv(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstURem(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstURem(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstURem(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstURem(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstSRem(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstSRem(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstSRem(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstSRem(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstFRem(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstFRem(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstFRem(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstFRem(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstAnd(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstAnd(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstAnd(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstAnd(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstOr(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstOr(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstOr(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstOr(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstXor(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstXor(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstXor(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstXor(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstICmp(LLVMIntPredicate Predicate, SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstICmp(Predicate.swigValue(), SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstICmp(LLVMIntPredicate Predicate, SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstICmp(Predicate.swigValue(), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstFCmp(LLVMRealPredicate Predicate, SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstFCmp(Predicate.swigValue(), SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstFCmp(LLVMRealPredicate Predicate, SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstFCmp(Predicate.swigValue(), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstShl(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstShl(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstShl(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstShl(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstLShr(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstLShr(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstLShr(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstLShr(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstAShr(SWIGTYPE_p_LLVMValueRef LHSConstant, SWIGTYPE_p_LLVMValueRef RHSConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstAShr(SWIGTYPE_p_LLVMValueRef.getCPtr(LHSConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(RHSConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstAShr(SWIGTYPE_p_LLVMOpaqueValue LHSConstant, SWIGTYPE_p_LLVMOpaqueValue RHSConstant) {
+    long cPtr = bitreaderJNI.LLVMConstAShr(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHSConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHSConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstGEP(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMValueRef ConstantIndices, long NumIndices) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstGEP(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantIndices), NumIndices), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstGEP(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_p_LLVMOpaqueValue ConstantIndices, long NumIndices) {
+    long cPtr = bitreaderJNI.LLVMConstGEP(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(ConstantIndices), NumIndices);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstInBoundsGEP(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMValueRef ConstantIndices, long NumIndices) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstInBoundsGEP(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantIndices), NumIndices), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstInBoundsGEP(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_p_LLVMOpaqueValue ConstantIndices, long NumIndices) {
+    long cPtr = bitreaderJNI.LLVMConstInBoundsGEP(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(ConstantIndices), NumIndices);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstTrunc(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstTrunc(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstTrunc(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstTrunc(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstSExt(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstSExt(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstSExt(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstSExt(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstZExt(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstZExt(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstZExt(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstZExt(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstFPTrunc(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstFPTrunc(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstFPTrunc(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstFPTrunc(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstFPExt(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstFPExt(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstFPExt(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstFPExt(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstUIToFP(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstUIToFP(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstUIToFP(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstUIToFP(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstSIToFP(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstSIToFP(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstSIToFP(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstSIToFP(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstFPToUI(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstFPToUI(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstFPToUI(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstFPToUI(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstFPToSI(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstFPToSI(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstFPToSI(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstFPToSI(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstPtrToInt(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstPtrToInt(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstPtrToInt(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstPtrToInt(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstIntToPtr(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstIntToPtr(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstIntToPtr(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstIntToPtr(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstBitCast(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstBitCast(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstBitCast(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstBitCast(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstAddrSpaceCast(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstAddrSpaceCast(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstAddrSpaceCast(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstAddrSpaceCast(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstZExtOrBitCast(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstZExtOrBitCast(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstZExtOrBitCast(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstZExtOrBitCast(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstSExtOrBitCast(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstSExtOrBitCast(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstSExtOrBitCast(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstSExtOrBitCast(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstTruncOrBitCast(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstTruncOrBitCast(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstTruncOrBitCast(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstTruncOrBitCast(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstPointerCast(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstPointerCast(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstPointerCast(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstPointerCast(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstIntCast(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType, SWIGTYPE_p_LLVMBool isSigned) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstIntCast(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType), SWIGTYPE_p_LLVMBool.getCPtr(isSigned)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstIntCast(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType, int isSigned) {
+    long cPtr = bitreaderJNI.LLVMConstIntCast(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType), isSigned);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstFPCast(SWIGTYPE_p_LLVMValueRef ConstantVal, SWIGTYPE_p_LLVMTypeRef ToType) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstFPCast(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal), SWIGTYPE_p_LLVMTypeRef.getCPtr(ToType)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstFPCast(SWIGTYPE_p_LLVMOpaqueValue ConstantVal, SWIGTYPE_p_LLVMOpaqueType ToType) {
+    long cPtr = bitreaderJNI.LLVMConstFPCast(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal), SWIGTYPE_p_LLVMOpaqueType.getCPtr(ToType));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstSelect(SWIGTYPE_p_LLVMValueRef ConstantCondition, SWIGTYPE_p_LLVMValueRef ConstantIfTrue, SWIGTYPE_p_LLVMValueRef ConstantIfFalse) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstSelect(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantCondition), SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantIfTrue), SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantIfFalse)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstSelect(SWIGTYPE_p_LLVMOpaqueValue ConstantCondition, SWIGTYPE_p_LLVMOpaqueValue ConstantIfTrue, SWIGTYPE_p_LLVMOpaqueValue ConstantIfFalse) {
+    long cPtr = bitreaderJNI.LLVMConstSelect(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantCondition), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantIfTrue), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantIfFalse));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstExtractElement(SWIGTYPE_p_LLVMValueRef VectorConstant, SWIGTYPE_p_LLVMValueRef IndexConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstExtractElement(SWIGTYPE_p_LLVMValueRef.getCPtr(VectorConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(IndexConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstExtractElement(SWIGTYPE_p_LLVMOpaqueValue VectorConstant, SWIGTYPE_p_LLVMOpaqueValue IndexConstant) {
+    long cPtr = bitreaderJNI.LLVMConstExtractElement(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(VectorConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(IndexConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstInsertElement(SWIGTYPE_p_LLVMValueRef VectorConstant, SWIGTYPE_p_LLVMValueRef ElementValueConstant, SWIGTYPE_p_LLVMValueRef IndexConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstInsertElement(SWIGTYPE_p_LLVMValueRef.getCPtr(VectorConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(ElementValueConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(IndexConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstInsertElement(SWIGTYPE_p_LLVMOpaqueValue VectorConstant, SWIGTYPE_p_LLVMOpaqueValue ElementValueConstant, SWIGTYPE_p_LLVMOpaqueValue IndexConstant) {
+    long cPtr = bitreaderJNI.LLVMConstInsertElement(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(VectorConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ElementValueConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(IndexConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstShuffleVector(SWIGTYPE_p_LLVMValueRef VectorAConstant, SWIGTYPE_p_LLVMValueRef VectorBConstant, SWIGTYPE_p_LLVMValueRef MaskConstant) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstShuffleVector(SWIGTYPE_p_LLVMValueRef.getCPtr(VectorAConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(VectorBConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(MaskConstant)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstShuffleVector(SWIGTYPE_p_LLVMOpaqueValue VectorAConstant, SWIGTYPE_p_LLVMOpaqueValue VectorBConstant, SWIGTYPE_p_LLVMOpaqueValue MaskConstant) {
+    long cPtr = bitreaderJNI.LLVMConstShuffleVector(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(VectorAConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(VectorBConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(MaskConstant));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstExtractValue(SWIGTYPE_p_LLVMValueRef AggConstant, SWIGTYPE_p_unsigned_int IdxList, long NumIdx) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstExtractValue(SWIGTYPE_p_LLVMValueRef.getCPtr(AggConstant), SWIGTYPE_p_unsigned_int.getCPtr(IdxList), NumIdx), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstExtractValue(SWIGTYPE_p_LLVMOpaqueValue AggConstant, SWIGTYPE_p_unsigned_int IdxList, long NumIdx) {
+    long cPtr = bitreaderJNI.LLVMConstExtractValue(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(AggConstant), SWIGTYPE_p_unsigned_int.getCPtr(IdxList), NumIdx);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstInsertValue(SWIGTYPE_p_LLVMValueRef AggConstant, SWIGTYPE_p_LLVMValueRef ElementValueConstant, SWIGTYPE_p_unsigned_int IdxList, long NumIdx) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstInsertValue(SWIGTYPE_p_LLVMValueRef.getCPtr(AggConstant), SWIGTYPE_p_LLVMValueRef.getCPtr(ElementValueConstant), SWIGTYPE_p_unsigned_int.getCPtr(IdxList), NumIdx), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstInsertValue(SWIGTYPE_p_LLVMOpaqueValue AggConstant, SWIGTYPE_p_LLVMOpaqueValue ElementValueConstant, SWIGTYPE_p_unsigned_int IdxList, long NumIdx) {
+    long cPtr = bitreaderJNI.LLVMConstInsertValue(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(AggConstant), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ElementValueConstant), SWIGTYPE_p_unsigned_int.getCPtr(IdxList), NumIdx);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMConstInlineAsm(SWIGTYPE_p_LLVMTypeRef Ty, String AsmString, String Constraints, SWIGTYPE_p_LLVMBool HasSideEffects, SWIGTYPE_p_LLVMBool IsAlignStack) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMConstInlineAsm(SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty), AsmString, Constraints, SWIGTYPE_p_LLVMBool.getCPtr(HasSideEffects), SWIGTYPE_p_LLVMBool.getCPtr(IsAlignStack)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMConstInlineAsm(SWIGTYPE_p_LLVMOpaqueType Ty, String AsmString, String Constraints, int HasSideEffects, int IsAlignStack) {
+    long cPtr = bitreaderJNI.LLVMConstInlineAsm(SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty), AsmString, Constraints, HasSideEffects, IsAlignStack);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBlockAddress(SWIGTYPE_p_LLVMValueRef F, SWIGTYPE_p_LLVMBasicBlockRef BB) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBlockAddress(SWIGTYPE_p_LLVMValueRef.getCPtr(F), SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(BB)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBlockAddress(SWIGTYPE_p_LLVMOpaqueValue F, SWIGTYPE_p_LLVMOpaqueBasicBlock BB) {
+    long cPtr = bitreaderJNI.LLVMBlockAddress(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(F), SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(BB));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMModuleRef LLVMGetGlobalParent(SWIGTYPE_p_LLVMValueRef Global) {
-    return new SWIGTYPE_p_LLVMModuleRef(bitreaderJNI.LLVMGetGlobalParent(SWIGTYPE_p_LLVMValueRef.getCPtr(Global)), true);
+  public static SWIGTYPE_p_LLVMOpaqueModule LLVMGetGlobalParent(SWIGTYPE_p_LLVMOpaqueValue Global) {
+    long cPtr = bitreaderJNI.LLVMGetGlobalParent(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Global));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueModule(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMIsDeclaration(SWIGTYPE_p_LLVMValueRef Global) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMIsDeclaration(SWIGTYPE_p_LLVMValueRef.getCPtr(Global)), true);
+  public static int LLVMIsDeclaration(SWIGTYPE_p_LLVMOpaqueValue Global) {
+    return bitreaderJNI.LLVMIsDeclaration(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Global));
   }
 
-  public static LLVMLinkage LLVMGetLinkage(SWIGTYPE_p_LLVMValueRef Global) {
-    return LLVMLinkage.swigToEnum(bitreaderJNI.LLVMGetLinkage(SWIGTYPE_p_LLVMValueRef.getCPtr(Global)));
+  public static LLVMLinkage LLVMGetLinkage(SWIGTYPE_p_LLVMOpaqueValue Global) {
+    return LLVMLinkage.swigToEnum(bitreaderJNI.LLVMGetLinkage(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Global)));
   }
 
-  public static void LLVMSetLinkage(SWIGTYPE_p_LLVMValueRef Global, LLVMLinkage Linkage) {
-    bitreaderJNI.LLVMSetLinkage(SWIGTYPE_p_LLVMValueRef.getCPtr(Global), Linkage.swigValue());
+  public static void LLVMSetLinkage(SWIGTYPE_p_LLVMOpaqueValue Global, LLVMLinkage Linkage) {
+    bitreaderJNI.LLVMSetLinkage(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Global), Linkage.swigValue());
   }
 
-  public static String LLVMGetSection(SWIGTYPE_p_LLVMValueRef Global) {
-    return bitreaderJNI.LLVMGetSection(SWIGTYPE_p_LLVMValueRef.getCPtr(Global));
+  public static String LLVMGetSection(SWIGTYPE_p_LLVMOpaqueValue Global) {
+    return bitreaderJNI.LLVMGetSection(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Global));
   }
 
-  public static void LLVMSetSection(SWIGTYPE_p_LLVMValueRef Global, String Section) {
-    bitreaderJNI.LLVMSetSection(SWIGTYPE_p_LLVMValueRef.getCPtr(Global), Section);
+  public static void LLVMSetSection(SWIGTYPE_p_LLVMOpaqueValue Global, String Section) {
+    bitreaderJNI.LLVMSetSection(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Global), Section);
   }
 
-  public static LLVMVisibility LLVMGetVisibility(SWIGTYPE_p_LLVMValueRef Global) {
-    return LLVMVisibility.swigToEnum(bitreaderJNI.LLVMGetVisibility(SWIGTYPE_p_LLVMValueRef.getCPtr(Global)));
+  public static LLVMVisibility LLVMGetVisibility(SWIGTYPE_p_LLVMOpaqueValue Global) {
+    return LLVMVisibility.swigToEnum(bitreaderJNI.LLVMGetVisibility(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Global)));
   }
 
-  public static void LLVMSetVisibility(SWIGTYPE_p_LLVMValueRef Global, LLVMVisibility Viz) {
-    bitreaderJNI.LLVMSetVisibility(SWIGTYPE_p_LLVMValueRef.getCPtr(Global), Viz.swigValue());
+  public static void LLVMSetVisibility(SWIGTYPE_p_LLVMOpaqueValue Global, LLVMVisibility Viz) {
+    bitreaderJNI.LLVMSetVisibility(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Global), Viz.swigValue());
   }
 
-  public static LLVMDLLStorageClass LLVMGetDLLStorageClass(SWIGTYPE_p_LLVMValueRef Global) {
-    return LLVMDLLStorageClass.swigToEnum(bitreaderJNI.LLVMGetDLLStorageClass(SWIGTYPE_p_LLVMValueRef.getCPtr(Global)));
+  public static LLVMDLLStorageClass LLVMGetDLLStorageClass(SWIGTYPE_p_LLVMOpaqueValue Global) {
+    return LLVMDLLStorageClass.swigToEnum(bitreaderJNI.LLVMGetDLLStorageClass(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Global)));
   }
 
-  public static void LLVMSetDLLStorageClass(SWIGTYPE_p_LLVMValueRef Global, LLVMDLLStorageClass Class) {
-    bitreaderJNI.LLVMSetDLLStorageClass(SWIGTYPE_p_LLVMValueRef.getCPtr(Global), Class.swigValue());
+  public static void LLVMSetDLLStorageClass(SWIGTYPE_p_LLVMOpaqueValue Global, LLVMDLLStorageClass Class) {
+    bitreaderJNI.LLVMSetDLLStorageClass(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Global), Class.swigValue());
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMHasUnnamedAddr(SWIGTYPE_p_LLVMValueRef Global) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMHasUnnamedAddr(SWIGTYPE_p_LLVMValueRef.getCPtr(Global)), true);
+  public static int LLVMHasUnnamedAddr(SWIGTYPE_p_LLVMOpaqueValue Global) {
+    return bitreaderJNI.LLVMHasUnnamedAddr(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Global));
   }
 
-  public static void LLVMSetUnnamedAddr(SWIGTYPE_p_LLVMValueRef Global, SWIGTYPE_p_LLVMBool HasUnnamedAddr) {
-    bitreaderJNI.LLVMSetUnnamedAddr(SWIGTYPE_p_LLVMValueRef.getCPtr(Global), SWIGTYPE_p_LLVMBool.getCPtr(HasUnnamedAddr));
+  public static void LLVMSetUnnamedAddr(SWIGTYPE_p_LLVMOpaqueValue Global, int HasUnnamedAddr) {
+    bitreaderJNI.LLVMSetUnnamedAddr(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Global), HasUnnamedAddr);
   }
 
-  public static long LLVMGetAlignment(SWIGTYPE_p_LLVMValueRef V) {
-    return bitreaderJNI.LLVMGetAlignment(SWIGTYPE_p_LLVMValueRef.getCPtr(V));
+  public static long LLVMGetAlignment(SWIGTYPE_p_LLVMOpaqueValue V) {
+    return bitreaderJNI.LLVMGetAlignment(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(V));
   }
 
-  public static void LLVMSetAlignment(SWIGTYPE_p_LLVMValueRef V, long Bytes) {
-    bitreaderJNI.LLVMSetAlignment(SWIGTYPE_p_LLVMValueRef.getCPtr(V), Bytes);
+  public static void LLVMSetAlignment(SWIGTYPE_p_LLVMOpaqueValue V, long Bytes) {
+    bitreaderJNI.LLVMSetAlignment(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(V), Bytes);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMAddGlobal(SWIGTYPE_p_LLVMModuleRef M, SWIGTYPE_p_LLVMTypeRef Ty, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMAddGlobal(SWIGTYPE_p_LLVMModuleRef.getCPtr(M), SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMAddGlobal(SWIGTYPE_p_LLVMOpaqueModule M, SWIGTYPE_p_LLVMOpaqueType Ty, String Name) {
+    long cPtr = bitreaderJNI.LLVMAddGlobal(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M), SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMAddGlobalInAddressSpace(SWIGTYPE_p_LLVMModuleRef M, SWIGTYPE_p_LLVMTypeRef Ty, String Name, long AddressSpace) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMAddGlobalInAddressSpace(SWIGTYPE_p_LLVMModuleRef.getCPtr(M), SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty), Name, AddressSpace), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMAddGlobalInAddressSpace(SWIGTYPE_p_LLVMOpaqueModule M, SWIGTYPE_p_LLVMOpaqueType Ty, String Name, long AddressSpace) {
+    long cPtr = bitreaderJNI.LLVMAddGlobalInAddressSpace(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M), SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty), Name, AddressSpace);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetNamedGlobal(SWIGTYPE_p_LLVMModuleRef M, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetNamedGlobal(SWIGTYPE_p_LLVMModuleRef.getCPtr(M), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetNamedGlobal(SWIGTYPE_p_LLVMOpaqueModule M, String Name) {
+    long cPtr = bitreaderJNI.LLVMGetNamedGlobal(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetFirstGlobal(SWIGTYPE_p_LLVMModuleRef M) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetFirstGlobal(SWIGTYPE_p_LLVMModuleRef.getCPtr(M)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetFirstGlobal(SWIGTYPE_p_LLVMOpaqueModule M) {
+    long cPtr = bitreaderJNI.LLVMGetFirstGlobal(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetLastGlobal(SWIGTYPE_p_LLVMModuleRef M) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetLastGlobal(SWIGTYPE_p_LLVMModuleRef.getCPtr(M)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetLastGlobal(SWIGTYPE_p_LLVMOpaqueModule M) {
+    long cPtr = bitreaderJNI.LLVMGetLastGlobal(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetNextGlobal(SWIGTYPE_p_LLVMValueRef GlobalVar) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetNextGlobal(SWIGTYPE_p_LLVMValueRef.getCPtr(GlobalVar)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetNextGlobal(SWIGTYPE_p_LLVMOpaqueValue GlobalVar) {
+    long cPtr = bitreaderJNI.LLVMGetNextGlobal(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(GlobalVar));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetPreviousGlobal(SWIGTYPE_p_LLVMValueRef GlobalVar) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetPreviousGlobal(SWIGTYPE_p_LLVMValueRef.getCPtr(GlobalVar)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetPreviousGlobal(SWIGTYPE_p_LLVMOpaqueValue GlobalVar) {
+    long cPtr = bitreaderJNI.LLVMGetPreviousGlobal(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(GlobalVar));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static void LLVMDeleteGlobal(SWIGTYPE_p_LLVMValueRef GlobalVar) {
-    bitreaderJNI.LLVMDeleteGlobal(SWIGTYPE_p_LLVMValueRef.getCPtr(GlobalVar));
+  public static void LLVMDeleteGlobal(SWIGTYPE_p_LLVMOpaqueValue GlobalVar) {
+    bitreaderJNI.LLVMDeleteGlobal(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(GlobalVar));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetInitializer(SWIGTYPE_p_LLVMValueRef GlobalVar) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetInitializer(SWIGTYPE_p_LLVMValueRef.getCPtr(GlobalVar)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetInitializer(SWIGTYPE_p_LLVMOpaqueValue GlobalVar) {
+    long cPtr = bitreaderJNI.LLVMGetInitializer(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(GlobalVar));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static void LLVMSetInitializer(SWIGTYPE_p_LLVMValueRef GlobalVar, SWIGTYPE_p_LLVMValueRef ConstantVal) {
-    bitreaderJNI.LLVMSetInitializer(SWIGTYPE_p_LLVMValueRef.getCPtr(GlobalVar), SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal));
+  public static void LLVMSetInitializer(SWIGTYPE_p_LLVMOpaqueValue GlobalVar, SWIGTYPE_p_LLVMOpaqueValue ConstantVal) {
+    bitreaderJNI.LLVMSetInitializer(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(GlobalVar), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal));
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMIsThreadLocal(SWIGTYPE_p_LLVMValueRef GlobalVar) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMIsThreadLocal(SWIGTYPE_p_LLVMValueRef.getCPtr(GlobalVar)), true);
+  public static int LLVMIsThreadLocal(SWIGTYPE_p_LLVMOpaqueValue GlobalVar) {
+    return bitreaderJNI.LLVMIsThreadLocal(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(GlobalVar));
   }
 
-  public static void LLVMSetThreadLocal(SWIGTYPE_p_LLVMValueRef GlobalVar, SWIGTYPE_p_LLVMBool IsThreadLocal) {
-    bitreaderJNI.LLVMSetThreadLocal(SWIGTYPE_p_LLVMValueRef.getCPtr(GlobalVar), SWIGTYPE_p_LLVMBool.getCPtr(IsThreadLocal));
+  public static void LLVMSetThreadLocal(SWIGTYPE_p_LLVMOpaqueValue GlobalVar, int IsThreadLocal) {
+    bitreaderJNI.LLVMSetThreadLocal(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(GlobalVar), IsThreadLocal);
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMIsGlobalConstant(SWIGTYPE_p_LLVMValueRef GlobalVar) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMIsGlobalConstant(SWIGTYPE_p_LLVMValueRef.getCPtr(GlobalVar)), true);
+  public static int LLVMIsGlobalConstant(SWIGTYPE_p_LLVMOpaqueValue GlobalVar) {
+    return bitreaderJNI.LLVMIsGlobalConstant(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(GlobalVar));
   }
 
-  public static void LLVMSetGlobalConstant(SWIGTYPE_p_LLVMValueRef GlobalVar, SWIGTYPE_p_LLVMBool IsConstant) {
-    bitreaderJNI.LLVMSetGlobalConstant(SWIGTYPE_p_LLVMValueRef.getCPtr(GlobalVar), SWIGTYPE_p_LLVMBool.getCPtr(IsConstant));
+  public static void LLVMSetGlobalConstant(SWIGTYPE_p_LLVMOpaqueValue GlobalVar, int IsConstant) {
+    bitreaderJNI.LLVMSetGlobalConstant(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(GlobalVar), IsConstant);
   }
 
-  public static LLVMThreadLocalMode LLVMGetThreadLocalMode(SWIGTYPE_p_LLVMValueRef GlobalVar) {
-    return LLVMThreadLocalMode.swigToEnum(bitreaderJNI.LLVMGetThreadLocalMode(SWIGTYPE_p_LLVMValueRef.getCPtr(GlobalVar)));
+  public static LLVMThreadLocalMode LLVMGetThreadLocalMode(SWIGTYPE_p_LLVMOpaqueValue GlobalVar) {
+    return LLVMThreadLocalMode.swigToEnum(bitreaderJNI.LLVMGetThreadLocalMode(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(GlobalVar)));
   }
 
-  public static void LLVMSetThreadLocalMode(SWIGTYPE_p_LLVMValueRef GlobalVar, LLVMThreadLocalMode Mode) {
-    bitreaderJNI.LLVMSetThreadLocalMode(SWIGTYPE_p_LLVMValueRef.getCPtr(GlobalVar), Mode.swigValue());
+  public static void LLVMSetThreadLocalMode(SWIGTYPE_p_LLVMOpaqueValue GlobalVar, LLVMThreadLocalMode Mode) {
+    bitreaderJNI.LLVMSetThreadLocalMode(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(GlobalVar), Mode.swigValue());
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMIsExternallyInitialized(SWIGTYPE_p_LLVMValueRef GlobalVar) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMIsExternallyInitialized(SWIGTYPE_p_LLVMValueRef.getCPtr(GlobalVar)), true);
+  public static int LLVMIsExternallyInitialized(SWIGTYPE_p_LLVMOpaqueValue GlobalVar) {
+    return bitreaderJNI.LLVMIsExternallyInitialized(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(GlobalVar));
   }
 
-  public static void LLVMSetExternallyInitialized(SWIGTYPE_p_LLVMValueRef GlobalVar, SWIGTYPE_p_LLVMBool IsExtInit) {
-    bitreaderJNI.LLVMSetExternallyInitialized(SWIGTYPE_p_LLVMValueRef.getCPtr(GlobalVar), SWIGTYPE_p_LLVMBool.getCPtr(IsExtInit));
+  public static void LLVMSetExternallyInitialized(SWIGTYPE_p_LLVMOpaqueValue GlobalVar, int IsExtInit) {
+    bitreaderJNI.LLVMSetExternallyInitialized(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(GlobalVar), IsExtInit);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMAddAlias(SWIGTYPE_p_LLVMModuleRef M, SWIGTYPE_p_LLVMTypeRef Ty, SWIGTYPE_p_LLVMValueRef Aliasee, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMAddAlias(SWIGTYPE_p_LLVMModuleRef.getCPtr(M), SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty), SWIGTYPE_p_LLVMValueRef.getCPtr(Aliasee), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMAddAlias(SWIGTYPE_p_LLVMOpaqueModule M, SWIGTYPE_p_LLVMOpaqueType Ty, SWIGTYPE_p_LLVMOpaqueValue Aliasee, String Name) {
+    long cPtr = bitreaderJNI.LLVMAddAlias(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M), SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Aliasee), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static void LLVMDeleteFunction(SWIGTYPE_p_LLVMValueRef Fn) {
-    bitreaderJNI.LLVMDeleteFunction(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn));
+  public static void LLVMDeleteFunction(SWIGTYPE_p_LLVMOpaqueValue Fn) {
+    bitreaderJNI.LLVMDeleteFunction(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetPersonalityFn(SWIGTYPE_p_LLVMValueRef Fn) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetPersonalityFn(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetPersonalityFn(SWIGTYPE_p_LLVMOpaqueValue Fn) {
+    long cPtr = bitreaderJNI.LLVMGetPersonalityFn(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static void LLVMSetPersonalityFn(SWIGTYPE_p_LLVMValueRef Fn, SWIGTYPE_p_LLVMValueRef PersonalityFn) {
-    bitreaderJNI.LLVMSetPersonalityFn(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn), SWIGTYPE_p_LLVMValueRef.getCPtr(PersonalityFn));
+  public static void LLVMSetPersonalityFn(SWIGTYPE_p_LLVMOpaqueValue Fn, SWIGTYPE_p_LLVMOpaqueValue PersonalityFn) {
+    bitreaderJNI.LLVMSetPersonalityFn(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(PersonalityFn));
   }
 
-  public static long LLVMGetIntrinsicID(SWIGTYPE_p_LLVMValueRef Fn) {
-    return bitreaderJNI.LLVMGetIntrinsicID(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn));
+  public static long LLVMGetIntrinsicID(SWIGTYPE_p_LLVMOpaqueValue Fn) {
+    return bitreaderJNI.LLVMGetIntrinsicID(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn));
   }
 
-  public static long LLVMGetFunctionCallConv(SWIGTYPE_p_LLVMValueRef Fn) {
-    return bitreaderJNI.LLVMGetFunctionCallConv(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn));
+  public static long LLVMGetFunctionCallConv(SWIGTYPE_p_LLVMOpaqueValue Fn) {
+    return bitreaderJNI.LLVMGetFunctionCallConv(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn));
   }
 
-  public static void LLVMSetFunctionCallConv(SWIGTYPE_p_LLVMValueRef Fn, long CC) {
-    bitreaderJNI.LLVMSetFunctionCallConv(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn), CC);
+  public static void LLVMSetFunctionCallConv(SWIGTYPE_p_LLVMOpaqueValue Fn, long CC) {
+    bitreaderJNI.LLVMSetFunctionCallConv(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn), CC);
   }
 
-  public static String LLVMGetGC(SWIGTYPE_p_LLVMValueRef Fn) {
-    return bitreaderJNI.LLVMGetGC(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn));
+  public static String LLVMGetGC(SWIGTYPE_p_LLVMOpaqueValue Fn) {
+    return bitreaderJNI.LLVMGetGC(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn));
   }
 
-  public static void LLVMSetGC(SWIGTYPE_p_LLVMValueRef Fn, String Name) {
-    bitreaderJNI.LLVMSetGC(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn), Name);
+  public static void LLVMSetGC(SWIGTYPE_p_LLVMOpaqueValue Fn, String Name) {
+    bitreaderJNI.LLVMSetGC(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn), Name);
   }
 
-  public static void LLVMAddFunctionAttr(SWIGTYPE_p_LLVMValueRef Fn, LLVMAttribute PA) {
-    bitreaderJNI.LLVMAddFunctionAttr(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn), PA.swigValue());
+  public static void LLVMAddFunctionAttr(SWIGTYPE_p_LLVMOpaqueValue Fn, LLVMAttribute PA) {
+    bitreaderJNI.LLVMAddFunctionAttr(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn), PA.swigValue());
   }
 
-  public static void LLVMAddTargetDependentFunctionAttr(SWIGTYPE_p_LLVMValueRef Fn, String A, String V) {
-    bitreaderJNI.LLVMAddTargetDependentFunctionAttr(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn), A, V);
+  public static void LLVMAddTargetDependentFunctionAttr(SWIGTYPE_p_LLVMOpaqueValue Fn, String A, String V) {
+    bitreaderJNI.LLVMAddTargetDependentFunctionAttr(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn), A, V);
   }
 
-  public static LLVMAttribute LLVMGetFunctionAttr(SWIGTYPE_p_LLVMValueRef Fn) {
-    return LLVMAttribute.swigToEnum(bitreaderJNI.LLVMGetFunctionAttr(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn)));
+  public static LLVMAttribute LLVMGetFunctionAttr(SWIGTYPE_p_LLVMOpaqueValue Fn) {
+    return LLVMAttribute.swigToEnum(bitreaderJNI.LLVMGetFunctionAttr(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn)));
   }
 
-  public static void LLVMRemoveFunctionAttr(SWIGTYPE_p_LLVMValueRef Fn, LLVMAttribute PA) {
-    bitreaderJNI.LLVMRemoveFunctionAttr(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn), PA.swigValue());
+  public static void LLVMRemoveFunctionAttr(SWIGTYPE_p_LLVMOpaqueValue Fn, LLVMAttribute PA) {
+    bitreaderJNI.LLVMRemoveFunctionAttr(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn), PA.swigValue());
   }
 
-  public static long LLVMCountParams(SWIGTYPE_p_LLVMValueRef Fn) {
-    return bitreaderJNI.LLVMCountParams(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn));
+  public static long LLVMCountParams(SWIGTYPE_p_LLVMOpaqueValue Fn) {
+    return bitreaderJNI.LLVMCountParams(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn));
   }
 
-  public static void LLVMGetParams(SWIGTYPE_p_LLVMValueRef Fn, SWIGTYPE_p_LLVMValueRef Params) {
-    bitreaderJNI.LLVMGetParams(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn), SWIGTYPE_p_LLVMValueRef.getCPtr(Params));
+  public static void LLVMGetParams(SWIGTYPE_p_LLVMOpaqueValue Fn, SWIGTYPE_p_p_LLVMOpaqueValue Params) {
+    bitreaderJNI.LLVMGetParams(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn), SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(Params));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetParam(SWIGTYPE_p_LLVMValueRef Fn, long Index) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetParam(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn), Index), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetParam(SWIGTYPE_p_LLVMOpaqueValue Fn, long Index) {
+    long cPtr = bitreaderJNI.LLVMGetParam(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn), Index);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetParamParent(SWIGTYPE_p_LLVMValueRef Inst) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetParamParent(SWIGTYPE_p_LLVMValueRef.getCPtr(Inst)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetParamParent(SWIGTYPE_p_LLVMOpaqueValue Inst) {
+    long cPtr = bitreaderJNI.LLVMGetParamParent(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Inst));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetFirstParam(SWIGTYPE_p_LLVMValueRef Fn) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetFirstParam(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetFirstParam(SWIGTYPE_p_LLVMOpaqueValue Fn) {
+    long cPtr = bitreaderJNI.LLVMGetFirstParam(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetLastParam(SWIGTYPE_p_LLVMValueRef Fn) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetLastParam(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetLastParam(SWIGTYPE_p_LLVMOpaqueValue Fn) {
+    long cPtr = bitreaderJNI.LLVMGetLastParam(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetNextParam(SWIGTYPE_p_LLVMValueRef Arg) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetNextParam(SWIGTYPE_p_LLVMValueRef.getCPtr(Arg)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetNextParam(SWIGTYPE_p_LLVMOpaqueValue Arg) {
+    long cPtr = bitreaderJNI.LLVMGetNextParam(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Arg));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetPreviousParam(SWIGTYPE_p_LLVMValueRef Arg) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetPreviousParam(SWIGTYPE_p_LLVMValueRef.getCPtr(Arg)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetPreviousParam(SWIGTYPE_p_LLVMOpaqueValue Arg) {
+    long cPtr = bitreaderJNI.LLVMGetPreviousParam(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Arg));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static void LLVMAddAttribute(SWIGTYPE_p_LLVMValueRef Arg, LLVMAttribute PA) {
-    bitreaderJNI.LLVMAddAttribute(SWIGTYPE_p_LLVMValueRef.getCPtr(Arg), PA.swigValue());
+  public static void LLVMAddAttribute(SWIGTYPE_p_LLVMOpaqueValue Arg, LLVMAttribute PA) {
+    bitreaderJNI.LLVMAddAttribute(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Arg), PA.swigValue());
   }
 
-  public static void LLVMRemoveAttribute(SWIGTYPE_p_LLVMValueRef Arg, LLVMAttribute PA) {
-    bitreaderJNI.LLVMRemoveAttribute(SWIGTYPE_p_LLVMValueRef.getCPtr(Arg), PA.swigValue());
+  public static void LLVMRemoveAttribute(SWIGTYPE_p_LLVMOpaqueValue Arg, LLVMAttribute PA) {
+    bitreaderJNI.LLVMRemoveAttribute(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Arg), PA.swigValue());
   }
 
-  public static LLVMAttribute LLVMGetAttribute(SWIGTYPE_p_LLVMValueRef Arg) {
-    return LLVMAttribute.swigToEnum(bitreaderJNI.LLVMGetAttribute(SWIGTYPE_p_LLVMValueRef.getCPtr(Arg)));
+  public static LLVMAttribute LLVMGetAttribute(SWIGTYPE_p_LLVMOpaqueValue Arg) {
+    return LLVMAttribute.swigToEnum(bitreaderJNI.LLVMGetAttribute(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Arg)));
   }
 
-  public static void LLVMSetParamAlignment(SWIGTYPE_p_LLVMValueRef Arg, long align) {
-    bitreaderJNI.LLVMSetParamAlignment(SWIGTYPE_p_LLVMValueRef.getCPtr(Arg), align);
+  public static void LLVMSetParamAlignment(SWIGTYPE_p_LLVMOpaqueValue Arg, long align) {
+    bitreaderJNI.LLVMSetParamAlignment(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Arg), align);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMMDStringInContext(SWIGTYPE_p_LLVMContextRef C, String Str, long SLen) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMMDStringInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C), Str, SLen), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMMDStringInContext(SWIGTYPE_p_LLVMOpaqueContext C, String Str, long SLen) {
+    long cPtr = bitreaderJNI.LLVMMDStringInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C), Str, SLen);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMMDString(String Str, long SLen) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMMDString(Str, SLen), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMMDString(String Str, long SLen) {
+    long cPtr = bitreaderJNI.LLVMMDString(Str, SLen);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMMDNodeInContext(SWIGTYPE_p_LLVMContextRef C, SWIGTYPE_p_LLVMValueRef Vals, long Count) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMMDNodeInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C), SWIGTYPE_p_LLVMValueRef.getCPtr(Vals), Count), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMMDNodeInContext(SWIGTYPE_p_LLVMOpaqueContext C, SWIGTYPE_p_p_LLVMOpaqueValue Vals, long Count) {
+    long cPtr = bitreaderJNI.LLVMMDNodeInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C), SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(Vals), Count);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMMDNode(SWIGTYPE_p_LLVMValueRef Vals, long Count) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMMDNode(SWIGTYPE_p_LLVMValueRef.getCPtr(Vals), Count), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMMDNode(SWIGTYPE_p_p_LLVMOpaqueValue Vals, long Count) {
+    long cPtr = bitreaderJNI.LLVMMDNode(SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(Vals), Count);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static String LLVMGetMDString(SWIGTYPE_p_LLVMValueRef V, SWIGTYPE_p_unsigned_int Len) {
-    return bitreaderJNI.LLVMGetMDString(SWIGTYPE_p_LLVMValueRef.getCPtr(V), SWIGTYPE_p_unsigned_int.getCPtr(Len));
+  public static String LLVMGetMDString(SWIGTYPE_p_LLVMOpaqueValue V, SWIGTYPE_p_unsigned_int Len) {
+    return bitreaderJNI.LLVMGetMDString(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(V), SWIGTYPE_p_unsigned_int.getCPtr(Len));
   }
 
-  public static long LLVMGetMDNodeNumOperands(SWIGTYPE_p_LLVMValueRef V) {
-    return bitreaderJNI.LLVMGetMDNodeNumOperands(SWIGTYPE_p_LLVMValueRef.getCPtr(V));
+  public static long LLVMGetMDNodeNumOperands(SWIGTYPE_p_LLVMOpaqueValue V) {
+    return bitreaderJNI.LLVMGetMDNodeNumOperands(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(V));
   }
 
-  public static void LLVMGetMDNodeOperands(SWIGTYPE_p_LLVMValueRef V, SWIGTYPE_p_LLVMValueRef Dest) {
-    bitreaderJNI.LLVMGetMDNodeOperands(SWIGTYPE_p_LLVMValueRef.getCPtr(V), SWIGTYPE_p_LLVMValueRef.getCPtr(Dest));
+  public static void LLVMGetMDNodeOperands(SWIGTYPE_p_LLVMOpaqueValue V, SWIGTYPE_p_p_LLVMOpaqueValue Dest) {
+    bitreaderJNI.LLVMGetMDNodeOperands(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(V), SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(Dest));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBasicBlockAsValue(SWIGTYPE_p_LLVMBasicBlockRef BB) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBasicBlockAsValue(SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(BB)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBasicBlockAsValue(SWIGTYPE_p_LLVMOpaqueBasicBlock BB) {
+    long cPtr = bitreaderJNI.LLVMBasicBlockAsValue(SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(BB));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMValueIsBasicBlock(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMValueIsBasicBlock(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static int LLVMValueIsBasicBlock(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    return bitreaderJNI.LLVMValueIsBasicBlock(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
   }
 
-  public static SWIGTYPE_p_LLVMBasicBlockRef LLVMValueAsBasicBlock(SWIGTYPE_p_LLVMValueRef Val) {
-    return new SWIGTYPE_p_LLVMBasicBlockRef(bitreaderJNI.LLVMValueAsBasicBlock(SWIGTYPE_p_LLVMValueRef.getCPtr(Val)), true);
+  public static SWIGTYPE_p_LLVMOpaqueBasicBlock LLVMValueAsBasicBlock(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    long cPtr = bitreaderJNI.LLVMValueAsBasicBlock(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBasicBlock(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetBasicBlockParent(SWIGTYPE_p_LLVMBasicBlockRef BB) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetBasicBlockParent(SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(BB)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetBasicBlockParent(SWIGTYPE_p_LLVMOpaqueBasicBlock BB) {
+    long cPtr = bitreaderJNI.LLVMGetBasicBlockParent(SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(BB));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetBasicBlockTerminator(SWIGTYPE_p_LLVMBasicBlockRef BB) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetBasicBlockTerminator(SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(BB)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetBasicBlockTerminator(SWIGTYPE_p_LLVMOpaqueBasicBlock BB) {
+    long cPtr = bitreaderJNI.LLVMGetBasicBlockTerminator(SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(BB));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static long LLVMCountBasicBlocks(SWIGTYPE_p_LLVMValueRef Fn) {
-    return bitreaderJNI.LLVMCountBasicBlocks(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn));
+  public static long LLVMCountBasicBlocks(SWIGTYPE_p_LLVMOpaqueValue Fn) {
+    return bitreaderJNI.LLVMCountBasicBlocks(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn));
   }
 
-  public static void LLVMGetBasicBlocks(SWIGTYPE_p_LLVMValueRef Fn, SWIGTYPE_p_LLVMBasicBlockRef BasicBlocks) {
-    bitreaderJNI.LLVMGetBasicBlocks(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn), SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(BasicBlocks));
+  public static void LLVMGetBasicBlocks(SWIGTYPE_p_LLVMOpaqueValue Fn, SWIGTYPE_p_p_LLVMOpaqueBasicBlock BasicBlocks) {
+    bitreaderJNI.LLVMGetBasicBlocks(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn), SWIGTYPE_p_p_LLVMOpaqueBasicBlock.getCPtr(BasicBlocks));
   }
 
-  public static SWIGTYPE_p_LLVMBasicBlockRef LLVMGetFirstBasicBlock(SWIGTYPE_p_LLVMValueRef Fn) {
-    return new SWIGTYPE_p_LLVMBasicBlockRef(bitreaderJNI.LLVMGetFirstBasicBlock(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn)), true);
+  public static SWIGTYPE_p_LLVMOpaqueBasicBlock LLVMGetFirstBasicBlock(SWIGTYPE_p_LLVMOpaqueValue Fn) {
+    long cPtr = bitreaderJNI.LLVMGetFirstBasicBlock(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBasicBlock(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBasicBlockRef LLVMGetLastBasicBlock(SWIGTYPE_p_LLVMValueRef Fn) {
-    return new SWIGTYPE_p_LLVMBasicBlockRef(bitreaderJNI.LLVMGetLastBasicBlock(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn)), true);
+  public static SWIGTYPE_p_LLVMOpaqueBasicBlock LLVMGetLastBasicBlock(SWIGTYPE_p_LLVMOpaqueValue Fn) {
+    long cPtr = bitreaderJNI.LLVMGetLastBasicBlock(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBasicBlock(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBasicBlockRef LLVMGetNextBasicBlock(SWIGTYPE_p_LLVMBasicBlockRef BB) {
-    return new SWIGTYPE_p_LLVMBasicBlockRef(bitreaderJNI.LLVMGetNextBasicBlock(SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(BB)), true);
+  public static SWIGTYPE_p_LLVMOpaqueBasicBlock LLVMGetNextBasicBlock(SWIGTYPE_p_LLVMOpaqueBasicBlock BB) {
+    long cPtr = bitreaderJNI.LLVMGetNextBasicBlock(SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(BB));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBasicBlock(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBasicBlockRef LLVMGetPreviousBasicBlock(SWIGTYPE_p_LLVMBasicBlockRef BB) {
-    return new SWIGTYPE_p_LLVMBasicBlockRef(bitreaderJNI.LLVMGetPreviousBasicBlock(SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(BB)), true);
+  public static SWIGTYPE_p_LLVMOpaqueBasicBlock LLVMGetPreviousBasicBlock(SWIGTYPE_p_LLVMOpaqueBasicBlock BB) {
+    long cPtr = bitreaderJNI.LLVMGetPreviousBasicBlock(SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(BB));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBasicBlock(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBasicBlockRef LLVMGetEntryBasicBlock(SWIGTYPE_p_LLVMValueRef Fn) {
-    return new SWIGTYPE_p_LLVMBasicBlockRef(bitreaderJNI.LLVMGetEntryBasicBlock(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn)), true);
+  public static SWIGTYPE_p_LLVMOpaqueBasicBlock LLVMGetEntryBasicBlock(SWIGTYPE_p_LLVMOpaqueValue Fn) {
+    long cPtr = bitreaderJNI.LLVMGetEntryBasicBlock(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBasicBlock(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBasicBlockRef LLVMAppendBasicBlockInContext(SWIGTYPE_p_LLVMContextRef C, SWIGTYPE_p_LLVMValueRef Fn, String Name) {
-    return new SWIGTYPE_p_LLVMBasicBlockRef(bitreaderJNI.LLVMAppendBasicBlockInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C), SWIGTYPE_p_LLVMValueRef.getCPtr(Fn), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueBasicBlock LLVMAppendBasicBlockInContext(SWIGTYPE_p_LLVMOpaqueContext C, SWIGTYPE_p_LLVMOpaqueValue Fn, String Name) {
+    long cPtr = bitreaderJNI.LLVMAppendBasicBlockInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBasicBlock(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBasicBlockRef LLVMAppendBasicBlock(SWIGTYPE_p_LLVMValueRef Fn, String Name) {
-    return new SWIGTYPE_p_LLVMBasicBlockRef(bitreaderJNI.LLVMAppendBasicBlock(SWIGTYPE_p_LLVMValueRef.getCPtr(Fn), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueBasicBlock LLVMAppendBasicBlock(SWIGTYPE_p_LLVMOpaqueValue Fn, String Name) {
+    long cPtr = bitreaderJNI.LLVMAppendBasicBlock(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBasicBlock(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBasicBlockRef LLVMInsertBasicBlockInContext(SWIGTYPE_p_LLVMContextRef C, SWIGTYPE_p_LLVMBasicBlockRef BB, String Name) {
-    return new SWIGTYPE_p_LLVMBasicBlockRef(bitreaderJNI.LLVMInsertBasicBlockInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C), SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(BB), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueBasicBlock LLVMInsertBasicBlockInContext(SWIGTYPE_p_LLVMOpaqueContext C, SWIGTYPE_p_LLVMOpaqueBasicBlock BB, String Name) {
+    long cPtr = bitreaderJNI.LLVMInsertBasicBlockInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C), SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(BB), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBasicBlock(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBasicBlockRef LLVMInsertBasicBlock(SWIGTYPE_p_LLVMBasicBlockRef InsertBeforeBB, String Name) {
-    return new SWIGTYPE_p_LLVMBasicBlockRef(bitreaderJNI.LLVMInsertBasicBlock(SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(InsertBeforeBB), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueBasicBlock LLVMInsertBasicBlock(SWIGTYPE_p_LLVMOpaqueBasicBlock InsertBeforeBB, String Name) {
+    long cPtr = bitreaderJNI.LLVMInsertBasicBlock(SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(InsertBeforeBB), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBasicBlock(cPtr, false);
   }
 
-  public static void LLVMDeleteBasicBlock(SWIGTYPE_p_LLVMBasicBlockRef BB) {
-    bitreaderJNI.LLVMDeleteBasicBlock(SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(BB));
+  public static void LLVMDeleteBasicBlock(SWIGTYPE_p_LLVMOpaqueBasicBlock BB) {
+    bitreaderJNI.LLVMDeleteBasicBlock(SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(BB));
   }
 
-  public static void LLVMRemoveBasicBlockFromParent(SWIGTYPE_p_LLVMBasicBlockRef BB) {
-    bitreaderJNI.LLVMRemoveBasicBlockFromParent(SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(BB));
+  public static void LLVMRemoveBasicBlockFromParent(SWIGTYPE_p_LLVMOpaqueBasicBlock BB) {
+    bitreaderJNI.LLVMRemoveBasicBlockFromParent(SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(BB));
   }
 
-  public static void LLVMMoveBasicBlockBefore(SWIGTYPE_p_LLVMBasicBlockRef BB, SWIGTYPE_p_LLVMBasicBlockRef MovePos) {
-    bitreaderJNI.LLVMMoveBasicBlockBefore(SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(BB), SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(MovePos));
+  public static void LLVMMoveBasicBlockBefore(SWIGTYPE_p_LLVMOpaqueBasicBlock BB, SWIGTYPE_p_LLVMOpaqueBasicBlock MovePos) {
+    bitreaderJNI.LLVMMoveBasicBlockBefore(SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(BB), SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(MovePos));
   }
 
-  public static void LLVMMoveBasicBlockAfter(SWIGTYPE_p_LLVMBasicBlockRef BB, SWIGTYPE_p_LLVMBasicBlockRef MovePos) {
-    bitreaderJNI.LLVMMoveBasicBlockAfter(SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(BB), SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(MovePos));
+  public static void LLVMMoveBasicBlockAfter(SWIGTYPE_p_LLVMOpaqueBasicBlock BB, SWIGTYPE_p_LLVMOpaqueBasicBlock MovePos) {
+    bitreaderJNI.LLVMMoveBasicBlockAfter(SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(BB), SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(MovePos));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetFirstInstruction(SWIGTYPE_p_LLVMBasicBlockRef BB) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetFirstInstruction(SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(BB)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetFirstInstruction(SWIGTYPE_p_LLVMOpaqueBasicBlock BB) {
+    long cPtr = bitreaderJNI.LLVMGetFirstInstruction(SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(BB));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetLastInstruction(SWIGTYPE_p_LLVMBasicBlockRef BB) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetLastInstruction(SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(BB)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetLastInstruction(SWIGTYPE_p_LLVMOpaqueBasicBlock BB) {
+    long cPtr = bitreaderJNI.LLVMGetLastInstruction(SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(BB));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static int LLVMHasMetadata(SWIGTYPE_p_LLVMValueRef Val) {
-    return bitreaderJNI.LLVMHasMetadata(SWIGTYPE_p_LLVMValueRef.getCPtr(Val));
+  public static int LLVMHasMetadata(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    return bitreaderJNI.LLVMHasMetadata(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetMetadata(SWIGTYPE_p_LLVMValueRef Val, long KindID) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetMetadata(SWIGTYPE_p_LLVMValueRef.getCPtr(Val), KindID), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetMetadata(SWIGTYPE_p_LLVMOpaqueValue Val, long KindID) {
+    long cPtr = bitreaderJNI.LLVMGetMetadata(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), KindID);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static void LLVMSetMetadata(SWIGTYPE_p_LLVMValueRef Val, long KindID, SWIGTYPE_p_LLVMValueRef Node) {
-    bitreaderJNI.LLVMSetMetadata(SWIGTYPE_p_LLVMValueRef.getCPtr(Val), KindID, SWIGTYPE_p_LLVMValueRef.getCPtr(Node));
+  public static void LLVMSetMetadata(SWIGTYPE_p_LLVMOpaqueValue Val, long KindID, SWIGTYPE_p_LLVMOpaqueValue Node) {
+    bitreaderJNI.LLVMSetMetadata(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), KindID, SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Node));
   }
 
-  public static SWIGTYPE_p_LLVMBasicBlockRef LLVMGetInstructionParent(SWIGTYPE_p_LLVMValueRef Inst) {
-    return new SWIGTYPE_p_LLVMBasicBlockRef(bitreaderJNI.LLVMGetInstructionParent(SWIGTYPE_p_LLVMValueRef.getCPtr(Inst)), true);
+  public static SWIGTYPE_p_LLVMOpaqueBasicBlock LLVMGetInstructionParent(SWIGTYPE_p_LLVMOpaqueValue Inst) {
+    long cPtr = bitreaderJNI.LLVMGetInstructionParent(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Inst));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBasicBlock(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetNextInstruction(SWIGTYPE_p_LLVMValueRef Inst) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetNextInstruction(SWIGTYPE_p_LLVMValueRef.getCPtr(Inst)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetNextInstruction(SWIGTYPE_p_LLVMOpaqueValue Inst) {
+    long cPtr = bitreaderJNI.LLVMGetNextInstruction(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Inst));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetPreviousInstruction(SWIGTYPE_p_LLVMValueRef Inst) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetPreviousInstruction(SWIGTYPE_p_LLVMValueRef.getCPtr(Inst)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetPreviousInstruction(SWIGTYPE_p_LLVMOpaqueValue Inst) {
+    long cPtr = bitreaderJNI.LLVMGetPreviousInstruction(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Inst));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static void LLVMInstructionEraseFromParent(SWIGTYPE_p_LLVMValueRef Inst) {
-    bitreaderJNI.LLVMInstructionEraseFromParent(SWIGTYPE_p_LLVMValueRef.getCPtr(Inst));
+  public static void LLVMInstructionEraseFromParent(SWIGTYPE_p_LLVMOpaqueValue Inst) {
+    bitreaderJNI.LLVMInstructionEraseFromParent(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Inst));
   }
 
-  public static LLVMOpcode LLVMGetInstructionOpcode(SWIGTYPE_p_LLVMValueRef Inst) {
-    return LLVMOpcode.swigToEnum(bitreaderJNI.LLVMGetInstructionOpcode(SWIGTYPE_p_LLVMValueRef.getCPtr(Inst)));
+  public static LLVMOpcode LLVMGetInstructionOpcode(SWIGTYPE_p_LLVMOpaqueValue Inst) {
+    return LLVMOpcode.swigToEnum(bitreaderJNI.LLVMGetInstructionOpcode(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Inst)));
   }
 
-  public static LLVMIntPredicate LLVMGetICmpPredicate(SWIGTYPE_p_LLVMValueRef Inst) {
-    return LLVMIntPredicate.swigToEnum(bitreaderJNI.LLVMGetICmpPredicate(SWIGTYPE_p_LLVMValueRef.getCPtr(Inst)));
+  public static LLVMIntPredicate LLVMGetICmpPredicate(SWIGTYPE_p_LLVMOpaqueValue Inst) {
+    return LLVMIntPredicate.swigToEnum(bitreaderJNI.LLVMGetICmpPredicate(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Inst)));
   }
 
-  public static LLVMRealPredicate LLVMGetFCmpPredicate(SWIGTYPE_p_LLVMValueRef Inst) {
-    return LLVMRealPredicate.swigToEnum(bitreaderJNI.LLVMGetFCmpPredicate(SWIGTYPE_p_LLVMValueRef.getCPtr(Inst)));
+  public static LLVMRealPredicate LLVMGetFCmpPredicate(SWIGTYPE_p_LLVMOpaqueValue Inst) {
+    return LLVMRealPredicate.swigToEnum(bitreaderJNI.LLVMGetFCmpPredicate(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Inst)));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMInstructionClone(SWIGTYPE_p_LLVMValueRef Inst) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMInstructionClone(SWIGTYPE_p_LLVMValueRef.getCPtr(Inst)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMInstructionClone(SWIGTYPE_p_LLVMOpaqueValue Inst) {
+    long cPtr = bitreaderJNI.LLVMInstructionClone(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Inst));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static void LLVMSetInstructionCallConv(SWIGTYPE_p_LLVMValueRef Instr, long CC) {
-    bitreaderJNI.LLVMSetInstructionCallConv(SWIGTYPE_p_LLVMValueRef.getCPtr(Instr), CC);
+  public static void LLVMSetInstructionCallConv(SWIGTYPE_p_LLVMOpaqueValue Instr, long CC) {
+    bitreaderJNI.LLVMSetInstructionCallConv(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Instr), CC);
   }
 
-  public static long LLVMGetInstructionCallConv(SWIGTYPE_p_LLVMValueRef Instr) {
-    return bitreaderJNI.LLVMGetInstructionCallConv(SWIGTYPE_p_LLVMValueRef.getCPtr(Instr));
+  public static long LLVMGetInstructionCallConv(SWIGTYPE_p_LLVMOpaqueValue Instr) {
+    return bitreaderJNI.LLVMGetInstructionCallConv(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Instr));
   }
 
-  public static void LLVMAddInstrAttribute(SWIGTYPE_p_LLVMValueRef Instr, long index, LLVMAttribute arg2) {
-    bitreaderJNI.LLVMAddInstrAttribute(SWIGTYPE_p_LLVMValueRef.getCPtr(Instr), index, arg2.swigValue());
+  public static void LLVMAddInstrAttribute(SWIGTYPE_p_LLVMOpaqueValue Instr, long index, LLVMAttribute arg2) {
+    bitreaderJNI.LLVMAddInstrAttribute(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Instr), index, arg2.swigValue());
   }
 
-  public static void LLVMRemoveInstrAttribute(SWIGTYPE_p_LLVMValueRef Instr, long index, LLVMAttribute arg2) {
-    bitreaderJNI.LLVMRemoveInstrAttribute(SWIGTYPE_p_LLVMValueRef.getCPtr(Instr), index, arg2.swigValue());
+  public static void LLVMRemoveInstrAttribute(SWIGTYPE_p_LLVMOpaqueValue Instr, long index, LLVMAttribute arg2) {
+    bitreaderJNI.LLVMRemoveInstrAttribute(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Instr), index, arg2.swigValue());
   }
 
-  public static void LLVMSetInstrParamAlignment(SWIGTYPE_p_LLVMValueRef Instr, long index, long align) {
-    bitreaderJNI.LLVMSetInstrParamAlignment(SWIGTYPE_p_LLVMValueRef.getCPtr(Instr), index, align);
+  public static void LLVMSetInstrParamAlignment(SWIGTYPE_p_LLVMOpaqueValue Instr, long index, long align) {
+    bitreaderJNI.LLVMSetInstrParamAlignment(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Instr), index, align);
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMIsTailCall(SWIGTYPE_p_LLVMValueRef CallInst) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMIsTailCall(SWIGTYPE_p_LLVMValueRef.getCPtr(CallInst)), true);
+  public static int LLVMIsTailCall(SWIGTYPE_p_LLVMOpaqueValue CallInst) {
+    return bitreaderJNI.LLVMIsTailCall(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(CallInst));
   }
 
-  public static void LLVMSetTailCall(SWIGTYPE_p_LLVMValueRef CallInst, SWIGTYPE_p_LLVMBool IsTailCall) {
-    bitreaderJNI.LLVMSetTailCall(SWIGTYPE_p_LLVMValueRef.getCPtr(CallInst), SWIGTYPE_p_LLVMBool.getCPtr(IsTailCall));
+  public static void LLVMSetTailCall(SWIGTYPE_p_LLVMOpaqueValue CallInst, int IsTailCall) {
+    bitreaderJNI.LLVMSetTailCall(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(CallInst), IsTailCall);
   }
 
-  public static long LLVMGetNumSuccessors(SWIGTYPE_p_LLVMValueRef Term) {
-    return bitreaderJNI.LLVMGetNumSuccessors(SWIGTYPE_p_LLVMValueRef.getCPtr(Term));
+  public static long LLVMGetNumSuccessors(SWIGTYPE_p_LLVMOpaqueValue Term) {
+    return bitreaderJNI.LLVMGetNumSuccessors(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Term));
   }
 
-  public static SWIGTYPE_p_LLVMBasicBlockRef LLVMGetSuccessor(SWIGTYPE_p_LLVMValueRef Term, long i) {
-    return new SWIGTYPE_p_LLVMBasicBlockRef(bitreaderJNI.LLVMGetSuccessor(SWIGTYPE_p_LLVMValueRef.getCPtr(Term), i), true);
+  public static SWIGTYPE_p_LLVMOpaqueBasicBlock LLVMGetSuccessor(SWIGTYPE_p_LLVMOpaqueValue Term, long i) {
+    long cPtr = bitreaderJNI.LLVMGetSuccessor(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Term), i);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBasicBlock(cPtr, false);
   }
 
-  public static void LLVMSetSuccessor(SWIGTYPE_p_LLVMValueRef Term, long i, SWIGTYPE_p_LLVMBasicBlockRef block) {
-    bitreaderJNI.LLVMSetSuccessor(SWIGTYPE_p_LLVMValueRef.getCPtr(Term), i, SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(block));
+  public static void LLVMSetSuccessor(SWIGTYPE_p_LLVMOpaqueValue Term, long i, SWIGTYPE_p_LLVMOpaqueBasicBlock block) {
+    bitreaderJNI.LLVMSetSuccessor(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Term), i, SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(block));
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMIsConditional(SWIGTYPE_p_LLVMValueRef Branch) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMIsConditional(SWIGTYPE_p_LLVMValueRef.getCPtr(Branch)), true);
+  public static int LLVMIsConditional(SWIGTYPE_p_LLVMOpaqueValue Branch) {
+    return bitreaderJNI.LLVMIsConditional(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Branch));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetCondition(SWIGTYPE_p_LLVMValueRef Branch) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetCondition(SWIGTYPE_p_LLVMValueRef.getCPtr(Branch)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetCondition(SWIGTYPE_p_LLVMOpaqueValue Branch) {
+    long cPtr = bitreaderJNI.LLVMGetCondition(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Branch));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static void LLVMSetCondition(SWIGTYPE_p_LLVMValueRef Branch, SWIGTYPE_p_LLVMValueRef Cond) {
-    bitreaderJNI.LLVMSetCondition(SWIGTYPE_p_LLVMValueRef.getCPtr(Branch), SWIGTYPE_p_LLVMValueRef.getCPtr(Cond));
+  public static void LLVMSetCondition(SWIGTYPE_p_LLVMOpaqueValue Branch, SWIGTYPE_p_LLVMOpaqueValue Cond) {
+    bitreaderJNI.LLVMSetCondition(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Branch), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Cond));
   }
 
-  public static SWIGTYPE_p_LLVMBasicBlockRef LLVMGetSwitchDefaultDest(SWIGTYPE_p_LLVMValueRef SwitchInstr) {
-    return new SWIGTYPE_p_LLVMBasicBlockRef(bitreaderJNI.LLVMGetSwitchDefaultDest(SWIGTYPE_p_LLVMValueRef.getCPtr(SwitchInstr)), true);
+  public static SWIGTYPE_p_LLVMOpaqueBasicBlock LLVMGetSwitchDefaultDest(SWIGTYPE_p_LLVMOpaqueValue SwitchInstr) {
+    long cPtr = bitreaderJNI.LLVMGetSwitchDefaultDest(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(SwitchInstr));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBasicBlock(cPtr, false);
   }
 
-  public static void LLVMAddIncoming(SWIGTYPE_p_LLVMValueRef PhiNode, SWIGTYPE_p_LLVMValueRef IncomingValues, SWIGTYPE_p_LLVMBasicBlockRef IncomingBlocks, long Count) {
-    bitreaderJNI.LLVMAddIncoming(SWIGTYPE_p_LLVMValueRef.getCPtr(PhiNode), SWIGTYPE_p_LLVMValueRef.getCPtr(IncomingValues), SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(IncomingBlocks), Count);
+  public static void LLVMAddIncoming(SWIGTYPE_p_LLVMOpaqueValue PhiNode, SWIGTYPE_p_p_LLVMOpaqueValue IncomingValues, SWIGTYPE_p_p_LLVMOpaqueBasicBlock IncomingBlocks, long Count) {
+    bitreaderJNI.LLVMAddIncoming(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(PhiNode), SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(IncomingValues), SWIGTYPE_p_p_LLVMOpaqueBasicBlock.getCPtr(IncomingBlocks), Count);
   }
 
-  public static long LLVMCountIncoming(SWIGTYPE_p_LLVMValueRef PhiNode) {
-    return bitreaderJNI.LLVMCountIncoming(SWIGTYPE_p_LLVMValueRef.getCPtr(PhiNode));
+  public static long LLVMCountIncoming(SWIGTYPE_p_LLVMOpaqueValue PhiNode) {
+    return bitreaderJNI.LLVMCountIncoming(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(PhiNode));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetIncomingValue(SWIGTYPE_p_LLVMValueRef PhiNode, long Index) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetIncomingValue(SWIGTYPE_p_LLVMValueRef.getCPtr(PhiNode), Index), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetIncomingValue(SWIGTYPE_p_LLVMOpaqueValue PhiNode, long Index) {
+    long cPtr = bitreaderJNI.LLVMGetIncomingValue(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(PhiNode), Index);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBasicBlockRef LLVMGetIncomingBlock(SWIGTYPE_p_LLVMValueRef PhiNode, long Index) {
-    return new SWIGTYPE_p_LLVMBasicBlockRef(bitreaderJNI.LLVMGetIncomingBlock(SWIGTYPE_p_LLVMValueRef.getCPtr(PhiNode), Index), true);
+  public static SWIGTYPE_p_LLVMOpaqueBasicBlock LLVMGetIncomingBlock(SWIGTYPE_p_LLVMOpaqueValue PhiNode, long Index) {
+    long cPtr = bitreaderJNI.LLVMGetIncomingBlock(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(PhiNode), Index);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBasicBlock(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBuilderRef LLVMCreateBuilderInContext(SWIGTYPE_p_LLVMContextRef C) {
-    return new SWIGTYPE_p_LLVMBuilderRef(bitreaderJNI.LLVMCreateBuilderInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(C)), true);
+  public static SWIGTYPE_p_LLVMOpaqueBuilder LLVMCreateBuilderInContext(SWIGTYPE_p_LLVMOpaqueContext C) {
+    long cPtr = bitreaderJNI.LLVMCreateBuilderInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(C));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBuilder(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBuilderRef LLVMCreateBuilder() {
-    return new SWIGTYPE_p_LLVMBuilderRef(bitreaderJNI.LLVMCreateBuilder(), true);
+  public static SWIGTYPE_p_LLVMOpaqueBuilder LLVMCreateBuilder() {
+    long cPtr = bitreaderJNI.LLVMCreateBuilder();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBuilder(cPtr, false);
   }
 
-  public static void LLVMPositionBuilder(SWIGTYPE_p_LLVMBuilderRef Builder, SWIGTYPE_p_LLVMBasicBlockRef Block, SWIGTYPE_p_LLVMValueRef Instr) {
-    bitreaderJNI.LLVMPositionBuilder(SWIGTYPE_p_LLVMBuilderRef.getCPtr(Builder), SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(Block), SWIGTYPE_p_LLVMValueRef.getCPtr(Instr));
+  public static void LLVMPositionBuilder(SWIGTYPE_p_LLVMOpaqueBuilder Builder, SWIGTYPE_p_LLVMOpaqueBasicBlock Block, SWIGTYPE_p_LLVMOpaqueValue Instr) {
+    bitreaderJNI.LLVMPositionBuilder(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(Builder), SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(Block), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Instr));
   }
 
-  public static void LLVMPositionBuilderBefore(SWIGTYPE_p_LLVMBuilderRef Builder, SWIGTYPE_p_LLVMValueRef Instr) {
-    bitreaderJNI.LLVMPositionBuilderBefore(SWIGTYPE_p_LLVMBuilderRef.getCPtr(Builder), SWIGTYPE_p_LLVMValueRef.getCPtr(Instr));
+  public static void LLVMPositionBuilderBefore(SWIGTYPE_p_LLVMOpaqueBuilder Builder, SWIGTYPE_p_LLVMOpaqueValue Instr) {
+    bitreaderJNI.LLVMPositionBuilderBefore(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(Builder), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Instr));
   }
 
-  public static void LLVMPositionBuilderAtEnd(SWIGTYPE_p_LLVMBuilderRef Builder, SWIGTYPE_p_LLVMBasicBlockRef Block) {
-    bitreaderJNI.LLVMPositionBuilderAtEnd(SWIGTYPE_p_LLVMBuilderRef.getCPtr(Builder), SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(Block));
+  public static void LLVMPositionBuilderAtEnd(SWIGTYPE_p_LLVMOpaqueBuilder Builder, SWIGTYPE_p_LLVMOpaqueBasicBlock Block) {
+    bitreaderJNI.LLVMPositionBuilderAtEnd(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(Builder), SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(Block));
   }
 
-  public static SWIGTYPE_p_LLVMBasicBlockRef LLVMGetInsertBlock(SWIGTYPE_p_LLVMBuilderRef Builder) {
-    return new SWIGTYPE_p_LLVMBasicBlockRef(bitreaderJNI.LLVMGetInsertBlock(SWIGTYPE_p_LLVMBuilderRef.getCPtr(Builder)), true);
+  public static SWIGTYPE_p_LLVMOpaqueBasicBlock LLVMGetInsertBlock(SWIGTYPE_p_LLVMOpaqueBuilder Builder) {
+    long cPtr = bitreaderJNI.LLVMGetInsertBlock(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(Builder));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueBasicBlock(cPtr, false);
   }
 
-  public static void LLVMClearInsertionPosition(SWIGTYPE_p_LLVMBuilderRef Builder) {
-    bitreaderJNI.LLVMClearInsertionPosition(SWIGTYPE_p_LLVMBuilderRef.getCPtr(Builder));
+  public static void LLVMClearInsertionPosition(SWIGTYPE_p_LLVMOpaqueBuilder Builder) {
+    bitreaderJNI.LLVMClearInsertionPosition(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(Builder));
   }
 
-  public static void LLVMInsertIntoBuilder(SWIGTYPE_p_LLVMBuilderRef Builder, SWIGTYPE_p_LLVMValueRef Instr) {
-    bitreaderJNI.LLVMInsertIntoBuilder(SWIGTYPE_p_LLVMBuilderRef.getCPtr(Builder), SWIGTYPE_p_LLVMValueRef.getCPtr(Instr));
+  public static void LLVMInsertIntoBuilder(SWIGTYPE_p_LLVMOpaqueBuilder Builder, SWIGTYPE_p_LLVMOpaqueValue Instr) {
+    bitreaderJNI.LLVMInsertIntoBuilder(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(Builder), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Instr));
   }
 
-  public static void LLVMInsertIntoBuilderWithName(SWIGTYPE_p_LLVMBuilderRef Builder, SWIGTYPE_p_LLVMValueRef Instr, String Name) {
-    bitreaderJNI.LLVMInsertIntoBuilderWithName(SWIGTYPE_p_LLVMBuilderRef.getCPtr(Builder), SWIGTYPE_p_LLVMValueRef.getCPtr(Instr), Name);
+  public static void LLVMInsertIntoBuilderWithName(SWIGTYPE_p_LLVMOpaqueBuilder Builder, SWIGTYPE_p_LLVMOpaqueValue Instr, String Name) {
+    bitreaderJNI.LLVMInsertIntoBuilderWithName(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(Builder), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Instr), Name);
   }
 
-  public static void LLVMDisposeBuilder(SWIGTYPE_p_LLVMBuilderRef Builder) {
-    bitreaderJNI.LLVMDisposeBuilder(SWIGTYPE_p_LLVMBuilderRef.getCPtr(Builder));
+  public static void LLVMDisposeBuilder(SWIGTYPE_p_LLVMOpaqueBuilder Builder) {
+    bitreaderJNI.LLVMDisposeBuilder(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(Builder));
   }
 
-  public static void LLVMSetCurrentDebugLocation(SWIGTYPE_p_LLVMBuilderRef Builder, SWIGTYPE_p_LLVMValueRef L) {
-    bitreaderJNI.LLVMSetCurrentDebugLocation(SWIGTYPE_p_LLVMBuilderRef.getCPtr(Builder), SWIGTYPE_p_LLVMValueRef.getCPtr(L));
+  public static void LLVMSetCurrentDebugLocation(SWIGTYPE_p_LLVMOpaqueBuilder Builder, SWIGTYPE_p_LLVMOpaqueValue L) {
+    bitreaderJNI.LLVMSetCurrentDebugLocation(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(Builder), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(L));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMGetCurrentDebugLocation(SWIGTYPE_p_LLVMBuilderRef Builder) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMGetCurrentDebugLocation(SWIGTYPE_p_LLVMBuilderRef.getCPtr(Builder)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMGetCurrentDebugLocation(SWIGTYPE_p_LLVMOpaqueBuilder Builder) {
+    long cPtr = bitreaderJNI.LLVMGetCurrentDebugLocation(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(Builder));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static void LLVMSetInstDebugLocation(SWIGTYPE_p_LLVMBuilderRef Builder, SWIGTYPE_p_LLVMValueRef Inst) {
-    bitreaderJNI.LLVMSetInstDebugLocation(SWIGTYPE_p_LLVMBuilderRef.getCPtr(Builder), SWIGTYPE_p_LLVMValueRef.getCPtr(Inst));
+  public static void LLVMSetInstDebugLocation(SWIGTYPE_p_LLVMOpaqueBuilder Builder, SWIGTYPE_p_LLVMOpaqueValue Inst) {
+    bitreaderJNI.LLVMSetInstDebugLocation(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(Builder), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Inst));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildRetVoid(SWIGTYPE_p_LLVMBuilderRef arg0) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildRetVoid(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildRetVoid(SWIGTYPE_p_LLVMOpaqueBuilder arg0) {
+    long cPtr = bitreaderJNI.LLVMBuildRetVoid(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildRet(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef V) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildRet(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(V)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildRet(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue V) {
+    long cPtr = bitreaderJNI.LLVMBuildRet(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(V));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildAggregateRet(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef RetVals, long N) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildAggregateRet(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(RetVals), N), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildAggregateRet(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_p_LLVMOpaqueValue RetVals, long N) {
+    long cPtr = bitreaderJNI.LLVMBuildAggregateRet(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(RetVals), N);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildBr(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMBasicBlockRef Dest) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildBr(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(Dest)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildBr(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueBasicBlock Dest) {
+    long cPtr = bitreaderJNI.LLVMBuildBr(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(Dest));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildCondBr(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef If, SWIGTYPE_p_LLVMBasicBlockRef Then, SWIGTYPE_p_LLVMBasicBlockRef Else) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildCondBr(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(If), SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(Then), SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(Else)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildCondBr(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue If, SWIGTYPE_p_LLVMOpaqueBasicBlock Then, SWIGTYPE_p_LLVMOpaqueBasicBlock Else) {
+    long cPtr = bitreaderJNI.LLVMBuildCondBr(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(If), SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(Then), SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(Else));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildSwitch(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef V, SWIGTYPE_p_LLVMBasicBlockRef Else, long NumCases) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildSwitch(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(V), SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(Else), NumCases), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildSwitch(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue V, SWIGTYPE_p_LLVMOpaqueBasicBlock Else, long NumCases) {
+    long cPtr = bitreaderJNI.LLVMBuildSwitch(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(V), SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(Else), NumCases);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildIndirectBr(SWIGTYPE_p_LLVMBuilderRef B, SWIGTYPE_p_LLVMValueRef Addr, long NumDests) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildIndirectBr(SWIGTYPE_p_LLVMBuilderRef.getCPtr(B), SWIGTYPE_p_LLVMValueRef.getCPtr(Addr), NumDests), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildIndirectBr(SWIGTYPE_p_LLVMOpaqueBuilder B, SWIGTYPE_p_LLVMOpaqueValue Addr, long NumDests) {
+    long cPtr = bitreaderJNI.LLVMBuildIndirectBr(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(B), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Addr), NumDests);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildInvoke(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Fn, SWIGTYPE_p_LLVMValueRef Args, long NumArgs, SWIGTYPE_p_LLVMBasicBlockRef Then, SWIGTYPE_p_LLVMBasicBlockRef Catch, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildInvoke(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Fn), SWIGTYPE_p_LLVMValueRef.getCPtr(Args), NumArgs, SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(Then), SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(Catch), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildInvoke(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Fn, SWIGTYPE_p_p_LLVMOpaqueValue Args, long NumArgs, SWIGTYPE_p_LLVMOpaqueBasicBlock Then, SWIGTYPE_p_LLVMOpaqueBasicBlock Catch, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildInvoke(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn), SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(Args), NumArgs, SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(Then), SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(Catch), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildLandingPad(SWIGTYPE_p_LLVMBuilderRef B, SWIGTYPE_p_LLVMTypeRef Ty, SWIGTYPE_p_LLVMValueRef PersFn, long NumClauses, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildLandingPad(SWIGTYPE_p_LLVMBuilderRef.getCPtr(B), SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty), SWIGTYPE_p_LLVMValueRef.getCPtr(PersFn), NumClauses, Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildLandingPad(SWIGTYPE_p_LLVMOpaqueBuilder B, SWIGTYPE_p_LLVMOpaqueType Ty, SWIGTYPE_p_LLVMOpaqueValue PersFn, long NumClauses, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildLandingPad(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(B), SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(PersFn), NumClauses, Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildResume(SWIGTYPE_p_LLVMBuilderRef B, SWIGTYPE_p_LLVMValueRef Exn) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildResume(SWIGTYPE_p_LLVMBuilderRef.getCPtr(B), SWIGTYPE_p_LLVMValueRef.getCPtr(Exn)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildResume(SWIGTYPE_p_LLVMOpaqueBuilder B, SWIGTYPE_p_LLVMOpaqueValue Exn) {
+    long cPtr = bitreaderJNI.LLVMBuildResume(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(B), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Exn));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildUnreachable(SWIGTYPE_p_LLVMBuilderRef arg0) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildUnreachable(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildUnreachable(SWIGTYPE_p_LLVMOpaqueBuilder arg0) {
+    long cPtr = bitreaderJNI.LLVMBuildUnreachable(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static void LLVMAddCase(SWIGTYPE_p_LLVMValueRef Switch, SWIGTYPE_p_LLVMValueRef OnVal, SWIGTYPE_p_LLVMBasicBlockRef Dest) {
-    bitreaderJNI.LLVMAddCase(SWIGTYPE_p_LLVMValueRef.getCPtr(Switch), SWIGTYPE_p_LLVMValueRef.getCPtr(OnVal), SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(Dest));
+  public static void LLVMAddCase(SWIGTYPE_p_LLVMOpaqueValue Switch, SWIGTYPE_p_LLVMOpaqueValue OnVal, SWIGTYPE_p_LLVMOpaqueBasicBlock Dest) {
+    bitreaderJNI.LLVMAddCase(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Switch), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(OnVal), SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(Dest));
   }
 
-  public static void LLVMAddDestination(SWIGTYPE_p_LLVMValueRef IndirectBr, SWIGTYPE_p_LLVMBasicBlockRef Dest) {
-    bitreaderJNI.LLVMAddDestination(SWIGTYPE_p_LLVMValueRef.getCPtr(IndirectBr), SWIGTYPE_p_LLVMBasicBlockRef.getCPtr(Dest));
+  public static void LLVMAddDestination(SWIGTYPE_p_LLVMOpaqueValue IndirectBr, SWIGTYPE_p_LLVMOpaqueBasicBlock Dest) {
+    bitreaderJNI.LLVMAddDestination(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(IndirectBr), SWIGTYPE_p_LLVMOpaqueBasicBlock.getCPtr(Dest));
   }
 
-  public static void LLVMAddClause(SWIGTYPE_p_LLVMValueRef LandingPad, SWIGTYPE_p_LLVMValueRef ClauseVal) {
-    bitreaderJNI.LLVMAddClause(SWIGTYPE_p_LLVMValueRef.getCPtr(LandingPad), SWIGTYPE_p_LLVMValueRef.getCPtr(ClauseVal));
+  public static void LLVMAddClause(SWIGTYPE_p_LLVMOpaqueValue LandingPad, SWIGTYPE_p_LLVMOpaqueValue ClauseVal) {
+    bitreaderJNI.LLVMAddClause(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LandingPad), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ClauseVal));
   }
 
-  public static void LLVMSetCleanup(SWIGTYPE_p_LLVMValueRef LandingPad, SWIGTYPE_p_LLVMBool Val) {
-    bitreaderJNI.LLVMSetCleanup(SWIGTYPE_p_LLVMValueRef.getCPtr(LandingPad), SWIGTYPE_p_LLVMBool.getCPtr(Val));
+  public static void LLVMSetCleanup(SWIGTYPE_p_LLVMOpaqueValue LandingPad, int Val) {
+    bitreaderJNI.LLVMSetCleanup(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LandingPad), Val);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildAdd(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildAdd(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildAdd(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildAdd(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildNSWAdd(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildNSWAdd(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildNSWAdd(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildNSWAdd(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildNUWAdd(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildNUWAdd(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildNUWAdd(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildNUWAdd(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildFAdd(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildFAdd(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildFAdd(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildFAdd(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildSub(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildSub(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildSub(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildSub(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildNSWSub(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildNSWSub(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildNSWSub(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildNSWSub(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildNUWSub(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildNUWSub(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildNUWSub(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildNUWSub(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildFSub(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildFSub(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildFSub(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildFSub(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildMul(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildMul(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildMul(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildMul(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildNSWMul(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildNSWMul(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildNSWMul(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildNSWMul(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildNUWMul(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildNUWMul(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildNUWMul(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildNUWMul(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildFMul(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildFMul(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildFMul(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildFMul(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildUDiv(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildUDiv(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildUDiv(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildUDiv(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildSDiv(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildSDiv(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildSDiv(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildSDiv(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildExactSDiv(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildExactSDiv(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildExactSDiv(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildExactSDiv(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildFDiv(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildFDiv(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildFDiv(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildFDiv(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildURem(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildURem(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildURem(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildURem(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildSRem(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildSRem(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildSRem(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildSRem(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildFRem(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildFRem(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildFRem(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildFRem(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildShl(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildShl(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildShl(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildShl(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildLShr(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildLShr(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildLShr(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildLShr(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildAShr(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildAShr(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildAShr(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildAShr(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildAnd(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildAnd(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildAnd(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildAnd(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildOr(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildOr(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildOr(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildOr(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildXor(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildXor(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildXor(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildXor(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildBinOp(SWIGTYPE_p_LLVMBuilderRef B, LLVMOpcode Op, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildBinOp(SWIGTYPE_p_LLVMBuilderRef.getCPtr(B), Op.swigValue(), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildBinOp(SWIGTYPE_p_LLVMOpaqueBuilder B, LLVMOpcode Op, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildBinOp(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(B), Op.swigValue(), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildNeg(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef V, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildNeg(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(V), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildNeg(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue V, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildNeg(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(V), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildNSWNeg(SWIGTYPE_p_LLVMBuilderRef B, SWIGTYPE_p_LLVMValueRef V, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildNSWNeg(SWIGTYPE_p_LLVMBuilderRef.getCPtr(B), SWIGTYPE_p_LLVMValueRef.getCPtr(V), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildNSWNeg(SWIGTYPE_p_LLVMOpaqueBuilder B, SWIGTYPE_p_LLVMOpaqueValue V, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildNSWNeg(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(B), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(V), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildNUWNeg(SWIGTYPE_p_LLVMBuilderRef B, SWIGTYPE_p_LLVMValueRef V, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildNUWNeg(SWIGTYPE_p_LLVMBuilderRef.getCPtr(B), SWIGTYPE_p_LLVMValueRef.getCPtr(V), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildNUWNeg(SWIGTYPE_p_LLVMOpaqueBuilder B, SWIGTYPE_p_LLVMOpaqueValue V, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildNUWNeg(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(B), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(V), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildFNeg(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef V, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildFNeg(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(V), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildFNeg(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue V, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildFNeg(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(V), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildNot(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef V, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildNot(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(V), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildNot(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue V, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildNot(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(V), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildMalloc(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMTypeRef Ty, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildMalloc(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildMalloc(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueType Ty, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildMalloc(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildArrayMalloc(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMTypeRef Ty, SWIGTYPE_p_LLVMValueRef Val, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildArrayMalloc(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildArrayMalloc(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueType Ty, SWIGTYPE_p_LLVMOpaqueValue Val, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildArrayMalloc(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildAlloca(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMTypeRef Ty, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildAlloca(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildAlloca(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueType Ty, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildAlloca(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildArrayAlloca(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMTypeRef Ty, SWIGTYPE_p_LLVMValueRef Val, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildArrayAlloca(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildArrayAlloca(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueType Ty, SWIGTYPE_p_LLVMOpaqueValue Val, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildArrayAlloca(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildFree(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef PointerVal) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildFree(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(PointerVal)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildFree(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue PointerVal) {
+    long cPtr = bitreaderJNI.LLVMBuildFree(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(PointerVal));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildLoad(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef PointerVal, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildLoad(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(PointerVal), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildLoad(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue PointerVal, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildLoad(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(PointerVal), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildStore(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMValueRef Ptr) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildStore(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMValueRef.getCPtr(Ptr)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildStore(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueValue Ptr) {
+    long cPtr = bitreaderJNI.LLVMBuildStore(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Ptr));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildGEP(SWIGTYPE_p_LLVMBuilderRef B, SWIGTYPE_p_LLVMValueRef Pointer, SWIGTYPE_p_LLVMValueRef Indices, long NumIndices, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildGEP(SWIGTYPE_p_LLVMBuilderRef.getCPtr(B), SWIGTYPE_p_LLVMValueRef.getCPtr(Pointer), SWIGTYPE_p_LLVMValueRef.getCPtr(Indices), NumIndices, Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildGEP(SWIGTYPE_p_LLVMOpaqueBuilder B, SWIGTYPE_p_LLVMOpaqueValue Pointer, SWIGTYPE_p_p_LLVMOpaqueValue Indices, long NumIndices, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildGEP(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(B), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Pointer), SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(Indices), NumIndices, Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildInBoundsGEP(SWIGTYPE_p_LLVMBuilderRef B, SWIGTYPE_p_LLVMValueRef Pointer, SWIGTYPE_p_LLVMValueRef Indices, long NumIndices, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildInBoundsGEP(SWIGTYPE_p_LLVMBuilderRef.getCPtr(B), SWIGTYPE_p_LLVMValueRef.getCPtr(Pointer), SWIGTYPE_p_LLVMValueRef.getCPtr(Indices), NumIndices, Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildInBoundsGEP(SWIGTYPE_p_LLVMOpaqueBuilder B, SWIGTYPE_p_LLVMOpaqueValue Pointer, SWIGTYPE_p_p_LLVMOpaqueValue Indices, long NumIndices, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildInBoundsGEP(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(B), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Pointer), SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(Indices), NumIndices, Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildStructGEP(SWIGTYPE_p_LLVMBuilderRef B, SWIGTYPE_p_LLVMValueRef Pointer, long Idx, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildStructGEP(SWIGTYPE_p_LLVMBuilderRef.getCPtr(B), SWIGTYPE_p_LLVMValueRef.getCPtr(Pointer), Idx, Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildStructGEP(SWIGTYPE_p_LLVMOpaqueBuilder B, SWIGTYPE_p_LLVMOpaqueValue Pointer, long Idx, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildStructGEP(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(B), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Pointer), Idx, Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildGlobalString(SWIGTYPE_p_LLVMBuilderRef B, String Str, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildGlobalString(SWIGTYPE_p_LLVMBuilderRef.getCPtr(B), Str, Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildGlobalString(SWIGTYPE_p_LLVMOpaqueBuilder B, String Str, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildGlobalString(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(B), Str, Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildGlobalStringPtr(SWIGTYPE_p_LLVMBuilderRef B, String Str, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildGlobalStringPtr(SWIGTYPE_p_LLVMBuilderRef.getCPtr(B), Str, Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildGlobalStringPtr(SWIGTYPE_p_LLVMOpaqueBuilder B, String Str, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildGlobalStringPtr(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(B), Str, Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMGetVolatile(SWIGTYPE_p_LLVMValueRef MemoryAccessInst) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMGetVolatile(SWIGTYPE_p_LLVMValueRef.getCPtr(MemoryAccessInst)), true);
+  public static int LLVMGetVolatile(SWIGTYPE_p_LLVMOpaqueValue MemoryAccessInst) {
+    return bitreaderJNI.LLVMGetVolatile(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(MemoryAccessInst));
   }
 
-  public static void LLVMSetVolatile(SWIGTYPE_p_LLVMValueRef MemoryAccessInst, SWIGTYPE_p_LLVMBool IsVolatile) {
-    bitreaderJNI.LLVMSetVolatile(SWIGTYPE_p_LLVMValueRef.getCPtr(MemoryAccessInst), SWIGTYPE_p_LLVMBool.getCPtr(IsVolatile));
+  public static void LLVMSetVolatile(SWIGTYPE_p_LLVMOpaqueValue MemoryAccessInst, int IsVolatile) {
+    bitreaderJNI.LLVMSetVolatile(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(MemoryAccessInst), IsVolatile);
   }
 
-  public static LLVMAtomicOrdering LLVMGetOrdering(SWIGTYPE_p_LLVMValueRef MemoryAccessInst) {
-    return LLVMAtomicOrdering.swigToEnum(bitreaderJNI.LLVMGetOrdering(SWIGTYPE_p_LLVMValueRef.getCPtr(MemoryAccessInst)));
+  public static LLVMAtomicOrdering LLVMGetOrdering(SWIGTYPE_p_LLVMOpaqueValue MemoryAccessInst) {
+    return LLVMAtomicOrdering.swigToEnum(bitreaderJNI.LLVMGetOrdering(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(MemoryAccessInst)));
   }
 
-  public static void LLVMSetOrdering(SWIGTYPE_p_LLVMValueRef MemoryAccessInst, LLVMAtomicOrdering Ordering) {
-    bitreaderJNI.LLVMSetOrdering(SWIGTYPE_p_LLVMValueRef.getCPtr(MemoryAccessInst), Ordering.swigValue());
+  public static void LLVMSetOrdering(SWIGTYPE_p_LLVMOpaqueValue MemoryAccessInst, LLVMAtomicOrdering Ordering) {
+    bitreaderJNI.LLVMSetOrdering(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(MemoryAccessInst), Ordering.swigValue());
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildTrunc(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildTrunc(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildTrunc(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildTrunc(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildZExt(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildZExt(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildZExt(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildZExt(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildSExt(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildSExt(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildSExt(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildSExt(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildFPToUI(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildFPToUI(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildFPToUI(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildFPToUI(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildFPToSI(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildFPToSI(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildFPToSI(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildFPToSI(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildUIToFP(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildUIToFP(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildUIToFP(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildUIToFP(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildSIToFP(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildSIToFP(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildSIToFP(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildSIToFP(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildFPTrunc(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildFPTrunc(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildFPTrunc(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildFPTrunc(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildFPExt(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildFPExt(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildFPExt(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildFPExt(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildPtrToInt(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildPtrToInt(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildPtrToInt(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildPtrToInt(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildIntToPtr(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildIntToPtr(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildIntToPtr(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildIntToPtr(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildBitCast(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildBitCast(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildBitCast(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildBitCast(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildAddrSpaceCast(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildAddrSpaceCast(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildAddrSpaceCast(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildAddrSpaceCast(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildZExtOrBitCast(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildZExtOrBitCast(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildZExtOrBitCast(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildZExtOrBitCast(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildSExtOrBitCast(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildSExtOrBitCast(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildSExtOrBitCast(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildSExtOrBitCast(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildTruncOrBitCast(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildTruncOrBitCast(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildTruncOrBitCast(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildTruncOrBitCast(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildCast(SWIGTYPE_p_LLVMBuilderRef B, LLVMOpcode Op, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildCast(SWIGTYPE_p_LLVMBuilderRef.getCPtr(B), Op.swigValue(), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildCast(SWIGTYPE_p_LLVMOpaqueBuilder B, LLVMOpcode Op, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildCast(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(B), Op.swigValue(), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildPointerCast(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildPointerCast(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildPointerCast(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildPointerCast(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildIntCast(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildIntCast(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildIntCast(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildIntCast(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildFPCast(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, SWIGTYPE_p_LLVMTypeRef DestTy, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildFPCast(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), SWIGTYPE_p_LLVMTypeRef.getCPtr(DestTy), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildFPCast(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, SWIGTYPE_p_LLVMOpaqueType DestTy, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildFPCast(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), SWIGTYPE_p_LLVMOpaqueType.getCPtr(DestTy), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildICmp(SWIGTYPE_p_LLVMBuilderRef arg0, LLVMIntPredicate Op, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildICmp(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), Op.swigValue(), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildICmp(SWIGTYPE_p_LLVMOpaqueBuilder arg0, LLVMIntPredicate Op, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildICmp(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), Op.swigValue(), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildFCmp(SWIGTYPE_p_LLVMBuilderRef arg0, LLVMRealPredicate Op, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildFCmp(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), Op.swigValue(), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildFCmp(SWIGTYPE_p_LLVMOpaqueBuilder arg0, LLVMRealPredicate Op, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildFCmp(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), Op.swigValue(), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildPhi(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMTypeRef Ty, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildPhi(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildPhi(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueType Ty, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildPhi(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildCall(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Fn, SWIGTYPE_p_LLVMValueRef Args, long NumArgs, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildCall(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Fn), SWIGTYPE_p_LLVMValueRef.getCPtr(Args), NumArgs, Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildCall(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Fn, SWIGTYPE_p_p_LLVMOpaqueValue Args, long NumArgs, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildCall(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Fn), SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(Args), NumArgs, Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildSelect(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef If, SWIGTYPE_p_LLVMValueRef Then, SWIGTYPE_p_LLVMValueRef Else, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildSelect(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(If), SWIGTYPE_p_LLVMValueRef.getCPtr(Then), SWIGTYPE_p_LLVMValueRef.getCPtr(Else), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildSelect(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue If, SWIGTYPE_p_LLVMOpaqueValue Then, SWIGTYPE_p_LLVMOpaqueValue Else, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildSelect(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(If), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Then), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Else), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildVAArg(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef List, SWIGTYPE_p_LLVMTypeRef Ty, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildVAArg(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(List), SWIGTYPE_p_LLVMTypeRef.getCPtr(Ty), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildVAArg(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue List, SWIGTYPE_p_LLVMOpaqueType Ty, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildVAArg(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(List), SWIGTYPE_p_LLVMOpaqueType.getCPtr(Ty), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildExtractElement(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef VecVal, SWIGTYPE_p_LLVMValueRef Index, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildExtractElement(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(VecVal), SWIGTYPE_p_LLVMValueRef.getCPtr(Index), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildExtractElement(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue VecVal, SWIGTYPE_p_LLVMOpaqueValue Index, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildExtractElement(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(VecVal), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Index), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildInsertElement(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef VecVal, SWIGTYPE_p_LLVMValueRef EltVal, SWIGTYPE_p_LLVMValueRef Index, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildInsertElement(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(VecVal), SWIGTYPE_p_LLVMValueRef.getCPtr(EltVal), SWIGTYPE_p_LLVMValueRef.getCPtr(Index), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildInsertElement(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue VecVal, SWIGTYPE_p_LLVMOpaqueValue EltVal, SWIGTYPE_p_LLVMOpaqueValue Index, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildInsertElement(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(VecVal), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(EltVal), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Index), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildShuffleVector(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef V1, SWIGTYPE_p_LLVMValueRef V2, SWIGTYPE_p_LLVMValueRef Mask, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildShuffleVector(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(V1), SWIGTYPE_p_LLVMValueRef.getCPtr(V2), SWIGTYPE_p_LLVMValueRef.getCPtr(Mask), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildShuffleVector(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue V1, SWIGTYPE_p_LLVMOpaqueValue V2, SWIGTYPE_p_LLVMOpaqueValue Mask, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildShuffleVector(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(V1), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(V2), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Mask), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildExtractValue(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef AggVal, long Index, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildExtractValue(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(AggVal), Index, Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildExtractValue(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue AggVal, long Index, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildExtractValue(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(AggVal), Index, Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildInsertValue(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef AggVal, SWIGTYPE_p_LLVMValueRef EltVal, long Index, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildInsertValue(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(AggVal), SWIGTYPE_p_LLVMValueRef.getCPtr(EltVal), Index, Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildInsertValue(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue AggVal, SWIGTYPE_p_LLVMOpaqueValue EltVal, long Index, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildInsertValue(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(AggVal), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(EltVal), Index, Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildIsNull(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildIsNull(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildIsNull(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildIsNull(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildIsNotNull(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef Val, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildIsNotNull(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildIsNotNull(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue Val, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildIsNotNull(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildPtrDiff(SWIGTYPE_p_LLVMBuilderRef arg0, SWIGTYPE_p_LLVMValueRef LHS, SWIGTYPE_p_LLVMValueRef RHS, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildPtrDiff(SWIGTYPE_p_LLVMBuilderRef.getCPtr(arg0), SWIGTYPE_p_LLVMValueRef.getCPtr(LHS), SWIGTYPE_p_LLVMValueRef.getCPtr(RHS), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildPtrDiff(SWIGTYPE_p_LLVMOpaqueBuilder arg0, SWIGTYPE_p_LLVMOpaqueValue LHS, SWIGTYPE_p_LLVMOpaqueValue RHS, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildPtrDiff(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(arg0), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(LHS), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(RHS), Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildFence(SWIGTYPE_p_LLVMBuilderRef B, LLVMAtomicOrdering ordering, SWIGTYPE_p_LLVMBool singleThread, String Name) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildFence(SWIGTYPE_p_LLVMBuilderRef.getCPtr(B), ordering.swigValue(), SWIGTYPE_p_LLVMBool.getCPtr(singleThread), Name), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildFence(SWIGTYPE_p_LLVMOpaqueBuilder B, LLVMAtomicOrdering ordering, int singleThread, String Name) {
+    long cPtr = bitreaderJNI.LLVMBuildFence(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(B), ordering.swigValue(), singleThread, Name);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef LLVMBuildAtomicRMW(SWIGTYPE_p_LLVMBuilderRef B, LLVMAtomicRMWBinOp op, SWIGTYPE_p_LLVMValueRef PTR, SWIGTYPE_p_LLVMValueRef Val, LLVMAtomicOrdering ordering, SWIGTYPE_p_LLVMBool singleThread) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.LLVMBuildAtomicRMW(SWIGTYPE_p_LLVMBuilderRef.getCPtr(B), op.swigValue(), SWIGTYPE_p_LLVMValueRef.getCPtr(PTR), SWIGTYPE_p_LLVMValueRef.getCPtr(Val), ordering.swigValue(), SWIGTYPE_p_LLVMBool.getCPtr(singleThread)), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue LLVMBuildAtomicRMW(SWIGTYPE_p_LLVMOpaqueBuilder B, LLVMAtomicRMWBinOp op, SWIGTYPE_p_LLVMOpaqueValue PTR, SWIGTYPE_p_LLVMOpaqueValue Val, LLVMAtomicOrdering ordering, int singleThread) {
+    long cPtr = bitreaderJNI.LLVMBuildAtomicRMW(SWIGTYPE_p_LLVMOpaqueBuilder.getCPtr(B), op.swigValue(), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(PTR), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val), ordering.swigValue(), singleThread);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMModuleProviderRef LLVMCreateModuleProviderForExistingModule(SWIGTYPE_p_LLVMModuleRef M) {
-    return new SWIGTYPE_p_LLVMModuleProviderRef(bitreaderJNI.LLVMCreateModuleProviderForExistingModule(SWIGTYPE_p_LLVMModuleRef.getCPtr(M)), true);
+  public static SWIGTYPE_p_LLVMOpaqueModuleProvider LLVMCreateModuleProviderForExistingModule(SWIGTYPE_p_LLVMOpaqueModule M) {
+    long cPtr = bitreaderJNI.LLVMCreateModuleProviderForExistingModule(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueModuleProvider(cPtr, false);
   }
 
-  public static void LLVMDisposeModuleProvider(SWIGTYPE_p_LLVMModuleProviderRef M) {
-    bitreaderJNI.LLVMDisposeModuleProvider(SWIGTYPE_p_LLVMModuleProviderRef.getCPtr(M));
+  public static void LLVMDisposeModuleProvider(SWIGTYPE_p_LLVMOpaqueModuleProvider M) {
+    bitreaderJNI.LLVMDisposeModuleProvider(SWIGTYPE_p_LLVMOpaqueModuleProvider.getCPtr(M));
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMCreateMemoryBufferWithContentsOfFile(String Path, SWIGTYPE_p_LLVMMemoryBufferRef OutMemBuf, SWIGTYPE_p_p_char OutMessage) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMCreateMemoryBufferWithContentsOfFile(Path, SWIGTYPE_p_LLVMMemoryBufferRef.getCPtr(OutMemBuf), SWIGTYPE_p_p_char.getCPtr(OutMessage)), true);
+  public static int LLVMCreateMemoryBufferWithContentsOfFile(String Path, SWIGTYPE_p_p_LLVMOpaqueMemoryBuffer OutMemBuf, SWIGTYPE_p_p_char OutMessage) {
+    return bitreaderJNI.LLVMCreateMemoryBufferWithContentsOfFile(Path, SWIGTYPE_p_p_LLVMOpaqueMemoryBuffer.getCPtr(OutMemBuf), SWIGTYPE_p_p_char.getCPtr(OutMessage));
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMCreateMemoryBufferWithSTDIN(SWIGTYPE_p_LLVMMemoryBufferRef OutMemBuf, SWIGTYPE_p_p_char OutMessage) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMCreateMemoryBufferWithSTDIN(SWIGTYPE_p_LLVMMemoryBufferRef.getCPtr(OutMemBuf), SWIGTYPE_p_p_char.getCPtr(OutMessage)), true);
+  public static int LLVMCreateMemoryBufferWithSTDIN(SWIGTYPE_p_p_LLVMOpaqueMemoryBuffer OutMemBuf, SWIGTYPE_p_p_char OutMessage) {
+    return bitreaderJNI.LLVMCreateMemoryBufferWithSTDIN(SWIGTYPE_p_p_LLVMOpaqueMemoryBuffer.getCPtr(OutMemBuf), SWIGTYPE_p_p_char.getCPtr(OutMessage));
   }
 
-  public static SWIGTYPE_p_LLVMMemoryBufferRef LLVMCreateMemoryBufferWithMemoryRange(String InputData, long InputDataLength, String BufferName, SWIGTYPE_p_LLVMBool RequiresNullTerminator) {
-    return new SWIGTYPE_p_LLVMMemoryBufferRef(bitreaderJNI.LLVMCreateMemoryBufferWithMemoryRange(InputData, InputDataLength, BufferName, SWIGTYPE_p_LLVMBool.getCPtr(RequiresNullTerminator)), true);
+  public static SWIGTYPE_p_LLVMOpaqueMemoryBuffer LLVMCreateMemoryBufferWithMemoryRange(String InputData, long InputDataLength, String BufferName, int RequiresNullTerminator) {
+    long cPtr = bitreaderJNI.LLVMCreateMemoryBufferWithMemoryRange(InputData, InputDataLength, BufferName, RequiresNullTerminator);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueMemoryBuffer(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMMemoryBufferRef LLVMCreateMemoryBufferWithMemoryRangeCopy(String InputData, long InputDataLength, String BufferName) {
-    return new SWIGTYPE_p_LLVMMemoryBufferRef(bitreaderJNI.LLVMCreateMemoryBufferWithMemoryRangeCopy(InputData, InputDataLength, BufferName), true);
+  public static SWIGTYPE_p_LLVMOpaqueMemoryBuffer LLVMCreateMemoryBufferWithMemoryRangeCopy(String InputData, long InputDataLength, String BufferName) {
+    long cPtr = bitreaderJNI.LLVMCreateMemoryBufferWithMemoryRangeCopy(InputData, InputDataLength, BufferName);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueMemoryBuffer(cPtr, false);
   }
 
-  public static String LLVMGetBufferStart(SWIGTYPE_p_LLVMMemoryBufferRef MemBuf) {
-    return bitreaderJNI.LLVMGetBufferStart(SWIGTYPE_p_LLVMMemoryBufferRef.getCPtr(MemBuf));
+  public static String LLVMGetBufferStart(SWIGTYPE_p_LLVMOpaqueMemoryBuffer MemBuf) {
+    return bitreaderJNI.LLVMGetBufferStart(SWIGTYPE_p_LLVMOpaqueMemoryBuffer.getCPtr(MemBuf));
   }
 
-  public static long LLVMGetBufferSize(SWIGTYPE_p_LLVMMemoryBufferRef MemBuf) {
-    return bitreaderJNI.LLVMGetBufferSize(SWIGTYPE_p_LLVMMemoryBufferRef.getCPtr(MemBuf));
+  public static long LLVMGetBufferSize(SWIGTYPE_p_LLVMOpaqueMemoryBuffer MemBuf) {
+    return bitreaderJNI.LLVMGetBufferSize(SWIGTYPE_p_LLVMOpaqueMemoryBuffer.getCPtr(MemBuf));
   }
 
-  public static void LLVMDisposeMemoryBuffer(SWIGTYPE_p_LLVMMemoryBufferRef MemBuf) {
-    bitreaderJNI.LLVMDisposeMemoryBuffer(SWIGTYPE_p_LLVMMemoryBufferRef.getCPtr(MemBuf));
+  public static void LLVMDisposeMemoryBuffer(SWIGTYPE_p_LLVMOpaqueMemoryBuffer MemBuf) {
+    bitreaderJNI.LLVMDisposeMemoryBuffer(SWIGTYPE_p_LLVMOpaqueMemoryBuffer.getCPtr(MemBuf));
   }
 
-  public static SWIGTYPE_p_LLVMPassRegistryRef LLVMGetGlobalPassRegistry() {
-    return new SWIGTYPE_p_LLVMPassRegistryRef(bitreaderJNI.LLVMGetGlobalPassRegistry(), true);
+  public static SWIGTYPE_p_LLVMOpaquePassRegistry LLVMGetGlobalPassRegistry() {
+    long cPtr = bitreaderJNI.LLVMGetGlobalPassRegistry();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaquePassRegistry(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMPassManagerRef LLVMCreatePassManager() {
-    return new SWIGTYPE_p_LLVMPassManagerRef(bitreaderJNI.LLVMCreatePassManager(), true);
+  public static SWIGTYPE_p_LLVMOpaquePassManager LLVMCreatePassManager() {
+    long cPtr = bitreaderJNI.LLVMCreatePassManager();
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaquePassManager(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMPassManagerRef LLVMCreateFunctionPassManagerForModule(SWIGTYPE_p_LLVMModuleRef M) {
-    return new SWIGTYPE_p_LLVMPassManagerRef(bitreaderJNI.LLVMCreateFunctionPassManagerForModule(SWIGTYPE_p_LLVMModuleRef.getCPtr(M)), true);
+  public static SWIGTYPE_p_LLVMOpaquePassManager LLVMCreateFunctionPassManagerForModule(SWIGTYPE_p_LLVMOpaqueModule M) {
+    long cPtr = bitreaderJNI.LLVMCreateFunctionPassManagerForModule(SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaquePassManager(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMPassManagerRef LLVMCreateFunctionPassManager(SWIGTYPE_p_LLVMModuleProviderRef MP) {
-    return new SWIGTYPE_p_LLVMPassManagerRef(bitreaderJNI.LLVMCreateFunctionPassManager(SWIGTYPE_p_LLVMModuleProviderRef.getCPtr(MP)), true);
+  public static SWIGTYPE_p_LLVMOpaquePassManager LLVMCreateFunctionPassManager(SWIGTYPE_p_LLVMOpaqueModuleProvider MP) {
+    long cPtr = bitreaderJNI.LLVMCreateFunctionPassManager(SWIGTYPE_p_LLVMOpaqueModuleProvider.getCPtr(MP));
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaquePassManager(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMRunPassManager(SWIGTYPE_p_LLVMPassManagerRef PM, SWIGTYPE_p_LLVMModuleRef M) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMRunPassManager(SWIGTYPE_p_LLVMPassManagerRef.getCPtr(PM), SWIGTYPE_p_LLVMModuleRef.getCPtr(M)), true);
+  public static int LLVMRunPassManager(SWIGTYPE_p_LLVMOpaquePassManager PM, SWIGTYPE_p_LLVMOpaqueModule M) {
+    return bitreaderJNI.LLVMRunPassManager(SWIGTYPE_p_LLVMOpaquePassManager.getCPtr(PM), SWIGTYPE_p_LLVMOpaqueModule.getCPtr(M));
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMInitializeFunctionPassManager(SWIGTYPE_p_LLVMPassManagerRef FPM) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMInitializeFunctionPassManager(SWIGTYPE_p_LLVMPassManagerRef.getCPtr(FPM)), true);
+  public static int LLVMInitializeFunctionPassManager(SWIGTYPE_p_LLVMOpaquePassManager FPM) {
+    return bitreaderJNI.LLVMInitializeFunctionPassManager(SWIGTYPE_p_LLVMOpaquePassManager.getCPtr(FPM));
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMRunFunctionPassManager(SWIGTYPE_p_LLVMPassManagerRef FPM, SWIGTYPE_p_LLVMValueRef F) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMRunFunctionPassManager(SWIGTYPE_p_LLVMPassManagerRef.getCPtr(FPM), SWIGTYPE_p_LLVMValueRef.getCPtr(F)), true);
+  public static int LLVMRunFunctionPassManager(SWIGTYPE_p_LLVMOpaquePassManager FPM, SWIGTYPE_p_LLVMOpaqueValue F) {
+    return bitreaderJNI.LLVMRunFunctionPassManager(SWIGTYPE_p_LLVMOpaquePassManager.getCPtr(FPM), SWIGTYPE_p_LLVMOpaqueValue.getCPtr(F));
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMFinalizeFunctionPassManager(SWIGTYPE_p_LLVMPassManagerRef FPM) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMFinalizeFunctionPassManager(SWIGTYPE_p_LLVMPassManagerRef.getCPtr(FPM)), true);
+  public static int LLVMFinalizeFunctionPassManager(SWIGTYPE_p_LLVMOpaquePassManager FPM) {
+    return bitreaderJNI.LLVMFinalizeFunctionPassManager(SWIGTYPE_p_LLVMOpaquePassManager.getCPtr(FPM));
   }
 
-  public static void LLVMDisposePassManager(SWIGTYPE_p_LLVMPassManagerRef PM) {
-    bitreaderJNI.LLVMDisposePassManager(SWIGTYPE_p_LLVMPassManagerRef.getCPtr(PM));
+  public static void LLVMDisposePassManager(SWIGTYPE_p_LLVMOpaquePassManager PM) {
+    bitreaderJNI.LLVMDisposePassManager(SWIGTYPE_p_LLVMOpaquePassManager.getCPtr(PM));
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMStartMultithreaded() {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMStartMultithreaded(), true);
+  public static int LLVMStartMultithreaded() {
+    return bitreaderJNI.LLVMStartMultithreaded();
   }
 
   public static void LLVMStopMultithreaded() {
     bitreaderJNI.LLVMStopMultithreaded();
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMIsMultithreaded() {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMIsMultithreaded(), true);
+  public static int LLVMIsMultithreaded() {
+    return bitreaderJNI.LLVMIsMultithreaded();
   }
 
-  public static SWIGTYPE_p_LLVMBool LLVMParseIRInContext(SWIGTYPE_p_LLVMContextRef ContextRef, SWIGTYPE_p_LLVMMemoryBufferRef MemBuf, SWIGTYPE_p_LLVMModuleRef OutM, SWIGTYPE_p_p_char OutMessage) {
-    return new SWIGTYPE_p_LLVMBool(bitreaderJNI.LLVMParseIRInContext(SWIGTYPE_p_LLVMContextRef.getCPtr(ContextRef), SWIGTYPE_p_LLVMMemoryBufferRef.getCPtr(MemBuf), SWIGTYPE_p_LLVMModuleRef.getCPtr(OutM), SWIGTYPE_p_p_char.getCPtr(OutMessage)), true);
+  public static int LLVMParseIRInContext(SWIGTYPE_p_LLVMOpaqueContext ContextRef, SWIGTYPE_p_LLVMOpaqueMemoryBuffer MemBuf, SWIGTYPE_p_p_LLVMOpaqueModule OutM, SWIGTYPE_p_p_char OutMessage) {
+    return bitreaderJNI.LLVMParseIRInContext(SWIGTYPE_p_LLVMOpaqueContext.getCPtr(ContextRef), SWIGTYPE_p_LLVMOpaqueMemoryBuffer.getCPtr(MemBuf), SWIGTYPE_p_p_LLVMOpaqueModule.getCPtr(OutM), SWIGTYPE_p_p_char.getCPtr(OutMessage));
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef malloc_LLVMTypeRef(int nbytes) {
+  public static SWIGTYPE_p_p_LLVMOpaqueType malloc_LLVMTypeRef(int nbytes) {
     long cPtr = bitreaderJNI.malloc_LLVMTypeRef(nbytes);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMTypeRef(cPtr, false);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef calloc_LLVMTypeRef(int nobj, int sz) {
+  public static SWIGTYPE_p_p_LLVMOpaqueType calloc_LLVMTypeRef(int nobj, int sz) {
     long cPtr = bitreaderJNI.calloc_LLVMTypeRef(nobj, sz);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMTypeRef(cPtr, false);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef realloc_LLVMTypeRef(SWIGTYPE_p_LLVMTypeRef ptr, int nitems) {
-    long cPtr = bitreaderJNI.realloc_LLVMTypeRef(SWIGTYPE_p_LLVMTypeRef.getCPtr(ptr), nitems);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMTypeRef(cPtr, false);
+  public static SWIGTYPE_p_p_LLVMOpaqueType realloc_LLVMTypeRef(SWIGTYPE_p_p_LLVMOpaqueType ptr, int nitems) {
+    long cPtr = bitreaderJNI.realloc_LLVMTypeRef(SWIGTYPE_p_p_LLVMOpaqueType.getCPtr(ptr), nitems);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static void free_LLVMTypeRef(SWIGTYPE_p_LLVMTypeRef ptr) {
-    bitreaderJNI.free_LLVMTypeRef(SWIGTYPE_p_LLVMTypeRef.getCPtr(ptr));
+  public static void free_LLVMTypeRef(SWIGTYPE_p_p_LLVMOpaqueType ptr) {
+    bitreaderJNI.free_LLVMTypeRef(SWIGTYPE_p_p_LLVMOpaqueType.getCPtr(ptr));
   }
 
-  public static SWIGTYPE_p_LLVMValueRef malloc_LLVMValueRef(int nbytes) {
+  public static SWIGTYPE_p_p_LLVMOpaqueValue malloc_LLVMValueRef(int nbytes) {
     long cPtr = bitreaderJNI.malloc_LLVMValueRef(nbytes);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMValueRef(cPtr, false);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef calloc_LLVMValueRef(int nobj, int sz) {
+  public static SWIGTYPE_p_p_LLVMOpaqueValue calloc_LLVMValueRef(int nobj, int sz) {
     long cPtr = bitreaderJNI.calloc_LLVMValueRef(nobj, sz);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMValueRef(cPtr, false);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef realloc_LLVMValueRef(SWIGTYPE_p_LLVMValueRef ptr, int nitems) {
-    long cPtr = bitreaderJNI.realloc_LLVMValueRef(SWIGTYPE_p_LLVMValueRef.getCPtr(ptr), nitems);
-    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMValueRef(cPtr, false);
+  public static SWIGTYPE_p_p_LLVMOpaqueValue realloc_LLVMValueRef(SWIGTYPE_p_p_LLVMOpaqueValue ptr, int nitems) {
+    long cPtr = bitreaderJNI.realloc_LLVMValueRef(SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(ptr), nitems);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static void free_LLVMValueRef(SWIGTYPE_p_LLVMValueRef ptr) {
-    bitreaderJNI.free_LLVMValueRef(SWIGTYPE_p_LLVMValueRef.getCPtr(ptr));
+  public static void free_LLVMValueRef(SWIGTYPE_p_p_LLVMOpaqueValue ptr) {
+    bitreaderJNI.free_LLVMValueRef(SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(ptr));
   }
 
-  public static SWIGTYPE_p_LLVMTypeRef getType(SWIGTYPE_p_LLVMTypeRef types, int i) {
-    return new SWIGTYPE_p_LLVMTypeRef(bitreaderJNI.getType(SWIGTYPE_p_LLVMTypeRef.getCPtr(types), i), true);
+  public static SWIGTYPE_p_LLVMOpaqueType getType(SWIGTYPE_p_p_LLVMOpaqueType types, int i) {
+    long cPtr = bitreaderJNI.getType(SWIGTYPE_p_p_LLVMOpaqueType.getCPtr(types), i);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueType(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMValueRef getValue(SWIGTYPE_p_LLVMValueRef values, int i) {
-    return new SWIGTYPE_p_LLVMValueRef(bitreaderJNI.getValue(SWIGTYPE_p_LLVMValueRef.getCPtr(values), i), true);
+  public static SWIGTYPE_p_LLVMOpaqueValue getValue(SWIGTYPE_p_p_LLVMOpaqueValue values, int i) {
+    long cPtr = bitreaderJNI.getValue(SWIGTYPE_p_p_LLVMOpaqueValue.getCPtr(values), i);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueValue(cPtr, false);
   }
 
-  public static SWIGTYPE_p_LLVMModuleRef parse(String path) {
-    return new SWIGTYPE_p_LLVMModuleRef(bitreaderJNI.parse(path), true);
+  public static SWIGTYPE_p_LLVMOpaqueModule parse(String path) {
+    long cPtr = bitreaderJNI.parse(path);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_LLVMOpaqueModule(cPtr, false);
   }
 
-  public static String getMDString(SWIGTYPE_p_LLVMValueRef valueRef) {
-    return bitreaderJNI.getMDString(SWIGTYPE_p_LLVMValueRef.getCPtr(valueRef));
+  public static String getMDString(SWIGTYPE_p_LLVMOpaqueValue valueRef) {
+    return bitreaderJNI.getMDString(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(valueRef));
   }
 
-  public static String GetDataArrayString(SWIGTYPE_p_LLVMValueRef Val) {
-    return bitreaderJNI.GetDataArrayString(SWIGTYPE_p_LLVMValueRef.getCPtr(Val));
+  public static String GetDataArrayString(SWIGTYPE_p_LLVMOpaqueValue Val) {
+    return bitreaderJNI.GetDataArrayString(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Val));
   }
 
-  public static LLVMRealPredicate GetFCmpPredicate(SWIGTYPE_p_LLVMValueRef Inst) {
-    return LLVMRealPredicate.swigToEnum(bitreaderJNI.GetFCmpPredicate(SWIGTYPE_p_LLVMValueRef.getCPtr(Inst)));
+  public static LLVMRealPredicate GetFCmpPredicate(SWIGTYPE_p_LLVMOpaqueValue Inst) {
+    return LLVMRealPredicate.swigToEnum(bitreaderJNI.GetFCmpPredicate(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(Inst)));
   }
 
-  public static double GetConstantFPDoubleValue(SWIGTYPE_p_LLVMValueRef ConstantVal) {
-    return bitreaderJNI.GetConstantFPDoubleValue(SWIGTYPE_p_LLVMValueRef.getCPtr(ConstantVal));
+  public static double GetConstantFPDoubleValue(SWIGTYPE_p_LLVMOpaqueValue ConstantVal) {
+    return bitreaderJNI.GetConstantFPDoubleValue(SWIGTYPE_p_LLVMOpaqueValue.getCPtr(ConstantVal));
   }
 
 }

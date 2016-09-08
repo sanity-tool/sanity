@@ -19,7 +19,7 @@ public class LineUtils implements DisposableBean {
     private static final Map<Pair<File, Integer>, String> CACHE = new HashMap<>();
 
     public static String dumpLine(File file, int lineNumber) {
-        return CACHE.computeIfAbsent(new Pair(file, lineNumber), key -> {
+        return CACHE.computeIfAbsent(new Pair<>(file, lineNumber), key -> {
             try {
                 LineNumberReader reader = new LineNumberReader(new FileReader(file));
                 String line;

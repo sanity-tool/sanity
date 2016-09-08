@@ -1,7 +1,7 @@
 package na.okutane.cpp;
 
 import na.okutane.api.cfg.SourceRange;
-import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMValueRef;
+import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 import na.okutane.cpp.llvm.bitreader;
 import org.springframework.stereotype.Component;
 
@@ -19,15 +19,15 @@ public class SourceRangeFactory {
     private static final int FILE_INDEX = 0;
     private static final int DIRECTORY_INDEX = 1;
 
-    public SourceRange getSourceRange(SWIGTYPE_p_LLVMValueRef instruction) {
+    public SourceRange getSourceRange(SWIGTYPE_p_LLVMOpaqueValue instruction) {
 
         long id = bitreader.LLVMGetMDKindID("dbg", 3);
-        SWIGTYPE_p_LLVMValueRef node = bitreader.LLVMGetMetadata(instruction, id);
+        SWIGTYPE_p_LLVMOpaqueValue node = bitreader.LLVMGetMetadata(instruction, id);
 
         if (node != null) {
             //deepDump(node);
 
-            SWIGTYPE_p_LLVMValueRef pair = getPair(node);
+            SWIGTYPE_p_LLVMOpaqueValue pair = getPair(node);
 
             if (pair != null) {
                 String filename = bitreader.getMDString(bitreader.LLVMGetOperand(pair, 0));
@@ -42,7 +42,7 @@ public class SourceRangeFactory {
         return null;
     }
 
-    private SWIGTYPE_p_LLVMValueRef getPair(SWIGTYPE_p_LLVMValueRef node) {
+    private SWIGTYPE_p_LLVMOpaqueValue getPair(SWIGTYPE_p_LLVMOpaqueValue node) {
         if (node == null) {
             return null;
         }

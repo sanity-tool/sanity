@@ -4,7 +4,14 @@ import na.okutane.api.cfg.ArrayType;
 import na.okutane.api.cfg.PointerType;
 import na.okutane.api.cfg.Primitive;
 import na.okutane.api.cfg.Type;
-import na.okutane.cpp.llvm.*;
+import na.okutane.cpp.llvm.LLVMTypeKind;
+import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;
+import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueType;
+import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
+import na.okutane.cpp.llvm.SWIGTYPE_p_p_LLVMOpaqueType;
+import na.okutane.cpp.llvm.SWIGTYPE_p_p_LLVMOpaqueValue;
+import na.okutane.cpp.llvm.bitreader;
+import na.okutane.cpp.llvm.bitreaderConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,12 +33,12 @@ public class TypeParser implements ParserListener {
     public static final int DW_TAG_compile_unit = 786449;
     private final Map<LLVMTypeKind, TypeKindParser> parsers;
 
-    private Map<SWIGTYPE_p_LLVMTypeRef, Type> typesCache;
+    private Map<SWIGTYPE_p_LLVMOpaqueType, Type> typesCache;
 
     private Map<String, List<String>> fieldNamesCache;
-    private Map<SWIGTYPE_p_LLVMTypeRef, Type> structCache;
+    private Map<SWIGTYPE_p_LLVMOpaqueType, Type> structCache;
     private int anonCount;
-    private Set<SWIGTYPE_p_LLVMValueRef> visited;
+    private Set<SWIGTYPE_p_LLVMOpaqueValue> visited;
 
     private static final TypeKindParser defaultParser = new TypeKindParser() {
         @Override
@@ -40,7 +47,7 @@ public class TypeParser implements ParserListener {
         }
 
         @Override
-        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMTypeRef type) {
+        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
             LLVMTypeKind typeKind = bitreader.LLVMGetTypeKind(type);
             throw new IllegalStateException("Can't parse " + typeKind);
         }
@@ -55,13 +62,13 @@ public class TypeParser implements ParserListener {
         }
     }
 
-    public Type parse(SWIGTYPE_p_LLVMTypeRef type) {
+    public Type parse(SWIGTYPE_p_LLVMOpaqueType type) {
         LLVMTypeKind typeKind = bitreader.LLVMGetTypeKind(type);
         return typesCache.computeIfAbsent(type, key -> parsers.getOrDefault(typeKind, defaultParser).parse(this, key));
     }
 
     @Override
-    public void onModuleStarted(SWIGTYPE_p_LLVMModuleRef module) {
+    public void onModuleStarted(SWIGTYPE_p_LLVMOpaqueModule module) {
         fieldNamesCache = new HashMap<>();
         structCache = new HashMap<>();
         typesCache = new HashMap<>();
@@ -69,13 +76,13 @@ public class TypeParser implements ParserListener {
         anonCount = 0;
 
         int arguments = (int) bitreader.LLVMGetNamedMetadataNumOperands(module, "llvm.dbg.cu");
-        SWIGTYPE_p_LLVMValueRef values = bitreader.calloc_LLVMValueRef(arguments, bitreaderConstants.sizeof_LLVMValueRef);
+        SWIGTYPE_p_p_LLVMOpaqueValue values = bitreader.calloc_LLVMValueRef(arguments, bitreaderConstants.sizeof_LLVMValueRef);
         try {
             bitreader.LLVMGetNamedMetadataOperands(module, "llvm.dbg.cu", values);
 
             for (int i = 0; i < arguments; i++) {
                 // process compile units
-                SWIGTYPE_p_LLVMValueRef compileUnitMD = bitreader.getValue(values, i);
+                SWIGTYPE_p_LLVMOpaqueValue compileUnitMD = bitreader.getValue(values, i);
                 if (LlvmUtils.checkTag(compileUnitMD, DW_TAG_compile_unit)) {
                     visit(compileUnitMD);
                 } else {
@@ -87,12 +94,12 @@ public class TypeParser implements ParserListener {
         }
     }
 
-    protected void visitStructure(SWIGTYPE_p_LLVMValueRef type) {
+    protected void visitStructure(SWIGTYPE_p_LLVMOpaqueValue type) {
         if (!visited.add(type)) {
             return;
         }
 
-        SWIGTYPE_p_LLVMValueRef members = bitreader.LLVMGetOperand(type, 10);
+        SWIGTYPE_p_LLVMOpaqueValue members = bitreader.LLVMGetOperand(type, 10);
 
         if (members == null) {
             return;
@@ -114,7 +121,7 @@ public class TypeParser implements ParserListener {
         List<String> fieldNames = new ArrayList<String>();
 
         for (int i = 0; i < bitreader.LLVMGetNumOperands(members); i++) {
-            SWIGTYPE_p_LLVMValueRef node = bitreader.LLVMGetOperand(members, i);
+            SWIGTYPE_p_LLVMOpaqueValue node = bitreader.LLVMGetOperand(members, i);
             if (LlvmUtils.checkTag(node, DW_TAG_member)) {
                 String fieldName = bitreader.getMDString(bitreader.LLVMGetOperand(node, 3));
                 fieldNames.add(fieldName);
@@ -124,7 +131,7 @@ public class TypeParser implements ParserListener {
         fieldNamesCache.put(typeName, fieldNames);
     }
 
-    protected void visit(SWIGTYPE_p_LLVMValueRef node) {
+    protected void visit(SWIGTYPE_p_LLVMOpaqueValue node) {
         if (bitreader.LLVMIsAMDNode(node) == null) {
             return;
         }
@@ -135,35 +142,35 @@ public class TypeParser implements ParserListener {
         }
 
         for (int j = 0; j < bitreader.LLVMGetNumOperands(node); j++) {
-            SWIGTYPE_p_LLVMValueRef type = bitreader.LLVMGetOperand(node, j);
+            SWIGTYPE_p_LLVMOpaqueValue type = bitreader.LLVMGetOperand(node, j);
             visit(type);
         }
     }
 
     @Override
-    public void onModuleFinished(SWIGTYPE_p_LLVMModuleRef module) {
+    public void onModuleFinished(SWIGTYPE_p_LLVMOpaqueModule module) {
         fieldNamesCache = null;
         structCache = null;
         visited = null;
     }
 
-    private List<String> getFieldNames(SWIGTYPE_p_LLVMTypeRef type) {
+    private List<String> getFieldNames(SWIGTYPE_p_LLVMOpaqueType type) {
         String typeName = bitreader.LLVMGetStructName(type);
         return fieldNamesCache.get(typeName);
     }
 
-    private Type get(SWIGTYPE_p_LLVMTypeRef type) {
+    private Type get(SWIGTYPE_p_LLVMOpaqueType type) {
         return structCache.get(type);
     }
 
-    private void cache(SWIGTYPE_p_LLVMTypeRef type, Type struct) {
+    private void cache(SWIGTYPE_p_LLVMOpaqueType type, Type struct) {
         structCache.put(type, struct);
     }
 
     private static interface TypeKindParser {
         LLVMTypeKind getTypeKind();
 
-        Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMTypeRef type);
+        Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type);
     }
 
     @Component
@@ -174,7 +181,7 @@ public class TypeParser implements ParserListener {
         }
 
         @Override
-        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMTypeRef type) {
+        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
             return new Primitive("int" + bitreader.LLVMGetIntTypeWidth(type));
         }
     }
@@ -187,7 +194,7 @@ public class TypeParser implements ParserListener {
         }
 
         @Override
-        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMTypeRef type) {
+        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
             return new Primitive("float");
         }
     }
@@ -200,7 +207,7 @@ public class TypeParser implements ParserListener {
         }
 
         @Override
-        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMTypeRef type) {
+        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
             return new Primitive("double");
         }
     }
@@ -213,7 +220,7 @@ public class TypeParser implements ParserListener {
         }
 
         @Override
-        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMTypeRef type) {
+        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
             return new Primitive("long double");
         }
     }
@@ -226,7 +233,7 @@ public class TypeParser implements ParserListener {
         }
 
         @Override
-        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMTypeRef type) {
+        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
             return new Primitive("void");
         }
     }
@@ -239,7 +246,7 @@ public class TypeParser implements ParserListener {
         }
 
         @Override
-        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMTypeRef type) {
+        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
             return new PointerType(typeParser.parse(bitreader.LLVMGetElementType(type)));
         }
     }
@@ -252,7 +259,7 @@ public class TypeParser implements ParserListener {
         }
 
         @Override
-        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMTypeRef type) {
+        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
             return new ArrayType(typeParser.parse(bitreader.LLVMGetElementType(type)), bitreader.LLVMGetArrayLength(type));
         }
     }
@@ -265,7 +272,7 @@ public class TypeParser implements ParserListener {
         }
 
         @Override
-        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMTypeRef type) {
+        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
             Type cached = typeParser.get(type);
             if (cached != null) {
                 return cached;
@@ -273,7 +280,7 @@ public class TypeParser implements ParserListener {
 
             String name = bitreader.LLVMGetStructName(type);
             int fields = (int)bitreader.LLVMCountStructElementTypes(type);
-            SWIGTYPE_p_LLVMTypeRef fieldsBuff = bitreader.calloc_LLVMTypeRef(fields, bitreaderConstants.sizeof_LLVMTypeRef);
+            SWIGTYPE_p_p_LLVMOpaqueType fieldsBuff = bitreader.calloc_LLVMTypeRef(fields, bitreaderConstants.sizeof_LLVMTypeRef);
             try {
                 bitreader.LLVMGetStructElementTypes(type, fieldsBuff);
 
@@ -333,12 +340,12 @@ public class TypeParser implements ParserListener {
         }
 
         @Override
-        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMTypeRef type) {
+        public Type parse(TypeParser typeParser, SWIGTYPE_p_LLVMOpaqueType type) {
             int params = (int) bitreader.LLVMCountParamTypes(type);
             final Type returnType = typeParser.parse(bitreader.LLVMGetReturnType(type));
             final Type[] paramsType = new Type[params];
             if (params != 0) {
-                SWIGTYPE_p_LLVMTypeRef paramsBuff = bitreader.calloc_LLVMTypeRef(params, bitreader.sizeof_LLVMTypeRef);
+                SWIGTYPE_p_p_LLVMOpaqueType paramsBuff = bitreader.calloc_LLVMTypeRef(params, bitreader.sizeof_LLVMTypeRef);
                 try {
                     bitreader.LLVMGetParamTypes(type, paramsBuff);
                     for (int i = 0; i < params; i++) {
