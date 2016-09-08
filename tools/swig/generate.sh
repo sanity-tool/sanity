@@ -39,6 +39,12 @@ case `uname` in
     ;;
 esac
 
+LLVM_MODULES="core native"
+
+CPPFLAGS=`$LLVM_CONFIG --cppflags`
+LDFLAGS=`$LLVM_CONFIG --ldflags`
+LIBS=`$LLVM_CONFIG --libs $LLVM_MODULES`
+
 STD_INCLUDES=
 
 LLVM_INCLUDE="-I`$LLVM_CONFIG --includedir`"
@@ -55,6 +61,6 @@ swig -E $LLVM_INCLUDE $STD_INCLUDES -java bitreader.i > swigprep.txt
 gcc -c bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $STD_INCLUDES $DEBUG -fPIC
 
 echo g++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $DEBUG -fPIC
-g++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $DEBUG -fPIC
+g++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $CPPFLAGS
 
-gcc -stdlib=libc++ -shared bitreader_wrap.o helpers.o $LLVM_LIBS -o $DLL_NAME
+gcc -stdlib=libc++ -shared bitreader_wrap.o helpers.o -o $DLL_NAME $LDFLAGS
