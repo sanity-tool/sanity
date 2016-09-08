@@ -35,7 +35,7 @@ case `uname` in
     Linux)
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
 
-        STDLIBS="/usr/lib/x86_64-linux-gnu/libtermcap.so /usr/lib/x86_64-linux-gnu/libstdc++.so.6"
+        STDLIBS="/usr/lib/x86_64-linux-gnu/libtermcap.so /usr/lib/x86_64-linux-gnu/libc.so /usr/lib/x86_64-linux-gnu/libc++.so /usr/lib/x86_64-linux-gnu/libstdc++.so.6"
 
         DLL_NAME=libirreader.so
     ;;
@@ -46,6 +46,8 @@ case `uname` in
 esac
 
 find / 2>/dev/null|grep libc\\.
+
+find / 2>/dev/null|grep libc++\\.
 
 find / 2>/dev/null|grep libstdc
 
