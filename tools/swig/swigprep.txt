@@ -2853,6 +2853,7 @@ SWIGINTERN const char * SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
 %module bitreader
 
 %{
+#include "llvm-c/Core.h"
 #include "llvm-c/IRReader.h"
 
 LLVMModuleRef parse(const char *path) {

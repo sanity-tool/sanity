@@ -1,6 +1,7 @@
 %module bitreader
 
 %{
+#include "llvm-c/Core.h"
 #include "llvm-c/IRReader.h"
 
 LLVMModuleRef parse(const char *path) {

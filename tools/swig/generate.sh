@@ -72,5 +72,8 @@ swig $LLVM_INCLUDE -java -outdir $OUTDIR -package na.okutane.cpp.llvm -v bitread
 swig -E $LLVM_INCLUDE $STD_INCLUDES -java bitreader.i > swigprep.txt
 
 gcc -c bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $STD_INCLUDES $DEBUG
+
+echo g++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $DEBUG -fPIC
 g++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $DEBUG -fPIC
+
 gcc -shared bitreader_wrap.o helpers.o $LLVM_LIBS -o $DLL_NAME
