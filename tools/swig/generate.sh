@@ -41,28 +41,8 @@ esac
 
 STD_INCLUDES=
 
-
-#sudo apt-get install gcc-4.7
-#wget -nc http://llvm.org/releases/3.5.0/llvm-3.5.0.src.tar.xz
-#tar xf llvm-3.5.0.src.tar.xz
-#cd llvm-3.5.0.src
-#./configure
-#make install
-
-#apt-get install llvm
-
-
-#use release build of llvm
 LLVM_INCLUDE="-I`$LLVM_CONFIG --includedir`"
 LLVM_LIBS=
-
-#use clang
-#LLVM_INCLUDE="-I/Users/jondoe/Downloads/llvm-3.5.0.src/include"
-#LLVM_LIBS=/Users/jondoe/Downloads/llvm-3.5.0.src/Release+Asserts/lib/*.a
-
-#use llvm
-#LLVM_INCLUDE="-I/Users/jondoe/Downloads/llvm-3.5.0.src/include"
-#LLVM_LIBS=/Users/jondoe/Downloads/llvm-3.5.0.src/Release+Asserts/lib/*.a
 
 DEBUG=-g
 
@@ -75,6 +55,6 @@ swig -E $LLVM_INCLUDE $STD_INCLUDES -java bitreader.i > swigprep.txt
 gcc -c bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $STD_INCLUDES $DEBUG -fPIC
 
 echo g++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $DEBUG -fPIC
-g++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS -stdlib=libc++ $JAVA_INCLUDES $LLVM_INCLUDE $DEBUG -fPIC
+g++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $DEBUG -fPIC
 
-gcc -shared bitreader_wrap.o helpers.o $LLVM_LIBS -o $DLL_NAME
+gcc -stdlib=libc++ -shared bitreader_wrap.o helpers.o $LLVM_LIBS -o $DLL_NAME
