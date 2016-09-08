@@ -23,8 +23,8 @@
 #include "llvm/Support/Threading.h"
 #include "llvm/Support/raw_ostream.h"
 
-#include <iostream>
-#include <stdio.h>
+//#include <iostream>
+//#include <stdio.h>
 
 using namespace llvm;
 
