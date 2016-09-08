@@ -3,7 +3,6 @@ sudo: required
 os: osx
 osx_image: xcode8
 language: java
-jdk: oraclejdk8
 
 notifications:
   email: false
