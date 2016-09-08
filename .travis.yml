@@ -9,5 +9,5 @@ notifications:
 
 before_install:
   - brew update
-  - brew outdated swig || brew upgrade swig
-  - brew outdated llvm || brew upgrade llvm
+  - brew install swig
+  - brew install llvm
