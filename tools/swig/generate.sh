@@ -1,6 +1,6 @@
 #!/bin/sh
 # Exit on failure
-#set -e
+set -e
 
 LLVM_CONFIG=llvm-config
 $LLVM_CONFIG --version >/dev/null 2>&1 || LLVM_CONFIG=/usr/local/opt/llvm/bin/llvm-config
@@ -45,17 +45,15 @@ case `uname` in
     ;;
 esac
 
-find / 2>/dev/null|grep libc\\.
+#find / 2>/dev/null|grep libc\\.
 
-find / 2>/dev/null|grep libc++\\.
+#find / 2>/dev/null|grep libc++\\.
 
-find / 2>/dev/null|grep libstdc
-
-LLVM_MODULES="core native"
+#find / 2>/dev/null|grep libstdc
 
 CPPFLAGS=`$LLVM_CONFIG --cppflags`
 LDFLAGS=`$LLVM_CONFIG --ldflags`
-LIBS=`$LLVM_CONFIG --libs $LLVM_MODULES`
+LIBS="`$LLVM_CONFIG --libs` -ltermcap"
 
 echo $LIBS
 
@@ -74,9 +72,13 @@ swig -E $LLVM_INCLUDE $STD_INCLUDES -java bitreader.i > swigprep.txt
 
 clang -c bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $STD_INCLUDES $DEBUG -fPIC
 
-clang++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $CPPFLAGS -fPIC
+COMPILE_HELPERS="clang++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $CPPFLAGS -fPIC -std=c++11"
+echo $COMPILE_HELPERS
+eval $COMPILE_HELPERS
 
-clang -shared $STD_LIBS $LIBS bitreader_wrap.o helpers.o -o $DLL_NAME $LDFLAGS
+LINK_CMD="clang++ -shared $STD_LIBS $LIBS bitreader_wrap.o helpers.o -o $DLL_NAME $LDFLAGS"
+echo $LINK_CMD
+eval $LINK_CMD
 
-ldd $DLL_NAME
-nm --dynamic --undefined-only $DLL_NAME
+#ldd $DLL_NAME
+#nm --dynamic --undefined-only $DLL_NAME
