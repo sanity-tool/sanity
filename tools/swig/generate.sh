@@ -19,7 +19,7 @@ swig -version >/dev/null 2>&1 || sudo apt-get install -y swig
 
 swig -version
 
-
+find / 2>/dev/null|grep llvm
 
 case `uname` in
     Darwin)

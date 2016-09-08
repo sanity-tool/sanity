@@ -6,3 +6,8 @@ language: java
 
 notifications:
   email: false
+
+before_install:
+  - brew update
+  - brew outdated swig || brew upgrade swig
+  - brew outdated llvm || brew upgrade llvm
