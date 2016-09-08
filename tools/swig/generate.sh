@@ -67,3 +67,4 @@ clang++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCL
 ld -shared bitreader_wrap.o helpers.o -o $DLL_NAME $LDFLAGS
 
 ldd $DLL_NAME
+nm --dynamic --undefined-only $DLL_NAME
