@@ -19,9 +19,6 @@ swig -version >/dev/null 2>&1 || sudo apt-get install -y swig
 
 swig -version
 
-OUTDIR="../../src/main/java/na/okutane/cpp/llvm"
-
-rm -rf $OUTDIR || echo already removed
 
 
 case `uname` in
@@ -66,17 +63,29 @@ DEBUG=-g
 
 echo "swig $LLVM_INCLUDE -java -outdir $OUTDIR -package na.okutane.cpp.llvm -v -debug-tmsearch -debug-tmused bitreader.i"
 
-mkdir $OUTDIR
-swig $LLVM_INCLUDE -java -outdir $OUTDIR -package na.okutane.cpp.llvm -v bitreader.i
+JAVA_OUT="../../target/generated-sources/java/na/okutane/cpp/llvm"
+rm -rf $JAVA_OUT || echo already removed
+
+CPP_OUT="../../target/generated-sources/jni"
+rm -rf $CPP_OUT || echo already removed
+
+mkdir -p $JAVA_OUT
+mkdir -p $CPP_OUT
+swig $LLVM_INCLUDE -java -outdir $JAVA_OUT -package na.okutane.cpp.llvm -o $CPP_OUT/bitreader_wrap.c -v bitreader.i
 swig -E $LLVM_INCLUDE $STD_INCLUDES -java bitreader.i > swigprep.txt
 
-clang -c bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $STD_INCLUDES $DEBUG -fPIC
+OBJ_DIR="../../target/native/static"
+SOBJ_DIR="../../target/native/shared"
+mkdir -p $OBJ_DIR
+mkdir -p $SOBJ_DIR
 
-COMPILE_HELPERS="clang++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $CPPFLAGS -fPIC -std=c++11"
+clang -c $CPP_OUT/bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $STD_INCLUDES $DEBUG -fPIC -o $OBJ_DIR/wrappers.o
+
+COMPILE_HELPERS="clang++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $CPPFLAGS -fPIC -std=c++11 -o $OBJ_DIR/helpers.o"
 echo $COMPILE_HELPERS
 eval $COMPILE_HELPERS
 
-LINK_CMD="clang++ -shared $STD_LIBS $LIBS bitreader_wrap.o helpers.o -o $DLL_NAME $LDFLAGS"
+LINK_CMD="clang++ -shared $STD_LIBS $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME $LDFLAGS"
 echo $LINK_CMD
 eval $LINK_CMD
 
