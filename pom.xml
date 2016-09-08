@@ -48,6 +48,7 @@
                     <includes>
                         <include>**/AllTests.class</include>
                     </includes>
+                    <argLine>-Djava.library.path=${basedir}/tools/swig</argLine>
                 </configuration>
             </plugin>
         </plugins>

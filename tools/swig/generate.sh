@@ -30,6 +30,8 @@ case `uname` in
     ;;
     Linux)
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
+
+        DLL_NAME=libirreader.so
     ;;
     *)
         echo Unknown environment: `uname`
@@ -39,7 +41,6 @@ esac
 
 STD_INCLUDES=
 
-DLL_NAME=irreader.so
 
 #sudo apt-get install gcc-4.7
 #wget -nc http://llvm.org/releases/3.5.0/llvm-3.5.0.src.tar.xz
