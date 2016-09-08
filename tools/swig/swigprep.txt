@@ -1,4 +1,4 @@
-%includefile "/usr/local/share/swig/3.0.2/swig.swg" %beginfile
+%includefile "/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/swig.swg" %beginfile
 /* -----------------------------------------------------------------------------
  * swig.swg
  *
@@ -314,7 +314,7 @@
  * Include all the warnings labels and macros 
  * ----------------------------------------------------------------------------- */
 
-%includefile "/usr/local/share/swig/3.0.2/swigwarnings.swg" %beginfile
+%includefile "/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/swigwarnings.swg" %beginfile
 /*
   Include the internal swig macro codes. These macros correspond to
   the one found in Source/Include/swigwarn.h plus the 'SWIG' prefix.
@@ -353,7 +353,7 @@
  * SWIG warning codes
  * ----------------------------------------------------------------------------- */
 
-%includefile "/usr/local/share/swig/3.0.2/swigwarn.swg" %beginfile
+%includefile "/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/swigwarn.swg" %beginfile
 /* SWIG warning codes */
 
 
@@ -566,6 +566,14 @@
 
 
 
+/* please leave 720-739 free for Scilab */
+
+
+
+/* please leave 740-759 free for Python */
+
+
+
 
 /* please leave 800-809 free for Ruby */
 
@@ -586,7 +594,9 @@
 
 
 
+
 /* please leave 810-829 free for Java */
+
 
 
 
@@ -740,6 +750,7 @@
 
 
 /* Macros for precedence levels */
+
 
 
 
@@ -1109,14 +1120,14 @@
 
 %endoffile
 
-%includefile "/usr/local/share/swig/3.0.2/java/java.swg" %beginfile
+%includefile "/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/java/java.swg" %beginfile
 /* -----------------------------------------------------------------------------
  * java.swg
  *
  * Java typemaps
  * ----------------------------------------------------------------------------- */
 
-%includefile "/usr/local/share/swig/3.0.2/java/javahead.swg" %beginfile
+%includefile "/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/java/javahead.swg" %beginfile
 /* -----------------------------------------------------------------------------
  * javahead.swg
  *
@@ -1524,8 +1535,11 @@ SWIGINTERN const char * SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
   bae = (*jenv)->GetByteArrayElements(jenv, ba, 0);
   sz = (*jenv)->GetArrayLength(jenv, ba);
   $1 = 0;
-  for(i=0; i<sz; i++) {
-    $1 = ($1 << 8) | ($1_type)(unsigned char)bae[i];
+  if (sz > 0) {
+    $1 = ($1_type)(signed char)bae[0];
+    for(i=1; i<sz; i++) {
+      $1 = ($1 << 8) | ($1_type)(unsigned char)bae[i];
+    }
   }
   (*jenv)->ReleaseByteArrayElements(jenv, ba, bae, 0);
 }
@@ -1548,8 +1562,11 @@ SWIGINTERN const char * SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
   bae = (*jenv)->GetByteArrayElements(jenv, ba, 0);
   sz = (*jenv)->GetArrayLength(jenv, ba);
   $result = 0;
-  for(i=0; i<sz; i++) {
-    $result = ($result << 8) | ($1_type)(unsigned char)bae[i];
+  if (sz > 0) {
+    $result = ($1_type)(signed char)bae[0];
+    for(i=1; i<sz; i++) {
+      $result = ($result << 8) | ($1_type)(unsigned char)bae[i];
+    }
   }
   (*jenv)->ReleaseByteArrayElements(jenv, ba, bae, 0);
 }
@@ -1614,11 +1631,12 @@ SWIGINTERN const char * SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
 }
 
 %typemap(directorin, descriptor="Ljava/lang/String;", noblock=1) char * {
- $input = 0;
+  $input = 0;
   if ($1) {
     $input = (*jenv)->NewStringUTF(jenv, (const char *)$1);
     if (!$input) return $null;
   }
+  Swig::LocalRefGuard $1_refguard(jenv, $input);
 }
 
 %typemap(freearg, noblock=1) char * { if ($1) (*jenv)->ReleaseStringUTFChars(jenv, $input, (const char *)$1); }
@@ -1765,8 +1783,11 @@ SWIGINTERN const char * SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
   sz = (*jenv)->GetArrayLength(jenv, ba);
   $1 = &temp;
   temp = 0;
-  for(i=0; i<sz; i++) {
-    temp = (temp << 8) | ($*1_ltype)(unsigned char)bae[i];
+  if (sz > 0) {
+    temp = ($*1_ltype)(signed char)bae[0];
+    for(i=1; i<sz; i++) {
+      temp = (temp << 8) | ($*1_ltype)(unsigned char)bae[i];
+    }
   }
   (*jenv)->ReleaseByteArrayElements(jenv, ba, bae, 0);
 }
@@ -1791,8 +1812,11 @@ SWIGINTERN const char * SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
   sz = (*jenv)->GetArrayLength(jenv, ba);
   $result = &temp;
   temp = 0;
-  for(i=0; i<sz; i++) {
-    temp = (temp << 8) | ($*1_ltype)(unsigned char)bae[i];
+  if (sz > 0) {
+    temp = ($*1_ltype)(signed char)bae[0];
+    for(i=1; i<sz; i++) {
+      temp = (temp << 8) | ($*1_ltype)(unsigned char)bae[i];
+    }
   }
   (*jenv)->ReleaseByteArrayElements(jenv, ba, bae, 0);
 }
@@ -1848,8 +1872,8 @@ SWIGINTERN const char * SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
 
 %typemap(directorin,descriptor="L$packagepath/$&javaclassname;") SWIGTYPE 
 %{ $input = 0;
-   *(($&1_ltype*)&$input) = &$1; %}
-%typemap(javadirectorin) SWIGTYPE "new $&javaclassname($jniinput, false)"
+   *(($&1_ltype*)&$input) = new $1_ltype((const $1_ltype &)$1); %}
+%typemap(javadirectorin) SWIGTYPE "new $&javaclassname($jniinput, true)"
 %typemap(javadirectorout) SWIGTYPE "$&javaclassname.getCPtr($javacall)"
 
 /* Generic pointers and references */
@@ -1945,6 +1969,7 @@ SWIGINTERN const char * SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
     $input = (*jenv)->NewStringUTF(jenv, (const char *)$1);
     if (!$input) return $null;
   }
+  Swig::LocalRefGuard $1_refguard(jenv, $input);
 }
 
 %typemap(argout) char[ANY], char[] ""
@@ -2424,11 +2449,11 @@ SWIGINTERN const char * SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
 
 /* Set the default javabody typemaps to use protected visibility.
    Use the macros to change to public if using multiple modules. */
-/*@SWIG:/usr/local/share/swig/3.0.2/java/java.swg,1145,SWIG_JAVABODY_PROXY@*/
+/*@SWIG:/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/java/java.swg,1159,SWIG_JAVABODY_PROXY@*/
 // Base proxy classes
 %typemap(javabody) SWIGTYPE %{
-  private long swigCPtr;
-  protected boolean swigCMemOwn;
+  private transient long swigCPtr;
+  protected transient boolean swigCMemOwn;
 
   protected $javaclassname(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
@@ -2442,7 +2467,7 @@ SWIGINTERN const char * SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
 
 // Derived proxy classes
 %typemap(javabody_derived) SWIGTYPE %{
-  private long swigCPtr;
+  private transient long swigCPtr;
 
   protected $javaclassname(long cPtr, boolean cMemoryOwn) {
     super($imclassname.$javaclazznameSWIGUpcast(cPtr), cMemoryOwn);
@@ -2454,12 +2479,12 @@ SWIGINTERN const char * SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
   }
 %}
 /*@SWIG@*/
-/*@SWIG:/usr/local/share/swig/3.0.2/java/java.swg,1176,SWIG_JAVABODY_TYPEWRAPPER@*/
+/*@SWIG:/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/java/java.swg,1190,SWIG_JAVABODY_TYPEWRAPPER@*/
 // Typewrapper classes
 %typemap(javabody) SWIGTYPE *, SWIGTYPE &, SWIGTYPE &&, SWIGTYPE [] %{
-  private long swigCPtr;
+  private transient long swigCPtr;
 
-  protected $javaclassname(long cPtr, boolean futureUse) {
+  protected $javaclassname(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
     swigCPtr = cPtr;
   }
 
@@ -2475,7 +2500,7 @@ SWIGINTERN const char * SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
 %typemap(javabody) SWIGTYPE (CLASS::*) %{
   private String swigCMemberPtr;
 
-  protected $javaclassname(String cMemberPtr, boolean futureUse) {
+  protected $javaclassname(String cMemberPtr, @SuppressWarnings("unused") boolean futureUse) {
     swigCMemberPtr = cMemberPtr;
   }
 
@@ -2527,7 +2552,7 @@ SWIGINTERN const char * SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
 
 
 // Set the default for SWIGTYPE: Java owns the C/C++ object.
-/*@SWIG:/usr/local/share/swig/3.0.2/java/java.swg,1243,SWIG_PROXY_CONSTRUCTOR@*/
+/*@SWIG:/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/java/java.swg,1257,SWIG_PROXY_CONSTRUCTOR@*/
 %typemap(javaconstruct,directorconnect="\n    $imclassname.$javaclazznamedirector_connect(this, swigCPtr, swigCMemOwn, true);") SWIGTYPE {
     this($imcall, true);$directorconnect
   }
@@ -2607,8 +2632,8 @@ SWIGINTERN const char * SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
 %typemap(freearg) (char *STRING, size_t LENGTH) ""
 %typemap(in)      (char *STRING, size_t LENGTH) {
   if ($input) {
-    $1 = (char *) (*jenv)->GetByteArrayElements(jenv, $input, 0);
-    $2 = (size_t) (*jenv)->GetArrayLength(jenv, $input);
+    $1 = ($1_ltype) (*jenv)->GetByteArrayElements(jenv, $input, 0);
+    $2 = ($2_type) (*jenv)->GetArrayLength(jenv, $input);
   } else {
     $1 = 0;
     $2 = 0;
@@ -2618,16 +2643,18 @@ SWIGINTERN const char * SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
   if ($input) (*jenv)->ReleaseByteArrayElements(jenv, $input, (jbyte *)$1, 0);
 }
 %typemap(directorin, descriptor="[B") (char *STRING, size_t LENGTH) {
-  jbyteArray jb = (jenv)->NewByteArray($2);
-  (jenv)->SetByteArrayRegion(jb, 0, $2, (jbyte *)$1);
+  jbyteArray jb = (jenv)->NewByteArray((jsize)$2);
+  (jenv)->SetByteArrayRegion(jb, 0, (jsize)$2, (jbyte *)$1);
   $input = jb;
 }
 %typemap(directorargout) (char *STRING, size_t LENGTH)
-%{(jenv)->GetByteArrayRegion($input, 0, $2, (jbyte *)$1); %}
+%{(jenv)->GetByteArrayRegion($input, 0, (jsize)$2, (jbyte *)$1);
+(jenv)->DeleteLocalRef($input);%}
+%typemap(javadirectorin, descriptor="[B") (char *STRING, size_t LENGTH) "$jniinput"
 %apply (char *STRING, size_t LENGTH) { (char *STRING, int LENGTH) }
 
 /* java keywords */
-%includefile "/usr/local/share/swig/3.0.2/java/javakw.swg" %beginfile
+%includefile "/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/java/javakw.swg" %beginfile
 
 
 
@@ -2701,7 +2728,7 @@ SWIGINTERN const char * SWIG_UnpackData(const char *c, void *ptr, size_t sz) {
 %endoffile
 
 // Default enum handling
-%includefile "/usr/local/share/swig/3.0.2/java/enumtypesafe.swg" %beginfile
+%includefile "/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/java/enumtypesafe.swg" %beginfile
 /* -----------------------------------------------------------------------------
  * enumtypesafe.swg
  *
@@ -2878,8 +2905,7 @@ double GetConstantFPDoubleValue(LLVMValueRef ConstantVal);
 
 
 
-%includefile "/Users/jondoe/Downloads/llvm-3.5.0.src_hacked/include/llvm/Support/DataTypes.h" %beginfile
-/* include/llvm/Support/DataTypes.h.  Generated from DataTypes.h.in by configure.  */
+%includefile "/usr/local/Cellar/llvm/3.8.1/include/llvm/Support/DataTypes.h" %beginfile
 /*===-- include/Support/DataTypes.h - Define fixed size types -----*- C -*-===*\
 |*                                                                            *|
 |*                     The LLVM Compiler Infrastructure                       *|
@@ -2903,7 +2929,7 @@ double GetConstantFPDoubleValue(LLVMValueRef ConstantVal);
 
 /* Please leave this file C-compatible. */
 
-/* Please keep this file in sync with DataTypes.h.cmake */
+/* Please keep this file in sync with DataTypes.h.in */
 
 
 
@@ -2911,7 +2937,7 @@ double GetConstantFPDoubleValue(LLVMValueRef ConstantVal);
 %constant HAVE_INTTYPES_H = 1;
 %constant HAVE_STDINT_H = 1;
 %constant HAVE_UINT64_T = 1;
-/* #undef HAVE_U_INT64_T */
+%constant HAVE_U_INT64_T = 1;
 
 
 
@@ -2987,6 +3013,13 @@ double GetConstantFPDoubleValue(LLVMValueRef ConstantVal);
 
 
 
+
+
+
+
+
+
+
 /* Set defaults for constants which we cannot find. */
 
 %constant INT64_MAX = 9223372036854775807LL;
@@ -3003,14 +3036,8 @@ double GetConstantFPDoubleValue(LLVMValueRef ConstantVal);
 
 
 
-
-
-
-
-
-
 %endoffile
-%includefile "/Users/jondoe/Downloads/llvm-3.5.0.src_hacked/include/llvm-c/Support.h" %beginfile
+%includefile "/usr/local/Cellar/llvm/3.8.1/include/llvm-c/Support.h" %beginfile
 /*===-- llvm-c/Support.h - Support C Interface --------------------*- C -*-===*\
 |*                                                                            *|
 |*                     The LLVM Compiler Infrastructure                       *|
@@ -3033,24 +3060,6 @@ double GetConstantFPDoubleValue(LLVMValueRef ConstantVal);
 
 
 
-/**
- * @defgroup LLVMCSupportTypes Types and Enumerations
- *
- * @{
- */
-
-typedef int LLVMBool;
-
-/**
- * Used to pass regions of memory through LLVM interfaces.
- *
- * @see llvm::MemoryBuffer
- */
-typedef struct LLVMOpaqueMemoryBuffer *LLVMMemoryBufferRef;
-
-/**
- * @}
- */
 
 /**
  * This function permanently loads the dynamic library at the given path.
@@ -3060,13 +3069,42 @@ typedef struct LLVMOpaqueMemoryBuffer *LLVMMemoryBufferRef;
   */
 LLVMBool LLVMLoadLibraryPermanently(const char* Filename);
 
+/**
+ * This function parses the given arguments using the LLVM command line parser.
+ * Note that the only stable thing about this function is its signature; you
+ * cannot rely on any particular set of command line arguments being interpreted
+ * the same way across LLVM versions.
+ *
+ * @see llvm::cl::ParseCommandLineOptions()
+ */
+void LLVMParseCommandLineOptions(int argc, const char *const *argv,
+                                 const char *Overview);
+
+/**
+ * This function will search through all previously loaded dynamic
+ * libraries for the symbol \p symbolName. If it is found, the address of
+ * that symbol is returned. If not, null is returned.
+ *
+ * @see sys::DynamicLibrary::SearchForAddressOfSymbol()
+ */
+void *LLVMSearchForAddressOfSymbol(const char *symbolName);
+
+/**
+ * This functions permanently adds the symbol \p symbolName with the
+ * value \p symbolValue.  These symbols are searched before any
+ * libraries.
+ *
+ * @see sys::DynamicLibrary::AddSymbol()
+ */
+void LLVMAddSymbol(const char *symbolName, void *symbolValue);
+
 
 
 
 
 
 %endoffile
-%includefile "/Users/jondoe/Downloads/llvm-3.5.0.src_hacked/include/llvm-c/Core.h" %beginfile
+%includefile "/usr/local/Cellar/llvm/3.8.1/include/llvm-c/Core.h" %beginfile
 /*===-- llvm-c/Core.h - Core Library C Interface ------------------*- C -*-===*\
 |*                                                                            *|
 |*                     The LLVM Compiler Infrastructure                       *|
@@ -3080,6 +3118,7 @@ LLVMBool LLVMLoadLibraryPermanently(const char* Filename);
 |* the LLVM intermediate representation.                                      *|
 |*                                                                            *|
 \*===----------------------------------------------------------------------===*/
+
 
 
 
@@ -3109,15 +3148,6 @@ LLVMBool LLVMLoadLibraryPermanently(const char* Filename);
  * the LLVM intermediate representation as well as other related types
  * and utilities.
  *
- * LLVM uses a polymorphic type hierarchy which C cannot represent, therefore
- * parameters must be passed as base types. Despite the declared types, most
- * of the functions provided operate only on branches of the type hierarchy.
- * The declared parameter names are descriptive and specify which type is
- * required. Additionally, each type hierarchy is documented along with the
- * functions that operate upon it. For more detail, refer to LLVM's C++ code.
- * If in doubt, refer to Core.cpp, which performs parameter downcasts in the
- * form unwrap<RequiredType>(Param).
- *
  * Many exotic languages can interoperate with C code but have a harder time
  * with C++ due to name mangling. So in addition to C, this interface enables
  * tools written in such languages.
@@ -3130,74 +3160,6 @@ LLVMBool LLVMLoadLibraryPermanently(const char* Filename);
  *
  * @{
  */
-
-/* Opaque types. */
-
-/**
- * The top-level container for all LLVM global data. See the LLVMContext class.
- */
-typedef struct LLVMOpaqueContext *LLVMContextRef;
-
-/**
- * The top-level container for all other LLVM Intermediate Representation (IR)
- * objects.
- *
- * @see llvm::Module
- */
-typedef struct LLVMOpaqueModule *LLVMModuleRef;
-
-/**
- * Each value in the LLVM IR has a type, an LLVMTypeRef.
- *
- * @see llvm::Type
- */
-typedef struct LLVMOpaqueType *LLVMTypeRef;
-
-/**
- * Represents an individual value in LLVM IR.
- *
- * This models llvm::Value.
- */
-typedef struct LLVMOpaqueValue *LLVMValueRef;
-
-/**
- * Represents a basic block of instructions in LLVM IR.
- *
- * This models llvm::BasicBlock.
- */
-typedef struct LLVMOpaqueBasicBlock *LLVMBasicBlockRef;
-
-/**
- * Represents an LLVM basic block builder.
- *
- * This models llvm::IRBuilder.
- */
-typedef struct LLVMOpaqueBuilder *LLVMBuilderRef;
-
-/**
- * Interface used to provide a module to JIT or interpreter.
- * This is now just a synonym for llvm::Module, but we have to keep using the
- * different type to keep binary compatibility.
- */
-typedef struct LLVMOpaqueModuleProvider *LLVMModuleProviderRef;
-
-/** @see llvm::PassManagerBase */
-typedef struct LLVMOpaquePassManager *LLVMPassManagerRef;
-
-/** @see llvm::PassRegistry */
-typedef struct LLVMOpaquePassRegistry *LLVMPassRegistryRef;
-
-/**
- * Used to get the users and usees of a Value.
- *
- * @see llvm::Use */
-typedef struct LLVMOpaqueUse *LLVMUseRef;
-
-
-/**
- * @see llvm::DiagnosticInfo
- */
-typedef struct LLVMOpaqueDiagnosticInfo *LLVMDiagnosticInfoRef;
 
 typedef enum {
     LLVMZExtAttribute       = 1<<0,
@@ -3230,14 +3192,15 @@ typedef enum {
     /* FIXME: These attributes are currently not included in the C API as
        a temporary measure until the API/ABI impact to the C API is understood
        and the path forward agreed upon.
-    LLVMAddressSafety = 1ULL << 32,
-    LLVMStackProtectStrongAttribute = 1ULL<<33,
-    LLVMCold = 1ULL << 34,
-    LLVMOptimizeNone = 1ULL << 35,
-    LLVMInAllocaAttribute = 1ULL << 36,
-    LLVMNonNullAttribute = 1ULL << 37,
-    LLVMJumpTableAttribute = 1ULL << 38,
-    LLVMDereferenceableAttribute = 1ULL << 39,
+    LLVMSanitizeAddressAttribute = 1ULL << 32,
+    LLVMStackProtectStrongAttribute = 1ULL<<35,
+    LLVMColdAttribute = 1ULL << 40,
+    LLVMOptimizeNoneAttribute = 1ULL << 42,
+    LLVMInAllocaAttribute = 1ULL << 43,
+    LLVMNonNullAttribute = 1ULL << 44,
+    LLVMJumpTableAttribute = 1ULL << 45,
+    LLVMConvergentAttribute = 1ULL << 46,
+    LLVMSafeStackAttribute = 1ULL << 47,
     */
 } LLVMAttribute;
 
@@ -3316,8 +3279,12 @@ typedef enum {
 
   /* Exception Handling Operators */
   LLVMResume         = 58,
-  LLVMLandingPad     = 59
-
+  LLVMLandingPad     = 59,
+  LLVMCleanupRet     = 61,
+  LLVMCatchRet       = 62,
+  LLVMCatchPad       = 63,
+  LLVMCleanupPad     = 64,
+  LLVMCatchSwitch    = 65
 } LLVMOpcode;
 
 typedef enum {
@@ -3336,7 +3303,8 @@ typedef enum {
   LLVMPointerTypeKind,     /**< Pointers */
   LLVMVectorTypeKind,      /**< SIMD 'packed' format, or other vector type */
   LLVMMetadataTypeKind,    /**< Metadata */
-  LLVMX86_MMXTypeKind      /**< X86 MMX */
+  LLVMX86_MMXTypeKind,     /**< X86 MMX */
+  LLVMTokenTypeKind        /**< Tokens */
 } LLVMTypeKind;
 
 typedef enum {
@@ -3496,35 +3464,10 @@ void LLVMInitializeCore(LLVMPassRegistryRef R);
     @see ManagedStatic */
 void LLVMShutdown(void);
 
-
 /*===-- Error handling ----------------------------------------------------===*/
 
 char *LLVMCreateMessage(const char *Message);
 void LLVMDisposeMessage(char *Message);
-
-typedef void (*LLVMFatalErrorHandler)(const char *Reason);
-
-/**
- * Install a fatal error handler. By default, if LLVM detects a fatal error, it
- * will call exit(1). This may not be appropriate in many contexts. For example,
- * doing exit(1) will bypass many crash reporting/tracing system tools. This
- * function allows you to install a callback that will be invoked prior to the
- * call to exit(1).
- */
-void LLVMInstallFatalErrorHandler(LLVMFatalErrorHandler Handler);
-
-/**
- * Reset the fatal error handler. This resets LLVM's fatal error handling
- * behavior to the default.
- */
-void LLVMResetFatalErrorHandler(void);
-
-/**
- * Enable LLVM's built-in stack trace code. This intercepts the OS's crash
- * signals and prints which component of LLVM you were in at the time if the
- * crash.
- */
-void LLVMEnablePrettyStackTrace(void);
 
 /**
  * @defgroup LLVMCCoreContext Contexts
@@ -3629,6 +3572,10 @@ LLVMModuleRef LLVMModuleCreateWithName(const char *ModuleID);
  */
 LLVMModuleRef LLVMModuleCreateWithNameInContext(const char *ModuleID,
                                                 LLVMContextRef C);
+/**
+ * Return an exact copy of the specified module.
+ */
+LLVMModuleRef LLVMCloneModule(LLVMModuleRef M);
 
 /**
  * Destroy a module instance.
@@ -3872,6 +3819,7 @@ LLVMTypeRef LLVMInt8TypeInContext(LLVMContextRef C);
 LLVMTypeRef LLVMInt16TypeInContext(LLVMContextRef C);
 LLVMTypeRef LLVMInt32TypeInContext(LLVMContextRef C);
 LLVMTypeRef LLVMInt64TypeInContext(LLVMContextRef C);
+LLVMTypeRef LLVMInt128TypeInContext(LLVMContextRef C);
 LLVMTypeRef LLVMIntTypeInContext(LLVMContextRef C, unsigned NumBits);
 
 /**
@@ -3883,6 +3831,7 @@ LLVMTypeRef LLVMInt8Type(void);
 LLVMTypeRef LLVMInt16Type(void);
 LLVMTypeRef LLVMInt32Type(void);
 LLVMTypeRef LLVMInt64Type(void);
+LLVMTypeRef LLVMInt128Type(void);
 LLVMTypeRef LLVMIntType(unsigned NumBits);
 unsigned LLVMGetIntTypeWidth(LLVMTypeRef IntegerTy);
 
@@ -4062,6 +4011,13 @@ unsigned LLVMCountStructElementTypes(LLVMTypeRef StructTy);
 void LLVMGetStructElementTypes(LLVMTypeRef StructTy, LLVMTypeRef *Dest);
 
 /**
+ * Get the type of the element at a given index in the structure.
+ *
+ * @see llvm::StructType::getTypeAtIndex()
+ */
+LLVMTypeRef LLVMStructGetTypeAtIndex(LLVMTypeRef StructTy, unsigned i);
+
+/**
  * Determine whether a structure is packed.
  *
  * @see llvm::StructType::isPacked()
@@ -4078,7 +4034,6 @@ LLVMBool LLVMIsOpaqueStruct(LLVMTypeRef StructTy);
 /**
  * @}
  */
-
 
 /**
  * @defgroup LLVMCCoreTypeSequential Sequential Types
@@ -4294,6 +4249,10 @@ LLVMTypeRef LLVMX86MMXType(void);
 
 
 
+
+
+
+
 /**
  * @defgroup LLVMCCoreValueGeneral General APIs
  *
@@ -4370,7 +4329,10 @@ LLVMBool LLVMIsUndef(LLVMValueRef Val);
  */
 
 
-      LLVMValueRef LLVMIsAArgument(LLVMValueRef Val);                                 LLVMValueRef LLVMIsABasicBlock(LLVMValueRef Val);                               LLVMValueRef LLVMIsAInlineAsm(LLVMValueRef Val);                                LLVMValueRef LLVMIsAMDNode(LLVMValueRef Val);                                   LLVMValueRef LLVMIsAMDString(LLVMValueRef Val);                                 LLVMValueRef LLVMIsAUser(LLVMValueRef Val);                                       LLVMValueRef LLVMIsAConstant(LLVMValueRef Val);                                   LLVMValueRef LLVMIsABlockAddress(LLVMValueRef Val);                             LLVMValueRef LLVMIsAConstantAggregateZero(LLVMValueRef Val);                    LLVMValueRef LLVMIsAConstantArray(LLVMValueRef Val);                            LLVMValueRef LLVMIsAConstantDataSequential(LLVMValueRef Val);                     LLVMValueRef LLVMIsAConstantDataArray(LLVMValueRef Val);                        LLVMValueRef LLVMIsAConstantDataVector(LLVMValueRef Val);                     LLVMValueRef LLVMIsAConstantExpr(LLVMValueRef Val);                             LLVMValueRef LLVMIsAConstantFP(LLVMValueRef Val);                               LLVMValueRef LLVMIsAConstantInt(LLVMValueRef Val);                              LLVMValueRef LLVMIsAConstantPointerNull(LLVMValueRef Val);                      LLVMValueRef LLVMIsAConstantStruct(LLVMValueRef Val);                           LLVMValueRef LLVMIsAConstantVector(LLVMValueRef Val);                           LLVMValueRef LLVMIsAGlobalValue(LLVMValueRef Val);                                LLVMValueRef LLVMIsAGlobalAlias(LLVMValueRef Val);                              LLVMValueRef LLVMIsAGlobalObject(LLVMValueRef Val);                               LLVMValueRef LLVMIsAFunction(LLVMValueRef Val);                                 LLVMValueRef LLVMIsAGlobalVariable(LLVMValueRef Val);                       LLVMValueRef LLVMIsAUndefValue(LLVMValueRef Val);                             LLVMValueRef LLVMIsAInstruction(LLVMValueRef Val);                                LLVMValueRef LLVMIsABinaryOperator(LLVMValueRef Val);                           LLVMValueRef LLVMIsACallInst(LLVMValueRef Val);                                   LLVMValueRef LLVMIsAIntrinsicInst(LLVMValueRef Val);                              LLVMValueRef LLVMIsADbgInfoIntrinsic(LLVMValueRef Val);                           LLVMValueRef LLVMIsADbgDeclareInst(LLVMValueRef Val);                         LLVMValueRef LLVMIsAMemIntrinsic(LLVMValueRef Val);                               LLVMValueRef LLVMIsAMemCpyInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAMemMoveInst(LLVMValueRef Val);                              LLVMValueRef LLVMIsAMemSetInst(LLVMValueRef Val);                         LLVMValueRef LLVMIsACmpInst(LLVMValueRef Val);                                    LLVMValueRef LLVMIsAFCmpInst(LLVMValueRef Val);                                 LLVMValueRef LLVMIsAICmpInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAExtractElementInst(LLVMValueRef Val);                       LLVMValueRef LLVMIsAGetElementPtrInst(LLVMValueRef Val);                        LLVMValueRef LLVMIsAInsertElementInst(LLVMValueRef Val);                        LLVMValueRef LLVMIsAInsertValueInst(LLVMValueRef Val);                          LLVMValueRef LLVMIsALandingPadInst(LLVMValueRef Val);                           LLVMValueRef LLVMIsAPHINode(LLVMValueRef Val);                                  LLVMValueRef LLVMIsASelectInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAShuffleVectorInst(LLVMValueRef Val);                        LLVMValueRef LLVMIsAStoreInst(LLVMValueRef Val);                                LLVMValueRef LLVMIsATerminatorInst(LLVMValueRef Val);                             LLVMValueRef LLVMIsABranchInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAIndirectBrInst(LLVMValueRef Val);                           LLVMValueRef LLVMIsAInvokeInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAReturnInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsASwitchInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAUnreachableInst(LLVMValueRef Val);                          LLVMValueRef LLVMIsAResumeInst(LLVMValueRef Val);                             LLVMValueRef LLVMIsAUnaryInstruction(LLVMValueRef Val);                           LLVMValueRef LLVMIsAAllocaInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsACastInst(LLVMValueRef Val);                                   LLVMValueRef LLVMIsAAddrSpaceCastInst(LLVMValueRef Val);                        LLVMValueRef LLVMIsABitCastInst(LLVMValueRef Val);                              LLVMValueRef LLVMIsAFPExtInst(LLVMValueRef Val);                                LLVMValueRef LLVMIsAFPToSIInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAFPToUIInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAFPTruncInst(LLVMValueRef Val);                              LLVMValueRef LLVMIsAIntToPtrInst(LLVMValueRef Val);                             LLVMValueRef LLVMIsAPtrToIntInst(LLVMValueRef Val);                             LLVMValueRef LLVMIsASExtInst(LLVMValueRef Val);                                 LLVMValueRef LLVMIsASIToFPInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsATruncInst(LLVMValueRef Val);                                LLVMValueRef LLVMIsAUIToFPInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAZExtInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAExtractValueInst(LLVMValueRef Val);                         LLVMValueRef LLVMIsALoadInst(LLVMValueRef Val);                                 LLVMValueRef LLVMIsAVAArgInst(LLVMValueRef Val);
+      LLVMValueRef LLVMIsAArgument(LLVMValueRef Val);                                 LLVMValueRef LLVMIsABasicBlock(LLVMValueRef Val);                               LLVMValueRef LLVMIsAInlineAsm(LLVMValueRef Val);                                LLVMValueRef LLVMIsAUser(LLVMValueRef Val);                                       LLVMValueRef LLVMIsAConstant(LLVMValueRef Val);                                   LLVMValueRef LLVMIsABlockAddress(LLVMValueRef Val);                             LLVMValueRef LLVMIsAConstantAggregateZero(LLVMValueRef Val);                    LLVMValueRef LLVMIsAConstantArray(LLVMValueRef Val);                            LLVMValueRef LLVMIsAConstantDataSequential(LLVMValueRef Val);                     LLVMValueRef LLVMIsAConstantDataArray(LLVMValueRef Val);                        LLVMValueRef LLVMIsAConstantDataVector(LLVMValueRef Val);                     LLVMValueRef LLVMIsAConstantExpr(LLVMValueRef Val);                             LLVMValueRef LLVMIsAConstantFP(LLVMValueRef Val);                               LLVMValueRef LLVMIsAConstantInt(LLVMValueRef Val);                              LLVMValueRef LLVMIsAConstantPointerNull(LLVMValueRef Val);                      LLVMValueRef LLVMIsAConstantStruct(LLVMValueRef Val);                           LLVMValueRef LLVMIsAConstantTokenNone(LLVMValueRef Val);                        LLVMValueRef LLVMIsAConstantVector(LLVMValueRef Val);                           LLVMValueRef LLVMIsAGlobalValue(LLVMValueRef Val);                                LLVMValueRef LLVMIsAGlobalAlias(LLVMValueRef Val);                              LLVMValueRef LLVMIsAGlobalObject(LLVMValueRef Val);                               LLVMValueRef LLVMIsAFunction(LLVMValueRef Val);                                 LLVMValueRef LLVMIsAGlobalVariable(LLVMValueRef Val);                       LLVMValueRef LLVMIsAUndefValue(LLVMValueRef Val);                             LLVMValueRef LLVMIsAInstruction(LLVMValueRef Val);                                LLVMValueRef LLVMIsABinaryOperator(LLVMValueRef Val);                           LLVMValueRef LLVMIsACallInst(LLVMValueRef Val);                                   LLVMValueRef LLVMIsAIntrinsicInst(LLVMValueRef Val);                              LLVMValueRef LLVMIsADbgInfoIntrinsic(LLVMValueRef Val);                           LLVMValueRef LLVMIsADbgDeclareInst(LLVMValueRef Val);                         LLVMValueRef LLVMIsAMemIntrinsic(LLVMValueRef Val);                               LLVMValueRef LLVMIsAMemCpyInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAMemMoveInst(LLVMValueRef Val);                              LLVMValueRef LLVMIsAMemSetInst(LLVMValueRef Val);                         LLVMValueRef LLVMIsACmpInst(LLVMValueRef Val);                                    LLVMValueRef LLVMIsAFCmpInst(LLVMValueRef Val);                                 LLVMValueRef LLVMIsAICmpInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAExtractElementInst(LLVMValueRef Val);                       LLVMValueRef LLVMIsAGetElementPtrInst(LLVMValueRef Val);                        LLVMValueRef LLVMIsAInsertElementInst(LLVMValueRef Val);                        LLVMValueRef LLVMIsAInsertValueInst(LLVMValueRef Val);                          LLVMValueRef LLVMIsALandingPadInst(LLVMValueRef Val);                           LLVMValueRef LLVMIsAPHINode(LLVMValueRef Val);                                  LLVMValueRef LLVMIsASelectInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAShuffleVectorInst(LLVMValueRef Val);                        LLVMValueRef LLVMIsAStoreInst(LLVMValueRef Val);                                LLVMValueRef LLVMIsATerminatorInst(LLVMValueRef Val);                             LLVMValueRef LLVMIsABranchInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAIndirectBrInst(LLVMValueRef Val);                           LLVMValueRef LLVMIsAInvokeInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAReturnInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsASwitchInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAUnreachableInst(LLVMValueRef Val);                          LLVMValueRef LLVMIsAResumeInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsACleanupReturnInst(LLVMValueRef Val);                        LLVMValueRef LLVMIsACatchReturnInst(LLVMValueRef Val);                        LLVMValueRef LLVMIsAFuncletPadInst(LLVMValueRef Val);                             LLVMValueRef LLVMIsACatchPadInst(LLVMValueRef Val);                             LLVMValueRef LLVMIsACleanupPadInst(LLVMValueRef Val);                         LLVMValueRef LLVMIsAUnaryInstruction(LLVMValueRef Val);                           LLVMValueRef LLVMIsAAllocaInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsACastInst(LLVMValueRef Val);                                   LLVMValueRef LLVMIsAAddrSpaceCastInst(LLVMValueRef Val);                        LLVMValueRef LLVMIsABitCastInst(LLVMValueRef Val);                              LLVMValueRef LLVMIsAFPExtInst(LLVMValueRef Val);                                LLVMValueRef LLVMIsAFPToSIInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAFPToUIInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAFPTruncInst(LLVMValueRef Val);                              LLVMValueRef LLVMIsAIntToPtrInst(LLVMValueRef Val);                             LLVMValueRef LLVMIsAPtrToIntInst(LLVMValueRef Val);                             LLVMValueRef LLVMIsASExtInst(LLVMValueRef Val);                                 LLVMValueRef LLVMIsASIToFPInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsATruncInst(LLVMValueRef Val);                                LLVMValueRef LLVMIsAUIToFPInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAZExtInst(LLVMValueRef Val);                               LLVMValueRef LLVMIsAExtractValueInst(LLVMValueRef Val);                         LLVMValueRef LLVMIsALoadInst(LLVMValueRef Val);                                 LLVMValueRef LLVMIsAVAArgInst(LLVMValueRef Val);
+
+LLVMValueRef LLVMIsAMDNode(LLVMValueRef Val);
+LLVMValueRef LLVMIsAMDString(LLVMValueRef Val);
 
 /**
  * @}
@@ -4445,6 +4407,13 @@ LLVMValueRef LLVMGetUsedValue(LLVMUseRef U);
  * @see llvm::User::getOperand()
  */
 LLVMValueRef LLVMGetOperand(LLVMValueRef Val, unsigned Index);
+
+/**
+ * Obtain the use of an operand at a specific index in a llvm::User value.
+ *
+ * @see llvm::User::getOperandUse()
+ */
+LLVMUseRef LLVMGetOperandUse(LLVMValueRef Val, unsigned Index);
 
 /**
  * Set an operand at a specific index in a llvm::User value.
@@ -4607,6 +4576,14 @@ unsigned long long LLVMConstIntGetZExtValue(LLVMValueRef ConstantVal);
 long long LLVMConstIntGetSExtValue(LLVMValueRef ConstantVal);
 
 /**
+ * Obtain the double value for an floating point constant value.
+ * losesInfo indicates if some precision was lost in the conversion.
+ *
+ * @see llvm::ConstantFP::getDoubleValue
+ */
+double LLVMConstRealGetDouble(LLVMValueRef ConstantVal, LLVMBool *losesInfo);
+
+/**
  * @}
  */
 
@@ -4637,6 +4614,20 @@ LLVMValueRef LLVMConstStringInContext(LLVMContextRef C, const char *Str,
  */
 LLVMValueRef LLVMConstString(const char *Str, unsigned Length,
                              LLVMBool DontNullTerminate);
+
+/**
+ * Returns true if the specified constant is an array of i8.
+ *
+ * @see ConstantDataSequential::getAsString()
+ */
+LLVMBool LLVMIsConstantString(LLVMValueRef c);
+
+/**
+ * Get the given constant data sequential as a string.
+ *
+ * @see ConstantDataSequential::getAsString()
+ */
+const char *LLVMGetAsString(LLVMValueRef c, size_t* out);
 
 /**
  * Create an anonymous ConstantStruct with the specified values.
@@ -4674,6 +4665,13 @@ LLVMValueRef LLVMConstArray(LLVMTypeRef ElementTy,
 LLVMValueRef LLVMConstNamedStruct(LLVMTypeRef StructTy,
                                   LLVMValueRef *ConstantVals,
                                   unsigned Count);
+
+/**
+ * Get an element at specified index as a constant.
+ *
+ * @see ConstantDataSequential::getElementAsConstant()
+ */
+LLVMValueRef LLVMGetElementAsConstant(LLVMValueRef c, unsigned idx);
 
 /**
  * Create a ConstantVector from values.
@@ -4908,6 +4906,20 @@ LLVMValueRef LLVMAddAlias(LLVMModuleRef M, LLVMTypeRef Ty, LLVMValueRef Aliasee,
 void LLVMDeleteFunction(LLVMValueRef Fn);
 
 /**
+ * Obtain the personality function attached to the function.
+ *
+ * @see llvm::Function::getPersonalityFn()
+ */
+LLVMValueRef LLVMGetPersonalityFn(LLVMValueRef Fn);
+
+/**
+ * Set the personality function attached to the function.
+ *
+ * @see llvm::Function::setPersonalityFn()
+ */
+void LLVMSetPersonalityFn(LLVMValueRef Fn, LLVMValueRef PersonalityFn);
+
+/**
  * Obtain the ID number from a function instance.
  *
  * @see llvm::Function::getIntrinsicID()
@@ -4956,7 +4968,7 @@ void LLVMSetGC(LLVMValueRef Fn, const char *Name);
 void LLVMAddFunctionAttr(LLVMValueRef Fn, LLVMAttribute PA);
 
 /**
- * Add a target-dependent attribute to a fuction
+ * Add a target-dependent attribute to a function
  * @see llvm::AttrBuilder::addAttribute()
  */
 void LLVMAddTargetDependentFunctionAttr(LLVMValueRef Fn, const char *A,
@@ -5433,7 +5445,7 @@ void LLVMInstructionEraseFromParent(LLVMValueRef Inst);
  *
  * @see llvm::Instruction::getOpCode()
  */
-LLVMOpcode   LLVMGetInstructionOpcode(LLVMValueRef Inst);
+LLVMOpcode LLVMGetInstructionOpcode(LLVMValueRef Inst);
 
 /**
  * Obtain the predicate of an instruction.
@@ -5444,6 +5456,26 @@ LLVMOpcode   LLVMGetInstructionOpcode(LLVMValueRef Inst);
  * @see llvm::ICmpInst::getPredicate()
  */
 LLVMIntPredicate LLVMGetICmpPredicate(LLVMValueRef Inst);
+
+/**
+ * Obtain the float predicate of an instruction.
+ *
+ * This is only valid for instructions that correspond to llvm::FCmpInst
+ * or llvm::ConstantExpr whose opcode is llvm::Instruction::FCmp.
+ *
+ * @see llvm::FCmpInst::getPredicate()
+ */
+LLVMRealPredicate LLVMGetFCmpPredicate(LLVMValueRef Inst);
+
+/**
+ * Create a copy of 'this' instruction that is identical in all ways
+ * except the following:
+ *   * The instruction has no parent
+ *   * The instruction has no name
+ *
+ * @see llvm::Instruction::clone()
+ */
+LLVMValueRef LLVMInstructionClone(LLVMValueRef Inst);
 
 /**
  * @defgroup LLVMCCoreValueInstructionCall Call Sites and Invocations
@@ -5506,6 +5538,63 @@ void LLVMSetTailCall(LLVMValueRef CallInst, LLVMBool IsTailCall);
  */
 
 /**
+ * @defgroup LLVMCCoreValueInstructionTerminator Terminators
+ *
+ * Functions in this group only apply to instructions that map to
+ * llvm::TerminatorInst instances.
+ *
+ * @{
+ */
+
+/**
+ * Return the number of successors that this terminator has.
+ *
+ * @see llvm::TerminatorInst::getNumSuccessors
+ */
+unsigned LLVMGetNumSuccessors(LLVMValueRef Term);
+
+/**
+ * Return the specified successor.
+ *
+ * @see llvm::TerminatorInst::getSuccessor
+ */
+LLVMBasicBlockRef LLVMGetSuccessor(LLVMValueRef Term, unsigned i);
+
+/**
+ * Update the specified successor to point at the provided block.
+ *
+ * @see llvm::TerminatorInst::setSuccessor
+ */
+void LLVMSetSuccessor(LLVMValueRef Term, unsigned i, LLVMBasicBlockRef block);
+
+/**
+ * Return if a branch is conditional.
+ *
+ * This only works on llvm::BranchInst instructions.
+ *
+ * @see llvm::BranchInst::isConditional
+ */
+LLVMBool LLVMIsConditional(LLVMValueRef Branch);
+
+/**
+ * Return the condition of a branch instruction.
+ *
+ * This only works on llvm::BranchInst instructions.
+ *
+ * @see llvm::BranchInst::getCondition
+ */
+LLVMValueRef LLVMGetCondition(LLVMValueRef Branch);
+
+/**
+ * Set the condition of a branch instruction.
+ *
+ * This only works on llvm::BranchInst instructions.
+ *
+ * @see llvm::BranchInst::setCondition
+ */
+void LLVMSetCondition(LLVMValueRef Branch, LLVMValueRef Cond);
+
+/**
  * Obtain the default destination basic block of a switch instruction.
  *
  * This only works on llvm::SwitchInst instructions.
@@ -5513,6 +5602,10 @@ void LLVMSetTailCall(LLVMValueRef CallInst, LLVMBool IsTailCall);
  * @see llvm::SwitchInst::getDefaultDest()
  */
 LLVMBasicBlockRef LLVMGetSwitchDefaultDest(LLVMValueRef SwitchInstr);
+
+/**
+ * @}
+ */
 
 /**
  * @defgroup LLVMCCoreValueInstructionPHINode PHI Nodes
@@ -5705,6 +5798,8 @@ LLVMValueRef LLVMBuildGlobalStringPtr(LLVMBuilderRef B, const char *Str,
                                       const char *Name);
 LLVMBool LLVMGetVolatile(LLVMValueRef MemoryAccessInst);
 void LLVMSetVolatile(LLVMValueRef MemoryAccessInst, LLVMBool IsVolatile);
+LLVMAtomicOrdering LLVMGetOrdering(LLVMValueRef MemoryAccessInst);
+void LLVMSetOrdering(LLVMValueRef MemoryAccessInst, LLVMAtomicOrdering Ordering);
 
 /* Casts */
 LLVMValueRef LLVMBuildTrunc(LLVMBuilderRef, LLVMValueRef Val,
@@ -5949,7 +6044,7 @@ LLVMBool LLVMIsMultithreaded(void);
 
 
 %endoffile
-%includefile "/Users/jondoe/Downloads/llvm-3.5.0.src_hacked/include/llvm-c/IRReader.h" %beginfile
+%includefile "/usr/local/Cellar/llvm/3.8.1/include/llvm-c/IRReader.h" %beginfile
 /*===-- llvm-c/IRReader.h - IR Reader C Interface -----------------*- C -*-===*\
 |*                                                                            *|
 |*                     The LLVM Compiler Infrastructure                       *|
@@ -5992,7 +6087,7 @@ LLVMBool LLVMParseIRInContext(LLVMContextRef ContextRef,
 
 %endoffile
 
-%includefile "/usr/local/share/swig/3.0.2/cmalloc.i" %beginfile
+%includefile "/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/cmalloc.i" %beginfile
 /* -----------------------------------------------------------------------------
  * cmalloc.i
  *
@@ -6104,8 +6199,8 @@ LLVMBool LLVMParseIRInContext(LLVMContextRef ContextRef,
 
 
 %endoffile
-/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,97,%allocators@*/
-/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,27,%malloc@*/
+/*@SWIG:/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/cmalloc.i,97,%allocators@*/
+/*@SWIG:/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/cmalloc.i,27,%malloc@*/
 
 
 
@@ -6118,7 +6213,7 @@ LLVMBool LLVMParseIRInContext(LLVMContextRef ContextRef,
 LLVMTypeRef *malloc(int nbytes);
 %typemap(default) int nbytes;
 /*@SWIG@*/
-/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,41,%calloc@*/
+/*@SWIG:/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/cmalloc.i,41,%calloc@*/
 
 
 
@@ -6134,7 +6229,7 @@ LLVMTypeRef *calloc(int nobj, int sz);
 %typemap(default) int sz;
 %typemap(default) int nobj;
 /*@SWIG@*/
-/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,58,%realloc@*/
+/*@SWIG:/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/cmalloc.i,58,%realloc@*/
 %insert("header") {
 
 
@@ -6155,7 +6250,7 @@ return (LLVMTypeRef *) realloc(ptr, nitems*sizeof(LLVMTypeRef));
 LLVMTypeRef *realloc_LLVMTypeRef(LLVMTypeRef *ptr, int nitems);
 
 /*@SWIG@*/
-/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,80,%free@*/
+/*@SWIG:/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/cmalloc.i,80,%free@*/
 
 
 
@@ -6164,7 +6259,7 @@ LLVMTypeRef *realloc_LLVMTypeRef(LLVMTypeRef *ptr, int nitems);
 void free(LLVMTypeRef *ptr);
 /*@SWIG@*/
 
-/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,89,%sizeof@*/
+/*@SWIG:/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/cmalloc.i,89,%sizeof@*/
 
 
 
@@ -6173,8 +6268,8 @@ void free(LLVMTypeRef *ptr);
 /*@SWIG@*/
 
 /*@SWIG@*/;
-/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,97,%allocators@*/
-/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,27,%malloc@*/
+/*@SWIG:/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/cmalloc.i,97,%allocators@*/
+/*@SWIG:/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/cmalloc.i,27,%malloc@*/
 
 
 
@@ -6187,7 +6282,7 @@ void free(LLVMTypeRef *ptr);
 LLVMValueRef *malloc(int nbytes);
 %typemap(default) int nbytes;
 /*@SWIG@*/
-/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,41,%calloc@*/
+/*@SWIG:/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/cmalloc.i,41,%calloc@*/
 
 
 
@@ -6203,7 +6298,7 @@ LLVMValueRef *calloc(int nobj, int sz);
 %typemap(default) int sz;
 %typemap(default) int nobj;
 /*@SWIG@*/
-/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,58,%realloc@*/
+/*@SWIG:/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/cmalloc.i,58,%realloc@*/
 %insert("header") {
 
 
@@ -6224,7 +6319,7 @@ return (LLVMValueRef *) realloc(ptr, nitems*sizeof(LLVMValueRef));
 LLVMValueRef *realloc_LLVMValueRef(LLVMValueRef *ptr, int nitems);
 
 /*@SWIG@*/
-/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,80,%free@*/
+/*@SWIG:/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/cmalloc.i,80,%free@*/
 
 
 
@@ -6233,7 +6328,7 @@ LLVMValueRef *realloc_LLVMValueRef(LLVMValueRef *ptr, int nitems);
 void free(LLVMValueRef *ptr);
 /*@SWIG@*/
 
-/*@SWIG:/usr/local/share/swig/3.0.2/cmalloc.i,89,%sizeof@*/
+/*@SWIG:/usr/local/Cellar/swig/3.0.10/share/swig/3.0.10/cmalloc.i,89,%sizeof@*/
 
 
 
