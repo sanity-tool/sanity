@@ -2,7 +2,7 @@ package na.okutane.api.cfg;
 
 import javafx.util.Pair;
 import na.okutane.cpp.ParserListener;
-import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;
+import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMModuleRef;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -24,12 +24,12 @@ public class GlobalVariableCache implements ParserListener {
     }
 
     @Override
-    public void onModuleStarted(SWIGTYPE_p_LLVMOpaqueModule module) {
+    public void onModuleStarted(SWIGTYPE_p_LLVMModuleRef module) {
         count = 0;
     }
 
     @Override
-    public void onModuleFinished(SWIGTYPE_p_LLVMOpaqueModule module) {
+    public void onModuleFinished(SWIGTYPE_p_LLVMModuleRef module) {
     }
 
     public static class GlobalVar extends TypedValue {

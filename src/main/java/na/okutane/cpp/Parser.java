@@ -10,12 +10,11 @@ import na.okutane.api.cfg.GetElementPointer;
 import na.okutane.api.cfg.GetFieldPointer;
 import na.okutane.api.cfg.Indirection;
 import na.okutane.api.cfg.LValue;
-import na.okutane.api.cfg.Primitive;
 import na.okutane.api.cfg.RValue;
 import na.okutane.api.cfg.Type;
-import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueBasicBlock;
-import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;
-import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
+import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMBasicBlockRef;
+import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMModuleRef;
+import na.okutane.cpp.llvm.SWIGTYPE_p_LLVMValueRef;
 import na.okutane.cpp.llvm.bitreader;
 import na.okutane.utils.TempFileWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +51,7 @@ public class Parser {
     public List<Cfg> parse(String filename) throws ParseException {
         try {
             ProcessBuilder pb = new ProcessBuilder();
-            pb.directory(new File("/Users/jondoe/IdeaProjects/SA/sanity/tests"));
+            pb.directory(new File(System.getProperty("user.dir")));
             //pb.command("clang", filename, "-c", "-S", "-emit-llvm", "-gline-tables-only");
 
             try (TempFileWrapper objFile = new TempFileWrapper("result", ".bc")) {
@@ -67,7 +66,7 @@ public class Parser {
                     int resultCode = process.waitFor();
 
                     if (resultCode == 0) {
-                        SWIGTYPE_p_LLVMOpaqueModule m = bitreader.parse(objFile.getAbsolutePath());
+                        SWIGTYPE_p_LLVMModuleRef m = bitreader.parse(objFile.getAbsolutePath());
 
                         if (m == null) {
                             return Collections.emptyList();
@@ -81,17 +80,17 @@ public class Parser {
                         try {
                             ArrayList<Cfg> result = new ArrayList<>();
 
-                            SWIGTYPE_p_LLVMOpaqueValue function = bitreader.LLVMGetFirstFunction(m);
+                            SWIGTYPE_p_LLVMValueRef function = bitreader.LLVMGetFirstFunction(m);
                             while (function != null) {
                                 try {
                                     if (bitreader.LLVMGetFirstBasicBlock(function) != null) {
                                         CfgBuildingCtx ctx = new CfgBuildingCtx(typeParser, function);
 
-                                        SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock = bitreader.LLVMGetEntryBasicBlock(function);
+                                        SWIGTYPE_p_LLVMBasicBlockRef entryBlock = bitreader.LLVMGetEntryBasicBlock(function);
 
                                         Cfe entry = processBlock(ctx, entryBlock);
 
-                                        SWIGTYPE_p_LLVMOpaqueBasicBlock block = bitreader.LLVMGetFirstBasicBlock(function);
+                                        SWIGTYPE_p_LLVMBasicBlockRef block = bitreader.LLVMGetFirstBasicBlock(function);
                                         block = bitreader.LLVMGetNextBasicBlock(block);
                                         while (block != null) {
                                             Cfe blockEntry = processBlock(ctx, block);
@@ -136,14 +135,14 @@ public class Parser {
         }
     }
 
-    protected Cfe parseGlobalInitializers(SWIGTYPE_p_LLVMOpaqueModule module) {
+    protected Cfe parseGlobalInitializers(SWIGTYPE_p_LLVMModuleRef module) {
         Cfe first = null;
         Cfe last = null;
 
-        SWIGTYPE_p_LLVMOpaqueValue global = bitreader.LLVMGetFirstGlobal(module);
+        SWIGTYPE_p_LLVMValueRef global = bitreader.LLVMGetFirstGlobal(module);
         while (global != null) {
             try {
-                SWIGTYPE_p_LLVMOpaqueValue initializer = bitreader.LLVMGetInitializer(global);
+                SWIGTYPE_p_LLVMValueRef initializer = bitreader.LLVMGetInitializer(global);
                 if (initializer != null) {
                     Cfe cfe;
                     LValue globalToInitialize = new Indirection(valueParser.parseLValue(null, global));
@@ -151,7 +150,7 @@ public class Parser {
                         cfe = null;
                         int n = bitreader.LLVMGetNumOperands(initializer);
                         while (n-- > 0) {
-                            SWIGTYPE_p_LLVMOpaqueValue fieldInit = bitreader.LLVMGetOperand(initializer, n);
+                            SWIGTYPE_p_LLVMValueRef fieldInit = bitreader.LLVMGetOperand(initializer, n);
                             RValue rValue = valueParser.parseRValue(null, fieldInit);
 
                             Cfe fieldInitCfe = new Assignment(new Indirection(new GetFieldPointer(globalToInitialize, n)), rValue, null);
@@ -162,7 +161,7 @@ public class Parser {
                         cfe = null;
                         int n = bitreader.LLVMGetNumOperands(initializer);
                         while (n-- > 0) {
-                            SWIGTYPE_p_LLVMOpaqueValue elementInit = bitreader.LLVMGetOperand(initializer, n);
+                            SWIGTYPE_p_LLVMValueRef elementInit = bitreader.LLVMGetOperand(initializer, n);
                             RValue rValue = valueParser.parseRValue(null, elementInit);
 
                             Cfe fieldInitCfe = new Assignment(new Indirection(new GetElementPointer(globalToInitialize, constants.get(n, typeParser.parse(bitreader.LLVMIntType(32))))), rValue, null);
@@ -197,11 +196,11 @@ public class Parser {
         return first;
     }
 
-    private Cfe processBlock(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock) {
+    private Cfe processBlock(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMBasicBlockRef entryBlock) {
         Cfe first = null;
         Cfe last = null;
 
-        SWIGTYPE_p_LLVMOpaqueValue instruction = bitreader.LLVMGetFirstInstruction(entryBlock);
+        SWIGTYPE_p_LLVMValueRef instruction = bitreader.LLVMGetFirstInstruction(entryBlock);
         while (instruction != null) {
             Cfe cfe = instructionParser.parse(ctx, instruction);
             if (first == null) {

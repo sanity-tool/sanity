@@ -21,7 +21,7 @@ public abstract class TestHelper {
     static {
         context.refresh();
     }
-    private static String BASE = "/Users/jondoe/IdeaProjects/SA/sanity/tests/res";
+    private static String BASE = System.getProperty("TEST_RESOURCES_ROOT");
 
     protected void fillWithTests(TestSuite suite, String path) {
         fillWithTests(suite, new File(BASE, path));

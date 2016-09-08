@@ -15,6 +15,7 @@ import java.util.List;
 @Configuration
 public class TestTools {
     String llvmAssembler = System.getProperty("sanity.llvm-as", "llvm-as");
+    String clang = System.getProperty("sanity.clang", "clang");
 
     @Bean
     ClangParametersFactory createClangParametersFactory() {
@@ -38,7 +39,7 @@ public class TestTools {
                 parameters.add("-o=" + objFile);
                 parameters.add(filename);
             } else {
-                parameters.add("clang");
+                parameters.add(clang);
 
                 if (filename.endsWith("hello.m")) {
                     parameters.add("-framework");

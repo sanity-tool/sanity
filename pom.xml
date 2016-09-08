@@ -35,7 +35,7 @@
                     <executable>sh</executable>
                     <workingDirectory>${pom.basedir}/tools/swig</workingDirectory>
                     <arguments>
-		    	<argument>-v</argument>
+                        <argument>-v</argument>
                         <argument>generate.sh</argument>
                     </arguments>
                 </configuration>
@@ -45,6 +45,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
+                    <systemPropertyVariables>
+                        <TEST_RESOURCES_ROOT>${build.testSourceDirectory}/../resources</TEST_RESOURCES_ROOT>
+                    </systemPropertyVariables>
+
                     <includes>
                         <include>**/AllTests.class</include>
                     </includes>
