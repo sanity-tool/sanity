@@ -45,7 +45,7 @@ LLVM_MODULES="core native"
 
 CPPFLAGS=`$LLVM_CONFIG --cppflags`
 LDFLAGS=`$LLVM_CONFIG --ldflags`
-LIBS=`$LLVM_CONFIG --libs $LLVM_MODULES`
+LIBS="`$LLVM_CONFIG --libs $LLVM_MODULES` -llibc++ -llibstdc++"
 
 echo $LIBS
 
