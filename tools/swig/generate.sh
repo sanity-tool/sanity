@@ -45,7 +45,7 @@ LLVM_MODULES="core native"
 
 CPPFLAGS=`$LLVM_CONFIG --cppflags`
 LDFLAGS=`$LLVM_CONFIG --ldflags`
-LIBS="`$LLVM_CONFIG --libs $LLVM_MODULES` -llibc++ -llibstdc++"
+LIBS=`$LLVM_CONFIG --libs $LLVM_MODULES`
 
 echo $LIBS
 
@@ -66,7 +66,7 @@ clang -c bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_I
 
 clang++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $CPPFLAGS -fPIC
 
-ld -shared bitreader_wrap.o helpers.o -o $DLL_NAME $LDFLAGS $LIBS
+clang++ -shared bitreader_wrap.o helpers.o -o $DLL_NAME $LDFLAGS $LIBS
 
 ldd $DLL_NAME
 nm --dynamic --undefined-only $DLL_NAME
