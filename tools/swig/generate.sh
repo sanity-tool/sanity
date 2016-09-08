@@ -1,6 +1,6 @@
 #!/bin/sh
 # Exit on failure
-set -e
+#set -e
 
 LLVM_CONFIG=llvm-config
 $LLVM_CONFIG --version >/dev/null 2>&1 || LLVM_CONFIG=/usr/local/opt/llvm/bin/llvm-config
@@ -28,10 +28,14 @@ case `uname` in
     Darwin)
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin/"
 
+        STDLIBS="/usr/lib/libc.dylib /usr/lib/libc++.dylib /usr/lib/libstdc++.dylib /usr/lib/libtermcap.dylib"
+
         DLL_NAME=libirreader.jnilib
     ;;
     Linux)
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
+
+        STDLIBS="/usr/lib/x86_64-linux-gnu/libtermcap.so"
 
         DLL_NAME=libirreader.so
     ;;
@@ -40,6 +44,8 @@ case `uname` in
         exit 1
     ;;
 esac
+
+find / 2>/dev/null|grep libstdc
 
 LLVM_MODULES="core native"
 
@@ -66,7 +72,7 @@ clang -c bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_I
 
 clang++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $CPPFLAGS -fPIC
 
-clang++ -shared bitreader_wrap.o helpers.o -o $DLL_NAME $LDFLAGS $LIBS
+clang++ -shared bitreader_wrap.o helpers.o -o $DLL_NAME $LDFLAGS $LIBS $STD_LIBS
 
 ldd $DLL_NAME
 nm --dynamic --undefined-only $DLL_NAME
