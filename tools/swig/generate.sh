@@ -27,6 +27,8 @@ rm -rf $OUTDIR || echo already removed
 case `uname` in
     Darwin)
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin/"
+
+        DLL_NAME=libirreader.jnilib
     ;;
     Linux)
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
@@ -63,3 +65,5 @@ clang -c bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_I
 clang++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $CPPFLAGS -fPIC
 
 ld -shared bitreader_wrap.o helpers.o -o $DLL_NAME $LDFLAGS
+
+ldd $DLL_NAME
