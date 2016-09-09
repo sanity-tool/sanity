@@ -89,7 +89,7 @@ COMPILE_HELPERS="/usr/local/Cellar/llvm/3.8.1/bin/clang++ -c helpers.cpp -D__STD
 echo $COMPILE_HELPERS
 eval $COMPILE_HELPERS
 
-LINK_CMD="/usr/local/Cellar/llvm/3.8.1/bin/clang++ -shared $STD_LIBS $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME $LDFLAGS"
+LINK_CMD="/usr/local/Cellar/llvm/3.8.1/bin/clang++ -shared $STD_LIBS $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS"
 echo $LINK_CMD
 eval $LINK_CMD
 
