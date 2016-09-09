@@ -10,7 +10,7 @@ notifications:
 before_install:
   - brew update
   - brew install swig
-  - brew install llvm --with-all-targets
+  - brew install llvm --with-toolchain
 
 after_failure:
   - cat hs_err*.log 
