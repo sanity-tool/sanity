@@ -2,25 +2,6 @@
 # Exit on failure
 set -e
 
-LLVM_CONFIG=llvm-config
-$LLVM_CONFIG --version >/dev/null 2>&1 || LLVM_CONFIG=/usr/local/opt/llvm/bin/llvm-config
-
-$LLVM_CONFIG --version
-
-$LLVM_CONFIG --includedir
-
-$LLVM_CONFIG --components
-$LLVM_CONFIG --libdir
-$LLVM_CONFIG --cxxflags
-$LLVM_CONFIG --ldflags
-
-#sudo apt-get -qq update
-swig -version >/dev/null 2>&1 || sudo apt-get install -y swig
-
-swig -version
-
-
-
 case `uname` in
     Darwin)
         LLVM_REMOTE="http://llvm.org/releases/3.8.0/clang+llvm-3.8.0-x86_64-apple-darwin.tar.xz"
@@ -60,13 +41,14 @@ tar xf $LLVM_LOCAL -C $DEPENDENCIES_DIR
 
 # find
 LLVM_CONFIG=`find $TARGET_DIR -name llvm-config`
+CC=`find $TARGET_DIR -name clang`
+CXX=`find $TARGET_DIR -name clang++`
 
-
-#find / 2>/dev/null|grep libc\\.
-
-#find / 2>/dev/null|grep libc++\\.
-
-#find / 2>/dev/null|grep libstdc
+# check tools availability
+$LLVM_CONFIG --version
+$CC --version
+$CXX --version
+swig -version
 
 CPPFLAGS=`$LLVM_CONFIG --cppflags`
 LDFLAGS=`$LLVM_CONFIG --ldflags`
