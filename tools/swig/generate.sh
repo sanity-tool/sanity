@@ -2,6 +2,10 @@
 # Exit on failure
 set -e
 
+clang -v
+
+/usr/local/Cellar/llvm/3.8.1/bin/clang -v
+
 LLVM_CONFIG=llvm-config
 $LLVM_CONFIG --version >/dev/null 2>&1 || LLVM_CONFIG=/usr/local/opt/llvm/bin/llvm-config
 
