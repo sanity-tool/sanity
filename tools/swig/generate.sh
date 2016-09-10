@@ -53,7 +53,7 @@ esac
 #find / 2>/dev/null|grep libstdc
 
 CPPFLAGS=`$LLVM_CONFIG --cppflags`
-LDFLAGS=`$LLVM_CONFIG --ldflags`
+LDFLAGS="`$LLVM_CONFIG --ldflags` -L/usr/local/opt/libffi/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
 LIBS="`$LLVM_CONFIG --libs` -ltermcap"
 
 echo $LIBS
@@ -83,9 +83,9 @@ SOBJ_DIR="../../target/native/shared"
 mkdir -p $OBJ_DIR
 mkdir -p $SOBJ_DIR
 
-/usr/local/Cellar/llvm/3.8.1/bin/clang -c $CPP_OUT/bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $STD_INCLUDES $DEBUG -fPIC -o $OBJ_DIR/wrappers.o
+/usr/local/Cellar/llvm/3.8.1/bin/clang -c $CPP_OUT/bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $STD_INCLUDES -I/usr/local/opt/llvm/include $DEBUG -fPIC -o $OBJ_DIR/wrappers.o
 
-COMPILE_HELPERS="/usr/local/Cellar/llvm/3.8.1/bin/clang++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $CPPFLAGS -fPIC -std=c++11 -o $OBJ_DIR/helpers.o"
+COMPILE_HELPERS="/usr/local/Cellar/llvm/3.8.1/bin/clang++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $CPPFLAGS -I/usr/local/opt/llvm/include $DEBUG -fPIC -std=c++11 -o $OBJ_DIR/helpers.o"
 echo $COMPILE_HELPERS
 eval $COMPILE_HELPERS
 
