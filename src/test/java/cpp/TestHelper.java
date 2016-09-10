@@ -1,6 +1,7 @@
 package cpp;
 
 import junit.framework.Assert;
+import junit.framework.ComparisonFailure;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -22,6 +23,7 @@ public abstract class TestHelper {
         context.refresh();
     }
     private static String BASE = System.getProperty("TEST_RESOURCES_ROOT");
+    private static String FAILURES_DIR = System.getProperty("TEST_FAILURES_ROOT");
 
     protected void fillWithTests(TestSuite suite, String path) {
         fillWithTests(suite, new File(BASE, path));
@@ -49,12 +51,28 @@ public abstract class TestHelper {
 
     public abstract void runTest(String unit, Path pathToExpected) throws Exception;
 
-    protected void check(Path pathToExpected, String actual) throws IOException {
+    protected void check(Path pathToExpected, String actual) throws IOException, InterruptedException {
         try {
             byte[] bytes = Files.readAllBytes(pathToExpected);
             String expected = new String(bytes, Charset.defaultCharset());
 
             Assert.assertEquals(expected, actual);
+        } catch (ComparisonFailure e) {
+            if (FAILURES_DIR != null) {
+                Path failuresPath = Paths.get(FAILURES_DIR);
+
+                Path expectedDir = failuresPath.resolve("expected");
+                expectedDir.toFile().mkdirs();
+                Path pathToExpected2 = expectedDir.resolve(pathToExpected.getFileName().toString());
+                Files.copy(pathToExpected, pathToExpected2);
+
+                Path actualDir = failuresPath.resolve("actual");
+                actualDir.toFile().mkdirs();
+                Path pathToActual = actualDir.resolve(pathToExpected.getFileName().toString());
+                Files.write(pathToActual, actual.getBytes());
+            }
+
+            throw e;
         } catch (NoSuchFileException e) {
             Files.write(pathToExpected, actual.getBytes());
             Assert.fail("File " + pathToExpected + " not found, but I've created it for you anyways.");

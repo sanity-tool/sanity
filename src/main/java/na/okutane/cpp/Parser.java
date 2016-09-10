@@ -72,7 +72,7 @@ public class Parser {
                             return Collections.emptyList();
                         }
 
-                        bitreader.LLVMDumpModule(m); // todo move to separate listener for test/debug
+                        //bitreader.LLVMDumpModule(m); // todo move to separate listener for test/debug
                         for (ParserListener listener : listeners) {
                             listener.onModuleStarted(m);
                         }
