@@ -1,12 +1,12 @@
 CFG: takeAddress
 #0000:	 assign: *FPTR = @function
-functionPointers.c:6 FPTR = function;
+ - no source -
 #0001:	 assign: *FPTR = @function <exit>
-functionPointers.c:7 FPTR = &function;
+ - no source -
 
 CFG: callFromPointer
 #0000:	 call: *FPTR() <exit>
-functionPointers.c:11 FPTR();
+ - no source -
 
 CFG: <module init>
 #0000:	 assign: *FPTR = null <exit>

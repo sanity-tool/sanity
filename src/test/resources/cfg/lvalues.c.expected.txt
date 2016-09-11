@@ -1,40 +1,40 @@
 CFG: localAuto
 #0000:	 assign: *tmp0 = 1 <exit>
-lvalues.c:2 int a = 1;
+ - no source -
 
 CFG: localStatic
 #0000:	 assign: *localStatic.a = 2 <exit>
-lvalues.c:7 a = 2;
+ - no source -
 
 CFG: arrayElementAccess
 #0000:	 assign: *ARRAY = 1
-lvalues.c:13 ARRAY[0] = 1;
+ - no source -
 #0001:	 assign: *(ARRAY+1) = 2 <exit>
-lvalues.c:14 ARRAY[1] = 2;
+ - no source -
 
 CFG: arrayDeref
 #0000:	 assign: *ARRAY = 1 <exit>
-lvalues.c:18 *ARRAY = 1;
+ - no source -
 
 CFG: ptrElementAccess
 #0000:	 assign: **PTR = 1
-lvalues.c:24 PTR[0] = 1;
+ - no source -
 #0001:	 assign: *(*PTR+1) = 2 <exit>
-lvalues.c:25 PTR[1] = 2;
+ - no source -
 
 CFG: ptrDeref
 #0000:	 assign: **PTR = 1 <exit>
-lvalues.c:29 *PTR = 1;
+ - no source -
 
 CFG: structFieldAccess
 #0000:	 assign: *(STRUCT.field) = 1 <exit>
-lvalues.c:37 STRUCT.field = 1;
+ - no source -
 
 CFG: structPtrFieldAccess
 #0000:	 assign: *(*PTR_STRUCT.field) = 1
-lvalues.c:41 (*PTR_STRUCT).field = 1;
+ - no source -
 #0001:	 assign: *(*PTR_STRUCT.field) = 2 <exit>
-lvalues.c:42 PTR_STRUCT->field = 2;
+ - no source -
 
 CFG: <module init>
 #0000:	 assign: *localStatic.a = 1

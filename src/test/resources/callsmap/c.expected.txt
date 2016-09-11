@@ -1,4 +1,4 @@
 Type: void ()*
 #0000:	 call: *FPTR() <exit>
-functionPointers.c:11 FPTR();
+ - no source -
 

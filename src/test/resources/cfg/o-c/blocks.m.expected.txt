@@ -1,74 +1,74 @@
 CFG: defineBlock
 #0000:	 assign: *SIMPLE = __block_literal_global <exit>
-blocks.m:6 SIMPLE = ^{
+ - no source -
 
 CFG: __defineBlock_block_invoke
 #0000:	 assign: *tmp0 = .block_descriptor
  - no source -
 #0001:	 assign: tmp1 = .block_descriptor
-blocks.m:6 SIMPLE = ^{
+ - no source -
 #0002:	 assign: *tmp2 = tmp1
  - no source -
 #0003:	 call: function() <exit>
-blocks.m:7 function();
+ - no source -
 
 CFG: callBlock
 #0000:	 assign: tmp0 = *SIMPLE
-blocks.m:12 SIMPLE();
+ - no source -
 #0001:	 assign: tmp1 = tmp0
-blocks.m:12 SIMPLE();
+ - no source -
 #0002:	 assign: tmp2 = *(tmp0.__FuncPtr)
-blocks.m:12 SIMPLE();
+ - no source -
 #0003:	 call: tmp2(tmp1) <exit>
-blocks.m:12 SIMPLE();
+ - no source -
 
 CFG: testBlockVars
 #0000:	 assign: *(tmp0.field0) = null
-blocks.m:16 __block int count = 0;
+ - no source -
 #0001:	 assign: *(tmp0.field1) = tmp0
-blocks.m:16 __block int count = 0;
+ - no source -
 #0002:	 assign: *(tmp0.field2) = 536870912
-blocks.m:16 __block int count = 0;
+ - no source -
 #0003:	 assign: *(tmp0.field3) = 32
-blocks.m:16 __block int count = 0;
+ - no source -
 #0004:	 assign: *(tmp0.field4) = 0
-blocks.m:16 __block int count = 0;
+ - no source -
 #0005:	 assign: *(tmp1.field0) = _NSConcreteStackBlock
-blocks.m:17 SIMPLE = ^{
+ - no source -
 #0006:	 assign: *(tmp1.field1) = -1040187392
-blocks.m:17 SIMPLE = ^{
+ - no source -
 #0007:	 assign: *(tmp1.field2) = 0
-blocks.m:17 SIMPLE = ^{
+ - no source -
 #0008:	 assign: *(tmp1.field3) = @__testBlockVars_block_invoke
-blocks.m:17 SIMPLE = ^{
+ - no source -
 #0009:	 assign: *(tmp1.field4) = __block_descriptor_tmp1
-blocks.m:17 SIMPLE = ^{
+ - no source -
 #0010:	 assign: tmp2 = tmp0
-blocks.m:17 SIMPLE = ^{
+ - no source -
 #0011:	 assign: *(tmp1.field5) = tmp2
-blocks.m:17 SIMPLE = ^{
+ - no source -
 #0012:	 assign: tmp3 = tmp1
-blocks.m:17 SIMPLE = ^{
+ - no source -
 #0013:	 assign: *SIMPLE = tmp3
-blocks.m:17 SIMPLE = ^{
+ - no source -
 #0014:	 assign: tmp4 = tmp0
-blocks.m:20 }
+ - no source -
 #0015:	 call: _Block_object_dispose(tmp4, 8) <exit>
-blocks.m:20 }
+ - no source -
 
 CFG: __testBlockVars_block_invoke
 #0000:	 assign: *tmp0 = .block_descriptor
  - no source -
 #0001:	 assign: tmp1 = .block_descriptor
-blocks.m:17 SIMPLE = ^{
+ - no source -
 #0002:	 assign: *tmp2 = tmp1
  - no source -
 #0003:	 assign: tmp3 = *(tmp1.field5)
-blocks.m:18 count++;
+ - no source -
 #0004:	 assign: tmp4 = *((*(tmp3.field1).field0)+4) + 1
-blocks.m:18 count++;
+ - no source -
 #0005:	 assign: *((*(tmp3.field1).field0)+4) = tmp4 <exit>
-blocks.m:18 count++;
+ - no source -
 
 CFG: __copy_helper_block_
 #0000:	 assign: *tmp0 = 
@@ -76,21 +76,21 @@ CFG: __copy_helper_block_
 #0001:	 assign: *tmp1 = 
  - no source -
 #0002:	 assign: tmp2 = *tmp1
-blocks.m:0 static void (^SIMPLE)(void);
+ - no source -
 #0003:	 assign: tmp3 = *tmp0
-blocks.m:0 static void (^SIMPLE)(void);
+ - no source -
 #0004:	 assign: tmp4 = (tmp3.field5)
-blocks.m:0 static void (^SIMPLE)(void);
+ - no source -
 #0005:	 call: _Block_object_assign(tmp4, *(tmp2.field5), 8) <exit>
-blocks.m:0 static void (^SIMPLE)(void);
+ - no source -
 
 CFG: __destroy_helper_block_
 #0000:	 assign: *tmp0 = 
  - no source -
 #0001:	 assign: tmp1 = *tmp0
-blocks.m:0 static void (^SIMPLE)(void);
+ - no source -
 #0002:	 call: _Block_object_dispose(*(tmp1.field5), 8) <exit>
-blocks.m:0 static void (^SIMPLE)(void);
+ - no source -
 
 CFG: <module init>
 #0000:	 assign: *.str = "v8@?0"

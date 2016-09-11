@@ -1,10 +1,10 @@
 CFG: addressOf
 #0000:	 assign: *I_P = I <exit>
-unary.c:4 I_P = &I;
+ - no source -
 
 CFG: deref
 #0000:	 assign: **I_P = *I <exit>
-unary.c:8 *I_P = I;
+ - no source -
 
 CFG: <module init>
 #0000:	 assign: *I = 0
