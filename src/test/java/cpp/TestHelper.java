@@ -9,10 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
@@ -64,7 +61,7 @@ public abstract class TestHelper {
                 Path expectedDir = failuresPath.resolve("expected");
                 expectedDir.toFile().mkdirs();
                 Path pathToExpected2 = expectedDir.resolve(pathToExpected.getFileName().toString());
-                Files.copy(pathToExpected, pathToExpected2);
+                Files.copy(pathToExpected, pathToExpected2, StandardCopyOption.REPLACE_EXISTING);
 
                 Path actualDir = failuresPath.resolve("actual");
                 actualDir.toFile().mkdirs();

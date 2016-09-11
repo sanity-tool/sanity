@@ -76,7 +76,6 @@ rm -rf $CPP_OUT || echo already removed
 mkdir -p $JAVA_OUT
 mkdir -p $CPP_OUT
 swig $LLVM_INCLUDE -java -outdir $JAVA_OUT -package na.okutane.cpp.llvm -o $CPP_OUT/bitreader_wrap.c -v bitreader.i
-swig -E $LLVM_INCLUDE $STD_INCLUDES -java bitreader.i > swigprep.txt
 
 OBJ_DIR="../../target/native/static"
 SOBJ_DIR="../../target/native/shared"

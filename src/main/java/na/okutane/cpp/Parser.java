@@ -50,13 +50,9 @@ public class Parser {
 
     public List<Cfg> parse(String filename) throws ParseException {
         try {
-            ProcessBuilder pb = new ProcessBuilder();
-            pb.directory(new File(System.getProperty("user.dir")));
-            //pb.command("clang", filename, "-c", "-S", "-emit-llvm", "-gline-tables-only");
-
             try (TempFileWrapper objFile = new TempFileWrapper("result", ".bc")) {
                 try (TempFileWrapper errFile = new TempFileWrapper("result", ".err")) {
-                    pb.command(parametersFactory.getParameters(filename, objFile.getAbsolutePath()));
+                    ProcessBuilder pb = new ProcessBuilder(parametersFactory.getParameters(filename, objFile.getAbsolutePath()));
 
                     pb.inheritIO();
                     pb.redirectError(ProcessBuilder.Redirect.to(errFile.getFile()));
