@@ -1,0 +1,2232 @@
+CFG: main
+#0000:	 assign: tmp0 = 
+ - no source -
+#0001:	 assign: *(_TZvOs7Process5_argcVs5Int32.field0) = 
+	:0 null
+#0002:	 assign: tmp1 = *globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_token5 == -1
+	:0 null
+#0003:	 if: tmp1 then #0004:	 else #0005:	
+	:0 null
+#0004:	 noop
+ - no source -
+#0006:	 assign: tmp2 = *globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_token5 == -1
+	:0 null
+#0007:	 call: llvm.assume(tmp2)
+	:0 null
+#0008:	 assign: *(_TZvOs7Process11_unsafeArgvGSpGSpVs4Int8__.field0) = tmp0
+	:0 null
+#0009:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+#0005:	 call: swift_once(globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_token5, @globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_func5) next: #0004:	
+	:0 null
+
+CFG: _TFC4main5Shape17simpleDescriptionfT_SS
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 call: tmp1 = _TTSg5SS___TFs27_allocateUninitializedArrayurFBwTGSax_Bp_(3)
+	:4 null
+#0002:	 assign: tmp2 = (tmp1.field0)
+	:4 null
+#0003:	 call: tmp3 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global0, 13, -1)
+	:4 null
+#0004:	 call: tmp4 = _TFSSCfT26stringInterpolationSegmentSS_SS((tmp3.field0), (tmp3.field0), (tmp3.field0))
+	:4 null
+#0005:	 noop: can't index (((tmp0.field0).field0).field0) by 0
+	:4 null
+#0006:	 noop: bad
+	:4 null
+#0007:	 noop: bad
+	:4 null
+#0008:	 assign: *tmp5 = (tmp4.field0)
+	:4 null
+#0009:	 assign: tmp6 = 
+	:4 null
+#0010:	 assign: tmp7 = *tmp6
+	:4 null
+#0011:	 assign: tmp8 = *(tmp7+10)
+	:4 null
+#0012:	 assign: tmp9 = tmp8
+	:4 null
+#0013:	 call: tmp10 = tmp9()
+	:4 null
+#0014:	 call: tmp11 = _TFSSCfT26stringInterpolationSegmentSi_SS(tmp10)
+	:4 null
+#0015:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
+	:4 null
+#0016:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
+	:4 null
+#0017:	 assign: tmp12 = (((((tmp2+1).field0).field0).field0)+2)
+	:4 null
+#0018:	 assign: *tmp12 = (tmp11.field0)
+	:4 null
+#0019:	 call: tmp13 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global1, 7, -1)
+	:4 null
+#0020:	 call: tmp14 = _TFSSCfT26stringInterpolationSegmentSS_SS((tmp13.field0), (tmp13.field0), (tmp13.field0))
+	:4 null
+#0021:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
+	:4 null
+#0022:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
+	:4 null
+#0023:	 assign: tmp15 = (((((tmp2+2).field0).field0).field0)+2)
+	:4 null
+#0024:	 assign: *tmp15 = (tmp14.field0)
+	:4 null
+#0025:	 call: tmp16 = _TFSSCft19stringInterpolationGSaSS__SS((tmp1.field0))
+	:4 null
+#0026:	 noop: opcode 'LLVMInsertValue' not supported
+	:4 null
+#0027:	 noop: opcode 'LLVMInsertValue' not supported
+	:4 null
+#0028:	 noop: opcode 'LLVMInsertValue' not supported
+	:4 null
+#0029:	 noop: opcode 'LLVMRet' not supported <exit>
+	:4 null
+
+CFG: _TFC4main5ShapeD
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 call: tmp1 = _TFC4main5Shaped()
+	:0 null
+#0002:	 assign: tmp2 = tmp1
+	:0 null
+#0003:	 assign: tmp3 = tmp2
+	:0 null
+#0004:	 call: swift_deallocClassInstance(tmp3, 24, 7) <exit>
+	:0 null
+
+CFG: _TFC4main5Shaped
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: tmp1 = 
+	:0 null
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main5Shapeg13numberOfSidesSi
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 noop: opcode 'LLVMRet' not supported <exit>
+	:2 null
+
+CFG: _TFC4main5Shapes13numberOfSidesSi
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: *tmp1 = 
+	:0 null
+#0002:	 noop: can't index ((.field1).field0) by 0 <exit>
+	:0 null
+
+CFG: _TFC4main5Shapem13numberOfSidesSi
+#0000:	 assign: tmp0 = (.field1)
+	:0 null
+#0001:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0002:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0003:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main5ShapecfT_S0_
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 noop: can't index ((.field1).field0) by 0
+	:2 null
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+	:1 null
+
+CFG: _TFC4main5ShapeCfT_S0_
+#0000:	 call: tmp0 = _TMaC4main5Shape()
+	:0 null
+#0001:	 call: tmp1 = swift_allocObject(tmp0, 24, 7)
+	:0 null
+#0002:	 assign: tmp2 = tmp1
+	:0 null
+#0003:	 call: tmp3 = _TFC4main5ShapecfT_S0_(tmp2)
+	:0 null
+#0004:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TMaC4main5Shape
+#0000:	 assign: tmp0 = *_TMLC4main5Shape == null
+	:0 null
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+	:0 null
+#0002:	 call: tmp1 = swift_getInitializedObjCClass((_TMfC4main5Shape.field2))
+	:0 null
+#0004:	 assign: tmp2 = tmp1
+	:0 null
+#0005:	 assign: *_TMLC4main5Shape = tmp2
+	:0 null
+#0003:	 noop
+ - no source -
+#0006:	 noop: opcode 'LLVMPHI' not supported
+	:0 null
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TF4main9testShapeFT_T_
+#0000:	 assign: tmp0 = tmp1
+	:0 null
+#0001:	 call: llvm.lifetime.start(8, tmp0)
+	:0 null
+#0002:	 assign: tmp2 = tmp3
+	:0 null
+#0003:	 call: llvm.lifetime.start(24, tmp2)
+	:0 null
+#0004:	 call: tmp4 = _TMaC4main5Shape()
+	:9 null
+#0005:	 call: tmp5 = _TFC4main5ShapeCfT_S0_(tmp4)
+	:9 null
+#0006:	 assign: *tmp1 = tmp5
+	:9 null
+#0007:	 assign: tmp6 = tmp5
+	:10 null
+#0008:	 call: swift_retain(tmp6)
+	:10 null
+#0009:	 assign: tmp7 = *((tmp5.field0).field0)
+	:10 null
+#0010:	 assign: tmp8 = *(tmp7+11)
+	:10 null
+#0011:	 assign: tmp9 = tmp8
+	:10 null
+#0012:	 call: tmp9(7, tmp5)
+	:10 null
+#0013:	 call: swift_release(tmp5)
+	:10 null
+#0014:	 assign: tmp10 = tmp5
+	:11 null
+#0015:	 call: swift_retain(tmp10)
+	:11 null
+#0016:	 assign: tmp11 = *((tmp5.field0).field0)
+	:11 null
+#0017:	 assign: tmp12 = *(tmp11+13)
+	:11 null
+#0018:	 assign: tmp13 = tmp12
+	:11 null
+#0019:	 call: tmp14 = tmp13(tmp5)
+	:11 null
+#0020:	 call: swift_release(tmp5)
+	:11 null
+#0021:	 noop: can't index (((tmp0.field0).field0).field0) by 0
+	:11 null
+#0022:	 noop: bad
+	:11 null
+#0023:	 noop: bad
+	:11 null
+#0024:	 assign: *tmp15 = (tmp14.field0)
+	:11 null
+#0025:	 noop: opcode 'LLVMIntToPtr' not supported
+	:12 null
+#0026:	 noop: opcode 'LLVMIntToPtr' not supported
+	:12 null
+#0027:	 call: swift_release(tmp5)
+	:12 null
+#0028:	 assign: tmp16 = tmp3
+	:12 null
+#0029:	 call: llvm.lifetime.end(24, tmp16)
+	:12 null
+#0030:	 assign: tmp17 = tmp1
+	:12 null
+#0031:	 call: llvm.lifetime.end(8, tmp17) <exit>
+	:12 null
+
+CFG: _TFC4main10NamedShapecfT4nameSS_S0_
+#0000:	 assign: *(tmp0.field0) = 
+	:0 null
+#0001:	 assign: *(tmp0.field1) = 
+	:0 null
+#0002:	 assign: *(tmp0.field2) = 
+	:0 null
+#0003:	 assign: *tmp1 = 
+	:0 null
+#0004:	 noop: can't index ((.field1).field0) by 0
+	:15 null
+#0005:	 noop: opcode 'LLVMIntToPtr' not supported
+	:19 null
+#0006:	 noop: opcode 'LLVMIntToPtr' not supported
+	:19 null
+#0007:	 noop: can't index ((((.field2).field0).field0).field0) by 0
+	:19 null
+#0008:	 noop: can't index (((((.field2).field0).field0).field0)+1) by 0
+	:19 null
+#0009:	 assign: tmp2 = (((((.field2).field0).field0).field0)+2)
+	:19 null
+#0010:	 assign: *tmp2 = 
+	:19 null
+#0011:	 noop: opcode 'LLVMIntToPtr' not supported
+	:20 null
+#0012:	 noop: opcode 'LLVMIntToPtr' not supported
+	:20 null
+#0013:	 noop: opcode 'LLVMRet' not supported <exit>
+	:20 null
+
+CFG: _TFC4main10NamedShapeCfT4nameSS_S0_
+#0000:	 call: tmp0 = _TMaC4main10NamedShape()
+	:0 null
+#0001:	 call: tmp1 = swift_allocObject(tmp0, 48, 7)
+	:0 null
+#0002:	 assign: tmp2 = tmp1
+	:0 null
+#0003:	 call: tmp3 = _TFC4main10NamedShapecfT4nameSS_S0_(, , , tmp2)
+	:0 null
+#0004:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TMaC4main10NamedShape
+#0000:	 assign: tmp0 = *_TMLC4main10NamedShape == null
+	:0 null
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+	:0 null
+#0002:	 call: tmp1 = swift_getInitializedObjCClass((_TMfC4main10NamedShape.field2))
+	:0 null
+#0004:	 assign: tmp2 = tmp1
+	:0 null
+#0005:	 assign: *_TMLC4main10NamedShape = tmp2
+	:0 null
+#0003:	 noop
+ - no source -
+#0006:	 noop: opcode 'LLVMPHI' not supported
+	:0 null
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main10NamedShape17simpleDescriptionfT_SS
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 call: tmp1 = _TTSg5SS___TFs27_allocateUninitializedArrayurFBwTGSax_Bp_(3)
+	:23 null
+#0002:	 assign: tmp2 = (tmp1.field0)
+	:23 null
+#0003:	 call: tmp3 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global2, 13, -1)
+	:23 null
+#0004:	 call: tmp4 = _TFSSCfT26stringInterpolationSegmentSS_SS((tmp3.field0), (tmp3.field0), (tmp3.field0))
+	:23 null
+#0005:	 noop: can't index (((tmp0.field0).field0).field0) by 0
+	:23 null
+#0006:	 noop: bad
+	:23 null
+#0007:	 noop: bad
+	:23 null
+#0008:	 assign: *tmp5 = (tmp4.field0)
+	:23 null
+#0009:	 assign: tmp6 = *((.field0).field0)
+	:23 null
+#0010:	 assign: tmp7 = *(tmp6+10)
+	:23 null
+#0011:	 assign: tmp8 = tmp7
+	:23 null
+#0012:	 call: tmp9 = tmp8()
+	:23 null
+#0013:	 call: tmp10 = _TFSSCfT26stringInterpolationSegmentSi_SS(tmp9)
+	:23 null
+#0014:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
+	:23 null
+#0015:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
+	:23 null
+#0016:	 assign: tmp11 = (((((tmp2+1).field0).field0).field0)+2)
+	:23 null
+#0017:	 assign: *tmp11 = (tmp10.field0)
+	:23 null
+#0018:	 call: tmp12 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global3, 7, -1)
+	:23 null
+#0019:	 call: tmp13 = _TFSSCfT26stringInterpolationSegmentSS_SS((tmp12.field0), (tmp12.field0), (tmp12.field0))
+	:23 null
+#0020:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
+	:23 null
+#0021:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
+	:23 null
+#0022:	 assign: tmp14 = (((((tmp2+2).field0).field0).field0)+2)
+	:23 null
+#0023:	 assign: *tmp14 = (tmp13.field0)
+	:23 null
+#0024:	 call: tmp15 = _TFSSCft19stringInterpolationGSaSS__SS((tmp1.field0))
+	:23 null
+#0025:	 noop: opcode 'LLVMInsertValue' not supported
+	:23 null
+#0026:	 noop: opcode 'LLVMInsertValue' not supported
+	:23 null
+#0027:	 noop: opcode 'LLVMInsertValue' not supported
+	:23 null
+#0028:	 noop: opcode 'LLVMRet' not supported <exit>
+	:23 null
+
+CFG: _TFC4main10NamedShapeD
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 call: tmp1 = _TFC4main10NamedShaped()
+	:0 null
+#0002:	 assign: tmp2 = tmp1
+	:0 null
+#0003:	 assign: tmp3 = tmp2
+	:0 null
+#0004:	 call: swift_deallocClassInstance(tmp3, 48, 7) <exit>
+	:0 null
+
+CFG: _TFC4main10NamedShaped
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: tmp1 = 
+	:0 null
+#0002:	 assign: tmp2 = (((((.field2).field0).field0).field0)+2)
+	:0 null
+#0003:	 call: swift_unknownRelease(*tmp2)
+	:0 null
+#0004:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main10NamedShapeg13numberOfSidesSi
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 noop: opcode 'LLVMRet' not supported <exit>
+	:15 null
+
+CFG: _TFC4main10NamedShapes13numberOfSidesSi
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: *tmp1 = 
+	:0 null
+#0002:	 noop: can't index ((.field1).field0) by 0 <exit>
+	:0 null
+
+CFG: _TFC4main10NamedShapem13numberOfSidesSi
+#0000:	 assign: tmp0 = (.field1)
+	:0 null
+#0001:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0002:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0003:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main10NamedShapeg4nameSS
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: tmp1 = (((((.field2).field0).field0).field0)+2)
+	:0 null
+#0002:	 noop: opcode 'LLVMIntToPtr' not supported
+	:0 null
+#0003:	 noop: opcode 'LLVMIntToPtr' not supported
+	:0 null
+#0004:	 noop: opcode 'LLVMInsertValue' not supported
+	:16 null
+#0005:	 noop: opcode 'LLVMInsertValue' not supported
+	:16 null
+#0006:	 noop: opcode 'LLVMInsertValue' not supported
+	:16 null
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+	:16 null
+
+CFG: _TFC4main10NamedShapes4nameSS
+#0000:	 assign: *(tmp0.field0) = 
+	:0 null
+#0001:	 assign: *(tmp0.field1) = 
+	:0 null
+#0002:	 assign: *(tmp0.field2) = 
+	:0 null
+#0003:	 assign: *tmp1 = 
+	:0 null
+#0004:	 noop: opcode 'LLVMIntToPtr' not supported
+	:0 null
+#0005:	 noop: opcode 'LLVMIntToPtr' not supported
+	:0 null
+#0006:	 assign: tmp2 = (((((.field2).field0).field0).field0)+2)
+	:0 null
+#0007:	 noop: can't index ((((.field2).field0).field0).field0) by 0
+	:0 null
+#0008:	 noop: can't index (((((.field2).field0).field0).field0)+1) by 0
+	:0 null
+#0009:	 assign: tmp3 = (((((.field2).field0).field0).field0)+2)
+	:0 null
+#0010:	 assign: *tmp3 = 
+	:0 null
+#0011:	 noop: opcode 'LLVMIntToPtr' not supported
+	:0 null
+#0012:	 noop: opcode 'LLVMIntToPtr' not supported
+	:0 null
+#0013:	 noop: opcode 'LLVMIntToPtr' not supported
+	:16 null
+#0014:	 noop: opcode 'LLVMIntToPtr' not supported <exit>
+	:16 null
+
+CFG: _TFC4main10NamedShapem4nameSS
+#0000:	 assign: tmp0 = (.field2)
+	:0 null
+#0001:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0002:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0003:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main6SquarecfT10sideLengthSd4nameSS_S0_
+#0000:	 assign: tmp0 = tmp1
+	:0 null
+#0001:	 call: llvm.lifetime.start(8, tmp0)
+	:0 null
+#0002:	 assign: *tmp2 = 
+	:0 null
+#0003:	 assign: *(tmp3.field0) = 
+	:0 null
+#0004:	 assign: *(tmp3.field1) = 
+	:0 null
+#0005:	 assign: *(tmp3.field2) = 
+	:0 null
+#0006:	 assign: *tmp1 = 
+	:0 null
+#0007:	 noop: can't index ((.field3).field0) by 0
+	:31 null
+#0008:	 assign: tmp4 = 
+	:32 null
+#0009:	 noop: opcode 'LLVMIntToPtr' not supported
+	:32 null
+#0010:	 noop: opcode 'LLVMIntToPtr' not supported
+	:32 null
+#0011:	 call: tmp5 = _TFC4main10NamedShapecfT4nameSS_S0_(, , , tmp4)
+	:32 null
+#0012:	 assign: tmp6 = tmp5
+	:32 null
+#0013:	 assign: *tmp1 = tmp6
+	:32 null
+#0014:	 assign: tmp7 = tmp6
+	:33 null
+#0015:	 call: swift_retain(tmp7)
+	:33 null
+#0016:	 assign: tmp8 = tmp6
+	:33 null
+#0017:	 assign: tmp9 = *((tmp8.field0).field0)
+	:33 null
+#0018:	 assign: tmp10 = *(tmp9+11)
+	:33 null
+#0019:	 assign: tmp11 = tmp10
+	:33 null
+#0020:	 call: tmp11(4, tmp8)
+	:33 null
+#0021:	 call: swift_release(tmp8)
+	:34 null
+#0022:	 assign: tmp12 = tmp6
+	:34 null
+#0023:	 call: swift_retain(tmp12)
+	:34 null
+#0024:	 noop: opcode 'LLVMIntToPtr' not supported
+	:34 null
+#0025:	 noop: opcode 'LLVMIntToPtr' not supported
+	:34 null
+#0026:	 call: swift_release(tmp6)
+	:34 null
+#0027:	 assign: tmp13 = tmp1
+	:34 null
+#0028:	 call: llvm.lifetime.end(8, tmp13)
+	:34 null
+#0029:	 noop: opcode 'LLVMRet' not supported <exit>
+	:34 null
+
+CFG: _TFC4main6SquareCfT10sideLengthSd4nameSS_S0_
+#0000:	 call: tmp0 = _TMaC4main6Square()
+	:0 null
+#0001:	 call: tmp1 = swift_allocObject(tmp0, 56, 7)
+	:0 null
+#0002:	 assign: tmp2 = tmp1
+	:0 null
+#0003:	 call: tmp3 = _TFC4main6SquarecfT10sideLengthSd4nameSS_S0_(, , , , tmp2)
+	:0 null
+#0004:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TMaC4main6Square
+#0000:	 assign: tmp0 = *_TMLC4main6Square == null
+	:0 null
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+	:0 null
+#0002:	 call: tmp1 = swift_getInitializedObjCClass((_TMfC4main6Square.field2))
+	:0 null
+#0004:	 assign: tmp2 = tmp1
+	:0 null
+#0005:	 assign: *_TMLC4main6Square = tmp2
+	:0 null
+#0003:	 noop
+ - no source -
+#0006:	 noop: opcode 'LLVMPHI' not supported
+	:0 null
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main6Square4areafT_Sd
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: tmp1 = *((.field0).field0)
+	:37 null
+#0002:	 assign: tmp2 = *(tmp1+20)
+	:37 null
+#0003:	 assign: tmp3 = tmp2
+	:37 null
+#0004:	 call: tmp4 = tmp3()
+	:37 null
+#0005:	 assign: tmp5 = *((.field0).field0)
+	:37 null
+#0006:	 assign: tmp6 = *(tmp5+20)
+	:37 null
+#0007:	 assign: tmp7 = tmp6
+	:37 null
+#0008:	 call: tmp8 = tmp7()
+	:37 null
+#0009:	 assign: tmp9 = tmp4 * tmp8
+	:37 null
+#0010:	 noop: opcode 'LLVMRet' not supported <exit>
+	:37 null
+
+CFG: _TFC4main6Square17simpleDescriptionfT_SS
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 call: tmp1 = _TTSg5SS___TFs27_allocateUninitializedArrayurFBwTGSax_Bp_(3)
+	:41 null
+#0002:	 assign: tmp2 = (tmp1.field0)
+	:41 null
+#0003:	 call: tmp3 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global4, 30, -1)
+	:41 null
+#0004:	 call: tmp4 = _TFSSCfT26stringInterpolationSegmentSS_SS((tmp3.field0), (tmp3.field0), (tmp3.field0))
+	:41 null
+#0005:	 noop: can't index (((tmp0.field0).field0).field0) by 0
+	:41 null
+#0006:	 noop: bad
+	:41 null
+#0007:	 noop: bad
+	:41 null
+#0008:	 assign: *tmp5 = (tmp4.field0)
+	:41 null
+#0009:	 assign: tmp6 = *((.field0).field0)
+	:41 null
+#0010:	 assign: tmp7 = *(tmp6+20)
+	:41 null
+#0011:	 assign: tmp8 = tmp7
+	:41 null
+#0012:	 call: tmp9 = tmp8()
+	:41 null
+#0013:	 call: tmp10 = _TFSSCfT26stringInterpolationSegmentSd_SS(tmp9)
+	:41 null
+#0014:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
+	:41 null
+#0015:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
+	:41 null
+#0016:	 assign: tmp11 = (((((tmp2+1).field0).field0).field0)+2)
+	:41 null
+#0017:	 assign: *tmp11 = (tmp10.field0)
+	:41 null
+#0018:	 call: tmp12 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global5, 1, -1)
+	:41 null
+#0019:	 call: tmp13 = _TFSSCfT26stringInterpolationSegmentSS_SS((tmp12.field0), (tmp12.field0), (tmp12.field0))
+	:41 null
+#0020:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
+	:41 null
+#0021:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
+	:41 null
+#0022:	 assign: tmp14 = (((((tmp2+2).field0).field0).field0)+2)
+	:41 null
+#0023:	 assign: *tmp14 = (tmp13.field0)
+	:41 null
+#0024:	 call: tmp15 = _TFSSCft19stringInterpolationGSaSS__SS((tmp1.field0))
+	:41 null
+#0025:	 noop: opcode 'LLVMInsertValue' not supported
+	:41 null
+#0026:	 noop: opcode 'LLVMInsertValue' not supported
+	:41 null
+#0027:	 noop: opcode 'LLVMInsertValue' not supported
+	:41 null
+#0028:	 noop: opcode 'LLVMRet' not supported <exit>
+	:41 null
+
+CFG: _TFC4main6SquareD
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 call: tmp1 = _TFC4main6Squared()
+	:0 null
+#0002:	 assign: tmp2 = tmp1
+	:0 null
+#0003:	 assign: tmp3 = tmp2
+	:0 null
+#0004:	 call: swift_deallocClassInstance(tmp3, 56, 7) <exit>
+	:0 null
+
+CFG: _TFC4main6Squared
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: tmp1 = 
+	:0 null
+#0002:	 call: tmp2 = _TFC4main10NamedShaped(tmp1)
+	:0 null
+#0003:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main6Squareg10sideLengthSd
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 noop: opcode 'LLVMRet' not supported <exit>
+	:28 null
+
+CFG: _TFC4main6Squares10sideLengthSd
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: *tmp1 = 
+	:0 null
+#0002:	 noop: can't index ((.field3).field0) by 0 <exit>
+	:0 null
+
+CFG: _TFC4main6Squarem10sideLengthSd
+#0000:	 assign: tmp0 = (.field3)
+	:0 null
+#0001:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0002:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0003:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main6SquareCfT4nameSS_S0_
+#0000:	 call: tmp0 = _TMaC4main6Square()
+	:0 null
+#0001:	 call: tmp1 = swift_allocObject(tmp0, 56, 7)
+	:0 null
+#0002:	 assign: tmp2 = tmp1
+	:0 null
+#0003:	 call: tmp3 = _TFC4main6SquarecfT4nameSS_S0_(, , , tmp2)
+	:0 null
+#0004:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main6SquarecfT4nameSS_S0_
+#0000:	 assign: *(tmp0.field0) = 
+	:0 null
+#0001:	 assign: *(tmp0.field1) = 
+	:0 null
+#0002:	 assign: *(tmp0.field2) = 
+	:0 null
+#0003:	 assign: *tmp1 = 
+	:0 null
+#0004:	 assign: tmp2 = tmp3
+	:27 null
+#0005:	 call: llvm.lifetime.start(8, tmp2)
+	:27 null
+#0006:	 if: -1 then #0007:	 else #0008:	
+	:27 null
+#0007:	 call: tmp4 = llvm.expect.i1(-1, -1)
+	:27 null
+#0009:	 if: tmp4 then #0010:	 else #0011:	
+	:27 null
+#0010:	 call: tmp5 = llvm.smul.with.overflow.i64(11, 1)
+	:27 null
+#0012:	 noop: can't index global7 by (na.okutane.api.cfg.TemporaryVar@3b00856b.field0)
+	:27 null
+#0013:	 assign: tmp6 = tmp3
+	:27 null
+#0014:	 call: llvm.lifetime.end(8, tmp6)
+	:27 null
+#0015:	 call: llvm.trap()
+	:27 null
+#0016:	 noop: opcode 'LLVMUnreachable' not supported <exit>
+	:0 null
+#0011:	 call: _TTSf4s_s_d_d___TFs18_fatalErrorMessageFTVs12StaticStringS_S_Su_T_(global8, 11, 2, global9, 39, 2)
+	:27 null
+#0017:	 noop: opcode 'LLVMUnreachable' not supported <exit>
+	:0 null
+#0008:	 assign: *(tmp3.field0) = 0
+	:27 null
+#0018:	 call: tmp7 = llvm.expect.i1(-1, -1)
+	:27 null
+#0019:	 if: tmp7 then #0020:	 else #0021:	
+	:27 null
+#0020:	 assign: tmp8 = tmp9
+	:27 null
+#0022:	 call: llvm.lifetime.start(8, tmp8)
+	:27 null
+#0023:	 assign: *tmp9 = global10
+	:27 null
+#0024:	 assign: tmp10 = tmp9
+	:27 null
+#0025:	 assign: tmp11 = tmp9
+	:27 null
+#0026:	 call: llvm.lifetime.end(8, tmp11)
+	:27 null
+#0027:	 noop: opcode 'LLVMTrunc' not supported
+	:27 null
+#0028:	 noop: opcode 'LLVMTrunc' not supported
+	:27 null
+#0029:	 noop: opcode 'LLVMSelect' not supported
+	:27 null
+#0030:	 noop: opcode 'LLVMSelect' not supported <exit>
+	:27 null
+#0021:	 call: _TTSf4s_s_d_d___TFs18_fatalErrorMessageFTVs12StaticStringS_S_Su_T_(global24, 11, 2, global25, 52, 2)
+	:27 null
+#0031:	 noop: opcode 'LLVMUnreachable' not supported <exit>
+	:0 null
+
+CFG: _TF4main10testSquareFT_T_
+#0000:	 call: tmp0 = _TMaC4main6Square()
+	:46 null
+#0001:	 call: tmp1 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global26, 14, -1)
+	:46 null
+#0002:	 call: tmp2 = _TFC4main6SquareCfT10sideLengthSd4nameSS_S0_(5.2, (tmp1.field0), (tmp1.field0), (tmp1.field0), tmp0)
+	:46 null
+#0003:	 assign: *tmp3 = tmp2
+	:46 null
+#0004:	 assign: tmp4 = *((tmp2.field0).field0)
+	:47 null
+#0005:	 assign: tmp5 = *(tmp4+24)
+	:47 null
+#0006:	 assign: tmp6 = tmp5
+	:47 null
+#0007:	 call: tmp7 = tmp6(tmp2)
+	:47 null
+#0008:	 assign: tmp8 = *((tmp2.field0).field0)
+	:48 null
+#0009:	 assign: tmp9 = *(tmp8+17)
+	:48 null
+#0010:	 assign: tmp10 = tmp9
+	:48 null
+#0011:	 call: tmp11 = tmp10(tmp2)
+	:48 null
+#0012:	 noop: opcode 'LLVMIntToPtr' not supported
+	:49 null
+#0013:	 noop: opcode 'LLVMIntToPtr' not supported
+	:49 null
+#0014:	 call: swift_release(tmp2) <exit>
+	:49 null
+
+CFG: _TFC4main19EquilateralTrianglecfT10sideLengthSd4nameSS_S0_
+#0000:	 assign: tmp0 = tmp1
+	:0 null
+#0001:	 call: llvm.lifetime.start(8, tmp0)
+	:0 null
+#0002:	 assign: *tmp2 = 
+	:0 null
+#0003:	 assign: *(tmp3.field0) = 
+	:0 null
+#0004:	 assign: *(tmp3.field1) = 
+	:0 null
+#0005:	 assign: *(tmp3.field2) = 
+	:0 null
+#0006:	 assign: *tmp1 = 
+	:0 null
+#0007:	 noop: can't index ((.field3).field0) by 0
+	:52 null
+#0008:	 noop: can't index ((.field3).field0) by 0
+	:55 null
+#0009:	 assign: tmp4 = 
+	:56 null
+#0010:	 noop: opcode 'LLVMIntToPtr' not supported
+	:56 null
+#0011:	 noop: opcode 'LLVMIntToPtr' not supported
+	:56 null
+#0012:	 call: tmp5 = _TFC4main10NamedShapecfT4nameSS_S0_(, , , tmp4)
+	:56 null
+#0013:	 assign: tmp6 = tmp5
+	:56 null
+#0014:	 assign: *tmp1 = tmp6
+	:56 null
+#0015:	 assign: tmp7 = tmp6
+	:57 null
+#0016:	 call: swift_retain(tmp7)
+	:57 null
+#0017:	 assign: tmp8 = tmp6
+	:57 null
+#0018:	 assign: tmp9 = *((tmp8.field0).field0)
+	:57 null
+#0019:	 assign: tmp10 = *(tmp9+11)
+	:57 null
+#0020:	 assign: tmp11 = tmp10
+	:57 null
+#0021:	 call: tmp11(3, tmp8)
+	:57 null
+#0022:	 call: swift_release(tmp8)
+	:58 null
+#0023:	 assign: tmp12 = tmp6
+	:58 null
+#0024:	 call: swift_retain(tmp12)
+	:58 null
+#0025:	 noop: opcode 'LLVMIntToPtr' not supported
+	:58 null
+#0026:	 noop: opcode 'LLVMIntToPtr' not supported
+	:58 null
+#0027:	 call: swift_release(tmp6)
+	:58 null
+#0028:	 assign: tmp13 = tmp1
+	:58 null
+#0029:	 call: llvm.lifetime.end(8, tmp13)
+	:58 null
+#0030:	 noop: opcode 'LLVMRet' not supported <exit>
+	:58 null
+
+CFG: _TFC4main19EquilateralTriangleCfT10sideLengthSd4nameSS_S0_
+#0000:	 call: tmp0 = _TMaC4main19EquilateralTriangle()
+	:0 null
+#0001:	 call: tmp1 = swift_allocObject(tmp0, 56, 7)
+	:0 null
+#0002:	 assign: tmp2 = tmp1
+	:0 null
+#0003:	 call: tmp3 = _TFC4main19EquilateralTrianglecfT10sideLengthSd4nameSS_S0_(, , , , tmp2)
+	:0 null
+#0004:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TMaC4main19EquilateralTriangle
+#0000:	 assign: tmp0 = *_TMLC4main19EquilateralTriangle == null
+	:0 null
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+	:0 null
+#0002:	 call: tmp1 = swift_getInitializedObjCClass((_TMfC4main19EquilateralTriangle.field2))
+	:0 null
+#0004:	 assign: tmp2 = tmp1
+	:0 null
+#0005:	 assign: *_TMLC4main19EquilateralTriangle = tmp2
+	:0 null
+#0003:	 noop
+ - no source -
+#0006:	 noop: opcode 'LLVMPHI' not supported
+	:0 null
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main19EquilateralTriangleg9perimeterSd
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: tmp1 = *((.field0).field0)
+	:62 null
+#0002:	 assign: tmp2 = *(tmp1+20)
+	:62 null
+#0003:	 assign: tmp3 = tmp2
+	:62 null
+#0004:	 call: tmp4 = tmp3()
+	:62 null
+#0005:	 assign: tmp5 = 3.0 * tmp4
+	:62 null
+#0006:	 noop: opcode 'LLVMRet' not supported <exit>
+	:62 null
+
+CFG: _TFC4main19EquilateralTriangles9perimeterSd
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: *tmp1 = 
+	:0 null
+#0002:	 assign: tmp2 =  / 3.0
+	:65 null
+#0003:	 assign: tmp3 = *((.field0).field0)
+	:65 null
+#0004:	 assign: tmp4 = *(tmp3+21)
+	:65 null
+#0005:	 assign: tmp5 = tmp4
+	:65 null
+#0006:	 call: tmp5(tmp2, ) <exit>
+	:65 null
+
+CFG: _TFC4main19EquilateralTrianglem9perimeterSd
+#0000:	 assign: tmp0 = 
+	:0 null
+#0001:	 call: tmp1 = _TFC4main19EquilateralTriangleg9perimeterSd()
+	:0 null
+#0002:	 assign: *(tmp0.field0) = tmp1
+	:0 null
+#0003:	 assign: tmp2 = tmp0
+	:0 null
+#0004:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0005:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0006:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFFC4main19EquilateralTrianglem9perimeterSdU_XfTBpRBBRS0_XMTS0__T_
+#0000:	 assign: tmp0 = 
+	:0 null
+#0001:	 call: _TFC4main19EquilateralTriangles9perimeterSd(*(tmp0.field0), *) <exit>
+	:0 null
+
+CFG: _TFC4main19EquilateralTriangle17simpleDescriptionfT_SS
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 call: tmp1 = _TTSg5SS___TFs27_allocateUninitializedArrayurFBwTGSax_Bp_(3)
+	:70 null
+#0002:	 assign: tmp2 = (tmp1.field0)
+	:70 null
+#0003:	 call: tmp3 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global27, 45, -1)
+	:70 null
+#0004:	 call: tmp4 = _TFSSCfT26stringInterpolationSegmentSS_SS((tmp3.field0), (tmp3.field0), (tmp3.field0))
+	:70 null
+#0005:	 noop: can't index (((tmp0.field0).field0).field0) by 0
+	:70 null
+#0006:	 noop: bad
+	:70 null
+#0007:	 noop: bad
+	:70 null
+#0008:	 assign: *tmp5 = (tmp4.field0)
+	:70 null
+#0009:	 assign: tmp6 = *((.field0).field0)
+	:70 null
+#0010:	 assign: tmp7 = *(tmp6+20)
+	:70 null
+#0011:	 assign: tmp8 = tmp7
+	:70 null
+#0012:	 call: tmp9 = tmp8()
+	:70 null
+#0013:	 call: tmp10 = _TFSSCfT26stringInterpolationSegmentSd_SS(tmp9)
+	:70 null
+#0014:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
+	:70 null
+#0015:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
+	:70 null
+#0016:	 assign: tmp11 = (((((tmp2+1).field0).field0).field0)+2)
+	:70 null
+#0017:	 assign: *tmp11 = (tmp10.field0)
+	:70 null
+#0018:	 call: tmp12 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global28, 1, -1)
+	:70 null
+#0019:	 call: tmp13 = _TFSSCfT26stringInterpolationSegmentSS_SS((tmp12.field0), (tmp12.field0), (tmp12.field0))
+	:70 null
+#0020:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
+	:70 null
+#0021:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
+	:70 null
+#0022:	 assign: tmp14 = (((((tmp2+2).field0).field0).field0)+2)
+	:70 null
+#0023:	 assign: *tmp14 = (tmp13.field0)
+	:70 null
+#0024:	 call: tmp15 = _TFSSCft19stringInterpolationGSaSS__SS((tmp1.field0))
+	:70 null
+#0025:	 noop: opcode 'LLVMInsertValue' not supported
+	:70 null
+#0026:	 noop: opcode 'LLVMInsertValue' not supported
+	:70 null
+#0027:	 noop: opcode 'LLVMInsertValue' not supported
+	:70 null
+#0028:	 noop: opcode 'LLVMRet' not supported <exit>
+	:70 null
+
+CFG: _TFC4main19EquilateralTriangleD
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 call: tmp1 = _TFC4main19EquilateralTriangled()
+	:0 null
+#0002:	 assign: tmp2 = tmp1
+	:0 null
+#0003:	 assign: tmp3 = tmp2
+	:0 null
+#0004:	 call: swift_deallocClassInstance(tmp3, 56, 7) <exit>
+	:0 null
+
+CFG: _TFC4main19EquilateralTriangled
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: tmp1 = 
+	:0 null
+#0002:	 call: tmp2 = _TFC4main10NamedShaped(tmp1)
+	:0 null
+#0003:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main19EquilateralTriangleg10sideLengthSd
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 noop: opcode 'LLVMRet' not supported <exit>
+	:52 null
+
+CFG: _TFC4main19EquilateralTriangles10sideLengthSd
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: *tmp1 = 
+	:0 null
+#0002:	 noop: can't index ((.field3).field0) by 0 <exit>
+	:0 null
+
+CFG: _TFC4main19EquilateralTrianglem10sideLengthSd
+#0000:	 assign: tmp0 = (.field3)
+	:0 null
+#0001:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0002:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0003:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main19EquilateralTriangleCfT4nameSS_S0_
+#0000:	 call: tmp0 = _TMaC4main19EquilateralTriangle()
+	:0 null
+#0001:	 call: tmp1 = swift_allocObject(tmp0, 56, 7)
+	:0 null
+#0002:	 assign: tmp2 = tmp1
+	:0 null
+#0003:	 call: tmp3 = _TFC4main19EquilateralTrianglecfT4nameSS_S0_(, , , tmp2)
+	:0 null
+#0004:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main19EquilateralTrianglecfT4nameSS_S0_
+#0000:	 assign: *(tmp0.field0) = 
+	:0 null
+#0001:	 assign: *(tmp0.field1) = 
+	:0 null
+#0002:	 assign: *(tmp0.field2) = 
+	:0 null
+#0003:	 assign: *tmp1 = 
+	:0 null
+#0004:	 assign: tmp2 = tmp3
+	:51 null
+#0005:	 call: llvm.lifetime.start(8, tmp2)
+	:51 null
+#0006:	 if: -1 then #0007:	 else #0008:	
+	:51 null
+#0007:	 call: tmp4 = llvm.expect.i1(-1, -1)
+	:51 null
+#0009:	 if: tmp4 then #0010:	 else #0011:	
+	:51 null
+#0010:	 call: tmp5 = llvm.smul.with.overflow.i64(24, 1)
+	:51 null
+#0012:	 noop: can't index global30 by (na.okutane.api.cfg.TemporaryVar@4c5474f5.field0)
+	:51 null
+#0013:	 assign: tmp6 = tmp3
+	:51 null
+#0014:	 call: llvm.lifetime.end(8, tmp6)
+	:51 null
+#0015:	 call: llvm.trap()
+	:51 null
+#0016:	 noop: opcode 'LLVMUnreachable' not supported <exit>
+	:0 null
+#0011:	 call: _TTSf4s_s_d_d___TFs18_fatalErrorMessageFTVs12StaticStringS_S_Su_T_(global31, 11, 2, global32, 39, 2)
+	:51 null
+#0017:	 noop: opcode 'LLVMUnreachable' not supported <exit>
+	:0 null
+#0008:	 assign: *(tmp3.field0) = 0
+	:51 null
+#0018:	 call: tmp7 = llvm.expect.i1(-1, -1)
+	:51 null
+#0019:	 if: tmp7 then #0020:	 else #0021:	
+	:51 null
+#0020:	 assign: tmp8 = tmp9
+	:51 null
+#0022:	 call: llvm.lifetime.start(8, tmp8)
+	:51 null
+#0023:	 assign: *tmp9 = global33
+	:51 null
+#0024:	 assign: tmp10 = tmp9
+	:51 null
+#0025:	 assign: tmp11 = tmp9
+	:51 null
+#0026:	 call: llvm.lifetime.end(8, tmp11)
+	:51 null
+#0027:	 noop: opcode 'LLVMTrunc' not supported
+	:51 null
+#0028:	 noop: opcode 'LLVMTrunc' not supported
+	:51 null
+#0029:	 noop: opcode 'LLVMSelect' not supported
+	:51 null
+#0030:	 noop: opcode 'LLVMSelect' not supported <exit>
+	:51 null
+#0021:	 call: _TTSf4s_s_d_d___TFs18_fatalErrorMessageFTVs12StaticStringS_S_Su_T_(global47, 11, 2, global48, 52, 2)
+	:51 null
+#0031:	 noop: opcode 'LLVMUnreachable' not supported <exit>
+	:0 null
+
+CFG: _TF4main12testTriangleFT_T_
+#0000:	 assign: tmp0 = tmp1
+	:0 null
+#0001:	 call: llvm.lifetime.start(8, tmp0)
+	:0 null
+#0002:	 assign: tmp2 = tmp3
+	:0 null
+#0003:	 call: llvm.lifetime.start(8, tmp2)
+	:0 null
+#0004:	 assign: tmp4 = tmp5
+	:0 null
+#0005:	 call: llvm.lifetime.start(8, tmp4)
+	:0 null
+#0006:	 call: tmp6 = _TMaC4main19EquilateralTriangle()
+	:75 null
+#0007:	 call: tmp7 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global49, 10, -1)
+	:75 null
+#0008:	 call: tmp8 = _TFC4main19EquilateralTriangleCfT10sideLengthSd4nameSS_S0_(3.1, (tmp7.field0), (tmp7.field0), (tmp7.field0), tmp6)
+	:75 null
+#0009:	 assign: *tmp1 = tmp8
+	:75 null
+#0010:	 assign: tmp9 = tmp8
+	:76 null
+#0011:	 call: swift_retain(tmp9)
+	:76 null
+#0012:	 assign: tmp10 = *((tmp8.field0).field0)
+	:76 null
+#0013:	 assign: tmp11 = *(tmp10+24)
+	:76 null
+#0014:	 assign: tmp12 = tmp11
+	:76 null
+#0015:	 call: tmp13 = tmp12(tmp8)
+	:76 null
+#0016:	 call: swift_release(tmp8)
+	:76 null
+#0017:	 assign: *(tmp3.field0) = tmp13
+	:76 null
+#0018:	 assign: tmp14 = tmp8
+	:77 null
+#0019:	 call: swift_retain(tmp14)
+	:77 null
+#0020:	 assign: tmp15 = *((tmp8.field0).field0)
+	:77 null
+#0021:	 assign: tmp16 = *(tmp15+25)
+	:77 null
+#0022:	 assign: tmp17 = tmp16
+	:77 null
+#0023:	 call: tmp17(9.9, tmp8)
+	:77 null
+#0024:	 call: swift_release(tmp8)
+	:77 null
+#0025:	 assign: tmp18 = tmp8
+	:78 null
+#0026:	 call: swift_retain(tmp18)
+	:78 null
+#0027:	 assign: tmp19 = *((tmp8.field0).field0)
+	:78 null
+#0028:	 assign: tmp20 = *(tmp19+20)
+	:78 null
+#0029:	 assign: tmp21 = tmp20
+	:78 null
+#0030:	 call: tmp22 = tmp21(tmp8)
+	:78 null
+#0031:	 call: swift_release(tmp8)
+	:78 null
+#0032:	 assign: *(tmp5.field0) = tmp22
+	:78 null
+#0033:	 call: swift_release(tmp8)
+	:79 null
+#0034:	 assign: tmp23 = tmp5
+	:79 null
+#0035:	 call: llvm.lifetime.end(8, tmp23)
+	:79 null
+#0036:	 assign: tmp24 = tmp3
+	:79 null
+#0037:	 call: llvm.lifetime.end(8, tmp24)
+	:79 null
+#0038:	 assign: tmp25 = tmp1
+	:79 null
+#0039:	 call: llvm.lifetime.end(8, tmp25) <exit>
+	:79 null
+
+CFG: _TFC4main17TriangleAndSquarew8triangleCS_19EquilateralTriangle
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: *tmp1 = 
+	:0 null
+#0002:	 assign: tmp2 = 
+	:84 null
+#0003:	 assign: tmp3 = *tmp2
+	:84 null
+#0004:	 assign: tmp4 = *(tmp3+13)
+	:84 null
+#0005:	 assign: tmp5 = tmp4
+	:84 null
+#0006:	 call: tmp6 = tmp5()
+	:84 null
+#0007:	 assign: tmp7 = *((.field0).field0)
+	:84 null
+#0008:	 assign: tmp8 = *(tmp7+20)
+	:84 null
+#0009:	 assign: tmp9 = tmp8
+	:84 null
+#0010:	 call: tmp10 = tmp9()
+	:84 null
+#0011:	 assign: tmp11 = *((tmp6.field0).field0)
+	:84 null
+#0012:	 assign: tmp12 = *(tmp11+21)
+	:84 null
+#0013:	 assign: tmp13 = tmp12
+	:84 null
+#0014:	 call: tmp13(tmp10, tmp6)
+	:84 null
+#0015:	 call: swift_release(tmp6)
+	:85 null
+#0016:	 call: swift_release() <exit>
+	:85 null
+
+CFG: _TFC4main17TriangleAndSquareg8triangleCS_19EquilateralTriangle
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: tmp1 = *(.field1)
+	:0 null
+#0002:	 call: swift_retain(tmp1)
+	:0 null
+#0003:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main17TriangleAndSquares8triangleCS_19EquilateralTriangle
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: *tmp1 = 
+	:0 null
+#0002:	 assign: tmp2 = 
+	:0 null
+#0003:	 call: swift_retain(tmp2)
+	:0 null
+#0004:	 call: _TFC4main17TriangleAndSquarew8triangleCS_19EquilateralTriangle(, )
+	:0 null
+#0005:	 assign: tmp3 = 
+	:0 null
+#0006:	 call: swift_retain(tmp3)
+	:0 null
+#0007:	 assign: *(.field1) = 
+	:0 null
+#0008:	 call: swift_release(*(.field1))
+	:0 null
+#0009:	 call: swift_release() <exit>
+	:0 null
+
+CFG: _TFC4main17TriangleAndSquarem8triangleCS_19EquilateralTriangle
+#0000:	 assign: tmp0 = 
+	:0 null
+#0001:	 assign: tmp1 = *(.field1)
+	:0 null
+#0002:	 call: swift_retain(tmp1)
+	:0 null
+#0003:	 assign: *tmp0 = *(.field1)
+	:0 null
+#0004:	 assign: tmp2 = tmp0
+	:0 null
+#0005:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0006:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFFC4main17TriangleAndSquarem8triangleCS_19EquilateralTriangleU_XfTBpRBBRS0_XMTS0__T_
+#0000:	 assign: tmp0 = 
+	:0 null
+#0001:	 call: _TFC4main17TriangleAndSquares8triangleCS_19EquilateralTriangle(*tmp0, *) <exit>
+	:0 null
+
+CFG: _TFC4main17TriangleAndSquarew6squareCS_6Square
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: *tmp1 = 
+	:0 null
+#0002:	 assign: tmp2 = *((.field0).field0)
+	:89 null
+#0003:	 assign: tmp3 = *(tmp2+10)
+	:89 null
+#0004:	 assign: tmp4 = tmp3
+	:89 null
+#0005:	 call: tmp5 = tmp4()
+	:89 null
+#0006:	 assign: tmp6 = *((.field0).field0)
+	:89 null
+#0007:	 assign: tmp7 = *(tmp6+20)
+	:89 null
+#0008:	 assign: tmp8 = tmp7
+	:89 null
+#0009:	 call: tmp9 = tmp8()
+	:89 null
+#0010:	 assign: tmp10 = *((tmp5.field0).field0)
+	:89 null
+#0011:	 assign: tmp11 = *(tmp10+21)
+	:89 null
+#0012:	 assign: tmp12 = tmp11
+	:89 null
+#0013:	 call: tmp12(tmp9, tmp5)
+	:89 null
+#0014:	 call: swift_release(tmp5)
+	:90 null
+#0015:	 call: swift_release() <exit>
+	:90 null
+
+CFG: _TFC4main17TriangleAndSquareg6squareCS_6Square
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: tmp1 = *(.field2)
+	:0 null
+#0002:	 call: swift_retain(tmp1)
+	:0 null
+#0003:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main17TriangleAndSquares6squareCS_6Square
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: *tmp1 = 
+	:0 null
+#0002:	 assign: tmp2 = 
+	:0 null
+#0003:	 call: swift_retain(tmp2)
+	:0 null
+#0004:	 call: _TFC4main17TriangleAndSquarew6squareCS_6Square(, )
+	:0 null
+#0005:	 assign: tmp3 = 
+	:0 null
+#0006:	 call: swift_retain(tmp3)
+	:0 null
+#0007:	 assign: *(.field2) = 
+	:0 null
+#0008:	 call: swift_release(*(.field2))
+	:0 null
+#0009:	 call: swift_release() <exit>
+	:0 null
+
+CFG: _TFC4main17TriangleAndSquarem6squareCS_6Square
+#0000:	 assign: tmp0 = 
+	:0 null
+#0001:	 assign: tmp1 = *(.field2)
+	:0 null
+#0002:	 call: swift_retain(tmp1)
+	:0 null
+#0003:	 assign: *tmp0 = *(.field2)
+	:0 null
+#0004:	 assign: tmp2 = tmp0
+	:0 null
+#0005:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0006:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFFC4main17TriangleAndSquarem6squareCS_6SquareU_XfTBpRBBRS0_XMTS0__T_
+#0000:	 assign: tmp0 = 
+	:0 null
+#0001:	 call: _TFC4main17TriangleAndSquares6squareCS_6Square(*tmp0, *) <exit>
+	:0 null
+
+CFG: _TFC4main17TriangleAndSquarecfT4sizeSd4nameSS_S0_
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: *(tmp1.field0) = 
+	:0 null
+#0002:	 assign: *(tmp1.field1) = 
+	:0 null
+#0003:	 assign: *(tmp1.field2) = 
+	:0 null
+#0004:	 assign: *tmp2 = 
+	:0 null
+#0005:	 call: tmp3 = _TMaC4main6Square()
+	:93 null
+#0006:	 noop: opcode 'LLVMIntToPtr' not supported
+	:93 null
+#0007:	 noop: opcode 'LLVMIntToPtr' not supported
+	:93 null
+#0008:	 call: tmp4 = _TFC4main6SquareCfT10sideLengthSd4nameSS_S0_(, , , , tmp3)
+	:93 null
+#0009:	 assign: *(.field2) = tmp4
+	:93 null
+#0010:	 call: tmp5 = _TMaC4main19EquilateralTriangle()
+	:94 null
+#0011:	 noop: opcode 'LLVMIntToPtr' not supported
+	:94 null
+#0012:	 noop: opcode 'LLVMIntToPtr' not supported
+	:94 null
+#0013:	 call: tmp6 = _TFC4main19EquilateralTriangleCfT10sideLengthSd4nameSS_S0_(, , , , tmp5)
+	:94 null
+#0014:	 assign: *(.field1) = tmp6
+	:94 null
+#0015:	 noop: opcode 'LLVMIntToPtr' not supported
+	:95 null
+#0016:	 noop: opcode 'LLVMIntToPtr' not supported
+	:95 null
+#0017:	 noop: opcode 'LLVMRet' not supported <exit>
+	:95 null
+
+CFG: _TFC4main17TriangleAndSquareCfT4sizeSd4nameSS_S0_
+#0000:	 call: tmp0 = _TMaC4main17TriangleAndSquare()
+	:0 null
+#0001:	 call: tmp1 = swift_allocObject(tmp0, 32, 7)
+	:0 null
+#0002:	 assign: tmp2 = tmp1
+	:0 null
+#0003:	 call: tmp3 = _TFC4main17TriangleAndSquarecfT4sizeSd4nameSS_S0_(, , , , tmp2)
+	:0 null
+#0004:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TMaC4main17TriangleAndSquare
+#0000:	 assign: tmp0 = *_TMLC4main17TriangleAndSquare == null
+	:0 null
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+	:0 null
+#0002:	 call: tmp1 = swift_getInitializedObjCClass((_TMfC4main17TriangleAndSquare.field2))
+	:0 null
+#0004:	 assign: tmp2 = tmp1
+	:0 null
+#0005:	 assign: *_TMLC4main17TriangleAndSquare = tmp2
+	:0 null
+#0003:	 noop
+ - no source -
+#0006:	 noop: opcode 'LLVMPHI' not supported
+	:0 null
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main17TriangleAndSquareD
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 call: tmp1 = _TFC4main17TriangleAndSquared()
+	:0 null
+#0002:	 assign: tmp2 = tmp1
+	:0 null
+#0003:	 assign: tmp3 = tmp2
+	:0 null
+#0004:	 call: swift_deallocClassInstance(tmp3, 32, 7) <exit>
+	:0 null
+
+CFG: _TFC4main17TriangleAndSquared
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: tmp1 = 
+	:0 null
+#0002:	 call: swift_release(*(.field1))
+	:0 null
+#0003:	 call: swift_release(*(.field2))
+	:0 null
+#0004:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TF4main18testTriangleSquareFT_T_
+#0000:	 assign: tmp0 = tmp1
+	:0 null
+#0001:	 call: llvm.lifetime.start(8, tmp0)
+	:0 null
+#0002:	 assign: tmp2 = tmp3
+	:0 null
+#0003:	 call: llvm.lifetime.start(8, tmp2)
+	:0 null
+#0004:	 call: tmp4 = _TMaC4main17TriangleAndSquare()
+	:99 null
+#0005:	 call: tmp5 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global50, 18, -1)
+	:99 null
+#0006:	 call: tmp6 = _TFC4main17TriangleAndSquareCfT4sizeSd4nameSS_S0_(10.0, (tmp5.field0), (tmp5.field0), (tmp5.field0), tmp4)
+	:99 null
+#0007:	 assign: *tmp1 = tmp6
+	:99 null
+#0008:	 assign: tmp7 = tmp6
+	:100 null
+#0009:	 call: swift_retain(tmp7)
+	:100 null
+#0010:	 assign: tmp8 = *((tmp6.field0).field0)
+	:100 null
+#0011:	 assign: tmp9 = *(tmp8+13)
+	:100 null
+#0012:	 assign: tmp10 = tmp9
+	:100 null
+#0013:	 call: tmp11 = tmp10(tmp6)
+	:100 null
+#0014:	 call: swift_release(tmp6)
+	:100 null
+#0015:	 assign: tmp12 = *((tmp11.field0).field0)
+	:100 null
+#0016:	 assign: tmp13 = *(tmp12+20)
+	:100 null
+#0017:	 assign: tmp14 = tmp13
+	:100 null
+#0018:	 call: tmp15 = tmp14(tmp11)
+	:100 null
+#0019:	 call: swift_release(tmp11)
+	:100 null
+#0020:	 assign: *(tmp3.field0) = tmp15
+	:100 null
+#0021:	 assign: tmp16 = tmp6
+	:101 null
+#0022:	 call: swift_retain(tmp16)
+	:101 null
+#0023:	 assign: tmp17 = *((tmp6.field0).field0)
+	:101 null
+#0024:	 assign: tmp18 = *(tmp17+10)
+	:101 null
+#0025:	 assign: tmp19 = tmp18
+	:101 null
+#0026:	 call: tmp20 = tmp19(tmp6)
+	:101 null
+#0027:	 call: swift_release(tmp6)
+	:101 null
+#0028:	 assign: tmp21 = *((tmp20.field0).field0)
+	:101 null
+#0029:	 assign: tmp22 = *(tmp21+20)
+	:101 null
+#0030:	 assign: tmp23 = tmp22
+	:101 null
+#0031:	 call: tmp24 = tmp23(tmp20)
+	:101 null
+#0032:	 call: swift_release(tmp20)
+	:101 null
+#0033:	 assign: *(tmp3.field0) = tmp24
+	:101 null
+#0034:	 assign: tmp25 = tmp6
+	:102 null
+#0035:	 call: swift_retain(tmp25)
+	:102 null
+#0036:	 call: tmp26 = _TMaC4main6Square()
+	:102 null
+#0037:	 call: tmp27 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global51, 13, -1)
+	:102 null
+#0038:	 call: tmp28 = _TFC4main6SquareCfT10sideLengthSd4nameSS_S0_(50.0, (tmp27.field0), (tmp27.field0), (tmp27.field0), tmp26)
+	:102 null
+#0039:	 assign: tmp29 = *((tmp6.field0).field0)
+	:102 null
+#0040:	 assign: tmp30 = *(tmp29+14)
+	:102 null
+#0041:	 assign: tmp31 = tmp30
+	:102 null
+#0042:	 call: tmp31(tmp28, tmp6)
+	:102 null
+#0043:	 call: swift_release(tmp6)
+	:102 null
+#0044:	 assign: tmp32 = tmp6
+	:103 null
+#0045:	 call: swift_retain(tmp32)
+	:103 null
+#0046:	 assign: tmp33 = *((tmp6.field0).field0)
+	:103 null
+#0047:	 assign: tmp34 = *(tmp33+10)
+	:103 null
+#0048:	 assign: tmp35 = tmp34
+	:103 null
+#0049:	 call: tmp36 = tmp35(tmp6)
+	:103 null
+#0050:	 call: swift_release(tmp6)
+	:103 null
+#0051:	 assign: tmp37 = *((tmp36.field0).field0)
+	:103 null
+#0052:	 assign: tmp38 = *(tmp37+20)
+	:103 null
+#0053:	 assign: tmp39 = tmp38
+	:103 null
+#0054:	 call: tmp40 = tmp39(tmp36)
+	:103 null
+#0055:	 call: swift_release(tmp36)
+	:103 null
+#0056:	 assign: *(tmp3.field0) = tmp40
+	:103 null
+#0057:	 call: swift_release(tmp6)
+	:104 null
+#0058:	 assign: tmp41 = tmp3
+	:104 null
+#0059:	 call: llvm.lifetime.end(8, tmp41)
+	:104 null
+#0060:	 assign: tmp42 = tmp1
+	:104 null
+#0061:	 call: llvm.lifetime.end(8, tmp42) <exit>
+	:104 null
+
+CFG: _TFC4main7Counter11incrementByfTSi13numberOfTimesSi_T_
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: *tmp1 = 
+	:0 null
+#0002:	 assign: *tmp2 = 
+	:0 null
+#0003:	 call: tmp3 = llvm.smul.with.overflow.i64(, )
+	:109 null
+#0004:	 if: (tmp3.field0) then #0005:	 else #0006:	
+	:109 null
+#0005:	 call: llvm.trap()
+	:109 null
+#0007:	 noop: opcode 'LLVMUnreachable' not supported <exit>
+	:109 null
+#0006:	 assign: tmp4 = tmp5
+	:109 null
+#0008:	 call: llvm.lifetime.start(24, tmp4)
+	:109 null
+#0009:	 assign: tmp6 = tmp7
+	:109 null
+#0010:	 call: llvm.lifetime.start(8, tmp6)
+	:109 null
+#0011:	 assign: tmp8 = tmp7
+	:109 null
+#0012:	 assign: tmp9 = 
+	:109 null
+#0013:	 assign: tmp10 = *tmp9
+	:109 null
+#0014:	 assign: tmp11 = *(tmp10+12)
+	:109 null
+#0015:	 assign: tmp12 = tmp11
+	:109 null
+#0016:	 call: tmp13 = tmp12(tmp8, tmp5, )
+	:109 null
+#0017:	 assign: tmp14 = (tmp13.field0)
+	:109 null
+#0018:	 call: tmp15 = llvm.sadd.with.overflow.i64(*(tmp14.field0), (tmp3.field0))
+	:109 null
+#0019:	 if: (tmp15.field0) then #0020:	 else #0021:	
+	:109 null
+#0020:	 call: llvm.trap()
+	:109 null
+#0022:	 noop: opcode 'LLVMUnreachable' not supported <exit>
+	:109 null
+#0021:	 assign: *(tmp14.field0) = (tmp15.field0)
+	:109 null
+#0023:	 assign: tmp16 = (tmp13.field0) == 0
+	:109 null
+#0024:	 if: tmp16 then #0025:	 else #0026:	
+	:109 null
+#0025:	 noop
+ - no source -
+#0027:	 assign: tmp17 = tmp7
+	:110 null
+#0028:	 call: llvm.lifetime.end(8, tmp17)
+	:110 null
+#0029:	 assign: tmp18 = tmp5
+	:110 null
+#0030:	 call: llvm.lifetime.end(24, tmp18) <exit>
+	:110 null
+#0026:	 noop: opcode 'LLVMIntToPtr' not supported
+	:109 null
+#0031:	 noop: opcode 'LLVMPHI' not supported
+	:0 null
+#0032:	 assign: tmp19 = tmp20
+	:110 null
+#0033:	 call: llvm.lifetime.start(8, tmp19)
+	:110 null
+#0034:	 assign: *tmp20 = 
+	:110 null
+#0035:	 call: tmp21 = _TMaC4main7Counter()
+	:110 null
+#0036:	 assign: tmp22 = tmp14
+	:110 null
+#0037:	 noop: opcode 'LLVMPHI' not supported
+	:110 null
+#0038:	 call: tmp23(tmp22, tmp5, tmp20, tmp21)
+	:110 null
+#0039:	 assign: tmp24 = tmp20
+	:110 null
+#0040:	 call: llvm.lifetime.end(8, tmp24) next: #0025:	
+	:110 null
+
+CFG: _TMaC4main7Counter
+#0000:	 assign: tmp0 = *_TMLC4main7Counter == null
+	:0 null
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+	:0 null
+#0002:	 call: tmp1 = swift_getInitializedObjCClass((_TMfC4main7Counter.field2))
+	:0 null
+#0004:	 assign: tmp2 = tmp1
+	:0 null
+#0005:	 assign: *_TMLC4main7Counter = tmp2
+	:0 null
+#0003:	 noop
+ - no source -
+#0006:	 noop: opcode 'LLVMPHI' not supported
+	:0 null
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main7CounterD
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 call: tmp1 = _TFC4main7Counterd()
+	:0 null
+#0002:	 assign: tmp2 = tmp1
+	:0 null
+#0003:	 assign: tmp3 = tmp2
+	:0 null
+#0004:	 call: swift_deallocClassInstance(tmp3, 24, 7) <exit>
+	:0 null
+
+CFG: _TFC4main7Counterd
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: tmp1 = 
+	:0 null
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main7Counterg5countSi
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 noop: opcode 'LLVMRet' not supported <exit>
+	:107 null
+
+CFG: _TFC4main7Counters5countSi
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: *tmp1 = 
+	:0 null
+#0002:	 noop: can't index ((.field1).field0) by 0 <exit>
+	:0 null
+
+CFG: _TFC4main7Counterm5countSi
+#0000:	 assign: tmp0 = (.field1)
+	:0 null
+#0001:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0002:	 noop: opcode 'LLVMInsertValue' not supported
+	:0 null
+#0003:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TFC4main7CountercfT_S0_
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 noop: can't index ((.field1).field0) by 0
+	:107 null
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+	:106 null
+
+CFG: _TFC4main7CounterCfT_S0_
+#0000:	 call: tmp0 = _TMaC4main7Counter()
+	:0 null
+#0001:	 call: tmp1 = swift_allocObject(tmp0, 24, 7)
+	:0 null
+#0002:	 assign: tmp2 = tmp1
+	:0 null
+#0003:	 call: tmp3 = _TFC4main7CountercfT_S0_(tmp2)
+	:0 null
+#0004:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TF4main11testCounterFT_T_
+#0000:	 assign: tmp0 = tmp1
+	:0 null
+#0001:	 call: llvm.lifetime.start(8, tmp0)
+	:0 null
+#0002:	 call: tmp2 = _TMaC4main7Counter()
+	:114 null
+#0003:	 call: tmp3 = _TFC4main7CounterCfT_S0_(tmp2)
+	:114 null
+#0004:	 assign: *tmp1 = tmp3
+	:114 null
+#0005:	 assign: tmp4 = tmp3
+	:115 null
+#0006:	 call: swift_retain(tmp4)
+	:115 null
+#0007:	 assign: tmp5 = *((tmp3.field0).field0)
+	:115 null
+#0008:	 assign: tmp6 = *(tmp5+13)
+	:115 null
+#0009:	 assign: tmp7 = tmp6
+	:115 null
+#0010:	 call: tmp7(2, 7, tmp3)
+	:115 null
+#0011:	 call: swift_release(tmp3)
+	:116 null
+#0012:	 call: swift_release(tmp3)
+	:116 null
+#0013:	 assign: tmp8 = tmp1
+	:116 null
+#0014:	 call: llvm.lifetime.end(8, tmp8) <exit>
+	:116 null
+
+CFG: _TF4main18testOptionalSquareFT_T_
+#0000:	 call: tmp0 = _TMaC4main6Square()
+	:119 null
+#0001:	 call: tmp1 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global52, 15, -1)
+	:119 null
+#0002:	 call: tmp2 = _TFC4main6SquareCfT10sideLengthSd4nameSS_S0_(2.5, (tmp1.field0), (tmp1.field0), (tmp1.field0), tmp0)
+	:119 null
+#0003:	 noop: opcode 'LLVMPtrToInt' not supported
+	:119 null
+#0004:	 noop: opcode 'LLVMPtrToInt' not supported
+	:119 null
+#0005:	 noop: opcode 'LLVMIntToPtr' not supported
+	:120 null
+#0006:	 noop: opcode 'LLVMIntToPtr' not supported
+	:120 null
+#0007:	 noop: opcode 'LLVMPtrToInt' not supported
+	:120 null
+#0008:	 assign: tmp3 = tmp4 ^ -1
+	:120 null
+#0009:	 if: tmp3 then #0010:	 else #0011:	
+	:120 null
+#0010:	 noop: opcode 'LLVMIntToPtr' not supported
+	:120 null
+#0012:	 noop: opcode 'LLVMIntToPtr' not supported
+	:120 null
+#0013:	 assign: tmp5 = *(tmp6+20)
+	:120 null
+#0014:	 assign: tmp7 = tmp5
+	:120 null
+#0015:	 noop: opcode 'LLVMIntToPtr' not supported
+	:120 null
+#0016:	 noop: opcode 'LLVMIntToPtr' not supported
+	:120 null
+#0017:	 assign: tmp8 = tmp9
+	:120 null
+#0011:	 noop
+ - no source -
+#0018:	 noop: opcode 'LLVMPHI' not supported
+	:0 null
+#0019:	 noop: opcode 'LLVMPHI' not supported
+	:0 null
+#0020:	 noop: opcode 'LLVMPHI' not supported
+	:120 null
+#0021:	 noop: opcode 'LLVMPHI' not supported
+	:120 null
+#0022:	 noop: opcode 'LLVMIntToPtr' not supported
+	:121 null
+#0023:	 noop: opcode 'LLVMIntToPtr' not supported <exit>
+	:121 null
+
+CFG: get_field_types_Shape
+#0000:	 assign: tmp0 = *field_type_vector_Shape == null
+ - no source -
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+ - no source -
+#0002:	 call: tmp1 = swift_slowAlloc(8, 7)
+ - no source -
+#0004:	 assign: tmp2 = tmp1
+ - no source -
+#0005:	 assign: *tmp2 = _TMSi
+ - no source -
+#0006:	 noop: opcode 'LLVMPtrToInt' not supported
+ - no source -
+#0007:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
+ - no source -
+#0008:	 noop: opcode 'LLVMAtomicCmpXchg' not supported <exit>
+ - no source -
+#0003:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0009:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: get_field_types_NamedShape
+#0000:	 assign: tmp0 = *field_type_vector_NamedShape == null
+ - no source -
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+ - no source -
+#0002:	 call: tmp1 = swift_slowAlloc(16, 7)
+ - no source -
+#0004:	 assign: tmp2 = tmp1
+ - no source -
+#0005:	 assign: *tmp2 = _TMSi
+ - no source -
+#0006:	 assign: *(tmp2+1) = _TMSS
+ - no source -
+#0007:	 noop: opcode 'LLVMPtrToInt' not supported
+ - no source -
+#0008:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
+ - no source -
+#0009:	 noop: opcode 'LLVMAtomicCmpXchg' not supported <exit>
+ - no source -
+#0003:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0010:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: get_field_types_Square
+#0000:	 assign: tmp0 = *field_type_vector_Square == null
+ - no source -
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+ - no source -
+#0002:	 call: tmp1 = swift_slowAlloc(8, 7)
+ - no source -
+#0004:	 assign: tmp2 = tmp1
+ - no source -
+#0005:	 assign: *tmp2 = _TMSd
+ - no source -
+#0006:	 noop: opcode 'LLVMPtrToInt' not supported
+ - no source -
+#0007:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
+ - no source -
+#0008:	 noop: opcode 'LLVMAtomicCmpXchg' not supported <exit>
+ - no source -
+#0003:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0009:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: get_field_types_EquilateralTriangle
+#0000:	 assign: tmp0 = *field_type_vector_EquilateralTriangle == null
+ - no source -
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+ - no source -
+#0002:	 call: tmp1 = swift_slowAlloc(8, 7)
+ - no source -
+#0004:	 assign: tmp2 = tmp1
+ - no source -
+#0005:	 assign: *tmp2 = _TMSd
+ - no source -
+#0006:	 noop: opcode 'LLVMPtrToInt' not supported
+ - no source -
+#0007:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
+ - no source -
+#0008:	 noop: opcode 'LLVMAtomicCmpXchg' not supported <exit>
+ - no source -
+#0003:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0009:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: get_field_types_TriangleAndSquare
+#0000:	 assign: tmp0 = *field_type_vector_TriangleAndSquare == null
+ - no source -
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+ - no source -
+#0002:	 call: tmp1 = swift_slowAlloc(16, 7)
+ - no source -
+#0004:	 assign: tmp2 = tmp1
+ - no source -
+#0005:	 call: tmp3 = _TMaC4main19EquilateralTriangle()
+ - no source -
+#0006:	 assign: *tmp2 = tmp3
+ - no source -
+#0007:	 call: tmp4 = _TMaC4main6Square()
+ - no source -
+#0008:	 assign: *(tmp2+1) = tmp4
+ - no source -
+#0009:	 noop: opcode 'LLVMPtrToInt' not supported
+ - no source -
+#0010:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
+ - no source -
+#0011:	 noop: opcode 'LLVMAtomicCmpXchg' not supported <exit>
+ - no source -
+#0003:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0012:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: get_field_types_Counter
+#0000:	 assign: tmp0 = *field_type_vector_Counter == null
+ - no source -
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+ - no source -
+#0002:	 call: tmp1 = swift_slowAlloc(8, 7)
+ - no source -
+#0004:	 assign: tmp2 = tmp1
+ - no source -
+#0005:	 assign: *tmp2 = _TMSi
+ - no source -
+#0006:	 noop: opcode 'LLVMPtrToInt' not supported
+ - no source -
+#0007:	 noop: opcode 'LLVMAtomicCmpXchg' not supported
+ - no source -
+#0008:	 noop: opcode 'LLVMAtomicCmpXchg' not supported <exit>
+ - no source -
+#0003:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0009:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: <module init>
+#0000:	 assign: *global53 = "A shape with "
+ - no source -
+#0001:	 assign: *global54 = " sides."
+ - no source -
+#0002:	 assign: *global55 = "A square with sides of length "
+ - no source -
+#0003:	 assign: *global56 = "."
+ - no source -
+#0004:	 assign: *global57 = "main.Square"
+ - no source -
+#0005:	 assign: *global58 = "init(name:)"
+ - no source -
+#0006:	 assign: *global59 = "/Users/okutane/IdeaProjects/sanity/src/test/java/../resources/cfg/swift/objects.swift"
+ - no source -
+#0007:	 assign: *global60 = "can't unsafeBitCast between types of different sizes"
+ - no source -
+#0008:	 assign: *global61 = "fatal error"
+ - no source -
+#0009:	 assign: *global62 = "high- and low-surrogate code points are not valid Unicode scalar values"
+ - no source -
+#0010:	 assign: *global63 = "value is outside of Unicode codespace"
+ - no source -
+#0011:	 assign: *global64 = "shift amount is larger than type size in bits"
+ - no source -
+#0012:	 assign: *global65 = "UnsafeBufferPointer with negative count"
+ - no source -
+#0013:	 assign: *global66 = "my test square"
+ - no source -
+#0014:	 assign: *global67 = "An equilateral triangle with sides of length "
+ - no source -
+#0015:	 assign: *global68 = "main.EquilateralTriangle"
+ - no source -
+#0016:	 assign: *global69 = "a triangle"
+ - no source -
+#0017:	 assign: *global70 = "another test shape"
+ - no source -
+#0018:	 assign: *global71 = "larger square"
+ - no source -
+#0019:	 assign: *global72 = "optional square"
+ - no source -
+#0020:	 assign: *_TWvdvC4main5Shape13numberOfSidesSi = 16
+ - no source -
+#0021:	 assign: *global73 = "numberOfSides"
+ - no source -
+#0022:	 assign: *global75 = "_TtC4main5Shape"
+ - no source -
+#0023:	 assign: *(*_METACLASS_DATA__TtC4main5Shape.field0) = 129
+ - no source -
+#0024:	 assign: *(*_DATA__TtC4main5Shape.field0) = 128
+ - no source -
+#0025:	 assign: *global78 = "C4main5Shape"
+ - no source -
+#0026:	 assign: *global79 = "numberOfSides"
+ - no source -
+#0027:	 assign: *(*_TMnC4main5Shape.field0) = 0
+ - no source -
+#0028:	 assign: *_TWoFC4main5Shapeg13numberOfSidesSi = 96
+ - no source -
+#0029:	 assign: *_TWoFC4main5Shapes13numberOfSidesSi = 104
+ - no source -
+#0030:	 assign: *_TWoFC4main5Shapem13numberOfSidesSi = 112
+ - no source -
+#0031:	 assign: *_TWoFC4main5Shape17simpleDescriptionfT_SS = 120
+ - no source -
+#0032:	 assign: *_TWoFC4main5ShapeCfT_S0_ = 128
+ - no source -
+#0033:	 assign: *_TMLC4main5Shape = null
+ - no source -
+#0034:	 assign: *_TWvdvC4main10NamedShape13numberOfSidesSi = 16
+ - no source -
+#0035:	 assign: *_TWvdvC4main10NamedShape4nameSS = 24
+ - no source -
+#0036:	 assign: *global82 = "name"
+ - no source -
+#0037:	 assign: *global83 = "_TtC4main10NamedShape"
+ - no source -
+#0038:	 assign: *(*_METACLASS_DATA__TtC4main10NamedShape.field0) = 129
+ - no source -
+#0039:	 assign: *(*_DATA__TtC4main10NamedShape.field0) = 128
+ - no source -
+#0040:	 assign: *global86 = "C4main10NamedShape"
+ - no source -
+#0041:	 assign: *global87 = "numberOfSides"
+ - no source -
+#0042:	 assign: *(*_TMnC4main10NamedShape.field0) = 0
+ - no source -
+#0043:	 assign: *_TWoFC4main10NamedShapeg13numberOfSidesSi = 96
+ - no source -
+#0044:	 assign: *_TWoFC4main10NamedShapes13numberOfSidesSi = 104
+ - no source -
+#0045:	 assign: *_TWoFC4main10NamedShapem13numberOfSidesSi = 112
+ - no source -
+#0046:	 assign: *_TWoFC4main10NamedShapeg4nameSS = 120
+ - no source -
+#0047:	 assign: *_TWoFC4main10NamedShapes4nameSS = 128
+ - no source -
+#0048:	 assign: *_TWoFC4main10NamedShapem4nameSS = 136
+ - no source -
+#0049:	 assign: *_TWoFC4main10NamedShapeCfT4nameSS_S0_ = 144
+ - no source -
+#0050:	 assign: *_TWoFC4main10NamedShape17simpleDescriptionfT_SS = 152
+ - no source -
+#0051:	 assign: *_TMLC4main10NamedShape = null
+ - no source -
+#0052:	 assign: *_TWvdvC4main6Square10sideLengthSd = 48
+ - no source -
+#0053:	 assign: *global90 = "sideLength"
+ - no source -
+#0054:	 assign: *global91 = "_TtC4main6Square"
+ - no source -
+#0055:	 assign: *(*_METACLASS_DATA__TtC4main6Square.field0) = 129
+ - no source -
+#0056:	 assign: *(*_DATA__TtC4main6Square.field0) = 128
+ - no source -
+#0057:	 assign: *global94 = "C4main6Square"
+ - no source -
+#0058:	 assign: *global95 = "sideLength"
+ - no source -
+#0059:	 assign: *(*_TMnC4main6Square.field0) = 0
+ - no source -
+#0060:	 assign: *_TWoFC4main6Squareg10sideLengthSd = 176
+ - no source -
+#0061:	 assign: *_TWoFC4main6Squares10sideLengthSd = 184
+ - no source -
+#0062:	 assign: *_TWoFC4main6Squarem10sideLengthSd = 192
+ - no source -
+#0063:	 assign: *_TWoFC4main6SquareCfT10sideLengthSd4nameSS_S0_ = 200
+ - no source -
+#0064:	 assign: *_TWoFC4main6Square4areafT_Sd = 208
+ - no source -
+#0065:	 assign: *_TMLC4main6Square = null
+ - no source -
+#0066:	 assign: *_TWvdvC4main19EquilateralTriangle10sideLengthSd = 48
+ - no source -
+#0067:	 assign: *global98 = "_TtC4main19EquilateralTriangle"
+ - no source -
+#0068:	 assign: *(*_METACLASS_DATA__TtC4main19EquilateralTriangle.field0) = 129
+ - no source -
+#0069:	 assign: *(*_DATA__TtC4main19EquilateralTriangle.field0) = 128
+ - no source -
+#0070:	 assign: *global101 = "C4main19EquilateralTriangle"
+ - no source -
+#0071:	 assign: *(*_TMnC4main19EquilateralTriangle.field0) = 0
+ - no source -
+#0072:	 assign: *_TWoFC4main19EquilateralTriangleg10sideLengthSd = 176
+ - no source -
+#0073:	 assign: *_TWoFC4main19EquilateralTriangles10sideLengthSd = 184
+ - no source -
+#0074:	 assign: *_TWoFC4main19EquilateralTrianglem10sideLengthSd = 192
+ - no source -
+#0075:	 assign: *_TWoFC4main19EquilateralTriangleCfT10sideLengthSd4nameSS_S0_ = 200
+ - no source -
+#0076:	 assign: *_TWoFC4main19EquilateralTriangleg9perimeterSd = 208
+ - no source -
+#0077:	 assign: *_TWoFC4main19EquilateralTriangles9perimeterSd = 216
+ - no source -
+#0078:	 assign: *_TWoFC4main19EquilateralTrianglem9perimeterSd = 224
+ - no source -
+#0079:	 assign: *_TMLC4main19EquilateralTriangle = null
+ - no source -
+#0080:	 assign: *_TWvdvC4main17TriangleAndSquare8triangleCS_19EquilateralTriangle = 16
+ - no source -
+#0081:	 assign: *global104 = "triangle"
+ - no source -
+#0082:	 assign: *_TWvdvC4main17TriangleAndSquare6squareCS_6Square = 24
+ - no source -
+#0083:	 assign: *global105 = "square"
+ - no source -
+#0084:	 assign: *global106 = "_TtC4main17TriangleAndSquare"
+ - no source -
+#0085:	 assign: *(*_METACLASS_DATA__TtC4main17TriangleAndSquare.field0) = 129
+ - no source -
+#0086:	 assign: *(*_DATA__TtC4main17TriangleAndSquare.field0) = 128
+ - no source -
+#0087:	 assign: *global109 = "C4main17TriangleAndSquare"
+ - no source -
+#0088:	 assign: *global110 = "triangle"
+ - no source -
+#0089:	 assign: *(*_TMnC4main17TriangleAndSquare.field0) = 0
+ - no source -
+#0090:	 assign: *_TWoFC4main17TriangleAndSquareg8triangleCS_19EquilateralTriangle = 96
+ - no source -
+#0091:	 assign: *_TWoFC4main17TriangleAndSquares8triangleCS_19EquilateralTriangle = 104
+ - no source -
+#0092:	 assign: *_TWoFC4main17TriangleAndSquarem8triangleCS_19EquilateralTriangle = 112
+ - no source -
+#0093:	 assign: *_TWoFC4main17TriangleAndSquareg6squareCS_6Square = 120
+ - no source -
+#0094:	 assign: *_TWoFC4main17TriangleAndSquares6squareCS_6Square = 128
+ - no source -
+#0095:	 assign: *_TWoFC4main17TriangleAndSquarem6squareCS_6Square = 136
+ - no source -
+#0096:	 assign: *_TWoFC4main17TriangleAndSquareCfT4sizeSd4nameSS_S0_ = 144
+ - no source -
+#0097:	 assign: *_TMLC4main17TriangleAndSquare = null
+ - no source -
+#0098:	 assign: *_TWvdvC4main7Counter5countSi = 16
+ - no source -
+#0099:	 assign: *global113 = "count"
+ - no source -
+#0100:	 assign: *global114 = "_TtC4main7Counter"
+ - no source -
+#0101:	 assign: *(*_METACLASS_DATA__TtC4main7Counter.field0) = 129
+ - no source -
+#0102:	 assign: *(*_DATA__TtC4main7Counter.field0) = 128
+ - no source -
+#0103:	 assign: *global117 = "C4main7Counter"
+ - no source -
+#0104:	 assign: *global118 = "count"
+ - no source -
+#0105:	 assign: *(*_TMnC4main7Counter.field0) = 0
+ - no source -
+#0106:	 assign: *_TWoFC4main7Counterg5countSi = 96
+ - no source -
+#0107:	 assign: *_TWoFC4main7Counters5countSi = 104
+ - no source -
+#0108:	 assign: *_TWoFC4main7Counterm5countSi = 112
+ - no source -
+#0109:	 assign: *_TWoFC4main7Counter11incrementByfTSi13numberOfTimesSi_T_ = 120
+ - no source -
+#0110:	 assign: *_TWoFC4main7CounterCfT_S0_ = 128
+ - no source -
+#0111:	 assign: *_TMLC4main7Counter = null
+ - no source -
+#0112:	 assign: *field_type_vector_Counter = null
+ - no source -
+#0113:	 assign: *field_type_vector_TriangleAndSquare = null
+ - no source -
+#0114:	 assign: *field_type_vector_EquilateralTriangle = null
+ - no source -
+#0115:	 assign: *field_type_vector_Square = null
+ - no source -
+#0116:	 assign: *field_type_vector_NamedShape = null
+ - no source -
+#0117:	 assign: *field_type_vector_Shape = null <exit>
+ - no source -
+

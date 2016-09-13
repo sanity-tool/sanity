@@ -8,13 +8,13 @@ methodCalls.cpp:24 Bar bar;
 
 CFG: _ZN3BarC2Ev
 #0000:	 call: _ZN3BarC2Ev(*tmp0) <exit>
- - no source -
+methodCalls.cpp:19 struct Bar : public Foo {
 
 CFG: _ZN3FooC2Ev
 #0000:	 call: _ZN3FooC2Ev(tmp0)
- - no source -
+methodCalls.cpp:19 struct Bar : public Foo {
 
-Type: void (struct.Foo.74*)
+Type: void (struct.Foo.1*)
 #0000:	 call: **tmp0(*tmp1) <exit>
 methodCalls.cpp:16 p->abstractMethod();
 

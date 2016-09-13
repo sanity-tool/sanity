@@ -28,27 +28,27 @@ CFG: _ZN3BarC1Ev
 #0000:	 assign: *tmp0 = this
  - no source -
 #0001:	 call: _ZN3BarC2Ev(*tmp0) <exit>
- - no source -
+methodCalls.cpp:19 struct Bar : public Foo {
 
 CFG: _ZN3BarC2Ev
 #0000:	 assign: *tmp0 = this
  - no source -
 #0001:	 assign: tmp1 = *tmp0
- - no source -
+methodCalls.cpp:19 struct Bar : public Foo {
 #0002:	 call: _ZN3FooC2Ev(tmp1)
- - no source -
+methodCalls.cpp:19 struct Bar : public Foo {
 #0003:	 assign: tmp2 = *tmp0
- - no source -
+methodCalls.cpp:19 struct Bar : public Foo {
 #0004:	 assign: *tmp2 = (_ZTV3Bar+2) <exit>
- - no source -
+methodCalls.cpp:19 struct Bar : public Foo {
 
 CFG: _ZN3FooC2Ev
 #0000:	 assign: *tmp0 = this
  - no source -
 #0001:	 assign: tmp1 = *tmp0
- - no source -
+methodCalls.cpp:1 struct Foo {
 #0002:	 assign: *tmp1 = (_ZTV3Foo+2) <exit>
- - no source -
+methodCalls.cpp:1 struct Foo {
 
 CFG: <module init>
 #0000:	 assign: **_ZTV3Foo = null

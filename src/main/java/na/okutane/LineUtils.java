@@ -23,16 +23,8 @@ public class LineUtils implements DisposableBean {
 
     public static String dumpLine(File file, int lineNumber) {
         return CACHE.computeIfAbsent(new Pair<>(file, lineNumber), key -> {
-            System.out.println("file = [" + file + "], lineNumber = [" + lineNumber + "]");
-            try {
+            try { // todo real all lines and cache for file
                 return Files.readAllLines(Paths.get(file.getAbsolutePath())).get(lineNumber - 1).trim();
-
-//                LineNumberReader reader = new LineNumberReader(new FileReader(file));
-//                String line;
-//                do {
-//                    line = reader.readLine();
-//                } while (reader.getLineNumber() < lineNumber);
-//                return line.trim();
             } catch (Throwable e) {
                 // todo fix
                 return null;

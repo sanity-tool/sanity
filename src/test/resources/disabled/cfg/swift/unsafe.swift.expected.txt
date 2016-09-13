@@ -1,0 +1,46 @@
+CFG: main
+#0000:	 assign: tmp0 = 
+ - no source -
+#0001:	 assign: *(_TZvOs7Process5_argcVs5Int32.field0) = 
+	:0 null
+#0002:	 assign: tmp1 = *globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_token5 == -1
+	:0 null
+#0003:	 if: tmp1 then #0004:	 else #0005:	
+	:0 null
+#0004:	 noop
+ - no source -
+#0006:	 assign: tmp2 = *globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_token5 == -1
+	:0 null
+#0007:	 call: llvm.assume(tmp2)
+	:0 null
+#0008:	 assign: *(_TZvOs7Process11_unsafeArgvGSpGSpVs4Int8__.field0) = tmp0
+	:0 null
+#0009:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+#0005:	 call: swift_once(globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_token5, @globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_func5) next: #0004:	
+	:0 null
+
+CFG: _TF4main18testReadFromUnsafeFGSPSi_T_
+#0000:	 assign: tmp0 = tmp1
+	:0 null
+#0001:	 call: llvm.lifetime.start(8, tmp0)
+	:0 null
+#0002:	 assign: *tmp2 = 
+	:0 null
+#0003:	 assign: tmp3 = 
+	:2 null
+#0004:	 assign: *(tmp1.field0) = *(tmp3.field0)
+	:2 null
+#0005:	 assign: tmp4 = tmp1
+	:3 null
+#0006:	 call: llvm.lifetime.end(8, tmp4) <exit>
+	:3 null
+
+CFG: _TF4main17testWriteToUnsafeFGSpSi_T_
+#0000:	 assign: *tmp0 = 
+	:0 null
+#0001:	 assign: tmp1 = 
+	:6 null
+#0002:	 assign: *(tmp1.field0) = 1 <exit>
+	:6 null
+

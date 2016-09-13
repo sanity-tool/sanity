@@ -27,13 +27,13 @@ CFG: ptrDeref
 lvalues.c:29 *PTR = 1;
 
 CFG: structFieldAccess
-#0000:	 assign: *(STRUCT.field) = 1 <exit>
+#0000:	 assign: *(STRUCT.field0) = 1 <exit>
 lvalues.c:37 STRUCT.field = 1;
 
 CFG: structPtrFieldAccess
-#0000:	 assign: *(*PTR_STRUCT.field) = 1
+#0000:	 assign: *(*PTR_STRUCT.field0) = 1
 lvalues.c:41 (*PTR_STRUCT).field = 1;
-#0001:	 assign: *(*PTR_STRUCT.field) = 2 <exit>
+#0001:	 assign: *(*PTR_STRUCT.field0) = 2 <exit>
 lvalues.c:42 PTR_STRUCT->field = 2;
 
 CFG: <module init>

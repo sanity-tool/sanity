@@ -1,0 +1,484 @@
+CFG: main
+#0000:	 assign: tmp0 = 
+ - no source -
+#0001:	 assign: *(_TZvOs7Process5_argcVs5Int32.field0) = 
+	:0 null
+#0002:	 assign: tmp1 = *globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_token5 == -1
+	:0 null
+#0003:	 if: tmp1 then #0004:	 else #0005:	
+	:0 null
+#0004:	 noop
+ - no source -
+#0006:	 assign: tmp2 = *globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_token5 == -1
+	:0 null
+#0007:	 call: llvm.assume(tmp2)
+	:0 null
+#0008:	 assign: *(_TZvOs7Process11_unsafeArgvGSpGSpVs4Int8__.field0) = tmp0
+	:0 null
+#0009:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+#0005:	 call: swift_once(globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_token5, @globalinit_33_1BDF70FFC18749BAB495A73B459ED2F0_func5) next: #0004:	
+	:0 null
+
+CFG: _TF4main10testVarLetFT_T_
+#0000:	 assign: tmp0 = tmp1
+	:0 null
+#0001:	 call: llvm.lifetime.start(8, tmp0)
+	:0 null
+#0002:	 assign: *(tmp1.field0) = 42
+	:2 null
+#0003:	 assign: *(tmp1.field0) = 50
+	:3 null
+#0004:	 assign: *tmp2 = 42
+	:4 null
+#0005:	 assign: tmp3 = tmp1
+	:5 null
+#0006:	 call: llvm.lifetime.end(8, tmp3) <exit>
+	:5 null
+
+CFG: _TF4main20testImplicitExplicitFT_T_
+#0000:	 assign: *tmp0 = 70
+	:8 null
+#0001:	 assign: *tmp1 = 70.0
+	:9 null
+#0002:	 assign: *tmp2 = 70.0 <exit>
+	:10 null
+
+CFG: _TF4main10testStringFT_T_
+#0000:	 call: tmp0 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global0, 13, -1)
+	:14 null
+#0001:	 assign: *(tmp1.field0) = (tmp0.field0)
+	:14 null
+#0002:	 assign: *(tmp1.field1) = (tmp0.field0)
+	:14 null
+#0003:	 assign: *(tmp1.field2) = (tmp0.field0)
+	:14 null
+#0004:	 assign: *tmp2 = 94
+	:15 null
+#0005:	 noop: opcode 'LLVMIntToPtr' not supported
+	:16 null
+#0006:	 noop: opcode 'LLVMIntToPtr' not supported
+	:16 null
+#0007:	 assign: tmp3 = tmp4
+	:16 null
+#0008:	 call: llvm.lifetime.start(8, tmp3)
+	:16 null
+#0009:	 assign: *(tmp4.field0) = 94
+	:16 null
+#0010:	 assign: tmp5 = tmp4
+	:16 null
+#0011:	 call: tmp6 = _TFSSCuRxs18_SignedIntegerTyperfxSS(tmp5, _TMSi, _TWPSis18_SignedIntegerTypes, _TMSi, _TWPSis33_BuiltinIntegerLiteralConvertibles)
+	:16 null
+#0012:	 call: tmp7 = _TZFsoi1pFTSSSS_SS((tmp0.field0), (tmp0.field0), (tmp0.field0), (tmp6.field0), (tmp6.field0), (tmp6.field0))
+	:16 null
+#0013:	 assign: *(tmp8.field0) = (tmp7.field0)
+	:16 null
+#0014:	 assign: *(tmp8.field1) = (tmp7.field0)
+	:16 null
+#0015:	 assign: *(tmp8.field2) = (tmp7.field0)
+	:16 null
+#0016:	 assign: tmp9 = tmp4
+	:16 null
+#0017:	 call: llvm.lifetime.end(8, tmp9)
+	:16 null
+#0018:	 assign: *tmp10 = 3
+	:18 null
+#0019:	 assign: *tmp11 = 5
+	:19 null
+#0020:	 call: tmp12 = _TTSg5SS___TFs27_allocateUninitializedArrayurFBwTGSax_Bp_(3)
+	:20 null
+#0021:	 assign: tmp13 = (tmp12.field0)
+	:20 null
+#0022:	 call: tmp14 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global1, 7, -1)
+	:20 null
+#0023:	 call: tmp15 = _TFSSCfT26stringInterpolationSegmentSS_SS((tmp14.field0), (tmp14.field0), (tmp14.field0))
+	:20 null
+#0024:	 noop: can't index (((tmp0.field0).field0).field0) by 0
+	:20 null
+#0025:	 noop: bad
+	:20 null
+#0026:	 noop: bad
+	:20 null
+#0027:	 assign: *tmp16 = (tmp15.field0)
+	:20 null
+#0028:	 call: tmp17 = _TFSSCfT26stringInterpolationSegmentSi_SS(3)
+	:20 null
+#0029:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
+	:20 null
+#0030:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
+	:20 null
+#0031:	 assign: tmp18 = (((((tmp13+1).field0).field0).field0)+2)
+	:20 null
+#0032:	 assign: *tmp18 = (tmp17.field0)
+	:20 null
+#0033:	 call: tmp19 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global2, 8, -1)
+	:20 null
+#0034:	 call: tmp20 = _TFSSCfT26stringInterpolationSegmentSS_SS((tmp19.field0), (tmp19.field0), (tmp19.field0))
+	:20 null
+#0035:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
+	:20 null
+#0036:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
+	:20 null
+#0037:	 assign: tmp21 = (((((tmp13+2).field0).field0).field0)+2)
+	:20 null
+#0038:	 assign: *tmp21 = (tmp20.field0)
+	:20 null
+#0039:	 call: tmp22 = _TFSSCft19stringInterpolationGSaSS__SS((tmp12.field0))
+	:20 null
+#0040:	 assign: *(tmp23.field0) = (tmp22.field0)
+	:20 null
+#0041:	 assign: *(tmp23.field1) = (tmp22.field0)
+	:20 null
+#0042:	 assign: *(tmp23.field2) = (tmp22.field0)
+	:20 null
+#0043:	 call: tmp24 = _TTSg5SS___TFs27_allocateUninitializedArrayurFBwTGSax_Bp_(3)
+	:21 null
+#0044:	 assign: tmp25 = (tmp24.field0)
+	:21 null
+#0045:	 call: tmp26 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global3, 7, -1)
+	:21 null
+#0046:	 call: tmp27 = _TFSSCfT26stringInterpolationSegmentSS_SS((tmp26.field0), (tmp26.field0), (tmp26.field0))
+	:21 null
+#0047:	 noop: can't index (((tmp0.field0).field0).field0) by 0
+	:21 null
+#0048:	 noop: bad
+	:21 null
+#0049:	 noop: bad
+	:21 null
+#0050:	 assign: *tmp28 = (tmp27.field0)
+	:21 null
+#0051:	 call: tmp29 = _TFSSCfT26stringInterpolationSegmentSi_SS(8)
+	:21 null
+#0052:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
+	:21 null
+#0053:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
+	:21 null
+#0054:	 assign: tmp30 = (((((tmp25+1).field0).field0).field0)+2)
+	:21 null
+#0055:	 assign: *tmp30 = (tmp29.field0)
+	:21 null
+#0056:	 call: tmp31 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global4, 17, -1)
+	:21 null
+#0057:	 call: tmp32 = _TFSSCfT26stringInterpolationSegmentSS_SS((tmp31.field0), (tmp31.field0), (tmp31.field0))
+	:21 null
+#0058:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
+	:21 null
+#0059:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
+	:21 null
+#0060:	 assign: tmp33 = (((((tmp25+2).field0).field0).field0)+2)
+	:21 null
+#0061:	 assign: *tmp33 = (tmp32.field0)
+	:21 null
+#0062:	 call: tmp34 = _TFSSCft19stringInterpolationGSaSS__SS((tmp24.field0))
+	:21 null
+#0063:	 assign: *(tmp35.field0) = (tmp34.field0)
+	:21 null
+#0064:	 assign: *(tmp35.field1) = (tmp34.field0)
+	:21 null
+#0065:	 assign: *(tmp35.field2) = (tmp34.field0)
+	:21 null
+#0066:	 noop: opcode 'LLVMIntToPtr' not supported
+	:22 null
+#0067:	 noop: opcode 'LLVMIntToPtr' not supported
+	:22 null
+#0068:	 noop: opcode 'LLVMIntToPtr' not supported
+	:22 null
+#0069:	 noop: opcode 'LLVMIntToPtr' not supported
+	:22 null
+#0070:	 noop: opcode 'LLVMIntToPtr' not supported
+	:22 null
+#0071:	 noop: opcode 'LLVMIntToPtr' not supported
+	:22 null
+#0072:	 noop: opcode 'LLVMIntToPtr' not supported
+	:22 null
+#0073:	 noop: opcode 'LLVMIntToPtr' not supported <exit>
+	:22 null
+
+CFG: _TF4main22testArraysDictionariesFT_T_
+#0000:	 assign: tmp0 = tmp1
+	:0 null
+#0001:	 call: llvm.lifetime.start(8, tmp0)
+	:0 null
+#0002:	 assign: tmp2 = tmp3
+	:0 null
+#0003:	 call: llvm.lifetime.start(8, tmp2)
+	:0 null
+#0004:	 call: tmp4 = _TTSg5SS___TFs27_allocateUninitializedArrayurFBwTGSax_Bp_(4)
+	:25 null
+#0005:	 assign: tmp5 = (tmp4.field0)
+	:25 null
+#0006:	 call: tmp6 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global5, 7, -1)
+	:25 null
+#0007:	 noop: can't index (((tmp0.field0).field0).field0) by 0
+	:25 null
+#0008:	 noop: bad
+	:25 null
+#0009:	 noop: bad
+	:25 null
+#0010:	 assign: *tmp7 = (tmp6.field0)
+	:25 null
+#0011:	 call: tmp8 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global6, 5, -1)
+	:25 null
+#0012:	 noop: can't index ((((tmp0+1).field0).field0).field0) by 0
+	:25 null
+#0013:	 noop: can't index (((((tmp0+1).field0).field0).field0)+1) by 0
+	:25 null
+#0014:	 assign: tmp9 = (((((tmp5+1).field0).field0).field0)+2)
+	:25 null
+#0015:	 assign: *tmp9 = (tmp8.field0)
+	:25 null
+#0016:	 call: tmp10 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global7, 6, -1)
+	:25 null
+#0017:	 noop: can't index ((((tmp0+2).field0).field0).field0) by 0
+	:25 null
+#0018:	 noop: can't index (((((tmp0+2).field0).field0).field0)+1) by 0
+	:25 null
+#0019:	 assign: tmp11 = (((((tmp5+2).field0).field0).field0)+2)
+	:25 null
+#0020:	 assign: *tmp11 = (tmp10.field0)
+	:25 null
+#0021:	 call: tmp12 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global8, 10, -1)
+	:25 null
+#0022:	 noop: can't index ((((tmp0+3).field0).field0).field0) by 0
+	:25 null
+#0023:	 noop: can't index (((((tmp0+3).field0).field0).field0)+1) by 0
+	:25 null
+#0024:	 assign: tmp13 = (((((tmp5+3).field0).field0).field0)+2)
+	:25 null
+#0025:	 assign: *tmp13 = (tmp12.field0)
+	:25 null
+#0026:	 call: tmp14 = _TTSg5SS___TFSaCft12arrayLiteralGSax__GSax_((tmp4.field0))
+	:25 null
+#0027:	 noop: bad
+	:25 null
+#0028:	 call: tmp15 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global9, 15, -1)
+	:26 null
+#0029:	 call: tmp16 = _TTSg5SS___TFSaap9subscriptFSix(1, tmp1)
+	:26 null
+#0030:	 assign: tmp17 = (tmp16.field0)
+	:26 null
+#0031:	 noop: bad
+	:26 null
+#0032:	 noop: can't index (((tmp0.field0).field0).field0) by 0
+	:26 null
+#0033:	 noop: bad
+	:26 null
+#0034:	 noop: bad
+	:26 null
+#0035:	 assign: *tmp18 = (tmp15.field0)
+	:26 null
+#0036:	 noop: opcode 'LLVMIntToPtr' not supported
+	:26 null
+#0037:	 noop: opcode 'LLVMIntToPtr' not supported
+	:26 null
+#0038:	 noop: opcode 'LLVMIntToPtr' not supported
+	:26 null
+#0039:	 noop: opcode 'LLVMIntToPtr' not supported
+	:26 null
+#0040:	 call: tmp19 = _TMaTSSSS_()
+	:28 null
+#0041:	 call: tmp20 = _TFs27_allocateUninitializedArrayurFBwTGSax_Bp_(2, tmp19)
+	:28 null
+#0042:	 assign: tmp21 = (tmp20.field0)
+	:28 null
+#0043:	 call: tmp22 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global10, 7, -1)
+	:29 null
+#0044:	 noop: can't index ((((tmp0.field0).field0).field0).field0) by 0
+	:29 null
+#0045:	 noop: can't index (((((tmp0.field0).field0).field0).field0)+1) by 0
+	:29 null
+#0046:	 assign: tmp23 = (((((tmp21.field0).field0).field0).field0)+2)
+	:29 null
+#0047:	 assign: *tmp23 = (tmp22.field0)
+	:29 null
+#0048:	 call: tmp24 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global11, 7, -1)
+	:29 null
+#0049:	 noop: can't index ((((tmp0.field1).field0).field0).field0) by 0
+	:29 null
+#0050:	 noop: can't index (((((tmp0.field1).field0).field0).field0)+1) by 0
+	:29 null
+#0051:	 assign: tmp25 = (((((tmp21.field1).field0).field0).field0)+2)
+	:29 null
+#0052:	 assign: *tmp25 = (tmp24.field0)
+	:29 null
+#0053:	 call: tmp26 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global12, 6, -1)
+	:30 null
+#0054:	 noop: can't index (((((tmp0+1).field0).field0).field0).field0) by 0
+	:30 null
+#0055:	 noop: can't index (((((tmp0+1).field0).field0).field0).field0) by 1
+	:30 null
+#0056:	 noop: can't index (((((tmp0+1).field0).field0).field0).field0) by 2
+	:30 null
+#0057:	 assign: *tmp27 = (tmp26.field0)
+	:30 null
+#0058:	 call: tmp28 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global13, 8, -1)
+	:30 null
+#0059:	 noop: bad
+	:30 null
+#0060:	 noop: bad
+	:30 null
+#0061:	 noop: bad
+	:30 null
+#0062:	 assign: *tmp29 = (tmp28.field0)
+	:30 null
+#0063:	 call: tmp30 = _TFVs10DictionaryCft17dictionaryLiteralGSaTxq____GS_xq__((tmp20.field0), _TMSS, _TWPSSs8Hashables, _TMSS)
+	:31 null
+#0064:	 assign: tmp31 = (tmp3.field0)
+	:28 null
+#0065:	 assign: *tmp31 = tmp30
+	:28 null
+#0066:	 call: tmp32 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global14, 5, -1)
+	:32 null
+#0067:	 call: tmp33 = _TFSSCfT21_builtinStringLiteralBp8byteSizeBw7isASCIIBi1__SS(global15, 16, -1)
+	:32 null
+#0068:	 noop: opcode 'LLVMPtrToInt' not supported
+	:32 null
+#0069:	 assign: tmp34 = tmp35
+	:32 null
+#0070:	 call: llvm.lifetime.start(25, tmp34)
+	:32 null
+#0071:	 assign: tmp36 = tmp35
+	:32 null
+#0072:	 noop: opcode 'LLVMPtrToInt' not supported
+	:32 null
+#0073:	 assign: *(tmp36.field1) = (tmp33.field0)
+	:32 null
+#0074:	 assign: *(tmp36.field2) = (tmp33.field0)
+	:32 null
+#0075:	 assign: tmp37 = (tmp35.field1)
+	:32 null
+#0076:	 assign: *tmp37 = 0
+	:32 null
+#0077:	 assign: tmp38 = tmp39
+	:32 null
+#0078:	 call: llvm.lifetime.start(24, tmp38)
+	:32 null
+#0079:	 noop: can't index (((tmp0.field0).field0).field0) by 0
+	:32 null
+#0080:	 noop: bad
+	:32 null
+#0081:	 noop: bad
+	:32 null
+#0082:	 assign: *tmp40 = (tmp32.field0)
+	:32 null
+#0083:	 assign: tmp41 = tmp35
+	:32 null
+#0084:	 assign: tmp42 = tmp39
+	:32 null
+#0085:	 call: tmp43 = _TMaGVs10DictionarySSSS_()
+	:32 null
+#0086:	 call: _TFVs10Dictionarys9subscriptFxGSqq__(tmp41, tmp42, tmp43, tmp3)
+	:32 null
+#0087:	 assign: tmp44 = tmp39
+	:32 null
+#0088:	 call: llvm.lifetime.end(24, tmp44)
+	:32 null
+#0089:	 assign: tmp45 = tmp35
+	:32 null
+#0090:	 call: llvm.lifetime.end(25, tmp45)
+	:32 null
+#0091:	 call: tmp46 = _TTSg5SS___TFSaCfT_GSax_()
+	:34 null
+#0092:	 assign: *tmp47 = tmp46
+	:34 null
+#0093:	 call: tmp48 = _TFVs10DictionaryCfT_GS_xq__(_TMSS, _TWPSSs8Hashables, _TMSf)
+	:35 null
+#0094:	 assign: *tmp49 = tmp48
+	:35 null
+#0095:	 call: tmp50 = _TTSg5SS___TFs27_allocateUninitializedArrayurFBwTGSax_Bp_(0)
+	:37 null
+#0096:	 assign: tmp51 = (tmp50.field0)
+	:37 null
+#0097:	 call: tmp52 = _TTSg5SS___TFSaCft12arrayLiteralGSax__GSax_((tmp50.field0))
+	:37 null
+#0098:	 noop: bad
+	:37 null
+#0099:	 noop: bad
+	:37 null
+#0100:	 call: tmp53 = _TFs27_allocateUninitializedArrayurFBwTGSax_Bp_(0, tmp19)
+	:38 null
+#0101:	 assign: tmp54 = (tmp53.field0)
+	:38 null
+#0102:	 call: tmp55 = _TFVs10DictionaryCft17dictionaryLiteralGSaTxq____GS_xq__((tmp53.field0), _TMSS, _TWPSSs8Hashables, _TMSS)
+	:38 null
+#0103:	 assign: tmp56 = (tmp3.field0)
+	:38 null
+#0104:	 assign: tmp57 = (tmp3.field0)
+	:38 null
+#0105:	 assign: *tmp57 = tmp55
+	:38 null
+#0106:	 noop: opcode 'LLVMLShr' not supported
+	:38 null
+#0107:	 noop: opcode 'LLVMTrunc' not supported
+	:38 null
+#0108:	 noop: opcode 'LLVMTrunc' not supported <exit>
+	:38 null
+
+CFG: _TMaTSSSS_
+#0000:	 assign: tmp0 = *_TMLTSSSS_ == null
+	:0 null
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+	:0 null
+#0002:	 call: tmp1 = swift_getTupleTypeMetadata2(_TMSS, _TMSS, null, null)
+	:0 null
+#0004:	 assign: *_TMLTSSSS_ = tmp1
+	:0 null
+#0003:	 noop
+ - no source -
+#0005:	 noop: opcode 'LLVMPHI' not supported
+	:0 null
+#0006:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: _TMaGVs10DictionarySSSS_
+#0000:	 assign: tmp0 = *_TMLGVs10DictionarySSSS_ == null
+	:0 null
+#0001:	 if: tmp0 then #0002:	 else #0003:	
+	:0 null
+#0002:	 call: tmp1 = swift_getGenericMetadata3(_TMPVs10Dictionary, _TMSS, _TMSS, _TWPSSs8Hashables)
+	:0 null
+#0004:	 assign: *_TMLGVs10DictionarySSSS_ = tmp1
+	:0 null
+#0003:	 noop
+ - no source -
+#0005:	 noop: opcode 'LLVMPHI' not supported
+	:0 null
+#0006:	 noop: opcode 'LLVMRet' not supported <exit>
+	:0 null
+
+CFG: <module init>
+#0000:	 assign: *global16 = "The width is "
+ - no source -
+#0001:	 assign: *global17 = "I have "
+ - no source -
+#0002:	 assign: *global18 = " apples."
+ - no source -
+#0003:	 assign: *global19 = " pieces of fruit."
+ - no source -
+#0004:	 assign: *global20 = "catfish"
+ - no source -
+#0005:	 assign: *global21 = "water"
+ - no source -
+#0006:	 assign: *global22 = "tulips"
+ - no source -
+#0007:	 assign: *global23 = "blue paint"
+ - no source -
+#0008:	 assign: *global24 = "bottle of water"
+ - no source -
+#0009:	 assign: *_TMLTSSSS_ = null
+ - no source -
+#0010:	 assign: *global25 = "Malcolm"
+ - no source -
+#0011:	 assign: *global26 = "Captain"
+ - no source -
+#0012:	 assign: *global27 = "Kaylee"
+ - no source -
+#0013:	 assign: *global28 = "Mechanic"
+ - no source -
+#0014:	 assign: *global29 = "Jayne"
+ - no source -
+#0015:	 assign: *global30 = "Public Relations"
+ - no source -
+#0016:	 assign: *_TMLGVs10DictionarySSSS_ = null <exit>
+ - no source -
+

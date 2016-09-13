@@ -1,0 +1,12 @@
+#0000:	 assign: *(_TZvOs7Process5_argcVs5Int32.field0) = 
+Á:0 null
+java.lang.IllegalStateException: Don't know how to get value from GetFieldPointer
+
+#0000:	 assign: *(tmp0.field0) = null
+Á:2 null
+java.lang.IllegalStateException: Don't know how to get value from GetFieldPointer
+
+#0000:	 assign: *(tmp0.field0) = null
+Á:7 null
+java.lang.IllegalStateException: Don't know how to get value from GetFieldPointer
+

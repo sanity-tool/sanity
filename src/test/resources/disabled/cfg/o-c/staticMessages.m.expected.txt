@@ -1,0 +1,46 @@
+CFG: sendStaticMessages
+#0000:	 assign: tmp0 = *OBJC_CLASSLIST_REFERENCES_$_
+staticMessages.m:9 [MyUtility voidUtility];
+#0001:	 call: tmp1 = objc_msgSend(tmp0, *OBJC_SELECTOR_REFERENCES_)
+staticMessages.m:9 [MyUtility voidUtility];
+#0002:	 assign: tmp2 = *OBJC_CLASSLIST_REFERENCES_$_
+staticMessages.m:10 R_INT = [MyUtility intUtility];
+#0003:	 call: tmp3 = objc_msgSend(tmp2, *OBJC_SELECTOR_REFERENCES_.2)
+staticMessages.m:10 R_INT = [MyUtility intUtility];
+#0004:	 assign: *R_INT = tmp3
+staticMessages.m:10 R_INT = [MyUtility intUtility];
+#0005:	 assign: tmp4 = *OBJC_CLASSLIST_REFERENCES_$_
+staticMessages.m:11 [MyUtility voidUtilityWithParam:1 withParam2: 2];
+#0006:	 call: tmp5 = objc_msgSend(tmp4, *OBJC_SELECTOR_REFERENCES_.4, 1, 2) <exit>
+staticMessages.m:11 [MyUtility voidUtilityWithParam:1 withParam2: 2];
+
+CFG: <module init>
+#0000:	 assign: *OBJC_CLASSLIST_REFERENCES_$_ = OBJC_CLASS_$_MyUtility
+ - no source -
+#0001:	 assign: *OBJC_METH_VAR_NAME_ = "voidUtility"
+ - no source -
+#0002:	 assign: *OBJC_SELECTOR_REFERENCES_ = OBJC_METH_VAR_NAME_
+ - no source -
+#0003:	 assign: *OBJC_METH_VAR_NAME_.1 = "intUtility"
+ - no source -
+#0004:	 assign: *OBJC_SELECTOR_REFERENCES_.2 = OBJC_METH_VAR_NAME_.1
+ - no source -
+#0005:	 assign: *OBJC_METH_VAR_NAME_.3 = "voidUtilityWithParam:withParam2:"
+ - no source -
+#0006:	 assign: *OBJC_SELECTOR_REFERENCES_.4 = OBJC_METH_VAR_NAME_.3
+ - no source -
+#0007:	 assign: **llvm.compiler.used = OBJC_CLASSLIST_REFERENCES_$_
+ - no source -
+#0008:	 assign: *(*llvm.compiler.used+1) = OBJC_METH_VAR_NAME_
+ - no source -
+#0009:	 assign: *(*llvm.compiler.used+2) = OBJC_SELECTOR_REFERENCES_
+ - no source -
+#0010:	 assign: *(*llvm.compiler.used+3) = OBJC_METH_VAR_NAME_.1
+ - no source -
+#0011:	 assign: *(*llvm.compiler.used+4) = OBJC_SELECTOR_REFERENCES_.2
+ - no source -
+#0012:	 assign: *(*llvm.compiler.used+5) = OBJC_METH_VAR_NAME_.3
+ - no source -
+#0013:	 assign: *(*llvm.compiler.used+6) = OBJC_SELECTOR_REFERENCES_.4 <exit>
+ - no source -
+

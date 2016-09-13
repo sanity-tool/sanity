@@ -1,5 +1,5 @@
 CFG: testFloatBuiltinOps
-#0000:	 call: tmp0 = fmodf(*F0, *F1)
+#0000:	 assign: tmp0 = *F0 % *F1
 builtins.c:6 FR = __builtin_fmodf(F0,F1);
 #0001:	 assign: *FR = tmp0
 builtins.c:6 FR = __builtin_fmodf(F0,F1);
@@ -13,7 +13,7 @@ builtins.c:7 DR = __builtin_fmod(D0,D1);
 builtins.c:7 DR = __builtin_fmod(D0,D1);
 #0006:	 noop: opcode 'LLVMFPTrunc' not supported
 builtins.c:7 DR = __builtin_fmod(D0,D1);
-#0007:	 call: tmp1 = fmodl(*LD0, *LD1)
+#0007:	 assign: tmp1 = *LD0 % *LD1
 builtins.c:8 LDR = __builtin_fmodl(LD0,LD1);
 #0008:	 assign: *LDR = tmp1 <exit>
 builtins.c:8 LDR = __builtin_fmodl(LD0,LD1);
