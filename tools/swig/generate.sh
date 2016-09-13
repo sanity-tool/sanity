@@ -29,14 +29,11 @@ case `uname` in
     Darwin)
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin/"
 
-        STDLIBS="/usr/lib/libc.dylib /usr/lib/libc++.dylib /usr/lib/libstdc++.dylib /usr/lib/libtermcap.dylib"
-
+        HACK_DLL_NAME=libdebughack.jnilib
         DLL_NAME=libirreader.jnilib
     ;;
     Linux)
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
-
-        STDLIBS="/usr/lib/x86_64-linux-gnu/libtermcap.so /usr/lib/x86_64-linux-gnu/libc.so /usr/lib/x86_64-linux-gnu/libc++.so /usr/lib/x86_64-linux-gnu/libstdc++.so.6"
 
         DLL_NAME=libirreader.so
     ;;
@@ -54,6 +51,8 @@ esac
 
 CPPFLAGS=`$LLVM_CONFIG --cppflags`
 LDFLAGS="`$LLVM_CONFIG --ldflags` -L/usr/local/opt/libffi/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
+
+#todo reduce to only necessary libs
 LIBS="`$LLVM_CONFIG --libs` -ltermcap"
 
 echo $LIBS
@@ -88,9 +87,19 @@ COMPILE_HELPERS="clang++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_
 echo $COMPILE_HELPERS
 eval $COMPILE_HELPERS
 
-LINK_CMD="clang++ -shared $STD_LIBS $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS"
+COMPILE_DEBUGHACK="clang++ -c debughack.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $CPPFLAGS -I/usr/local/opt/llvm/include $DEBUG -fPIC -std=c++11 -o $OBJ_DIR/debughack.o"
+echo $COMPILE_DEBUGHACK
+eval $COMPILE_DEBUGHACK
+
+cp /usr/local/Cellar/llvm/3.8.1/lib/libLLVMCore.a $OBJ_DIR/libLLVMCore.a
+chmod +w $OBJ_DIR/libLLVMCore.a
+gobjcopy -v --target mach-o-x86-64 --strip-symbol __ZN4llvm16UpgradeDebugInfoERNS_6ModuleE $OBJ_DIR/libLLVMCore.a
+
+LINK_CMD="clang++ -Wl,-allow_sub_type_mismatches -shared ${LIBS/-lLLVMCore/} $OBJ_DIR/libLLVMCore.a $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o $OBJ_DIR/debughack.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS"
 echo $LINK_CMD
 eval $LINK_CMD
+
+#gobjcopy --strip-symbol __ZN4llvm16UpgradeDebugInfoERNS_6ModuleE $SOBJ_DIR/$DLL_NAME
 
 #ldd $DLL_NAME
 #nm --dynamic --undefined-only $DLL_NAME
