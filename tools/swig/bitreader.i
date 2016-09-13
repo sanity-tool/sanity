@@ -78,6 +78,8 @@ const char* GetDataArrayString(LLVMValueRef Val);
 LLVMRealPredicate GetFCmpPredicate(LLVMValueRef Inst);
 double GetConstantFPDoubleValue(LLVMValueRef ConstantVal);
 
+int SAGetInstructionDebugLocLine(LLVMValueRef instruction);
+
 %pragma(java) jniclasscode=%{
   static {
      System.loadLibrary("irreader");

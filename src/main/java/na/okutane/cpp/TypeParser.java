@@ -86,7 +86,7 @@ public class TypeParser implements ParserListener {
                 if (LlvmUtils.checkTag(compileUnitMD, DW_TAG_compile_unit)) {
                     visit(compileUnitMD);
                 } else {
-                    throw new IllegalStateException("not a compilation unit: " + bitreader.LLVMPrintValueToString(compileUnitMD));
+                    //throw new IllegalStateException("not a compilation unit: " + bitreader.LLVMPrintValueToString(compileUnitMD));
                 }
             }
         } finally {

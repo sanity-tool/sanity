@@ -20,26 +20,35 @@ public class SourceRangeFactory {
     private static final int DIRECTORY_INDEX = 1;
 
     public SourceRange getSourceRange(SWIGTYPE_p_LLVMOpaqueValue instruction) {
-
-        long id = bitreader.LLVMGetMDKindID("dbg", 3);
-        SWIGTYPE_p_LLVMOpaqueValue node = bitreader.LLVMGetMetadata(instruction, id);
-
-        if (node != null) {
-            //deepDump(node);
-
-            SWIGTYPE_p_LLVMOpaqueValue pair = getPair(node);
-
-            if (pair != null) {
-                String filename = bitreader.getMDString(bitreader.LLVMGetOperand(pair, 0));
-                String directory = bitreader.getMDString(bitreader.LLVMGetOperand(pair, 1));
-                int lineNo = (int) bitreader.LLVMConstIntGetSExtValue(bitreader.LLVMGetOperand(node, 0));
-                if (new File(filename).isAbsolute()) {
-                    return new SourceRange(filename, lineNo);
-                }
-                return new SourceRange(new File(directory, filename).getAbsolutePath(), lineNo);
+        try {
+            int line = bitreader.SAGetInstructionDebugLocLine(instruction);
+            if (line != -1) {
+                System.out.println("line = " + line);
+                return new SourceRange(Parser.CURRENT, line);
             }
+
+            long id = bitreader.LLVMGetMDKindID("dbg", 3);
+            SWIGTYPE_p_LLVMOpaqueValue node = bitreader.LLVMGetMetadata(instruction, id);
+
+            if (node != null) {
+                //deepDump(node);
+
+                SWIGTYPE_p_LLVMOpaqueValue pair = getPair(node);
+
+                if (pair != null) {
+                    String filename = bitreader.getMDString(bitreader.LLVMGetOperand(pair, 0));
+                    String directory = bitreader.getMDString(bitreader.LLVMGetOperand(pair, 1));
+                    int lineNo = (int) bitreader.LLVMConstIntGetSExtValue(bitreader.LLVMGetOperand(node, 0));
+                    if (new File(filename).isAbsolute()) {
+                        return new SourceRange(filename, lineNo);
+                    }
+                    return new SourceRange(new File(directory, filename).getAbsolutePath(), lineNo);
+                }
+            }
+            return null;
+        } catch (Exception e) {
+            return null;
         }
-        return null;
     }
 
     private SWIGTYPE_p_LLVMOpaqueValue getPair(SWIGTYPE_p_LLVMOpaqueValue node) {
@@ -50,10 +59,20 @@ public class SourceRangeFactory {
             return null;
         }
 
-        if (LlvmUtils.checkTag(node, DW_TAG_file_type) || LlvmUtils.checkTag(node, DW_TAG_lexical_block)) {
-            return bitreader.LLVMGetOperand(node, 1);
-        } else {
-            return getPair(bitreader.LLVMGetOperand(node, 2));
+        try {
+            if (LlvmUtils.checkTag(node, DW_TAG_file_type) || LlvmUtils.checkTag(node, DW_TAG_lexical_block)) {
+                return bitreader.LLVMGetOperand(node, 1);
+            } else {
+                return getPair(bitreader.LLVMGetOperand(node, 2));
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("node = " + bitreader.LLVMPrintValueToString(node));
+            int count = bitreader.LLVMGetNumOperands(node);
+            System.out.println("count = " + count);
+            for (int i = 0; i < count; i++) {
+                System.out.println("bitreader.LLVMGetOperand(node, " + i + ") = " + bitreader.LLVMPrintValueToString(bitreader.LLVMGetOperand(node, i)));
+            }
+            throw e;
         }
     }
 }

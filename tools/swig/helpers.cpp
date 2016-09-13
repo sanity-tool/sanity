@@ -23,8 +23,11 @@
 #include "llvm/Support/Threading.h"
 #include "llvm/Support/raw_ostream.h"
 
+#include <llvm/IR/Instruction.h>
+#include <llvm/IR/DebugInfoMetadata.h>
+
 //#include <iostream>
-//#include <stdio.h>
+#include <stdio.h>
 
 using namespace llvm;
 
@@ -67,6 +70,14 @@ double GetConstantFPDoubleValue(LLVMValueRef ConstantVal) {
   checkSemantics(x87DoubleExtended);*/
 
   return apf.bitcastToAPInt().bitsToDouble();
+}
+
+int SAGetInstructionDebugLocLine(LLVMValueRef instruction) {
+    const DebugLoc &loc = unwrap<Instruction>(instruction)->getDebugLoc();
+    printf("&loc == %p\n", &loc);
+    int line = loc ? loc->getLine() : -1;
+    printf("line == %d\n", line);
+    return line;
 }
 
 }
