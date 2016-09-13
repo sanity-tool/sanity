@@ -28,8 +28,9 @@ notifications:
 
 before_install:
   - brew update
-  - brew install swig
-  - brew install llvm --dsym
+  - brew install llvm # main dependency
+  - brew install crosstool-ng # to replace undesired function from llvm core
+  - brew install swig # wrappers generator
 
 after_failure:
   - diff target/failures/expected target/failures/actual
