@@ -36,7 +36,7 @@ public class ParserTests extends TestHelper {
                     parser.parse(unit);
                     throw new IllegalStateException("should have failed");
                 } catch (ParseException e) {
-                    check(pathToExpected, e.toString());
+                    check(pathToExpected, e.toString().replace(BASE, ""));
                 }
 
             }

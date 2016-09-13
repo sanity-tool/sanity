@@ -19,7 +19,7 @@ public abstract class TestHelper {
     static {
         context.refresh();
     }
-    private static String BASE = System.getProperty("TEST_RESOURCES_ROOT");
+    public static final String BASE = System.getProperty("TEST_RESOURCES_ROOT");
     private static String FAILURES_DIR = System.getProperty("TEST_FAILURES_ROOT");
 
     protected void fillWithTests(TestSuite suite, String path) {
