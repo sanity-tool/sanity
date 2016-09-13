@@ -23,8 +23,11 @@ public class SourceRangeFactory {
         try {
             int line = bitreader.SAGetInstructionDebugLocLine(instruction);
             if (line != -1) {
-                System.out.println("line = " + line);
-                return new SourceRange(Parser.CURRENT, line);
+                String filename = bitreader.SAGetInstructionDebugLocScopeFile(instruction);
+                if (filename != null) {
+                    return new SourceRange(filename, line);
+                }
+                return null;
             }
 
             long id = bitreader.LLVMGetMDKindID("dbg", 3);

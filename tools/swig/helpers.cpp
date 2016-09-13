@@ -74,10 +74,25 @@ double GetConstantFPDoubleValue(LLVMValueRef ConstantVal) {
 
 int SAGetInstructionDebugLocLine(LLVMValueRef instruction) {
     const DebugLoc &loc = unwrap<Instruction>(instruction)->getDebugLoc();
-    printf("&loc == %p\n", &loc);
-    int line = loc ? loc->getLine() : -1;
-    printf("line == %d\n", line);
-    return line;
+    if (!loc) {
+        return -1;
+    }
+    return loc->getLine();
+}
+
+std::string result; // non-threadsafe
+const char *SAGetInstructionDebugLocScopeFile(LLVMValueRef instruction) {
+
+    const DebugLoc &loc = unwrap<Instruction>(instruction)->getDebugLoc();
+    if (!loc) {
+        return 0;
+    }
+    if (!loc->getScope()) {
+        return 0;
+    }
+    result = loc->getScope()->getFilename().str();
+
+    return result.c_str();
 }
 
 }

@@ -33,9 +33,6 @@ import java.util.List;
  */
 @Component
 public class Parser {
-    //todo replace by proper solution
-    public static String CURRENT;
-
     @Autowired
     ClangParametersFactory parametersFactory;
     @Autowired
@@ -52,7 +49,6 @@ public class Parser {
     ConstCache constants;
 
     public List<Cfg> parse(String filename) throws ParseException {
-        CURRENT = filename;
         try {
             try (TempFileWrapper objFile = new TempFileWrapper("result", ".bc")) {
                 try (TempFileWrapper errFile = new TempFileWrapper("result", ".err")) {
