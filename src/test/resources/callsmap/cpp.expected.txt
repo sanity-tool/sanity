@@ -1,10 +1,10 @@
 CFG: _Z18abstractMethodCallP3Foo
 #0000:	 call: _Z18abstractMethodCallP3Foo(tmp0) <exit>
- - no source -
+methodCalls.cpp:25 abstractMethodCall(&bar);
 
 CFG: _ZN3BarC1Ev
 #0000:	 call: _ZN3BarC1Ev(tmp0)
- - no source -
+methodCalls.cpp:24 Bar bar;
 
 CFG: _ZN3BarC2Ev
 #0000:	 call: _ZN3BarC2Ev(*tmp0) <exit>
@@ -16,5 +16,5 @@ CFG: _ZN3FooC2Ev
 
 Type: void (struct.Foo.74*)
 #0000:	 call: **tmp0(*tmp1) <exit>
- - no source -
+methodCalls.cpp:16 p->abstractMethod();
 

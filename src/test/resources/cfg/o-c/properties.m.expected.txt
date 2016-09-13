@@ -4,11 +4,11 @@ CFG: -[MyObjectWithProperty readSelf]
 #0001:	 assign: *tmp1 = _cmd
  - no source -
 #0002:	 assign: tmp2 = *tmp0
- - no source -
+properties.m:12 return self.intProperty;
 #0003:	 call: tmp3 = objc_msgSend(tmp2, *L_OBJC_SELECTOR_REFERENCES_)
- - no source -
+properties.m:12 return self.intProperty;
 #0004:	 noop: opcode 'LLVMRet' not supported <exit>
- - no source -
+properties.m:12 return self.intProperty;
 
 CFG: -[MyObjectWithProperty intProperty]
 #0000:	 assign: *tmp0 = self
@@ -16,11 +16,11 @@ CFG: -[MyObjectWithProperty intProperty]
 #0001:	 assign: *tmp1 = _cmd
  - no source -
 #0002:	 assign: tmp2 = *tmp0
- - no source -
+properties.m:3 @property int intProperty;
 #0003:	 assign: tmp3 = (tmp2+*OBJC_IVAR_$_MyObjectWithProperty._intProperty)
- - no source -
+properties.m:3 @property int intProperty;
 #0004:	 noop: opcode 'LLVMRet' not supported <exit>
- - no source -
+properties.m:3 @property int intProperty;
 
 CFG: -[MyObjectWithProperty setIntProperty:]
 #0000:	 assign: *tmp0 = self
@@ -30,19 +30,19 @@ CFG: -[MyObjectWithProperty setIntProperty:]
 #0002:	 assign: *tmp2 = intProperty
  - no source -
 #0003:	 assign: tmp3 = *tmp0
- - no source -
+properties.m:3 @property int intProperty;
 #0004:	 assign: tmp4 = (tmp3+*OBJC_IVAR_$_MyObjectWithProperty._intProperty)
- - no source -
+properties.m:3 @property int intProperty;
 #0005:	 assign: *tmp4 = *tmp2 <exit>
- - no source -
+properties.m:3 @property int intProperty;
 
 CFG: readGlobal
 #0000:	 assign: tmp0 = *OBJ
- - no source -
+properties.m:20 return OBJ.intProperty;
 #0001:	 call: tmp1 = objc_msgSend(tmp0, *L_OBJC_SELECTOR_REFERENCES_)
- - no source -
+properties.m:20 return OBJ.intProperty;
 #0002:	 noop: opcode 'LLVMRet' not supported <exit>
- - no source -
+properties.m:20 return OBJ.intProperty;
 
 CFG: <module init>
 #0000:	 assign: *L_OBJC_METH_VAR_NAME_ = "intProperty"
@@ -65,7 +65,7 @@ CFG: <module init>
  - no source -
 #0009:	 assign: *L_OBJC_METH_VAR_NAME_2 = "setIntProperty:"
  - no source -
- - no source -
+#0010:	 assign: *L_OBJC_METH_VAR_TYPE_3 = "v20@0:8i16"
  - no source -
 #0011:	 assign: *L_OBJC_METH_VAR_NAME_4 = "_intProperty"
  - no source -

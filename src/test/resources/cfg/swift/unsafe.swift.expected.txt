@@ -7,13 +7,13 @@ CFG: _TF4main18testReadFromUnsafeFGVSs13UnsafePointerSi_T_
 #0001:	 assign: *tmp1 = 
  - no source -
 #0002:	 assign: tmp2 = 
- - no source -
+unsafe.swift:2 var v = p.memory;
 #0003:	 assign: tmp3 = tmp4
- - no source -
+unsafe.swift:2 var v = p.memory;
 #0004:	 assign: tmp5 = tmp2
- - no source -
+unsafe.swift:2 var v = p.memory;
 #0005:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp3, tmp5, 8, 8, 0) <exit>
- - no source -
+unsafe.swift:2 var v = p.memory;
 
 CFG: _TF4main17testWriteToUnsafeFGVSs20UnsafeMutablePointerSi_T_
 #0000:	 assign: *tmp0 = 
@@ -21,9 +21,9 @@ CFG: _TF4main17testWriteToUnsafeFGVSs20UnsafeMutablePointerSi_T_
 #0001:	 assign: *tmp1 = 
  - no source -
 #0002:	 assign: tmp2 = 
- - no source -
+unsafe.swift:6 p.memory = 1;
 #0003:	 assign: *(tmp2.field0) = 1 <exit>
- - no source -
+unsafe.swift:6 p.memory = 1;
 
 CFG: main
 #0000:	 call: tmp0 = _TFSsa6C_ARGCVSs5Int32()

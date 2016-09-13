@@ -1,18 +1,18 @@
 CFG: sendStaticMessages
 #0000:	 assign: tmp0 = *L_OBJC_CLASSLIST_REFERENCES_$_
- - no source -
+staticMessages.m:9 [MyUtility voidUtility];
 #0001:	 call: tmp1 = objc_msgSend(tmp0, *L_OBJC_SELECTOR_REFERENCES_)
- - no source -
+staticMessages.m:9 [MyUtility voidUtility];
 #0002:	 assign: tmp2 = *L_OBJC_CLASSLIST_REFERENCES_$_
- - no source -
+staticMessages.m:10 R_INT = [MyUtility intUtility];
 #0003:	 call: tmp3 = objc_msgSend(tmp2, *L_OBJC_SELECTOR_REFERENCES_2)
- - no source -
+staticMessages.m:10 R_INT = [MyUtility intUtility];
 #0004:	 assign: *R_INT = tmp3
- - no source -
+staticMessages.m:10 R_INT = [MyUtility intUtility];
 #0005:	 assign: tmp4 = *L_OBJC_CLASSLIST_REFERENCES_$_
- - no source -
+staticMessages.m:11 [MyUtility voidUtilityWithParam:1 withParam2: 2];
 #0006:	 call: tmp5 = objc_msgSend(tmp4, *L_OBJC_SELECTOR_REFERENCES_4, 1, 2) <exit>
- - no source -
+staticMessages.m:11 [MyUtility voidUtilityWithParam:1 withParam2: 2];
 
 CFG: <module init>
 #0000:	 assign: *L_OBJC_CLASSLIST_REFERENCES_$_ = OBJC_CLASS_$_MyUtility

@@ -4,9 +4,9 @@ CFG: -[MyObject useSelf]
 #0001:	 assign: *tmp1 = _cmd
  - no source -
 #0002:	 assign: tmp2 = *tmp0
- - no source -
+messages.m:8 [self foo];
 #0003:	 call: tmp3 = objc_msgSend(tmp2, *L_OBJC_SELECTOR_REFERENCES_) <exit>
- - no source -
+messages.m:8 [self foo];
 
 CFG: -[MyChild foo]
 #0000:	 assign: *tmp0 = self
@@ -14,37 +14,37 @@ CFG: -[MyChild foo]
 #0001:	 assign: *tmp1 = _cmd
  - no source -
 #0002:	 assign: tmp2 = *tmp0
- - no source -
+messages.m:17 [super foo];
 #0003:	 assign: *(tmp3.field0) = tmp2
- - no source -
+messages.m:17 [super foo];
 #0004:	 assign: tmp4 = *L_OBJC_CLASSLIST_SUP_REFS_$_
- - no source -
+messages.m:17 [super foo];
 #0005:	 assign: *(tmp3.field1) = tmp4
- - no source -
+messages.m:17 [super foo];
 #0006:	 call: tmp5 = objc_msgSendSuper2(tmp3, *L_OBJC_SELECTOR_REFERENCES_) <exit>
- - no source -
+messages.m:17 [super foo];
 
 CFG: testNew
 #0000:	 assign: tmp0 = *L_OBJC_CLASSLIST_REFERENCES_$_
- - no source -
+messages.m:24 OBJ = [MyObject new];
 #0001:	 call: tmp1 = objc_msgSend(tmp0, *L_OBJC_SELECTOR_REFERENCES_4)
- - no source -
+messages.m:24 OBJ = [MyObject new];
 #0002:	 assign: tmp2 = tmp1
- - no source -
+messages.m:24 OBJ = [MyObject new];
 #0003:	 assign: *OBJ = tmp2 <exit>
- - no source -
+messages.m:24 OBJ = [MyObject new];
 
 CFG: testAllocInit
 #0000:	 assign: tmp0 = *L_OBJC_CLASSLIST_REFERENCES_$_
- - no source -
+messages.m:28 OBJ = [[MyObject alloc] init];
 #0001:	 call: tmp1 = objc_msgSend(tmp0, *L_OBJC_SELECTOR_REFERENCES_6)
- - no source -
+messages.m:28 OBJ = [[MyObject alloc] init];
 #0002:	 call: tmp2 = objc_msgSend(tmp1, *L_OBJC_SELECTOR_REFERENCES_8)
- - no source -
+messages.m:28 OBJ = [[MyObject alloc] init];
 #0003:	 assign: tmp3 = tmp2
- - no source -
+messages.m:28 OBJ = [[MyObject alloc] init];
 #0004:	 assign: *OBJ = tmp3 <exit>
- - no source -
+messages.m:28 OBJ = [[MyObject alloc] init];
 
 CFG: <module init>
 #0000:	 assign: *L_OBJC_METH_VAR_NAME_ = "foo"

@@ -1,4 +1,4 @@
 #0000:	 assign: tmp0 = *GPBOOL != null
- - no source -
+conditions.cpp:9 if (GPBOOL);
 java.lang.IllegalStateException: Don't know how to get value from BinaryExpression
 

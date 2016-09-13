@@ -1,8 +1,8 @@
 CFG: _ZL15testBoolLogicalv
 #0000:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+boolean.cpp:4 BR = B0 && B1;
 #0001:	 noop: opcode 'LLVMTrunc' not supported <exit>
- - no source -
+boolean.cpp:4 BR = B0 && B1;
 
 CFG: <module init>
 #0000:	 assign: *_ZL2BR = 0

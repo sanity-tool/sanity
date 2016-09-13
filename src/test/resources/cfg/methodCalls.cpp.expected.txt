@@ -2,27 +2,27 @@ CFG: _Z18instanceMethodCallP3Foo
 #0000:	 assign: *tmp0 = p
  - no source -
 #0001:	 call: _ZN3Foo14instanceMethodEv(*tmp0) <exit>
- - no source -
+methodCalls.cpp:8 p->instanceMethod();
 
 CFG: _Z16staticMethodCallv
 #0000:	 call: _ZN3Foo12staticMethodEv() <exit>
- - no source -
+methodCalls.cpp:12 Foo::staticMethod();
 
 CFG: _Z18abstractMethodCallP3Foo
 #0000:	 assign: *tmp0 = p
  - no source -
 #0001:	 assign: tmp1 = *tmp0
- - no source -
+methodCalls.cpp:16 p->abstractMethod();
 #0002:	 call: **tmp1(*tmp0) <exit>
- - no source -
+methodCalls.cpp:16 p->abstractMethod();
 
 CFG: _Z7testBarv
 #0000:	 call: _ZN3BarC1Ev(tmp0)
- - no source -
+methodCalls.cpp:24 Bar bar;
 #0001:	 assign: tmp1 = tmp0
- - no source -
+methodCalls.cpp:25 abstractMethodCall(&bar);
 #0002:	 call: _Z18abstractMethodCallP3Foo(tmp1) <exit>
- - no source -
+methodCalls.cpp:25 abstractMethodCall(&bar);
 
 CFG: _ZN3BarC1Ev
 #0000:	 assign: *tmp0 = this

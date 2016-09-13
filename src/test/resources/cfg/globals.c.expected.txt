@@ -1,10 +1,10 @@
 CFG: writeToGlobalInt
 #0000:	 assign: *I = 1 <exit>
- - no source -
+globals.c:4 I = 1;
 
 CFG: writeToGlobalIntPointer
 #0000:	 assign: *I_P = null <exit>
- - no source -
+globals.c:8 I_P = 0;
 
 CFG: <module init>
 #0000:	 assign: *I = 0

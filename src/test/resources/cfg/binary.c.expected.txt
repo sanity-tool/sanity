@@ -1,178 +1,178 @@
 CFG: testChar
 #0000:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0001:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0002:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0003:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0004:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0005:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0006:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0007:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0008:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0009:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0010:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0011:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0012:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0013:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0014:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0015:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0016:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0017:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0018:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0019:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0020:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0021:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0022:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0023:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0024:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0025:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0026:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0027:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0028:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0029:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0030:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0031:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0032:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0033:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0034:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0035:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0036:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0037:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0038:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0039:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0040:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0041:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0042:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0043:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0044:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0045:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0046:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0047:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0048:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0049:	 noop: opcode 'LLVMTrunc' not supported <exit>
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 
 CFG: testCharCmp
 #0000:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0001:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0002:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0003:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0004:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0005:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0006:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0007:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0008:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0009:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0010:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0011:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0012:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0013:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0014:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0015:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0016:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0017:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0018:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0019:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0020:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0021:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0022:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0023:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0024:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0025:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0026:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0027:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0028:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0029:	 noop: opcode 'LLVMTrunc' not supported <exit>
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 
 CFG: testCharLogical
 #0000:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0001:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0002:	 if: tmp0 then #0003:	 else #0004:	
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0003:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0005:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0004:	 noop
  - no source -
 #0006:	 noop: opcode 'LLVMPHI' not supported
@@ -182,131 +182,131 @@ CFG: testCharLogical
 #0008:	 noop: opcode 'LLVMTrunc' not supported
  - no source -
 #0009:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0010:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0011:	 if: tmp1 then #0012:	 else #0013:	
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0012:	 noop
  - no source -
 #0014:	 noop: opcode 'LLVMPHI' not supported
  - no source -
 #0015:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0016:	 noop: opcode 'LLVMTrunc' not supported <exit>
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0013:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0017:	 noop: opcode 'LLVMSExt' not supported next: #0012:	
- - no source -
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 
 CFG: testUChar
 #0000:	 assign: tmp0 = *UC0 + *UC1
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0001:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0002:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0003:	 assign: tmp1 = *UC0 - *UC1
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0004:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0005:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0006:	 assign: tmp2 = *UC0 * *UC1
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0007:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0008:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0009:	 assign: tmp3 = *UC0 / *UC1
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0010:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0011:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0012:	 assign: tmp4 = *UC0 % *UC1
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0013:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0014:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0015:	 assign: tmp5 = *UC0 & *UC1
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0016:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0017:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0018:	 assign: tmp6 = *UC0 | *UC1
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0019:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0020:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0021:	 assign: tmp7 = *UC0 ^ *UC1
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0022:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0023:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0024:	 assign: tmp8 = *UC0 << *UC1
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0025:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0026:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0027:	 assign: tmp9 = *UC0 >> *UC1
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0028:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0029:	 noop: opcode 'LLVMTrunc' not supported <exit>
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 
 CFG: testUCharCmp
 #0000:	 assign: tmp0 = *UC0 < *UC1
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0001:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0002:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0003:	 assign: tmp1 = *UC0 > *UC1
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0004:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0005:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0006:	 assign: tmp2 = *UC0 <= *UC1
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0007:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0008:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0009:	 assign: tmp3 = *UC0 >= *UC1
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0010:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0011:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0012:	 assign: tmp4 = *UC0 == *UC1
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0013:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0014:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0015:	 assign: tmp5 = *UC0 != *UC1
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0016:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0017:	 noop: opcode 'LLVMTrunc' not supported <exit>
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 
 CFG: testUCharLogical
 #0000:	 assign: tmp0 = *UC0 != 0
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0001:	 if: tmp0 then #0002:	 else #0003:	
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0002:	 assign: tmp1 = *UC1 != 0
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0003:	 noop
  - no source -
 #0004:	 noop: opcode 'LLVMPHI' not supported
@@ -316,195 +316,195 @@ CFG: testUCharLogical
 #0006:	 noop: opcode 'LLVMTrunc' not supported
  - no source -
 #0007:	 assign: tmp2 = *UC0 != 0
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0008:	 if: tmp2 then #0009:	 else #0010:	
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0009:	 noop
  - no source -
 #0011:	 noop: opcode 'LLVMPHI' not supported
  - no source -
 #0012:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0013:	 noop: opcode 'LLVMTrunc' not supported <exit>
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0010:	 assign: tmp3 = *UC1 != 0 next: #0009:	
- - no source -
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 
 CFG: testShort
 #0000:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0001:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0002:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0003:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0004:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0005:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0006:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0007:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0008:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0009:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0010:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0011:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0012:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0013:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0014:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0015:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0016:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0017:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0018:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0019:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0020:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0021:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0022:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0023:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0024:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0025:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0026:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0027:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0028:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0029:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0030:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0031:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0032:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0033:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0034:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0035:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0036:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0037:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0038:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0039:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0040:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0041:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0042:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0043:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0044:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0045:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0046:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0047:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0048:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0049:	 noop: opcode 'LLVMTrunc' not supported <exit>
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 
 CFG: testShortCmp
 #0000:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0001:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0002:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0003:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0004:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0005:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0006:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0007:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0008:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0009:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0010:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0011:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0012:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0013:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0014:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0015:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0016:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0017:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0018:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0019:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0020:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0021:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0022:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0023:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0024:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0025:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0026:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0027:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0028:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0029:	 noop: opcode 'LLVMTrunc' not supported <exit>
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 
 CFG: testShortLogical
 #0000:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0001:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0002:	 if: tmp0 then #0003:	 else #0004:	
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0003:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0005:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0004:	 noop
  - no source -
 #0006:	 noop: opcode 'LLVMPHI' not supported
@@ -514,131 +514,131 @@ CFG: testShortLogical
 #0008:	 noop: opcode 'LLVMTrunc' not supported
  - no source -
 #0009:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0010:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0011:	 if: tmp1 then #0012:	 else #0013:	
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0012:	 noop
  - no source -
 #0014:	 noop: opcode 'LLVMPHI' not supported
  - no source -
 #0015:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0016:	 noop: opcode 'LLVMTrunc' not supported <exit>
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0013:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0017:	 noop: opcode 'LLVMSExt' not supported next: #0012:	
- - no source -
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 
 CFG: testUShort
 #0000:	 assign: tmp0 = *US0 + *US1
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0001:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0002:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0003:	 assign: tmp1 = *US0 - *US1
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0004:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0005:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0006:	 assign: tmp2 = *US0 * *US1
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0007:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0008:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0009:	 assign: tmp3 = *US0 / *US1
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0010:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0011:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0012:	 assign: tmp4 = *US0 % *US1
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0013:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0014:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0015:	 assign: tmp5 = *US0 & *US1
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0016:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0017:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0018:	 assign: tmp6 = *US0 | *US1
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0019:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0020:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0021:	 assign: tmp7 = *US0 ^ *US1
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0022:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0023:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0024:	 assign: tmp8 = *US0 << *US1
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0025:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0026:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0027:	 assign: tmp9 = *US0 >> *US1
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0028:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0029:	 noop: opcode 'LLVMTrunc' not supported <exit>
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 
 CFG: testUShortCmp
 #0000:	 assign: tmp0 = *US0 < *US1
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0001:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0002:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0003:	 assign: tmp1 = *US0 > *US1
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0004:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0005:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0006:	 assign: tmp2 = *US0 <= *US1
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0007:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0008:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0009:	 assign: tmp3 = *US0 >= *US1
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0010:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0011:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0012:	 assign: tmp4 = *US0 == *US1
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0013:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0014:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0015:	 assign: tmp5 = *US0 != *US1
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0016:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0017:	 noop: opcode 'LLVMTrunc' not supported <exit>
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 
 CFG: testUShortLogical
 #0000:	 assign: tmp0 = *US0 != 0
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0001:	 if: tmp0 then #0002:	 else #0003:	
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0002:	 assign: tmp1 = *US1 != 0
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0003:	 noop
  - no source -
 #0004:	 noop: opcode 'LLVMPHI' not supported
@@ -648,95 +648,95 @@ CFG: testUShortLogical
 #0006:	 noop: opcode 'LLVMTrunc' not supported
  - no source -
 #0007:	 assign: tmp2 = *US0 != 0
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0008:	 if: tmp2 then #0009:	 else #0010:	
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0009:	 noop
  - no source -
 #0011:	 noop: opcode 'LLVMPHI' not supported
  - no source -
 #0012:	 noop: opcode 'LLVMTrunc' not supported
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0013:	 noop: opcode 'LLVMTrunc' not supported <exit>
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0010:	 assign: tmp3 = *US1 != 0 next: #0009:	
- - no source -
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 
 CFG: testInt
 #0000:	 assign: tmp0 = *I0 + *I1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0001:	 assign: *IR = tmp0
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0002:	 assign: tmp1 = *I0 - *I1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0003:	 assign: *IR = tmp1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0004:	 assign: tmp2 = *I0 * *I1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0005:	 assign: *IR = tmp2
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0006:	 assign: tmp3 = *I0 / *I1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0007:	 assign: *IR = tmp3
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0008:	 assign: tmp4 = *I0 % *I1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0009:	 assign: *IR = tmp4
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0010:	 assign: tmp5 = *I0 & *I1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0011:	 assign: *IR = tmp5
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0012:	 assign: tmp6 = *I0 | *I1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0013:	 assign: *IR = tmp6
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0014:	 assign: tmp7 = *I0 ^ *I1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0015:	 assign: *IR = tmp7
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0016:	 assign: tmp8 = *I0 << *I1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0017:	 assign: *IR = tmp8
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0018:	 assign: tmp9 = *I0 >> *I1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0019:	 assign: *IR = tmp9 <exit>
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 
 CFG: testIntCmp
 #0000:	 assign: tmp0 = *I0 < *I1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0001:	 assign: *IR = tmp0
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0002:	 assign: tmp1 = *I0 > *I1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0003:	 assign: *IR = tmp1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0004:	 assign: tmp2 = *I0 <= *I1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0005:	 assign: *IR = tmp2
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0006:	 assign: tmp3 = *I0 >= *I1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0007:	 assign: *IR = tmp3
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0008:	 assign: tmp4 = *I0 == *I1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0009:	 assign: *IR = tmp4
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0010:	 assign: tmp5 = *I0 != *I1
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0011:	 assign: *IR = tmp5 <exit>
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 
 CFG: testIntLogical
 #0000:	 assign: tmp0 = *I0 != 0
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0001:	 if: tmp0 then #0002:	 else #0003:	
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0002:	 assign: tmp1 = *I1 != 0
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0003:	 noop
  - no source -
 #0004:	 noop: opcode 'LLVMPHI' not supported
@@ -744,93 +744,93 @@ CFG: testIntLogical
 #0005:	 noop: opcode 'LLVMPHI' not supported
  - no source -
 #0006:	 assign: tmp2 = *I0 != 0
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0007:	 if: tmp2 then #0008:	 else #0009:	
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0008:	 noop
  - no source -
 #0010:	 noop: opcode 'LLVMPHI' not supported
  - no source -
 #0011:	 noop: opcode 'LLVMPHI' not supported <exit>
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0009:	 assign: tmp3 = *I1 != 0 next: #0008:	
- - no source -
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 
 CFG: testUInt
 #0000:	 assign: tmp0 = *UI0 + *UI1
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0001:	 assign: *UIR = tmp0
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0002:	 assign: tmp1 = *UI0 - *UI1
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0003:	 assign: *UIR = tmp1
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0004:	 assign: tmp2 = *UI0 * *UI1
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0005:	 assign: *UIR = tmp2
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0006:	 noop: opcode 'LLVMUDiv' not supported
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0007:	 noop: opcode 'LLVMUDiv' not supported
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0008:	 noop: opcode 'LLVMURem' not supported
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0009:	 noop: opcode 'LLVMURem' not supported
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0010:	 assign: tmp3 = *UI0 & *UI1
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0011:	 assign: *UIR = tmp3
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0012:	 assign: tmp4 = *UI0 | *UI1
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0013:	 assign: *UIR = tmp4
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0014:	 assign: tmp5 = *UI0 ^ *UI1
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0015:	 assign: *UIR = tmp5
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0016:	 assign: tmp6 = *UI0 << *UI1
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0017:	 assign: *UIR = tmp6
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0018:	 noop: opcode 'LLVMLShr' not supported
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0019:	 noop: opcode 'LLVMLShr' not supported <exit>
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 
 CFG: testUIntCmp
 #0000:	 assign: tmp0 = *UI0 < *UI1
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0001:	 assign: *UIR = tmp0
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0002:	 assign: tmp1 = *UI0 > *UI1
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0003:	 assign: *UIR = tmp1
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0004:	 assign: tmp2 = *UI0 <= *UI1
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0005:	 assign: *UIR = tmp2
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0006:	 assign: tmp3 = *UI0 >= *UI1
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0007:	 assign: *UIR = tmp3
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0008:	 assign: tmp4 = *UI0 == *UI1
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0009:	 assign: *UIR = tmp4
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0010:	 assign: tmp5 = *UI0 != *UI1
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0011:	 assign: *UIR = tmp5 <exit>
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 
 CFG: testUIntLogical
 #0000:	 assign: tmp0 = *UI0 != 0
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0001:	 if: tmp0 then #0002:	 else #0003:	
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0002:	 assign: tmp1 = *UI1 != 0
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0003:	 noop
  - no source -
 #0004:	 noop: opcode 'LLVMPHI' not supported
@@ -838,105 +838,105 @@ CFG: testUIntLogical
 #0005:	 noop: opcode 'LLVMPHI' not supported
  - no source -
 #0006:	 assign: tmp2 = *UI0 != 0
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0007:	 if: tmp2 then #0008:	 else #0009:	
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0008:	 noop
  - no source -
 #0010:	 noop: opcode 'LLVMPHI' not supported
  - no source -
 #0011:	 noop: opcode 'LLVMPHI' not supported <exit>
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0009:	 assign: tmp3 = *UI1 != 0 next: #0008:	
- - no source -
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 
 CFG: testLong
 #0000:	 assign: tmp0 = *L0 + *L1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0001:	 assign: *LR = tmp0
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0002:	 assign: tmp1 = *L0 - *L1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0003:	 assign: *LR = tmp1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0004:	 assign: tmp2 = *L0 * *L1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0005:	 assign: *LR = tmp2
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0006:	 assign: tmp3 = *L0 / *L1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0007:	 assign: *LR = tmp3
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0008:	 assign: tmp4 = *L0 % *L1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0009:	 assign: *LR = tmp4
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0010:	 assign: tmp5 = *L0 & *L1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0011:	 assign: *LR = tmp5
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0012:	 assign: tmp6 = *L0 | *L1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0013:	 assign: *LR = tmp6
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0014:	 assign: tmp7 = *L0 ^ *L1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0015:	 assign: *LR = tmp7
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0016:	 assign: tmp8 = *L0 << *L1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0017:	 assign: *LR = tmp8
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0018:	 assign: tmp9 = *L0 >> *L1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0019:	 assign: *LR = tmp9 <exit>
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 
 CFG: testLongCmp
 #0000:	 assign: tmp0 = *L0 < *L1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0001:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0002:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0003:	 assign: tmp1 = *L0 > *L1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0004:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0005:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0006:	 assign: tmp2 = *L0 <= *L1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0007:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0008:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0009:	 assign: tmp3 = *L0 >= *L1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0010:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0011:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0012:	 assign: tmp4 = *L0 == *L1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0013:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0014:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0015:	 assign: tmp5 = *L0 != *L1
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0016:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0017:	 noop: opcode 'LLVMSExt' not supported <exit>
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 
 CFG: testLongLogical
 #0000:	 assign: tmp0 = *L0 != 0
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0001:	 if: tmp0 then #0002:	 else #0003:	
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0002:	 assign: tmp1 = *L1 != 0
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0003:	 noop
  - no source -
 #0004:	 noop: opcode 'LLVMPHI' not supported
@@ -946,107 +946,107 @@ CFG: testLongLogical
 #0006:	 noop: opcode 'LLVMSExt' not supported
  - no source -
 #0007:	 assign: tmp2 = *L0 != 0
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0008:	 if: tmp2 then #0009:	 else #0010:	
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0009:	 noop
  - no source -
 #0011:	 noop: opcode 'LLVMPHI' not supported
  - no source -
 #0012:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0013:	 noop: opcode 'LLVMSExt' not supported <exit>
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0010:	 assign: tmp3 = *L1 != 0 next: #0009:	
- - no source -
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 
 CFG: testULong
 #0000:	 assign: tmp0 = *UL0 + *UL1
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0001:	 assign: *ULR = tmp0
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0002:	 assign: tmp1 = *UL0 - *UL1
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0003:	 assign: *ULR = tmp1
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0004:	 assign: tmp2 = *UL0 * *UL1
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0005:	 assign: *ULR = tmp2
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0006:	 noop: opcode 'LLVMUDiv' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0007:	 noop: opcode 'LLVMUDiv' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0008:	 noop: opcode 'LLVMURem' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0009:	 noop: opcode 'LLVMURem' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0010:	 assign: tmp3 = *UL0 & *UL1
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0011:	 assign: *ULR = tmp3
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0012:	 assign: tmp4 = *UL0 | *UL1
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0013:	 assign: *ULR = tmp4
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0014:	 assign: tmp5 = *UL0 ^ *UL1
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0015:	 assign: *ULR = tmp5
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0016:	 assign: tmp6 = *UL0 << *UL1
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0017:	 assign: *ULR = tmp6
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0018:	 noop: opcode 'LLVMLShr' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0019:	 noop: opcode 'LLVMLShr' not supported <exit>
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 
 CFG: testULongCmp
 #0000:	 assign: tmp0 = *UL0 < *UL1
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0001:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0002:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0003:	 assign: tmp1 = *UL0 > *UL1
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0004:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0005:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0006:	 assign: tmp2 = *UL0 <= *UL1
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0007:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0008:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0009:	 assign: tmp3 = *UL0 >= *UL1
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0010:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0011:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0012:	 assign: tmp4 = *UL0 == *UL1
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0013:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0014:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0015:	 assign: tmp5 = *UL0 != *UL1
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0016:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0017:	 noop: opcode 'LLVMSExt' not supported <exit>
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 
 CFG: testULongLogical
 #0000:	 assign: tmp0 = *UL0 != 0
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0001:	 if: tmp0 then #0002:	 else #0003:	
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0002:	 assign: tmp1 = *UL1 != 0
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0003:	 noop
  - no source -
 #0004:	 noop: opcode 'LLVMPHI' not supported
@@ -1056,83 +1056,83 @@ CFG: testULongLogical
 #0006:	 noop: opcode 'LLVMSExt' not supported
  - no source -
 #0007:	 assign: tmp2 = *UL0 != 0
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0008:	 if: tmp2 then #0009:	 else #0010:	
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0009:	 noop
  - no source -
 #0011:	 noop: opcode 'LLVMPHI' not supported
  - no source -
 #0012:	 noop: opcode 'LLVMSExt' not supported
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0013:	 noop: opcode 'LLVMSExt' not supported <exit>
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0010:	 assign: tmp3 = *UL1 != 0 next: #0009:	
- - no source -
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 
 CFG: testFloat
 #0000:	 assign: tmp0 = *F0 + *F1
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0001:	 assign: *FR = tmp0
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0002:	 assign: tmp1 = *F0 - *F1
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0003:	 assign: *FR = tmp1
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0004:	 assign: tmp2 = *F0 * *F1
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0005:	 assign: *FR = tmp2
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0006:	 assign: tmp3 = *F0 / *F1
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0007:	 assign: *FR = tmp3 <exit>
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 
 CFG: testFloatCmp
 #0000:	 assign: tmp0 = *F0 < *F1
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0001:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0002:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0003:	 assign: tmp1 = *F0 > *F1
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0004:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0005:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0006:	 assign: tmp2 = *F0 <= *F1
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0007:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0008:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0009:	 assign: tmp3 = *F0 >= *F1
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0010:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0011:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0012:	 assign: tmp4 = *F0 == *F1
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0013:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0014:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0015:	 assign: tmp5 = *F0 != *F1
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0016:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0017:	 noop: opcode 'LLVMSIToFP' not supported <exit>
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 
 CFG: testFloatLogical
 #0000:	 assign: tmp0 = *F0 != 0.0
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0001:	 if: tmp0 then #0002:	 else #0003:	
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0002:	 assign: tmp1 = *F1 != 0.0
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0003:	 noop
  - no source -
 #0004:	 noop: opcode 'LLVMPHI' not supported
@@ -1142,83 +1142,83 @@ CFG: testFloatLogical
 #0006:	 noop: opcode 'LLVMSIToFP' not supported
  - no source -
 #0007:	 assign: tmp2 = *F0 != 0.0
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0008:	 if: tmp2 then #0009:	 else #0010:	
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0009:	 noop
  - no source -
 #0011:	 noop: opcode 'LLVMPHI' not supported
  - no source -
 #0012:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0013:	 noop: opcode 'LLVMSIToFP' not supported <exit>
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0010:	 assign: tmp3 = *F1 != 0.0 next: #0009:	
- - no source -
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 
 CFG: testDouble
 #0000:	 assign: tmp0 = *D0 + *D1
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0001:	 assign: *DR = tmp0
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0002:	 assign: tmp1 = *D0 - *D1
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0003:	 assign: *DR = tmp1
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0004:	 assign: tmp2 = *D0 * *D1
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0005:	 assign: *DR = tmp2
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0006:	 assign: tmp3 = *D0 / *D1
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0007:	 assign: *DR = tmp3 <exit>
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 
 CFG: testDoubleCmp
 #0000:	 assign: tmp0 = *D0 < *D1
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0001:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0002:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0003:	 assign: tmp1 = *D0 > *D1
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0004:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0005:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0006:	 assign: tmp2 = *D0 <= *D1
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0007:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0008:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0009:	 assign: tmp3 = *D0 >= *D1
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0010:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0011:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0012:	 assign: tmp4 = *D0 == *D1
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0013:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0014:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0015:	 assign: tmp5 = *D0 != *D1
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0016:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0017:	 noop: opcode 'LLVMSIToFP' not supported <exit>
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 
 CFG: testDoubleLogical
 #0000:	 assign: tmp0 = *D0 != 0.0
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0001:	 if: tmp0 then #0002:	 else #0003:	
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0002:	 assign: tmp1 = *D1 != 0.0
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0003:	 noop
  - no source -
 #0004:	 noop: opcode 'LLVMPHI' not supported
@@ -1228,83 +1228,83 @@ CFG: testDoubleLogical
 #0006:	 noop: opcode 'LLVMSIToFP' not supported
  - no source -
 #0007:	 assign: tmp2 = *D0 != 0.0
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0008:	 if: tmp2 then #0009:	 else #0010:	
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0009:	 noop
  - no source -
 #0011:	 noop: opcode 'LLVMPHI' not supported
  - no source -
 #0012:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0013:	 noop: opcode 'LLVMSIToFP' not supported <exit>
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0010:	 assign: tmp3 = *D1 != 0.0 next: #0009:	
- - no source -
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 
 CFG: testLongDouble
 #0000:	 assign: tmp0 = *LD0 + *LD1
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0001:	 assign: *LDR = tmp0
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0002:	 assign: tmp1 = *LD0 - *LD1
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0003:	 assign: *LDR = tmp1
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0004:	 assign: tmp2 = *LD0 * *LD1
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0005:	 assign: *LDR = tmp2
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0006:	 assign: tmp3 = *LD0 / *LD1
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0007:	 assign: *LDR = tmp3 <exit>
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 
 CFG: testLongDoubleCmp
 #0000:	 assign: tmp0 = *LD0 < *LD1
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0001:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0002:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0003:	 assign: tmp1 = *LD0 > *LD1
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0004:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0005:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0006:	 assign: tmp2 = *LD0 <= *LD1
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0007:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0008:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0009:	 assign: tmp3 = *LD0 >= *LD1
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0010:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0011:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0012:	 assign: tmp4 = *LD0 == *LD1
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0013:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0014:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0015:	 assign: tmp5 = *LD0 != *LD1
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0016:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0017:	 noop: opcode 'LLVMSIToFP' not supported <exit>
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 
 CFG: testLongDoubleLogical
 #0000:	 assign: tmp0 = *LD0 != 0.0
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0001:	 if: tmp0 then #0002:	 else #0003:	
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0002:	 assign: tmp1 = *LD1 != 0.0
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0003:	 noop
  - no source -
 #0004:	 noop: opcode 'LLVMPHI' not supported
@@ -1314,19 +1314,19 @@ CFG: testLongDoubleLogical
 #0006:	 noop: opcode 'LLVMSIToFP' not supported
  - no source -
 #0007:	 assign: tmp2 = *LD0 != 0.0
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0008:	 if: tmp2 then #0009:	 else #0010:	
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0009:	 noop
  - no source -
 #0011:	 noop: opcode 'LLVMPHI' not supported
  - no source -
 #0012:	 noop: opcode 'LLVMSIToFP' not supported
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0013:	 noop: opcode 'LLVMSIToFP' not supported <exit>
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0010:	 assign: tmp3 = *LD1 != 0.0 next: #0009:	
- - no source -
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 
 CFG: <module init>
 #0000:	 assign: *C0 = 0
