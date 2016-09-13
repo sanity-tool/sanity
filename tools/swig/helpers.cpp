@@ -26,9 +26,6 @@
 #include <llvm/IR/Instruction.h>
 #include <llvm/IR/DebugInfoMetadata.h>
 
-//#include <iostream>
-#include <stdio.h>
-
 using namespace llvm;
 
 extern "C" {
@@ -80,7 +77,6 @@ int SAGetInstructionDebugLocLine(LLVMValueRef instruction) {
     return loc->getLine();
 }
 
-std::string result; // non-threadsafe
 const char *SAGetInstructionDebugLocScopeFile(LLVMValueRef instruction) {
 
     const DebugLoc &loc = unwrap<Instruction>(instruction)->getDebugLoc();
@@ -90,9 +86,8 @@ const char *SAGetInstructionDebugLocScopeFile(LLVMValueRef instruction) {
     if (!loc->getScope()) {
         return 0;
     }
-    result = loc->getScope()->getFilename().str();
 
-    return result.c_str();
+    return loc->getScope()->getFilename().str().c_str();
 }
 
 }
