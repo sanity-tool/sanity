@@ -38,6 +38,11 @@ double GetConstantFPDoubleValue(LLVMValueRef ConstantVal);
 
 %}
 
+%contract LLVMGetOperand (LLVMValueRef Val, unsigned Index) {
+require:
+   Index >= 0 && Index < LLVMGetNumOperands(Val);
+}
+
 %typemap(javacode) SWIGTYPE * %{
   public boolean equals(Object obj) {
     boolean equal = false;
