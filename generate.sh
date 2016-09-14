@@ -33,7 +33,7 @@ LIBS="`$LLVM_CONFIG --libs` -ltermcap"
 LLVM_INCLUDE="-I`$LLVM_CONFIG --includedir`"
 LLVM_LIBS=
 
-DEBUG=-g
+DEBUG="-g -coverage"
 
 SRC_DIR="src/main/cpp"
 
@@ -72,4 +72,4 @@ if [ -z "$REAL_LLVM" ]; then
     LDFLAGS="-Wl,-allow_sub_type_mismatches ${LDFLAGS}"
 fi
 
-clang++ -shared $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS
+clang++ -shared $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS $DEBUG
