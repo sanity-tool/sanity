@@ -35,30 +35,31 @@ LLVM_LIBS=
 
 DEBUG=-g
 
-JAVA_OUT="../../target/generated-sources/java/na/okutane/cpp/llvm"
-rm -rf $JAVA_OUT || echo already removed
+SRC_DIR="src/main/cpp"
 
-CPP_OUT="../../target/generated-sources/jni"
-rm -rf $CPP_OUT || echo already removed
-
+JAVA_OUT="target/generated-sources/java/na/okutane/cpp/llvm"
 mkdir -p $JAVA_OUT
-mkdir -p $CPP_OUT
-swig $LLVM_INCLUDE -java -outdir $JAVA_OUT -package na.okutane.cpp.llvm -o $CPP_OUT/bitreader_wrap.c -v bitreader.i
 
-OBJ_DIR="../../target/native/static"
-SOBJ_DIR="../../target/native/shared"
+CPP_OUT="target/generated-sources/jni"
+mkdir -p $CPP_OUT
+
+OBJ_DIR="target/native/static"
 mkdir -p $OBJ_DIR
+
+SOBJ_DIR="target/native/shared"
 mkdir -p $SOBJ_DIR
+
+swig $LLVM_INCLUDE -java -outdir $JAVA_OUT -package na.okutane.cpp.llvm -o $CPP_OUT/bitreader_wrap.c -v $SRC_DIR/bitreader.i
 
 clang -c $CPP_OUT/bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE -I/usr/local/opt/llvm/include $DEBUG -fPIC -o $OBJ_DIR/wrappers.o
 
-clang++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $CPPFLAGS -I/usr/local/opt/llvm/include $DEBUG -fPIC -std=c++11 -o $OBJ_DIR/helpers.o
+clang++ -c $SRC_DIR/helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $CPPFLAGS -I/usr/local/opt/llvm/include $DEBUG -fPIC -std=c++11 -o $OBJ_DIR/helpers.o
 
 if [ -z "$REAL_LLVM" ]; then
     # llvm drops debug information (hence source refs) from some compilers, code below disabled that logic.
 
     # compile replacement code.
-    clang++ -c debughack.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $CPPFLAGS -I/usr/local/opt/llvm/include $DEBUG -fPIC -std=c++11 -o $OBJ_DIR/debughack.o
+    clang++ -c $SRC_DIR/debughack.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $CPPFLAGS -I/usr/local/opt/llvm/include $DEBUG -fPIC -std=c++11 -o $OBJ_DIR/debughack.o
 
     # remove logic from llvm library.
     cp /usr/local/Cellar/llvm/3.8.1/lib/libLLVMCore.a $OBJ_DIR/libLLVMCore.a
@@ -67,6 +68,8 @@ if [ -z "$REAL_LLVM" ]; then
 
     # link against "hacked" library and replacement code.
     LIBS="${LIBS/-lLLVMCore/} $OBJ_DIR/libLLVMCore.a $OBJ_DIR/debughack.o"
+
+    LDFLAGS="-Wl,-allow_sub_type_mismatches ${LDFLAGS}"
 fi
 
-clang++ -Wl,-allow_sub_type_mismatches -shared $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS
+clang++ -shared $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS
