@@ -1,0 +1,34 @@
+sudo: required
+
+matrix:
+  include:
+    #- os: osx
+    #  osx_image: xcode8 # todo fix it if it's fixable, last result: jvm crash in jni code
+    - os: osx
+      osx_image: xcode7.3
+    - os: osx
+      osx_image: xcode7.2
+    - os: osx
+      osx_image: xcode7.1
+    - os: osx
+      osx_image: xcode7
+    #- os: osx
+    #  osx_image: xcode6.4
+    #- os: osx
+    #  osx_image: beta-xcode6.3
+    #- os: osx
+    #  osx_image: beta-xcode6.2
+    #- os: osx
+    #  osx_image: beta-xcode6.1
+
+language: java
+
+before_install:
+  - brew update
+  - brew install llvm # main dependency
+  - brew install crosstool-ng # to replace undesired function from llvm core
+  - brew install swig # wrappers generator
+
+after_failure:
+  - diff target/failures/expected target/failures/actual
+  - cat hs_err*.log 

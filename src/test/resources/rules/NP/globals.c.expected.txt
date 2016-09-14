@@ -1,0 +1,12 @@
+Violation: *GLOBAL is null
+globals.c:4 GLOBAL = 0;
+globals.c:5 *GLOBAL = 1;
+
+Violation: *GLOBAL is null
+globals.c:9 GLOBAL = 0;
+globals.c:10 switch (*GLOBAL) {
+
+#0000:	 assign: tmp0 = **GLOBAL != 0
+globals.c:16 if (*GLOBAL);
+java.lang.IllegalStateException: Don't know how to get value from BinaryExpression
+

@@ -1,4 +1,0 @@
-Violation: *GLOBAL is null
-globals.c:4 GLOBAL = 0;
-globals.c:5 *GLOBAL = 1;
-

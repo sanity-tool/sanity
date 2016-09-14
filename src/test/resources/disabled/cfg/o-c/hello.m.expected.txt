@@ -1,0 +1,1478 @@
+CFG: _OSSwapInt16
+#0000:	 assign: *tmp0 = _data
+ - no source -
+#0001:	 assign: tmp1 = *tmp0 << 8
+_OSByteOrder.h:50 return ((__uint16_t)((_data << 8) | (_data >> 8)));
+#0002:	 assign: tmp2 = *tmp0 >> 8
+_OSByteOrder.h:50 return ((__uint16_t)((_data << 8) | (_data >> 8)));
+#0003:	 assign: tmp3 = tmp1 | tmp2
+_OSByteOrder.h:50 return ((__uint16_t)((_data << 8) | (_data >> 8)));
+#0004:	 noop: opcode 'LLVMTrunc' not supported
+_OSByteOrder.h:50 return ((__uint16_t)((_data << 8) | (_data >> 8)));
+#0005:	 noop: opcode 'LLVMRet' not supported <exit>
+_OSByteOrder.h:50 return ((__uint16_t)((_data << 8) | (_data >> 8)));
+
+CFG: _OSSwapInt32
+#0000:	 assign: *tmp0 = _data
+ - no source -
+#0001:	 call: tmp1 = llvm.bswap.i32(*tmp0)
+_OSByteOrder.h:60 return __builtin_bswap32(_data);
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+_OSByteOrder.h:60 return __builtin_bswap32(_data);
+
+CFG: _OSSwapInt64
+#0000:	 assign: *tmp0 = _data
+ - no source -
+#0001:	 call: tmp1 = llvm.bswap.i64(*tmp0)
+_OSByteOrder.h:74 return __builtin_bswap64(_data);
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+_OSByteOrder.h:74 return __builtin_bswap64(_data);
+
+CFG: __darwin_fd_isset
+#0000:	 assign: *tmp0 = _n
+ - no source -
+#0001:	 assign: *tmp1 = _p
+ - no source -
+#0002:	 noop: opcode 'LLVMSExt' not supported
+_fd_def.h:55 return (_p->fds_bits[(unsigned long)_n/__DARWIN_NFDBITS] & ((__int32_t)(1<<((unsigned long)_n % __DARWIN_NFDBITS))));
+#0003:	 noop: opcode 'LLVMUDiv' not supported
+_fd_def.h:55 return (_p->fds_bits[(unsigned long)_n/__DARWIN_NFDBITS] & ((__int32_t)(1<<((unsigned long)_n % __DARWIN_NFDBITS))));
+#0004:	 noop: opcode 'LLVMSExt' not supported
+_fd_def.h:55 return (_p->fds_bits[(unsigned long)_n/__DARWIN_NFDBITS] & ((__int32_t)(1<<((unsigned long)_n % __DARWIN_NFDBITS))));
+#0005:	 noop: opcode 'LLVMURem' not supported
+_fd_def.h:55 return (_p->fds_bits[(unsigned long)_n/__DARWIN_NFDBITS] & ((__int32_t)(1<<((unsigned long)_n % __DARWIN_NFDBITS))));
+#0006:	 noop: opcode 'LLVMTrunc' not supported
+_fd_def.h:55 return (_p->fds_bits[(unsigned long)_n/__DARWIN_NFDBITS] & ((__int32_t)(1<<((unsigned long)_n % __DARWIN_NFDBITS))));
+#0007:	 noop: opcode 'LLVMTrunc' not supported
+_fd_def.h:55 return (_p->fds_bits[(unsigned long)_n/__DARWIN_NFDBITS] & ((__int32_t)(1<<((unsigned long)_n % __DARWIN_NFDBITS))));
+#0008:	 noop: opcode 'LLVMUDiv' not supported
+_fd_def.h:55 return (_p->fds_bits[(unsigned long)_n/__DARWIN_NFDBITS] & ((__int32_t)(1<<((unsigned long)_n % __DARWIN_NFDBITS))));
+#0009:	 noop: opcode 'LLVMRet' not supported <exit>
+_fd_def.h:55 return (_p->fds_bits[(unsigned long)_n/__DARWIN_NFDBITS] & ((__int32_t)(1<<((unsigned long)_n % __DARWIN_NFDBITS))));
+
+CFG: CFRangeMake
+#0000:	 assign: *tmp0 = loc
+ - no source -
+#0001:	 assign: *tmp1 = len
+ - no source -
+#0002:	 assign: *(tmp2.field0) = *tmp0
+CFBase.h:414 range.location = loc;
+#0003:	 assign: *(tmp2.field1) = *tmp1
+CFBase.h:415 range.length = len;
+#0004:	 assign: tmp3 = tmp4
+CFBase.h:416 return range;
+#0005:	 assign: tmp5 = tmp2
+CFBase.h:416 return range;
+#0006:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp3, tmp5, 16, 8, 0)
+CFBase.h:416 return range;
+#0007:	 assign: tmp6 = tmp4
+CFBase.h:416 return range;
+#0008:	 noop: opcode 'LLVMRet' not supported <exit>
+CFBase.h:416 return range;
+
+CFG: OSReadSwapInt16
+#0000:	 assign: *tmp0 = base
+ - no source -
+#0001:	 assign: *tmp1 = byteOffset
+ - no source -
+#0002:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:47 result = *(volatile uint16_t *)((uintptr_t)base + byteOffset);
+#0003:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:47 result = *(volatile uint16_t *)((uintptr_t)base + byteOffset);
+#0004:	 noop: opcode 'LLVMIntToPtr' not supported
+OSByteOrder.h:47 result = *(volatile uint16_t *)((uintptr_t)base + byteOffset);
+#0005:	 noop: opcode 'LLVMIntToPtr' not supported
+OSByteOrder.h:47 result = *(volatile uint16_t *)((uintptr_t)base + byteOffset);
+#0006:	 call: tmp2 = _OSSwapInt16(*tmp3)
+OSByteOrder.h:48 return _OSSwapInt16(result);
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+OSByteOrder.h:48 return _OSSwapInt16(result);
+
+CFG: OSReadSwapInt32
+#0000:	 assign: *tmp0 = base
+ - no source -
+#0001:	 assign: *tmp1 = byteOffset
+ - no source -
+#0002:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:60 result = *(volatile uint32_t *)((uintptr_t)base + byteOffset);
+#0003:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:60 result = *(volatile uint32_t *)((uintptr_t)base + byteOffset);
+#0004:	 noop: opcode 'LLVMIntToPtr' not supported
+OSByteOrder.h:60 result = *(volatile uint32_t *)((uintptr_t)base + byteOffset);
+#0005:	 noop: opcode 'LLVMIntToPtr' not supported
+OSByteOrder.h:60 result = *(volatile uint32_t *)((uintptr_t)base + byteOffset);
+#0006:	 call: tmp2 = _OSSwapInt32(*tmp3)
+OSByteOrder.h:61 return _OSSwapInt32(result);
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+OSByteOrder.h:61 return _OSSwapInt32(result);
+
+CFG: OSReadSwapInt64
+#0000:	 assign: *tmp0 = base
+ - no source -
+#0001:	 assign: *tmp1 = byteOffset
+ - no source -
+#0002:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:73 result = *(volatile uint64_t *)((uintptr_t)base + byteOffset);
+#0003:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:73 result = *(volatile uint64_t *)((uintptr_t)base + byteOffset);
+#0004:	 noop: opcode 'LLVMIntToPtr' not supported
+OSByteOrder.h:73 result = *(volatile uint64_t *)((uintptr_t)base + byteOffset);
+#0005:	 noop: opcode 'LLVMIntToPtr' not supported
+OSByteOrder.h:73 result = *(volatile uint64_t *)((uintptr_t)base + byteOffset);
+#0006:	 call: tmp2 = _OSSwapInt64(*tmp3)
+OSByteOrder.h:74 return _OSSwapInt64(result);
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+OSByteOrder.h:74 return _OSSwapInt64(result);
+
+CFG: OSWriteSwapInt16
+#0000:	 assign: *tmp0 = base
+ - no source -
+#0001:	 assign: *tmp1 = byteOffset
+ - no source -
+#0002:	 assign: *tmp2 = data
+ - no source -
+#0003:	 call: tmp3 = _OSSwapInt16(*tmp2)
+OSByteOrder.h:87 *(volatile uint16_t *)((uintptr_t)base + byteOffset) = _OSSwapInt16(data);
+#0004:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:87 *(volatile uint16_t *)((uintptr_t)base + byteOffset) = _OSSwapInt16(data);
+#0005:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:87 *(volatile uint16_t *)((uintptr_t)base + byteOffset) = _OSSwapInt16(data);
+#0006:	 noop: opcode 'LLVMIntToPtr' not supported
+OSByteOrder.h:87 *(volatile uint16_t *)((uintptr_t)base + byteOffset) = _OSSwapInt16(data);
+#0007:	 noop: opcode 'LLVMIntToPtr' not supported <exit>
+OSByteOrder.h:87 *(volatile uint16_t *)((uintptr_t)base + byteOffset) = _OSSwapInt16(data);
+
+CFG: OSWriteSwapInt32
+#0000:	 assign: *tmp0 = base
+ - no source -
+#0001:	 assign: *tmp1 = byteOffset
+ - no source -
+#0002:	 assign: *tmp2 = data
+ - no source -
+#0003:	 call: tmp3 = _OSSwapInt32(*tmp2)
+OSByteOrder.h:98 *(volatile uint32_t *)((uintptr_t)base + byteOffset) = _OSSwapInt32(data);
+#0004:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:98 *(volatile uint32_t *)((uintptr_t)base + byteOffset) = _OSSwapInt32(data);
+#0005:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:98 *(volatile uint32_t *)((uintptr_t)base + byteOffset) = _OSSwapInt32(data);
+#0006:	 noop: opcode 'LLVMIntToPtr' not supported
+OSByteOrder.h:98 *(volatile uint32_t *)((uintptr_t)base + byteOffset) = _OSSwapInt32(data);
+#0007:	 noop: opcode 'LLVMIntToPtr' not supported <exit>
+OSByteOrder.h:98 *(volatile uint32_t *)((uintptr_t)base + byteOffset) = _OSSwapInt32(data);
+
+CFG: OSWriteSwapInt64
+#0000:	 assign: *tmp0 = base
+ - no source -
+#0001:	 assign: *tmp1 = byteOffset
+ - no source -
+#0002:	 assign: *tmp2 = data
+ - no source -
+#0003:	 call: tmp3 = _OSSwapInt64(*tmp2)
+OSByteOrder.h:109 *(volatile uint64_t *)((uintptr_t)base + byteOffset) = _OSSwapInt64(data);
+#0004:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:109 *(volatile uint64_t *)((uintptr_t)base + byteOffset) = _OSSwapInt64(data);
+#0005:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:109 *(volatile uint64_t *)((uintptr_t)base + byteOffset) = _OSSwapInt64(data);
+#0006:	 noop: opcode 'LLVMIntToPtr' not supported
+OSByteOrder.h:109 *(volatile uint64_t *)((uintptr_t)base + byteOffset) = _OSSwapInt64(data);
+#0007:	 noop: opcode 'LLVMIntToPtr' not supported <exit>
+OSByteOrder.h:109 *(volatile uint64_t *)((uintptr_t)base + byteOffset) = _OSSwapInt64(data);
+
+CFG: OSHostByteOrder
+#0000:	 noop: opcode 'LLVMRet' not supported <exit>
+OSByteOrder.h:68 return OSLittleEndian;
+
+CFG: _OSReadInt16
+#0000:	 assign: *tmp0 = base
+ - no source -
+#0001:	 assign: *tmp1 = byteOffset
+ - no source -
+#0002:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:94 return *(volatile uint16_t *)((uintptr_t)base + byteOffset);
+#0003:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:94 return *(volatile uint16_t *)((uintptr_t)base + byteOffset);
+#0004:	 noop: opcode 'LLVMIntToPtr' not supported
+OSByteOrder.h:94 return *(volatile uint16_t *)((uintptr_t)base + byteOffset);
+#0005:	 noop: opcode 'LLVMRet' not supported <exit>
+OSByteOrder.h:94 return *(volatile uint16_t *)((uintptr_t)base + byteOffset);
+
+CFG: _OSReadInt32
+#0000:	 assign: *tmp0 = base
+ - no source -
+#0001:	 assign: *tmp1 = byteOffset
+ - no source -
+#0002:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:104 return *(volatile uint32_t *)((uintptr_t)base + byteOffset);
+#0003:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:104 return *(volatile uint32_t *)((uintptr_t)base + byteOffset);
+#0004:	 noop: opcode 'LLVMIntToPtr' not supported
+OSByteOrder.h:104 return *(volatile uint32_t *)((uintptr_t)base + byteOffset);
+#0005:	 noop: opcode 'LLVMRet' not supported <exit>
+OSByteOrder.h:104 return *(volatile uint32_t *)((uintptr_t)base + byteOffset);
+
+CFG: _OSReadInt64
+#0000:	 assign: *tmp0 = base
+ - no source -
+#0001:	 assign: *tmp1 = byteOffset
+ - no source -
+#0002:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:114 return *(volatile uint64_t *)((uintptr_t)base + byteOffset);
+#0003:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:114 return *(volatile uint64_t *)((uintptr_t)base + byteOffset);
+#0004:	 noop: opcode 'LLVMIntToPtr' not supported
+OSByteOrder.h:114 return *(volatile uint64_t *)((uintptr_t)base + byteOffset);
+#0005:	 noop: opcode 'LLVMRet' not supported <exit>
+OSByteOrder.h:114 return *(volatile uint64_t *)((uintptr_t)base + byteOffset);
+
+CFG: _OSWriteInt16
+#0000:	 assign: *tmp0 = base
+ - no source -
+#0001:	 assign: *tmp1 = byteOffset
+ - no source -
+#0002:	 assign: *tmp2 = data
+ - no source -
+#0003:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:127 *(volatile uint16_t *)((uintptr_t)base + byteOffset) = data;
+#0004:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:127 *(volatile uint16_t *)((uintptr_t)base + byteOffset) = data;
+#0005:	 noop: opcode 'LLVMIntToPtr' not supported
+OSByteOrder.h:127 *(volatile uint16_t *)((uintptr_t)base + byteOffset) = data;
+#0006:	 noop: opcode 'LLVMIntToPtr' not supported <exit>
+OSByteOrder.h:127 *(volatile uint16_t *)((uintptr_t)base + byteOffset) = data;
+
+CFG: _OSWriteInt32
+#0000:	 assign: *tmp0 = base
+ - no source -
+#0001:	 assign: *tmp1 = byteOffset
+ - no source -
+#0002:	 assign: *tmp2 = data
+ - no source -
+#0003:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:138 *(volatile uint32_t *)((uintptr_t)base + byteOffset) = data;
+#0004:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:138 *(volatile uint32_t *)((uintptr_t)base + byteOffset) = data;
+#0005:	 noop: opcode 'LLVMIntToPtr' not supported
+OSByteOrder.h:138 *(volatile uint32_t *)((uintptr_t)base + byteOffset) = data;
+#0006:	 noop: opcode 'LLVMIntToPtr' not supported <exit>
+OSByteOrder.h:138 *(volatile uint32_t *)((uintptr_t)base + byteOffset) = data;
+
+CFG: _OSWriteInt64
+#0000:	 assign: *tmp0 = base
+ - no source -
+#0001:	 assign: *tmp1 = byteOffset
+ - no source -
+#0002:	 assign: *tmp2 = data
+ - no source -
+#0003:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:149 *(volatile uint64_t *)((uintptr_t)base + byteOffset) = data;
+#0004:	 noop: opcode 'LLVMPtrToInt' not supported
+OSByteOrder.h:149 *(volatile uint64_t *)((uintptr_t)base + byteOffset) = data;
+#0005:	 noop: opcode 'LLVMIntToPtr' not supported
+OSByteOrder.h:149 *(volatile uint64_t *)((uintptr_t)base + byteOffset) = data;
+#0006:	 noop: opcode 'LLVMIntToPtr' not supported <exit>
+OSByteOrder.h:149 *(volatile uint64_t *)((uintptr_t)base + byteOffset) = data;
+
+CFG: CFByteOrderGetCurrent
+#0000:	 call: tmp0 = OSHostByteOrder()
+CFByteOrder.h:25 int32_t byteOrder = OSHostByteOrder();
+#0001:	 assign: *tmp1 = tmp0
+CFByteOrder.h:25 int32_t byteOrder = OSHostByteOrder();
+#0002:	 switch: *tmp1 default #0003:	 1 -> #0004:	 2 -> #0005:
+CFByteOrder.h:26 switch (byteOrder) {
+#0003:	 assign: *tmp2 = 0
+CFByteOrder.h:31 return CFByteOrderUnknown;
+#0006:	 noop
+ - no source -
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+CFByteOrder.h:41 }
+#0004:	 assign: *tmp2 = 1 next: #0006:
+CFByteOrder.h:27 case OSLittleEndian: return CFByteOrderLittleEndian;
+#0005:	 assign: *tmp2 = 2 next: #0006:
+CFByteOrder.h:28 case OSBigEndian: return CFByteOrderBigEndian;
+
+CFG: CFSwapInt16
+#0000:	 assign: *tmp0 = arg
+ - no source -
+#0001:	 call: tmp1 = _OSSwapInt16(*tmp0)
+CFByteOrder.h:45 return OSSwapInt16(arg);
+#0002:	 noop: opcode 'LLVMTrunc' not supported
+CFByteOrder.h:45 return OSSwapInt16(arg);
+#0003:	 noop: opcode 'LLVMRet' not supported <exit>
+CFByteOrder.h:45 return OSSwapInt16(arg);
+
+CFG: CFSwapInt32
+#0000:	 assign: *tmp0 = arg
+ - no source -
+#0001:	 call: tmp1 = _OSSwapInt32(*tmp0)
+CFByteOrder.h:55 return OSSwapInt32(arg);
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+CFByteOrder.h:55 return OSSwapInt32(arg);
+
+CFG: CFSwapInt64
+#0000:	 assign: *tmp0 = arg
+ - no source -
+#0001:	 call: tmp1 = _OSSwapInt64(*tmp0)
+CFByteOrder.h:65 return OSSwapInt64(arg);
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+CFByteOrder.h:65 return OSSwapInt64(arg);
+
+CFG: CFSwapInt16BigToHost
+#0000:	 assign: *tmp0 = arg
+ - no source -
+#0001:	 call: tmp1 = _OSSwapInt16(*tmp0)
+CFByteOrder.h:80 return OSSwapBigToHostInt16(arg);
+#0002:	 noop: opcode 'LLVMTrunc' not supported
+CFByteOrder.h:80 return OSSwapBigToHostInt16(arg);
+#0003:	 noop: opcode 'LLVMRet' not supported <exit>
+CFByteOrder.h:80 return OSSwapBigToHostInt16(arg);
+
+CFG: CFSwapInt32BigToHost
+#0000:	 assign: *tmp0 = arg
+ - no source -
+#0001:	 call: tmp1 = _OSSwapInt32(*tmp0)
+CFByteOrder.h:90 return OSSwapBigToHostInt32(arg);
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+CFByteOrder.h:90 return OSSwapBigToHostInt32(arg);
+
+CFG: CFSwapInt64BigToHost
+#0000:	 assign: *tmp0 = arg
+ - no source -
+#0001:	 call: tmp1 = _OSSwapInt64(*tmp0)
+CFByteOrder.h:100 return OSSwapBigToHostInt64(arg);
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+CFByteOrder.h:100 return OSSwapBigToHostInt64(arg);
+
+CFG: CFSwapInt16HostToBig
+#0000:	 assign: *tmp0 = arg
+ - no source -
+#0001:	 call: tmp1 = _OSSwapInt16(*tmp0)
+CFByteOrder.h:110 return OSSwapHostToBigInt16(arg);
+#0002:	 noop: opcode 'LLVMTrunc' not supported
+CFByteOrder.h:110 return OSSwapHostToBigInt16(arg);
+#0003:	 noop: opcode 'LLVMRet' not supported <exit>
+CFByteOrder.h:110 return OSSwapHostToBigInt16(arg);
+
+CFG: CFSwapInt32HostToBig
+#0000:	 assign: *tmp0 = arg
+ - no source -
+#0001:	 call: tmp1 = _OSSwapInt32(*tmp0)
+CFByteOrder.h:120 return OSSwapHostToBigInt32(arg);
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+CFByteOrder.h:120 return OSSwapHostToBigInt32(arg);
+
+CFG: CFSwapInt64HostToBig
+#0000:	 assign: *tmp0 = arg
+ - no source -
+#0001:	 call: tmp1 = _OSSwapInt64(*tmp0)
+CFByteOrder.h:130 return OSSwapHostToBigInt64(arg);
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+CFByteOrder.h:130 return OSSwapHostToBigInt64(arg);
+
+CFG: CFSwapInt16LittleToHost
+#0000:	 assign: *tmp0 = arg
+ - no source -
+#0001:	 noop: opcode 'LLVMRet' not supported <exit>
+CFByteOrder.h:140 return OSSwapLittleToHostInt16(arg);
+
+CFG: CFSwapInt32LittleToHost
+#0000:	 assign: *tmp0 = arg
+ - no source -
+#0001:	 noop: opcode 'LLVMRet' not supported <exit>
+CFByteOrder.h:150 return OSSwapLittleToHostInt32(arg);
+
+CFG: CFSwapInt64LittleToHost
+#0000:	 assign: *tmp0 = arg
+ - no source -
+#0001:	 noop: opcode 'LLVMRet' not supported <exit>
+CFByteOrder.h:160 return OSSwapLittleToHostInt64(arg);
+
+CFG: CFSwapInt16HostToLittle
+#0000:	 assign: *tmp0 = arg
+ - no source -
+#0001:	 noop: opcode 'LLVMRet' not supported <exit>
+CFByteOrder.h:170 return OSSwapHostToLittleInt16(arg);
+
+CFG: CFSwapInt32HostToLittle
+#0000:	 assign: *tmp0 = arg
+ - no source -
+#0001:	 noop: opcode 'LLVMRet' not supported <exit>
+CFByteOrder.h:180 return OSSwapHostToLittleInt32(arg);
+
+CFG: CFSwapInt64HostToLittle
+#0000:	 assign: *tmp0 = arg
+ - no source -
+#0001:	 noop: opcode 'LLVMRet' not supported <exit>
+CFByteOrder.h:190 return OSSwapHostToLittleInt64(arg);
+
+CFG: NSSwapInt
+#0000:	 assign: *tmp0 = inv
+ - no source -
+#0001:	 call: tmp1 = CFSwapInt32(*tmp0)
+NSByteOrder.h:23 return CFSwapInt32(inv);
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+NSByteOrder.h:23 return CFSwapInt32(inv);
+
+CFG: NSSwapLongLong
+#0000:	 assign: *tmp0 = inv
+ - no source -
+#0001:	 call: tmp1 = CFSwapInt64(*tmp0)
+NSByteOrder.h:35 return CFSwapInt64(inv);
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+NSByteOrder.h:35 return CFSwapInt64(inv);
+
+CFG: NSConvertHostFloatToSwapped
+#0000:	 assign: *tmp0 = x
+ - no source -
+#0001:	 assign: tmp1 = tmp0
+NSByteOrder.h:127 return ((union fconv *)&x)->sf;
+#0002:	 assign: tmp2 = tmp1
+NSByteOrder.h:127 return ((union fconv *)&x)->sf;
+#0003:	 assign: tmp3 = tmp4
+NSByteOrder.h:127 return ((union fconv *)&x)->sf;
+#0004:	 assign: tmp5 = tmp2
+NSByteOrder.h:127 return ((union fconv *)&x)->sf;
+#0005:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp3, tmp5, 4, 4, 0)
+NSByteOrder.h:127 return ((union fconv *)&x)->sf;
+#0006:	 noop: opcode 'LLVMRet' not supported <exit>
+NSByteOrder.h:127 return ((union fconv *)&x)->sf;
+
+CFG: NSConvertSwappedFloatToHost
+#0000:	 assign: *(tmp0.field0) = x.coerce
+ - no source -
+#0001:	 assign: tmp1 = tmp0
+NSByteOrder.h:135 return ((union fconv *)&x)->number;
+#0002:	 assign: tmp2 = tmp1
+NSByteOrder.h:135 return ((union fconv *)&x)->number;
+#0003:	 noop: opcode 'LLVMRet' not supported <exit>
+NSByteOrder.h:135 return ((union fconv *)&x)->number;
+
+CFG: NSConvertHostDoubleToSwapped
+#0000:	 assign: *tmp0 = x
+ - no source -
+#0001:	 assign: tmp1 = tmp0
+NSByteOrder.h:143 return ((union dconv *)&x)->sd;
+#0002:	 assign: tmp2 = tmp1
+NSByteOrder.h:143 return ((union dconv *)&x)->sd;
+#0003:	 assign: tmp3 = tmp4
+NSByteOrder.h:143 return ((union dconv *)&x)->sd;
+#0004:	 assign: tmp5 = tmp2
+NSByteOrder.h:143 return ((union dconv *)&x)->sd;
+#0005:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp3, tmp5, 8, 8, 0)
+NSByteOrder.h:143 return ((union dconv *)&x)->sd;
+#0006:	 noop: opcode 'LLVMRet' not supported <exit>
+NSByteOrder.h:143 return ((union dconv *)&x)->sd;
+
+CFG: NSConvertSwappedDoubleToHost
+#0000:	 assign: *(tmp0.field0) = x.coerce
+ - no source -
+#0001:	 assign: tmp1 = tmp0
+NSByteOrder.h:151 return ((union dconv *)&x)->number;
+#0002:	 assign: tmp2 = tmp1
+NSByteOrder.h:151 return ((union dconv *)&x)->number;
+#0003:	 noop: opcode 'LLVMRet' not supported <exit>
+NSByteOrder.h:151 return ((union dconv *)&x)->number;
+
+CFG: NSSwapFloat
+#0000:	 assign: *(tmp0.field0) = x.coerce
+ - no source -
+#0001:	 call: tmp1 = NSSwapInt(*(tmp0.field0))
+NSByteOrder.h:155 x.v = NSSwapInt(x.v);
+#0002:	 assign: *(tmp0.field0) = tmp1
+NSByteOrder.h:155 x.v = NSSwapInt(x.v);
+#0003:	 assign: tmp2 = tmp3
+NSByteOrder.h:156 return x;
+#0004:	 assign: tmp4 = tmp0
+NSByteOrder.h:156 return x;
+#0005:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp2, tmp4, 4, 4, 0)
+NSByteOrder.h:156 return x;
+#0006:	 noop: opcode 'LLVMRet' not supported <exit>
+NSByteOrder.h:156 return x;
+
+CFG: NSSwapDouble
+#0000:	 assign: *(tmp0.field0) = x.coerce
+ - no source -
+#0001:	 call: tmp1 = NSSwapLongLong(*(tmp0.field0))
+NSByteOrder.h:160 x.v = NSSwapLongLong(x.v);
+#0002:	 assign: *(tmp0.field0) = tmp1
+NSByteOrder.h:160 x.v = NSSwapLongLong(x.v);
+#0003:	 assign: tmp2 = tmp3
+NSByteOrder.h:161 return x;
+#0004:	 assign: tmp4 = tmp0
+NSByteOrder.h:161 return x;
+#0005:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp2, tmp4, 8, 8, 0)
+NSByteOrder.h:161 return x;
+#0006:	 noop: opcode 'LLVMRet' not supported <exit>
+NSByteOrder.h:161 return x;
+
+CFG: CGPointMake
+#0000:	 assign: *tmp0 = x
+ - no source -
+#0001:	 assign: *tmp1 = y
+ - no source -
+#0002:	 assign: *(tmp2.x) = *tmp0
+CGGeometry.h:273 CGPoint p; p.x = x; p.y = y; return p;
+#0003:	 assign: *(tmp2.y) = *tmp1
+CGGeometry.h:273 CGPoint p; p.x = x; p.y = y; return p;
+#0004:	 assign: tmp3 = tmp4
+CGGeometry.h:273 CGPoint p; p.x = x; p.y = y; return p;
+#0005:	 assign: tmp5 = tmp2
+CGGeometry.h:273 CGPoint p; p.x = x; p.y = y; return p;
+#0006:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp3, tmp5, 16, 8, 0)
+CGGeometry.h:273 CGPoint p; p.x = x; p.y = y; return p;
+#0007:	 assign: tmp6 = tmp4
+CGGeometry.h:273 CGPoint p; p.x = x; p.y = y; return p;
+#0008:	 noop: opcode 'LLVMRet' not supported <exit>
+CGGeometry.h:273 CGPoint p; p.x = x; p.y = y; return p;
+
+CFG: CGSizeMake
+#0000:	 assign: *tmp0 = width
+ - no source -
+#0001:	 assign: *tmp1 = height
+ - no source -
+#0002:	 assign: *(tmp2.width) = *tmp0
+CGGeometry.h:279 CGSize size; size.width = width; size.height = height; return size;
+#0003:	 assign: *(tmp2.height) = *tmp1
+CGGeometry.h:279 CGSize size; size.width = width; size.height = height; return size;
+#0004:	 assign: tmp3 = tmp4
+CGGeometry.h:279 CGSize size; size.width = width; size.height = height; return size;
+#0005:	 assign: tmp5 = tmp2
+CGGeometry.h:279 CGSize size; size.width = width; size.height = height; return size;
+#0006:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp3, tmp5, 16, 8, 0)
+CGGeometry.h:279 CGSize size; size.width = width; size.height = height; return size;
+#0007:	 assign: tmp6 = tmp4
+CGGeometry.h:279 CGSize size; size.width = width; size.height = height; return size;
+#0008:	 noop: opcode 'LLVMRet' not supported <exit>
+CGGeometry.h:279 CGSize size; size.width = width; size.height = height; return size;
+
+CFG: CGVectorMake
+#0000:	 assign: *tmp0 = dx
+ - no source -
+#0001:	 assign: *tmp1 = dy
+ - no source -
+#0002:	 assign: *(tmp2.dx) = *tmp0
+CGGeometry.h:285 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
+#0003:	 assign: *(tmp2.dy) = *tmp1
+CGGeometry.h:285 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
+#0004:	 assign: tmp3 = tmp4
+CGGeometry.h:285 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
+#0005:	 assign: tmp5 = tmp2
+CGGeometry.h:285 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
+#0006:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp3, tmp5, 16, 8, 0)
+CGGeometry.h:285 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
+#0007:	 assign: tmp6 = tmp4
+CGGeometry.h:285 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
+#0008:	 noop: opcode 'LLVMRet' not supported <exit>
+CGGeometry.h:285 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
+
+CFG: CGRectMake
+#0000:	 assign: *tmp0 = x
+ - no source -
+#0001:	 assign: *tmp1 = y
+ - no source -
+#0002:	 assign: *tmp2 = width
+ - no source -
+#0003:	 assign: *tmp3 = height
+ - no source -
+#0004:	 noop: can't index ((tmp0.origin).x) by 0
+CGGeometry.h:292 rect.origin.x = x; rect.origin.y = y;
+#0005:	 noop: can't index ((tmp0.origin).x) by 1
+CGGeometry.h:292 rect.origin.x = x; rect.origin.y = y;
+#0006:	 noop: can't index ((tmp0.size).width) by 0
+CGGeometry.h:293 rect.size.width = width; rect.size.height = height;
+#0007:	 noop: can't index ((tmp0.size).width) by 1
+CGGeometry.h:293 rect.size.width = width; rect.size.height = height;
+#0008:	 assign: tmp4 = agg.result
+CGGeometry.h:294 return rect;
+#0009:	 assign: tmp5 = tmp6
+CGGeometry.h:294 return rect;
+#0010:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp4, tmp5, 32, 8, 0) <exit>
+CGGeometry.h:294 return rect;
+
+CFG: __CGPointEqualToPoint
+#0000:	 assign: tmp0 = tmp1
+ - no source -
+#0001:	 assign: *(tmp0.field0) = point1.coerce0
+ - no source -
+#0002:	 assign: *(tmp0.field1) = point1.coerce1
+ - no source -
+#0003:	 assign: tmp2 = tmp3
+ - no source -
+#0004:	 assign: *(tmp2.field0) = point2.coerce0
+ - no source -
+#0005:	 assign: *(tmp2.field1) = point2.coerce1
+ - no source -
+#0006:	 assign: tmp4 = *(tmp1.x) == *(tmp3.x)
+CGGeometry.h:300 return point1.x == point2.x && point1.y == point2.y;
+#0007:	 if: tmp4 then #0008:	 else #0009:
+CGGeometry.h:300 return point1.x == point2.x && point1.y == point2.y;
+#0008:	 assign: tmp5 = *(tmp1.y) == *(tmp3.y)
+CGGeometry.h:300 return point1.x == point2.x && point1.y == point2.y;
+#0009:	 noop
+ - no source -
+#0010:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0011:	 noop: opcode 'LLVMRet' not supported <exit>
+CGGeometry.h:301 }
+
+CFG: __CGSizeEqualToSize
+#0000:	 assign: tmp0 = tmp1
+ - no source -
+#0001:	 assign: *(tmp0.field0) = size1.coerce0
+ - no source -
+#0002:	 assign: *(tmp0.field1) = size1.coerce1
+ - no source -
+#0003:	 assign: tmp2 = tmp3
+ - no source -
+#0004:	 assign: *(tmp2.field0) = size2.coerce0
+ - no source -
+#0005:	 assign: *(tmp2.field1) = size2.coerce1
+ - no source -
+#0006:	 assign: tmp4 = *(tmp1.width) == *(tmp3.width)
+CGGeometry.h:307 return size1.width == size2.width && size1.height == size2.height;
+#0007:	 if: tmp4 then #0008:	 else #0009:
+CGGeometry.h:307 return size1.width == size2.width && size1.height == size2.height;
+#0008:	 assign: tmp5 = *(tmp1.height) == *(tmp3.height)
+CGGeometry.h:307 return size1.width == size2.width && size1.height == size2.height;
+#0009:	 noop
+ - no source -
+#0010:	 noop: opcode 'LLVMPHI' not supported
+ - no source -
+#0011:	 noop: opcode 'LLVMRet' not supported <exit>
+CGGeometry.h:308 }
+
+CFG: UCIsSurrogateHighCharacter
+#0000:	 assign: *tmp0 = character
+ - no source -
+#0001:	 assign: tmp1 = *tmp0 & 64512
+TextCommon.h:1113 return ( ( character & 0xFC00 ) == kUCHighSurrogateRangeStart );
+#0002:	 assign: tmp2 = tmp1 == 55296
+TextCommon.h:1113 return ( ( character & 0xFC00 ) == kUCHighSurrogateRangeStart );
+#0003:	 noop: opcode 'LLVMTrunc' not supported
+TextCommon.h:1113 return ( ( character & 0xFC00 ) == kUCHighSurrogateRangeStart );
+#0004:	 noop: opcode 'LLVMRet' not supported <exit>
+TextCommon.h:1113 return ( ( character & 0xFC00 ) == kUCHighSurrogateRangeStart );
+
+CFG: UCIsSurrogateLowCharacter
+#0000:	 assign: *tmp0 = character
+ - no source -
+#0001:	 assign: tmp1 = *tmp0 & 64512
+TextCommon.h:1124 return ( ( character & 0xFC00 ) == kUCLowSurrogateRangeStart );
+#0002:	 assign: tmp2 = tmp1 == 56320
+TextCommon.h:1124 return ( ( character & 0xFC00 ) == kUCLowSurrogateRangeStart );
+#0003:	 noop: opcode 'LLVMTrunc' not supported
+TextCommon.h:1124 return ( ( character & 0xFC00 ) == kUCLowSurrogateRangeStart );
+#0004:	 noop: opcode 'LLVMRet' not supported <exit>
+TextCommon.h:1124 return ( ( character & 0xFC00 ) == kUCLowSurrogateRangeStart );
+
+CFG: UCGetUnicodeScalarValueForSurrogatePair
+#0000:	 assign: *tmp0 = surrogateHigh
+ - no source -
+#0001:	 assign: *tmp1 = surrogateLow
+ - no source -
+#0002:	 assign: tmp2 = *tmp0 - 55296
+TextCommon.h:1137 return ( (UnicodeScalarValue)( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000;
+#0003:	 assign: tmp3 = tmp2 << 10
+TextCommon.h:1137 return ( (UnicodeScalarValue)( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000;
+#0004:	 assign: tmp4 = *tmp1 - 56320
+TextCommon.h:1137 return ( (UnicodeScalarValue)( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000;
+#0005:	 assign: tmp5 = tmp3 + tmp4
+TextCommon.h:1137 return ( (UnicodeScalarValue)( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000;
+#0006:	 assign: tmp6 = tmp5 + 65536
+TextCommon.h:1137 return ( (UnicodeScalarValue)( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000;
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+TextCommon.h:1137 return ( (UnicodeScalarValue)( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000;
+
+CFG: SInt64ToWide
+#0000:	 assign: *tmp0 = s
+ - no source -
+#0001:	 noop: opcode 'LLVMLShr' not supported
+Math64.h:1354 static inline wide SInt64ToWide(SInt64 s) { wide result; result.hi = (SInt32)(((UInt64)s >> 32) & 0xffffffffUL); result.lo = (UInt32)((UInt64)s & 0xffffffffUL); return result; }
+#0002:	 noop: opcode 'LLVMLShr' not supported
+Math64.h:1354 static inline wide SInt64ToWide(SInt64 s) { wide result; result.hi = (SInt32)(((UInt64)s >> 32) & 0xffffffffUL); result.lo = (UInt32)((UInt64)s & 0xffffffffUL); return result; }
+#0003:	 noop: opcode 'LLVMTrunc' not supported
+Math64.h:1354 static inline wide SInt64ToWide(SInt64 s) { wide result; result.hi = (SInt32)(((UInt64)s >> 32) & 0xffffffffUL); result.lo = (UInt32)((UInt64)s & 0xffffffffUL); return result; }
+#0004:	 noop: opcode 'LLVMTrunc' not supported
+Math64.h:1354 static inline wide SInt64ToWide(SInt64 s) { wide result; result.hi = (SInt32)(((UInt64)s >> 32) & 0xffffffffUL); result.lo = (UInt32)((UInt64)s & 0xffffffffUL); return result; }
+#0005:	 assign: tmp1 = *tmp0 & 4294967295
+Math64.h:1354 static inline wide SInt64ToWide(SInt64 s) { wide result; result.hi = (SInt32)(((UInt64)s >> 32) & 0xffffffffUL); result.lo = (UInt32)((UInt64)s & 0xffffffffUL); return result; }
+#0006:	 noop: opcode 'LLVMTrunc' not supported
+Math64.h:1354 static inline wide SInt64ToWide(SInt64 s) { wide result; result.hi = (SInt32)(((UInt64)s >> 32) & 0xffffffffUL); result.lo = (UInt32)((UInt64)s & 0xffffffffUL); return result; }
+#0007:	 noop: opcode 'LLVMTrunc' not supported
+Math64.h:1354 static inline wide SInt64ToWide(SInt64 s) { wide result; result.hi = (SInt32)(((UInt64)s >> 32) & 0xffffffffUL); result.lo = (UInt32)((UInt64)s & 0xffffffffUL); return result; }
+#0008:	 assign: tmp2 = tmp3
+Math64.h:1354 static inline wide SInt64ToWide(SInt64 s) { wide result; result.hi = (SInt32)(((UInt64)s >> 32) & 0xffffffffUL); result.lo = (UInt32)((UInt64)s & 0xffffffffUL); return result; }
+#0009:	 assign: tmp4 = tmp5
+Math64.h:1354 static inline wide SInt64ToWide(SInt64 s) { wide result; result.hi = (SInt32)(((UInt64)s >> 32) & 0xffffffffUL); result.lo = (UInt32)((UInt64)s & 0xffffffffUL); return result; }
+#0010:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp2, tmp4, 8, 2, 0)
+Math64.h:1354 static inline wide SInt64ToWide(SInt64 s) { wide result; result.hi = (SInt32)(((UInt64)s >> 32) & 0xffffffffUL); result.lo = (UInt32)((UInt64)s & 0xffffffffUL); return result; }
+#0011:	 assign: tmp6 = tmp3
+Math64.h:1354 static inline wide SInt64ToWide(SInt64 s) { wide result; result.hi = (SInt32)(((UInt64)s >> 32) & 0xffffffffUL); result.lo = (UInt32)((UInt64)s & 0xffffffffUL); return result; }
+#0012:	 noop: opcode 'LLVMRet' not supported <exit>
+Math64.h:1354 static inline wide SInt64ToWide(SInt64 s) { wide result; result.hi = (SInt32)(((UInt64)s >> 32) & 0xffffffffUL); result.lo = (UInt32)((UInt64)s & 0xffffffffUL); return result; }
+
+CFG: WideToSInt64
+#0000:	 assign: tmp0 = tmp1
+ - no source -
+#0001:	 assign: *tmp0 = w.coerce
+ - no source -
+#0002:	 noop: opcode 'LLVMSExt' not supported
+Math64.h:1355 static inline SInt64 WideToSInt64(wide w) { SInt64 result = w.hi; result = (result << 32) | w.lo; return result; }
+#0003:	 noop: opcode 'LLVMSExt' not supported
+Math64.h:1355 static inline SInt64 WideToSInt64(wide w) { SInt64 result = w.hi; result = (result << 32) | w.lo; return result; }
+#0004:	 assign: tmp2 = *tmp3 << 32
+Math64.h:1355 static inline SInt64 WideToSInt64(wide w) { SInt64 result = w.hi; result = (result << 32) | w.lo; return result; }
+#0005:	 assign: tmp4 = tmp2 | *(tmp1.lo)
+Math64.h:1355 static inline SInt64 WideToSInt64(wide w) { SInt64 result = w.hi; result = (result << 32) | w.lo; return result; }
+#0006:	 assign: *tmp3 = tmp4
+Math64.h:1355 static inline SInt64 WideToSInt64(wide w) { SInt64 result = w.hi; result = (result << 32) | w.lo; return result; }
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+Math64.h:1355 static inline SInt64 WideToSInt64(wide w) { SInt64 result = w.hi; result = (result << 32) | w.lo; return result; }
+
+CFG: UInt64ToUnsignedWide
+#0000:	 assign: *tmp0 = u
+ - no source -
+#0001:	 noop: opcode 'LLVMLShr' not supported
+Math64.h:1357 static inline UnsignedWide UInt64ToUnsignedWide(UInt64 u) { UnsignedWide result; result.hi = (UInt32)((u >> 32) & 0xffffffffUL); result.lo = (UInt32)(u & 0xffffffffUL); return result; }
+#0002:	 noop: opcode 'LLVMLShr' not supported
+Math64.h:1357 static inline UnsignedWide UInt64ToUnsignedWide(UInt64 u) { UnsignedWide result; result.hi = (UInt32)((u >> 32) & 0xffffffffUL); result.lo = (UInt32)(u & 0xffffffffUL); return result; }
+#0003:	 noop: opcode 'LLVMTrunc' not supported
+Math64.h:1357 static inline UnsignedWide UInt64ToUnsignedWide(UInt64 u) { UnsignedWide result; result.hi = (UInt32)((u >> 32) & 0xffffffffUL); result.lo = (UInt32)(u & 0xffffffffUL); return result; }
+#0004:	 noop: opcode 'LLVMTrunc' not supported
+Math64.h:1357 static inline UnsignedWide UInt64ToUnsignedWide(UInt64 u) { UnsignedWide result; result.hi = (UInt32)((u >> 32) & 0xffffffffUL); result.lo = (UInt32)(u & 0xffffffffUL); return result; }
+#0005:	 assign: tmp1 = *tmp0 & 4294967295
+Math64.h:1357 static inline UnsignedWide UInt64ToUnsignedWide(UInt64 u) { UnsignedWide result; result.hi = (UInt32)((u >> 32) & 0xffffffffUL); result.lo = (UInt32)(u & 0xffffffffUL); return result; }
+#0006:	 noop: opcode 'LLVMTrunc' not supported
+Math64.h:1357 static inline UnsignedWide UInt64ToUnsignedWide(UInt64 u) { UnsignedWide result; result.hi = (UInt32)((u >> 32) & 0xffffffffUL); result.lo = (UInt32)(u & 0xffffffffUL); return result; }
+#0007:	 noop: opcode 'LLVMTrunc' not supported
+Math64.h:1357 static inline UnsignedWide UInt64ToUnsignedWide(UInt64 u) { UnsignedWide result; result.hi = (UInt32)((u >> 32) & 0xffffffffUL); result.lo = (UInt32)(u & 0xffffffffUL); return result; }
+#0008:	 assign: tmp2 = tmp3
+Math64.h:1357 static inline UnsignedWide UInt64ToUnsignedWide(UInt64 u) { UnsignedWide result; result.hi = (UInt32)((u >> 32) & 0xffffffffUL); result.lo = (UInt32)(u & 0xffffffffUL); return result; }
+#0009:	 assign: tmp4 = tmp5
+Math64.h:1357 static inline UnsignedWide UInt64ToUnsignedWide(UInt64 u) { UnsignedWide result; result.hi = (UInt32)((u >> 32) & 0xffffffffUL); result.lo = (UInt32)(u & 0xffffffffUL); return result; }
+#0010:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp2, tmp4, 8, 2, 0)
+Math64.h:1357 static inline UnsignedWide UInt64ToUnsignedWide(UInt64 u) { UnsignedWide result; result.hi = (UInt32)((u >> 32) & 0xffffffffUL); result.lo = (UInt32)(u & 0xffffffffUL); return result; }
+#0011:	 assign: tmp6 = tmp3
+Math64.h:1357 static inline UnsignedWide UInt64ToUnsignedWide(UInt64 u) { UnsignedWide result; result.hi = (UInt32)((u >> 32) & 0xffffffffUL); result.lo = (UInt32)(u & 0xffffffffUL); return result; }
+#0012:	 noop: opcode 'LLVMRet' not supported <exit>
+Math64.h:1357 static inline UnsignedWide UInt64ToUnsignedWide(UInt64 u) { UnsignedWide result; result.hi = (UInt32)((u >> 32) & 0xffffffffUL); result.lo = (UInt32)(u & 0xffffffffUL); return result; }
+
+CFG: UnsignedWideToUInt64
+#0000:	 assign: tmp0 = tmp1
+ - no source -
+#0001:	 assign: *tmp0 = uw.coerce
+ - no source -
+#0002:	 assign: *tmp2 = *(tmp1.hi)
+Math64.h:1358 static inline UInt64 UnsignedWideToUInt64(UnsignedWide uw) { UInt64 result = uw.hi; result = (result << 32) | uw.lo; return result; }
+#0003:	 assign: tmp3 = *tmp2 << 32
+Math64.h:1358 static inline UInt64 UnsignedWideToUInt64(UnsignedWide uw) { UInt64 result = uw.hi; result = (result << 32) | uw.lo; return result; }
+#0004:	 assign: tmp4 = tmp3 | *(tmp1.lo)
+Math64.h:1358 static inline UInt64 UnsignedWideToUInt64(UnsignedWide uw) { UInt64 result = uw.hi; result = (result << 32) | uw.lo; return result; }
+#0005:	 assign: *tmp2 = tmp4
+Math64.h:1358 static inline UInt64 UnsignedWideToUInt64(UnsignedWide uw) { UInt64 result = uw.hi; result = (result << 32) | uw.lo; return result; }
+#0006:	 noop: opcode 'LLVMRet' not supported <exit>
+Math64.h:1358 static inline UInt64 UnsignedWideToUInt64(UnsignedWide uw) { UInt64 result = uw.hi; result = (result << 32) | uw.lo; return result; }
+
+CFG: _mm_packs_pi16
+#0000:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0001:	 assign: *tmp0 = __m1.coerce
+ - no source -
+#0002:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0003:	 assign: *tmp1 = __m2.coerce
+ - no source -
+#0004:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0005:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0006:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0007:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0008:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0009:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0010:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0011:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0012:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0013:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0014:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0015:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: _mm_packs_pi32
+#0000:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0001:	 assign: *tmp0 = __m1.coerce
+ - no source -
+#0002:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0003:	 assign: *tmp1 = __m2.coerce
+ - no source -
+#0004:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0005:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0006:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0007:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0008:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0009:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0010:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0011:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0012:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0013:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0014:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0015:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: _mm_unpackhi_pi16
+#0000:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0001:	 assign: *tmp0 = __m1.coerce
+ - no source -
+#0002:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0003:	 assign: *tmp1 = __m2.coerce
+ - no source -
+#0004:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0005:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0006:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0007:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0008:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0009:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0010:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0011:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0012:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0013:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0014:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0015:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: _mm_unpacklo_pi8
+#0000:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0001:	 assign: *tmp0 = __m1.coerce
+ - no source -
+#0002:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0003:	 assign: *tmp1 = __m2.coerce
+ - no source -
+#0004:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0005:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0006:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0007:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0008:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0009:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0010:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0011:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0012:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0013:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0014:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0015:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: _mm_unpacklo_pi16
+#0000:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0001:	 assign: *tmp0 = __m1.coerce
+ - no source -
+#0002:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0003:	 assign: *tmp1 = __m2.coerce
+ - no source -
+#0004:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0005:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0006:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0007:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0008:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0009:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0010:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0011:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0012:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0013:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0014:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0015:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: _mm_cmpgt_pi8
+#0000:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0001:	 assign: *tmp0 = __m1.coerce
+ - no source -
+#0002:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0003:	 assign: *tmp1 = __m2.coerce
+ - no source -
+#0004:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0005:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0006:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0007:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0008:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0009:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0010:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0011:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0012:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0013:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0014:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0015:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: _mm_cmpgt_pi16
+#0000:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0001:	 assign: *tmp0 = __m1.coerce
+ - no source -
+#0002:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0003:	 assign: *tmp1 = __m2.coerce
+ - no source -
+#0004:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0005:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0006:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0007:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0008:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0009:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0010:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0011:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0012:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0013:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0014:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0015:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: _mm_setzero_si64
+#0000:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0001:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0002:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0003:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: _mm_set_pi32
+#0000:	 assign: *tmp0 = __i1
+ - no source -
+#0001:	 assign: *tmp1 = __i0
+ - no source -
+#0002:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0003:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0004:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0005:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0006:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0007:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0008:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: _mm_set_pi16
+#0000:	 assign: *tmp0 = __s3
+ - no source -
+#0001:	 assign: *tmp1 = __s2
+ - no source -
+#0002:	 assign: *tmp2 = __s1
+ - no source -
+#0003:	 assign: *tmp3 = __s0
+ - no source -
+#0004:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0005:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0006:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0007:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0008:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0009:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0010:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0011:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0012:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: _mm_set_pi8
+#0000:	 assign: *tmp0 = __b7
+ - no source -
+#0001:	 assign: *tmp1 = __b6
+ - no source -
+#0002:	 assign: *tmp2 = __b5
+ - no source -
+#0003:	 assign: *tmp3 = __b4
+ - no source -
+#0004:	 assign: *tmp4 = __b3
+ - no source -
+#0005:	 assign: *tmp5 = __b2
+ - no source -
+#0006:	 assign: *tmp6 = __b1
+ - no source -
+#0007:	 assign: *tmp7 = __b0
+ - no source -
+#0008:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0009:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0010:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0011:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0012:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0013:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0014:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0015:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0016:	 noop: Can't parse LLVMX86_MMXTypeKind
+ - no source -
+#0017:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0018:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0019:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0020:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: _mm_load_ps
+#0000:	 assign: *tmp0 = __p
+ - no source -
+#0001:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: _mm_set1_ps
+#0000:	 assign: *tmp0 = __w
+ - no source -
+#0001:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0002:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0003:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0004:	 noop: opcode 'LLVMInsertElement' not supported
+ - no source -
+#0005:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0006:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: _mm_setzero_ps
+#0000:	 noop: Can't parse LLVMVectorTypeKind
+xmmintrin.h:614 return (__m128){ 0, 0, 0, 0 };
+#0001:	 noop: opcode 'LLVMRet' not supported <exit>
+xmmintrin.h:614 return (__m128){ 0, 0, 0, 0 };
+
+CFG: _mm_cvtpi16_ps
+#0000:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0001:	 assign: *tmp0 = __a.coerce
+ - no source -
+#0002:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0003:	 call: tmp1 = _mm_setzero_si64()
+ - no source -
+#0004:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0005:	 assign: *tmp2 = tmp1
+ - no source -
+#0006:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0007:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0008:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0009:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0010:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0011:	 call: tmp3 = _mm_cmpgt_pi16(*tmp4, *tmp5)
+ - no source -
+#0012:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0013:	 assign: *tmp6 = tmp3
+ - no source -
+#0014:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0015:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0016:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0017:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0018:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0019:	 call: tmp7 = _mm_unpackhi_pi16(*tmp8, *tmp9)
+ - no source -
+#0020:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0021:	 assign: *tmp10 = tmp7
+ - no source -
+#0022:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0023:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0024:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0025:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0026:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0027:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0028:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0029:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0030:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0031:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0032:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0033:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0034:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0035:	 call: tmp11 = _mm_unpacklo_pi16(*tmp12, *tmp13)
+ - no source -
+#0036:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0037:	 assign: *tmp14 = tmp11
+ - no source -
+#0038:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0039:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0040:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0041:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0042:	 noop: Can't parse LLVMVectorTypeKind
+ - no source -
+#0043:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: __CGAffineTransformMake
+#0000:	 assign: *tmp0 = a
+ - no source -
+#0001:	 assign: *tmp1 = b
+ - no source -
+#0002:	 assign: *tmp2 = c
+ - no source -
+#0003:	 assign: *tmp3 = d
+ - no source -
+#0004:	 assign: *tmp4 = tx
+ - no source -
+#0005:	 assign: *tmp5 = ty
+ - no source -
+#0006:	 assign: *(tmp6.a) = *tmp0
+CGAffineTransform.h:120 t.a = a; t.b = b; t.c = c; t.d = d; t.tx = tx; t.ty = ty;
+#0007:	 assign: *(tmp6.b) = *tmp1
+CGAffineTransform.h:120 t.a = a; t.b = b; t.c = c; t.d = d; t.tx = tx; t.ty = ty;
+#0008:	 assign: *(tmp6.c) = *tmp2
+CGAffineTransform.h:120 t.a = a; t.b = b; t.c = c; t.d = d; t.tx = tx; t.ty = ty;
+#0009:	 assign: *(tmp6.d) = *tmp3
+CGAffineTransform.h:120 t.a = a; t.b = b; t.c = c; t.d = d; t.tx = tx; t.ty = ty;
+#0010:	 assign: *(tmp6.tx) = *tmp4
+CGAffineTransform.h:120 t.a = a; t.b = b; t.c = c; t.d = d; t.tx = tx; t.ty = ty;
+#0011:	 assign: *(tmp6.ty) = *tmp5
+CGAffineTransform.h:120 t.a = a; t.b = b; t.c = c; t.d = d; t.tx = tx; t.ty = ty;
+#0012:	 assign: tmp7 = agg.result
+CGAffineTransform.h:121 return t;
+#0013:	 assign: tmp8 = tmp6
+CGAffineTransform.h:121 return t;
+#0014:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp7, tmp8, 48, 8, 0) <exit>
+CGAffineTransform.h:121 return t;
+
+CFG: __CGPointApplyAffineTransform
+#0000:	 assign: tmp0 = tmp1
+ - no source -
+#0001:	 assign: *(tmp0.field0) = point.coerce0
+ - no source -
+#0002:	 assign: *(tmp0.field1) = point.coerce1
+ - no source -
+#0003:	 assign: tmp2 = *(t.a) * *(tmp1.x)
+CGAffineTransform.h:129 p.x = (CGFloat)((double)t.a * point.x + (double)t.c * point.y + t.tx);
+#0004:	 assign: tmp3 = *(t.c) * *(tmp1.y)
+CGAffineTransform.h:129 p.x = (CGFloat)((double)t.a * point.x + (double)t.c * point.y + t.tx);
+#0005:	 assign: tmp4 = tmp2 + tmp3
+CGAffineTransform.h:129 p.x = (CGFloat)((double)t.a * point.x + (double)t.c * point.y + t.tx);
+#0006:	 assign: tmp5 = tmp4 + *(t.tx)
+CGAffineTransform.h:129 p.x = (CGFloat)((double)t.a * point.x + (double)t.c * point.y + t.tx);
+#0007:	 assign: *(tmp6.x) = tmp5
+CGAffineTransform.h:129 p.x = (CGFloat)((double)t.a * point.x + (double)t.c * point.y + t.tx);
+#0008:	 assign: tmp7 = *(t.b) * *(tmp1.x)
+CGAffineTransform.h:130 p.y = (CGFloat)((double)t.b * point.x + (double)t.d * point.y + t.ty);
+#0009:	 assign: tmp8 = *(t.d) * *(tmp1.y)
+CGAffineTransform.h:130 p.y = (CGFloat)((double)t.b * point.x + (double)t.d * point.y + t.ty);
+#0010:	 assign: tmp9 = tmp7 + tmp8
+CGAffineTransform.h:130 p.y = (CGFloat)((double)t.b * point.x + (double)t.d * point.y + t.ty);
+#0011:	 assign: tmp10 = tmp9 + *(t.ty)
+CGAffineTransform.h:130 p.y = (CGFloat)((double)t.b * point.x + (double)t.d * point.y + t.ty);
+#0012:	 assign: *(tmp6.y) = tmp10
+CGAffineTransform.h:130 p.y = (CGFloat)((double)t.b * point.x + (double)t.d * point.y + t.ty);
+#0013:	 assign: tmp11 = tmp12
+CGAffineTransform.h:131 return p;
+#0014:	 assign: tmp13 = tmp6
+CGAffineTransform.h:131 return p;
+#0015:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp11, tmp13, 16, 8, 0)
+CGAffineTransform.h:131 return p;
+#0016:	 assign: tmp14 = tmp12
+CGAffineTransform.h:131 return p;
+#0017:	 noop: opcode 'LLVMRet' not supported <exit>
+CGAffineTransform.h:131 return p;
+
+CFG: __CGSizeApplyAffineTransform
+#0000:	 assign: tmp0 = tmp1
+ - no source -
+#0001:	 assign: *(tmp0.field0) = size.coerce0
+ - no source -
+#0002:	 assign: *(tmp0.field1) = size.coerce1
+ - no source -
+#0003:	 assign: tmp2 = *(t.a) * *(tmp1.width)
+CGAffineTransform.h:139 s.width = (CGFloat)((double)t.a * size.width + (double)t.c * size.height);
+#0004:	 assign: tmp3 = *(t.c) * *(tmp1.height)
+CGAffineTransform.h:139 s.width = (CGFloat)((double)t.a * size.width + (double)t.c * size.height);
+#0005:	 assign: tmp4 = tmp2 + tmp3
+CGAffineTransform.h:139 s.width = (CGFloat)((double)t.a * size.width + (double)t.c * size.height);
+#0006:	 assign: *(tmp5.width) = tmp4
+CGAffineTransform.h:139 s.width = (CGFloat)((double)t.a * size.width + (double)t.c * size.height);
+#0007:	 assign: tmp6 = *(t.b) * *(tmp1.width)
+CGAffineTransform.h:140 s.height = (CGFloat)((double)t.b * size.width + (double)t.d * size.height);
+#0008:	 assign: tmp7 = *(t.d) * *(tmp1.height)
+CGAffineTransform.h:140 s.height = (CGFloat)((double)t.b * size.width + (double)t.d * size.height);
+#0009:	 assign: tmp8 = tmp6 + tmp7
+CGAffineTransform.h:140 s.height = (CGFloat)((double)t.b * size.width + (double)t.d * size.height);
+#0010:	 assign: *(tmp5.height) = tmp8
+CGAffineTransform.h:140 s.height = (CGFloat)((double)t.b * size.width + (double)t.d * size.height);
+#0011:	 assign: tmp9 = tmp10
+CGAffineTransform.h:141 return s;
+#0012:	 assign: tmp11 = tmp5
+CGAffineTransform.h:141 return s;
+#0013:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp9, tmp11, 16, 8, 0)
+CGAffineTransform.h:141 return s;
+#0014:	 assign: tmp12 = tmp10
+CGAffineTransform.h:141 return s;
+#0015:	 noop: opcode 'LLVMRet' not supported <exit>
+CGAffineTransform.h:141 return s;
+
+CFG: __NDR_convert__mig_reply_error_t
+#0000:	 assign: *tmp0 = x <exit>
+ - no source -
+
+CFG: OSAtomicIncrement32
+#0000:	 assign: *tmp0 = __theValue
+ - no source -
+#0001:	 call: tmp1 = OSAtomicAdd32(1, *tmp0)
+OSAtomic.h:149 { return OSAtomicAdd32(  1, __theValue); }
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+OSAtomic.h:149 { return OSAtomicAdd32(  1, __theValue); }
+
+CFG: OSAtomicIncrement32Barrier
+#0000:	 assign: *tmp0 = __theValue
+ - no source -
+#0001:	 call: tmp1 = OSAtomicAdd32Barrier(1, *tmp0)
+OSAtomic.h:153 { return OSAtomicAdd32Barrier(  1, __theValue); }
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+OSAtomic.h:153 { return OSAtomicAdd32Barrier(  1, __theValue); }
+
+CFG: OSAtomicDecrement32
+#0000:	 assign: *tmp0 = __theValue
+ - no source -
+#0001:	 call: tmp1 = OSAtomicAdd32(-1, *tmp0)
+OSAtomic.h:157 { return OSAtomicAdd32( -1, __theValue); }
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+OSAtomic.h:157 { return OSAtomicAdd32( -1, __theValue); }
+
+CFG: OSAtomicDecrement32Barrier
+#0000:	 assign: *tmp0 = __theValue
+ - no source -
+#0001:	 call: tmp1 = OSAtomicAdd32Barrier(-1, *tmp0)
+OSAtomic.h:161 { return OSAtomicAdd32Barrier( -1, __theValue); }
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+OSAtomic.h:161 { return OSAtomicAdd32Barrier( -1, __theValue); }
+
+CFG: OSAtomicIncrement64
+#0000:	 assign: *tmp0 = __theValue
+ - no source -
+#0001:	 call: tmp1 = OSAtomicAdd64(1, *tmp0)
+OSAtomic.h:228 { return OSAtomicAdd64(  1, __theValue); }
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+OSAtomic.h:228 { return OSAtomicAdd64(  1, __theValue); }
+
+CFG: OSAtomicIncrement64Barrier
+#0000:	 assign: *tmp0 = __theValue
+ - no source -
+#0001:	 call: tmp1 = OSAtomicAdd64Barrier(1, *tmp0)
+OSAtomic.h:232 { return OSAtomicAdd64Barrier(  1, __theValue); }
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+OSAtomic.h:232 { return OSAtomicAdd64Barrier(  1, __theValue); }
+
+CFG: OSAtomicDecrement64
+#0000:	 assign: *tmp0 = __theValue
+ - no source -
+#0001:	 call: tmp1 = OSAtomicAdd64(-1, *tmp0)
+OSAtomic.h:236 { return OSAtomicAdd64( -1, __theValue); }
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+OSAtomic.h:236 { return OSAtomicAdd64( -1, __theValue); }
+
+CFG: OSAtomicDecrement64Barrier
+#0000:	 assign: *tmp0 = __theValue
+ - no source -
+#0001:	 call: tmp1 = OSAtomicAdd64Barrier(-1, *tmp0)
+OSAtomic.h:240 { return OSAtomicAdd64Barrier( -1, __theValue); }
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+OSAtomic.h:240 { return OSAtomicAdd64Barrier( -1, __theValue); }
+
+CFG: main
+#0000:	 assign: *tmp0 = 0
+ - no source -
+#0001:	 assign: *tmp1 = argc
+ - no source -
+#0002:	 assign: *tmp2 = argv
+ - no source -
+#0003:	 assign: tmp3 = *L_OBJC_CLASSLIST_REFERENCES_$_
+hello.m:5 NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+#0004:	 call: tmp4 = objc_msgSend(tmp3, *L_OBJC_SELECTOR_REFERENCES_2)
+hello.m:5 NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+#0005:	 assign: tmp5 = tmp4
+hello.m:5 NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+#0006:	 assign: tmp6 = tmp5
+hello.m:5 NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+#0007:	 call: tmp7 = objc_msgSend(tmp6, *L_OBJC_SELECTOR_REFERENCES_4)
+hello.m:5 NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+#0008:	 assign: tmp8 = tmp7
+hello.m:5 NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+#0009:	 assign: *tmp9 = tmp8
+hello.m:5 NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+#0010:	 call: NSLog(_unnamed_cfstring_)
+hello.m:6 NSLog (@"Hello, World!");
+#0011:	 assign: tmp10 = *tmp9
+hello.m:7 [pool drain];
+#0012:	 call: tmp11 = objc_msgSend(tmp10, *L_OBJC_SELECTOR_REFERENCES_6)
+hello.m:7 [pool drain];
+#0013:	 noop: opcode 'LLVMRet' not supported <exit>
+hello.m:8 return 0;
+
+CFG: <module init>
+#0000:	 assign: *L_OBJC_METH_VAR_NAME_ = "autorelease"
+ - no source -
+#0001:	 assign: *L_OBJC_SELECTOR_REFERENCES_ = L_OBJC_METH_VAR_NAME_
+ - no source -
+#0002:	 assign: *L_OBJC_CLASSLIST_REFERENCES_$_ = OBJC_CLASS_$_NSAutoreleasePool
+ - no source -
+#0003:	 assign: *L_OBJC_METH_VAR_NAME_1 = "alloc"
+ - no source -
+#0004:	 assign: *L_OBJC_SELECTOR_REFERENCES_2 = L_OBJC_METH_VAR_NAME_1
+ - no source -
+#0005:	 assign: *L_OBJC_METH_VAR_NAME_3 = "init"
+ - no source -
+#0006:	 assign: *L_OBJC_SELECTOR_REFERENCES_4 = L_OBJC_METH_VAR_NAME_3
+ - no source -
+#0007:	 assign: *.str = "Hello, World!"
+ - no source -
+#0008:	 assign: *(*_unnamed_cfstring_.field0) = __CFConstantStringClassReference
+ - no source -
+#0009:	 assign: *L_OBJC_METH_VAR_NAME_5 = "drain"
+ - no source -
+#0010:	 assign: *L_OBJC_SELECTOR_REFERENCES_6 = L_OBJC_METH_VAR_NAME_5
+ - no source -
+#0011:	 assign: **llvm.used = L_OBJC_METH_VAR_NAME_
+ - no source -
+#0012:	 assign: *(*llvm.used+1) = L_OBJC_SELECTOR_REFERENCES_
+ - no source -
+#0013:	 assign: *(*llvm.used+2) = L_OBJC_CLASSLIST_REFERENCES_$_
+ - no source -
+#0014:	 assign: *(*llvm.used+3) = L_OBJC_METH_VAR_NAME_1
+ - no source -
+#0015:	 assign: *(*llvm.used+4) = L_OBJC_SELECTOR_REFERENCES_2
+ - no source -
+#0016:	 assign: *(*llvm.used+5) = L_OBJC_METH_VAR_NAME_3
+ - no source -
+#0017:	 assign: *(*llvm.used+6) = L_OBJC_SELECTOR_REFERENCES_4
+ - no source -
+#0018:	 assign: *(*llvm.used+7) = L_OBJC_METH_VAR_NAME_5
+ - no source -
+#0019:	 assign: *(*llvm.used+8) = L_OBJC_SELECTOR_REFERENCES_6 <exit>
+ - no source -
+

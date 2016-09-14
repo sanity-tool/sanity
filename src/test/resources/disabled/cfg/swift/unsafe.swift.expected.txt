@@ -1,0 +1,50 @@
+CFG: top_level_code
+
+
+CFG: _TF4main18testReadFromUnsafeFGVSs13UnsafePointerSi_T_
+#0000:	 assign: *tmp0 =
+ - no source -
+#0001:	 assign: *tmp1 =
+ - no source -
+#0002:	 assign: tmp2 =
+unsafe.swift:2 var v = p.memory;
+#0003:	 assign: tmp3 = tmp4
+unsafe.swift:2 var v = p.memory;
+#0004:	 assign: tmp5 = tmp2
+unsafe.swift:2 var v = p.memory;
+#0005:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp3, tmp5, 8, 8, 0) <exit>
+unsafe.swift:2 var v = p.memory;
+
+CFG: _TF4main17testWriteToUnsafeFGVSs20UnsafeMutablePointerSi_T_
+#0000:	 assign: *tmp0 =
+ - no source -
+#0001:	 assign: *tmp1 =
+ - no source -
+#0002:	 assign: tmp2 =
+unsafe.swift:6 p.memory = 1;
+#0003:	 assign: *(tmp2.field0) = 1 <exit>
+unsafe.swift:6 p.memory = 1;
+
+CFG: main
+#0000:	 call: tmp0 = _TFSsa6C_ARGCVSs5Int32()
+ - no source -
+#0001:	 assign: tmp1 = tmp0
+ - no source -
+#0002:	 assign: *tmp1 = argc
+ - no source -
+#0003:	 call: tmp2 = _TFSsa6C_ARGVGVSs20UnsafeMutablePointerGS_VSs4Int8__()
+ - no source -
+#0004:	 assign: tmp3 = tmp2
+ - no source -
+#0005:	 assign: *tmp3 = argv
+ - no source -
+#0006:	 call: top_level_code()
+ - no source -
+#0007:	 noop: opcode 'LLVMRet' not supported <exit>
+ - no source -
+
+CFG: <module init>
+#0000:	 assign: **llvm.used = @_TF4main18testReadFromUnsafeFGVSs13UnsafePointerSi_T_
+ - no source -
+#0001:	 assign: *(*llvm.used+1) = @_TF4main17testWriteToUnsafeFGVSs20UnsafeMutablePointerSi_T_ <exit>
+ - no source -
