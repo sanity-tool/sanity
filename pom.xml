@@ -53,7 +53,6 @@
                     <executable>sh</executable>
                     <workingDirectory>${pom.basedir}/tools/swig</workingDirectory>
                     <arguments>
-                        <argument>-v</argument>
                         <argument>generate.sh</argument>
                     </arguments>
                 </configuration>

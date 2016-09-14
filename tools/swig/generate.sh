@@ -1,29 +1,10 @@
 #!/bin/sh
+
 # Exit on failure
 set -e
 
-clang -v
-
-/usr/local/Cellar/llvm/3.8.1/bin/clang -v
-
 LLVM_CONFIG=llvm-config
 $LLVM_CONFIG --version >/dev/null 2>&1 || LLVM_CONFIG=/usr/local/opt/llvm/bin/llvm-config
-
-$LLVM_CONFIG --version
-
-$LLVM_CONFIG --includedir
-
-$LLVM_CONFIG --components
-$LLVM_CONFIG --libdir
-$LLVM_CONFIG --cxxflags
-$LLVM_CONFIG --ldflags
-
-#sudo apt-get -qq update
-swig -version >/dev/null 2>&1 || sudo apt-get install -y swig
-
-swig -version
-
-#find / 2>/dev/null|grep llvm
 
 case `uname` in
     Darwin)
@@ -43,28 +24,16 @@ case `uname` in
     ;;
 esac
 
-#find / 2>/dev/null|grep libc\\.
-
-#find / 2>/dev/null|grep libc++\\.
-
-#find / 2>/dev/null|grep libstdc
-
 CPPFLAGS=`$LLVM_CONFIG --cppflags`
 LDFLAGS="`$LLVM_CONFIG --ldflags` -L/usr/local/opt/libffi/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
 
-#todo reduce to only necessary libs
+# todo reduce to only necessary libs.
 LIBS="`$LLVM_CONFIG --libs` -ltermcap"
-
-echo $LIBS
-
-STD_INCLUDES=
 
 LLVM_INCLUDE="-I`$LLVM_CONFIG --includedir`"
 LLVM_LIBS=
 
 DEBUG=-g
-
-echo "swig $LLVM_INCLUDE -java -outdir $OUTDIR -package na.okutane.cpp.llvm -v -debug-tmsearch -debug-tmused bitreader.i"
 
 JAVA_OUT="../../target/generated-sources/java/na/okutane/cpp/llvm"
 rm -rf $JAVA_OUT || echo already removed
@@ -81,25 +50,23 @@ SOBJ_DIR="../../target/native/shared"
 mkdir -p $OBJ_DIR
 mkdir -p $SOBJ_DIR
 
-clang -c $CPP_OUT/bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE $STD_INCLUDES -I/usr/local/opt/llvm/include $DEBUG -fPIC -o $OBJ_DIR/wrappers.o
+clang -c $CPP_OUT/bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE -I/usr/local/opt/llvm/include $DEBUG -fPIC -o $OBJ_DIR/wrappers.o
 
-COMPILE_HELPERS="clang++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $CPPFLAGS -I/usr/local/opt/llvm/include $DEBUG -fPIC -std=c++11 -o $OBJ_DIR/helpers.o"
-echo $COMPILE_HELPERS
-eval $COMPILE_HELPERS
+clang++ -c helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $CPPFLAGS -I/usr/local/opt/llvm/include $DEBUG -fPIC -std=c++11 -o $OBJ_DIR/helpers.o
 
-COMPILE_DEBUGHACK="clang++ -c debughack.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $CPPFLAGS -I/usr/local/opt/llvm/include $DEBUG -fPIC -std=c++11 -o $OBJ_DIR/debughack.o"
-echo $COMPILE_DEBUGHACK
-eval $COMPILE_DEBUGHACK
+if [ -z "$REAL_LLVM" ]; then
+    # llvm drops debug information (hence source refs) from some compilers, code below disabled that logic.
 
-cp /usr/local/Cellar/llvm/3.8.1/lib/libLLVMCore.a $OBJ_DIR/libLLVMCore.a
-chmod +w $OBJ_DIR/libLLVMCore.a
-gobjcopy -v --target mach-o-x86-64 --strip-symbol __ZN4llvm16UpgradeDebugInfoERNS_6ModuleE $OBJ_DIR/libLLVMCore.a
+    # compile replacement code.
+    clang++ -c debughack.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $CPPFLAGS -I/usr/local/opt/llvm/include $DEBUG -fPIC -std=c++11 -o $OBJ_DIR/debughack.o
 
-LINK_CMD="clang++ -Wl,-allow_sub_type_mismatches -shared ${LIBS/-lLLVMCore/} $OBJ_DIR/libLLVMCore.a $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o $OBJ_DIR/debughack.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS"
-echo $LINK_CMD
-eval $LINK_CMD
+    # remove logic from llvm library.
+    cp /usr/local/Cellar/llvm/3.8.1/lib/libLLVMCore.a $OBJ_DIR/libLLVMCore.a
+    chmod +w $OBJ_DIR/libLLVMCore.a
+    gobjcopy -v --target mach-o-x86-64 --strip-symbol __ZN4llvm16UpgradeDebugInfoERNS_6ModuleE $OBJ_DIR/libLLVMCore.a
 
-#gobjcopy --strip-symbol __ZN4llvm16UpgradeDebugInfoERNS_6ModuleE $SOBJ_DIR/$DLL_NAME
+    # link against "hacked" library and replacement code.
+    LIBS="${LIBS/-lLLVMCore/} $OBJ_DIR/libLLVMCore.a $OBJ_DIR/debughack.o"
+fi
 
-#ldd $DLL_NAME
-#nm --dynamic --undefined-only $DLL_NAME
+clang++ -Wl,-allow_sub_type_mismatches -shared $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS
