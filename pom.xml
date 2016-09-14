@@ -26,7 +26,9 @@
                 <executions>
                     <execution>
                         <phase>generate-sources</phase>
-                        <goals><goal>add-source</goal></goals>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
                         <configuration>
                             <sources>
                                 <source>target/generated-sources/java</source>
@@ -94,6 +96,54 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>custom clang</id>
+            <activation>
+                <property>
+                    <name>env.CLANG_BIN</name>
+                </property>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <sanity.clang>${env.CLANG_BIN}</sanity.clang>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>custom llvm-as</id>
+            <activation>
+                <property>
+                    <name>env.LLVM_AS_BIN</name>
+                </property>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <sanity.llvs-as>${env.LLVM_AS_BIN}</sanity.llvs-as>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
