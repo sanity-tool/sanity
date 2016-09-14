@@ -5,7 +5,7 @@ CFG: -[MyObjectWithProperty readSelf]
  - no source -
 #0002:	 assign: tmp2 = *tmp0
 properties.m:12 return self.intProperty;
-#0003:	 call: tmp3 = objc_msgSend(tmp2, *OBJC_SELECTOR_REFERENCES_)
+#0003:	 call: tmp3 = objc_msgSend(tmp2, *L_OBJC_SELECTOR_REFERENCES_)
 properties.m:12 return self.intProperty;
 #0004:	 noop: opcode 'LLVMRet' not supported <exit>
 properties.m:12 return self.intProperty;
@@ -39,15 +39,15 @@ properties.m:3 @property int intProperty;
 CFG: readGlobal
 #0000:	 assign: tmp0 = *OBJ
 properties.m:20 return OBJ.intProperty;
-#0001:	 call: tmp1 = objc_msgSend(tmp0, *OBJC_SELECTOR_REFERENCES_)
+#0001:	 call: tmp1 = objc_msgSend(tmp0, *L_OBJC_SELECTOR_REFERENCES_)
 properties.m:20 return OBJ.intProperty;
 #0002:	 noop: opcode 'LLVMRet' not supported <exit>
 properties.m:20 return OBJ.intProperty;
 
 CFG: <module init>
-#0000:	 assign: *OBJC_METH_VAR_NAME_ = "intProperty"
+#0000:	 assign: *L_OBJC_METH_VAR_NAME_ = "intProperty"
  - no source -
-#0001:	 assign: *OBJC_SELECTOR_REFERENCES_ = OBJC_METH_VAR_NAME_
+#0001:	 assign: *L_OBJC_SELECTOR_REFERENCES_ = L_OBJC_METH_VAR_NAME_
  - no source -
 #0002:	 assign: *OBJC_IVAR_$_MyObjectWithProperty._intProperty = 0
  - no source -
@@ -55,58 +55,58 @@ CFG: <module init>
  - no source -
 #0004:	 assign: *(*OBJC_METACLASS_$_MyObjectWithProperty.field0) = OBJC_METACLASS_$_MyObjectWithProperty
  - no source -
-#0005:	 assign: *OBJC_CLASS_NAME_ = "MyObjectWithProperty"
+#0005:	 assign: *L_OBJC_CLASS_NAME_ = "MyObjectWithProperty"
  - no source -
 #0006:	 assign: *(*l_OBJC_METACLASS_RO_$_MyObjectWithProperty.field0) = 3
  - no source -
-#0007:	 assign: *OBJC_METH_VAR_NAME_.1 = "readSelf"
+#0007:	 assign: *L_OBJC_METH_VAR_NAME_1 = "readSelf"
  - no source -
-#0008:	 assign: *OBJC_METH_VAR_TYPE_ = "i16@0:8"
+#0008:	 assign: *L_OBJC_METH_VAR_TYPE_ = "i16@0:8"
  - no source -
-#0009:	 assign: *OBJC_METH_VAR_NAME_.2 = "setIntProperty:"
+#0009:	 assign: *L_OBJC_METH_VAR_NAME_2 = "setIntProperty:"
  - no source -
-#0010:	 assign: *OBJC_METH_VAR_TYPE_.3 = "v20@0:8i16"
+#0010:	 assign: *L_OBJC_METH_VAR_TYPE_3 = "v20@0:8i16"
  - no source -
-#0011:	 assign: *OBJC_METH_VAR_NAME_.4 = "_intProperty"
+#0011:	 assign: *L_OBJC_METH_VAR_NAME_4 = "_intProperty"
  - no source -
-#0012:	 assign: *OBJC_METH_VAR_TYPE_.5 = "i"
+#0012:	 assign: *L_OBJC_METH_VAR_TYPE_5 = "i"
  - no source -
-#0013:	 assign: *OBJC_PROP_NAME_ATTR_ = "intProperty"
+#0013:	 assign: *L_OBJC_PROP_NAME_ATTR_ = "intProperty"
  - no source -
-#0014:	 assign: *OBJC_PROP_NAME_ATTR_.6 = "Ti,V_intProperty"
+#0014:	 assign: *L_OBJC_PROP_NAME_ATTR_6 = "Ti,V_intProperty"
  - no source -
 #0015:	 assign: *(*l_OBJC_CLASS_RO_$_MyObjectWithProperty.field0) = 2
  - no source -
-#0016:	 assign: **OBJC_LABEL_CLASS_$ = OBJC_CLASS_$_MyObjectWithProperty
+#0016:	 assign: **L_OBJC_LABEL_CLASS_$ = OBJC_CLASS_$_MyObjectWithProperty
  - no source -
-#0017:	 assign: **llvm.compiler.used = OBJC_METH_VAR_NAME_
+#0017:	 assign: **llvm.used = L_OBJC_METH_VAR_NAME_
  - no source -
-#0018:	 assign: *(*llvm.compiler.used+1) = OBJC_SELECTOR_REFERENCES_
+#0018:	 assign: *(*llvm.used+1) = L_OBJC_SELECTOR_REFERENCES_
  - no source -
-#0019:	 assign: *(*llvm.compiler.used+2) = OBJC_CLASS_NAME_
+#0019:	 assign: *(*llvm.used+2) = L_OBJC_CLASS_NAME_
  - no source -
-#0020:	 assign: *(*llvm.compiler.used+3) = OBJC_METH_VAR_NAME_.1
+#0020:	 assign: *(*llvm.used+3) = L_OBJC_METH_VAR_NAME_1
  - no source -
-#0021:	 assign: *(*llvm.compiler.used+4) = OBJC_METH_VAR_TYPE_
+#0021:	 assign: *(*llvm.used+4) = L_OBJC_METH_VAR_TYPE_
  - no source -
-#0022:	 assign: *(*llvm.compiler.used+5) = OBJC_METH_VAR_NAME_.2
+#0022:	 assign: *(*llvm.used+5) = L_OBJC_METH_VAR_NAME_2
  - no source -
-#0023:	 assign: *(*llvm.compiler.used+6) = OBJC_METH_VAR_TYPE_.3
+#0023:	 assign: *(*llvm.used+6) = L_OBJC_METH_VAR_TYPE_3
  - no source -
-#0024:	 assign: *(*llvm.compiler.used+7) = l_OBJC_$_INSTANCE_METHODS_MyObjectWithProperty
+#0024:	 assign: *(*llvm.used+7) = l_OBJC_$_INSTANCE_METHODS_MyObjectWithProperty
  - no source -
-#0025:	 assign: *(*llvm.compiler.used+8) = OBJC_METH_VAR_NAME_.4
+#0025:	 assign: *(*llvm.used+8) = L_OBJC_METH_VAR_NAME_4
  - no source -
-#0026:	 assign: *(*llvm.compiler.used+9) = OBJC_METH_VAR_TYPE_.5
+#0026:	 assign: *(*llvm.used+9) = L_OBJC_METH_VAR_TYPE_5
  - no source -
-#0027:	 assign: *(*llvm.compiler.used+10) = l_OBJC_$_INSTANCE_VARIABLES_MyObjectWithProperty
+#0027:	 assign: *(*llvm.used+10) = l_OBJC_$_INSTANCE_VARIABLES_MyObjectWithProperty
  - no source -
-#0028:	 assign: *(*llvm.compiler.used+11) = OBJC_PROP_NAME_ATTR_
+#0028:	 assign: *(*llvm.used+11) = L_OBJC_PROP_NAME_ATTR_
  - no source -
-#0029:	 assign: *(*llvm.compiler.used+12) = OBJC_PROP_NAME_ATTR_.6
+#0029:	 assign: *(*llvm.used+12) = L_OBJC_PROP_NAME_ATTR_6
  - no source -
-#0030:	 assign: *(*llvm.compiler.used+13) = l_OBJC_$_PROP_LIST_MyObjectWithProperty
+#0030:	 assign: *(*llvm.used+13) = l_OBJC_$_PROP_LIST_MyObjectWithProperty
  - no source -
-#0031:	 assign: *(*llvm.compiler.used+14) = OBJC_LABEL_CLASS_$ <exit>
+#0031:	 assign: *(*llvm.used+14) = L_OBJC_LABEL_CLASS_$ <exit>
  - no source -
 

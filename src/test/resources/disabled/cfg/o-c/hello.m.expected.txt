@@ -56,19 +56,19 @@ CFG: CFRangeMake
 #0001:	 assign: *tmp1 = len
  - no source -
 #0002:	 assign: *(tmp2.field0) = *tmp0
-CFBase.h:463 range.location = loc;
+CFBase.h:414 range.location = loc;
 #0003:	 assign: *(tmp2.field1) = *tmp1
-CFBase.h:464 range.length = len;
+CFBase.h:415 range.length = len;
 #0004:	 assign: tmp3 = tmp4
-CFBase.h:465 return range;
+CFBase.h:416 return range;
 #0005:	 assign: tmp5 = tmp2
-CFBase.h:465 return range;
+CFBase.h:416 return range;
 #0006:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp3, tmp5, 16, 8, 0)
-CFBase.h:465 return range;
+CFBase.h:416 return range;
 #0007:	 assign: tmp6 = tmp4
-CFBase.h:465 return range;
+CFBase.h:416 return range;
 #0008:	 noop: opcode 'LLVMRet' not supported <exit>
-CFBase.h:465 return range;
+CFBase.h:416 return range;
 
 CFG: OSReadSwapInt16
 #0000:	 assign: *tmp0 = base
@@ -277,7 +277,7 @@ CFG: CFByteOrderGetCurrent
 CFByteOrder.h:25 int32_t byteOrder = OSHostByteOrder();
 #0001:	 assign: *tmp1 = tmp0
 CFByteOrder.h:25 int32_t byteOrder = OSHostByteOrder();
-#0002:	 switch: *tmp1 default #0003:	 1 -> #0004:	 2 -> #0005:	
+#0002:	 switch: *tmp1 default #0003:	 1 -> #0004:	 2 -> #0005:
 CFByteOrder.h:26 switch (byteOrder) {
 #0003:	 assign: *tmp2 = 0
 CFByteOrder.h:31 return CFByteOrderUnknown;
@@ -285,9 +285,9 @@ CFByteOrder.h:31 return CFByteOrderUnknown;
  - no source -
 #0007:	 noop: opcode 'LLVMRet' not supported <exit>
 CFByteOrder.h:41 }
-#0004:	 assign: *tmp2 = 1 next: #0006:	
+#0004:	 assign: *tmp2 = 1 next: #0006:
 CFByteOrder.h:27 case OSLittleEndian: return CFByteOrderLittleEndian;
-#0005:	 assign: *tmp2 = 2 next: #0006:	
+#0005:	 assign: *tmp2 = 2 next: #0006:
 CFByteOrder.h:28 case OSBigEndian: return CFByteOrderBigEndian;
 
 CFG: CFSwapInt16
@@ -509,60 +509,60 @@ CFG: CGPointMake
  - no source -
 #0001:	 assign: *tmp1 = y
  - no source -
-#0002:	 assign: *(tmp2.field0) = *tmp0
-CGGeometry.h:282 CGPoint p; p.x = x; p.y = y; return p;
-#0003:	 assign: *(tmp2.field1) = *tmp1
-CGGeometry.h:282 CGPoint p; p.x = x; p.y = y; return p;
+#0002:	 assign: *(tmp2.x) = *tmp0
+CGGeometry.h:273 CGPoint p; p.x = x; p.y = y; return p;
+#0003:	 assign: *(tmp2.y) = *tmp1
+CGGeometry.h:273 CGPoint p; p.x = x; p.y = y; return p;
 #0004:	 assign: tmp3 = tmp4
-CGGeometry.h:282 CGPoint p; p.x = x; p.y = y; return p;
+CGGeometry.h:273 CGPoint p; p.x = x; p.y = y; return p;
 #0005:	 assign: tmp5 = tmp2
-CGGeometry.h:282 CGPoint p; p.x = x; p.y = y; return p;
+CGGeometry.h:273 CGPoint p; p.x = x; p.y = y; return p;
 #0006:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp3, tmp5, 16, 8, 0)
-CGGeometry.h:282 CGPoint p; p.x = x; p.y = y; return p;
+CGGeometry.h:273 CGPoint p; p.x = x; p.y = y; return p;
 #0007:	 assign: tmp6 = tmp4
-CGGeometry.h:282 CGPoint p; p.x = x; p.y = y; return p;
+CGGeometry.h:273 CGPoint p; p.x = x; p.y = y; return p;
 #0008:	 noop: opcode 'LLVMRet' not supported <exit>
-CGGeometry.h:282 CGPoint p; p.x = x; p.y = y; return p;
+CGGeometry.h:273 CGPoint p; p.x = x; p.y = y; return p;
 
 CFG: CGSizeMake
 #0000:	 assign: *tmp0 = width
  - no source -
 #0001:	 assign: *tmp1 = height
  - no source -
-#0002:	 assign: *(tmp2.field0) = *tmp0
-CGGeometry.h:288 CGSize size; size.width = width; size.height = height; return size;
-#0003:	 assign: *(tmp2.field1) = *tmp1
-CGGeometry.h:288 CGSize size; size.width = width; size.height = height; return size;
+#0002:	 assign: *(tmp2.width) = *tmp0
+CGGeometry.h:279 CGSize size; size.width = width; size.height = height; return size;
+#0003:	 assign: *(tmp2.height) = *tmp1
+CGGeometry.h:279 CGSize size; size.width = width; size.height = height; return size;
 #0004:	 assign: tmp3 = tmp4
-CGGeometry.h:288 CGSize size; size.width = width; size.height = height; return size;
+CGGeometry.h:279 CGSize size; size.width = width; size.height = height; return size;
 #0005:	 assign: tmp5 = tmp2
-CGGeometry.h:288 CGSize size; size.width = width; size.height = height; return size;
+CGGeometry.h:279 CGSize size; size.width = width; size.height = height; return size;
 #0006:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp3, tmp5, 16, 8, 0)
-CGGeometry.h:288 CGSize size; size.width = width; size.height = height; return size;
+CGGeometry.h:279 CGSize size; size.width = width; size.height = height; return size;
 #0007:	 assign: tmp6 = tmp4
-CGGeometry.h:288 CGSize size; size.width = width; size.height = height; return size;
+CGGeometry.h:279 CGSize size; size.width = width; size.height = height; return size;
 #0008:	 noop: opcode 'LLVMRet' not supported <exit>
-CGGeometry.h:288 CGSize size; size.width = width; size.height = height; return size;
+CGGeometry.h:279 CGSize size; size.width = width; size.height = height; return size;
 
 CFG: CGVectorMake
 #0000:	 assign: *tmp0 = dx
  - no source -
 #0001:	 assign: *tmp1 = dy
  - no source -
-#0002:	 assign: *(tmp2.field0) = *tmp0
-CGGeometry.h:294 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
-#0003:	 assign: *(tmp2.field1) = *tmp1
-CGGeometry.h:294 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
+#0002:	 assign: *(tmp2.dx) = *tmp0
+CGGeometry.h:285 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
+#0003:	 assign: *(tmp2.dy) = *tmp1
+CGGeometry.h:285 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
 #0004:	 assign: tmp3 = tmp4
-CGGeometry.h:294 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
+CGGeometry.h:285 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
 #0005:	 assign: tmp5 = tmp2
-CGGeometry.h:294 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
+CGGeometry.h:285 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
 #0006:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp3, tmp5, 16, 8, 0)
-CGGeometry.h:294 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
+CGGeometry.h:285 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
 #0007:	 assign: tmp6 = tmp4
-CGGeometry.h:294 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
+CGGeometry.h:285 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
 #0008:	 noop: opcode 'LLVMRet' not supported <exit>
-CGGeometry.h:294 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
+CGGeometry.h:285 CGVector vector; vector.dx = dx; vector.dy = dy; return vector;
 
 CFG: CGRectMake
 #0000:	 assign: *tmp0 = x
@@ -573,20 +573,20 @@ CFG: CGRectMake
  - no source -
 #0003:	 assign: *tmp3 = height
  - no source -
-#0004:	 noop: can't index ((tmp0.field0).field0) by 0
-CGGeometry.h:301 rect.origin.x = x; rect.origin.y = y;
-#0005:	 noop: can't index ((tmp0.field0).field0) by 1
-CGGeometry.h:301 rect.origin.x = x; rect.origin.y = y;
-#0006:	 noop: can't index ((tmp0.field1).field0) by 0
-CGGeometry.h:302 rect.size.width = width; rect.size.height = height;
-#0007:	 noop: can't index ((tmp0.field1).field0) by 1
-CGGeometry.h:302 rect.size.width = width; rect.size.height = height;
+#0004:	 noop: can't index ((tmp0.origin).x) by 0
+CGGeometry.h:292 rect.origin.x = x; rect.origin.y = y;
+#0005:	 noop: can't index ((tmp0.origin).x) by 1
+CGGeometry.h:292 rect.origin.x = x; rect.origin.y = y;
+#0006:	 noop: can't index ((tmp0.size).width) by 0
+CGGeometry.h:293 rect.size.width = width; rect.size.height = height;
+#0007:	 noop: can't index ((tmp0.size).width) by 1
+CGGeometry.h:293 rect.size.width = width; rect.size.height = height;
 #0008:	 assign: tmp4 = agg.result
-CGGeometry.h:303 return rect;
+CGGeometry.h:294 return rect;
 #0009:	 assign: tmp5 = tmp6
-CGGeometry.h:303 return rect;
+CGGeometry.h:294 return rect;
 #0010:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp4, tmp5, 32, 8, 0) <exit>
-CGGeometry.h:303 return rect;
+CGGeometry.h:294 return rect;
 
 CFG: __CGPointEqualToPoint
 #0000:	 assign: tmp0 = tmp1
@@ -601,18 +601,18 @@ CFG: __CGPointEqualToPoint
  - no source -
 #0005:	 assign: *(tmp2.field1) = point2.coerce1
  - no source -
-#0006:	 assign: tmp4 = *(tmp1.field0) == *(tmp3.field0)
-CGGeometry.h:309 return point1.x == point2.x && point1.y == point2.y;
-#0007:	 if: tmp4 then #0008:	 else #0009:	
-CGGeometry.h:309 return point1.x == point2.x && point1.y == point2.y;
-#0008:	 assign: tmp5 = *(tmp1.field1) == *(tmp3.field1)
-CGGeometry.h:309 return point1.x == point2.x && point1.y == point2.y;
+#0006:	 assign: tmp4 = *(tmp1.x) == *(tmp3.x)
+CGGeometry.h:300 return point1.x == point2.x && point1.y == point2.y;
+#0007:	 if: tmp4 then #0008:	 else #0009:
+CGGeometry.h:300 return point1.x == point2.x && point1.y == point2.y;
+#0008:	 assign: tmp5 = *(tmp1.y) == *(tmp3.y)
+CGGeometry.h:300 return point1.x == point2.x && point1.y == point2.y;
 #0009:	 noop
  - no source -
 #0010:	 noop: opcode 'LLVMPHI' not supported
  - no source -
 #0011:	 noop: opcode 'LLVMRet' not supported <exit>
-CGGeometry.h:309 return point1.x == point2.x && point1.y == point2.y;
+CGGeometry.h:301 }
 
 CFG: __CGSizeEqualToSize
 #0000:	 assign: tmp0 = tmp1
@@ -627,42 +627,42 @@ CFG: __CGSizeEqualToSize
  - no source -
 #0005:	 assign: *(tmp2.field1) = size2.coerce1
  - no source -
-#0006:	 assign: tmp4 = *(tmp1.field0) == *(tmp3.field0)
-CGGeometry.h:316 return size1.width == size2.width && size1.height == size2.height;
-#0007:	 if: tmp4 then #0008:	 else #0009:	
-CGGeometry.h:316 return size1.width == size2.width && size1.height == size2.height;
-#0008:	 assign: tmp5 = *(tmp1.field1) == *(tmp3.field1)
-CGGeometry.h:316 return size1.width == size2.width && size1.height == size2.height;
+#0006:	 assign: tmp4 = *(tmp1.width) == *(tmp3.width)
+CGGeometry.h:307 return size1.width == size2.width && size1.height == size2.height;
+#0007:	 if: tmp4 then #0008:	 else #0009:
+CGGeometry.h:307 return size1.width == size2.width && size1.height == size2.height;
+#0008:	 assign: tmp5 = *(tmp1.height) == *(tmp3.height)
+CGGeometry.h:307 return size1.width == size2.width && size1.height == size2.height;
 #0009:	 noop
  - no source -
 #0010:	 noop: opcode 'LLVMPHI' not supported
  - no source -
 #0011:	 noop: opcode 'LLVMRet' not supported <exit>
-CGGeometry.h:316 return size1.width == size2.width && size1.height == size2.height;
+CGGeometry.h:308 }
 
 CFG: UCIsSurrogateHighCharacter
 #0000:	 assign: *tmp0 = character
  - no source -
 #0001:	 assign: tmp1 = *tmp0 & 64512
-TextCommon.h:1114 null
+TextCommon.h:1113 return ( ( character & 0xFC00 ) == kUCHighSurrogateRangeStart );
 #0002:	 assign: tmp2 = tmp1 == 55296
-TextCommon.h:1114 null
+TextCommon.h:1113 return ( ( character & 0xFC00 ) == kUCHighSurrogateRangeStart );
 #0003:	 noop: opcode 'LLVMTrunc' not supported
-TextCommon.h:1114 null
+TextCommon.h:1113 return ( ( character & 0xFC00 ) == kUCHighSurrogateRangeStart );
 #0004:	 noop: opcode 'LLVMRet' not supported <exit>
-TextCommon.h:1114 null
+TextCommon.h:1113 return ( ( character & 0xFC00 ) == kUCHighSurrogateRangeStart );
 
 CFG: UCIsSurrogateLowCharacter
 #0000:	 assign: *tmp0 = character
  - no source -
 #0001:	 assign: tmp1 = *tmp0 & 64512
-TextCommon.h:1125 null
+TextCommon.h:1124 return ( ( character & 0xFC00 ) == kUCLowSurrogateRangeStart );
 #0002:	 assign: tmp2 = tmp1 == 56320
-TextCommon.h:1125 null
+TextCommon.h:1124 return ( ( character & 0xFC00 ) == kUCLowSurrogateRangeStart );
 #0003:	 noop: opcode 'LLVMTrunc' not supported
-TextCommon.h:1125 null
+TextCommon.h:1124 return ( ( character & 0xFC00 ) == kUCLowSurrogateRangeStart );
 #0004:	 noop: opcode 'LLVMRet' not supported <exit>
-TextCommon.h:1125 null
+TextCommon.h:1124 return ( ( character & 0xFC00 ) == kUCLowSurrogateRangeStart );
 
 CFG: UCGetUnicodeScalarValueForSurrogatePair
 #0000:	 assign: *tmp0 = surrogateHigh
@@ -670,17 +670,17 @@ CFG: UCGetUnicodeScalarValueForSurrogatePair
 #0001:	 assign: *tmp1 = surrogateLow
  - no source -
 #0002:	 assign: tmp2 = *tmp0 - 55296
-TextCommon.h:1138 null
+TextCommon.h:1137 return ( (UnicodeScalarValue)( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000;
 #0003:	 assign: tmp3 = tmp2 << 10
-TextCommon.h:1138 null
+TextCommon.h:1137 return ( (UnicodeScalarValue)( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000;
 #0004:	 assign: tmp4 = *tmp1 - 56320
-TextCommon.h:1138 null
+TextCommon.h:1137 return ( (UnicodeScalarValue)( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000;
 #0005:	 assign: tmp5 = tmp3 + tmp4
-TextCommon.h:1138 null
+TextCommon.h:1137 return ( (UnicodeScalarValue)( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000;
 #0006:	 assign: tmp6 = tmp5 + 65536
-TextCommon.h:1138 null
+TextCommon.h:1137 return ( (UnicodeScalarValue)( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000;
 #0007:	 noop: opcode 'LLVMRet' not supported <exit>
-TextCommon.h:1138 null
+TextCommon.h:1137 return ( (UnicodeScalarValue)( surrogateHigh - kUCHighSurrogateRangeStart ) << 10 ) + ( surrogateLow - kUCLowSurrogateRangeStart ) + 0x0010000;
 
 CFG: SInt64ToWide
 #0000:	 assign: *tmp0 = s
@@ -721,7 +721,7 @@ Math64.h:1355 static inline SInt64 WideToSInt64(wide w) { SInt64 result = w.hi; 
 Math64.h:1355 static inline SInt64 WideToSInt64(wide w) { SInt64 result = w.hi; result = (result << 32) | w.lo; return result; }
 #0004:	 assign: tmp2 = *tmp3 << 32
 Math64.h:1355 static inline SInt64 WideToSInt64(wide w) { SInt64 result = w.hi; result = (result << 32) | w.lo; return result; }
-#0005:	 assign: tmp4 = tmp2 | *(tmp1.field0)
+#0005:	 assign: tmp4 = tmp2 | *(tmp1.lo)
 Math64.h:1355 static inline SInt64 WideToSInt64(wide w) { SInt64 result = w.hi; result = (result << 32) | w.lo; return result; }
 #0006:	 assign: *tmp3 = tmp4
 Math64.h:1355 static inline SInt64 WideToSInt64(wide w) { SInt64 result = w.hi; result = (result << 32) | w.lo; return result; }
@@ -761,11 +761,11 @@ CFG: UnsignedWideToUInt64
  - no source -
 #0001:	 assign: *tmp0 = uw.coerce
  - no source -
-#0002:	 assign: *tmp2 = *(tmp1.field1)
+#0002:	 assign: *tmp2 = *(tmp1.hi)
 Math64.h:1358 static inline UInt64 UnsignedWideToUInt64(UnsignedWide uw) { UInt64 result = uw.hi; result = (result << 32) | uw.lo; return result; }
 #0003:	 assign: tmp3 = *tmp2 << 32
 Math64.h:1358 static inline UInt64 UnsignedWideToUInt64(UnsignedWide uw) { UInt64 result = uw.hi; result = (result << 32) | uw.lo; return result; }
-#0004:	 assign: tmp4 = tmp3 | *(tmp1.field0)
+#0004:	 assign: tmp4 = tmp3 | *(tmp1.lo)
 Math64.h:1358 static inline UInt64 UnsignedWideToUInt64(UnsignedWide uw) { UInt64 result = uw.hi; result = (result << 32) | uw.lo; return result; }
 #0005:	 assign: *tmp2 = tmp4
 Math64.h:1358 static inline UInt64 UnsignedWideToUInt64(UnsignedWide uw) { UInt64 result = uw.hi; result = (result << 32) | uw.lo; return result; }
@@ -1138,9 +1138,9 @@ CFG: _mm_set1_ps
 
 CFG: _mm_setzero_ps
 #0000:	 noop: Can't parse LLVMVectorTypeKind
- - no source -
+xmmintrin.h:614 return (__m128){ 0, 0, 0, 0 };
 #0001:	 noop: opcode 'LLVMRet' not supported <exit>
- - no source -
+xmmintrin.h:614 return (__m128){ 0, 0, 0, 0 };
 
 CFG: _mm_cvtpi16_ps
 #0000:	 noop: Can't parse LLVMVectorTypeKind
@@ -1245,17 +1245,17 @@ CFG: __CGAffineTransformMake
  - no source -
 #0005:	 assign: *tmp5 = ty
  - no source -
-#0006:	 assign: *(tmp6.field0) = *tmp0
+#0006:	 assign: *(tmp6.a) = *tmp0
 CGAffineTransform.h:120 t.a = a; t.b = b; t.c = c; t.d = d; t.tx = tx; t.ty = ty;
-#0007:	 assign: *(tmp6.field1) = *tmp1
+#0007:	 assign: *(tmp6.b) = *tmp1
 CGAffineTransform.h:120 t.a = a; t.b = b; t.c = c; t.d = d; t.tx = tx; t.ty = ty;
-#0008:	 assign: *(tmp6.field2) = *tmp2
+#0008:	 assign: *(tmp6.c) = *tmp2
 CGAffineTransform.h:120 t.a = a; t.b = b; t.c = c; t.d = d; t.tx = tx; t.ty = ty;
-#0009:	 assign: *(tmp6.field3) = *tmp3
+#0009:	 assign: *(tmp6.d) = *tmp3
 CGAffineTransform.h:120 t.a = a; t.b = b; t.c = c; t.d = d; t.tx = tx; t.ty = ty;
-#0010:	 assign: *(tmp6.field4) = *tmp4
+#0010:	 assign: *(tmp6.tx) = *tmp4
 CGAffineTransform.h:120 t.a = a; t.b = b; t.c = c; t.d = d; t.tx = tx; t.ty = ty;
-#0011:	 assign: *(tmp6.field5) = *tmp5
+#0011:	 assign: *(tmp6.ty) = *tmp5
 CGAffineTransform.h:120 t.a = a; t.b = b; t.c = c; t.d = d; t.tx = tx; t.ty = ty;
 #0012:	 assign: tmp7 = agg.result
 CGAffineTransform.h:121 return t;
@@ -1271,25 +1271,25 @@ CFG: __CGPointApplyAffineTransform
  - no source -
 #0002:	 assign: *(tmp0.field1) = point.coerce1
  - no source -
-#0003:	 assign: tmp2 = *(t.field0) * *(tmp1.field0)
+#0003:	 assign: tmp2 = *(t.a) * *(tmp1.x)
 CGAffineTransform.h:129 p.x = (CGFloat)((double)t.a * point.x + (double)t.c * point.y + t.tx);
-#0004:	 assign: tmp3 = *(t.field2) * *(tmp1.field1)
+#0004:	 assign: tmp3 = *(t.c) * *(tmp1.y)
 CGAffineTransform.h:129 p.x = (CGFloat)((double)t.a * point.x + (double)t.c * point.y + t.tx);
 #0005:	 assign: tmp4 = tmp2 + tmp3
 CGAffineTransform.h:129 p.x = (CGFloat)((double)t.a * point.x + (double)t.c * point.y + t.tx);
-#0006:	 assign: tmp5 = tmp4 + *(t.field4)
+#0006:	 assign: tmp5 = tmp4 + *(t.tx)
 CGAffineTransform.h:129 p.x = (CGFloat)((double)t.a * point.x + (double)t.c * point.y + t.tx);
-#0007:	 assign: *(tmp6.field0) = tmp5
+#0007:	 assign: *(tmp6.x) = tmp5
 CGAffineTransform.h:129 p.x = (CGFloat)((double)t.a * point.x + (double)t.c * point.y + t.tx);
-#0008:	 assign: tmp7 = *(t.field1) * *(tmp1.field0)
+#0008:	 assign: tmp7 = *(t.b) * *(tmp1.x)
 CGAffineTransform.h:130 p.y = (CGFloat)((double)t.b * point.x + (double)t.d * point.y + t.ty);
-#0009:	 assign: tmp8 = *(t.field3) * *(tmp1.field1)
+#0009:	 assign: tmp8 = *(t.d) * *(tmp1.y)
 CGAffineTransform.h:130 p.y = (CGFloat)((double)t.b * point.x + (double)t.d * point.y + t.ty);
 #0010:	 assign: tmp9 = tmp7 + tmp8
 CGAffineTransform.h:130 p.y = (CGFloat)((double)t.b * point.x + (double)t.d * point.y + t.ty);
-#0011:	 assign: tmp10 = tmp9 + *(t.field5)
+#0011:	 assign: tmp10 = tmp9 + *(t.ty)
 CGAffineTransform.h:130 p.y = (CGFloat)((double)t.b * point.x + (double)t.d * point.y + t.ty);
-#0012:	 assign: *(tmp6.field1) = tmp10
+#0012:	 assign: *(tmp6.y) = tmp10
 CGAffineTransform.h:130 p.y = (CGFloat)((double)t.b * point.x + (double)t.d * point.y + t.ty);
 #0013:	 assign: tmp11 = tmp12
 CGAffineTransform.h:131 return p;
@@ -1309,21 +1309,21 @@ CFG: __CGSizeApplyAffineTransform
  - no source -
 #0002:	 assign: *(tmp0.field1) = size.coerce1
  - no source -
-#0003:	 assign: tmp2 = *(t.field0) * *(tmp1.field0)
+#0003:	 assign: tmp2 = *(t.a) * *(tmp1.width)
 CGAffineTransform.h:139 s.width = (CGFloat)((double)t.a * size.width + (double)t.c * size.height);
-#0004:	 assign: tmp3 = *(t.field2) * *(tmp1.field1)
+#0004:	 assign: tmp3 = *(t.c) * *(tmp1.height)
 CGAffineTransform.h:139 s.width = (CGFloat)((double)t.a * size.width + (double)t.c * size.height);
 #0005:	 assign: tmp4 = tmp2 + tmp3
 CGAffineTransform.h:139 s.width = (CGFloat)((double)t.a * size.width + (double)t.c * size.height);
-#0006:	 assign: *(tmp5.field0) = tmp4
+#0006:	 assign: *(tmp5.width) = tmp4
 CGAffineTransform.h:139 s.width = (CGFloat)((double)t.a * size.width + (double)t.c * size.height);
-#0007:	 assign: tmp6 = *(t.field1) * *(tmp1.field0)
+#0007:	 assign: tmp6 = *(t.b) * *(tmp1.width)
 CGAffineTransform.h:140 s.height = (CGFloat)((double)t.b * size.width + (double)t.d * size.height);
-#0008:	 assign: tmp7 = *(t.field3) * *(tmp1.field1)
+#0008:	 assign: tmp7 = *(t.d) * *(tmp1.height)
 CGAffineTransform.h:140 s.height = (CGFloat)((double)t.b * size.width + (double)t.d * size.height);
 #0009:	 assign: tmp8 = tmp6 + tmp7
 CGAffineTransform.h:140 s.height = (CGFloat)((double)t.b * size.width + (double)t.d * size.height);
-#0010:	 assign: *(tmp5.field1) = tmp8
+#0010:	 assign: *(tmp5.height) = tmp8
 CGAffineTransform.h:140 s.height = (CGFloat)((double)t.b * size.width + (double)t.d * size.height);
 #0011:	 assign: tmp9 = tmp10
 CGAffineTransform.h:141 return s;
@@ -1340,6 +1340,70 @@ CFG: __NDR_convert__mig_reply_error_t
 #0000:	 assign: *tmp0 = x <exit>
  - no source -
 
+CFG: OSAtomicIncrement32
+#0000:	 assign: *tmp0 = __theValue
+ - no source -
+#0001:	 call: tmp1 = OSAtomicAdd32(1, *tmp0)
+OSAtomic.h:149 { return OSAtomicAdd32(  1, __theValue); }
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+OSAtomic.h:149 { return OSAtomicAdd32(  1, __theValue); }
+
+CFG: OSAtomicIncrement32Barrier
+#0000:	 assign: *tmp0 = __theValue
+ - no source -
+#0001:	 call: tmp1 = OSAtomicAdd32Barrier(1, *tmp0)
+OSAtomic.h:153 { return OSAtomicAdd32Barrier(  1, __theValue); }
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+OSAtomic.h:153 { return OSAtomicAdd32Barrier(  1, __theValue); }
+
+CFG: OSAtomicDecrement32
+#0000:	 assign: *tmp0 = __theValue
+ - no source -
+#0001:	 call: tmp1 = OSAtomicAdd32(-1, *tmp0)
+OSAtomic.h:157 { return OSAtomicAdd32( -1, __theValue); }
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+OSAtomic.h:157 { return OSAtomicAdd32( -1, __theValue); }
+
+CFG: OSAtomicDecrement32Barrier
+#0000:	 assign: *tmp0 = __theValue
+ - no source -
+#0001:	 call: tmp1 = OSAtomicAdd32Barrier(-1, *tmp0)
+OSAtomic.h:161 { return OSAtomicAdd32Barrier( -1, __theValue); }
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+OSAtomic.h:161 { return OSAtomicAdd32Barrier( -1, __theValue); }
+
+CFG: OSAtomicIncrement64
+#0000:	 assign: *tmp0 = __theValue
+ - no source -
+#0001:	 call: tmp1 = OSAtomicAdd64(1, *tmp0)
+OSAtomic.h:228 { return OSAtomicAdd64(  1, __theValue); }
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+OSAtomic.h:228 { return OSAtomicAdd64(  1, __theValue); }
+
+CFG: OSAtomicIncrement64Barrier
+#0000:	 assign: *tmp0 = __theValue
+ - no source -
+#0001:	 call: tmp1 = OSAtomicAdd64Barrier(1, *tmp0)
+OSAtomic.h:232 { return OSAtomicAdd64Barrier(  1, __theValue); }
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+OSAtomic.h:232 { return OSAtomicAdd64Barrier(  1, __theValue); }
+
+CFG: OSAtomicDecrement64
+#0000:	 assign: *tmp0 = __theValue
+ - no source -
+#0001:	 call: tmp1 = OSAtomicAdd64(-1, *tmp0)
+OSAtomic.h:236 { return OSAtomicAdd64( -1, __theValue); }
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+OSAtomic.h:236 { return OSAtomicAdd64( -1, __theValue); }
+
+CFG: OSAtomicDecrement64Barrier
+#0000:	 assign: *tmp0 = __theValue
+ - no source -
+#0001:	 call: tmp1 = OSAtomicAdd64Barrier(-1, *tmp0)
+OSAtomic.h:240 { return OSAtomicAdd64Barrier( -1, __theValue); }
+#0002:	 noop: opcode 'LLVMRet' not supported <exit>
+OSAtomic.h:240 { return OSAtomicAdd64Barrier( -1, __theValue); }
+
 CFG: main
 #0000:	 assign: *tmp0 = 0
  - no source -
@@ -1347,15 +1411,15 @@ CFG: main
  - no source -
 #0002:	 assign: *tmp2 = argv
  - no source -
-#0003:	 assign: tmp3 = *OBJC_CLASSLIST_REFERENCES_$_
+#0003:	 assign: tmp3 = *L_OBJC_CLASSLIST_REFERENCES_$_
 hello.m:5 NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-#0004:	 call: tmp4 = objc_msgSend(tmp3, *OBJC_SELECTOR_REFERENCES_.2)
+#0004:	 call: tmp4 = objc_msgSend(tmp3, *L_OBJC_SELECTOR_REFERENCES_2)
 hello.m:5 NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 #0005:	 assign: tmp5 = tmp4
 hello.m:5 NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 #0006:	 assign: tmp6 = tmp5
 hello.m:5 NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-#0007:	 call: tmp7 = objc_msgSend(tmp6, *OBJC_SELECTOR_REFERENCES_.4)
+#0007:	 call: tmp7 = objc_msgSend(tmp6, *L_OBJC_SELECTOR_REFERENCES_4)
 hello.m:5 NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 #0008:	 assign: tmp8 = tmp7
 hello.m:5 NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
@@ -1365,100 +1429,50 @@ hello.m:5 NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 hello.m:6 NSLog (@"Hello, World!");
 #0011:	 assign: tmp10 = *tmp9
 hello.m:7 [pool drain];
-#0012:	 call: tmp11 = objc_msgSend(tmp10, *OBJC_SELECTOR_REFERENCES_.6)
+#0012:	 call: tmp11 = objc_msgSend(tmp10, *L_OBJC_SELECTOR_REFERENCES_6)
 hello.m:7 [pool drain];
 #0013:	 noop: opcode 'LLVMRet' not supported <exit>
 hello.m:8 return 0;
 
 CFG: <module init>
-#0000:	 assign: *kCFNotFound = -1
+#0000:	 assign: *L_OBJC_METH_VAR_NAME_ = "autorelease"
  - no source -
-#0001:	 assign: *NSNotFound = 9223372036854775807
+#0001:	 assign: *L_OBJC_SELECTOR_REFERENCES_ = L_OBJC_METH_VAR_NAME_
  - no source -
-#0002:	 assign: *OBJC_METH_VAR_NAME_ = "autorelease"
+#0002:	 assign: *L_OBJC_CLASSLIST_REFERENCES_$_ = OBJC_CLASS_$_NSAutoreleasePool
  - no source -
-#0003:	 assign: *OBJC_SELECTOR_REFERENCES_ = OBJC_METH_VAR_NAME_
+#0003:	 assign: *L_OBJC_METH_VAR_NAME_1 = "alloc"
  - no source -
-#0004:	 assign: *NSHashTableStrongMemory = 0
+#0004:	 assign: *L_OBJC_SELECTOR_REFERENCES_2 = L_OBJC_METH_VAR_NAME_1
  - no source -
-#0005:	 assign: *NSHashTableZeroingWeakMemory = 1
+#0005:	 assign: *L_OBJC_METH_VAR_NAME_3 = "init"
  - no source -
-#0006:	 assign: *NSHashTableCopyIn = 65536
+#0006:	 assign: *L_OBJC_SELECTOR_REFERENCES_4 = L_OBJC_METH_VAR_NAME_3
  - no source -
-#0007:	 assign: *NSHashTableObjectPointerPersonality = 512
+#0007:	 assign: *.str = "Hello, World!"
  - no source -
-#0008:	 assign: *NSHashTableWeakMemory = 5
+#0008:	 assign: *(*_unnamed_cfstring_.field0) = __CFConstantStringClassReference
  - no source -
-#0009:	 assign: *NSMapTableStrongMemory = 0
+#0009:	 assign: *L_OBJC_METH_VAR_NAME_5 = "drain"
  - no source -
-#0010:	 assign: *NSMapTableZeroingWeakMemory = 1
+#0010:	 assign: *L_OBJC_SELECTOR_REFERENCES_6 = L_OBJC_METH_VAR_NAME_5
  - no source -
-#0011:	 assign: *NSMapTableCopyIn = 65536
+#0011:	 assign: **llvm.used = L_OBJC_METH_VAR_NAME_
  - no source -
-#0012:	 assign: *NSMapTableObjectPointerPersonality = 512
+#0012:	 assign: *(*llvm.used+1) = L_OBJC_SELECTOR_REFERENCES_
  - no source -
-#0013:	 assign: *NSMapTableWeakMemory = 5
+#0013:	 assign: *(*llvm.used+2) = L_OBJC_CLASSLIST_REFERENCES_$_
  - no source -
-#0014:	 assign: *NSOperationQueueDefaultMaxConcurrentOperationCount = -1
+#0014:	 assign: *(*llvm.used+3) = L_OBJC_METH_VAR_NAME_1
  - no source -
-#0015:	 assign: *NSUndoCloseGroupingRunLoopOrdering = 350000
+#0015:	 assign: *(*llvm.used+4) = L_OBJC_SELECTOR_REFERENCES_2
  - no source -
-#0016:	 assign: *NSNotificationDeliverImmediately = 1
+#0016:	 assign: *(*llvm.used+5) = L_OBJC_METH_VAR_NAME_3
  - no source -
-#0017:	 assign: *NSNotificationPostToAllSessions = 2
+#0017:	 assign: *(*llvm.used+6) = L_OBJC_SELECTOR_REFERENCES_4
  - no source -
-#0018:	 assign: *kCGFontIndexMax = -2
+#0018:	 assign: *(*llvm.used+7) = L_OBJC_METH_VAR_NAME_5
  - no source -
-#0019:	 assign: *kCGFontIndexInvalid = -1
- - no source -
-#0020:	 assign: *kCGGlyphMax = -2
- - no source -
-#0021:	 assign: *kAXValueCGPointType = 1
- - no source -
-#0022:	 assign: *kAXValueCGSizeType = 2
- - no source -
-#0023:	 assign: *kAXValueCGRectType = 3
- - no source -
-#0024:	 assign: *kAXValueCFRangeType = 4
- - no source -
-#0025:	 assign: *kAXValueAXErrorType = 5
- - no source -
-#0026:	 assign: *kAXValueIllegalType = 0
- - no source -
-#0027:	 assign: *OBJC_CLASSLIST_REFERENCES_$_ = OBJC_CLASS_$_NSAutoreleasePool
- - no source -
-#0028:	 assign: *OBJC_METH_VAR_NAME_.1 = "alloc"
- - no source -
-#0029:	 assign: *OBJC_SELECTOR_REFERENCES_.2 = OBJC_METH_VAR_NAME_.1
- - no source -
-#0030:	 assign: *OBJC_METH_VAR_NAME_.3 = "init"
- - no source -
-#0031:	 assign: *OBJC_SELECTOR_REFERENCES_.4 = OBJC_METH_VAR_NAME_.3
- - no source -
-#0032:	 assign: *.str = "Hello, World!"
- - no source -
-#0033:	 assign: *(*_unnamed_cfstring_.field0) = __CFConstantStringClassReference
- - no source -
-#0034:	 assign: *OBJC_METH_VAR_NAME_.5 = "drain"
- - no source -
-#0035:	 assign: *OBJC_SELECTOR_REFERENCES_.6 = OBJC_METH_VAR_NAME_.5
- - no source -
-#0036:	 assign: **llvm.compiler.used = OBJC_METH_VAR_NAME_
- - no source -
-#0037:	 assign: *(*llvm.compiler.used+1) = OBJC_SELECTOR_REFERENCES_
- - no source -
-#0038:	 assign: *(*llvm.compiler.used+2) = OBJC_CLASSLIST_REFERENCES_$_
- - no source -
-#0039:	 assign: *(*llvm.compiler.used+3) = OBJC_METH_VAR_NAME_.1
- - no source -
-#0040:	 assign: *(*llvm.compiler.used+4) = OBJC_SELECTOR_REFERENCES_.2
- - no source -
-#0041:	 assign: *(*llvm.compiler.used+5) = OBJC_METH_VAR_NAME_.3
- - no source -
-#0042:	 assign: *(*llvm.compiler.used+6) = OBJC_SELECTOR_REFERENCES_.4
- - no source -
-#0043:	 assign: *(*llvm.compiler.used+7) = OBJC_METH_VAR_NAME_.5
- - no source -
-#0044:	 assign: *(*llvm.compiler.used+8) = OBJC_SELECTOR_REFERENCES_.6 <exit>
+#0019:	 assign: *(*llvm.used+8) = L_OBJC_SELECTOR_REFERENCES_6 <exit>
  - no source -
 
