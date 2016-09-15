@@ -4,10 +4,10 @@
 set -e
 
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-    apt-get install llvm # main dependency
-    apt-get install swig # wrappers generator
+    sudo apt-get install llvm # main dependency
+    sudo apt-get install swig # wrappers generator
 
-    apt-get install clang
+    sudo apt-get install clang
 fi
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
