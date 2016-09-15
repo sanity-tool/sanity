@@ -5,6 +5,7 @@
 #include "llvm-c/Support.h"
 #include "llvm-c/IRReader.h"
 
+#line 8 "bitreader.i"
 int SAGetInstructionDebugLocLine(LLVMValueRef instruction);
 unsigned SAGetDebugMetadataVersionFromModule(LLVMModuleRef module);
 
@@ -49,6 +50,7 @@ const char *SAGetInstructionDebugLocScopeFile(LLVMValueRef instruction);
 
 const char *SAGetMDString(LLVMValueRef value);
 
+#line 248 "bitreader_wrap.c"
 %}
 
 %contract LLVMGetOperand (LLVMValueRef Val, int Index) {
