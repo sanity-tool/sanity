@@ -20,8 +20,8 @@ public class LineUtils implements DisposableBean {
 
     public static String dumpLine(File file, int lineNumber) {
         return CACHE.computeIfAbsent(new Pair(file, lineNumber), key -> {
-            try {
-                LineNumberReader reader = new LineNumberReader(new FileReader(file));
+            try (FileReader in = new FileReader(file);
+                 LineNumberReader reader = new LineNumberReader(in)) {
                 String line;
                 do {
                     line = reader.readLine();
