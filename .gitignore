@@ -2,3 +2,5 @@ sanity.iml
 .idea/
 
 target/
+
+*.gcov

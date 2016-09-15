@@ -69,8 +69,7 @@
                     <includes>
                         <include>**/AllTests.class</include>
                     </includes>
-                    <argLine>${argLine}</argLine>
-                    <argLine>-Djava.library.path=${basedir}/target/native/shared</argLine>
+                    <argLine>${argLine} -Djava.library.path=${basedir}/target/native/shared</argLine>
                 </configuration>
             </plugin>
             <plugin>

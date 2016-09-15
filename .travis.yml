@@ -29,6 +29,9 @@ before_install:
   - brew install crosstool-ng # to replace undesired function from llvm core
   - brew install swig # wrappers generator
 
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
 after_failure:
   - diff target/failures/expected target/failures/actual
   - cat hs_err*.log 
