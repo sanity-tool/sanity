@@ -12,6 +12,7 @@ case `uname` in
         CXX=g++
         LD=g++
         OBJCOPY=objcopy
+        LLVM_CONFIG=/home/travis/build/okutane/sanity/clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-14.04/bin/llvm-config
 
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
 

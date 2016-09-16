@@ -8,15 +8,10 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     wget http://llvm.org/releases/3.9.0/clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-14.04.tar.xz
     tar xf clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-14.04.tar.xz
 
-    sudo apt-add-repository "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.8 main"
-
-    wget -O - http://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
+    sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
     sudo apt-get update
-    sudo apt-get install clang-3.8 clang-3.8-doc libclang-common-3.8-dev libclang-3.8-dev libclang1-3.8 libclang1-3.8-dbg libllvm-3.8-ocaml-dev libllvm3.8 libllvm3.8-dbg lldb-3.8 llvm-3.8 llvm-3.8-dev llvm-3.8-doc llvm-3.8-examples llvm-3.8-runtime clang-format-3.8 python-clang-3.8 lldb-3.8-dev
-    #sudo apt-get install llvm # main dependency
-    sudo apt-get install swig # wrappers generator
-
-    #sudo apt-get install clang
+    sudo apt-get install libstdc++6-4.7-dev
+    sudo apt-get install swig
 fi
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
