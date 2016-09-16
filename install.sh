@@ -1,9 +1,13 @@
 #!/bin/bash
 
 # Exit on failure
-set -e
+#set -e
 
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+    pwd
+    wget http://llvm.org/releases/3.9.0/clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-14.04.tar.xz
+    tar xf clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-14.04.tar.xz
+
     sudo apt-add-repository "deb http://llvm.org/apt/trusty/ llvm-toolchain-trusty-3.8 main"
 
     wget -O - http://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
