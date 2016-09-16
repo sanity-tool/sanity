@@ -56,7 +56,7 @@ public class SourceRangeFactory {
             }
             return null;
         } catch (Exception e) {
-            return null;
+            throw e;
         }
     }
 
