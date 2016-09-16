@@ -28,7 +28,7 @@ public class SourceRangeFactory implements ParserListener {
         if (versionByte == 3) {
             if (line != -1) {
                 String filename = bitreader.SAGetInstructionDebugLocScopeFile(instruction);
-                return new SourceRange(filename, line);
+                return getSourceRange(filename, line);
             }
 
             return null;
@@ -46,13 +46,21 @@ public class SourceRangeFactory implements ParserListener {
                 String filename = bitreader.getMDString(bitreader.LLVMGetOperand(pair, 0));
                 String directory = bitreader.getMDString(bitreader.LLVMGetOperand(pair, 1));
                 if (new File(filename).isAbsolute()) {
-                    return new SourceRange(filename, line);
+                    return getSourceRange(filename, line);
                 }
-                return new SourceRange(new File(directory, filename).getAbsolutePath(), line);
+                return getSourceRange(new File(directory, filename).getAbsolutePath(), line);
             }
         }
 
         return null;
+    }
+
+    private SourceRange getSourceRange(String filename, int line) {
+        if (!new File(filename).exists()) {
+            return null;
+        }
+
+        return new SourceRange(filename, line);
     }
 
     private SWIGTYPE_p_LLVMOpaqueValue getPair(SWIGTYPE_p_LLVMOpaqueValue node) {

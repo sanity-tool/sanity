@@ -34,6 +34,10 @@ matrix:
       env:
       - LANG=IR
       - LLVM_AS_BIN=llvm-as-3.8
+    - os: linux
+      jdk: oraclejdk8
+      env:
+      - LANG=Rust
 
     - os: osx
       osx_image: xcode8

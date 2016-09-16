@@ -11,5 +11,7 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     brew install cmake || brew upgrade cmake || echo warning ^
     brew install swig # wrappers generator
 
+    # tested languages
+    brew install rust
     [ -z $EXTRA_BREW ] || brew install $EXTRA_BREW
 fi

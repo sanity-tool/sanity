@@ -28,7 +28,7 @@ public class LineUtils implements DisposableBean {
                 } while (reader.getLineNumber() < lineNumber);
                 return line.trim();
             } catch (IOException e) {
-                throw new IllegalStateException("couldn't dump " + lineNumber + " line of " + file);
+                throw new IllegalStateException("couldn't dump " + lineNumber + " line of " + file, e);
             }
         });
     }
