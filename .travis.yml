@@ -37,4 +37,4 @@ after_failure:
   - cat hs_err*.log 
 
 notifications:
-  slack: staticanalyzers:$SLACK_TOKEN
+  slack: staticanalyzers:8CXJTuMbcNHE7COl24xZuz9G
