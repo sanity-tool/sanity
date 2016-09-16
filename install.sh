@@ -8,10 +8,13 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
     wget http://llvm.org/releases/3.9.0/clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-14.04.tar.xz
     tar xf clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-14.04.tar.xz
 
+    wget https://github.com/swig/swig/archive/rel-3.0.10.tar.gz
+    tar xf rel-3.0.10.tar.gz
+    (cd rel-3.0.10; ./configure; make install)
+
     sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
     sudo apt-get update
     sudo apt-get install libstdc++6-4.7-dev
-    sudo apt-get install swig
 fi
 
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
