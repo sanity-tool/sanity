@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Exit on failure
+# Exit on failure # todo restore
 #set -e
 
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
@@ -10,7 +10,7 @@ if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
 
     wget https://github.com/swig/swig/archive/rel-3.0.10.tar.gz
     tar xf rel-3.0.10.tar.gz
-    (cd rel-3.0.10; ./configure; make install)
+    (cd swig-rel-3.0.10 && ./autogen.sh && mkdir -p build/build && cd build/build && ../../configure && make && sudo make install)
 
     sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
     sudo apt-get update
