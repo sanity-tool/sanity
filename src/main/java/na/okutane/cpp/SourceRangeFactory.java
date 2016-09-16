@@ -24,7 +24,7 @@ public class SourceRangeFactory {
             int line = bitreader.SAGetInstructionDebugLocLine(instruction);
             if (line != -1) {
                 String filename = null;
-                for (int i = 0; i < 100; i++) { // todo remove
+                for (int i = 0; i < 10000; i++) { // todo remove
                     filename = bitreader.SAGetInstructionDebugLocScopeFile(instruction);
                     if (!new File(filename).exists()) {
                         throw new IllegalStateException("corrupted source range: " + filename);

@@ -35,3 +35,6 @@ after_success:
 after_failure:
   - diff target/failures/expected target/failures/actual
   - cat hs_err*.log 
+
+notifications:
+  slack: staticanalyzers:$SLACK_TOKEN
