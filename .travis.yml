@@ -37,4 +37,5 @@ after_failure:
   - cat hs_err*.log 
 
 notifications:
+  email: false
   slack: staticanalyzers:8CXJTuMbcNHE7COl24xZuz9G

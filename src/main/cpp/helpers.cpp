@@ -77,7 +77,9 @@ int SAGetInstructionDebugLocLine(LLVMValueRef instruction) {
     return loc->getLine();
 }
 
+
 const char *SAGetInstructionDebugLocScopeFile(LLVMValueRef instruction) {
+    static std::string result; // todo make thread-safe
 
     const DebugLoc &loc = unwrap<Instruction>(instruction)->getDebugLoc();
     if (!loc) {
@@ -87,7 +89,9 @@ const char *SAGetInstructionDebugLocScopeFile(LLVMValueRef instruction) {
         return 0;
     }
 
-    return loc->getScope()->getFilename().str().c_str();
+    result = loc->getScope()->getFilename().str();
+
+    return result.c_str();
 }
 
 }
