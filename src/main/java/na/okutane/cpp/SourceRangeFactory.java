@@ -23,7 +23,13 @@ public class SourceRangeFactory {
         try {
             int line = bitreader.SAGetInstructionDebugLocLine(instruction);
             if (line != -1) {
-                String filename = bitreader.SAGetInstructionDebugLocScopeFile(instruction);
+                String filename = null;
+                for (int i = 0; i < 100; i++) { // todo remove
+                    filename = bitreader.SAGetInstructionDebugLocScopeFile(instruction);
+                    if (!new File(filename).exists()) {
+                        throw new IllegalStateException("corrupted source range: " + filename);
+                    }
+                }
                 if (filename != null) {
                     return new SourceRange(filename, line);
                 }
