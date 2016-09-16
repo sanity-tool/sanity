@@ -78,16 +78,16 @@ int SAGetInstructionDebugLocLine(LLVMValueRef instruction) {
 }
 
 const char *SAGetInstructionDebugLocScopeFile(LLVMValueRef instruction) {
+    static std::string result;
 
     const DebugLoc &loc = unwrap<Instruction>(instruction)->getDebugLoc();
-    if (!loc) {
-        return 0;
-    }
-    if (!loc->getScope()) {
+    if (!loc || !loc->getScope()) {
         return 0;
     }
 
-    return loc->getScope()->getFilename().str().c_str();
+    result = loc->getScope()->getFilename().str();
+
+    return result.c_str();
 }
 
 }

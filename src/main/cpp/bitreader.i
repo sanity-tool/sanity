@@ -81,6 +81,8 @@ LLVMRealPredicate GetFCmpPredicate(LLVMValueRef Inst);
 double GetConstantFPDoubleValue(LLVMValueRef ConstantVal);
 
 int SAGetInstructionDebugLocLine(LLVMValueRef instruction);
+
+%javamethodmodifiers SAGetInstructionDebugLocScopeFile "public synchronized";
 const char *SAGetInstructionDebugLocScopeFile(LLVMValueRef instruction);
 
 %pragma(java) jniclasscode=%{
