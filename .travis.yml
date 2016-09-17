@@ -1,9 +1,5 @@
 sudo: required
 
-language: java
-jdk:
-  - oraclejdk8
-
 matrix:
   allow_failures:
     - os: linux
@@ -36,6 +32,13 @@ matrix:
     #  osx_image: beta-xcode6.2
     #- os: osx
     #  osx_image: beta-xcode6.1
+
+language: java
+
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
 
 before_install:
   - source install.sh
