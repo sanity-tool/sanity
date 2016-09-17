@@ -5,6 +5,9 @@ matrix:
     - os: linux
   include:
     - os: linux
+      env:
+      - REAL_LLVM=1
+      - CLANG_BIN=/home/travis/build/okutane/sanity/clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-14.04/bin/clang
     #- os: osx
     #  osx_image: xcode8 # todo fix it if it's fixable, last result: jvm crash in jni code
     - os: osx
