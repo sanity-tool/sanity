@@ -48,7 +48,7 @@ esac
 echo `$LLVM_CONFIG --version`
 
 CPPFLAGS=`$LLVM_CONFIG --cppflags`
-LDFLAGS="`$LLVM_CONFIG --ldflags` -L/usr/local/opt/libffi/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
+LDFLAGS="`$LLVM_CONFIG --ldflags` -L/usr/local/opt/libffi/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib $LDFLAGS"
 
 LLVM_INCLUDE="-I`$LLVM_CONFIG --includedir`"
 
