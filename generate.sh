@@ -11,9 +11,9 @@ case `uname` in
         gcc -v || no gcc
         gcc-4.9 -v || no gcc
 
-        CC=gcc
-        CXX=g++
-        LD=g++
+        CC=gcc-4.9
+        CXX=g++-4.9
+        LD=g++-4.9
         OBJCOPY=objcopy
         LLVM_CONFIG=/home/travis/build/okutane/sanity/clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-14.04/bin/llvm-config
 
