@@ -3,6 +3,7 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
+      - llvm-toolchain-precise-3.8
     packages:
       - oracle-java8-installer
       - oracle-java8-set-default
@@ -11,6 +12,11 @@ addons:
       - gcc-4.9
       - g++-4.9
       - swig
+      - clang-3.8
+      - libllvm3.8
+      - llvm-3.8
+      - llvm-3.8-dev
+      - llvm-3.8-runtime
 
 matrix:
   allow_failures:

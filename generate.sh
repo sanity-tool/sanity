@@ -15,7 +15,9 @@ case `uname` in
         CXX=g++-4.9
         LD=g++-4.9
         OBJCOPY=objcopy
-        LLVM_CONFIG=/home/travis/build/okutane/sanity/clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-14.04/bin/llvm-config
+
+
+        #LLVM_CONFIG=/home/travis/build/okutane/sanity/clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-14.04/bin/llvm-config
 
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
 
@@ -77,7 +79,7 @@ if [ -z "$REAL_LLVM" ]; then
     # remove logic from llvm library.
     cp /usr/local/Cellar/llvm/3.8.1/lib/libLLVMCore.a $OBJ_DIR/libLLVMCore.a
     chmod +w $OBJ_DIR/libLLVMCore.a
-    $OBJCOPY -v --target mach-o-x86-64 --strip-symbol __ZN4llvm16UpgradeDebugInfoERNS_6ModuleE $OBJ_DIR/libLLVMCore.a
+    $OBJCOPY -v --strip-symbol __ZN4llvm16UpgradeDebugInfoERNS_6ModuleE $OBJ_DIR/libLLVMCore.a
 
     # link against "hacked" library and replacement code.
     LIBS="${LIBS/-lLLVMCore/} $OBJ_DIR/libLLVMCore.a $OBJ_DIR/debughack.o"
