@@ -35,11 +35,6 @@ matrix:
 
 language: java
 
-addons:
-  apt:
-    packages:
-      - oracle-java8-installer
-
 before_install:
   - source install.sh
 
