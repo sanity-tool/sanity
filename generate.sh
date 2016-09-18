@@ -16,8 +16,7 @@ case `uname` in
         LD=g++-4.9
         OBJCOPY=objcopy
 
-
-        #LLVM_CONFIG=/home/travis/build/okutane/sanity/clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-14.04/bin/llvm-config
+        LLVM_CONFIG=llvm-config-3.8
 
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
 
