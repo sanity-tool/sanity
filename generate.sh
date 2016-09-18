@@ -6,6 +6,8 @@ set -e
 LLVM_CONFIG=llvm-config
 $LLVM_CONFIG --version >/dev/null 2>&1 || LLVM_CONFIG=/usr/local/opt/llvm/bin/llvm-config
 
+LLVM_LIBS="irreader transformutils"
+
 case `uname` in
     Linux)
         gcc -v || no gcc
@@ -22,7 +24,8 @@ case `uname` in
 
         DLL_NAME=libirreader.so
 
-        LD_FLAGS="-Wl,-z,defs"
+        LIBS="`$LLVM_CONFIG --libfiles $LLVM_LIBS` -ltermcap"
+        REAL_LLVM=1
     ;;
     Darwin)
         CC=clang
@@ -33,6 +36,8 @@ case `uname` in
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin/"
 
         DLL_NAME=libirreader.jnilib
+
+        LIBS="`$LLVM_CONFIG --libs $LLVM_LIBS` -ltermcap"
     ;;
     *)
         echo Unknown environment: `uname`
@@ -43,13 +48,9 @@ esac
 echo `$LLVM_CONFIG --version`
 
 CPPFLAGS=`$LLVM_CONFIG --cppflags`
-LDFLAGS="`$LLVM_CONFIG --ldflags` -L/usr/local/opt/libffi/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib $LDFLAGS"
-
-# todo reduce to only necessary libs.
-LIBS="`$LLVM_CONFIG --libs irreader transformutils` -ltermcap"
+LDFLAGS="`$LLVM_CONFIG --ldflags` -L/usr/local/opt/libffi/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
 
 LLVM_INCLUDE="-I`$LLVM_CONFIG --includedir`"
-LLVM_LIBS=
 
 DEBUG="-g -coverage"
 
