@@ -25,7 +25,7 @@ case `uname` in
         DLL_NAME=libirreader.so
 
         LIBS="`$LLVM_CONFIG --libfiles $LLVM_LIBS` -ltermcap"
-        LD_FLAGS="-Wl,-z,defs"
+        LD_FLAGS="-Wl,-z,defs -v"
     ;;
     Darwin)
         CC=clang
