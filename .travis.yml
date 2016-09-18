@@ -17,6 +17,7 @@ matrix:
     - os: linux
   include:
     - os: linux
+      jdk: oraclejdk8
       env:
       - REAL_LLVM=1
       - CLANG_BIN=/home/travis/build/okutane/sanity/clang+llvm-3.9.0-x86_64-linux-gnu-ubuntu-14.04/bin/clang
