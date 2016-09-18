@@ -91,4 +91,5 @@ if [ -z "$REAL_LLVM" ]; then
     LDFLAGS="-Wl,-allow_sub_type_mismatches ${LDFLAGS}"
 fi
 
+echo $CXX -shared $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS $DEBUG
 $CXX -shared $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS $DEBUG
