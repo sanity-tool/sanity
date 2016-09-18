@@ -21,6 +21,8 @@ case `uname` in
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
 
         DLL_NAME=libirreader.so
+
+        LD_FLAGS="-Wl,-z,defs"
     ;;
     Darwin)
         CC=clang
@@ -41,10 +43,10 @@ esac
 echo `$LLVM_CONFIG --version`
 
 CPPFLAGS=`$LLVM_CONFIG --cppflags`
-LDFLAGS="`$LLVM_CONFIG --ldflags` -L/usr/local/opt/libffi/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
+LDFLAGS="`$LLVM_CONFIG --ldflags` -L/usr/local/opt/libffi/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib $LDFLAGS"
 
 # todo reduce to only necessary libs.
-LIBS="`$LLVM_CONFIG --libs` -ltermcap"
+LIBS="`$LLVM_CONFIG --libs irreader transformutils` -ltermcap"
 
 LLVM_INCLUDE="-I`$LLVM_CONFIG --includedir`"
 LLVM_LIBS=
