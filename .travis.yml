@@ -3,6 +3,7 @@ addons:
   apt:
     packages:
       - oracle-java8-installer
+      - libstdc++6
 
 matrix:
   allow_failures:
