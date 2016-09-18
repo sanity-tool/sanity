@@ -9,6 +9,7 @@ addons:
       - libstdc++6-4.7-dev
       - gcc-4.9
       - g++-4.9
+      - swig
 
 matrix:
   allow_failures:
