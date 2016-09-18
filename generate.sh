@@ -10,8 +10,8 @@ LLVM_LIBS="irreader transformutils"
 
 case `uname` in
     Linux)
-        gcc -v || no gcc
-        gcc-4.9 -v || no gcc
+        gcc --version || no gcc
+        gcc-4.9 --version || no gcc
 
         CC=gcc-4.9
         CXX=g++-4.9
@@ -25,7 +25,7 @@ case `uname` in
         DLL_NAME=libirreader.so
 
         LIBS="`$LLVM_CONFIG --libfiles $LLVM_LIBS` -ltermcap"
-        LD_FLAGS="-Wl,-z,defs -v"
+        LDFLAGS="-Wl,-z,defs -v"
     ;;
     Darwin)
         CC=clang
