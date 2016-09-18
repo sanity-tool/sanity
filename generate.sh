@@ -8,6 +8,9 @@ $LLVM_CONFIG --version >/dev/null 2>&1 || LLVM_CONFIG=/usr/local/opt/llvm/bin/ll
 
 case `uname` in
     Linux)
+        gcc -v || no gcc
+        gcc-4.9 -v || no gcc
+
         CC=gcc
         CXX=g++
         LD=g++
