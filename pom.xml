@@ -52,6 +52,7 @@
                 <configuration>
                     <executable>sh</executable>
                     <arguments>
+                        <argument>-v</argument>
                         <argument>generate.sh</argument>
                     </arguments>
                 </configuration>
