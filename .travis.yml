@@ -3,7 +3,7 @@ addons:
   apt:
     packages:
       - oracle-java8-installer
-      
+
 matrix:
   allow_failures:
     - os: linux
@@ -38,8 +38,6 @@ matrix:
     #  osx_image: beta-xcode6.1
 
 language: java
-jdk:
-  - oraclejdk8
 
 install: true
 
