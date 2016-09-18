@@ -39,7 +39,7 @@ case `uname` in
     ;;
 esac
 
-$LLVM_CONFIG --version || (echo "llvm-config not found"; exit 1)
+echo `$LLVM_CONFIG --version`
 
 CPPFLAGS=`$LLVM_CONFIG --cppflags`
 LDFLAGS="`$LLVM_CONFIG --ldflags` -L/usr/local/opt/libffi/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
