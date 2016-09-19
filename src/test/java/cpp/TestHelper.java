@@ -10,17 +10,22 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
  */
 public abstract class TestHelper {
-    protected static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+    static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
     static {
         context.refresh();
     }
-    public static final String BASE = System.getProperty("TEST_RESOURCES_ROOT");
+    static final String BASE = System.getProperty("TEST_RESOURCES_ROOT");
     private static String FAILURES_DIR = System.getProperty("TEST_FAILURES_ROOT");
+
+    private static List<String> SUPPORTED_EXTS = Arrays.asList(System.getProperty("TEST_SUPPORTED_EXTS", ".c;.cpp").split(";"));
+    private static List<String> SUPPORTED_DIRS = Arrays.asList(System.getProperty("TEST_SUPPORTED_DIRS", "c;cpp").split(";"));
 
     protected void fillWithTests(TestSuite suite, String path) {
         fillWithTests(suite, new File(BASE, path));
@@ -44,7 +49,17 @@ public abstract class TestHelper {
         }
     }
 
-    protected abstract boolean matches(File file);
+    protected boolean matches(File file) {
+        return isExtensionSupported(file);
+    }
+
+    private boolean isExtensionSupported(File file) {
+        return SUPPORTED_EXTS.stream().anyMatch(ext -> file.getName().endsWith(ext));
+    }
+
+    boolean isDirectorySupported(File file) {
+        return file.isDirectory() && TestHelper.SUPPORTED_DIRS.contains(file.getName());
+    }
 
     public abstract void runTest(String unit, Path pathToExpected) throws Exception;
 

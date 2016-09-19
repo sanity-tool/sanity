@@ -30,7 +30,7 @@ public class CallsMapTests extends TestHelper {
 
     @Override
     protected boolean matches(File file) {
-        return file.isDirectory();
+        return isDirectorySupported(file);
     }
 
     void parseAll(Parser parser, File directory, List<Cfg> allCfgs) throws Exception {
