@@ -56,7 +56,8 @@ language: java
 install: true
 
 before_install:
-  - source install.sh
+  - source setenv.sh
+  - ./install.sh
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
