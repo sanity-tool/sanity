@@ -11,6 +11,7 @@ addons:
       - gcc-4.9
       - g++-4.9
       - swig
+      - clang-3.3
       - clang-3.8
       - libllvm3.8
       - llvm-3.8
@@ -26,6 +27,11 @@ matrix:
       env:
       - REAL_LLVM=1
       - CLANG_BIN=clang-3.8
+    - os: linux
+      jdk: oraclejdk8
+      env:
+      - REAL_LLVM=1
+      - CLANG_BIN=clang-3.3
     #- os: osx
     #  osx_image: xcode8 # todo fix it if it's fixable, last result: jvm crash in jni code
     - os: osx
