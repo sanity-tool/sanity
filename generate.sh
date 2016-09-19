@@ -93,3 +93,13 @@ fi
 
 echo $CXX -shared $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS $DEBUG
 $CXX -shared $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS $DEBUG
+
+case `uname` in
+    Linux)
+        g++-4.9 -shared -o $SOBJ_DIR/$DLL_NAME target/native/static/wrappers.o target/native/static/helpers.o `llvm-config-3.8 --libfiles irreader transformutils` -coverage -lpthread -ltermcap
+    ;;
+    *)
+        echo $CXX -shared $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS $DEBUG
+        $CXX -shared $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS $DEBUG
+    ;;
+esac
