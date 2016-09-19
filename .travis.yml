@@ -56,7 +56,6 @@ language: java
 install: true
 
 before_install:
-  - source setenv.sh
   - ./install.sh
 
 after_success:
