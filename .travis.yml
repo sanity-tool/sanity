@@ -26,6 +26,7 @@ matrix:
       env:
       - REAL_LLVM=1
       - CLANG_BIN=clang-3.8
+      - LLVM_AS_BIN=llvm-as-3.8
     #- os: osx
     #  osx_image: xcode8 # todo fix it if it's fixable, last result: jvm crash in jni code
     - os: osx
