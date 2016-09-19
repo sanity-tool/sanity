@@ -4,6 +4,7 @@
 #set -e
 
 if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+exit 0
     sudo apt-get update && sudo apt-get install oracle-java8-installer
 
     sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
