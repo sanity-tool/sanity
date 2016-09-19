@@ -3,6 +3,7 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
+      - llvm-toolchain-precise-3.3
       - llvm-toolchain-precise-3.8
     packages:
       - oracle-java8-installer
