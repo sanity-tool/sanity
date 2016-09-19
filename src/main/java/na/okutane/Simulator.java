@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author <a href="mailto:dmitriy.matveev@corp.mail.ru">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class Simulator {
     List<MachineState> states = new ArrayList<>();

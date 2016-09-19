@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 
 /**
- * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
 public class SourceRangeFactory {

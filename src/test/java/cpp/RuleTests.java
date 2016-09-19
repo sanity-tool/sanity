@@ -18,7 +18,7 @@ import java.util.Deque;
 import java.util.List;
 
 /**
- * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class RuleTests extends TestHelper {
     public static TestSuite suite() {

@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
-* @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+* @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
 */
 public class TempFileWrapper implements AutoCloseable {
     File tempFile;

@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
 public class InstructionParser {

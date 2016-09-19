@@ -14,7 +14,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 /**
- * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class ParserTests extends TestHelper {
     public static TestSuite suite() {

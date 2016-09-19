@@ -3,7 +3,7 @@ package cpp;
 import junit.framework.TestSuite;
 
 /**
- * @author <a href="mailto:dmitriy.matveev@corp.mail.ru">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class AllTests {
     public static TestSuite suite() {

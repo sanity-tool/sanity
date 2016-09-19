@@ -19,7 +19,7 @@ import java.util.Collection;
 import java.util.Deque;
 
 /**
- * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class NullPointer {
     public void enforce(Cfg cfg, CallsMap callsMap) {

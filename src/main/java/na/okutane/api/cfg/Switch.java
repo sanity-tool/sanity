@@ -3,7 +3,7 @@ package na.okutane.api.cfg;
 import java.util.Map;
 
 /**
- * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class Switch extends Cfe {
     private final RValue control;
