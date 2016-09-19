@@ -24,7 +24,7 @@ case `uname` in
 
         DLL_NAME=libirreader.so
 
-        LIBS="`$LLVM_CONFIG --libfiles $LLVM_LIBS` -ltermcap"
+        LIBS="`$LLVM_CONFIG --libs $LLVM_LIBS` -lpthread -ltermcap"
         LDFLAGS="-Wl,-z,defs -v"
     ;;
     Darwin)
@@ -93,7 +93,7 @@ fi
 
 case `uname` in
     Linux)
-        $CXX -shared -o $SOBJ_DIR/$DLL_NAME $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o `$LLVM_CONFIG --libfiles $LLVM_LIBS` -coverage -lpthread -ltermcap
+        $CXX -shared -o $SOBJ_DIR/$DLL_NAME $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o $LIBS -coverage
     ;;
     *)
         echo $CXX -shared $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS $DEBUG
