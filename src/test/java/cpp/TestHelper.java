@@ -4,6 +4,11 @@ import junit.framework.Assert;
 import junit.framework.ComparisonFailure;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import na.okutane.cpp.tools.Language;
+import na.okutane.cpp.tools.ToolFactory;
+import org.apache.commons.collections4.BidiMap;
+import org.apache.commons.collections4.bidimap.DualHashBidiMap;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.File;
@@ -12,15 +17,22 @@ import java.nio.charset.Charset;
 import java.nio.file.*;
 
 /**
- * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public abstract class TestHelper {
-    protected static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+    static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+
+    static final String BASE = System.getProperty("TEST_RESOURCES_ROOT");
+    private static String FAILURES_DIR = System.getProperty("TEST_FAILURES_ROOT");
+    private static final BidiMap<Language, String> languageDirs = new DualHashBidiMap<>();
+
     static {
         context.refresh();
+
+        languageDirs.put(Language.C, "c");
+        languageDirs.put(Language.Cpp, "cpp");
+        languageDirs.put(Language.ObjectiveC, "o-c");
     }
-    public static final String BASE = System.getProperty("TEST_RESOURCES_ROOT");
-    private static String FAILURES_DIR = System.getProperty("TEST_FAILURES_ROOT");
 
     protected void fillWithTests(TestSuite suite, String path) {
         fillWithTests(suite, new File(BASE, path));
@@ -44,7 +56,21 @@ public abstract class TestHelper {
         }
     }
 
-    protected abstract boolean matches(File file);
+    protected boolean matches(File file) {
+        return isSupportedByExtension(file);
+    }
+
+    private boolean isSupportedByExtension(File file) {
+        return isExtensionSupported(FilenameUtils.getExtension(file.getName()));
+    }
+
+    private boolean isExtensionSupported(String extension) {
+        return context.getBean(ToolFactory.class).getExtensions().contains(extension);
+    }
+
+    boolean isDirectorySupported(File file) {
+        return file.isDirectory() && context.getBean(ToolFactory.class).getLanguages().contains(languageDirs.getKey(file.getName()));
+    }
 
     public abstract void runTest(String unit, Path pathToExpected) throws Exception;
 

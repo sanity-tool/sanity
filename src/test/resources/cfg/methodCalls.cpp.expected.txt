@@ -17,46 +17,6 @@ methodCalls.cpp:16 p->abstractMethod();
 methodCalls.cpp:16 p->abstractMethod();
 
 CFG: _Z7testBarv
-#0000:	 call: _ZN3BarC1Ev(tmp0)
-methodCalls.cpp:24 Bar bar;
-#0001:	 assign: tmp1 = tmp0
+#0000:	 call: _Z18abstractMethodCallP3Foo((bar.field0)) <exit>
 methodCalls.cpp:25 abstractMethodCall(&bar);
-#0002:	 call: _Z18abstractMethodCallP3Foo(tmp1) <exit>
-methodCalls.cpp:25 abstractMethodCall(&bar);
-
-CFG: _ZN3BarC1Ev
-#0000:	 assign: *tmp0 = this
- - no source -
-#0001:	 call: _ZN3BarC2Ev(*tmp0) <exit>
-methodCalls.cpp:19 struct Bar : public Foo {
-
-CFG: _ZN3BarC2Ev
-#0000:	 assign: *tmp0 = this
- - no source -
-#0001:	 assign: tmp1 = *tmp0
-methodCalls.cpp:19 struct Bar : public Foo {
-#0002:	 call: _ZN3FooC2Ev(tmp1)
-methodCalls.cpp:19 struct Bar : public Foo {
-#0003:	 assign: tmp2 = *tmp0
-methodCalls.cpp:19 struct Bar : public Foo {
-#0004:	 assign: *tmp2 = (_ZTV3Bar+2) <exit>
-methodCalls.cpp:19 struct Bar : public Foo {
-
-CFG: _ZN3FooC2Ev
-#0000:	 assign: *tmp0 = this
- - no source -
-#0001:	 assign: tmp1 = *tmp0
-methodCalls.cpp:1 struct Foo {
-#0002:	 assign: *tmp1 = (_ZTV3Foo+2) <exit>
-methodCalls.cpp:1 struct Foo {
-
-CFG: <module init>
-#0000:	 assign: **_ZTV3Foo = null
- - no source -
-#0001:	 assign: *_ZTS3Foo = "3Foo"
- - no source -
-#0002:	 assign: *(*_ZTI3Foo.field0) = (_ZTVN10__cxxabiv117__class_type_infoE+2)
- - no source -
-#0003:	 assign: *(*_ZTI3Foo.field1) = _ZTS3Foo <exit>
- - no source -
 

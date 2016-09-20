@@ -3,7 +3,7 @@ package na.okutane.api;
 import na.okutane.api.cfg.Cfe;
 
 /**
- * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class Cfg {
     private final String id;

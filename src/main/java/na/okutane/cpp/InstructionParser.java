@@ -26,6 +26,7 @@ import na.okutane.cpp.llvm.bitreader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -35,12 +36,15 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
 public class InstructionParser {
     @Autowired
     SourceRangeFactory sourceRangeFactory;
+
+    @Autowired
+    OpcodeParser[] parsersOtu;
 
     private Map<LLVMOpcode, OpcodeParser> parsers;
 
@@ -51,11 +55,11 @@ public class InstructionParser {
         }
     };
 
-    @Autowired
-    public InstructionParser(OpcodeParser[] parsers) {
+    @PostConstruct
+    private void init() {
         this.parsers = new HashMap<>();
 
-        for (OpcodeParser parser : parsers) {
+        for (OpcodeParser parser : parsersOtu) {
             for (LLVMOpcode opcode : parser.getOpcodes()) {
                 this.parsers.put(opcode, parser);
             }

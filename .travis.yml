@@ -1,9 +1,38 @@
-sudo: required
+sudo: false
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - llvm-toolchain-precise-3.8
+    packages:
+      - oracle-java8-installer
+      - libstdc++6
+      - libstdc++6-4.7-dev
+      - gcc-4.9
+      - g++-4.9
+      - swig
+      - clang-3.8
+      - libllvm3.8
+      - llvm-3.8
+      - llvm-3.8-dev
+      - llvm-3.8-runtime
 
 matrix:
   include:
+    - os: linux
+      jdk: oraclejdk8
+      env:
+      - REAL_LLVM=1
+      - CLANG_BIN=clang-3.8
+      - LLVM_AS_BIN=llvm-as-3.8
     #- os: osx
     #  osx_image: xcode8 # todo fix it if it's fixable, last result: jvm crash in jni code
+    - os: osx
+      osx_image: xcode7.3
+      env:
+      - DESCRIPTION=Latest supported OSX image with original llvm libs and released clang
+      - REAL_LLVM=1
+      - CLANG_BIN=/usr/local/opt/llvm/bin/clang
     - os: osx
       osx_image: xcode7.3
     - os: osx
@@ -23,11 +52,10 @@ matrix:
 
 language: java
 
+install: true
+
 before_install:
-  - brew update
-  - brew install llvm # main dependency
-  - brew install crosstool-ng # to replace undesired function from llvm core
-  - brew install swig # wrappers generator
+  - ./install.sh
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

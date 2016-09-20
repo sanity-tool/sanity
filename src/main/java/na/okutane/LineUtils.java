@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
 public class LineUtils implements DisposableBean {
@@ -20,16 +20,15 @@ public class LineUtils implements DisposableBean {
 
     public static String dumpLine(File file, int lineNumber) {
         return CACHE.computeIfAbsent(new Pair(file, lineNumber), key -> {
-            try {
-                LineNumberReader reader = new LineNumberReader(new FileReader(file));
+            try (FileReader in = new FileReader(file);
+                 LineNumberReader reader = new LineNumberReader(in)) {
                 String line;
                 do {
                     line = reader.readLine();
                 } while (reader.getLineNumber() < lineNumber);
                 return line.trim();
             } catch (IOException e) {
-                e.printStackTrace();
-                return null;
+                throw new IllegalStateException("couldn't dump " + lineNumber + " line of " + file);
             }
         });
     }

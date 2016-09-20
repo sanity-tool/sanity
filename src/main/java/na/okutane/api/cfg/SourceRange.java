@@ -5,7 +5,7 @@ import na.okutane.LineUtils;
 import java.io.File;
 
 /**
- * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class SourceRange {
     private final String filename;

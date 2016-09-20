@@ -20,7 +20,7 @@ struct Bar : public Foo {
     void abstractMethod();
 };
 
+extern Bar bar;
 void testBar() {
-    Bar bar;
     abstractMethodCall(&bar);
 }

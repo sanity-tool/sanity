@@ -1,7 +1,7 @@
 package na.okutane.api.cfg;
 
 /**
- * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class IfCondition extends Cfe {
     private final RValue condition;

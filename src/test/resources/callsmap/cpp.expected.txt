@@ -1,18 +1,6 @@
 CFG: _Z18abstractMethodCallP3Foo
-#0000:	 call: _Z18abstractMethodCallP3Foo(tmp0) <exit>
+#0000:	 call: _Z18abstractMethodCallP3Foo((bar.field0)) <exit>
 methodCalls.cpp:25 abstractMethodCall(&bar);
-
-CFG: _ZN3BarC1Ev
-#0000:	 call: _ZN3BarC1Ev(tmp0)
-methodCalls.cpp:24 Bar bar;
-
-CFG: _ZN3BarC2Ev
-#0000:	 call: _ZN3BarC2Ev(*tmp0) <exit>
-methodCalls.cpp:19 struct Bar : public Foo {
-
-CFG: _ZN3FooC2Ev
-#0000:	 call: _ZN3FooC2Ev(tmp0)
-methodCalls.cpp:19 struct Bar : public Foo {
 
 Type: void (struct.Foo.1*)
 #0000:	 call: **tmp0(*tmp1) <exit>

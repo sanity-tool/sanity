@@ -18,7 +18,7 @@ import java.util.Deque;
 import java.util.List;
 
 /**
- * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class RuleTests extends TestHelper {
     public static TestSuite suite() {
@@ -27,11 +27,6 @@ public class RuleTests extends TestHelper {
         new RuleTests().fillWithTests(suite, "rules/NP");
 
         return suite;
-    }
-
-    @Override
-    protected boolean matches(File file) {
-        return file.getName().endsWith(".c") || file.getName().endsWith(".cpp") || file.getName().endsWith(".m") || file.getName().endsWith(".ll") || file.getName().endsWith(".swift");
     }
 
     void parseAll(Parser parser, File file, List<Cfg> allCfgs) throws Exception {

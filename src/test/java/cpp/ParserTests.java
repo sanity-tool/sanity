@@ -14,7 +14,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 /**
- * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class ParserTests extends TestHelper {
     public static TestSuite suite() {
@@ -24,11 +24,6 @@ public class ParserTests extends TestHelper {
 
         TestSuite parseErrors = new TestSuite("parse errors");
         new TestHelper() {
-            @Override
-            protected boolean matches(File file) {
-                return isSupported(file);
-            }
-
             @Override
             public void runTest(String unit, Path pathToExpected) throws Exception {
                 Parser parser = context.getBean(Parser.class);
@@ -44,15 +39,6 @@ public class ParserTests extends TestHelper {
         suite.addTest(parseErrors);
 
         return suite;
-    }
-
-    @Override
-    protected boolean matches(File file) {
-        return isSupported(file);
-    }
-
-    private static boolean isSupported(File file) {
-        return file.getName().endsWith(".c") || file.getName().endsWith(".cpp") || file.getName().endsWith(".m") || file.getName().endsWith(".ll") || file.getName().endsWith(".swift");
     }
 
     @Override

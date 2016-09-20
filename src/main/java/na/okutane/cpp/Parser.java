@@ -29,7 +29,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
 public class Parser {

@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitriy Matveev</a>
+ * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class CallsMapTests extends TestHelper {
     public static TestSuite suite() {
@@ -30,7 +30,7 @@ public class CallsMapTests extends TestHelper {
 
     @Override
     protected boolean matches(File file) {
-        return file.isDirectory();
+        return isDirectorySupported(file);
     }
 
     void parseAll(Parser parser, File directory, List<Cfg> allCfgs) throws Exception {
