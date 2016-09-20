@@ -6,8 +6,6 @@ set -e
 LLVM_CONFIG=llvm-config
 $LLVM_CONFIG --version >/dev/null 2>&1 || LLVM_CONFIG=/usr/local/opt/llvm/bin/llvm-config
 
-LLVM_LIBS="irreader transformutils"
-
 case `uname` in
     Linux)
         CC=gcc-4.9
@@ -36,7 +34,6 @@ case `uname` in
 
         DLL_NAME=libirreader.jnilib
 
-        LIBS="`$LLVM_CONFIG --libs $LLVM_LIBS` -ltermcap"
         LDFLAGS="-ltermcap -L/usr/local/opt/libffi/lib"
     ;;
     *)
@@ -47,6 +44,7 @@ esac
 
 echo `$LLVM_CONFIG --version`
 
+LLVM_LIBS="irreader transformutils"
 LIBS=`$LLVM_CONFIG --libs $LLVM_LIBS`
 
 
@@ -71,7 +69,7 @@ mkdir -p $OBJ_DIR
 SOBJ_DIR="target/native/shared"
 mkdir -p $SOBJ_DIR
 
-swig -cpperraswarn $LLVM_INCLUDE -java -outdir $JAVA_OUT -package na.okutane.cpp.llvm -o $CPP_OUT/bitreader_wrap.c -v $SRC_DIR/bitreader.i
+swig $LLVM_INCLUDE -java -outdir $JAVA_OUT -package na.okutane.cpp.llvm -o $CPP_OUT/bitreader_wrap.c -v $SRC_DIR/bitreader.i
 
 $CC -c $CPP_OUT/bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE -I/usr/local/opt/llvm/include $DEBUG -fPIC -o $OBJ_DIR/wrappers.o
 
