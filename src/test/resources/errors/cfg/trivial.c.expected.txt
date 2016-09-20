@@ -1,4 +1,4 @@
-na.okutane.cpp.ParseException: resultCode = [1], error = [/errors/cfg/trivial.c:1:1: error: unknown type name 'a'
+ru.urururu.sanity.cpp.ParseException: resultCode = [1], error = [/errors/cfg/trivial.c:1:1: error: unknown type name 'a'
 a
 ^
 /errors/cfg/trivial.c:1:2: error: expected identifier or '('

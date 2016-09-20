@@ -57,7 +57,7 @@ DEBUG="-g -coverage"
 
 SRC_DIR="src/main/cpp"
 
-JAVA_OUT="target/generated-sources/java/na/okutane/cpp/llvm"
+JAVA_OUT="target/generated-sources/java/ru/urururu/sanity/cpp/llvm"
 mkdir -p $JAVA_OUT
 
 CPP_OUT="target/generated-sources/jni"
@@ -69,7 +69,7 @@ mkdir -p $OBJ_DIR
 SOBJ_DIR="target/native/shared"
 mkdir -p $SOBJ_DIR
 
-swig $LLVM_INCLUDE -java -outdir $JAVA_OUT -package na.okutane.cpp.llvm -o $CPP_OUT/bitreader_wrap.c -v $SRC_DIR/bitreader.i
+swig $LLVM_INCLUDE -java -outdir $JAVA_OUT -package ru.urururu.sanity.cpp.llvm -o $CPP_OUT/bitreader_wrap.c -v $SRC_DIR/bitreader.i
 
 $CC -c $CPP_OUT/bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE -I/usr/local/opt/llvm/include $DEBUG -fPIC -o $OBJ_DIR/wrappers.o
 
