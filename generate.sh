@@ -10,9 +10,6 @@ LLVM_LIBS="irreader transformutils"
 
 case `uname` in
     Linux)
-        gcc --version || no gcc
-        gcc-4.9 --version || no gcc
-
         CC=gcc-4.9
         CXX=g++-4.9
         LD=g++-4.9
@@ -24,8 +21,10 @@ case `uname` in
 
         DLL_NAME=libirreader.so
 
-        LIBS="`$LLVM_CONFIG --libs $LLVM_LIBS` -lpthread -ltermcap"
-        LDFLAGS="-Wl,-z,defs -v"
+        LDFLAGS="-lpthread -ltermcap"
+
+        # todo nice to have
+        #LDFLAGS="$LDFLAGS -Wl,-z,defs"
     ;;
     Darwin)
         CC=clang
@@ -38,6 +37,7 @@ case `uname` in
         DLL_NAME=libirreader.jnilib
 
         LIBS="`$LLVM_CONFIG --libs $LLVM_LIBS` -ltermcap"
+        LDFLAGS="-ltermcap -L/usr/local/opt/libffi/lib"
     ;;
     *)
         echo Unknown environment: `uname`
@@ -47,8 +47,11 @@ esac
 
 echo `$LLVM_CONFIG --version`
 
+LIBS=`$LLVM_CONFIG --libs $LLVM_LIBS`
+
+
 CPPFLAGS=`$LLVM_CONFIG --cppflags`
-LDFLAGS="`$LLVM_CONFIG --ldflags` -L/usr/local/opt/libffi/lib -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib $LDFLAGS"
+LDFLAGS="`$LLVM_CONFIG --ldflags` -v $LDFLAGS"
 
 LLVM_INCLUDE="-I`$LLVM_CONFIG --includedir`"
 
@@ -91,12 +94,4 @@ if [ -z "$REAL_LLVM" ]; then
     LDFLAGS="-Wl,-allow_sub_type_mismatches ${LDFLAGS}"
 fi
 
-case `uname` in
-    Linux)
-        $CXX -shared -o $SOBJ_DIR/$DLL_NAME $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o $LIBS $LDFLAGS -coverage
-    ;;
-    *)
-        echo $CXX -shared $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS $DEBUG
-        $CXX -shared $LIBS $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o -o $SOBJ_DIR/$DLL_NAME -L/usr/local/opt/libffi/lib $LDFLAGS $DEBUG
-    ;;
-esac
+$CXX -shared -o $SOBJ_DIR/$DLL_NAME $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o $LIBS $LDFLAGS $DEBUG
