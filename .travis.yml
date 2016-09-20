@@ -18,8 +18,6 @@ addons:
       - llvm-3.8-runtime
 
 matrix:
-  allow_failures:
-    - os: linux
   include:
     - os: linux
       jdk: oraclejdk8
