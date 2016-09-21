@@ -5,7 +5,8 @@
 //#include "llvm/IR/CallSite.h"
 #include "llvm/IR/Constants.h"
 #include "llvm/IR/DerivedTypes.h"
-//#include "llvm/IR/DiagnosticInfo.h"
+#include "llvm/IR/DebugInfo.h"
+#include "llvm/IR/DiagnosticInfo.h"
 //#include "llvm/IR/DiagnosticPrinter.h"
 #include "llvm/IR/GlobalAlias.h"
 #include "llvm/IR/GlobalVariable.h"
@@ -88,6 +89,13 @@ const char *SAGetInstructionDebugLocScopeFile(LLVMValueRef instruction) {
     result = loc->getScope()->getFilename().str();
 
     return result.c_str();
+}
+
+unsigned SAGetDebugMetadataVersionFromModule(LLVMModuleRef module) {
+  if (auto *Val = mdconst::dyn_extract_or_null<ConstantInt>(
+          unwrap(module)->getModuleFlag("Debug Info Version")))
+    return Val->getZExtValue();
+  return 0;
 }
 
 }

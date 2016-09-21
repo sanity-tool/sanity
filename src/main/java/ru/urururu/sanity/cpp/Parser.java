@@ -48,6 +48,7 @@ public class Parser {
     ConstCache constants;
 
     public List<Cfg> parse(String filename) throws ParseException {
+        System.out.println("filename = " + filename);
         try {
             try (TempFileWrapper objFile = new TempFileWrapper("result", ".bc")) {
                 try (TempFileWrapper errFile = new TempFileWrapper("result", ".err")) {

@@ -80,6 +80,8 @@ const char* GetDataArrayString(LLVMValueRef Val);
 LLVMRealPredicate GetFCmpPredicate(LLVMValueRef Inst);
 double GetConstantFPDoubleValue(LLVMValueRef ConstantVal);
 
+unsigned SAGetDebugMetadataVersionFromModule(LLVMModuleRef module);
+
 int SAGetInstructionDebugLocLine(LLVMValueRef instruction);
 
 %javamethodmodifiers SAGetInstructionDebugLocScopeFile "public synchronized";

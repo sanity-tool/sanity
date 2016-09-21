@@ -84,7 +84,7 @@ public class TypeParser implements ParserListener {
                 // process compile units
                 SWIGTYPE_p_LLVMOpaqueValue compileUnitMD = bitreader.getValue(values, i);
                 if (LlvmUtils.checkTag(compileUnitMD, DW_TAG_compile_unit)) {
-                    visit(compileUnitMD);
+                    //visit(compileUnitMD);
                 } else {
                     //throw new IllegalStateException("not a compilation unit: " + bitreader.LLVMPrintValueToString(compileUnitMD));
                 }
