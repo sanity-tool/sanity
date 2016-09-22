@@ -6,7 +6,7 @@ set -e
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     brew update
 
-    brew cast install java
+    brew cask install java
     brew install llvm # main dependency
     brew install crosstool-ng # to replace undesired function from llvm core
     brew install swig # wrappers generator
