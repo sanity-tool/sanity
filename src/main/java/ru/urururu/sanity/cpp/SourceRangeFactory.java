@@ -21,10 +21,11 @@ public class SourceRangeFactory implements ParserListener {
     private static final int DIRECTORY_INDEX = 1;
 
     private Long debugVersion;
+    private Byte versionByte;
 
     public SourceRange getSourceRange(SWIGTYPE_p_LLVMOpaqueValue instruction) {
         int line = bitreader.SAGetInstructionDebugLocLine(instruction);
-        if (debugVersion != 0) {
+        if (versionByte == 3) {
             if (line != -1) {
                 String filename = bitreader.SAGetInstructionDebugLocScopeFile(instruction);
                 if (filename != null) {
@@ -93,11 +94,14 @@ public class SourceRangeFactory implements ParserListener {
     @Override
     public void onModuleStarted(SWIGTYPE_p_LLVMOpaqueModule module) {
         debugVersion = bitreader.SAGetDebugMetadataVersionFromModule(module);
+        versionByte = (byte)(debugVersion >>> 0); // most significat byte
         System.out.println("debugVersion = " + Long.toHexString(debugVersion));
+        System.out.println("versionByte = " + versionByte);
     }
 
     @Override
     public void onModuleFinished(SWIGTYPE_p_LLVMOpaqueModule module) {
         debugVersion = null;
+        versionByte = null;
     }
 }
