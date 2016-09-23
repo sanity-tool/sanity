@@ -93,7 +93,7 @@ public class SourceRangeFactory implements ParserListener {
     @Override
     public void onModuleStarted(SWIGTYPE_p_LLVMOpaqueModule module) {
         debugVersion = bitreader.SAGetDebugMetadataVersionFromModule(module);
-        System.out.println("debugVersion = " + debugVersion);
+        System.out.println("debugVersion = " + Long.toHexString(debugVersion));
     }
 
     @Override
