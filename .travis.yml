@@ -59,7 +59,7 @@ language: java
 install: true
 
 before_install:
-  - ./install.sh
+  - bash -v ./install.sh
 
 after_success:
   - ./check.sh
