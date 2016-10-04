@@ -66,7 +66,7 @@ before_install:
   - if test "$TRAVIS_OS_NAME" = "osx"; then brew install crosstool-ng; fi # to replace undesired function from llvm core
   - if test "$TRAVIS_OS_NAME" = "osx"; then brew install swig; fi # wrappers generator
 
-  - if test "$TRAVIS_OS_NAME" = "osx"; then travis_wait brew install llvm33; fi # explicitly testing older llvm to ensure older xcode support # todo install only if want to test it?
+  - if test "$TRAVIS_OS_NAME" = "osx"; then travis_wait 30 brew install llvm33; fi # explicitly testing older llvm to ensure older xcode support # todo install only if want to test it?
 
 after_success:
   - ./check.sh
