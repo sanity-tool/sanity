@@ -8,10 +8,8 @@ import java.util.Set;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class Swift extends Tool {
-    private String executable;
-
-    Swift(String executable) {
-        this.executable = executable;
+    Swift(String executable, String version) {
+        super(executable, version);
     }
 
     @Override

@@ -3,21 +3,14 @@ package ru.urururu.sanity.cpp.tools;
 import org.apache.commons.lang3.SystemUtils;
 
 import java.util.EnumSet;
-import java.util.Optional;
 import java.util.Set;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 class Clang extends Tool {
-    private final String executable;
-
-    private Clang(String executable) {
-        this.executable = executable;
-    }
-
-    static Optional<Tool> tryCreate(String executable) throws InterruptedException {
-        return tryCreate(executable, Clang::new);
+    Clang(String executable, String version) {
+        super(executable, version);
     }
 
     @Override
@@ -32,5 +25,20 @@ class Clang extends Tool {
         }
 
         return new String[]{executable, filename, "-c", "-emit-llvm", "-femit-all-decls", "-g", "-o", objFile};
+    }
+
+    @Override
+    String evaluateVersionId(String version) {
+        String clangVersion = "clang version";
+        if (version.startsWith(clangVersion)) {
+            version = version.substring(clangVersion.length(), version.indexOf('(')).trim().replace(".", "");
+            return "clang" + version;
+        } else if (version.startsWith("Apple LLVM version")) {
+            if (version.startsWith("Apple LLVM version 7.3.0")) {
+                return "a-llvm-73";
+            }
+        }
+
+        return super.evaluateVersionId(version);
     }
 }

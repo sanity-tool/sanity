@@ -1,21 +1,14 @@
 package ru.urururu.sanity.cpp.tools;
 
 import java.util.EnumSet;
-import java.util.Optional;
 import java.util.Set;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 class LlvmAs extends Tool {
-    private final String executable;
-
-    private LlvmAs(String executable) {
-        this.executable = executable;
-    }
-
-    static Optional<Tool> tryCreate(String executable) throws InterruptedException {
-        return tryCreate(executable, LlvmAs::new);
+    LlvmAs(String executable, String version) {
+        super(executable, version);
     }
 
     @Override
