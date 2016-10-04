@@ -35,7 +35,7 @@ class Clang extends Tool {
             return "clang" + version;
         } else if (version.startsWith("Apple LLVM version")) {
             if (version.startsWith("Apple LLVM version 7.3.0")) {
-                return "a-llvm-73";
+                return "allvm73";
             }
         }
 

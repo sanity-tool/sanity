@@ -5,6 +5,7 @@ import junit.framework.ComparisonFailure;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import ru.urururu.sanity.cpp.tools.Language;
+import ru.urururu.sanity.cpp.tools.Tool;
 import ru.urururu.sanity.cpp.tools.ToolFactory;
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
@@ -26,8 +27,12 @@ public abstract class TestHelper {
     private static String FAILURES_DIR = System.getProperty("TEST_FAILURES_ROOT");
     private static final BidiMap<Language, String> languageDirs = new DualHashBidiMap<>();
 
+    static ToolFactory toolFactory;
+
     static {
         context.refresh();
+
+        toolFactory = context.getBean(ToolFactory.class);
 
         languageDirs.put(Language.C, "c");
         languageDirs.put(Language.Cpp, "cpp");
@@ -44,7 +49,13 @@ public abstract class TestHelper {
                 suite.addTest(new TestCase(f.getName()) {
                     @Override
                     protected void runTest() throws Throwable {
-                        Path pathToExpected = Paths.get(f.getAbsolutePath() + ".expected.txt");
+                        String versionId = toolFactory.get(FilenameUtils.getExtension(f.getAbsolutePath())).getVersionId();
+
+                        Path pathToExpected = Paths.get(f.getAbsolutePath() + '.' + versionId + ".expected.txt");
+                        if (!pathToExpected.toFile().exists()) {
+                            pathToExpected = Paths.get(f.getAbsolutePath() + ".expected.txt");
+                        }
+
                         TestHelper.this.runTest(f.getAbsolutePath(), pathToExpected);
                     }
                 });
