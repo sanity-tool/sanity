@@ -49,11 +49,15 @@ public abstract class TestHelper {
                 suite.addTest(new TestCase(f.getName()) {
                     @Override
                     protected void runTest() throws Throwable {
-                        String versionId = toolFactory.get(FilenameUtils.getExtension(f.getAbsolutePath())).getVersionId();
-
-                        Path pathToExpected = Paths.get(f.getAbsolutePath() + '.' + versionId + ".expected.txt");
-                        if (!pathToExpected.toFile().exists()) {
+                        Path pathToExpected;
+                        if (f.isDirectory()) {
                             pathToExpected = Paths.get(f.getAbsolutePath() + ".expected.txt");
+                        } else {
+                            String versionId = toolFactory.get(FilenameUtils.getExtension(f.getAbsolutePath())).getVersionId();
+                            pathToExpected = Paths.get(f.getAbsolutePath() + '.' + versionId + ".expected.txt");
+                            if (!pathToExpected.toFile().exists()) {
+                                pathToExpected = Paths.get(f.getAbsolutePath() + ".expected.txt");
+                            }
                         }
 
                         TestHelper.this.runTest(f.getAbsolutePath(), pathToExpected);
