@@ -1,0 +1,8 @@
+Type: void (int8*)*
+#0000:	 call: tmp0(tmp1) <exit>
+blocks.m:12 SIMPLE();
+
+Type: int8* (int8*, struct._message_ref_t*)*
+#0000:	 call: tmp0 = tmp1(tmp2, l_objc_msgSend_fixup_alloc)
+messages.m:28 OBJ = [[MyObject alloc] init];
+

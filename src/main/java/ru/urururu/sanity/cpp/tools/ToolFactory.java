@@ -53,4 +53,8 @@ public class ToolFactory {
     public Tool get(String extension) {
         return byExtensions.get(extension);
     }
+
+    public Tool get(Language language) {
+        return byLanguages.get(language);
+    }
 }

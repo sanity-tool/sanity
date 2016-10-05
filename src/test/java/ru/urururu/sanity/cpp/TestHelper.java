@@ -20,14 +20,14 @@ import java.nio.file.*;
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
-public abstract class TestHelper {
+abstract class TestHelper {
     static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 
     static final String BASE = System.getProperty("TEST_RESOURCES_ROOT");
     private static String FAILURES_DIR = System.getProperty("TEST_FAILURES_ROOT");
     private static final BidiMap<Language, String> languageDirs = new DualHashBidiMap<>();
 
-    static ToolFactory toolFactory;
+    private static ToolFactory toolFactory;
 
     static {
         context.refresh();
@@ -43,17 +43,27 @@ public abstract class TestHelper {
         fillWithTests(suite, new File(BASE, path));
     }
 
-    protected void fillWithTests(TestSuite suite, File file) {
+    private void fillWithTests(TestSuite suite, File file) {
         for (final File f : file.listFiles()) {
             if (matches(f)) {
                 suite.addTest(new TestCase(f.getName()) {
                     @Override
                     protected void runTest() throws Throwable {
-                        Path pathToExpected;
+                        Tool testTool;
                         if (f.isDirectory()) {
+                            String name = f.getName();
+                            Language language = languageDirs.getKey(name);
+                            testTool = toolFactory.get(language);
+                        } else {
+                            testTool = toolFactory.get(FilenameUtils.getExtension(f.getAbsolutePath()));
+                        }
+
+                        Path pathToExpected;
+                        if (testTool == null) {
                             pathToExpected = Paths.get(f.getAbsolutePath() + ".expected.txt");
                         } else {
-                            String versionId = toolFactory.get(FilenameUtils.getExtension(f.getAbsolutePath())).getVersionId();
+                            String versionId = testTool.getVersionId();
+
                             pathToExpected = Paths.get(f.getAbsolutePath() + '.' + versionId + ".expected.txt");
                             if (!pathToExpected.toFile().exists()) {
                                 pathToExpected = Paths.get(f.getAbsolutePath() + ".expected.txt");
@@ -84,12 +94,12 @@ public abstract class TestHelper {
     }
 
     boolean isDirectorySupported(File file) {
-        return file.isDirectory() && context.getBean(ToolFactory.class).getLanguages().contains(languageDirs.getKey(file.getName()));
+        return file.isDirectory() && toolFactory.getLanguages().contains(languageDirs.getKey(file.getName()));
     }
 
     public abstract void runTest(String unit, Path pathToExpected) throws Exception;
 
-    protected void check(Path pathToExpected, String actual) throws IOException, InterruptedException {
+    void check(Path pathToExpected, String actual) throws IOException, InterruptedException {
         try {
             byte[] bytes = Files.readAllBytes(pathToExpected);
             String expected = new String(bytes, Charset.defaultCharset());
