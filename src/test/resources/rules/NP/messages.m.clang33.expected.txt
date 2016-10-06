@@ -1,4 +1,4 @@
-#0000:	 assign: *OBJC_SELECTOR_REFERENCES_ = OBJC_METH_VAR_NAME_
+#0000:	 assign: *L_OBJC_SELECTOR_REFERENCES_ = L_OBJC_METH_VAR_NAME_
  - no source -
 java.lang.IllegalStateException: Don't know how to get value from GetElementPointer
 

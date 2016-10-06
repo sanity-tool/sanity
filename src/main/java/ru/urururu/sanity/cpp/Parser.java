@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -52,7 +53,10 @@ public class Parser {
         try {
             try (TempFileWrapper objFile = new TempFileWrapper("result", ".bc")) {
                 try (TempFileWrapper errFile = new TempFileWrapper("result", ".err")) {
-                    ProcessBuilder pb = new ProcessBuilder(parametersFactory.getParameters(filename, objFile.getAbsolutePath()));
+                    String[] parameters = parametersFactory.getParameters(filename, objFile.getAbsolutePath());
+                    System.out.println("parameters = " + Arrays.toString(parameters));
+
+                    ProcessBuilder pb = new ProcessBuilder(parameters);
 
                     pb.inheritIO();
                     pb.redirectError(ProcessBuilder.Redirect.to(errFile.getFile()));

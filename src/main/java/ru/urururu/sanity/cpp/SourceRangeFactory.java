@@ -47,9 +47,7 @@ public class SourceRangeFactory implements ParserListener {
 
             if (pair != null) {
                 String filename = bitreader.getMDString(bitreader.LLVMGetOperand(pair, 0));
-                System.out.println("filename = " + filename);
                 String directory = bitreader.getMDString(bitreader.LLVMGetOperand(pair, 1));
-                System.out.println("directory = " + directory);
                 int lineNo = line;
                 if (new File(filename).isAbsolute()) {
                     return new SourceRange(filename, lineNo);
@@ -61,14 +59,11 @@ public class SourceRangeFactory implements ParserListener {
     }
 
     private SWIGTYPE_p_LLVMOpaqueValue getPair(SWIGTYPE_p_LLVMOpaqueValue node) {
-        System.out.println("SourceRangeFactory.getPair");
-        System.out.println("node = " + bitreader.LLVMPrintValueToString(node));
         if (node == null) {
             return null;
         }
         int count = bitreader.LLVMGetNumOperands(node);
         if (count == 1) {
-            System.out.println("count = " + count);
             return getPair(bitreader.LLVMGetOperand(node, 0));
         }
         if (bitreader.LLVMIsAMDNode(node) == null) {
@@ -82,8 +77,6 @@ public class SourceRangeFactory implements ParserListener {
                 return getPair(bitreader.LLVMGetOperand(node, 2));
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("node = " + bitreader.LLVMPrintValueToString(node));
-            System.out.println("count = " + count);
             for (int i = 0; i < count; i++) {
                 System.out.println("bitreader.LLVMGetOperand(node, " + i + ") = " + bitreader.LLVMPrintValueToString(bitreader.LLVMGetOperand(node, i)));
             }
@@ -94,7 +87,7 @@ public class SourceRangeFactory implements ParserListener {
     @Override
     public void onModuleStarted(SWIGTYPE_p_LLVMOpaqueModule module) {
         debugVersion = bitreader.SAGetDebugMetadataVersionFromModule(module);
-        versionByte = (byte)(debugVersion >>> 0); // most significat byte
+        versionByte = (byte)(debugVersion >>> 0); // most significat byte // todo report intellij bug here
         System.out.println("debugVersion = " + Long.toHexString(debugVersion));
         System.out.println("versionByte = " + versionByte);
     }

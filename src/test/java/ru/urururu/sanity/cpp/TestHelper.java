@@ -46,31 +46,34 @@ abstract class TestHelper {
     private void fillWithTests(TestSuite suite, File file) {
         for (final File f : file.listFiles()) {
             if (matches(f)) {
+                Tool testTool;
+                if (f.isDirectory()) {
+                    String name = f.getName();
+                    Language language = languageDirs.getKey(name);
+                    testTool = toolFactory.get(language);
+                } else {
+                    testTool = toolFactory.get(FilenameUtils.getExtension(f.getAbsolutePath()));
+                }
+
+                Path pathToExpected;
+                if (testTool == null) {
+                    pathToExpected = Paths.get(f.getAbsolutePath() + ".expected.txt");
+                } else {
+                    String versionId = testTool.getVersionId();
+
+                    pathToExpected = Paths.get(f.getAbsolutePath() + '.' + versionId + ".expected.txt");
+                    if (!pathToExpected.toFile().exists()) {
+                        pathToExpected = Paths.get(f.getAbsolutePath() + ".expected.txt");
+                    }
+                }
+
+                String absolutePath = f.getAbsolutePath();
+                Path finalPathToExpected = pathToExpected;
+
                 suite.addTest(new TestCase(f.getName()) {
                     @Override
                     protected void runTest() throws Throwable {
-                        Tool testTool;
-                        if (f.isDirectory()) {
-                            String name = f.getName();
-                            Language language = languageDirs.getKey(name);
-                            testTool = toolFactory.get(language);
-                        } else {
-                            testTool = toolFactory.get(FilenameUtils.getExtension(f.getAbsolutePath()));
-                        }
-
-                        Path pathToExpected;
-                        if (testTool == null) {
-                            pathToExpected = Paths.get(f.getAbsolutePath() + ".expected.txt");
-                        } else {
-                            String versionId = testTool.getVersionId();
-
-                            pathToExpected = Paths.get(f.getAbsolutePath() + '.' + versionId + ".expected.txt");
-                            if (!pathToExpected.toFile().exists()) {
-                                pathToExpected = Paths.get(f.getAbsolutePath() + ".expected.txt");
-                            }
-                        }
-
-                        TestHelper.this.runTest(f.getAbsolutePath(), pathToExpected);
+                        TestHelper.this.runTest(absolutePath, finalPathToExpected);
                     }
                 });
             } else if (f.isDirectory()) {
@@ -106,17 +109,21 @@ abstract class TestHelper {
 
             Assert.assertEquals(expected, actual);
         } catch (ComparisonFailure e) {
+            System.out.println("pathToExpected = " + pathToExpected);
+
             if (FAILURES_DIR != null) {
                 Path failuresPath = Paths.get(FAILURES_DIR);
 
                 Path expectedDir = failuresPath.resolve("expected");
                 expectedDir.toFile().mkdirs();
                 Path pathToExpected2 = expectedDir.resolve(pathToExpected.getFileName().toString());
+                System.out.println("pathToExpected2 = " + pathToExpected2);
                 Files.copy(pathToExpected, pathToExpected2, StandardCopyOption.REPLACE_EXISTING);
 
                 Path actualDir = failuresPath.resolve("actual");
                 actualDir.toFile().mkdirs();
                 Path pathToActual = actualDir.resolve(pathToExpected.getFileName().toString());
+                System.out.println("pathToActual = " + pathToActual);
                 Files.write(pathToActual, actual.getBytes());
             }
 
