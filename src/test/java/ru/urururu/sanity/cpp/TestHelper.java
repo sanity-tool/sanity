@@ -109,21 +109,17 @@ abstract class TestHelper {
 
             Assert.assertEquals(expected, actual);
         } catch (ComparisonFailure e) {
-            System.out.println("pathToExpected = " + pathToExpected);
-
             if (FAILURES_DIR != null) {
                 Path failuresPath = Paths.get(FAILURES_DIR);
 
                 Path expectedDir = failuresPath.resolve("expected");
                 expectedDir.toFile().mkdirs();
                 Path pathToExpected2 = expectedDir.resolve(pathToExpected.getFileName().toString());
-                System.out.println("pathToExpected2 = " + pathToExpected2);
                 Files.copy(pathToExpected, pathToExpected2, StandardCopyOption.REPLACE_EXISTING);
 
                 Path actualDir = failuresPath.resolve("actual");
                 actualDir.toFile().mkdirs();
                 Path pathToActual = actualDir.resolve(pathToExpected.getFileName().toString());
-                System.out.println("pathToActual = " + pathToActual);
                 Files.write(pathToActual, actual.getBytes());
             }
 
