@@ -82,10 +82,7 @@ matrix:
 
 language: java
 
-install: true
-
-before_install:
-  - ./install.sh
+install: ./install.sh
 
 after_success:
   - ./check.sh
