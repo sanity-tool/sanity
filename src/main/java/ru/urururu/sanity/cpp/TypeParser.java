@@ -83,7 +83,7 @@ public class TypeParser implements ParserListener {
             for (int i = 0; i < arguments; i++) {
                 // process compile units
                 SWIGTYPE_p_LLVMOpaqueValue compileUnitMD = bitreader.getValue(values, i);
-                if (LlvmUtils.checkTag(compileUnitMD, DW_TAG_compile_unit)) {
+                if (LlvmUtils.checkTag(compileUnitMD, null, DW_TAG_compile_unit)) {
                     //visit(compileUnitMD);
                 } else {
                     //throw new IllegalStateException("not a compilation unit: " + bitreader.LLVMPrintValueToString(compileUnitMD));
@@ -122,7 +122,7 @@ public class TypeParser implements ParserListener {
 
         for (int i = 0; i < bitreader.LLVMGetNumOperands(members); i++) {
             SWIGTYPE_p_LLVMOpaqueValue node = bitreader.LLVMGetOperand(members, i);
-            if (LlvmUtils.checkTag(node, DW_TAG_member)) {
+            if (LlvmUtils.checkTag(node, null, DW_TAG_member)) {
                 String fieldName = bitreader.getMDString(bitreader.LLVMGetOperand(node, 3));
                 fieldNames.add(fieldName);
             }
@@ -136,7 +136,7 @@ public class TypeParser implements ParserListener {
             return;
         }
 
-        if (LlvmUtils.checkTag(node, DW_TAG_structure_type)) {
+        if (LlvmUtils.checkTag(node, null, DW_TAG_structure_type)) {
             visitStructure(node);
             return;
         }

@@ -92,10 +92,15 @@ const char *SAGetInstructionDebugLocScopeFile(LLVMValueRef instruction) {
 }
 
 unsigned SAGetDebugMetadataVersionFromModule(LLVMModuleRef module) {
-  if (auto *Val = mdconst::dyn_extract_or_null<ConstantInt>(
-          unwrap(module)->getModuleFlag("Debug Info Version")))
-    return Val->getZExtValue();
-  return 0;
+    if (auto *Val = mdconst::dyn_extract_or_null<ConstantInt>(unwrap(module)->getModuleFlag("Debug Info Version"))) {
+        return Val->getZExtValue();
+    }
+    return 0;
+}
+
+const char *SAGetMDString(LLVMValueRef value) {
+    unsigned len;
+    return LLVMGetMDString(value, &len);
 }
 
 }

@@ -55,6 +55,7 @@ public class SourceRangeFactory implements ParserListener {
                 return new SourceRange(new File(directory, filename).getAbsolutePath(), lineNo);
             }
         }
+
         return null;
     }
 
@@ -71,7 +72,7 @@ public class SourceRangeFactory implements ParserListener {
         }
 
         try {
-            if (LlvmUtils.checkTag(node, DW_TAG_file_type) || LlvmUtils.checkTag(node, DW_TAG_lexical_block)) {
+            if (LlvmUtils.checkTag(node, "0x29", DW_TAG_file_type, DW_TAG_lexical_block)) {
                 return bitreader.LLVMGetOperand(node, 1);
             } else {
                 return getPair(bitreader.LLVMGetOperand(node, 2));

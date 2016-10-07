@@ -38,6 +38,8 @@ double GetConstantFPDoubleValue(LLVMValueRef ConstantVal);
 
 const char *SAGetInstructionDebugLocScopeFile(LLVMValueRef instruction);
 
+const char *SAGetMDString(LLVMValueRef value);
+
 %}
 
 %contract LLVMGetOperand (LLVMValueRef Val, unsigned Index) {
@@ -86,6 +88,8 @@ int SAGetInstructionDebugLocLine(LLVMValueRef instruction);
 
 %javamethodmodifiers SAGetInstructionDebugLocScopeFile "public synchronized";
 const char *SAGetInstructionDebugLocScopeFile(LLVMValueRef instruction);
+
+const char *SAGetMDString(LLVMValueRef value);
 
 %pragma(java) jniclasscode=%{
   static {
