@@ -2,8 +2,7 @@ package ru.urururu.sanity.cpp.tools;
 
 import org.apache.commons.lang3.SystemUtils;
 
-import java.util.EnumSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
@@ -28,17 +27,33 @@ class Clang extends Tool {
     }
 
     @Override
-    String evaluateVersionId(String version) {
+    List<String> evaluateVersionIds(String version) {
         String clangVersion = "clang version";
         if (version.startsWith(clangVersion)) {
-            version = version.substring(clangVersion.length(), version.indexOf('(')).trim().replace(".", "");
-            return "clang" + version;
-        } else if (version.startsWith("Apple LLVM version")) {
-            if (version.startsWith("Apple LLVM version 7.3.0")) {
-                return "allvm73";
+            version = version.substring(clangVersion.length(), version.indexOf('(')).trim();
+            return createVersionsFamily("clang", version);
+        } else {
+            String appleLlvmVersion = "Apple LLVM version";
+            if (version.startsWith(appleLlvmVersion)) {
+                version = version.substring(appleLlvmVersion.length(), version.indexOf('(')).trim();
+                return createVersionsFamily("allvm", version);
             }
         }
 
-        return super.evaluateVersionId(version);
+        return super.evaluateVersionIds(version);
+    }
+
+    private List<String> createVersionsFamily(String prefix, String version) {
+        String[] versionParts = version.split(".");
+
+        String[] result = new String[versionParts.length];
+
+        StringBuilder sb = new StringBuilder(prefix);
+        for (int i = 0; i < versionParts.length; i++) {
+            sb.append(versionParts[i]);
+            result[result.length - i] = sb.toString();
+        }
+
+        return Collections.unmodifiableList(Arrays.asList(result));
     }
 }

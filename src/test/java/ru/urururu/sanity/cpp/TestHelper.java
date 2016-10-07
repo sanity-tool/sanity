@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.*;
+import java.util.List;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
@@ -39,12 +40,18 @@ abstract class TestHelper {
         languageDirs.put(Language.ObjectiveC, "o-c");
     }
 
-    protected void fillWithTests(TestSuite suite, String path) {
+    void fillWithTests(TestSuite suite, String path) {
         fillWithTests(suite, new File(BASE, path));
     }
 
     private void fillWithTests(TestSuite suite, File file) {
-        for (final File f : file.listFiles()) {
+        File[] files = file.listFiles();
+
+        if (files == null) {
+            throw new IllegalStateException("No files in " + file);
+        }
+
+        for (final File f : files) {
             if (matches(f)) {
                 Tool testTool;
                 if (f.isDirectory()) {
@@ -55,25 +62,13 @@ abstract class TestHelper {
                     testTool = toolFactory.get(FilenameUtils.getExtension(f.getAbsolutePath()));
                 }
 
-                Path pathToExpected;
-                if (testTool == null) {
-                    pathToExpected = Paths.get(f.getAbsolutePath() + ".expected.txt");
-                } else {
-                    String versionId = testTool.getVersionId();
-
-                    pathToExpected = Paths.get(f.getAbsolutePath() + '.' + versionId + ".expected.txt");
-                    if (!pathToExpected.toFile().exists()) {
-                        pathToExpected = Paths.get(f.getAbsolutePath() + ".expected.txt");
-                    }
-                }
-
                 String absolutePath = f.getAbsolutePath();
-                Path finalPathToExpected = pathToExpected;
+                Path pathToExpected = getPathToExpected(f, testTool);
 
                 suite.addTest(new TestCase(f.getName()) {
                     @Override
                     protected void runTest() throws Throwable {
-                        TestHelper.this.runTest(absolutePath, finalPathToExpected);
+                        TestHelper.this.runTest(absolutePath, pathToExpected);
                     }
                 });
             } else if (f.isDirectory()) {
@@ -82,6 +77,20 @@ abstract class TestHelper {
                 suite.addTest(inner);
             }
         }
+    }
+
+    private Path getPathToExpected(File testFile, Tool tool) {
+        if (tool != null) {
+            List<String> versionIds = tool.getVersionIds();
+
+            for (String versionId : versionIds) {
+                Path pathToExpected = Paths.get(testFile.getAbsolutePath() + '.' + versionId + ".expected.txt");
+                if (pathToExpected.toFile().exists()) {
+                    return pathToExpected;
+                }
+            }
+        }
+        return Paths.get(testFile.getAbsolutePath() + ".expected.txt");
     }
 
     protected boolean matches(File file) {
