@@ -88,7 +88,7 @@ public class SourceRangeFactory implements ParserListener {
     @Override
     public void onModuleStarted(SWIGTYPE_p_LLVMOpaqueModule module) {
         debugVersion = bitreader.SAGetDebugMetadataVersionFromModule(module);
-        versionByte = (byte)(debugVersion >>> 0); // most significat byte // todo report intellij bug here
+        versionByte = debugVersion.byteValue();
         System.out.println("debugVersion = " + Long.toHexString(debugVersion));
         System.out.println("versionByte = " + versionByte);
     }
