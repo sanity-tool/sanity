@@ -1,5 +1,7 @@
 package ru.urururu.sanity.cpp;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.urururu.sanity.CfgUtils;
 import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.api.cfg.Assignment;
@@ -24,6 +26,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,6 +35,8 @@ import java.util.List;
  */
 @Component
 public class Parser {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Parser.class);
+
     @Autowired
     ClangParametersFactory parametersFactory;
     @Autowired
@@ -48,10 +53,14 @@ public class Parser {
     ConstCache constants;
 
     public List<Cfg> parse(String filename) throws ParseException {
+        LOGGER.info("filename = {}", filename);
         try {
             try (TempFileWrapper objFile = new TempFileWrapper("result", ".bc")) {
                 try (TempFileWrapper errFile = new TempFileWrapper("result", ".err")) {
-                    ProcessBuilder pb = new ProcessBuilder(parametersFactory.getParameters(filename, objFile.getAbsolutePath()));
+                    String[] parameters = parametersFactory.getParameters(filename, objFile.getAbsolutePath());
+                    LOGGER.info("parameters = {}", Arrays.toString(parameters));
+
+                    ProcessBuilder pb = new ProcessBuilder(parameters);
 
                     pb.inheritIO();
                     pb.redirectError(ProcessBuilder.Redirect.to(errFile.getFile()));
@@ -130,7 +139,7 @@ public class Parser {
         }
     }
 
-    protected Cfe parseGlobalInitializers(SWIGTYPE_p_LLVMOpaqueModule module) {
+    private Cfe parseGlobalInitializers(SWIGTYPE_p_LLVMOpaqueModule module) {
         Cfe first = null;
         Cfe last = null;
 

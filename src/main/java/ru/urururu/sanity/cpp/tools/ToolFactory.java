@@ -14,10 +14,10 @@ public class ToolFactory {
     private final Map<Language, Tool> byLanguages = new EnumMap<>(Language.class);
 
     public ToolFactory() throws InterruptedException {
-        Clang.tryCreate(System.getProperty("sanity.clang", "clang")).ifPresent(this::addTool);
-        Swift.tryCreate(System.getProperty("sanity.swiftc", "swiftc"), Swift::new).ifPresent(this::addTool);
+        Tool.tryCreate(System.getProperty("sanity.clang", "clang"), Clang::new).ifPresent(this::addTool);
+        Tool.tryCreate(System.getProperty("sanity.swiftc", "swiftc"), Swift::new).ifPresent(this::addTool);
 
-        LlvmAs.tryCreate(System.getProperty("sanity.llvm-as", "llvm-as")).ifPresent(this::addTool);
+        Tool.tryCreate(System.getProperty("sanity.llvm-as", "llvm-as"), LlvmAs::new).ifPresent(this::addTool);
     }
 
     private void addTool(Tool tool) {
@@ -52,5 +52,9 @@ public class ToolFactory {
 
     public Tool get(String extension) {
         return byExtensions.get(extension);
+    }
+
+    public Tool get(Language language) {
+        return byLanguages.get(language);
     }
 }

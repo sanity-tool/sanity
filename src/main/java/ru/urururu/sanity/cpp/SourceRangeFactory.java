@@ -1,6 +1,9 @@
 package ru.urururu.sanity.cpp;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.urururu.sanity.api.cfg.SourceRange;
+import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 import ru.urururu.sanity.cpp.llvm.bitreader;
 import org.springframework.stereotype.Component;
@@ -11,21 +14,23 @@ import java.io.File;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class SourceRangeFactory {
-    public static final int DW_TAG_file_type = 786473;
-    public static final int DW_TAG_lexical_block = 786443;
-    public static final int DW_TAG_subprogram = 786478;
+public class SourceRangeFactory implements ParserListener {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SourceRangeFactory.class);
 
-    private static final int FILE_INDEX = 0;
-    private static final int DIRECTORY_INDEX = 1;
+    private static final int DW_TAG_file_type = 786473;
+    private static final int DW_TAG_lexical_block = 786443;
 
-    public SourceRange getSourceRange(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+    private Long debugVersion;
+    private Byte versionByte;
+
+    SourceRange getSourceRange(SWIGTYPE_p_LLVMOpaqueValue instruction) {
         int line = bitreader.SAGetInstructionDebugLocLine(instruction);
-        if (line != -1) {
-            String filename = bitreader.SAGetInstructionDebugLocScopeFile(instruction);
-            if (filename != null) {
+        if (versionByte == 3) {
+            if (line != -1) {
+                String filename = bitreader.SAGetInstructionDebugLocScopeFile(instruction);
                 return new SourceRange(filename, line);
             }
+
             return null;
         }
 
@@ -40,38 +45,41 @@ public class SourceRangeFactory {
             if (pair != null) {
                 String filename = bitreader.getMDString(bitreader.LLVMGetOperand(pair, 0));
                 String directory = bitreader.getMDString(bitreader.LLVMGetOperand(pair, 1));
-                int lineNo = (int) bitreader.LLVMConstIntGetSExtValue(bitreader.LLVMGetOperand(node, 0));
                 if (new File(filename).isAbsolute()) {
-                    return new SourceRange(filename, lineNo);
+                    return new SourceRange(filename, line);
                 }
-                return new SourceRange(new File(directory, filename).getAbsolutePath(), lineNo);
+                return new SourceRange(new File(directory, filename).getAbsolutePath(), line);
             }
         }
+
         return null;
     }
 
     private SWIGTYPE_p_LLVMOpaqueValue getPair(SWIGTYPE_p_LLVMOpaqueValue node) {
-        if (node == null) {
-            return null;
-        }
-        if (bitreader.LLVMIsAMDNode(node) == null) {
-            return null;
+        int count = bitreader.LLVMGetNumOperands(node);
+        if (count == 1) {
+            return getPair(bitreader.LLVMGetOperand(node, 0));
         }
 
-        try {
-            if (LlvmUtils.checkTag(node, DW_TAG_file_type) || LlvmUtils.checkTag(node, DW_TAG_lexical_block)) {
-                return bitreader.LLVMGetOperand(node, 1);
-            } else {
-                return getPair(bitreader.LLVMGetOperand(node, 2));
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println("node = " + bitreader.LLVMPrintValueToString(node));
-            int count = bitreader.LLVMGetNumOperands(node);
-            System.out.println("count = " + count);
-            for (int i = 0; i < count; i++) {
-                System.out.println("bitreader.LLVMGetOperand(node, " + i + ") = " + bitreader.LLVMPrintValueToString(bitreader.LLVMGetOperand(node, i)));
-            }
-            throw e;
+        if (LlvmUtils.checkTag(node, "0x29", DW_TAG_file_type, DW_TAG_lexical_block)) {
+            return bitreader.LLVMGetOperand(node, 1);
+        } else {
+            return getPair(bitreader.LLVMGetOperand(node, 2));
         }
+    }
+
+    @Override
+    public void onModuleStarted(SWIGTYPE_p_LLVMOpaqueModule module) {
+        debugVersion = bitreader.SAGetDebugMetadataVersionFromModule(module);
+        versionByte = debugVersion.byteValue();
+
+        LOGGER.info("debugVersion = {}", Long.toHexString(debugVersion));
+        LOGGER.info("versionByte = {}", versionByte);
+    }
+
+    @Override
+    public void onModuleFinished(SWIGTYPE_p_LLVMOpaqueModule module) {
+        debugVersion = null;
+        versionByte = null;
     }
 }

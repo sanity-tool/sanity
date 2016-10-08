@@ -78,7 +78,7 @@ memory.cpp:26 delete[] PSTRUCT2;
 #0009:	 if: tmp4 then #0010:	 else #0011:
 memory.cpp:26 delete[] PSTRUCT2;
 #0010:	 call: _ZdaPv((tmp2+-8)) next: #0005:
-memory.cpp:26 delete[] PSTRUCT2;
+memory.cpp:27 }
 #0011:	 noop: opcode 'LLVMPHI' not supported
 memory.cpp:26 delete[] PSTRUCT2;
 #0012:	 noop: opcode 'LLVMInvoke' not supported <exit>

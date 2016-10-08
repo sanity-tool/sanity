@@ -2,22 +2,14 @@ package ru.urururu.sanity.cpp.tools;
 
 import org.apache.commons.lang3.SystemUtils;
 
-import java.util.EnumSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 class Clang extends Tool {
-    private final String executable;
-
-    private Clang(String executable) {
-        this.executable = executable;
-    }
-
-    static Optional<Tool> tryCreate(String executable) throws InterruptedException {
-        return tryCreate(executable, Clang::new);
+    Clang(String executable, String version) {
+        super(executable, version);
     }
 
     @Override
@@ -32,5 +24,34 @@ class Clang extends Tool {
         }
 
         return new String[]{executable, filename, "-c", "-emit-llvm", "-femit-all-decls", "-g", "-o", objFile};
+    }
+
+    @Override
+    List<String> evaluateVersionIds(String version) {
+        String clangVersion = "clang version";
+        if (version.startsWith(clangVersion)) {
+            return createVersionsFamily("clang", version.substring(clangVersion.length(), version.indexOf('(')).trim());
+        } else {
+            String appleLlvmVersion = "Apple LLVM version";
+            if (version.startsWith(appleLlvmVersion)) {
+                return createVersionsFamily("allvm", version.substring(appleLlvmVersion.length(), version.indexOf('(')).trim());
+            }
+        }
+
+        return super.evaluateVersionIds(version);
+    }
+
+    private List<String> createVersionsFamily(String prefix, String version) {
+        String[] versionParts = version.split("\\.");
+
+        String[] result = new String[versionParts.length];
+
+        StringBuilder sb = new StringBuilder(prefix);
+        for (int i = 0; i < versionParts.length; i++) {
+            sb.append(versionParts[i]);
+            result[result.length - 1 - i] = sb.toString();
+        }
+
+        return Collections.unmodifiableList(Arrays.asList(result));
     }
 }

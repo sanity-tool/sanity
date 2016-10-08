@@ -44,7 +44,7 @@ public class CfePrinter implements CfeVisitor {
                 sb.append(" <exit>");
             }
             if (printed.contains(cfe.getNext())) {
-                sb.append(" next: ").append(getId(cfe.getNext()));
+                sb.append(" next: ").append(getId(cfe.getNext()).trim());
             }
         }
 
@@ -140,7 +140,7 @@ public class CfePrinter implements CfeVisitor {
     public void visit(IfCondition ifCondition) {
         sb.append("if: ");
         print(ifCondition.getCondition());
-        sb.append(" then ").append(getId(ifCondition.getThenElement())).append(" else ").append(getId(ifCondition.getElseElement()));
+        sb.append(" then ").append(getId(ifCondition.getThenElement())).append(" else ").append(getId(ifCondition.getElseElement()).trim());
     }
 
     @Override
@@ -153,6 +153,7 @@ public class CfePrinter implements CfeVisitor {
             print(entry.getKey());
             sb.append(" -> ").append(getId(entry.getValue()));
         }
+        sb.setLength(sb.length() - 1); // todo get rid of trailing whitespace in getId
     }
 
     private void print(RValue value) {
@@ -210,7 +211,7 @@ public class CfePrinter implements CfeVisitor {
         if (cfe == null) {
             return "<exit>";
         }
-        return String.format("#%04d:\t", getOrCreateId(cfe, cfeIds));
+        return String.format("#%04d:\t", getOrCreateId(cfe, cfeIds)); // todo remove trailing whitespace
     }
 
     private <K> Integer getOrCreateId(K value, Map<K, Integer> map) {

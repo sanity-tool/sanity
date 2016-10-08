@@ -3,18 +3,24 @@ package ru.urururu.sanity.cpp;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 import ru.urururu.sanity.cpp.llvm.bitreader;
 
+import java.util.stream.LongStream;
+
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class LlvmUtils {
-    public static boolean checkTag(SWIGTYPE_p_LLVMOpaqueValue node, long tag) {
+    static boolean checkTag(SWIGTYPE_p_LLVMOpaqueValue node, String stringMarker, long... tags) {
         if (bitreader.LLVMIsAMDNode(node) == null) {
             return false;
         }
         SWIGTYPE_p_LLVMOpaqueValue maybeTag = bitreader.LLVMGetOperand(node, 0);
         if (bitreader.LLVMIsAConstantInt(maybeTag) != null) {
             long val = bitreader.LLVMConstIntGetSExtValue(maybeTag);
-            return val == tag;
+            return LongStream.of(tags).anyMatch(tag -> tag == val);
+        }
+        if (stringMarker != null && bitreader.LLVMIsAMDString(maybeTag) != null) {
+            String mdString = bitreader.SAGetMDString(maybeTag);
+            return mdString.equals(stringMarker);
         }
         return false;
     }
