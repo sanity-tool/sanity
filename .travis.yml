@@ -58,6 +58,7 @@ before_install:
   - ./install.sh
 
 after_success:
+  - ./check.sh
   - bash <(curl -s https://codecov.io/bash)
 
 after_failure:
