@@ -30,13 +30,11 @@ class Clang extends Tool {
     List<String> evaluateVersionIds(String version) {
         String clangVersion = "clang version";
         if (version.startsWith(clangVersion)) {
-            version = version.substring(clangVersion.length(), version.indexOf('(')).trim();
-            return createVersionsFamily("clang", version);
+            return createVersionsFamily("clang", version.substring(clangVersion.length(), version.indexOf('(')).trim());
         } else {
             String appleLlvmVersion = "Apple LLVM version";
             if (version.startsWith(appleLlvmVersion)) {
-                version = version.substring(appleLlvmVersion.length(), version.indexOf('(')).trim();
-                return createVersionsFamily("allvm", version);
+                return createVersionsFamily("allvm", version.substring(appleLlvmVersion.length(), version.indexOf('(')).trim());
             }
         }
 

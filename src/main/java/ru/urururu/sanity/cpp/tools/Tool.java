@@ -1,5 +1,8 @@
 package ru.urururu.sanity.cpp.tools;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,14 +16,18 @@ import java.util.function.BiFunction;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public abstract class Tool {
+    private final static Logger LOGGER = LoggerFactory.getLogger(Tool.class);
+
     final String executable;
     private final List<String> versionIds;
 
     Tool(String executable, String version) {
         this.executable = executable;
         this.versionIds = evaluateVersionIds(version);
-        System.out.println("version = " + version);
-        System.out.println("versionId = " + versionIds);
+
+        LOGGER.info("executable = {}", executable);
+        LOGGER.info("versionString = {}", version);
+        LOGGER.info("versionIds = {}", versionIds);
     }
 
     abstract Set<Language> getLanguages();
@@ -55,7 +62,7 @@ public abstract class Tool {
     }
 
     List<String> evaluateVersionIds(String version) {
-        System.err.println("unknown version = " + version);
+        LOGGER.warn("unknown version = {}", version);
         return Collections.singletonList("unknown");
     }
 }
