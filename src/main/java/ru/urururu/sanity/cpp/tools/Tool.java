@@ -16,7 +16,7 @@ import java.util.function.BiFunction;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public abstract class Tool {
-    private final static Logger LOGGER = LoggerFactory.getLogger(Tool.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Tool.class);
 
     final String executable;
     private final List<String> versionIds;
