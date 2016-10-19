@@ -24,6 +24,7 @@ import java.util.List;
 abstract class TestHelper {
     static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 
+    static final String LANG = System.getProperty("LANG");
     static final String BASE = System.getProperty("TEST_RESOURCES_ROOT");
     private static String FAILURES_DIR = System.getProperty("TEST_FAILURES_ROOT");
     private static final BidiMap<Language, String> languageDirs = new DualHashBidiMap<>();
@@ -102,11 +103,21 @@ abstract class TestHelper {
     }
 
     private boolean isExtensionSupported(String extension) {
-        return context.getBean(ToolFactory.class).getExtensions().contains(extension);
+        return isLanguageSupported(Language.getByExtension(extension));
     }
 
     boolean isDirectorySupported(File file) {
-        return file.isDirectory() && toolFactory.getLanguages().contains(languageDirs.getKey(file.getName()));
+        return file.isDirectory() && isLanguageSupported(languageDirs.getKey(file.getName()));
+    }
+
+    private boolean isLanguageSupported(Language language) {
+        if (language == null) {
+            return false;
+        }
+        if (LANG != null) {
+            return language.toString().equals(LANG);
+        }
+        return toolFactory.getLanguages().contains(language);
     }
 
     public abstract void runTest(String unit, Path pathToExpected) throws Exception;
