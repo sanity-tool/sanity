@@ -4,6 +4,7 @@ import junit.framework.Assert;
 import junit.framework.ComparisonFailure;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.apache.commons.lang3.StringUtils;
 import ru.urururu.sanity.cpp.tools.Language;
 import ru.urururu.sanity.cpp.tools.Tool;
 import ru.urururu.sanity.cpp.tools.ToolFactory;
@@ -24,10 +25,10 @@ import java.util.List;
 abstract class TestHelper {
     static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 
-    static final String LANG = System.getProperty("LANG");
     static final String BASE = System.getProperty("TEST_RESOURCES_ROOT");
     private static String FAILURES_DIR = System.getProperty("TEST_FAILURES_ROOT");
     private static final BidiMap<Language, String> languageDirs = new DualHashBidiMap<>();
+    private static final String LANG = System.getProperty("LANG");
 
     private static ToolFactory toolFactory;
 
@@ -114,7 +115,7 @@ abstract class TestHelper {
         if (language == null) {
             return false;
         }
-        if (LANG != null) {
+        if (StringUtils.isNotEmpty(LANG)) {
             return language.toString().equals(LANG);
         }
         return toolFactory.getLanguages().contains(language);
