@@ -125,7 +125,7 @@ install: ./install.sh
 
 after_success:
   - ./check.sh
-  - [ -z $EXTRA_BREW ] || bash <(curl -s https://codecov.io/bash) -F $LANG
+  - bash <(curl -s https://codecov.io/bash) -F $LANG
 
 after_failure:
   - diff target/failures/expected target/failures/actual
