@@ -19,7 +19,7 @@ addons:
 
 matrix:
   allow_failures:
-  - osx_image: xcode8
+  - osx_image: xcode8 # todo fix it if it's fixable, last result: jvm crash in jni code
   include:
     - os: linux
       jdk: oraclejdk8
@@ -39,14 +39,39 @@ matrix:
       - LANG=IR
       - REAL_LLVM=1
       - LLVM_AS_BIN=llvm-as-3.8
+
     - os: osx
-      osx_image: xcode8 # todo fix it if it's fixable, last result: jvm crash in jni code
+      osx_image: xcode8
+      env: LANG=C
+    - os: osx
+      osx_image: xcode8
+      env: LANG=Cpp
+    - os: osx
+      osx_image: xcode8
+      env: LANG=ObjectiveC
+
     - os: osx
       osx_image: xcode7.3
       env:
       - DESCRIPTION=Latest supported OSX image with original llvm libs and released clang
+      - LANG=C
       - REAL_LLVM=1
       - CLANG_BIN=/usr/local/opt/llvm/bin/clang
+    - os: osx
+      osx_image: xcode7.3
+      env:
+      - DESCRIPTION=Latest supported OSX image with original llvm libs and released clang
+      - LANG=Cpp
+      - REAL_LLVM=1
+      - CLANG_BIN=/usr/local/opt/llvm/bin/clang
+    - os: osx
+      osx_image: xcode7.3
+      env:
+      - DESCRIPTION=Latest supported OSX image with original llvm libs and released clang
+      - LANG=ObjectiveC
+      - REAL_LLVM=1
+      - CLANG_BIN=/usr/local/opt/llvm/bin/clang
+
     - os: osx
       osx_image: xcode7.3
     - os: osx
@@ -100,7 +125,7 @@ install: ./install.sh
 
 after_success:
   - ./check.sh
-  - bash <(curl -s https://codecov.io/bash) -F LANG
+  - [ -z $EXTRA_BREW ] || bash <(curl -s https://codecov.io/bash) -F $LANG
 
 after_failure:
   - diff target/failures/expected target/failures/actual
