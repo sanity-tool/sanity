@@ -3,7 +3,41 @@
 # Exit on failure
 set -e
 
-CMAKE=cmake
+
+case `uname` in
+    Linux)
+        if [[ ! -f "cmake-3.4.3-Linux-x86_64/bin/cmake" ]]; then wget --no-check-certificate http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz && tar -xvf cmake-3.4.3-Linux-x86_64.tar.gz; fi
+        CMAKE=cmake-3.4.3-Linux-x86_64/bin/cmake
+        CC=gcc-4.9
+        CXX=g++-4.9
+        LD=g++-4.9
+
+        JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
+
+        DLL_NAME=libirreader.so
+
+        LDFLAGS="-lpthread -ltermcap"
+
+        # todo nice to have
+        #LDFLAGS="$LDFLAGS -Wl,-z,defs"
+    ;;
+    Darwin)
+        CMAKE=cmake
+        CC=clang
+        CXX=clang++
+        LD=clang++
+
+        JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin/"
+
+        DLL_NAME=libirreader.jnilib
+
+        LDFLAGS="-ltermcap -L/usr/local/opt/libffi/lib"
+    ;;
+    *)
+        echo Unknown environment: `uname`
+        exit 1
+    ;;
+esac
 
 LLVM_HOME="target/llvm"
 LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
@@ -29,38 +63,6 @@ if [ ! -d "$LLVM_HOME" ] ; then
 
     cd $OLD_DIR
 fi
-
-case `uname` in
-    Linux)
-        CC=gcc-4.9
-        CXX=g++-4.9
-        LD=g++-4.9
-
-        JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
-
-        DLL_NAME=libirreader.so
-
-        LDFLAGS="-lpthread -ltermcap"
-
-        # todo nice to have
-        #LDFLAGS="$LDFLAGS -Wl,-z,defs"
-    ;;
-    Darwin)
-        CC=clang
-        CXX=clang++
-        LD=clang++
-
-        JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin/"
-
-        DLL_NAME=libirreader.jnilib
-
-        LDFLAGS="-ltermcap -L/usr/local/opt/libffi/lib"
-    ;;
-    *)
-        echo Unknown environment: `uname`
-        exit 1
-    ;;
-esac
 
 echo `$LLVM_CONFIG --version`
 
