@@ -3,8 +3,40 @@
 # Exit on failure
 set -e
 
-LLVM_CONFIG=llvm-config
-$LLVM_CONFIG --version >/dev/null 2>&1 || LLVM_CONFIG=/usr/local/opt/llvm/bin/llvm-config
+CMAKE=cmake
+
+LLVM_HOME="target/llvm"
+LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
+
+if [ ! -d "$LLVM_HOME" ] ; then
+    OLD_DIR=`pwd`
+
+    git clone -b saving-debug https://github.com/okutane/llvm.git $LLVM_HOME
+    cd $LLVM_HOME
+
+    mkdir build && cd build
+    $CMAKE -G "Unix Makefiles" ..
+    # subdependencies for my library
+    make LLVMCore
+    make LLVMAsmParser
+    make LLVMBitReader
+    make LLVMProfileData
+    make LLVMMC
+    make LLVMMCParser
+    make LLVMObject
+    make LLVMAnalysis
+    # dependencies for my library
+    make LLVMIRReader
+    make LLVMTransformUtils
+    # to build my library
+    make llvm-config
+    # to check strip-debug-info
+    make llvm-dis
+
+    LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
+
+    cd $OLD_DIR
+fi
 
 case `uname` in
     Linux)
@@ -12,8 +44,6 @@ case `uname` in
         CXX=g++-4.9
         LD=g++-4.9
         OBJCOPY=objcopy
-
-        LLVM_CONFIG=llvm-config-3.8
 
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
 
@@ -47,7 +77,7 @@ echo `$LLVM_CONFIG --version`
 LLVM_LIBS="irreader transformutils"
 LIBS=`$LLVM_CONFIG --libs $LLVM_LIBS`
 
-
+CFLAGS=`$LLVM_CONFIG --cflags`
 CPPFLAGS=`$LLVM_CONFIG --cppflags`
 LDFLAGS="`$LLVM_CONFIG --ldflags` -v $LDFLAGS"
 
@@ -71,25 +101,8 @@ mkdir -p $SOBJ_DIR
 
 swig $LLVM_INCLUDE -java -outdir $JAVA_OUT -package ru.urururu.sanity.cpp.llvm -o $CPP_OUT/bitreader_wrap.c -v $SRC_DIR/bitreader.i
 
-$CC -c $CPP_OUT/bitreader_wrap.c -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $JAVA_INCLUDES $LLVM_INCLUDE -I/usr/local/opt/llvm/include $DEBUG -fPIC -o $OBJ_DIR/wrappers.o
+$CC -c $CPP_OUT/bitreader_wrap.c $JAVA_INCLUDES $CFLAGS $DEBUG -o $OBJ_DIR/wrappers.o
 
-$CXX -c $SRC_DIR/helpers.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $CPPFLAGS -I/usr/local/opt/llvm/include $DEBUG -fPIC -std=c++11 -o $OBJ_DIR/helpers.o
-
-if [ -z "$REAL_LLVM" ]; then
-    # llvm drops debug information (hence source refs) from some compilers, code below disabled that logic.
-
-    # compile replacement code.
-    $CXX -c $SRC_DIR/debughack.cpp -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS $CPPFLAGS -I/usr/local/opt/llvm/include $DEBUG -fPIC -std=c++11 -o $OBJ_DIR/debughack.o
-
-    # remove logic from llvm library.
-    cp /usr/local/Cellar/llvm/3.8.1/lib/libLLVMCore.a $OBJ_DIR/libLLVMCore.a
-    chmod +w $OBJ_DIR/libLLVMCore.a
-    $OBJCOPY -v --strip-symbol __ZN4llvm16UpgradeDebugInfoERNS_6ModuleE $OBJ_DIR/libLLVMCore.a
-
-    # link against "hacked" library and replacement code.
-    LIBS="${LIBS/-lLLVMCore/} $OBJ_DIR/libLLVMCore.a $OBJ_DIR/debughack.o"
-
-    LDFLAGS="-Wl,-allow_sub_type_mismatches ${LDFLAGS}"
-fi
+$CXX -c $SRC_DIR/helpers.cpp $CPPFLAGS $DEBUG -std=c++11 -o $OBJ_DIR/helpers.o
 
 $CXX -shared -o $SOBJ_DIR/$DLL_NAME $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o $LIBS $LDFLAGS $DEBUG
