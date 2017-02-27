@@ -10,6 +10,7 @@ addons:
       - libstdc++6-4.7-dev
       - gcc-4.9
       - g++-4.9
+      - cmake
       - swig
       - clang-3.8
       - libllvm3.8

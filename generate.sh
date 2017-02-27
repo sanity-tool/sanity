@@ -43,7 +43,6 @@ case `uname` in
         CC=gcc-4.9
         CXX=g++-4.9
         LD=g++-4.9
-        OBJCOPY=objcopy
 
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
 
@@ -58,7 +57,6 @@ case `uname` in
         CC=clang
         CXX=clang++
         LD=clang++
-        OBJCOPY=gobjcopy
 
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/darwin/"
 
