@@ -50,13 +50,13 @@ if [ ! -d "$LLVM_HOME" ] ; then
     mkdir build && cd build
     $CMAKE -G "Unix Makefiles" ..
     # subdependencies for my library
-    make -j LLVMCore LLVMAsmParser LLVMBitReader LLVMProfileData LLVMMC LLVMMCParser LLVMObject LLVMAnalysis
+    make LLVMCore LLVMAsmParser LLVMBitReader LLVMProfileData LLVMMC LLVMMCParser LLVMObject LLVMAnalysis
     # dependencies for my library
-    make -j LLVMIRReader LLVMTransformUtils
+    make LLVMIRReader LLVMTransformUtils
     # to build my library
-    make -j llvm-config
+    make llvm-config
     # to check strip-debug-info
-    make -j llvm-dis
+    make llvm-dis
 
     LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
 
