@@ -2,13 +2,22 @@
 
 %{
 #include "llvm-c/Core.h"
+#include "llvm-c/Support.h"
 #include "llvm-c/IRReader.h"
+
+int SAGetInstructionDebugLocLine(LLVMValueRef instruction);
+unsigned SAGetDebugMetadataVersionFromModule(LLVMModuleRef module);
 
 LLVMModuleRef parse(const char *path) {
     LLVMModuleRef m;
     LLVMMemoryBufferRef membuf;
     char *errmsg;
     LLVMContextRef ctx = LLVMGetGlobalContext();
+
+    int argc = 2;
+    const char *argv[] = { "dummy", "-strip-debug-info=0" };
+
+    LLVMParseCommandLineOptions(argc, argv, "llvm .bc reader library");
 
     if (LLVMCreateMemoryBufferWithContentsOfFile(path, &membuf, &errmsg)) {
         return 0;
@@ -42,7 +51,7 @@ const char *SAGetMDString(LLVMValueRef value);
 
 %}
 
-%contract LLVMGetOperand (LLVMValueRef Val, unsigned Index) {
+%contract LLVMGetOperand (LLVMValueRef Val, int Index) {
 require:
    Index >= 0 && Index < LLVMGetNumOperands(Val);
 }
@@ -60,10 +69,6 @@ require:
   }
 %}
 
-#define __STDC_LIMIT_MACROS
-#define __STDC_CONSTANT_MACROS
-
-%include "llvm/Support/DataTypes.h"
 %include "llvm-c/Types.h"
 %include "llvm-c/Support.h"
 %include "llvm-c/Core.h"

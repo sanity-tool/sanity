@@ -10,6 +10,7 @@ addons:
       - libstdc++6-4.7-dev
       - gcc-4.9
       - g++-4.9
+      - cmake
       - swig
       - clang-3.8
       - libllvm3.8
@@ -22,7 +23,6 @@ matrix:
     - os: linux
       jdk: oraclejdk8
       env:
-      - REAL_LLVM=1
       - CLANG_BIN=clang-3.8
       - LLVM_AS_BIN=llvm-as-3.8
     #- os: osx
@@ -31,43 +31,45 @@ matrix:
       osx_image: xcode7.3
       env:
       - DESCRIPTION=Latest supported OSX image with original llvm libs and released clang
-      - REAL_LLVM=1
       - CLANG_BIN=/usr/local/opt/llvm/bin/clang
     - os: osx
       osx_image: xcode7.3
+
+# travis uses 7.3 for those below:
+#    - os: osx
+#      osx_image: xcode7.2
+#    - os: osx
+#      osx_image: xcode7.1
+#    - os: osx
+#      osx_image: xcode7
+
+# brew don't have those below:
+#    - os: osx
+#      osx_image: xcode7.1
+#      env:
+#      - EXTRA_BREW=llvm33
+#      - CLANG_BIN=clang-3.3
+#    - os: osx
+#      osx_image: xcode7.1
+#      env:
+#      - EXTRA_BREW=llvm34
+#      - CLANG_BIN=clang-3.4
+#    - os: osx
+#      osx_image: xcode7.1
+#      env:
+#      - EXTRA_BREW=llvm35
+#      - CLANG_BIN=clang-3.5
+#    - os: osx
+#      osx_image: xcode7.1
+#      env:
+#      - EXTRA_BREW=llvm36
+#      - CLANG_BIN=clang-3.6
+
     - os: osx
-      osx_image: xcode7.2
-    - os: osx
-      osx_image: xcode7.1
-    - os: osx
-      osx_image: xcode7
-    - os: osx
-      osx_image: xcode7.1
-      env:
-      - EXTRA_BREW=llvm33
-      - CLANG_BIN=clang-3.3
-    - os: osx
-      osx_image: xcode7.1
-      env:
-      - EXTRA_BREW=llvm34
-      - CLANG_BIN=clang-3.4
-    - os: osx
-      osx_image: xcode7.1
-      env:
-      - EXTRA_BREW=llvm35
-      - CLANG_BIN=clang-3.5
-    - os: osx
-      osx_image: xcode7.1
-      env:
-      - EXTRA_BREW=llvm36
-      - CLANG_BIN=clang-3.6
-    - os: osx
-      osx_image: xcode7.1
       env:
       - EXTRA_BREW=llvm37
       - CLANG_BIN=clang-3.7
     - os: osx
-      osx_image: xcode7.1
       env:
       - EXTRA_BREW=llvm38
       - CLANG_BIN=clang-3.8
