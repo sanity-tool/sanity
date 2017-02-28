@@ -51,7 +51,7 @@ const char *SAGetMDString(LLVMValueRef value);
 
 %}
 
-%contract LLVMGetOperand (LLVMValueRef Val, unsigned Index) {
+%contract LLVMGetOperand (LLVMValueRef Val, int Index) {
 require:
    Index >= 0 && Index < LLVMGetNumOperands(Val);
 }
