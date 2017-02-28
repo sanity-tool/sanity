@@ -75,7 +75,7 @@ LDFLAGS="`$LLVM_CONFIG --ldflags` -v $LDFLAGS"
 LLVM_INCLUDE="-I`$LLVM_CONFIG --includedir`"
 
 DEBUG="-g -coverage"
-COMMONFLAGS="-Werror $DEBUG"
+COMMONFLAGS="$DEBUG"
 
 SRC_DIR="src/main/cpp"
 
