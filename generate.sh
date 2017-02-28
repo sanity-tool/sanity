@@ -69,6 +69,8 @@ LLVM_LIBS="irreader transformutils"
 LIBS=`$LLVM_CONFIG --libs $LLVM_LIBS`
 
 CFLAGS=`$LLVM_CONFIG --cflags`
+CXXFLAGS=`$LLVM_CONFIG --cxxflags`
+
 CPPFLAGS=`$LLVM_CONFIG --cppflags`
 LDFLAGS="`$LLVM_CONFIG --ldflags` -v $LDFLAGS"
 
@@ -91,10 +93,10 @@ mkdir -p $OBJ_DIR
 SOBJ_DIR="target/native/shared"
 mkdir -p $SOBJ_DIR
 
-swig $LLVM_INCLUDE -java -outdir $JAVA_OUT -package ru.urururu.sanity.cpp.llvm -o $CPP_OUT/bitreader_wrap.c -v $SRC_DIR/bitreader.i
+swig $CPPFLAGS -java -outdir $JAVA_OUT -package ru.urururu.sanity.cpp.llvm -o $CPP_OUT/bitreader_wrap.c -v $SRC_DIR/bitreader.i
 
 $CC -c $CPP_OUT/bitreader_wrap.c $JAVA_INCLUDES $CFLAGS $COMMONFLAGS -o $OBJ_DIR/wrappers.o
 
-$CXX -c $SRC_DIR/helpers.cpp $CPPFLAGS $COMMONFLAGS -std=c++11 -o $OBJ_DIR/helpers.o
+$CXX -c $SRC_DIR/helpers.cpp $CXXFLAGS $COMMONFLAGS -o $OBJ_DIR/helpers.o
 
 $CXX -shared -o $SOBJ_DIR/$DLL_NAME $OBJ_DIR/wrappers.o $OBJ_DIR/helpers.o $LIBS $LDFLAGS $DEBUG
