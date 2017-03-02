@@ -25,6 +25,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <systemPropertyVariables>
+                        <LANG>${env.LANG}</LANG>
                         <TEST_FAILURES_ROOT>${basedir}/target/failures</TEST_FAILURES_ROOT>
                         <TEST_RESOURCES_ROOT>${build.testSourceDirectory}/../resources</TEST_RESOURCES_ROOT>
                     </systemPropertyVariables>
@@ -115,7 +116,7 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <configuration>
                             <systemPropertyVariables>
-                                <sanity.llvs-as>${env.LLVM_AS_BIN}</sanity.llvs-as>
+                                <sanity.llvm-as>${env.LLVM_AS_BIN}</sanity.llvm-as>
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>
