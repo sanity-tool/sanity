@@ -10,7 +10,6 @@ addons:
       - libstdc++6-4.7-dev
       - gcc-4.9
       - g++-4.9
-      - cmake
       - swig
       - clang-3.8
       - libllvm3.8
@@ -19,21 +18,44 @@ addons:
       - llvm-3.8-runtime
 
 matrix:
+  allow_failures:
+  - osx_image: xcode8 # todo fix it if it's fixable, last result: jvm crash in jni code
   include:
     - os: linux
       jdk: oraclejdk8
       env:
+      - LANG=C
       - CLANG_BIN=clang-3.8
-      - LLVM_AS_BIN=llvm-as-3.8
-    #- os: osx
-    #  osx_image: xcode8 # todo fix it if it's fixable, last result: jvm crash in jni code
-    - os: osx
-      osx_image: xcode7.3
+    - os: linux
+      jdk: oraclejdk8
       env:
-      - DESCRIPTION=Latest supported OSX image with original llvm libs and released clang
-      - CLANG_BIN=/usr/local/opt/llvm/bin/clang
+      - LANG=Cpp
+      - CLANG_BIN=clang-3.8
+    - os: linux
+      jdk: oraclejdk8
+      env:
+      - LANG=IR
+      - LLVM_AS_BIN=llvm-as-3.8
+
+    - os: osx
+      osx_image: xcode8
+      env: LANG=C
+    - os: osx
+      osx_image: xcode8
+      env: LANG=Cpp
+    - os: osx
+      osx_image: xcode8
+      env: LANG=ObjectiveC
+
     - os: osx
       osx_image: xcode7.3
+      env: LANG=C
+    - os: osx
+      osx_image: xcode7.3
+      env: LANG=Cpp
+    - os: osx
+      osx_image: xcode7.3
+      env: LANG=ObjectiveC
 
 # travis uses 7.3 for those below:
 #    - os: osx
@@ -42,6 +64,62 @@ matrix:
 #      osx_image: xcode7.1
 #    - os: osx
 #      osx_image: xcode7
+
+    - os: osx
+      osx_image: xcode6.4
+      env: LANG=C
+    - os: osx
+      osx_image: xcode6.4
+      env: LANG=Cpp
+    - os: osx
+      osx_image: xcode6.4
+      env: LANG=ObjectiveC
+
+    - os: osx
+      osx_image: beta-xcode6.3
+      env: LANG=C
+    - os: osx
+      osx_image: beta-xcode6.3
+      env: LANG=Cpp
+    - os: osx
+      osx_image: beta-xcode6.3
+      env: LANG=ObjectiveC
+
+    - os: osx
+      osx_image: beta-xcode6.2
+      env: LANG=C
+    - os: osx
+      osx_image: beta-xcode6.2
+      env: LANG=Cpp
+    - os: osx
+      osx_image: beta-xcode6.2
+      env: LANG=ObjectiveC
+
+    - os: osx
+      osx_image: beta-xcode6.1
+      env: LANG=C
+    - os: osx
+      osx_image: beta-xcode6.1
+      env: LANG=Cpp
+    - os: osx
+      osx_image: beta-xcode6.1
+      env: LANG=ObjectiveC
+
+    - os: osx
+      osx_image: xcode7.3
+      env:
+      - LANG=C
+      - CLANG_BIN=/usr/local/opt/llvm/bin/clang
+    - os: osx
+      osx_image: xcode7.3
+      env:
+      - LANG=Cpp
+      - CLANG_BIN=/usr/local/opt/llvm/bin/clang
+    - os: osx
+      osx_image: xcode7.3
+      env:
+      - LANG=ObjectiveC
+      - CLANG_BIN=/usr/local/opt/llvm/bin/clang
 
 # brew don't have those below:
 #    - os: osx
@@ -67,20 +145,35 @@ matrix:
 
     - os: osx
       env:
+      - LANG=C
       - EXTRA_BREW=llvm37
       - CLANG_BIN=clang-3.7
     - os: osx
       env:
+      - LANG=Cpp
+      - EXTRA_BREW=llvm37
+      - CLANG_BIN=clang-3.7
+    - os: osx
+      env:
+      - LANG=ObjectiveC
+      - EXTRA_BREW=llvm37
+      - CLANG_BIN=clang-3.7
+
+    - os: osx
+      env:
+      - LANG=C
       - EXTRA_BREW=llvm38
       - CLANG_BIN=clang-3.8
     - os: osx
-      osx_image: xcode6.4
+      env:
+      - LANG=Cpp
+      - EXTRA_BREW=llvm38
+      - CLANG_BIN=clang-3.8
     - os: osx
-      osx_image: beta-xcode6.3
-    - os: osx
-      osx_image: beta-xcode6.2
-    - os: osx
-      osx_image: beta-xcode6.1
+      env:
+      - LANG=ObjectiveC
+      - EXTRA_BREW=llvm38
+      - CLANG_BIN=clang-3.8
 
 language: java
 
@@ -92,7 +185,7 @@ script: mvn -P $SANITY_PROFILE test -B
 
 after_success:
   - ./check.sh
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -F $LANG
 
 after_failure:
   - diff target/failures/expected target/failures/actual

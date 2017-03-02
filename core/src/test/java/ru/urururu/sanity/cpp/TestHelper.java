@@ -4,13 +4,14 @@ import junit.framework.Assert;
 import junit.framework.ComparisonFailure;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.apache.commons.lang3.StringUtils;
+import ru.urururu.sanity.cpp.tools.Language;
+import ru.urururu.sanity.cpp.tools.Tool;
+import ru.urururu.sanity.cpp.tools.ToolFactory;
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ru.urururu.sanity.cpp.tools.Language;
-import ru.urururu.sanity.cpp.tools.Tool;
-import ru.urururu.sanity.cpp.tools.ToolFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +28,7 @@ abstract class TestHelper {
     static final String BASE = System.getProperty("TEST_RESOURCES_ROOT");
     private static String FAILURES_DIR = System.getProperty("TEST_FAILURES_ROOT");
     private static final BidiMap<Language, String> languageDirs = new DualHashBidiMap<>();
+    private static final String LANG = System.getProperty("LANG");
 
     private static ToolFactory toolFactory;
 
@@ -102,11 +104,21 @@ abstract class TestHelper {
     }
 
     private boolean isExtensionSupported(String extension) {
-        return context.getBean(ToolFactory.class).getExtensions().contains(extension);
+        return isLanguageSupported(Language.getByExtension(extension));
     }
 
     boolean isDirectorySupported(File file) {
-        return file.isDirectory() && toolFactory.getLanguages().contains(languageDirs.getKey(file.getName()));
+        return file.isDirectory() && isLanguageSupported(languageDirs.getKey(file.getName()));
+    }
+
+    private boolean isLanguageSupported(Language language) {
+        if (language == null) {
+            return false;
+        }
+        if (StringUtils.isNotEmpty(LANG)) {
+            return language.toString().equals(LANG);
+        }
+        return toolFactory.getLanguages().contains(language);
     }
 
     public abstract void runTest(String unit, Path pathToExpected) throws Exception;
