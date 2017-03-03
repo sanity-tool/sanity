@@ -17,9 +17,18 @@ public class TestTools {
 
     @Bean
     ClangParametersFactory createClangParametersFactory() {
-        return (filename, objFile) -> {
-            Tool tool = tools.get(FilenameUtils.getExtension(filename));
-            return tool.createParameters(filename, objFile);
+        return new ClangParametersFactory() {
+            @Override
+            public String[] getParameters(String filename, String objFile) {
+                Tool tool = tools.get(FilenameUtils.getExtension(filename));
+                return tool.createParameters(filename, objFile);
+            }
+
+            @Override
+            public String[] getDebugParameters(String filename, String debugFile) {
+                Tool tool = tools.get(FilenameUtils.getExtension(filename));
+                return tool.createDebugParameters(filename, debugFile);
+            }
         };
     }
 }

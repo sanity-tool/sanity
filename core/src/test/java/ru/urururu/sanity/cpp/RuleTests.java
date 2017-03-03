@@ -33,7 +33,7 @@ public class RuleTests extends TestHelper {
                 parseAll(parser, child, allCfgs);
             }
         } else {
-            allCfgs.addAll(parser.parse(file.getAbsolutePath()));
+            allCfgs.addAll(parser.parse(file.getAbsolutePath(), (prefix, suffix) -> getDebugPath(file.getAbsolutePath(), prefix, suffix), true));
         }
     }
 

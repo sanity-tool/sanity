@@ -24,7 +24,7 @@ public class ParserTests extends TestHelper {
             public void runTest(String unit, Path pathToExpected) throws Exception {
                 Parser parser = context.getBean(Parser.class);
                 try {
-                    parser.parse(unit);
+                    parser.parse(unit, (prefix, suffix) -> getDebugPath(unit, prefix, suffix), true);
                     throw new IllegalStateException("should have failed");
                 } catch (ParseException e) {
                     check(pathToExpected, e.toString().replace(BASE, ""));
@@ -40,7 +40,7 @@ public class ParserTests extends TestHelper {
     @Override
     public void runTest(String unit, Path pathToExpected) throws Exception {
         Parser parser = context.getBean(Parser.class);
-        List<Cfg> testResult = parser.parse(unit);
+        List<Cfg> testResult = parser.parse(unit, (prefix, suffix) -> getDebugPath(unit, prefix, suffix), true);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final PrintStream ps = new PrintStream(baos);

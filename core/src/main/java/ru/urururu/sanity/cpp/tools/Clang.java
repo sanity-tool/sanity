@@ -27,6 +27,11 @@ class Clang extends Tool {
     }
 
     @Override
+    public String[] createDebugParameters(String filename, String debugFile) {
+        return new String[]{executable, filename, "-S", "-emit-llvm", "-femit-all-decls", "-g", "-o", debugFile};
+    }
+
+    @Override
     List<String> evaluateVersionIds(String version) {
         String clangVersion = "clang version";
         if (version.startsWith(clangVersion)) {

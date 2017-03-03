@@ -5,4 +5,6 @@ package ru.urururu.sanity.cpp;
  */
 public interface ClangParametersFactory {
     String[] getParameters(String filename, String objFile);
+
+    String[] getDebugParameters(String filename, String debugFile);
 }

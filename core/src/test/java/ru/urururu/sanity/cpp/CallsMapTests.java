@@ -37,7 +37,7 @@ public class CallsMapTests extends TestHelper {
             if (file.isDirectory()) {
                 parseAll(parser, file, allCfgs);
             } else {
-                allCfgs.addAll(parser.parse(file.getAbsolutePath()));
+                allCfgs.addAll(parser.parse(file.getAbsolutePath(), (prefix, suffix) -> getDebugPath(file.getAbsolutePath(), prefix, suffix), true));
             }
         }
     }

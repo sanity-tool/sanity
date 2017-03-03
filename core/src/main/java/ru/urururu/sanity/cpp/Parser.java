@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.api.BytecodeParser;
 import ru.urururu.sanity.api.Cfg;
+import ru.urururu.sanity.utils.FileWrapper;
 import ru.urururu.sanity.utils.TempFileWrapper;
 
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BiFunction;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
@@ -28,10 +30,34 @@ public class Parser {
     BytecodeParser bytecodeParser;
 
     public List<Cfg> parse(String filename) throws ParseException {
+        return parse(filename, TempFileWrapper::new, false);
+    }
+
+    public List<Cfg> parse(String filename, BiFunction<String, String, FileWrapper> fileWrapperFactory, boolean produceDebug) throws ParseException {
         LOGGER.info("filename = {}", filename);
         try {
-            try (TempFileWrapper objFile = new TempFileWrapper("result", ".bc")) {
-                try (TempFileWrapper errFile = new TempFileWrapper("result", ".err")) {
+            try (FileWrapper objFile = fileWrapperFactory.apply("result", ".bc")) {
+                try (FileWrapper errFile = fileWrapperFactory.apply("result", ".err.log")) {
+                    if (produceDebug) {
+                        try (FileWrapper debugFile = fileWrapperFactory.apply("debug", ".ll")) {
+                            try (FileWrapper debugErrFile = fileWrapperFactory.apply("debug", ".err.log")) {
+                                String[] parameters = parametersFactory.getDebugParameters(filename, debugFile.getAbsolutePath());
+                                if (parameters != null) {
+                                    LOGGER.info("debugParameters = {}", Arrays.toString(parameters));
+
+                                    ProcessBuilder pb = new ProcessBuilder(parameters);
+
+                                    pb.inheritIO();
+                                    pb.redirectError(ProcessBuilder.Redirect.to(debugErrFile.getFile()));
+
+                                    Process process = pb.start();
+
+                                    process.waitFor();
+                                }
+                            }
+                        }
+                    }
+
                     String[] parameters = parametersFactory.getParameters(filename, objFile.getAbsolutePath());
                     LOGGER.info("parameters = {}", Arrays.toString(parameters));
 
