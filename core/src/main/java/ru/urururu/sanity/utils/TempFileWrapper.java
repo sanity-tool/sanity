@@ -6,23 +6,22 @@ import java.io.IOException;
 /**
 * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
 */
-public class TempFileWrapper implements AutoCloseable {
-    File tempFile;
+public class TempFileWrapper extends FileWrapper {
+    public TempFileWrapper(String prefix, String suffix) {
+        super(createTempFile(prefix, suffix));
+    }
 
-    public TempFileWrapper(String prefix, String suffix) throws IOException {
-        this.tempFile = File.createTempFile(prefix, suffix);
+    private static File createTempFile(String prefix, String suffix) {
+        try {
+            return File.createTempFile(prefix, suffix);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void close() throws IOException {
-        tempFile.delete();
+        file.delete();
     }
 
-    public File getFile() {
-        return tempFile;
-    }
-
-    public String getAbsolutePath() {
-        return tempFile.getAbsolutePath();
-    }
 }

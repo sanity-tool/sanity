@@ -4,14 +4,16 @@ import junit.framework.Assert;
 import junit.framework.ComparisonFailure;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import org.apache.commons.lang3.StringUtils;
-import ru.urururu.sanity.cpp.tools.Language;
-import ru.urururu.sanity.cpp.tools.Tool;
-import ru.urururu.sanity.cpp.tools.ToolFactory;
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.urururu.sanity.cpp.tools.Language;
+import ru.urururu.sanity.cpp.tools.Tool;
+import ru.urururu.sanity.cpp.tools.ToolFactory;
+import ru.urururu.sanity.utils.FileWrapper;
+import ru.urururu.sanity.utils.TempFileWrapper;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,6 +29,7 @@ abstract class TestHelper {
 
     static final String BASE = System.getProperty("TEST_RESOURCES_ROOT");
     private static String FAILURES_DIR = System.getProperty("TEST_FAILURES_ROOT");
+    private static String DEBUG_DIR = System.getProperty("TEST_DEBUG_ROOT");
     private static final BidiMap<Language, String> languageDirs = new DualHashBidiMap<>();
     private static final String LANG = System.getProperty("LANG");
 
@@ -149,5 +152,27 @@ abstract class TestHelper {
             Files.write(pathToExpected, actual.getBytes());
             Assert.fail("File " + pathToExpected + " not found, but I've created it for you anyways.");
         }
+    }
+
+    public FileWrapper getDebugPath(String unit, String prefix, String suffix) {
+        if (DEBUG_DIR != null) {
+            Path debugPath = Paths.get(DEBUG_DIR);
+
+            Path basePath = Paths.get(BASE);
+
+            Path unitPath = Paths.get(unit);
+
+            Path unitDir = debugPath.resolve(basePath.relativize(unitPath));
+            File unitDirFile = unitDir.toFile();
+            unitDirFile.mkdirs();
+
+            return new FileWrapper(unitDir.resolve(prefix + suffix).toFile()) {
+                @Override
+                public void close() throws IOException {
+                }
+            };
+        }
+
+        return new TempFileWrapper(prefix, suffix);
     }
 }

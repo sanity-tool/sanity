@@ -54,6 +54,10 @@ public abstract class Tool {
 
     public abstract String[] createParameters(String filename, String objFile);
 
+    public String[] createDebugParameters(String filename, String debugFile) {
+        return null;
+    }
+
     /**
      * @return version identifiers from most specific to more generic
      */
