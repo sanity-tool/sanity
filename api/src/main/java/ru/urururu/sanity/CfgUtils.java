@@ -1,7 +1,11 @@
 package ru.urururu.sanity;
 
 import org.springframework.stereotype.Component;
-import ru.urururu.sanity.api.cfg.*;
+import ru.urururu.sanity.api.cfg.Cfe;
+import ru.urururu.sanity.api.cfg.IfCondition;
+import ru.urururu.sanity.api.cfg.NoOp;
+import ru.urururu.sanity.api.cfg.RValue;
+import ru.urururu.sanity.api.cfg.Switch;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
