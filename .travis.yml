@@ -84,7 +84,11 @@ matrix:
 
 language: java
 
-install: ./install.sh
+install:
+ - export SANITY_PROFILE=parser-native
+ - ./install.sh
+
+script: mvn -P $SANITY_PROFILE test -B
 
 after_success:
   - ./check.sh

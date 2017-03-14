@@ -4,12 +4,14 @@ set -e
 
 if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
     # run normal analysis
-    mvn package sonar:sonar \
+    mvn -P $SANITY_PROFILE \
+        package sonar:sonar \
 		-Dsonar.host.url=$SONAR_HOST_URL \
 		-Dsonar.login=$SONAR_TOKEN
 elif [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ -n "${GITHUB_TOKEN-}" ]; then
     # run PR analysis
-	mvn package sonar:sonar \
+	mvn -P $SANITY_PROFILE \
+	    package sonar:sonar \
 		-Dsonar.host.url=$SONAR_HOST_URL \
 		-Dsonar.login=$SONAR_TOKEN \
 		-Dsonar.analysis.mode=preview \
@@ -18,5 +20,5 @@ elif [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ -n "${GITHUB_TOKEN-}" ]; then
 		-Dsonar.github.pullRequest=$TRAVIS_PULL_REQUEST
 else
     # run tests
-    mvn verify
+    mvn -P $SANITY_PROFILE verify
 fi
