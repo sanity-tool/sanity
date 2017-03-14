@@ -10,9 +10,16 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>ru.urururu</groupId>
     <artifactId>sanity-parser-native</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>ru.urururu</groupId>
+            <artifactId>sanity-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
