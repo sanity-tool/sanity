@@ -3,13 +3,7 @@ package ru.urururu.sanity.api.cfg;
 import ru.urururu.sanity.CfgUtils;
 import ru.urururu.sanity.api.Cfg;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>

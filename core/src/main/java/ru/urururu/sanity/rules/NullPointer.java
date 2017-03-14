@@ -3,16 +3,7 @@ package ru.urururu.sanity.rules;
 import ru.urururu.sanity.CallsMap;
 import ru.urururu.sanity.Simulator;
 import ru.urururu.sanity.api.Cfg;
-import ru.urururu.sanity.api.cfg.Assignment;
-import ru.urururu.sanity.api.cfg.Call;
-import ru.urururu.sanity.api.cfg.Cfe;
-import ru.urururu.sanity.api.cfg.CfePrinter;
-import ru.urururu.sanity.api.cfg.ConstCache;
-import ru.urururu.sanity.api.cfg.GetElementPointer;
-import ru.urururu.sanity.api.cfg.IfCondition;
-import ru.urururu.sanity.api.cfg.Indirection;
-import ru.urururu.sanity.api.cfg.RValue;
-import ru.urururu.sanity.api.cfg.Switch;
+import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.sanity.simulation.SimulationException;
 
 import java.util.Collection;

@@ -1,12 +1,11 @@
 package ru.urururu.sanity.cpp;
 
-import ru.urururu.sanity.cpp.ClangParametersFactory;
-import ru.urururu.sanity.cpp.tools.Tool;
-import ru.urururu.sanity.cpp.tools.ToolFactory;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import ru.urururu.sanity.cpp.tools.Tool;
+import ru.urururu.sanity.cpp.tools.ToolFactory;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>

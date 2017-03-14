@@ -1,13 +1,6 @@
 package ru.urururu.sanity;
 
-import ru.urururu.sanity.api.cfg.ConstCache;
-import ru.urururu.sanity.api.cfg.GetElementPointer;
-import ru.urururu.sanity.api.cfg.GlobalVar;
-import ru.urururu.sanity.api.cfg.Indirection;
-import ru.urururu.sanity.api.cfg.Parameter;
-import ru.urururu.sanity.api.cfg.RValue;
-import ru.urururu.sanity.api.cfg.TemporaryVar;
-import ru.urururu.sanity.api.cfg.Value;
+import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.sanity.simulation.SimulationException;
 
 import java.io.PrintStream;

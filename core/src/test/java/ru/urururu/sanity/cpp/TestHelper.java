@@ -4,13 +4,13 @@ import junit.framework.Assert;
 import junit.framework.ComparisonFailure;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import ru.urururu.sanity.cpp.tools.Language;
-import ru.urururu.sanity.cpp.tools.Tool;
-import ru.urururu.sanity.cpp.tools.ToolFactory;
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.urururu.sanity.cpp.tools.Language;
+import ru.urururu.sanity.cpp.tools.Tool;
+import ru.urururu.sanity.cpp.tools.ToolFactory;
 
 import java.io.File;
 import java.io.IOException;

@@ -1,27 +1,12 @@
 package ru.urururu.sanity;
 
 import ru.urururu.sanity.api.Cfg;
-import ru.urururu.sanity.api.cfg.Assignment;
-import ru.urururu.sanity.api.cfg.Call;
-import ru.urururu.sanity.api.cfg.Cfe;
-import ru.urururu.sanity.api.cfg.CfePrinter;
-import ru.urururu.sanity.api.cfg.CfeVisitor;
-import ru.urururu.sanity.api.cfg.IfCondition;
-import ru.urururu.sanity.api.cfg.NoOp;
-import ru.urururu.sanity.api.cfg.RValue;
-import ru.urururu.sanity.api.cfg.Switch;
-import ru.urururu.sanity.api.cfg.UnprocessedElement;
+import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.sanity.simulation.SimulationException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>

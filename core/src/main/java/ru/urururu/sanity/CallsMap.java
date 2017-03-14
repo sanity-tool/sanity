@@ -1,26 +1,11 @@
 package ru.urururu.sanity;
 
-import ru.urururu.sanity.api.Cfg;
-import ru.urururu.sanity.api.cfg.Assignment;
-import ru.urururu.sanity.api.cfg.Call;
-import ru.urururu.sanity.api.cfg.Cfe;
-import ru.urururu.sanity.api.cfg.CfeVisitor;
-import ru.urururu.sanity.api.cfg.ConstCache;
-import ru.urururu.sanity.api.cfg.IfCondition;
-import ru.urururu.sanity.api.cfg.NoOp;
-import ru.urururu.sanity.api.cfg.Switch;
-import ru.urururu.sanity.api.cfg.Type;
-import ru.urururu.sanity.api.cfg.UnprocessedElement;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import ru.urururu.sanity.api.Cfg;
+import ru.urururu.sanity.api.cfg.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
