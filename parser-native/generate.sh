@@ -54,7 +54,8 @@ if [ ! -d "$LLVM_HOME" ] ; then
 
     make install
 
-    find $LLVM_HOME
+    # there are hundreds of MBs we don't want to cache
+    find $LLVM_HOME/bin ! -name 'llvm-config' -type f -exec rm -f {} +
 
     cd $OLD_DIR
 fi
