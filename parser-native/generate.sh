@@ -39,7 +39,7 @@ case `uname` in
 esac
 
 LLVM_HOME="$HOME/cache/llvm"
-LLVM_CONFIG=$LLVM_HOME/llvm-config
+LLVM_CONFIG=$LLVM_HOME/bin/llvm-config
 
 if [ ! -d "$LLVM_HOME" ] ; then
     OLD_DIR=`pwd`
@@ -48,7 +48,7 @@ if [ ! -d "$LLVM_HOME" ] ; then
     cd target/llvm
 
     mkdir build && cd build
-    $CMAKE -DCMAKE_INSTALL_PREFIX:PATH=$LLVM_HOME -G "Unix Makefiles" ..
+    $CMAKE -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=$LLVM_HOME -G "Unix Makefiles" ..
     # subdependencies for my library
     make LLVMCore LLVMAsmParser LLVMBitReader LLVMProfileData LLVMMC LLVMMCParser LLVMObject LLVMAnalysis
     # dependencies for my library
