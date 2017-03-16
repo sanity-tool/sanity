@@ -69,6 +69,8 @@ require:
   }
 %}
 
+%ignore LLVMDumpType;
+
 %include "llvm-c/Types.h"
 %include "llvm-c/Support.h"
 %include "llvm-c/Core.h"
