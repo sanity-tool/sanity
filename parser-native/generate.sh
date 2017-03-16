@@ -38,7 +38,7 @@ case `uname` in
     ;;
 esac
 
-LLVM_HOME="target/llvm"
+LLVM_HOME="$HOME/.llvm/`uname`"
 LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
 
 if [ ! -d "$LLVM_HOME" ] ; then
