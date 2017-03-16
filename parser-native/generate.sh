@@ -49,14 +49,8 @@ if [ ! -d "$LLVM_HOME" ] ; then
 
     mkdir build && cd build
     $CMAKE -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=$LLVM_HOME -G "Unix Makefiles" ..
-    # subdependencies for my library
-    make LLVMCore LLVMAsmParser LLVMBitReader LLVMProfileData LLVMMC LLVMMCParser LLVMObject LLVMAnalysis
-    # dependencies for my library
-    make LLVMIRReader LLVMTransformUtils
-    # to build my library
-    make llvm-config
-    # to check strip-debug-info
-    make llvm-dis
+
+    make -j4
 
     make install
 
