@@ -196,4 +196,4 @@ notifications:
 
 cache:
   directories:
-    - $HOME/.llvm
+    - $HOME/cache
