@@ -187,9 +187,13 @@ after_success:
   - bash <(curl -s https://codecov.io/bash) -F $LANG
 
 after_failure:
-  - diff target/failures/expected target/failures/actual
+  - diff tests/target/failures/expected tests/target/failures/actual
   - cat hs_err*.log 
 
 notifications:
   email: false
   slack: staticanalyzers:8CXJTuMbcNHE7COl24xZuz9G
+
+cache:
+  directories:
+    - $HOME/cache

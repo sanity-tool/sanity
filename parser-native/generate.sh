@@ -38,27 +38,24 @@ case `uname` in
     ;;
 esac
 
-LLVM_HOME="target/llvm"
-LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
+LLVM_HOME="$HOME/cache/llvm"
+LLVM_CONFIG=$LLVM_HOME/bin/llvm-config
 
 if [ ! -d "$LLVM_HOME" ] ; then
     OLD_DIR=`pwd`
 
-    git clone -b saving-debug https://github.com/okutane/llvm.git $LLVM_HOME
-    cd $LLVM_HOME
+    git clone -b saving-debug --depth 1 https://github.com/okutane/llvm.git target/llvm
+    cd target/llvm
 
     mkdir build && cd build
-    $CMAKE -G "Unix Makefiles" ..
-    # subdependencies for my library
-    make LLVMCore LLVMAsmParser LLVMBitReader LLVMProfileData LLVMMC LLVMMCParser LLVMObject LLVMAnalysis
-    # dependencies for my library
-    make LLVMIRReader LLVMTransformUtils
-    # to build my library
-    make llvm-config
-    # to check strip-debug-info
-    make llvm-dis
+    $CMAKE -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=$LLVM_HOME -G "Unix Makefiles" ..
 
-    LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
+    make -j4
+
+    make install
+
+    # there are hundreds of MBs we don't want to cache
+    find $LLVM_HOME/bin ! -name 'llvm-config' -type f -exec rm -f {} +
 
     cd $OLD_DIR
 fi
