@@ -44,7 +44,7 @@ LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
 if [ ! -d "$LLVM_HOME" ] ; then
     OLD_DIR=`pwd`
 
-    git clone -b saving-debug https://github.com/okutane/llvm.git $LLVM_HOME
+    git clone -b saving-debug --depth 1 https://github.com/okutane/llvm.git $LLVM_HOME
     cd $LLVM_HOME
 
     mkdir build && cd build
