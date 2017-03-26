@@ -16,6 +16,7 @@ addons:
       - llvm-3.8
       - llvm-3.8-dev
       - llvm-3.8-runtime
+      - rustc
 
 matrix:
   include:
@@ -38,6 +39,11 @@ matrix:
       jdk: oraclejdk8
       env:
       - LANG=Rust
+      addons:
+        apt:
+          packages:
+            - *default_packages
+            - rustc
 
     - os: osx
       osx_image: xcode8
