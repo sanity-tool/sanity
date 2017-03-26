@@ -23,7 +23,7 @@ public class SourceRangeFactory implements ParserListener {
     private Long debugVersion;
     private Byte versionByte;
 
-    SourceRange getSourceRange(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+    public SourceRange getSourceRange(SWIGTYPE_p_LLVMOpaqueValue instruction) {
         int line = bitreader.SAGetInstructionDebugLocLine(instruction);
         if (versionByte == 3) {
             if (line != -1) {

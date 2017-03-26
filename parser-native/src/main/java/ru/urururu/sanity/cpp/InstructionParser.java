@@ -42,7 +42,9 @@ public class InstructionParser {
     public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
         try {
             OpcodeParser parser = parsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
-            return parser.parse(ctx, instruction);
+            Cfe result = parser.parse(ctx, instruction);
+
+            return result;
         } catch (Throwable e) {
             return new UnprocessedElement(e.getMessage() == null ? e.getClass().getName() : e.getMessage(), sourceRangeFactory.getSourceRange(instruction));
         }
@@ -315,6 +317,24 @@ public class InstructionParser {
     }
 
     @Component
+    private static class PhiParser extends AbstractParser {
+        @Override
+        public LLVMOpcode getOpcode() {
+            return LLVMOpcode.LLVMPHI;
+        }
+
+        @Override
+        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            return null;
+        }
+
+        @Override
+        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            return ctx.getTmpVar(instruction);
+        }
+    }
+
+    @Component
     private static class BrParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
@@ -368,6 +388,11 @@ public class InstructionParser {
             opcodeOperatorMap.put(LLVMOpcode.LLVMFMul, BinaryExpression.Operator.Mul);
             opcodeOperatorMap.put(LLVMOpcode.LLVMFDiv, BinaryExpression.Operator.Div);
             opcodeOperatorMap.put(LLVMOpcode.LLVMFRem, BinaryExpression.Operator.Rem);
+
+            opcodeOperatorMap.put(LLVMOpcode.LLVMUDiv, BinaryExpression.Operator.Div);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMURem, BinaryExpression.Operator.Rem);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMLShr, BinaryExpression.Operator.ShiftRight);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMAShr, BinaryExpression.Operator.ShiftLeft);
         }
 
         @Deprecated
@@ -500,10 +525,10 @@ public class InstructionParser {
     }
 
     @Component
-    private static class ZExtParser extends AbstractParser {
+    private static class CastParser extends AbstractParser {
         @Override
-        public LLVMOpcode getOpcode() {
-            return LLVMOpcode.LLVMZExt;
+        public Set<LLVMOpcode> getOpcodes() {
+            return new HashSet<>(Arrays.asList(LLVMOpcode.LLVMSExt, LLVMOpcode.LLVMZExt, LLVMOpcode.LLVMTrunc, LLVMOpcode.LLVMSIToFP));
         }
 
         @Override
