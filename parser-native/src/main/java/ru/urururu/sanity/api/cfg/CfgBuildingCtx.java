@@ -1,5 +1,6 @@
 package ru.urururu.sanity.api.cfg;
 
+import ru.urururu.sanity.cpp.ParsersFacade;
 import ru.urururu.sanity.cpp.SourceRangeFactory;
 import ru.urururu.sanity.cpp.TypeParser;
 import ru.urururu.sanity.cpp.ValueParser;
@@ -15,23 +16,19 @@ import java.util.Map;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class CfgBuildingCtx {
-    private final TypeParser typeParser;
-    private final ValueParser valueParser;
-    private final SourceRangeFactory sourceRangeFactory;
+    private final ParsersFacade parsers;
 
     Map<SWIGTYPE_p_LLVMOpaqueValue, RValue> params = new HashMap<>();
     Map<SWIGTYPE_p_LLVMOpaqueValue, LValue> tmpVars = new HashMap<>();
     Map<SWIGTYPE_p_LLVMOpaqueBasicBlock, Cfe> labels = new HashMap<>();
     private SWIGTYPE_p_LLVMOpaqueBasicBlock block;
 
-    public CfgBuildingCtx(TypeParser typeParser, ValueParser valueParser, SourceRangeFactory sourceRangeFactory, SWIGTYPE_p_LLVMOpaqueValue function) {
-        this.typeParser = typeParser;
-        this.valueParser = valueParser;
-        this.sourceRangeFactory = sourceRangeFactory;
+    public CfgBuildingCtx(ParsersFacade parsers, SWIGTYPE_p_LLVMOpaqueValue function) {
+        this.parsers = parsers;
 
         SWIGTYPE_p_LLVMOpaqueValue param = bitreader.LLVMGetFirstParam(function);
         while (param != null) {
-            params.put(param, new Parameter(params.size(), bitreader.LLVMGetValueName(param), typeParser.parse(bitreader.LLVMTypeOf(param))));
+            params.put(param, new Parameter(params.size(), bitreader.LLVMGetValueName(param), parsers.parse(bitreader.LLVMTypeOf(param))));
             param = bitreader.LLVMGetNextParam(param);
         }
     }
@@ -39,7 +36,7 @@ public class CfgBuildingCtx {
     public LValue getOrCreateTmpVar(SWIGTYPE_p_LLVMOpaqueValue instruction) {
         LValue result = tmpVars.get(instruction);
         if (result == null) {
-            result = new TemporaryVar(typeParser.parse(bitreader.LLVMTypeOf(instruction)));
+            result = new TemporaryVar(parsers.parse(bitreader.LLVMTypeOf(instruction)));
             tmpVars.put(instruction, result);
         }
         return result;
@@ -73,8 +70,8 @@ public class CfgBuildingCtx {
                 if (this.block.equals(bitreader.LLVMGetIncomingBlock(instruction, i))) {
                     Assignment phiAssignment = new Assignment(
                             getOrCreateTmpVar(instruction),
-                            valueParser.parseRValue(this, bitreader.LLVMGetIncomingValue(instruction, i)),
-                            sourceRangeFactory.getSourceRange(instruction)
+                            parsers.parseRValue(this, bitreader.LLVMGetIncomingValue(instruction, i)),
+                            parsers.getSourceRange(instruction)
                     );
                     phiAssignment.setNext(result);
 

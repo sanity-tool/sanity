@@ -26,11 +26,11 @@ public class NativeBytecodeParser implements BytecodeParser {
     @Autowired
     InstructionParser instructionParser;
     @Autowired
+    ParsersFacade parsers;
+    @Autowired
     TypeParser typeParser;
     @Autowired
     ValueParser valueParser;
-    @Autowired
-    SourceRangeFactory sourceRangeFactory;
     @Autowired
     ParserListener[] listeners;
     @Autowired
@@ -138,7 +138,7 @@ public class NativeBytecodeParser implements BytecodeParser {
             while (function != null) {
                 try {
                     if (bitreader.LLVMGetFirstBasicBlock(function) != null) {
-                        CfgBuildingCtx ctx = new CfgBuildingCtx(typeParser, valueParser, sourceRangeFactory, function);
+                        CfgBuildingCtx ctx = new CfgBuildingCtx(parsers, function);
 
                         SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock = bitreader.LLVMGetEntryBasicBlock(function);
 
