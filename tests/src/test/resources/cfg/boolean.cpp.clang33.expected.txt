@@ -6,7 +6,7 @@ boolean.cpp:4 BR = B0 && B1;
 #0003:	 noop
  - no source -
 #0004:	 assign: *_ZL2BR = tmp0
-boolean.cpp:4 BR = B0 && B1;
+ - no source -
 #0005:	 if: *_ZL2B0 then #0006:	 else #0007:
 boolean.cpp:5 BR = B0 || B1;
 #0006:	 assign: tmp1 = -1

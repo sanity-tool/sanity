@@ -30,6 +30,8 @@ public class NativeBytecodeParser implements BytecodeParser {
     @Autowired
     ValueParser valueParser;
     @Autowired
+    SourceRangeFactory sourceRangeFactory;
+    @Autowired
     ParserListener[] listeners;
     @Autowired
     ConstCache constants;
@@ -96,6 +98,8 @@ public class NativeBytecodeParser implements BytecodeParser {
     }
 
     private Cfe processBlock(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock) {
+        ctx.enterSubCfg(ctx, entryBlock);
+
         Cfe first = null;
         Cfe last = null;
 
@@ -134,7 +138,7 @@ public class NativeBytecodeParser implements BytecodeParser {
             while (function != null) {
                 try {
                     if (bitreader.LLVMGetFirstBasicBlock(function) != null) {
-                        CfgBuildingCtx ctx = new CfgBuildingCtx(typeParser, function);
+                        CfgBuildingCtx ctx = new CfgBuildingCtx(typeParser, valueParser, sourceRangeFactory, function);
 
                         SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock = bitreader.LLVMGetEntryBasicBlock(function);
 
