@@ -39,11 +39,7 @@ matrix:
       jdk: oraclejdk8
       env:
       - LANG=Rust
-      addons:
-        apt:
-          packages:
-            - *default_packages
-            - rustc
+      rust: stable
 
     - os: osx
       osx_image: xcode8
