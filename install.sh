@@ -17,5 +17,5 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 fi
 
 if [[ "$LANG" == "Rust" ]]; then
-    curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain stable
+    curl https://sh.rustup.rs -sSf | sh -s -- -y
 fi
