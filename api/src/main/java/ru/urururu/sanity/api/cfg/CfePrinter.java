@@ -116,8 +116,8 @@ public class CfePrinter implements CfeVisitor {
             sb.append(" = ");
         }
         RValue function = call.getFunction();
-        if (function instanceof ConstCache.FunctionAddress) {
-            sb.append(((ConstCache.FunctionAddress) function).getName());
+        if (function instanceof FunctionAddress) {
+            sb.append(((FunctionAddress) function).getName());
         } else {
             print(function);
         }
@@ -169,12 +169,12 @@ public class CfePrinter implements CfeVisitor {
             print(expression.getRight());
             return;
         }
-        if (value instanceof ConstCache.Const) {
-            ConstCache.Const constant = (ConstCache.Const) value;
+        if (value instanceof Const) {
+            Const constant = (Const) value;
             sb.append(constant.getValue());
             return;
         }
-        if (value instanceof ConstCache.NullPtr) {
+        if (value instanceof NullPtr) {
             sb.append("null");
             return;
         }
@@ -185,7 +185,7 @@ public class CfePrinter implements CfeVisitor {
         }
         if (value instanceof GetElementPointer) {
             RValue index = ((GetElementPointer) value).getIndex();
-            if (index instanceof ConstCache.Const && ((ConstCache.Const) index).getValue() == 0) {
+            if (index instanceof Const && ((Const) index).getValue() == 0) {
                 print(((GetElementPointer) value).getPointer());
             } else {
                 sb.append('(');

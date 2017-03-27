@@ -50,15 +50,15 @@ public class CallsMap implements CfeVisitor {
 
     @Override
     public void visit(Assignment assignment) {
-        if (assignment.getRight() instanceof ConstCache.FunctionAddress) {
-            tookPointers.add(((ConstCache.FunctionAddress) assignment.getRight()).getName());
+        if (assignment.getRight() instanceof FunctionAddress) {
+            tookPointers.add(((FunctionAddress) assignment.getRight()).getName());
         }
     }
 
     @Override
     public void visit(Call call) {
-        if (call.getFunction() instanceof ConstCache.FunctionAddress) {
-            List<Cfe> cfes = staticCalls.get(((ConstCache.FunctionAddress) call.getFunction()).getName());
+        if (call.getFunction() instanceof FunctionAddress) {
+            List<Cfe> cfes = staticCalls.get(((FunctionAddress) call.getFunction()).getName());
             if (cfes != null) {
                 cfes.add(call);
             }

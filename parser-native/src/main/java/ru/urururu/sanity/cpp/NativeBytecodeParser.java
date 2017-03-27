@@ -157,7 +157,7 @@ public class NativeBytecodeParser implements BytecodeParser {
 
                         entry = cfgUtils.removeNoOps(entry);
 
-                        result.add(new Cfg(bitreader.LLVMGetValueName(function), entry));
+                        result.add(new Cfg((FunctionAddress) valueParser.parseRValue(null, function), entry));
                     }
                 } catch (Exception e) {
                     System.err.println("Can't parse function: " + bitreader.LLVMGetValueName(function));
