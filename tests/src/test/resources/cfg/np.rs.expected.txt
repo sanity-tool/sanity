@@ -11,7 +11,7 @@ CFG: _ZN4core3ptr4null1700000000000000000E
  - no source -
 
 CFG: _ZN4core3ptr4read1700000000000000000E
-#0000:	 assign: *tmp0 =
+#0000:	 assign: *tmp0 = <param 0>
  - no source -
 #0001:	 assign: *tmp1 = 0
  - no source -

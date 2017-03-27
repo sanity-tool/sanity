@@ -162,6 +162,10 @@ public class CfePrinter implements CfeVisitor {
             sb.append("tmp").append(number);
             return;
         }
+        if (value instanceof FunctionAddress) {
+            sb.append('@').append(((FunctionAddress) value).getName());
+            return;
+        }
         if (value instanceof BinaryExpression) {
             BinaryExpression expression = (BinaryExpression) value;
             print(expression.getLeft());
@@ -172,6 +176,10 @@ public class CfePrinter implements CfeVisitor {
         if (value instanceof Const) {
             Const constant = (Const) value;
             sb.append(constant.getValue());
+            return;
+        }
+        if (value instanceof RealConst) {
+            sb.append(((RealConst) value).getValue());
             return;
         }
         if (value instanceof NullPtr) {
@@ -202,6 +210,10 @@ public class CfePrinter implements CfeVisitor {
             sb.append('.');
             sb.append(((GetFieldPointer) value).getPointer().getType().getFieldName(((GetFieldPointer) value).getIndex()));
             sb.append(')');
+            return;
+        }
+        if (value instanceof GlobalVar) {
+            sb.append(((GlobalVar) value).getName());
             return;
         }
         sb.append(value.toString());
