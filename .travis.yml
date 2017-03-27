@@ -38,7 +38,7 @@ matrix:
       jdk: oraclejdk8
       env:
       - LANG=Rust
-      rust: stable
+      - RUST_BIN=$HOME/.cargo/bin/rustc
 
     - os: osx
       osx_image: xcode8
