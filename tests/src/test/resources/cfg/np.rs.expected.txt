@@ -1,13 +1,13 @@
 CFG: _ZN4core3mem13uninitialized17hccb5915bcda30b4fE
 #0000:	 noop
  - no source -
-#0001:	 noop: opcode 'LLVMRet' not supported <exit>
+#0001:	 return *tmp0 <exit>
  - no source -
 
 CFG: _ZN4core3ptr4null17h7d98b44b357ccd92E
 #0000:	 noop
  - no source -
-#0001:	 noop: opcode 'LLVMRet' not supported <exit>
+#0001:	 return null <exit>
  - no source -
 
 CFG: _ZN4core3ptr4read17h94e9b3857111b998E
