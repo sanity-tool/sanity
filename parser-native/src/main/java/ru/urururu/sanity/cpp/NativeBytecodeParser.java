@@ -3,7 +3,6 @@ package ru.urururu.sanity.cpp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.CfgUtils;
-import ru.urururu.sanity.Iterables;
 import ru.urururu.sanity.api.BytecodeParser;
 import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.api.cfg.*;
@@ -11,6 +10,7 @@ import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueBasicBlock;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 import ru.urururu.sanity.cpp.llvm.bitreader;
+import ru.urururu.util.Iterables;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -42,7 +42,7 @@ public class NativeBytecodeParser implements BytecodeParser {
         Cfe last = null;
 
         Iterable<SWIGTYPE_p_LLVMOpaqueValue> globals =
-                    Iterables.fromFunctions(() -> bitreader.LLVMGetFirstGlobal(module), bitreader::LLVMGetNextGlobal);
+                    Iterables.linked(() -> bitreader.LLVMGetFirstGlobal(module), bitreader::LLVMGetNextGlobal);
         for (SWIGTYPE_p_LLVMOpaqueValue global : globals) {
             try {
                 SWIGTYPE_p_LLVMOpaqueValue initializer = bitreader.LLVMGetInitializer(global);
