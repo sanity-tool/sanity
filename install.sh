@@ -18,5 +18,4 @@ fi
 
 if [[ "$LANG" == "Rust" ]]; then
     curl https://sh.rustup.rs -sSf | sh -s -- -y
-    which rustc
 fi
