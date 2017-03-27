@@ -102,6 +102,12 @@ public class CfePrinter implements CfeVisitor {
     }
 
     @Override
+    public void visit(Return returnStatement) {
+        sb.append("return ");
+        print(returnStatement.getValue());
+    }
+
+    @Override
     public void visit(Call call) {
         sb.append("call: ");
         LValue lvalue = call.getlValue();

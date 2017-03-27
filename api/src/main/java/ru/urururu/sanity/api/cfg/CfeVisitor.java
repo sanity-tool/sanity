@@ -15,4 +15,6 @@ public interface CfeVisitor {
     void visit(Switch switchElement);
 
     void visit(NoOp noOp);
+
+    void visit(Return returnStatement);
 }

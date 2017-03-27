@@ -4,7 +4,7 @@ package ru.urururu.sanity.api.cfg;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public abstract class Cfe {
-    Cfe next;
+    private Cfe next;
     private final SourceRange sourceRange;
 
     public Cfe(SourceRange sourceRange) {

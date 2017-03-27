@@ -151,7 +151,11 @@ public class InstructionParser {
             if (bitreader.LLVMGetNumOperands(instruction) == 0) {
                 return null;
             }
-            return super.parse(ctx, instruction);
+
+            return new Return(
+                    valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
+                    sourceRangeFactory.getSourceRange(instruction)
+            );
         }
     }
 
