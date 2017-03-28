@@ -15,7 +15,7 @@ import java.util.*;
  */
 @Component
 public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOpaqueType,
-        SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueBasicBlock, CfgBuildingCtx> {
+        SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueBasicBlock, NativeCfgBuildingCtx> {
     @Autowired
     ConstCache constants;
 
@@ -56,18 +56,18 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
     }
 
-    protected Cfe doParse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+    protected Cfe doParse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
         OpcodeParser parser = opcodeParsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
 
         return parser.parse(ctx, instruction);
     }
 
-    public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+    public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
         OpcodeParser parser = opcodeParsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
         return parser.parseValue(ctx, instruction);
     }
 
-    public RValue parseConst(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
+    public RValue parseConst(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
         OpcodeParser parser = opcodeParsers.getOrDefault(bitreader.LLVMGetConstOpcode(constant), defaultParser);
         return parser.parseConst(ctx, constant);
     }
@@ -75,11 +75,11 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
     private interface OpcodeParser {
         Set<LLVMOpcode> getOpcodes();
 
-        Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction);
+        Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction);
 
-        RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction);
+        RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction);
 
-        RValue parseConst(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant);
+        RValue parseConst(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant);
     }
 
     private static abstract class AbstractParser implements OpcodeParser {
@@ -93,17 +93,17 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             throw new IllegalStateException("opcode '" + bitreader.LLVMGetInstructionOpcode(instruction) + "' not supported");
         }
 
         @Override
-        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             throw new IllegalStateException("opcode '" + bitreader.LLVMGetInstructionOpcode(instruction) + "' not supported");
         }
 
         @Override
-        public RValue parseConst(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
+        public RValue parseConst(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
             throw new IllegalStateException("opcode '" + bitreader.LLVMGetConstOpcode(constant) + "' not supported");
         }
     }
@@ -115,7 +115,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return createStore(ctx, instruction,
                     bitreader.LLVMGetOperand(instruction, 0), bitreader.LLVMGetOperand(instruction, 1));
         }
@@ -128,12 +128,12 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return null;
         }
 
         @Override
-        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return new Indirection(parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)));
         }
     }
@@ -145,7 +145,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             if (bitreader.LLVMGetNumOperands(instruction) == 0) {
                 return createReturn(ctx, instruction);
             }
@@ -161,12 +161,12 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return null;
         }
 
         @Override
-        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return ctx.getOrCreateTmpVar(instruction);
         }
     }
@@ -178,12 +178,12 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return null;
         }
 
         @Override
-        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             RValue pointer = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
 
             int operandsCount = bitreader.LLVMGetNumOperands(instruction);
@@ -198,7 +198,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public RValue parseConst(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
+        public RValue parseConst(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
             return parseValue(ctx, constant);
         }
 
@@ -224,12 +224,12 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return null;
         }
 
         @Override
-        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             RValue pointer = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
 
             pointer = getPointer(pointer, constants.get(0, null));
@@ -246,7 +246,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public RValue parseConst(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
+        public RValue parseConst(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
             return parseValue(ctx, constant);
         }
 
@@ -272,7 +272,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             int argLen = bitreader.LLVMGetNumOperands(instruction) - 1;
             final SWIGTYPE_p_LLVMOpaqueValue function = bitreader.LLVMGetOperand(instruction, argLen);
 
@@ -281,7 +281,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return ctx.getTmpVar(instruction);
         }
     }
@@ -293,12 +293,12 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return null;
         }
 
         @Override
-        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return ctx.getTmpVar(instruction);
         }
     }
@@ -310,7 +310,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             if (bitreader.LLVMGetNumOperands(instruction) == 1) {
                 return ctx.getLabel(bitreader.LLVMGetOperand(instruction, 0));
             }
@@ -328,7 +328,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             RValue controlValue = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
             Cfe defaultCase = ctx.getLabel(bitreader.LLVMGetOperand(instruction, 1));
 
@@ -382,7 +382,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             LValue tmp = ctx.getOrCreateTmpVar(instruction);
             return new Assignment(
                     tmp,
@@ -396,7 +396,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return ctx.getTmpVar(instruction);
         }
     }
@@ -408,7 +408,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             LValue tmp = ctx.getOrCreateTmpVar(instruction);
             RValue operand = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
             return new Assignment(
@@ -419,12 +419,12 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return ctx.getTmpVar(instruction);
         }
 
         @Override
-        public RValue parseConst(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
+        public RValue parseConst(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
             return parsers.parseRValue(ctx, bitreader.LLVMGetOperand(constant, 0));
         }
     }
@@ -436,13 +436,13 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             // todo think about source range comparison. if different - it's better to have tmp var assignment to preserve source reference.
             return null;
         }
 
         @Override
-        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             // just return it's operand, it's smaller, so it will fit.
             return parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
         }
@@ -472,7 +472,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             LValue tmp = ctx.getOrCreateTmpVar(instruction);
 
             LLVMIntPredicate predicate = bitreader.LLVMGetICmpPredicate(instruction);
@@ -494,7 +494,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return ctx.getTmpVar(instruction);
         }
     }
@@ -526,7 +526,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             LValue tmp = ctx.getOrCreateTmpVar(instruction);
 
             LLVMRealPredicate predicate = bitreader.GetFCmpPredicate(instruction);
@@ -548,7 +548,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             return ctx.getTmpVar(instruction);
         }
     }

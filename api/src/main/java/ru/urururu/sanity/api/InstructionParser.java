@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
-public abstract class InstructionParser<T, V, I, B, Ctx> {
+public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T, V, I, B, Ctx>> {
     @Autowired
     protected ParsersFacade<T, V, I, B, Ctx> parsers;
 
@@ -55,6 +55,7 @@ public abstract class InstructionParser<T, V, I, B, Ctx> {
         for (V param : parameters) {
             args.add(parsers.parseRValue(ctx, param));
         }
+        
         return new Call(
                 target,
                 lvalue,

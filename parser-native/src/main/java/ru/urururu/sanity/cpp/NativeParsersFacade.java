@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.urururu.sanity.api.ParsersFacade;
 import ru.urururu.sanity.api.SourceRangeFactory;
 import ru.urururu.sanity.api.TypeParser;
-import ru.urururu.sanity.api.cfg.CfgBuildingCtx;
+import ru.urururu.sanity.api.cfg.NativeCfgBuildingCtx;
 import ru.urururu.sanity.api.cfg.RValue;
 import ru.urururu.sanity.api.cfg.SourceRange;
 import ru.urururu.sanity.api.cfg.Type;
@@ -18,7 +18,7 @@ import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
  */
 @Component
 public class NativeParsersFacade extends ParsersFacade<SWIGTYPE_p_LLVMOpaqueType,
-        SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueBasicBlock, CfgBuildingCtx> {
+        SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueBasicBlock, NativeCfgBuildingCtx> {
     @Autowired
     ValueParser valueParser;
 
@@ -32,7 +32,7 @@ public class NativeParsersFacade extends ParsersFacade<SWIGTYPE_p_LLVMOpaqueType
         return typeParser.parse(type);
     }
 
-    public RValue parseRValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue value) {
+    public RValue parseRValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue value) {
         return valueParser.parseRValue(ctx, value);
     }
 

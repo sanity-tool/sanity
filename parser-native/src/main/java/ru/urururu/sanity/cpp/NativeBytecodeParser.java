@@ -104,7 +104,7 @@ public class NativeBytecodeParser implements BytecodeParser {
         return first;
     }
 
-    private Cfe processBlock(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock) {
+    private Cfe processBlock(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock) {
         ctx.enterSubCfg(ctx, entryBlock);
 
         Cfe first = null;
@@ -145,7 +145,7 @@ public class NativeBytecodeParser implements BytecodeParser {
             while (function != null) {
                 try {
                     if (bitreader.LLVMGetFirstBasicBlock(function) != null) {
-                        CfgBuildingCtx ctx = new CfgBuildingCtx(parsers, function);
+                        NativeCfgBuildingCtx ctx = new NativeCfgBuildingCtx(parsers, function);
 
                         SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock = bitreader.LLVMGetEntryBasicBlock(function);
 

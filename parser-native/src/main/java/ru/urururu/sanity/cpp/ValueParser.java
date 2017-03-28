@@ -2,7 +2,7 @@ package ru.urururu.sanity.cpp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.urururu.sanity.api.cfg.CfgBuildingCtx;
+import ru.urururu.sanity.api.cfg.NativeCfgBuildingCtx;
 import ru.urururu.sanity.api.cfg.ConstCache;
 import ru.urururu.sanity.api.cfg.GlobalVariableCache;
 import ru.urururu.sanity.api.cfg.RValue;
@@ -25,7 +25,7 @@ public class ValueParser {
     @Autowired
     NativeParsersFacade parsers;
 
-    public RValue parseLValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue value) {
+    public RValue parseLValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue value) {
         if (bitreader.LLVMIsAGlobalVariable(value) != null) {
             return globals.get(bitreader.LLVMGetValueName(value), parsers.parse(bitreader.LLVMTypeOf(value)));
         }
@@ -35,7 +35,7 @@ public class ValueParser {
         throw new IllegalStateException("Can't parse LValue: " + bitreader.LLVMPrintValueToString(value));
     }
 
-    public RValue parseRValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue value) {
+    public RValue parseRValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue value) {
         if (bitreader.LLVMIsAInstruction(value) != null) {
             return instructionParser.parseValue(ctx, value);
         }
