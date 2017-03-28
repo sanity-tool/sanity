@@ -23,7 +23,7 @@ public class ValueParser {
     @Autowired
     InstructionParser instructionParser;
     @Autowired
-    ParsersFacade parsers;
+    NativeParsersFacade parsers;
 
     public RValue parseLValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue value) {
         if (bitreader.LLVMIsAGlobalVariable(value) != null) {

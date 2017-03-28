@@ -15,7 +15,7 @@ import java.util.*;
 @Component
 public class InstructionParser {
     @Autowired
-    ParsersFacade parsers;
+    NativeParsersFacade parsers;
 
     @Autowired
     OpcodeParser[] parsersOtu;
@@ -73,10 +73,7 @@ public class InstructionParser {
 
     private static abstract class AbstractParser implements OpcodeParser {
         @Autowired
-        ParsersFacade parsers;
-
-        @Autowired
-        ValueParser valueParser;
+        NativeParsersFacade parsers;
 
         @Override
         public Set<LLVMOpcode> getOpcodes() {
@@ -115,8 +112,8 @@ public class InstructionParser {
             SWIGTYPE_p_LLVMOpaqueValue pointer = bitreader.LLVMGetOperand(instruction, 1);
             SWIGTYPE_p_LLVMOpaqueValue value = bitreader.LLVMGetOperand(instruction, 0);
             return new Assignment(
-                    new Indirection(valueParser.parseRValue(ctx, pointer)),
-                    valueParser.parseRValue(ctx, value),
+                    new Indirection(parsers.parseRValue(ctx, pointer)),
+                    parsers.parseRValue(ctx, value),
                     parsers.getSourceRange(instruction)
             );
         }
@@ -136,7 +133,7 @@ public class InstructionParser {
 
         @Override
         public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            return new Indirection(valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)));
+            return new Indirection(parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)));
         }
     }
 
@@ -154,7 +151,7 @@ public class InstructionParser {
             }
 
             return new Return(
-                    valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
+                    parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
                     parsers.getSourceRange(instruction)
             );
         }
@@ -192,13 +189,13 @@ public class InstructionParser {
 
         @Override
         public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            RValue pointer = valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
+            RValue pointer = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
 
             int operandsCount = bitreader.LLVMGetNumOperands(instruction);
 
             int i = 1;
             while (i < operandsCount) {
-                pointer = getPointer(pointer, valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
+                pointer = getPointer(pointer, parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
                 i++;
             }
 
@@ -242,7 +239,7 @@ public class InstructionParser {
 
         @Override
         public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            RValue pointer = valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
+            RValue pointer = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
 
             pointer = getPointer(pointer, constants.get(0, null));
 
@@ -250,7 +247,7 @@ public class InstructionParser {
 
             int i = 1;
             while (i < operandsCount) {
-                pointer = getPointer(pointer, valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
+                pointer = getPointer(pointer, parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
                 i++;
             }
 
@@ -305,10 +302,10 @@ public class InstructionParser {
             SWIGTYPE_p_LLVMOpaqueType lvalueType = bitreader.LLVMGetReturnType(type);
             LValue lvalue = bitreader.LLVMGetTypeKind(lvalueType) == LLVMTypeKind.LLVMVoidTypeKind ? null : ctx.getOrCreateTmpVar(instruction);
             for (int i = 0; i < argLen; i++) {
-                args.add(valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
+                args.add(parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
             }
             return new Call(
-                    valueParser.parseRValue(ctx, function),
+                    parsers.parseRValue(ctx, function),
                     lvalue,
                     args,
                     parsers.getSourceRange(instruction)
@@ -351,7 +348,7 @@ public class InstructionParser {
             if (bitreader.LLVMGetNumOperands(instruction) == 1) {
                 return ctx.getLabel(bitreader.LLVMGetOperand(instruction, 0));
             }
-            RValue condition = valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
+            RValue condition = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
             Cfe thenElement = ctx.getLabel(bitreader.LLVMGetOperand(instruction, 2));
             Cfe elseElement = ctx.getLabel(bitreader.LLVMGetOperand(instruction, 1));
             return new IfCondition(condition, thenElement, elseElement, parsers.getSourceRange(instruction));
@@ -367,14 +364,14 @@ public class InstructionParser {
 
         @Override
         public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            RValue controlValue = valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
+            RValue controlValue = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
             Cfe defaultCase = ctx.getLabel(bitreader.LLVMGetOperand(instruction, 1));
 
             Map<RValue, Cfe> cases = new LinkedHashMap<>();
 
             int i = 2;
             while (i + 1 < bitreader.LLVMGetNumOperands(instruction)) {
-                cases.put(valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)), ctx.getLabel(bitreader.LLVMGetOperand(instruction, i + 1)));
+                cases.put(parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)), ctx.getLabel(bitreader.LLVMGetOperand(instruction, i + 1)));
                 i = i + 2;
             }
 
@@ -397,7 +394,7 @@ public class InstructionParser {
             opcodeOperatorMap.put(LLVMOpcode.LLVMUDiv, BinaryExpression.Operator.Div);
             opcodeOperatorMap.put(LLVMOpcode.LLVMURem, BinaryExpression.Operator.Rem);
             opcodeOperatorMap.put(LLVMOpcode.LLVMLShr, BinaryExpression.Operator.ShiftRight);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMAShr, BinaryExpression.Operator.ShiftLeft);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMAShr, BinaryExpression.Operator.ShiftRight);
         }
 
         @Deprecated
@@ -416,9 +413,9 @@ public class InstructionParser {
             return new Assignment(
                     tmp,
                     new BinaryExpression(
-                            valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
+                            parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
                             opcodeOperatorMap.get(bitreader.LLVMGetInstructionOpcode(instruction)),
-                            valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
+                            parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
                     ),
                     parsers.getSourceRange(instruction)
             );
@@ -494,13 +491,6 @@ public class InstructionParser {
     }
 
     @Component
-    private static class ShrParser extends BinaryOperationParser {
-        public ShrParser() {
-            super(LLVMOpcode.LLVMAShr, BinaryExpression.Operator.ShiftRight);
-        }
-    }
-
-    @Component
     private static class BitCastParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
@@ -510,7 +500,7 @@ public class InstructionParser {
         @Override
         public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             LValue tmp = ctx.getOrCreateTmpVar(instruction);
-            RValue operand = valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
+            RValue operand = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
             return new Assignment(
                     tmp,
                     operand,
@@ -525,7 +515,7 @@ public class InstructionParser {
 
         @Override
         public RValue parseConst(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
-            return valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(constant, 0));
+            return parsers.parseRValue(ctx, bitreader.LLVMGetOperand(constant, 0));
         }
     }
 
@@ -545,7 +535,7 @@ public class InstructionParser {
         @Override
         public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             // just return it's operand, it's smaller, so it will fit.
-            return valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
+            return parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
         }
     }
 
@@ -587,9 +577,9 @@ public class InstructionParser {
             return new Assignment(
                     tmp,
                     new BinaryExpression(
-                            valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
+                            parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
                             operator,
-                            valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
+                            parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
                     ),
                     parsers.getSourceRange(instruction)
             );
@@ -642,9 +632,9 @@ public class InstructionParser {
             return new Assignment(
                     tmp,
                     new BinaryExpression(
-                            valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
+                            parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
                             operator,
-                            valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
+                            parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
                     ),
                     parsers.getSourceRange(instruction)
             );

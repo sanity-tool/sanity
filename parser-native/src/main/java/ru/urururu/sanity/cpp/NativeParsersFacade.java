@@ -2,12 +2,14 @@ package ru.urururu.sanity.cpp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.urururu.sanity.api.ParsersFacade;
 import ru.urururu.sanity.api.SourceRangeFactory;
 import ru.urururu.sanity.api.TypeParser;
 import ru.urururu.sanity.api.cfg.CfgBuildingCtx;
 import ru.urururu.sanity.api.cfg.RValue;
 import ru.urururu.sanity.api.cfg.SourceRange;
 import ru.urururu.sanity.api.cfg.Type;
+import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueBasicBlock;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueType;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 
@@ -15,7 +17,8 @@ import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class ParsersFacade {
+public class NativeParsersFacade extends ParsersFacade<SWIGTYPE_p_LLVMOpaqueType,
+        SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueBasicBlock, CfgBuildingCtx> {
     @Autowired
     ValueParser valueParser;
 

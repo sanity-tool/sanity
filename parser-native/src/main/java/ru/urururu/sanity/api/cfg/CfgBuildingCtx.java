@@ -1,6 +1,6 @@
 package ru.urururu.sanity.api.cfg;
 
-import ru.urururu.sanity.cpp.ParsersFacade;
+import ru.urururu.sanity.cpp.NativeParsersFacade;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueBasicBlock;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 import ru.urururu.sanity.cpp.llvm.bitreader;
@@ -12,14 +12,14 @@ import java.util.Map;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class CfgBuildingCtx {
-    private final ParsersFacade parsers;
+    private final NativeParsersFacade parsers;
 
     Map<SWIGTYPE_p_LLVMOpaqueValue, RValue> params = new HashMap<>();
     Map<SWIGTYPE_p_LLVMOpaqueValue, LValue> tmpVars = new HashMap<>();
     Map<SWIGTYPE_p_LLVMOpaqueBasicBlock, Cfe> labels = new HashMap<>();
     private SWIGTYPE_p_LLVMOpaqueBasicBlock block;
 
-    public CfgBuildingCtx(ParsersFacade parsers, SWIGTYPE_p_LLVMOpaqueValue function) {
+    public CfgBuildingCtx(NativeParsersFacade parsers, SWIGTYPE_p_LLVMOpaqueValue function) {
         this.parsers = parsers;
 
         SWIGTYPE_p_LLVMOpaqueValue param = bitreader.LLVMGetFirstParam(function);

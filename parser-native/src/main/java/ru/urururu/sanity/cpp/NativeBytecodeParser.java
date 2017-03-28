@@ -27,7 +27,7 @@ public class NativeBytecodeParser implements BytecodeParser {
     @Autowired
     InstructionParser instructionParser;
     @Autowired
-    ParsersFacade parsers;
+    NativeParsersFacade parsers;
     @Autowired
     NativeTypeParser typeParser;
     @Autowired

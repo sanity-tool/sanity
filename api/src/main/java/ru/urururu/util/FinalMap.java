@@ -29,7 +29,7 @@ public class FinalMap {
     private static <K, V> V validate(K key, V value, V oldValue) {
         if (oldValue != null) {
             // todo is it possible to support null values?
-            throw new IllegalArgumentException("Tried to replace " + oldValue + " by " + value + " for" + key);
+            throw new IllegalArgumentException("Tried to replace " + oldValue + " by " + value + " for " + key);
         }
 
         return oldValue;
