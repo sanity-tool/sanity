@@ -14,7 +14,7 @@ import java.util.*;
 @Component
 public class InstructionParser {
     @Autowired
-    SourceRangeFactory sourceRangeFactory;
+    NativeSourceRangeFactory sourceRangeFactory;
 
     @Autowired
     OpcodeParser[] parsersOtu;
@@ -72,7 +72,7 @@ public class InstructionParser {
 
     private static abstract class AbstractParser implements OpcodeParser {
         @Autowired
-        SourceRangeFactory sourceRangeFactory;
+        NativeSourceRangeFactory sourceRangeFactory;
 
         @Autowired
         ValueParser valueParser;

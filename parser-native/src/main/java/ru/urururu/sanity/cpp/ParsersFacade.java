@@ -21,7 +21,7 @@ public class ParsersFacade {
     NativeTypeParser typeParser;
 
     @Autowired
-    SourceRangeFactory sourceRangeFactory;
+    NativeSourceRangeFactory sourceRangeFactory;
 
     public Type parse(SWIGTYPE_p_LLVMOpaqueType type) {
         return typeParser.parse(type);
