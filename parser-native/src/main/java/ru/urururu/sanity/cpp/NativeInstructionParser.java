@@ -2,9 +2,11 @@ package ru.urururu.sanity.cpp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.urururu.sanity.api.InstructionParser;
 import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.sanity.cpp.llvm.*;
 import ru.urururu.util.FinalMap;
+import ru.urururu.util.Iterables;
 
 import java.util.*;
 
@@ -12,10 +14,8 @@ import java.util.*;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class NativeInstructionParser {
-    @Autowired
-    NativeParsersFacade parsers;
-
+public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOpaqueType,
+        SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueBasicBlock, CfgBuildingCtx> {
     @Autowired
     ConstCache constants;
 
@@ -56,14 +56,10 @@ public class NativeInstructionParser {
         }
     }
 
-    public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-        try {
-            OpcodeParser parser = opcodeParsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
+    protected Cfe doParse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        OpcodeParser parser = opcodeParsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
 
-            return parser.parse(ctx, instruction);
-        } catch (Throwable e) {
-            return new UnprocessedElement(e.getMessage() == null ? e.getClass().getName() : e.getMessage(), parsers.getSourceRange(instruction));
-        }
+        return parser.parse(ctx, instruction);
     }
 
     public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
@@ -120,13 +116,8 @@ public class NativeInstructionParser {
 
         @Override
         public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            SWIGTYPE_p_LLVMOpaqueValue pointer = bitreader.LLVMGetOperand(instruction, 1);
-            SWIGTYPE_p_LLVMOpaqueValue value = bitreader.LLVMGetOperand(instruction, 0);
-            return new Assignment(
-                    new Indirection(parsers.parseRValue(ctx, pointer)),
-                    parsers.parseRValue(ctx, value),
-                    parsers.getSourceRange(instruction)
-            );
+            return createStore(ctx, instruction,
+                    bitreader.LLVMGetOperand(instruction, 0), bitreader.LLVMGetOperand(instruction, 1));
         }
     }
 
@@ -156,13 +147,10 @@ public class NativeInstructionParser {
         @Override
         public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             if (bitreader.LLVMGetNumOperands(instruction) == 0) {
-                return null;
+                return createReturn(ctx, instruction);
             }
 
-            return new Return(
-                    parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
-                    parsers.getSourceRange(instruction)
-            );
+            return createReturn(ctx, instruction, bitreader.LLVMGetOperand(instruction, 0));
         }
     }
 
@@ -285,33 +273,11 @@ public class NativeInstructionParser {
 
         @Override
         public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            List<RValue> args = new ArrayList<>();
             int argLen = bitreader.LLVMGetNumOperands(instruction) - 1;
-            SWIGTYPE_p_LLVMOpaqueValue function = bitreader.LLVMGetOperand(instruction, argLen);
+            final SWIGTYPE_p_LLVMOpaqueValue function = bitreader.LLVMGetOperand(instruction, argLen);
 
-            if (bitreader.LLVMIsAConstantExpr(function) != null) {
-                function = bitreader.LLVMGetOperand(function, 0);
-            }
-            if (bitreader.LLVMIsAFunction(function) != null) {
-                String name = bitreader.LLVMGetValueName(function);
-                if (name.startsWith("llvm.dbg")) {
-                    return null;
-                }
-            }
-
-            SWIGTYPE_p_LLVMOpaqueType type = bitreader.LLVMTypeOf(function);
-            type = bitreader.LLVMGetElementType(type);
-            SWIGTYPE_p_LLVMOpaqueType lvalueType = bitreader.LLVMGetReturnType(type);
-            LValue lvalue = bitreader.LLVMGetTypeKind(lvalueType) == LLVMTypeKind.LLVMVoidTypeKind ? null : ctx.getOrCreateTmpVar(instruction);
-            for (int i = 0; i < argLen; i++) {
-                args.add(parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
-            }
-            return new Call(
-                    parsers.parseRValue(ctx, function),
-                    lvalue,
-                    args,
-                    parsers.getSourceRange(instruction)
-            );
+            return createCall(ctx, instruction, function,
+                    Iterables.indexed(i -> bitreader.LLVMGetOperand(instruction, i), () -> argLen));
         }
 
         @Override
