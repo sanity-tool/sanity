@@ -1,0 +1,35 @@
+CFG: _ZN4core3mem13uninitialized1700000000000000000E
+#0000:	 noop
+ - no source -
+#0001:	 return *tmp0 <exit>
+ - no source -
+
+CFG: _ZN4core3ptr4null1700000000000000000E
+#0000:	 noop
+ - no source -
+#0001:	 return null <exit>
+ - no source -
+
+CFG: _ZN4core3ptr4read1700000000000000000E
+#0000:	 assign: *tmp0 = <param 0>
+ - no source -
+#0001:	 assign: *tmp1 = 0
+ - no source -
+#0002:	 assign: *tmp2 = *tmp0
+ - no source -
+#0003:	 noop: opcode 'LLVMInvoke' not supported <exit>
+ - no source -
+
+CFG: _ZN4drop1700000000000000000E
+
+
+CFG: _ZN2np5_test1700000000000000000E
+#0000:	 noop
+ - no source -
+#0001:	 call: tmp0 = _ZN4core3ptr4null1700000000000000000E()
+np.rs:4 let p: *const i32 = ptr::null();
+#0002:	 assign: *tmp1 = tmp0
+np.rs:4 let p: *const i32 = ptr::null();
+#0003:	 call: tmp2 = _ZN4core3ptr4read1700000000000000000E(*tmp1) <exit>
+np.rs:5 std::ptr::read(p);
+

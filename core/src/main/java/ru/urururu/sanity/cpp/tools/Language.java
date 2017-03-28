@@ -10,6 +10,7 @@ public enum Language {
     Cpp("cpp"),
     ObjectiveC("m"),
     Swift("swift"),
+    Rust("rs"),
     IR("ll"),
     ;
 

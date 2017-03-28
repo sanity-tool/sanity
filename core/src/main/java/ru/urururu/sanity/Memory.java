@@ -20,7 +20,7 @@ public class Memory implements Cloneable {
     Memory putValue(RValue rValue, Value value) throws SimulationException {
         if (rValue instanceof Indirection) {
             Value pointer = getValue(((Indirection) rValue).getPointer());
-            if (pointer instanceof ConstCache.NullPtr) {
+            if (pointer instanceof NullPtr) {
                 return null; // corruption
             }
 
@@ -55,7 +55,7 @@ public class Memory implements Cloneable {
     public Value getValue(RValue rValue) throws SimulationException {
         if (rValue instanceof Indirection) {
             Value pointer = getValue(((Indirection) rValue).getPointer());
-            if (pointer instanceof ConstCache.NullPtr) {
+            if (pointer instanceof NullPtr) {
                 throw new SimulationException();
             }
 
@@ -63,7 +63,7 @@ public class Memory implements Cloneable {
         }
         if (rValue instanceof GetElementPointer) {
             Value pointer = getValue(((GetElementPointer) rValue).getPointer());
-            if (pointer instanceof ConstCache.NullPtr) {
+            if (pointer instanceof NullPtr) {
                 return pointer; // todo not very correct, but better than non zero constant.
             }
         }

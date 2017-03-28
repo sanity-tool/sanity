@@ -1,11 +1,14 @@
 package ru.urururu.sanity.cpp;
 
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.api.BytecodeParser;
 import ru.urururu.sanity.api.Cfg;
+import ru.urururu.sanity.cpp.tools.Tool;
+import ru.urururu.sanity.cpp.tools.ToolFactory;
 import ru.urururu.sanity.utils.FileWrapper;
 import ru.urururu.sanity.utils.TempFileWrapper;
 
@@ -24,7 +27,7 @@ public class Parser {
     private static final Logger LOGGER = LoggerFactory.getLogger(Parser.class);
 
     @Autowired
-    ClangParametersFactory parametersFactory;
+    private ToolFactory tools;
 
     @Autowired
     BytecodeParser bytecodeParser;
@@ -38,10 +41,12 @@ public class Parser {
         try {
             try (FileWrapper objFile = fileWrapperFactory.apply("result", ".bc")) {
                 try (FileWrapper errFile = fileWrapperFactory.apply("result", ".err.log")) {
+                    Tool tool = tools.get(FilenameUtils.getExtension(filename));
+
                     if (produceDebug) {
                         try (FileWrapper debugFile = fileWrapperFactory.apply("debug", ".ll")) {
                             try (FileWrapper debugErrFile = fileWrapperFactory.apply("debug", ".err.log")) {
-                                String[] parameters = parametersFactory.getDebugParameters(filename, debugFile.getAbsolutePath());
+                                String[] parameters = tool.createDebugParameters(filename, debugFile.getAbsolutePath());
                                 if (parameters != null) {
                                     LOGGER.info("debugParameters = {}", Arrays.toString(parameters));
 
@@ -58,7 +63,7 @@ public class Parser {
                         }
                     }
 
-                    String[] parameters = parametersFactory.getParameters(filename, objFile.getAbsolutePath());
+                    String[] parameters = tool.createParameters(filename, objFile.getAbsolutePath());
                     LOGGER.info("parameters = {}", Arrays.toString(parameters));
 
                     ProcessBuilder pb = new ProcessBuilder(parameters);

@@ -116,6 +116,11 @@ public class Simulator {
         }
 
         @Override
+        public void visit(Return returnStatement) {
+            visitSimple(returnStatement);
+        }
+
+        @Override
         public void visit(IfCondition ifCondition) {
             // todo memory.getValue to check if branch known
             paths = Arrays.asList(

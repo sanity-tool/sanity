@@ -151,7 +151,11 @@ public class InstructionParser {
             if (bitreader.LLVMGetNumOperands(instruction) == 0) {
                 return null;
             }
-            return super.parse(ctx, instruction);
+
+            return new Return(
+                    valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
+                    sourceRangeFactory.getSourceRange(instruction)
+            );
         }
     }
 
@@ -209,8 +213,8 @@ public class InstructionParser {
             if (basePointer.getType().getElementType() != null) {
                 return new GetElementPointer(basePointer, index);
             }
-            if (index instanceof ConstCache.Const) {
-                int intIndex = (int) ((ConstCache.Const) index).getValue();
+            if (index instanceof Const) {
+                int intIndex = (int) ((Const) index).getValue();
                 Type fieldType = basePointer.getType().getFieldType(intIndex);
                 if (fieldType != null) {
                     return new GetFieldPointer(basePointer, intIndex);
@@ -261,8 +265,8 @@ public class InstructionParser {
             if (basePointer.getType().getElementType() != null) {
                 return new GetElementPointer(basePointer, index);
             }
-            if (index instanceof ConstCache.Const) {
-                int intIndex = (int) ((ConstCache.Const) index).getValue();
+            if (index instanceof Const) {
+                int intIndex = (int) ((Const) index).getValue();
                 Type fieldType = basePointer.getType().getFieldType(intIndex);
                 if (fieldType != null) {
                     return new GetFieldPointer(basePointer, intIndex);

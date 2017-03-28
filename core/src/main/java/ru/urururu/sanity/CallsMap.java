@@ -13,9 +13,9 @@ import java.util.*;
 @Scope("prototype")
 @Component
 public class CallsMap implements CfeVisitor {
-    Map<String, List<Cfe>> staticCalls = new LinkedHashMap<>();
-    Set<String> tookPointers = new LinkedHashSet<>();
-    Map<Type, List<Cfe>> compatibleCalls = new LinkedHashMap<>();
+    private Map<String, List<Cfe>> staticCalls = new LinkedHashMap<>();
+    private Set<String> tookPointers = new LinkedHashSet<>();
+    private Map<Type, List<Cfe>> compatibleCalls = new LinkedHashMap<>();
 
     public void init(List<Cfg> cfgs) {
         for (Cfg cfg : cfgs) {
@@ -28,12 +28,7 @@ public class CallsMap implements CfeVisitor {
             }
         }
 
-        for (Iterator<Map.Entry<String, List<Cfe>>> it = staticCalls.entrySet().iterator(); it.hasNext();) {
-            Map.Entry<String, List<Cfe>> entry = it.next();
-            if (entry.getValue().isEmpty()) {
-                it.remove();
-            }
-        }
+        staticCalls.entrySet().removeIf(entry -> entry.getValue().isEmpty());
     }
 
     public Map<String, List<Cfe>> getStaticCalls() {
@@ -55,24 +50,20 @@ public class CallsMap implements CfeVisitor {
 
     @Override
     public void visit(Assignment assignment) {
-        if (assignment.getRight() instanceof ConstCache.FunctionAddress) {
-            tookPointers.add(((ConstCache.FunctionAddress) assignment.getRight()).getName());
+        if (assignment.getRight() instanceof FunctionAddress) {
+            tookPointers.add(((FunctionAddress) assignment.getRight()).getName());
         }
     }
 
     @Override
     public void visit(Call call) {
-        if (call.getFunction() instanceof ConstCache.FunctionAddress) {
-            List<Cfe> cfes = staticCalls.get(((ConstCache.FunctionAddress) call.getFunction()).getName());
+        if (call.getFunction() instanceof FunctionAddress) {
+            List<Cfe> cfes = staticCalls.get(((FunctionAddress) call.getFunction()).getName());
             if (cfes != null) {
                 cfes.add(call);
             }
         } else {
-            List<Cfe> cfes = compatibleCalls.get(call.getFunction().getType());
-            if (cfes == null) {
-                cfes = new ArrayList<>();
-                compatibleCalls.put(call.getFunction().getType(), cfes);
-            }
+            List<Cfe> cfes = compatibleCalls.computeIfAbsent(call.getFunction().getType(), k -> new ArrayList<>());
             cfes.add(call);
         }
     }
@@ -89,6 +80,11 @@ public class CallsMap implements CfeVisitor {
 
     @Override
     public void visit(NoOp noOp) {
+
+    }
+
+    @Override
+    public void visit(Return returnStatement) {
 
     }
 }

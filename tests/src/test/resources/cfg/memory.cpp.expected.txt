@@ -51,7 +51,7 @@ memory.cpp:20 PSTRUCT = new Foo();
 memory.cpp:20 PSTRUCT = new Foo();
 
 CFG: __clang_call_terminate
-#0000:	 call: tmp0 = __cxa_begin_catch()
+#0000:	 call: tmp0 = __cxa_begin_catch(<param 0>)
  - no source -
 #0001:	 call: _ZSt9terminatev()
  - no source -

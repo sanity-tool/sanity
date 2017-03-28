@@ -102,6 +102,12 @@ public class CfePrinter implements CfeVisitor {
     }
 
     @Override
+    public void visit(Return returnStatement) {
+        sb.append("return ");
+        print(returnStatement.getValue());
+    }
+
+    @Override
     public void visit(Call call) {
         sb.append("call: ");
         LValue lvalue = call.getlValue();
@@ -110,8 +116,8 @@ public class CfePrinter implements CfeVisitor {
             sb.append(" = ");
         }
         RValue function = call.getFunction();
-        if (function instanceof ConstCache.FunctionAddress) {
-            sb.append(((ConstCache.FunctionAddress) function).getName());
+        if (function instanceof FunctionAddress) {
+            sb.append(((FunctionAddress) function).getName());
         } else {
             print(function);
         }
@@ -156,6 +162,10 @@ public class CfePrinter implements CfeVisitor {
             sb.append("tmp").append(number);
             return;
         }
+        if (value instanceof FunctionAddress) {
+            sb.append('@').append(((FunctionAddress) value).getName());
+            return;
+        }
         if (value instanceof BinaryExpression) {
             BinaryExpression expression = (BinaryExpression) value;
             print(expression.getLeft());
@@ -163,12 +173,16 @@ public class CfePrinter implements CfeVisitor {
             print(expression.getRight());
             return;
         }
-        if (value instanceof ConstCache.Const) {
-            ConstCache.Const constant = (ConstCache.Const) value;
+        if (value instanceof Const) {
+            Const constant = (Const) value;
             sb.append(constant.getValue());
             return;
         }
-        if (value instanceof ConstCache.NullPtr) {
+        if (value instanceof RealConst) {
+            sb.append(((RealConst) value).getValue());
+            return;
+        }
+        if (value instanceof NullPtr) {
             sb.append("null");
             return;
         }
@@ -179,7 +193,7 @@ public class CfePrinter implements CfeVisitor {
         }
         if (value instanceof GetElementPointer) {
             RValue index = ((GetElementPointer) value).getIndex();
-            if (index instanceof ConstCache.Const && ((ConstCache.Const) index).getValue() == 0) {
+            if (index instanceof Const && ((Const) index).getValue() == 0) {
                 print(((GetElementPointer) value).getPointer());
             } else {
                 sb.append('(');
@@ -196,6 +210,10 @@ public class CfePrinter implements CfeVisitor {
             sb.append('.');
             sb.append(((GetFieldPointer) value).getPointer().getType().getFieldName(((GetFieldPointer) value).getIndex()));
             sb.append(')');
+            return;
+        }
+        if (value instanceof GlobalVar) {
+            sb.append(((GlobalVar) value).getName());
             return;
         }
         sb.append(value.toString());

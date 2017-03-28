@@ -16,6 +16,7 @@ public class ToolFactory {
     public ToolFactory() throws InterruptedException {
         Tool.tryCreate(System.getProperty("sanity.clang", "clang"), Clang::new).ifPresent(this::addTool);
         Tool.tryCreate(System.getProperty("sanity.swiftc", "swiftc"), Swift::new).ifPresent(this::addTool);
+        Tool.tryCreate(System.getProperty("sanity.rustc", "rustc"), Rust::new).ifPresent(this::addTool);
 
         Tool.tryCreate(System.getProperty("sanity.llvm-as", "llvm-as"), LlvmAs::new).ifPresent(this::addTool);
     }

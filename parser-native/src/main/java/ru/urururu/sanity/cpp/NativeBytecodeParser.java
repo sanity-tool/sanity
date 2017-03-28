@@ -10,6 +10,7 @@ import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueBasicBlock;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 import ru.urururu.sanity.cpp.llvm.bitreader;
+import ru.urururu.util.Iterables;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,13 +41,20 @@ public class NativeBytecodeParser implements BytecodeParser {
         Cfe first = null;
         Cfe last = null;
 
-        SWIGTYPE_p_LLVMOpaqueValue global = bitreader.LLVMGetFirstGlobal(module);
-        while (global != null) {
+        Iterable<SWIGTYPE_p_LLVMOpaqueValue> globals =
+                    Iterables.linked(() -> bitreader.LLVMGetFirstGlobal(module), bitreader::LLVMGetNextGlobal);
+        for (SWIGTYPE_p_LLVMOpaqueValue global : globals) {
             try {
                 SWIGTYPE_p_LLVMOpaqueValue initializer = bitreader.LLVMGetInitializer(global);
                 if (initializer != null) {
                     Cfe cfe;
-                    LValue globalToInitialize = new Indirection(valueParser.parseLValue(null, global));
+                    GlobalVar pointerToGlobal = (GlobalVar) valueParser.parseLValue(null, global);
+
+                    if (pointerToGlobal.getName().contains("rustc_debug")) {
+                        continue;
+                    }
+
+                    LValue globalToInitialize = new Indirection(pointerToGlobal);
                     if (bitreader.LLVMIsAConstantStruct(initializer) != null) {
                         cfe = null;
                         int n = bitreader.LLVMGetNumOperands(initializer);
@@ -91,7 +99,6 @@ public class NativeBytecodeParser implements BytecodeParser {
                 System.err.println("Can't parse global: " + bitreader.LLVMGetValueName(global));
                 e.printStackTrace(System.err);
             }
-            global = bitreader.LLVMGetNextGlobal(global);
         }
 
         return first;
@@ -157,7 +164,7 @@ public class NativeBytecodeParser implements BytecodeParser {
 
                         entry = cfgUtils.removeNoOps(entry);
 
-                        result.add(new Cfg(bitreader.LLVMGetValueName(function), entry));
+                        result.add(new Cfg((FunctionAddress) valueParser.parseRValue(null, function), entry));
                     }
                 } catch (Exception e) {
                     System.err.println("Can't parse function: " + bitreader.LLVMGetValueName(function));

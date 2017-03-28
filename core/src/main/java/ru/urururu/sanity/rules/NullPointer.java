@@ -65,7 +65,7 @@ public class NullPointer {
 
                     private boolean checkForNull(RValue pointer) {
                         try {
-                            if (getMemory().getValue(pointer) instanceof ConstCache.NullPtr) {
+                            if (getMemory().getValue(pointer) instanceof NullPtr) {
                                 reportViolation(CfePrinter.printValue(pointer) + " is null", getPath());
                                 return true;
                             }
