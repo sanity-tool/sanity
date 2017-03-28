@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.sanity.cpp.llvm.*;
+import ru.urururu.util.FinalMap;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
@@ -14,12 +15,12 @@ import java.util.*;
 @Component
 public class InstructionParser {
     @Autowired
-    ParsersFacade sourceRangeFactory;
+    ParsersFacade parsers;
 
     @Autowired
     OpcodeParser[] parsersOtu;
 
-    private Map<LLVMOpcode, OpcodeParser> parsers;
+    private Map<LLVMOpcode, OpcodeParser> opcodeParsers;
 
     private OpcodeParser defaultParser = new AbstractParser() {
         @Override
@@ -30,33 +31,33 @@ public class InstructionParser {
 
     @PostConstruct
     private void init() {
-        this.parsers = new HashMap<>();
+        this.opcodeParsers = FinalMap.createHashMap();
 
         for (OpcodeParser parser : parsersOtu) {
             for (LLVMOpcode opcode : parser.getOpcodes()) {
-                this.parsers.put(opcode, parser);
+                opcodeParsers.put(opcode, parser);
             }
         }
     }
 
     public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
         try {
-            OpcodeParser parser = parsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
+            OpcodeParser parser = opcodeParsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
             Cfe result = parser.parse(ctx, instruction);
 
             return result;
         } catch (Throwable e) {
-            return new UnprocessedElement(e.getMessage() == null ? e.getClass().getName() : e.getMessage(), sourceRangeFactory.getSourceRange(instruction));
+            return new UnprocessedElement(e.getMessage() == null ? e.getClass().getName() : e.getMessage(), parsers.getSourceRange(instruction));
         }
     }
 
     public RValue parseValue(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-        OpcodeParser parser = parsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
+        OpcodeParser parser = opcodeParsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
         return parser.parseValue(ctx, instruction);
     }
 
     public RValue parseConst(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
-        OpcodeParser parser = parsers.getOrDefault(bitreader.LLVMGetConstOpcode(constant), defaultParser);
+        OpcodeParser parser = opcodeParsers.getOrDefault(bitreader.LLVMGetConstOpcode(constant), defaultParser);
         return parser.parseConst(ctx, constant);
     }
 
