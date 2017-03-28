@@ -4,7 +4,7 @@ package ru.urururu.sanity.api.cfg;
 * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
 */
 public class Primitive implements Type {
-    String name;
+    private String name;
 
     public Primitive(String name) {
         this.name = name;

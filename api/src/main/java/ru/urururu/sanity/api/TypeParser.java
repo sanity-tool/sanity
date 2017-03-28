@@ -49,7 +49,12 @@ public abstract class TypeParser<T> {
     }
 
     protected static Primitive createVoid() {
-        return createPrimitive("void");
+        return new Primitive("void") {
+            @Override
+            public boolean isVoid() {
+                return true;
+            }
+        };
     }
 
     protected PointerType createPointer(T baseType) {

@@ -11,15 +11,15 @@ import java.util.Map;
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
-public abstract class CfgBuildingCtx<T, V, I, B, Ctx/*todo?*/> {
-    protected final ParsersFacade<T, V, I, B, CfgBuildingCtx<T, V, I, B, Ctx>> parsers;
+public abstract class CfgBuildingCtx<T, V, I, B, Ctx/*todo?*/ extends CfgBuildingCtx<T, V, I, B, Ctx>> {
+    protected final ParsersFacade<T, V, I, B, Ctx> parsers;
 
     protected Map<V, RValue> params = FinalMap.createHashMap();
     Map<I, LValue> tmpVars = FinalMap.createHashMap();
     protected Map<B, Cfe> labels = FinalMap.createHashMap();
     protected B block;
 
-    protected CfgBuildingCtx(ParsersFacade<T, V, I, B, CfgBuildingCtx<T, V, I, B, Ctx>> parsers) {
+    protected CfgBuildingCtx(ParsersFacade<T, V, I, B, Ctx> parsers) {
         this.parsers = parsers;
     }
 

@@ -55,7 +55,7 @@ public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T
         for (V param : parameters) {
             args.add(parsers.parseRValue(ctx, param));
         }
-        
+
         return new Call(
                 target,
                 lvalue,
