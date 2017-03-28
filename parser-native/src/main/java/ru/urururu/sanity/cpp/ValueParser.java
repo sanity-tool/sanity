@@ -21,7 +21,7 @@ public class ValueParser {
     @Autowired
     ConstCache constants;
     @Autowired
-    InstructionParser instructionParser;
+    NativeInstructionParser instructionParser;
     @Autowired
     NativeParsersFacade parsers;
 

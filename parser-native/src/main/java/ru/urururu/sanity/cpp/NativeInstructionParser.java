@@ -6,19 +6,18 @@ import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.sanity.cpp.llvm.*;
 import ru.urururu.util.FinalMap;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class InstructionParser {
+public class NativeInstructionParser {
     @Autowired
     NativeParsersFacade parsers;
 
     @Autowired
-    OpcodeParser[] parsersOtu;
+    ConstCache constants;
 
     private Map<LLVMOpcode, OpcodeParser> opcodeParsers;
 
@@ -29,9 +28,26 @@ public class InstructionParser {
         }
     };
 
-    @PostConstruct
-    private void init() {
+    public NativeInstructionParser() {
         this.opcodeParsers = FinalMap.createHashMap();
+
+        List<OpcodeParser> parsersOtu = new ArrayList<>();
+        parsersOtu.add(new StoreParser());
+        parsersOtu.add(new LoadParser());
+        parsersOtu.add(new RetParser());
+        parsersOtu.add(new AllocaParser());
+        parsersOtu.add(new GetElementPtrParser());
+        parsersOtu.add(new ExtractValueParser());
+        parsersOtu.add(new CallParser());
+        parsersOtu.add(new PhiParser());
+        parsersOtu.add(new BrParser());
+        parsersOtu.add(new SwitchParser());
+        parsersOtu.add(new BinaryOperationParser());
+        parsersOtu.add(new BitCastParser());
+        parsersOtu.add(new CastParser());
+
+        parsersOtu.add(new ICmpParser());
+        parsersOtu.add(new FCmpParser());
 
         for (OpcodeParser parser : parsersOtu) {
             for (LLVMOpcode opcode : parser.getOpcodes()) {
@@ -43,9 +59,8 @@ public class InstructionParser {
     public Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
         try {
             OpcodeParser parser = opcodeParsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
-            Cfe result = parser.parse(ctx, instruction);
 
-            return result;
+            return parser.parse(ctx, instruction);
         } catch (Throwable e) {
             return new UnprocessedElement(e.getMessage() == null ? e.getClass().getName() : e.getMessage(), parsers.getSourceRange(instruction));
         }
@@ -61,7 +76,7 @@ public class InstructionParser {
         return parser.parseConst(ctx, constant);
     }
 
-    private static interface OpcodeParser {
+    private interface OpcodeParser {
         Set<LLVMOpcode> getOpcodes();
 
         Cfe parse(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction);
@@ -72,9 +87,6 @@ public class InstructionParser {
     }
 
     private static abstract class AbstractParser implements OpcodeParser {
-        @Autowired
-        NativeParsersFacade parsers;
-
         @Override
         public Set<LLVMOpcode> getOpcodes() {
             return Collections.singleton(getOpcode());
@@ -100,8 +112,7 @@ public class InstructionParser {
         }
     }
 
-    @Component
-    private static class StoreParser extends AbstractParser {
+    private class StoreParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
             return LLVMOpcode.LLVMStore;
@@ -119,8 +130,7 @@ public class InstructionParser {
         }
     }
 
-    @Component
-    private static class LoadParser extends AbstractParser {
+    private class LoadParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
             return LLVMOpcode.LLVMLoad;
@@ -137,8 +147,7 @@ public class InstructionParser {
         }
     }
 
-    @Component
-    private static class RetParser extends AbstractParser {
+    private class RetParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
             return LLVMOpcode.LLVMRet;
@@ -157,7 +166,6 @@ public class InstructionParser {
         }
     }
 
-    @Component
     private static class AllocaParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
@@ -175,8 +183,7 @@ public class InstructionParser {
         }
     }
 
-    @Component
-    private static class GetElementPtrParser extends AbstractParser {
+    private class GetElementPtrParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
             return LLVMOpcode.LLVMGetElementPtr;
@@ -222,11 +229,7 @@ public class InstructionParser {
         }
     }
 
-    @Component
-    private static class ExtractValueParser extends AbstractParser {
-        @Autowired
-        ConstCache constants;
-
+    private class ExtractValueParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
             return LLVMOpcode.LLVMExtractValue;
@@ -274,8 +277,7 @@ public class InstructionParser {
         }
     }
 
-    @Component
-    private static class CallParser extends AbstractParser {
+    private class CallParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
             return LLVMOpcode.LLVMCall;
@@ -318,8 +320,7 @@ public class InstructionParser {
         }
     }
 
-    @Component
-    private static class PhiParser extends AbstractParser {
+    private class PhiParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
             return LLVMOpcode.LLVMPHI;
@@ -336,8 +337,7 @@ public class InstructionParser {
         }
     }
 
-    @Component
-    private static class BrParser extends AbstractParser {
+    private class BrParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
             return LLVMOpcode.LLVMBr;
@@ -355,8 +355,7 @@ public class InstructionParser {
         }
     }
 
-    @Component
-    private static class SwitchParser extends AbstractParser {
+    private class SwitchParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
             return LLVMOpcode.LLVMSwitch;
@@ -379,20 +378,29 @@ public class InstructionParser {
         }
     }
 
-    @Component
-    private static class BinaryOperationParser extends AbstractParser {
+    private class BinaryOperationParser extends AbstractParser {
         private final Map<LLVMOpcode, BinaryExpression.Operator> opcodeOperatorMap;
 
-        public BinaryOperationParser() {
-            opcodeOperatorMap = new HashMap<>();
+        BinaryOperationParser() {
+            opcodeOperatorMap = FinalMap.createHashMap();
+            opcodeOperatorMap.put(LLVMOpcode.LLVMAdd, BinaryExpression.Operator.Add);
             opcodeOperatorMap.put(LLVMOpcode.LLVMFAdd, BinaryExpression.Operator.Add);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMSub, BinaryExpression.Operator.Sub);
             opcodeOperatorMap.put(LLVMOpcode.LLVMFSub, BinaryExpression.Operator.Sub);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMMul, BinaryExpression.Operator.Mul);
             opcodeOperatorMap.put(LLVMOpcode.LLVMFMul, BinaryExpression.Operator.Mul);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMUDiv, BinaryExpression.Operator.Div);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMSDiv, BinaryExpression.Operator.Div);
             opcodeOperatorMap.put(LLVMOpcode.LLVMFDiv, BinaryExpression.Operator.Div);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMURem, BinaryExpression.Operator.Rem);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMSRem, BinaryExpression.Operator.Rem);
             opcodeOperatorMap.put(LLVMOpcode.LLVMFRem, BinaryExpression.Operator.Rem);
 
-            opcodeOperatorMap.put(LLVMOpcode.LLVMUDiv, BinaryExpression.Operator.Div);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMURem, BinaryExpression.Operator.Rem);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMAnd, BinaryExpression.Operator.And);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMOr, BinaryExpression.Operator.Or);
+            opcodeOperatorMap.put(LLVMOpcode.LLVMXor, BinaryExpression.Operator.Xor);
+
+            opcodeOperatorMap.put(LLVMOpcode.LLVMShl, BinaryExpression.Operator.ShiftLeft);
             opcodeOperatorMap.put(LLVMOpcode.LLVMLShr, BinaryExpression.Operator.ShiftRight);
             opcodeOperatorMap.put(LLVMOpcode.LLVMAShr, BinaryExpression.Operator.ShiftRight);
         }
@@ -427,71 +435,7 @@ public class InstructionParser {
         }
     }
 
-    @Component
-    private static class AddParser extends BinaryOperationParser {
-        public AddParser() {
-            super(LLVMOpcode.LLVMAdd, BinaryExpression.Operator.Add);
-        }
-    }
-
-    @Component
-    private static class SubParser extends BinaryOperationParser {
-        public SubParser() {
-            super(LLVMOpcode.LLVMSub, BinaryExpression.Operator.Sub);
-        }
-    }
-
-    @Component
-    private static class MulParser extends BinaryOperationParser {
-        public MulParser() {
-            super(LLVMOpcode.LLVMMul, BinaryExpression.Operator.Mul);
-        }
-    }
-
-    @Component
-    private static class DivParser extends BinaryOperationParser {
-        public DivParser() {
-            super(LLVMOpcode.LLVMSDiv, BinaryExpression.Operator.Div);
-        }
-    }
-
-    @Component
-    private static class RemParser extends BinaryOperationParser {
-        public RemParser() {
-            super(LLVMOpcode.LLVMSRem, BinaryExpression.Operator.Rem);
-        }
-    }
-
-    @Component
-    private static class AndParser extends BinaryOperationParser {
-        public AndParser() {
-            super(LLVMOpcode.LLVMAnd, BinaryExpression.Operator.And);
-        }
-    }
-
-    @Component
-    private static class OrParser extends BinaryOperationParser {
-        public OrParser() {
-            super(LLVMOpcode.LLVMOr, BinaryExpression.Operator.Or);
-        }
-    }
-
-    @Component
-    private static class XorParser extends BinaryOperationParser {
-        public XorParser() {
-            super(LLVMOpcode.LLVMXor, BinaryExpression.Operator.Xor);
-        }
-    }
-
-    @Component
-    private static class ShlParser extends BinaryOperationParser {
-        public ShlParser() {
-            super(LLVMOpcode.LLVMShl, BinaryExpression.Operator.ShiftLeft);
-        }
-    }
-
-    @Component
-    private static class BitCastParser extends AbstractParser {
+    private class BitCastParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
             return LLVMOpcode.LLVMBitCast;
@@ -519,8 +463,7 @@ public class InstructionParser {
         }
     }
 
-    @Component
-    private static class CastParser extends AbstractParser {
+    private class CastParser extends AbstractParser {
         @Override
         public Set<LLVMOpcode> getOpcodes() {
             return new HashSet<>(Arrays.asList(LLVMOpcode.LLVMSExt, LLVMOpcode.LLVMZExt, LLVMOpcode.LLVMTrunc, LLVMOpcode.LLVMSIToFP));
@@ -539,11 +482,10 @@ public class InstructionParser {
         }
     }
 
-    @Component
-    private static class ICmpParser extends AbstractParser {
+    private class ICmpParser extends AbstractParser {
         Map<LLVMIntPredicate, BinaryExpression.Operator> predicateOperatorMap = new HashMap<>();
 
-        public ICmpParser() {
+        ICmpParser() {
             predicateOperatorMap.put(LLVMIntPredicate.LLVMIntSLT, BinaryExpression.Operator.Lt);
             predicateOperatorMap.put(LLVMIntPredicate.LLVMIntSLE, BinaryExpression.Operator.Le);
             predicateOperatorMap.put(LLVMIntPredicate.LLVMIntSGT, BinaryExpression.Operator.Gt);
@@ -591,11 +533,10 @@ public class InstructionParser {
         }
     }
 
-    @Component
-    private static class FCmpParser extends AbstractParser {
+    private class FCmpParser extends AbstractParser {
         Map<LLVMRealPredicate, BinaryExpression.Operator> predicateOperatorMap = new HashMap<>();
 
-        public FCmpParser() {
+        FCmpParser() {
             predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOLT, BinaryExpression.Operator.Lt);
             predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOLE, BinaryExpression.Operator.Le);
             predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOGT, BinaryExpression.Operator.Gt);

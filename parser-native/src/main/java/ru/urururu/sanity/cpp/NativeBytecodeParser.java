@@ -25,7 +25,7 @@ public class NativeBytecodeParser implements BytecodeParser {
     @Autowired
     CfgUtils cfgUtils;
     @Autowired
-    InstructionParser instructionParser;
+    NativeInstructionParser instructionParser;
     @Autowired
     NativeParsersFacade parsers;
     @Autowired
