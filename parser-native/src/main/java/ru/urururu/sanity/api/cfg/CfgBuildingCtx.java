@@ -1,10 +1,6 @@
 package ru.urururu.sanity.api.cfg;
 
 import ru.urururu.sanity.cpp.ParsersFacade;
-import ru.urururu.sanity.cpp.SourceRangeFactory;
-import ru.urururu.sanity.cpp.TypeParser;
-import ru.urururu.sanity.cpp.ValueParser;
-import ru.urururu.sanity.cpp.llvm.LLVMOpcode;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueBasicBlock;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 import ru.urururu.sanity.cpp.llvm.bitreader;

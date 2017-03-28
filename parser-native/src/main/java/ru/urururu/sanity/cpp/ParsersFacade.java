@@ -18,7 +18,7 @@ public class ParsersFacade {
     ValueParser valueParser;
 
     @Autowired
-    TypeParser typeParser;
+    NativeTypeParser typeParser;
 
     @Autowired
     SourceRangeFactory sourceRangeFactory;
