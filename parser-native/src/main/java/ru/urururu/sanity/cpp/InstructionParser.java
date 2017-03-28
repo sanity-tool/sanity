@@ -14,7 +14,7 @@ import java.util.*;
 @Component
 public class InstructionParser {
     @Autowired
-    NativeSourceRangeFactory sourceRangeFactory;
+    ParsersFacade sourceRangeFactory;
 
     @Autowired
     OpcodeParser[] parsersOtu;
@@ -72,7 +72,7 @@ public class InstructionParser {
 
     private static abstract class AbstractParser implements OpcodeParser {
         @Autowired
-        NativeSourceRangeFactory sourceRangeFactory;
+        ParsersFacade parsers;
 
         @Autowired
         ValueParser valueParser;
@@ -116,7 +116,7 @@ public class InstructionParser {
             return new Assignment(
                     new Indirection(valueParser.parseRValue(ctx, pointer)),
                     valueParser.parseRValue(ctx, value),
-                    sourceRangeFactory.getSourceRange(instruction)
+                    parsers.getSourceRange(instruction)
             );
         }
     }
@@ -154,7 +154,7 @@ public class InstructionParser {
 
             return new Return(
                     valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
-                    sourceRangeFactory.getSourceRange(instruction)
+                    parsers.getSourceRange(instruction)
             );
         }
     }
@@ -310,7 +310,7 @@ public class InstructionParser {
                     valueParser.parseRValue(ctx, function),
                     lvalue,
                     args,
-                    sourceRangeFactory.getSourceRange(instruction)
+                    parsers.getSourceRange(instruction)
             );
         }
 
@@ -353,7 +353,7 @@ public class InstructionParser {
             RValue condition = valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
             Cfe thenElement = ctx.getLabel(bitreader.LLVMGetOperand(instruction, 2));
             Cfe elseElement = ctx.getLabel(bitreader.LLVMGetOperand(instruction, 1));
-            return new IfCondition(condition, thenElement, elseElement, sourceRangeFactory.getSourceRange(instruction));
+            return new IfCondition(condition, thenElement, elseElement, parsers.getSourceRange(instruction));
         }
     }
 
@@ -377,7 +377,7 @@ public class InstructionParser {
                 i = i + 2;
             }
 
-            return new Switch(controlValue, defaultCase, cases, sourceRangeFactory.getSourceRange(instruction));
+            return new Switch(controlValue, defaultCase, cases, parsers.getSourceRange(instruction));
         }
     }
 
@@ -419,7 +419,7 @@ public class InstructionParser {
                             opcodeOperatorMap.get(bitreader.LLVMGetInstructionOpcode(instruction)),
                             valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
                     ),
-                    sourceRangeFactory.getSourceRange(instruction)
+                    parsers.getSourceRange(instruction)
             );
         }
 
@@ -513,7 +513,7 @@ public class InstructionParser {
             return new Assignment(
                     tmp,
                     operand,
-                    sourceRangeFactory.getSourceRange(instruction)
+                    parsers.getSourceRange(instruction)
             );
         }
 
@@ -590,7 +590,7 @@ public class InstructionParser {
                             operator,
                             valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
                     ),
-                    sourceRangeFactory.getSourceRange(instruction)
+                    parsers.getSourceRange(instruction)
             );
         }
 
@@ -645,7 +645,7 @@ public class InstructionParser {
                             operator,
                             valueParser.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
                     ),
-                    sourceRangeFactory.getSourceRange(instruction)
+                    parsers.getSourceRange(instruction)
             );
         }
 
