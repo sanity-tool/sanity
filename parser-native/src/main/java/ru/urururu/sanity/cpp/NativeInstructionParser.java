@@ -10,6 +10,7 @@ import ru.urururu.util.Iterables;
 
 import java.util.*;
 
+
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
@@ -274,9 +275,8 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         @Override
         public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             int argLen = bitreader.LLVMGetNumOperands(instruction) - 1;
-            final SWIGTYPE_p_LLVMOpaqueValue function = bitreader.LLVMGetOperand(instruction, argLen);
 
-            return createCall(ctx, instruction, function,
+            return createCall(ctx, instruction, bitreader.LLVMGetOperand(instruction, argLen),
                     Iterables.indexed(i -> bitreader.LLVMGetOperand(instruction, i), () -> argLen));
         }
 
@@ -332,7 +332,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
             RValue controlValue = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
             Cfe defaultCase = ctx.getLabel(bitreader.LLVMGetOperand(instruction, 1));
 
-            Map<RValue, Cfe> cases = new LinkedHashMap<>();
+            Map<RValue, Cfe> cases = FinalMap.createLinkedHashMap();
 
             int i = 2;
             while (i + 1 < bitreader.LLVMGetNumOperands(instruction)) {
@@ -383,16 +383,10 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
 
         @Override
         public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            LValue tmp = ctx.getOrCreateTmpVar(instruction);
-            return new Assignment(
-                    tmp,
-                    new BinaryExpression(
-                            parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
-                            opcodeOperatorMap.get(bitreader.LLVMGetInstructionOpcode(instruction)),
-                            parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
-                    ),
-                    parsers.getSourceRange(instruction)
-            );
+            return createBinaryAssignment(ctx, instruction,
+                    bitreader.LLVMGetOperand(instruction, 0),
+                    opcodeOperatorMap.get(bitreader.LLVMGetInstructionOpcode(instruction)),
+                    bitreader.LLVMGetOperand(instruction, 1));
         }
 
         @Override
@@ -449,7 +443,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
     }
 
     private class ICmpParser extends AbstractParser {
-        Map<LLVMIntPredicate, BinaryExpression.Operator> predicateOperatorMap = new HashMap<>();
+        Map<LLVMIntPredicate, BinaryExpression.Operator> predicateOperatorMap = FinalMap.createHashMap();
 
         ICmpParser() {
             predicateOperatorMap.put(LLVMIntPredicate.LLVMIntSLT, BinaryExpression.Operator.Lt);
@@ -473,24 +467,10 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
 
         @Override
         public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            LValue tmp = ctx.getOrCreateTmpVar(instruction);
-
-            LLVMIntPredicate predicate = bitreader.LLVMGetICmpPredicate(instruction);
-            BinaryExpression.Operator operator = predicateOperatorMap.get(predicate);
-
-            if (operator == null) {
-                throw new IllegalArgumentException(predicate.toString() + " not supported.");
-            }
-
-            return new Assignment(
-                    tmp,
-                    new BinaryExpression(
-                            parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
-                            operator,
-                            parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
-                    ),
-                    parsers.getSourceRange(instruction)
-            );
+            return createBinaryAssignment(ctx, instruction,
+                    bitreader.LLVMGetOperand(instruction, 0),
+                    predicateOperatorMap.get(bitreader.LLVMGetICmpPredicate(instruction)),
+                    bitreader.LLVMGetOperand(instruction, 1));
         }
 
         @Override
@@ -500,7 +480,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
     }
 
     private class FCmpParser extends AbstractParser {
-        Map<LLVMRealPredicate, BinaryExpression.Operator> predicateOperatorMap = new HashMap<>();
+        Map<LLVMRealPredicate, BinaryExpression.Operator> predicateOperatorMap = FinalMap.createHashMap();
 
         FCmpParser() {
             predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOLT, BinaryExpression.Operator.Lt);
@@ -527,24 +507,10 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
 
         @Override
         public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            LValue tmp = ctx.getOrCreateTmpVar(instruction);
-
-            LLVMRealPredicate predicate = bitreader.GetFCmpPredicate(instruction);
-            BinaryExpression.Operator operator = predicateOperatorMap.get(predicate);
-
-            if (operator == null) {
-                throw new IllegalArgumentException(predicate.toString() + " not supported.");
-            }
-
-            return new Assignment(
-                    tmp,
-                    new BinaryExpression(
-                            parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)),
-                            operator,
-                            parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 1))
-                    ),
-                    parsers.getSourceRange(instruction)
-            );
+            return createBinaryAssignment(ctx, instruction,
+                    bitreader.LLVMGetOperand(instruction, 0),
+                    predicateOperatorMap.get(bitreader.GetFCmpPredicate(instruction)),
+                    bitreader.LLVMGetOperand(instruction, 1));
         }
 
         @Override

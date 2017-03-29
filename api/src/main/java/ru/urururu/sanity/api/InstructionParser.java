@@ -70,4 +70,16 @@ public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T
                 parsers.getSourceRange(instruction)
         );
     }
+
+    protected Cfe createBinaryAssignment(Ctx ctx, I instruction, V left, BinaryExpression.Operator operator, V right) {
+        return new Assignment(
+                ctx.getOrCreateTmpVar(instruction),
+                new BinaryExpression(
+                        parsers.parseRValue(ctx, left),
+                        operator,
+                        parsers.parseRValue(ctx, right)
+                ),
+                parsers.getSourceRange(instruction)
+        );
+    }
 }

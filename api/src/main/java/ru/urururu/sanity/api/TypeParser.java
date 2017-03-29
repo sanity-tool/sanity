@@ -21,7 +21,7 @@ public abstract class TypeParser<T> {
     public abstract Type parse(T type);
 
     private Type get(T type) {
-        return structCache.get(type);
+        return structCache.getOrDefault(type, null);
     }
 
     private void cache(T type, Type struct) {
