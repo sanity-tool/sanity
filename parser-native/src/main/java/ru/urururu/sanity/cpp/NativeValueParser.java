@@ -2,7 +2,6 @@ package ru.urururu.sanity.cpp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.urururu.sanity.api.InstructionParser;
 import ru.urururu.sanity.api.cfg.NativeCfgBuildingCtx;
 import ru.urururu.sanity.api.cfg.ConstCache;
 import ru.urururu.sanity.api.cfg.GlobalVariableCache;
@@ -18,14 +17,12 @@ import java.util.function.Function;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class NativeValueParser {
+public class NativeValueParser extends ValueParser<SWIGTYPE_p_LLVMOpaqueType,
+        SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueBasicBlock, NativeCfgBuildingCtx> {
     @Autowired
     GlobalVariableCache globals;
     @Autowired
     ConstCache constants;
-    @Autowired
-    InstructionParser<SWIGTYPE_p_LLVMOpaqueType, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue,
-            SWIGTYPE_p_LLVMOpaqueBasicBlock, NativeCfgBuildingCtx> instructionParser;
     @Autowired
     NativeParsersFacade parsers;
 
@@ -41,10 +38,10 @@ public class NativeValueParser {
 
     public RValue parseRValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue value) {
         if (bitreader.LLVMIsAInstruction(value) != null) {
-            return instructionParser.parseValue(ctx, value);
+            return parsers.parseInstructionValue(ctx, value);
         }
         if (bitreader.LLVMIsAConstantExpr(value) != null) {
-            return instructionParser.parseConst(ctx, value);
+            return parsers.parseInstructionConst(ctx, value);
         }
         if (bitreader.LLVMIsAConstantInt(value) != null) {
             return constants.get(bitreader.LLVMConstIntGetSExtValue(value), parsers.parse(bitreader.LLVMTypeOf(value)));
