@@ -366,13 +366,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
 
         @Override
         public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            LValue tmp = ctx.getOrCreateTmpVar(instruction);
-            RValue operand = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
-            return new Assignment(
-                    tmp,
-                    operand,
-                    parsers.getSourceRange(instruction)
-            );
+            return createBitCast(ctx, instruction, bitreader.LLVMGetOperand(instruction, 0));
         }
 
         @Override

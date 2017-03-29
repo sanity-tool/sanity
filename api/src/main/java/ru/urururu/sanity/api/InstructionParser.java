@@ -137,4 +137,14 @@ public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T
         return new IfCondition(parsers.parseRValue(ctx, condition),
                 ctx.getLabel(thenElement), ctx.getLabel(elseElement), parsers.getSourceRange(instruction));
     }
+
+    protected Cfe createBitCast(Ctx ctx, I instruction, V value) {
+        LValue tmp = ctx.getOrCreateTmpVar(instruction);
+        RValue operand = parsers.parseRValue(ctx, value);
+        return new Assignment(
+                tmp,
+                operand,
+                parsers.getSourceRange(instruction)
+        );
+    }
 }
