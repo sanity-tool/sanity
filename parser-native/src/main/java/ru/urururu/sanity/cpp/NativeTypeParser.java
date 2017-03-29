@@ -29,6 +29,7 @@ public class NativeTypeParser extends TypeParser<SWIGTYPE_p_LLVMOpaqueType> impl
         parsers.put(LLVMTypeKind.LLVMArrayTypeKind,
                 t -> createArray(bitreader.LLVMGetElementType(t), bitreader.LLVMGetArrayLength(t)));
         parsers.put(LLVMTypeKind.LLVMPointerTypeKind, t -> createPointer(bitreader.LLVMGetElementType(t)));
+        parsers.put(LLVMTypeKind.LLVMMetadataTypeKind, t -> createMetadata());
     }
 
     public Type parse(SWIGTYPE_p_LLVMOpaqueType type) {

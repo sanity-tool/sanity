@@ -44,6 +44,10 @@ public abstract class TypeParser<T> {
         return createPrimitive("long double");
     }
 
+    protected static Type createMetadata() {
+        return createPrimitive("metadata");
+    }
+
     private static Primitive createPrimitive(String name) {
         return new Primitive(name);
     }
@@ -73,30 +77,7 @@ public abstract class TypeParser<T> {
 
         final List<Type> fieldTypes = new ArrayList<>();
 
-        Type struct = new Type() {
-            @Override
-            public Type getElementType() {
-                return null;
-            }
-
-            @Override
-            public Type getFieldType(int index) {
-                if (index >= fieldTypes.size()) {
-                    throw new IllegalStateException("bad");
-                }
-                return fieldTypes.get(index);
-            }
-
-            @Override
-            public String getFieldName(int index) {
-                return "field" + index;
-            }
-
-            @Override
-            public String toString() {
-                return name;
-            }
-        };
+        Type struct = new StructType(fieldTypes, name);
 
         cache(originalType, struct);
 
@@ -109,35 +90,83 @@ public abstract class TypeParser<T> {
         final Type returnType = parse(originalReturnType);
         final Type[] paramsType = StreamSupport.stream(originalParamTypes.spliterator(), false).map(this::parse).toArray(Type[]::new);
 
-        return new Type() {
-            @Override
-            public Type getElementType() {
-                return null;
-            }
+        return new FunctionType(returnType, paramsType);
+    }
 
-            @Override
-            public Type getFieldType(int index) {
-                return null;
-            }
+    private static class StructType implements Type {
+        private final List<Type> fieldTypes;
+        private final String name;
 
-            @Override
-            public String getFieldName(int index) {
-                return null;
-            }
+        public StructType(List<Type> fieldTypes, String name) {
+            this.fieldTypes = fieldTypes;
+            this.name = name;
+        }
 
-            @Override
-            public String toString() {
-                StringBuilder sb = new StringBuilder(returnType.toString());
-                sb.append(" (");
-                if (paramsType.length != 0) {
-                    sb.append(paramsType[0]);
-                    for (int i = 1; i < paramsType.length; i++) {
-                        sb.append(", ").append(paramsType[i]);
-                    }
+        @Override
+        public Type getElementType() {
+            return null;
+        }
+
+        @Override
+        public Type getFieldType(int index) {
+            if (index >= fieldTypes.size()) {
+                throw new IllegalStateException("bad");
+            }
+            return fieldTypes.get(index);
+        }
+
+        @Override
+        public String getFieldName(int index) {
+            return "field" + index;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
+    private static class FunctionType implements Type {
+        private final Type returnType;
+        private final Type[] paramsType;
+
+        public FunctionType(Type returnType, Type[] paramsType) {
+            this.returnType = returnType;
+            this.paramsType = paramsType;
+        }
+
+        @Override
+        public Type getReturnType() {
+            return returnType;
+        }
+
+        @Override
+        public Type getElementType() {
+            return null;
+        }
+
+        @Override
+        public Type getFieldType(int index) {
+            return null;
+        }
+
+        @Override
+        public String getFieldName(int index) {
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder(returnType.toString());
+            sb.append(" (");
+            if (paramsType.length != 0) {
+                sb.append(paramsType[0]);
+                for (int i = 1; i < paramsType.length; i++) {
+                    sb.append(", ").append(paramsType[i]);
                 }
-                sb.append(')');
-                return sb.toString();
             }
-        };
+            sb.append(')');
+            return sb.toString();
+        }
     }
 }

@@ -49,7 +49,10 @@ public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T
             }
         }
 
-        LValue lvalue = target.getType().getReturnType().isVoid() ? null : ctx.getOrCreateTmpVar(instruction);
+        Type returnType =
+                target.getType().getElementType() == null ? target.getType().getReturnType() : target.getType().getElementType().getReturnType();
+
+        LValue lvalue = returnType.isVoid() ? null : ctx.getOrCreateTmpVar(instruction);
 
         List<RValue> args = new ArrayList<>();
         for (V param : parameters) {
