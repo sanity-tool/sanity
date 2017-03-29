@@ -2,10 +2,13 @@ package ru.urururu.sanity.cpp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.urururu.sanity.api.InstructionParser;
 import ru.urururu.sanity.api.cfg.NativeCfgBuildingCtx;
 import ru.urururu.sanity.api.cfg.ConstCache;
 import ru.urururu.sanity.api.cfg.GlobalVariableCache;
 import ru.urururu.sanity.api.cfg.RValue;
+import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueBasicBlock;
+import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueType;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 import ru.urururu.sanity.cpp.llvm.bitreader;
 
@@ -21,7 +24,8 @@ public class ValueParser {
     @Autowired
     ConstCache constants;
     @Autowired
-    NativeInstructionParser instructionParser;
+    InstructionParser<SWIGTYPE_p_LLVMOpaqueType, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue,
+            SWIGTYPE_p_LLVMOpaqueBasicBlock, NativeCfgBuildingCtx> instructionParser;
     @Autowired
     NativeParsersFacade parsers;
 

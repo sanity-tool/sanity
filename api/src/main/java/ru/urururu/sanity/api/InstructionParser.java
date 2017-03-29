@@ -147,4 +147,8 @@ public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T
                 parsers.getSourceRange(instruction)
         );
     }
+
+    public abstract RValue parseValue(Ctx ctx, I value);
+
+    public abstract RValue parseConst(Ctx ctx, I value);
 }

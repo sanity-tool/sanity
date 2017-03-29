@@ -5,11 +5,9 @@ import org.springframework.stereotype.Component;
 import ru.urururu.sanity.CfgUtils;
 import ru.urururu.sanity.api.BytecodeParser;
 import ru.urururu.sanity.api.Cfg;
+import ru.urururu.sanity.api.InstructionParser;
 import ru.urururu.sanity.api.cfg.*;
-import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueBasicBlock;
-import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;
-import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
-import ru.urururu.sanity.cpp.llvm.bitreader;
+import ru.urururu.sanity.cpp.llvm.*;
 import ru.urururu.util.Iterables;
 
 import java.io.File;
@@ -25,7 +23,8 @@ public class NativeBytecodeParser implements BytecodeParser {
     @Autowired
     CfgUtils cfgUtils;
     @Autowired
-    NativeInstructionParser instructionParser;
+    InstructionParser<SWIGTYPE_p_LLVMOpaqueType, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue,
+            SWIGTYPE_p_LLVMOpaqueBasicBlock, NativeCfgBuildingCtx> instructionParser;
     @Autowired
     NativeParsersFacade parsers;
     @Autowired
