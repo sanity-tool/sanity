@@ -18,7 +18,7 @@ import java.util.function.Function;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class ValueParser {
+public class NativeValueParser {
     @Autowired
     GlobalVariableCache globals;
     @Autowired
