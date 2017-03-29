@@ -135,7 +135,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
 
         @Override
         public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            return new Indirection(parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0)));
+            return createLoad(ctx, bitreader.LLVMGetOperand(instruction, 0));
         }
     }
 
