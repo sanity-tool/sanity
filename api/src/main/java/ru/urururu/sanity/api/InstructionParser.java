@@ -2,9 +2,12 @@ package ru.urururu.sanity.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.urururu.sanity.api.cfg.*;
+import ru.urururu.util.FinalMap;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
@@ -81,5 +84,57 @@ public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T
                 ),
                 parsers.getSourceRange(instruction)
         );
+    }
+
+    protected RValue getPointer(Ctx ctx, V basePointer, Iterable<V> indices) {
+        RValue pointer = parsers.parseRValue(ctx, basePointer);
+
+        for (V index : indices) {
+            pointer = getPointer(pointer, parsers.parseRValue(ctx, index));
+        }
+
+        return pointer;
+    }
+
+    protected RValue getPointer(RValue basePointer, RValue index) {
+        if (basePointer.getType().getElementType() != null) {
+            return new GetElementPointer(basePointer, index);
+        }
+        if (index instanceof Const) {
+            int intIndex = (int) ((Const) index).getValue();
+            Type fieldType = basePointer.getType().getFieldType(intIndex);
+            if (fieldType != null) {
+                return new GetFieldPointer(basePointer, intIndex);
+            }
+        }
+        throw new IllegalStateException("can't index " + CfePrinter.printValue(basePointer) + " by " + index);
+    }
+
+    protected Cfe createSwitch(Ctx ctx, I instruction, V controlValue, V defaultCase, Iterable<V> values, Iterable<V> labels) {
+        Map<RValue, Cfe> cases = FinalMap.createLinkedHashMap();
+
+        Iterator<V> valuesIterator = values.iterator();
+        Iterator<V> labelsIterator = labels.iterator();
+        while (valuesIterator.hasNext() && labelsIterator.hasNext()) {
+            cases.put(parsers.parseRValue(ctx, valuesIterator.next()), ctx.getLabel(labelsIterator.next()));
+        }
+
+        if (valuesIterator.hasNext()) {
+            throw new IllegalStateException("out of labels, but have value");
+        }
+        if (labelsIterator.hasNext()) {
+            throw new IllegalStateException("out of values, but have label");
+        }
+
+        return new Switch(parsers.parseRValue(ctx, controlValue), ctx.getLabel(defaultCase), cases, parsers.getSourceRange(instruction));
+    }
+
+    protected Cfe createGoto(Ctx ctx, I instruction, V label) {
+        return ctx.getLabel(label);
+    }
+
+    protected Cfe createIf(Ctx ctx, I instruction, V condition, V thenElement, V elseElement) {
+        return new IfCondition(parsers.parseRValue(ctx, condition),
+                ctx.getLabel(thenElement), ctx.getLabel(elseElement), parsers.getSourceRange(instruction));
     }
 }

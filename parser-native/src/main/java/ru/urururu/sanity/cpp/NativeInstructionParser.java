@@ -185,36 +185,16 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
 
         @Override
         public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            RValue pointer = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
-
             int operandsCount = bitreader.LLVMGetNumOperands(instruction);
 
-            int i = 1;
-            while (i < operandsCount) {
-                pointer = getPointer(pointer, parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
-                i++;
-            }
-
-            return pointer;
+            return getPointer(ctx, bitreader.LLVMGetOperand(instruction, 0), Iterables.indexed(
+                    i -> bitreader.LLVMGetOperand(instruction, i + 1),
+                    () -> operandsCount - 1));
         }
 
         @Override
         public RValue parseConst(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
             return parseValue(ctx, constant);
-        }
-
-        private RValue getPointer(RValue basePointer, RValue index) {
-            if (basePointer.getType().getElementType() != null) {
-                return new GetElementPointer(basePointer, index);
-            }
-            if (index instanceof Const) {
-                int intIndex = (int) ((Const) index).getValue();
-                Type fieldType = basePointer.getType().getFieldType(intIndex);
-                if (fieldType != null) {
-                    return new GetFieldPointer(basePointer, intIndex);
-                }
-            }
-            throw new IllegalStateException("can't index " + CfePrinter.printValue(basePointer) + " by " + index);
         }
     }
 
@@ -231,6 +211,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
 
         @Override
         public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+            // todo wtf? tests?
             RValue pointer = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
 
             pointer = getPointer(pointer, constants.get(0, null));
@@ -249,20 +230,6 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         @Override
         public RValue parseConst(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
             return parseValue(ctx, constant);
-        }
-
-        private RValue getPointer(RValue basePointer, RValue index) {
-            if (basePointer.getType().getElementType() != null) {
-                return new GetElementPointer(basePointer, index);
-            }
-            if (index instanceof Const) {
-                int intIndex = (int) ((Const) index).getValue();
-                Type fieldType = basePointer.getType().getFieldType(intIndex);
-                if (fieldType != null) {
-                    return new GetFieldPointer(basePointer, intIndex);
-                }
-            }
-            throw new IllegalStateException("can't index " + CfePrinter.printValue(basePointer) + " by " + index);
         }
     }
 
@@ -312,12 +279,10 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         @Override
         public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
             if (bitreader.LLVMGetNumOperands(instruction) == 1) {
-                return ctx.getLabel(bitreader.LLVMGetOperand(instruction, 0));
+                return createGoto(ctx, instruction, bitreader.LLVMGetOperand(instruction, 0));
             }
-            RValue condition = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
-            Cfe thenElement = ctx.getLabel(bitreader.LLVMGetOperand(instruction, 2));
-            Cfe elseElement = ctx.getLabel(bitreader.LLVMGetOperand(instruction, 1));
-            return new IfCondition(condition, thenElement, elseElement, parsers.getSourceRange(instruction));
+            return createIf(ctx, instruction, bitreader.LLVMGetOperand(instruction, 0),
+                    bitreader.LLVMGetOperand(instruction, 2), bitreader.LLVMGetOperand(instruction, 1));
         }
     }
 
@@ -329,18 +294,16 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
 
         @Override
         public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            RValue controlValue = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
-            Cfe defaultCase = ctx.getLabel(bitreader.LLVMGetOperand(instruction, 1));
-
-            Map<RValue, Cfe> cases = FinalMap.createLinkedHashMap();
+            List<SWIGTYPE_p_LLVMOpaqueValue> values = new ArrayList<>();
+            List<SWIGTYPE_p_LLVMOpaqueValue> labels = new ArrayList<>();
 
             int i = 2;
             while (i + 1 < bitreader.LLVMGetNumOperands(instruction)) {
-                cases.put(parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)), ctx.getLabel(bitreader.LLVMGetOperand(instruction, i + 1)));
-                i = i + 2;
+                values.add(bitreader.LLVMGetOperand(instruction, i++));
+                labels.add(bitreader.LLVMGetOperand(instruction, i++));
             }
 
-            return new Switch(controlValue, defaultCase, cases, parsers.getSourceRange(instruction));
+            return createSwitch(ctx, instruction, bitreader.LLVMGetOperand(instruction, 0), bitreader.LLVMGetOperand(instruction, 1), values, labels);
         }
     }
 

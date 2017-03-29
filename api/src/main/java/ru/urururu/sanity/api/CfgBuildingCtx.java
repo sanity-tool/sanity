@@ -29,6 +29,8 @@ public abstract class CfgBuildingCtx<T, V, I, B, Ctx/*todo?*/ extends CfgBuildin
 
     public abstract LValue getOrCreateTmpVar(I instruction);
 
+    public abstract Cfe getLabel(V label);
+
     public LValue getTmpVar(I instruction) {
         LValue result = tmpVars.get(instruction);
         if (result == null) {
