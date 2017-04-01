@@ -15,6 +15,7 @@ public abstract class CfgBuildingCtx<T, V, I, B, Ctx/*todo?*/ extends CfgBuildin
     private Map<I, LValue> tmpVars = FinalMap.createHashMap();
     protected Map<B, Cfe> labels = FinalMap.createHashMap();
     protected B block;
+    protected CfgBuilder builder;
 
     protected CfgBuildingCtx(ParsersFacade<T, V, I, B, Ctx> parsers) {
         this.parsers = parsers;
@@ -29,11 +30,15 @@ public abstract class CfgBuildingCtx<T, V, I, B, Ctx/*todo?*/ extends CfgBuildin
     public abstract Cfe getLabel(V label);
 
     public Cfe endSubCfg() {
-        throw new IllegalStateException("not subCfg ctx");
+        try {
+            return builder.getResult();
+        } finally {
+            builder = null;
+        }
     }
 
     public void append(Cfe cfe) {
-        throw new IllegalStateException("not subCfg ctx");
+        builder.append(cfe);
     }
 
     public LValue getTmpVar(I instruction) {
@@ -44,31 +49,8 @@ public abstract class CfgBuildingCtx<T, V, I, B, Ctx/*todo?*/ extends CfgBuildin
         return result;
     }
 
-    public CfgBuildingCtx<T, V, I, B, Ctx> beginSubCfg(B entryBlock) {
-        CfgBuildingCtx<T, V, I, B, Ctx> parent = this;
-        this.block = entryBlock;
-        return new CfgBuildingCtx<T, V, I, B, Ctx>(parsers) {
-            CfgBuilder builder = new CfgBuilder();
-
-            @Override
-            public LValue getOrCreateTmpVar(I instruction) {
-                return parent.getOrCreateTmpVar(instruction);
-            }
-
-            @Override
-            public Cfe getLabel(V label) {
-                return parent.getLabel(label);
-            }
-
-            @Override
-            public void append(Cfe cfe) {
-                builder.append(cfe);
-            }
-
-            @Override
-            public Cfe endSubCfg() {
-                return builder.getResult();
-            }
-        };
+    public void beginSubCfg(B entryBlock) {
+        block = entryBlock;
+        builder = new CfgBuilder();
     }
 }

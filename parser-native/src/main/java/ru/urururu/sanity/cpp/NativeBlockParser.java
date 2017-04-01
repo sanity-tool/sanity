@@ -18,7 +18,8 @@ public class NativeBlockParser extends BlockParser<SWIGTYPE_p_LLVMOpaqueType,
         SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueBasicBlock, NativeCfgBuildingCtx> {
     @Override
     protected Cfe processBlock(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueBasicBlock block) {
-        return processBlock(ctx.beginSubCfg(block),
+        ctx.beginSubCfg(block);
+        return processBlock(ctx,
                 Iterables.linked(() -> bitreader.LLVMGetFirstInstruction(block), bitreader::LLVMGetNextInstruction));
     }
 }

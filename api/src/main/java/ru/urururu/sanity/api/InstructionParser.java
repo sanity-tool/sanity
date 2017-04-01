@@ -20,9 +20,6 @@ public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T
         try {
             return doParse(ctx, instruction);
         } catch (Exception e) {
-            if (e instanceof RuntimeException) {
-                throw e;
-            }
             return new UnprocessedElement(e.getMessage() == null ? e.getClass().getName() : e.getMessage(), parsers.getSourceRange(instruction));
         }
     }
