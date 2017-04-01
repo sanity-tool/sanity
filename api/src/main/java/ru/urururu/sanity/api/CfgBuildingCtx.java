@@ -1,9 +1,6 @@
 package ru.urururu.sanity.api;
 
-import ru.urururu.sanity.api.cfg.Cfe;
-import ru.urururu.sanity.api.cfg.LValue;
-import ru.urururu.sanity.api.cfg.RValue;
-import ru.urururu.sanity.api.cfg.TemporaryVar;
+import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.util.FinalMap;
 
 import java.util.Map;
@@ -31,6 +28,14 @@ public abstract class CfgBuildingCtx<T, V, I, B, Ctx/*todo?*/ extends CfgBuildin
 
     public abstract Cfe getLabel(V label);
 
+    public Cfe endSubCfg() {
+        throw new IllegalStateException("not subCfg ctx");
+    }
+
+    public void append(Cfe cfe) {
+        throw new IllegalStateException("not subCfg ctx");
+    }
+
     public LValue getTmpVar(I instruction) {
         LValue result = tmpVars.get(instruction);
         if (result == null) {
@@ -39,8 +44,31 @@ public abstract class CfgBuildingCtx<T, V, I, B, Ctx/*todo?*/ extends CfgBuildin
         return result;
     }
 
-    public CfgBuildingCtx<T, V, I, B, Ctx> enterSubCfg(CfgBuildingCtx<T, V, I, B, Ctx> ctx, B entryBlock) {
+    public CfgBuildingCtx<T, V, I, B, Ctx> beginSubCfg(B entryBlock) {
+        CfgBuildingCtx<T, V, I, B, Ctx> parent = this;
         this.block = entryBlock;
-        return this;
+        return new CfgBuildingCtx<T, V, I, B, Ctx>(parsers) {
+            CfgBuilder builder = new CfgBuilder();
+
+            @Override
+            public LValue getOrCreateTmpVar(I instruction) {
+                return parent.getOrCreateTmpVar(instruction);
+            }
+
+            @Override
+            public Cfe getLabel(V label) {
+                return parent.getLabel(label);
+            }
+
+            @Override
+            public void append(Cfe cfe) {
+                builder.append(cfe);
+            }
+
+            @Override
+            public Cfe endSubCfg() {
+                return builder.getResult();
+            }
+        };
     }
 }

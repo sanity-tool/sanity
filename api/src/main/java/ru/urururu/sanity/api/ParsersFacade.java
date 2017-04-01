@@ -16,6 +16,8 @@ public abstract class ParsersFacade<T, V, I, B, Ctx extends CfgBuildingCtx<T, V,
     SourceRangeFactory<I> sourceRangeFactory;
     @Autowired
     ValueParser<T, V, I, B, Ctx> valueParser;
+    @Autowired
+    BlockParser<T, V, I, B, Ctx> blockParser;
 
     public RValue parseRValue(Ctx ctx, V value) {
         return valueParser.parseRValue(ctx, value);
@@ -23,6 +25,10 @@ public abstract class ParsersFacade<T, V, I, B, Ctx extends CfgBuildingCtx<T, V,
 
     public Type parse(T type) {
         return typeParser.parse(type);
+    }
+
+    public Cfe parseBlock(Ctx ctx, B block) {
+        return blockParser.processBlock(ctx, block);
     }
 
     public Cfe parse(Ctx ctx, I instruction) {

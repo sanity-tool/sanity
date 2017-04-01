@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import ru.urururu.sanity.CfgUtils;
 import ru.urururu.sanity.api.BytecodeParser;
 import ru.urururu.sanity.api.Cfg;
+import ru.urururu.sanity.api.CfgBuildingCtx;
 import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.sanity.cpp.llvm.*;
 import ru.urururu.util.Iterables;
@@ -82,20 +83,21 @@ public class NativeBytecodeParser implements BytecodeParser {
     }
 
     private Cfe processBlock(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock) {
-        ctx.enterSubCfg(ctx, entryBlock);
-
-        CfgBuilder builder = new CfgBuilder();
-
-        SWIGTYPE_p_LLVMOpaqueValue instruction = bitreader.LLVMGetFirstInstruction(entryBlock);
-        while (instruction != null) {
-            Cfe cfe = parsers.parse(ctx, instruction);
-            if (cfe != null) {
-                builder.append(cfe);
-            }
-            instruction = bitreader.LLVMGetNextInstruction(instruction);
-        }
-
-        return builder.getResult();
+        return parsers.parseBlock(ctx, entryBlock);
+//        CfgBuildingCtx<SWIGTYPE_p_LLVMOpaqueType, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueBasicBlock, NativeCfgBuildingCtx> subCtx = ctx.beginSubCfg(entryBlock);
+//
+//        CfgBuilder builder = new CfgBuilder();
+//
+//        SWIGTYPE_p_LLVMOpaqueValue instruction = bitreader.LLVMGetFirstInstruction(entryBlock);
+//        while (instruction != null) {
+//            Cfe cfe = parsers.parse(ctx, instruction);
+//            if (cfe != null) {
+//                builder.append(cfe);
+//            }
+//            instruction = bitreader.LLVMGetNextInstruction(instruction);
+//        }
+//
+//        return builder.getResult();
     }
 
     @Override
