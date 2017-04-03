@@ -9,4 +9,12 @@ public interface Type {
     Type getFieldType(int index);
 
     String getFieldName(int index);
+
+    default Type getReturnType() {
+        throw new IllegalStateException("not a function, but a " + getClass().getSimpleName());
+    }
+
+    default boolean isVoid() {
+        return false;
+    }
 }

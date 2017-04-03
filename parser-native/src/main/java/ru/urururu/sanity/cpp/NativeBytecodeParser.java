@@ -6,10 +6,7 @@ import ru.urururu.sanity.CfgUtils;
 import ru.urururu.sanity.api.BytecodeParser;
 import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.api.cfg.*;
-import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueBasicBlock;
-import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;
-import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
-import ru.urururu.sanity.cpp.llvm.bitreader;
+import ru.urururu.sanity.cpp.llvm.*;
 import ru.urururu.util.Iterables;
 
 import java.io.File;
@@ -25,21 +22,18 @@ public class NativeBytecodeParser implements BytecodeParser {
     @Autowired
     CfgUtils cfgUtils;
     @Autowired
-    InstructionParser instructionParser;
+    NativeParsersFacade parsers;
     @Autowired
-    ParsersFacade parsers;
+    NativeTypeParser typeParser;
     @Autowired
-    TypeParser typeParser;
-    @Autowired
-    ValueParser valueParser;
+    NativeValueParser valueParser;
     @Autowired
     ParserListener[] listeners;
     @Autowired
     ConstCache constants;
 
     private Cfe parseGlobalInitializers(SWIGTYPE_p_LLVMOpaqueModule module) {
-        Cfe first = null;
-        Cfe last = null;
+        CfgBuilder builder = new CfgBuilder();
 
         Iterable<SWIGTYPE_p_LLVMOpaqueValue> globals =
                     Iterables.linked(() -> bitreader.LLVMGetFirstGlobal(module), bitreader::LLVMGetNextGlobal);
@@ -47,7 +41,6 @@ public class NativeBytecodeParser implements BytecodeParser {
             try {
                 SWIGTYPE_p_LLVMOpaqueValue initializer = bitreader.LLVMGetInitializer(global);
                 if (initializer != null) {
-                    Cfe cfe;
                     GlobalVar pointerToGlobal = (GlobalVar) valueParser.parseLValue(null, global);
 
                     if (pointerToGlobal.getName().contains("rustc_debug")) {
@@ -56,43 +49,27 @@ public class NativeBytecodeParser implements BytecodeParser {
 
                     LValue globalToInitialize = new Indirection(pointerToGlobal);
                     if (bitreader.LLVMIsAConstantStruct(initializer) != null) {
-                        cfe = null;
                         int n = bitreader.LLVMGetNumOperands(initializer);
                         while (n-- > 0) {
                             SWIGTYPE_p_LLVMOpaqueValue fieldInit = bitreader.LLVMGetOperand(initializer, n);
                             RValue rValue = valueParser.parseRValue(null, fieldInit);
-
-                            Cfe fieldInitCfe = new Assignment(new Indirection(new GetFieldPointer(globalToInitialize, n)), rValue, null);
-                            fieldInitCfe.setNext(cfe);
-                            cfe = fieldInitCfe;
+                            builder.append(new Assignment(new Indirection(new GetFieldPointer(globalToInitialize, n)), rValue, null));
                         }
                     } else if (bitreader.LLVMIsAConstantArray(initializer) != null) {
-                        cfe = null;
                         int n = bitreader.LLVMGetNumOperands(initializer);
                         while (n-- > 0) {
                             SWIGTYPE_p_LLVMOpaqueValue elementInit = bitreader.LLVMGetOperand(initializer, n);
                             RValue rValue = valueParser.parseRValue(null, elementInit);
-
-                            Cfe fieldInitCfe = new Assignment(new Indirection(new GetElementPointer(globalToInitialize, constants.get(n, typeParser.parse(bitreader.LLVMIntType(32))))), rValue, null);
-                            fieldInitCfe.setNext(cfe);
-                            cfe = fieldInitCfe;
+                            builder.append(new Assignment(new Indirection(new GetElementPointer(globalToInitialize, constants.get(n, typeParser.parse(bitreader.LLVMIntType(32))))), rValue, null));
                         }
                     } else if (bitreader.LLVMIsAConstantDataArray(initializer) != null) {
                         Type type = typeParser.parse(bitreader.LLVMTypeOf(initializer));
                         String s = bitreader.GetDataArrayString(initializer);
                         if (s != null) {
-                            cfe = new Assignment(globalToInitialize, constants.get(s, type), null);
-                        } else {
-                            cfe = null;
+                            builder.append(new Assignment(globalToInitialize, constants.get(s, type), null));
                         }
                     } else {
-                        cfe = new Assignment(globalToInitialize, valueParser.parseRValue(null, initializer), null);
-                    }
-                    if (first == null) {
-                        first = last = cfe;
-                    } else if (cfe != null) {
-                        last.setNext(cfe);
-                        last = last.getNext();
+                        builder.append(new Assignment(globalToInitialize, valueParser.parseRValue(null, initializer), null));
                     }
                 }
             } catch (Exception e) {
@@ -101,28 +78,7 @@ public class NativeBytecodeParser implements BytecodeParser {
             }
         }
 
-        return first;
-    }
-
-    private Cfe processBlock(CfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock) {
-        ctx.enterSubCfg(ctx, entryBlock);
-
-        Cfe first = null;
-        Cfe last = null;
-
-        SWIGTYPE_p_LLVMOpaqueValue instruction = bitreader.LLVMGetFirstInstruction(entryBlock);
-        while (instruction != null) {
-            Cfe cfe = instructionParser.parse(ctx, instruction);
-            if (first == null) {
-                first = last = cfe;
-            } else if (cfe != null) {
-                last.setNext(cfe);
-                last = last.getNext();
-            }
-            instruction = bitreader.LLVMGetNextInstruction(instruction);
-        }
-
-        return first;
+        return builder.getResult();
     }
 
     @Override
@@ -145,16 +101,16 @@ public class NativeBytecodeParser implements BytecodeParser {
             while (function != null) {
                 try {
                     if (bitreader.LLVMGetFirstBasicBlock(function) != null) {
-                        CfgBuildingCtx ctx = new CfgBuildingCtx(parsers, function);
+                        NativeCfgBuildingCtx ctx = new NativeCfgBuildingCtx(parsers, function);
 
                         SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock = bitreader.LLVMGetEntryBasicBlock(function);
 
-                        Cfe entry = processBlock(ctx, entryBlock);
+                        Cfe entry = parsers.parseBlock(ctx, entryBlock);
 
                         SWIGTYPE_p_LLVMOpaqueBasicBlock block = bitreader.LLVMGetFirstBasicBlock(function);
                         block = bitreader.LLVMGetNextBasicBlock(block);
                         while (block != null) {
-                            Cfe blockEntry = processBlock(ctx, block);
+                            Cfe blockEntry = parsers.parseBlock(ctx, block);
                             Cfe label = ctx.getLabel(bitreader.LLVMBasicBlockAsValue(block));
 
                             label.setNext(blockEntry);
