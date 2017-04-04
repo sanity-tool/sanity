@@ -382,7 +382,8 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
     private class CastParser extends AbstractParser {
         @Override
         public Set<LLVMOpcode> getOpcodes() {
-            return new HashSet<>(Arrays.asList(LLVMOpcode.LLVMSExt, LLVMOpcode.LLVMZExt, LLVMOpcode.LLVMTrunc, LLVMOpcode.LLVMSIToFP));
+            return new HashSet<>(Arrays.asList(LLVMOpcode.LLVMSExt, LLVMOpcode.LLVMZExt, LLVMOpcode.LLVMTrunc,
+                    LLVMOpcode.LLVMSIToFP, LLVMOpcode.LLVMFPExt, LLVMOpcode.LLVMFPTrunc));
         }
 
         @Override
