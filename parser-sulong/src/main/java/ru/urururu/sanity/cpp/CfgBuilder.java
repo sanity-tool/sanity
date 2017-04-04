@@ -131,8 +131,8 @@ public class CfgBuilder implements ModelVisitor {
         }
     }
 
-    private Cfe processBlock(CfgBuildingCtx<Type, Symbol, InstructionBlock> ctx, InstructionBlock entryBlock) {
-        ctx.enterSubCfg(entryBlock);
+    private Cfe processBlock(SuCfgBuildingCtx ctx, InstructionBlock entryBlock) {
+        ctx.beginSubCfg(entryBlock);
 
         Cfe first = null;
         Cfe last = null;

@@ -16,6 +16,8 @@
 
         <module>parser-native</module>
 
+        <module>parser-sulong</module>
+
         <module>llvm-bitreader</module>
         <module>parser-pure</module>
     </modules>

@@ -1,5 +1,6 @@
 package ru.urururu.sanity.cpp;
 
+import com.oracle.truffle.llvm.parser.model.ModelModule;
 import com.oracle.truffle.llvm.parser.model.blocks.InstructionBlock;
 import com.oracle.truffle.llvm.parser.model.enums.BinaryOperator;
 import com.oracle.truffle.llvm.parser.model.enums.CastOperator;
@@ -19,11 +20,10 @@ import com.oracle.truffle.llvm.parser.model.symbols.instructions.*;
 import com.oracle.truffle.llvm.parser.model.visitors.ConstantVisitor;
 import com.oracle.truffle.llvm.parser.model.visitors.InstructionVisitor;
 import com.oracle.truffle.llvm.runtime.types.symbols.Symbol;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.urururu.sanity.api.InstructionParser;
 import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.sanity.api.cfg.Call;
-import ru.urururu.sanity.api.cfg.FunctionType;
 import ru.urururu.sanity.api.cfg.Type;
 import ru.urururu.util.FinalMap;
 import ru.urururu.util.FinalReference;
@@ -37,15 +37,12 @@ import java.util.Map;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class SulongInstructionParser extends InstructionParser<com.oracle.truffle.llvm.runtime.types.Type, Symbol, InstructionBlock> {
-    @Autowired
-    SulongValueParser valueParser; // todo to base class?
-
+public class SulongInstructionParser extends InstructionParser<ModelModule, com.oracle.truffle.llvm.runtime.types.Type, Symbol, Instruction, InstructionBlock, SuCfgBuildingCtx> {
     @Override
-    protected Cfe doParse(CfgBuildingCtx<com.oracle.truffle.llvm.runtime.types.Type, Symbol, InstructionBlock> ctx, Symbol instruction) {
+    protected Cfe doParse(SuCfgBuildingCtx ctx, Instruction instruction) {
         FinalReference<Cfe> result = new FinalReference<>("Cfe");
 
-        ((Instruction)instruction).accept(new InstructionVisitor() {
+        instruction.accept(new InstructionVisitor() {
             @Override
             public void visit(AllocateInstruction allocate) {
                 result.set(null);
@@ -57,11 +54,11 @@ public class SulongInstructionParser extends InstructionParser<com.oracle.truffl
                 result.set(new Assignment(
                         tmp,
                         new BinaryExpression(
-                                valueParser.parseRValue(ctx, operation.getLHS()),
+                                parsers.parseRValue(ctx, operation.getLHS()),
                                 toOperator(operation.getOperator()),
-                                valueParser.parseRValue(ctx, operation.getRHS())
+                                parsers.parseRValue(ctx, operation.getRHS())
                         ),
-                        sourceRangeFactory.getSourceRange(instruction)
+                        parsers.getSourceRange(instruction)
                 ));
             }
 
@@ -79,11 +76,11 @@ public class SulongInstructionParser extends InstructionParser<com.oracle.truffl
             public void visit(CastInstruction cast) {
                 if (cast.getOperator() == CastOperator.BITCAST) {
                     LValue tmp = ctx.getOrCreateTmpVar(instruction);
-                    RValue operand = valueParser.parseRValue(ctx, cast.getValue());
+                    RValue operand = parsers.parseRValue(ctx, cast.getValue());
                     result.set(new Assignment(
                             tmp,
                             operand,
-                            sourceRangeFactory.getSourceRange(instruction)
+                            parsers.getSourceRange(instruction)
                     ));
                     return;
                 }
@@ -96,20 +93,20 @@ public class SulongInstructionParser extends InstructionParser<com.oracle.truffl
                 result.set(new Assignment(
                         tmp,
                         new BinaryExpression(
-                                valueParser.parseRValue(ctx, operation.getLHS()),
+                                parsers.parseRValue(ctx, operation.getLHS()),
                                 toOperator(operation.getOperator()),
-                                valueParser.parseRValue(ctx, operation.getRHS())
+                                parsers.parseRValue(ctx, operation.getRHS())
                         ),
-                        sourceRangeFactory.getSourceRange(instruction)
+                        parsers.getSourceRange(instruction)
                 ));
             }
 
             @Override
             public void visit(ConditionalBranchInstruction branch) {
-                RValue condition = valueParser.parseRValue(ctx, branch.getCondition());
+                RValue condition = parsers.parseRValue(ctx, branch.getCondition());
                 Cfe thenElement = ctx.getLabel(branch.getTrueSuccessor());
                 Cfe elseElement = ctx.getLabel(branch.getFalseSuccessor());
-                result.set(new IfCondition(condition, thenElement, elseElement, sourceRangeFactory.getSourceRange(instruction)));
+                result.set(new IfCondition(condition, thenElement, elseElement, parsers.getSourceRange(instruction)));
             }
 
             @Override
@@ -173,24 +170,24 @@ public class SulongInstructionParser extends InstructionParser<com.oracle.truffl
             @Override
             public void visit(StoreInstruction store) {
                 result.set(new Assignment(
-                        new Indirection(valueParser.parseRValue(ctx, store.getDestination())),
-                        valueParser.parseRValue(ctx, store.getSource()),
-                        sourceRangeFactory.getSourceRange(instruction)
+                        new Indirection(parsers.parseRValue(ctx, store.getDestination())),
+                        parsers.parseRValue(ctx, store.getSource()),
+                        parsers.getSourceRange(instruction)
                 ));
             }
 
             @Override
             public void visit(SwitchInstruction select) {
-                RValue controlValue = valueParser.parseRValue(ctx, select.getCondition());
+                RValue controlValue = parsers.parseRValue(ctx, select.getCondition());
                 Cfe defaultCase = ctx.getLabel(select.getDefaultBlock());
 
                 Map<RValue, Cfe> cases = FinalMap.createLinkedHashMap();
 
                 for (int i = 0; i < select.getCaseCount(); i++) {
-                    cases.put(valueParser.parseRValue(ctx, select.getCaseValue(i)), ctx.getLabel(select.getCaseBlock(i)));
+                    cases.put(parsers.parseRValue(ctx, select.getCaseValue(i)), ctx.getLabel(select.getCaseBlock(i)));
                 }
 
-                result.set(new Switch(controlValue, defaultCase, cases, sourceRangeFactory.getSourceRange(instruction)));
+                result.set(new Switch(controlValue, defaultCase, cases, parsers.getSourceRange(instruction)));
             }
 
             @Override
@@ -217,24 +214,24 @@ public class SulongInstructionParser extends InstructionParser<com.oracle.truffl
 
                 List<RValue> args = new ArrayList<>();
 
-                RValue function = valueParser.parseRValue(ctx, callTarget);
+                RValue function = parsers.parseRValue(ctx, callTarget);
 
                 Type functionType = function.getType();
                 if (functionType.isPointer()) {
                     functionType = functionType.getElementType();
                 }
-                Type returnType = ((FunctionType) functionType).getReturnType();
+                Type returnType = functionType.getReturnType();
 
                 LValue lvalue = returnType.isVoid() ? null : ctx.getOrCreateTmpVar(call);
                 for (Symbol argument : arguments) {
-                    args.add(valueParser.parseRValue(ctx, argument));
+                    args.add(parsers.parseRValue(ctx, argument));
                 }
 
                 result.set(new Call(
                         function,
                         lvalue,
                         args,
-                        sourceRangeFactory.getSourceRange(instruction)
+                        parsers.getSourceRange(instruction)
                 ));
             }
         });
@@ -341,10 +338,10 @@ public class SulongInstructionParser extends InstructionParser<com.oracle.truffl
     }
 
     @Override
-    public RValue parseValue(CfgBuildingCtx<com.oracle.truffle.llvm.runtime.types.Type, Symbol, InstructionBlock> ctx, Symbol instruction) {
+    public RValue parseValue(SuCfgBuildingCtx ctx, Instruction value) {
         FinalReference<RValue> result = new FinalReference<>("RValue");
 
-        ((Instruction)instruction).accept(new InstructionVisitor() {
+        value.accept(new InstructionVisitor() {
             @Override
             public void visit(AllocateInstruction allocate) {
                 result.set(ctx.getOrCreateTmpVar(allocate));
@@ -368,11 +365,11 @@ public class SulongInstructionParser extends InstructionParser<com.oracle.truffl
             @Override
             public void visit(CastInstruction cast) {
                 if (cast.getOperator() == CastOperator.BITCAST) {
-                    result.set(ctx.getTmpVar(instruction));
+                    result.set(ctx.getTmpVar(cast));
                     return;
                 }
 
-                result.set(valueParser.parseRValue(ctx, cast.getValue()));
+                result.set(parsers.parseRValue(ctx, cast.getValue()));
             }
 
             @Override
@@ -397,10 +394,10 @@ public class SulongInstructionParser extends InstructionParser<com.oracle.truffl
 
             @Override
             public void visit(GetElementPointerInstruction gep) {
-                RValue pointer = valueParser.parseRValue(ctx, gep.getBasePointer());
+                RValue pointer = parsers.parseRValue(ctx, gep.getBasePointer());
 
                 for (Symbol index : gep.getIndices()) {
-                    pointer = getPointer(pointer, valueParser.parseRValue(ctx, index));
+                    pointer = getPointer(pointer, parsers.parseRValue(ctx, index));
                 }
 
                 result.set(pointer);
@@ -423,7 +420,7 @@ public class SulongInstructionParser extends InstructionParser<com.oracle.truffl
 
             @Override
             public void visit(LoadInstruction load) {
-                result.set(new Indirection(valueParser.parseRValue(ctx, load.getSource())));
+                result.set(new Indirection(parsers.parseRValue(ctx, load.getSource())));
             }
 
             @Override
@@ -473,17 +470,17 @@ public class SulongInstructionParser extends InstructionParser<com.oracle.truffl
         });
 
         if (!result.isSet()) {
-            throw new IllegalStateException(instruction.getClass().getSimpleName());
+            throw new IllegalStateException(value.getClass().getSimpleName());
         }
 
         return result.get();
     }
 
     @Override
-    public RValue parseConst(CfgBuildingCtx<com.oracle.truffle.llvm.runtime.types.Type, Symbol, InstructionBlock> ctx, Symbol constant) {
+    public RValue parseConst(SuCfgBuildingCtx ctx, Instruction value) {
         FinalReference<RValue> result = new FinalReference<>("Constant");
 
-        ((Constant)constant).accept(new ConstantVisitor() {
+        ((Constant)value).accept(new ConstantVisitor() {
             @Override
             public void visit(ArrayConstant arrayConstant) {
                 throw new IllegalStateException("bitreader::LLVMIsAConstantArray");
@@ -516,7 +513,7 @@ public class SulongInstructionParser extends InstructionParser<com.oracle.truffl
 
             @Override
             public void visit(CastConstant castConstant) {
-                result.set(valueParser.parseRValue(ctx, castConstant.getValue()));
+                result.set(parsers.parseRValue(ctx, castConstant.getValue()));
             }
 
             @Override
@@ -541,20 +538,20 @@ public class SulongInstructionParser extends InstructionParser<com.oracle.truffl
 
             @Override
             public void visit(FunctionDeclaration functionDeclaration) {
-                result.set(valueParser.parseRValue(ctx, functionDeclaration));
+                result.set(parsers.parseRValue(ctx, functionDeclaration));
             }
 
             @Override
             public void visit(FunctionDefinition functionDefinition) {
-                result.set(valueParser.parseRValue(ctx, functionDefinition));
+                result.set(parsers.parseRValue(ctx, functionDefinition));
             }
 
             @Override
             public void visit(GetElementPointerConstant getElementPointerConstant) {
-                RValue pointer = valueParser.parseRValue(ctx, getElementPointerConstant.getBasePointer());
+                RValue pointer = parsers.parseRValue(ctx, getElementPointerConstant.getBasePointer());
 
                 for (Symbol index : getElementPointerConstant.getIndices()) {
-                    pointer = getPointer(pointer, valueParser.parseRValue(ctx, index));
+                    pointer = getPointer(pointer, parsers.parseRValue(ctx, index));
                 }
 
                 result.set(pointer);
@@ -577,7 +574,7 @@ public class SulongInstructionParser extends InstructionParser<com.oracle.truffl
 
             @Override
             public void visit(StringConstant stringConstant) {
-                result.set(valueParser.parseRValue(ctx, stringConstant));
+                result.set(parsers.parseRValue(ctx, stringConstant));
             }
 
             @Override
@@ -587,7 +584,7 @@ public class SulongInstructionParser extends InstructionParser<com.oracle.truffl
         });
 
         if (!result.isSet()) {
-            throw new IllegalStateException(constant.getClass().getSimpleName());
+            throw new IllegalStateException(value.getClass().getSimpleName());
         }
 
         return result.get();

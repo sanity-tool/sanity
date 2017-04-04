@@ -1,5 +1,6 @@
 package ru.urururu.sanity.cpp;
 
+import com.oracle.truffle.llvm.parser.model.ModelModule;
 import com.oracle.truffle.llvm.parser.model.blocks.InstructionBlock;
 import com.oracle.truffle.llvm.parser.model.functions.FunctionParameter;
 import com.oracle.truffle.llvm.parser.model.globals.GlobalVariable;
@@ -10,21 +11,20 @@ import com.oracle.truffle.llvm.parser.model.symbols.constants.floatingpoint.Floa
 import com.oracle.truffle.llvm.parser.model.symbols.constants.integer.IntegerConstant;
 import com.oracle.truffle.llvm.parser.model.symbols.instructions.Instruction;
 import com.oracle.truffle.llvm.runtime.types.FunctionType;
-import com.oracle.truffle.llvm.runtime.types.Type;
 import com.oracle.truffle.llvm.runtime.types.symbols.Symbol;
 import org.springframework.stereotype.Component;
-import ru.urururu.sanity.api.cfg.CfgBuildingCtx;
 import ru.urururu.sanity.api.cfg.RValue;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class SulongValueParser extends ValueParser<Symbol, Type, InstructionBlock> {
+public class SulongValueParser extends ValueParser<ModelModule, com.oracle.truffle.llvm.runtime.types.Type, Symbol,
+        Instruction, InstructionBlock, SuCfgBuildingCtx> {
     @Override
-    public RValue parseLValue(CfgBuildingCtx<Type, Symbol, InstructionBlock> ctx, Symbol value) {
+    public RValue parseLValue(SuCfgBuildingCtx ctx, Symbol value) {
         if (value instanceof GlobalVariable) {
-            return globals.get(fixName(((GlobalVariable) value).getName()), typeParser.parse(value.getType()));
+            return globals.get(fixName(((GlobalVariable) value).getName()), parsers.parse(value.getType()));
         }
         if (value instanceof FunctionParameter) {
             return ctx.getParam(value);
@@ -33,16 +33,16 @@ public class SulongValueParser extends ValueParser<Symbol, Type, InstructionBloc
     }
 
     @Override
-    public RValue parseRValue(CfgBuildingCtx<Type, Symbol, InstructionBlock> ctx, Symbol value) {
+    public RValue parseRValue(SuCfgBuildingCtx ctx, Symbol value) {
         if (value == null) {
             throw new IllegalArgumentException("value: " + value);
         }
 
         if (value instanceof Instruction) {
-            return instructionParser.parseValue(ctx, value);
+            return parsers.parseInstructionValue(ctx, (Instruction) value);
         }
         if (value instanceof NullConstant) {
-            ru.urururu.sanity.api.cfg.Type constantType = typeParser.parse(value.getType());
+            ru.urururu.sanity.api.cfg.Type constantType = parsers.parse(value.getType());
             if (constantType.isInteger()) {
                 return constants.get(0, constantType);
             }
@@ -56,19 +56,19 @@ public class SulongValueParser extends ValueParser<Symbol, Type, InstructionBloc
             return null;
         }
         if (value instanceof IntegerConstant) {
-            return constants.get(((IntegerConstant) value).getValue(), typeParser.parse(value.getType()));
+            return constants.get(((IntegerConstant) value).getValue(), parsers.parse(value.getType()));
         }
         if (value instanceof FloatConstant) {
-            return constants.get(((FloatConstant) value).getValue(), typeParser.parse(value.getType()));
+            return constants.get(((FloatConstant) value).getValue(), parsers.parse(value.getType()));
         }
         if (value instanceof StringConstant) {
-            return constants.get(((StringConstant) value).getString(), typeParser.parse(value.getType()));
+            return constants.get(((StringConstant) value).getString(), parsers.parse(value.getType()));
         }
         if (value instanceof FunctionType) {
-            return constants.getFunction(fixName(((FunctionType) value).getName()), typeParser.parse(value.getType()));
+            return constants.getFunction(fixName(((FunctionType) value).getName()), parsers.parse(value.getType()));
         }
         if (value instanceof Constant) {
-            return instructionParser.parseConst(ctx, value);
+            return parsers.parseInstructionConst(ctx, (Instruction) value);
         }
 
         return parseLValue(ctx, value);
