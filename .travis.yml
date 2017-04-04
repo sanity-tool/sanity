@@ -12,7 +12,14 @@ addons:
       - swig
       - ccache
 
+env:
+ - SANITY_PROFILE=parser-native
+ - SANITY_PROFILE=parser-sulong
+ - SANITY_PROFILE=parser-pure
 matrix:
+  allow_failures:
+   - env: SANITY_PROFILE=parser-sulong
+   - env: SANITY_PROFILE=parser-pure
   include:
     - os: linux
       jdk: oraclejdk8
@@ -248,6 +255,11 @@ matrix:
       - LANG=ObjectiveC
       - EXTRA_BREW=llvm38
       - CLANG_BIN=clang-3.8
+  exclude:
+   - os: osx
+     env: SANITY_PROFILE=parser-sulong
+   - os: osx
+     env: SANITY_PROFILE=parser-pure
 
     - os: osx
       env:
@@ -289,7 +301,6 @@ matrix:
 language: java
 
 install:
- - export SANITY_PROFILE=parser-native
  - ./install.sh
 
 script: mvn -P $SANITY_PROFILE test -B
