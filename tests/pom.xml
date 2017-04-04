@@ -80,6 +80,18 @@
         </profile>
 
         <profile>
+            <id>parser-pure</id>
+            <dependencies>
+                <dependency>
+                    <groupId>ru.urururu</groupId>
+                    <artifactId>sanity-parser-pure</artifactId>
+                    <version>1.0-SNAPSHOT</version>
+                    <!--<scope>runtime</scope> todo jacoco only adds test and compile scopes -->
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
             <id>custom clang</id>
             <activation>
                 <property>
