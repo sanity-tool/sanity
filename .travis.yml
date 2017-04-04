@@ -17,9 +17,6 @@ env:
  - SANITY_PROFILE=parser-sulong
  - SANITY_PROFILE=parser-pure
 matrix:
-  allow_failures:
-   - env: SANITY_PROFILE=parser-sulong
-   - env: SANITY_PROFILE=parser-pure
   include:
     - os: linux
       jdk: oraclejdk8
@@ -255,6 +252,9 @@ matrix:
       - LANG=ObjectiveC
       - EXTRA_BREW=llvm38
       - CLANG_BIN=clang-3.8
+  allow_failures:
+     - env: SANITY_PROFILE=parser-sulong
+     - env: SANITY_PROFILE=parser-pure
   exclude:
    - os: osx
      env: SANITY_PROFILE=parser-sulong
