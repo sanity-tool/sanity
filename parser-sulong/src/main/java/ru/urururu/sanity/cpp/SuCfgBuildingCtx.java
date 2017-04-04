@@ -1,20 +1,22 @@
 package ru.urururu.sanity.cpp;
 
+import com.oracle.truffle.llvm.parser.model.ModelModule;
 import com.oracle.truffle.llvm.parser.model.blocks.InstructionBlock;
 import com.oracle.truffle.llvm.parser.model.functions.FunctionDefinition;
 import com.oracle.truffle.llvm.parser.model.functions.FunctionParameter;
+import com.oracle.truffle.llvm.parser.model.symbols.instructions.Instruction;
 import com.oracle.truffle.llvm.parser.model.symbols.instructions.PhiInstruction;
 import com.oracle.truffle.llvm.runtime.types.symbols.Symbol;
+import ru.urururu.sanity.api.CfgBuildingCtx;
 import ru.urururu.sanity.api.cfg.*;
+import ru.urururu.sanity.api.cfg.Type;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
-public class SuCfgBuildingCtx extends CfgBuildingCtx<com.oracle.truffle.llvm.runtime.types.Type, Symbol, InstructionBlock> {
-    private final SulongParsersFacade parsers;
-
+public class SuCfgBuildingCtx extends CfgBuildingCtx<ModelModule, com.oracle.truffle.llvm.runtime.types.Type, Symbol, Instruction, InstructionBlock, SuCfgBuildingCtx> {
     SuCfgBuildingCtx(SulongParsersFacade parsers, FunctionDefinition function) {
-        this.parsers = parsers;
+        super(parsers);
 
         for (FunctionParameter parameter : function.getParameters()) {
             params.put(parameter, new Parameter(params.size(), defaultName(parameter.getName()), getType(parameter)));
@@ -28,23 +30,22 @@ public class SuCfgBuildingCtx extends CfgBuildingCtx<com.oracle.truffle.llvm.run
         return name;
     }
 
-    @Override
     protected Type getType(Symbol value) {
         return parsers.parse(value.getType());
     }
 
-    @Override
-    protected InstructionBlock getValueAsBasicBlock(Symbol label) {
+    private InstructionBlock getValueAsBasicBlock(Symbol label) {
         return (InstructionBlock)label;
     }
 
     @Override
     public Cfe getLabel(Symbol label) {
-        Cfe result = super.getLabel(label);
+        InstructionBlock block = getValueAsBasicBlock(label);
 
-        InstructionBlock referencedBlock = getValueAsBasicBlock(label);
-        if (referencedBlock.getInstructionCount() != 0 && referencedBlock.getInstruction(0) instanceof PhiInstruction) {
-            PhiInstruction phi = (PhiInstruction) referencedBlock.getInstruction(0);
+        Cfe result = labels.computeIfAbsent(block, k -> new NoOp(null));
+
+        if (block.getInstructionCount() != 0 && block.getInstruction(0) instanceof PhiInstruction) {
+            PhiInstruction phi = (PhiInstruction) block.getInstruction(0);
             long n = phi.getSize();
             for (int i = 0; i < n; i++) {
                 if (this.block.equals(phi.getBlock(i))) {
@@ -61,5 +62,10 @@ public class SuCfgBuildingCtx extends CfgBuildingCtx<com.oracle.truffle.llvm.run
         }
 
         return result;
+    }
+
+    @Override
+    public LValue getOrCreateTmpVar(Instruction instruction) {
+        return super.getOrCreateTmpVar(instruction, instruction.getType());
     }
 }

@@ -1,5 +1,6 @@
 package ru.urururu.sanity.cpp;
 
+import com.oracle.truffle.llvm.parser.model.ModelModule;
 import com.oracle.truffle.llvm.runtime.types.*;
 import com.oracle.truffle.llvm.runtime.types.ArrayType;
 import com.oracle.truffle.llvm.runtime.types.PointerType;
@@ -8,16 +9,20 @@ import com.oracle.truffle.llvm.runtime.types.metadata.MetadataConstantPointerTyp
 import com.oracle.truffle.llvm.runtime.types.metadata.MetadataConstantType;
 import com.oracle.truffle.llvm.runtime.types.visitors.TypeVisitor;
 import org.springframework.stereotype.Component;
+import ru.urururu.sanity.api.TypeParser;
 import ru.urururu.util.FinalReference;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class SulongTypeParser extends TypeParser<Type> {
+public class SulongTypeParser extends TypeParser<ModelModule, Type> {
     @Override
-    protected ru.urururu.sanity.api.cfg.Type doParse(Type type) {
+    public ru.urururu.sanity.api.cfg.Type parse(Type type) {
         FinalReference<ru.urururu.sanity.api.cfg.Type> result = new FinalReference<>("Type");
 
         type.accept(new TypeVisitor() {
@@ -33,7 +38,7 @@ public class SulongTypeParser extends TypeParser<Type> {
 
             @Override
             public void visit(FunctionType functionType) {
-                result.set(createFunction(functionType.getReturnType(), functionType.getArgumentTypes()));
+                result.set(createFunction(functionType.getReturnType(), Arrays.asList(functionType.getArgumentTypes())));
             }
 
             @Override
@@ -64,7 +69,7 @@ public class SulongTypeParser extends TypeParser<Type> {
                 }
 
                 if (metaType == MetaType.OPAQUE) {
-                    result.set(createStructure(type, "", new Type[0]));
+                    result.set(createStruct(type, "", Collections.emptyList()));
                     return; // is this correct?
                 }
 
@@ -78,7 +83,7 @@ public class SulongTypeParser extends TypeParser<Type> {
 
             @Override
             public void visit(ArrayType arrayType) {
-                result.set(createArray(arrayType.getLength(), arrayType.getElementType()));
+                result.set(createArray(arrayType.getElementType(), arrayType.getLength()));
             }
 
             @Override
@@ -88,7 +93,7 @@ public class SulongTypeParser extends TypeParser<Type> {
                     fieldTypes[i] = structureType.getElementType(i);
                 }
 
-                result.set(createStructure(structureType, structureType.getName(), fieldTypes));
+                result.set(createStruct(structureType, structureType.getName(), Arrays.asList(fieldTypes)));
             }
 
             @Override
