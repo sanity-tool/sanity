@@ -14,9 +14,9 @@ import java.util.stream.StreamSupport;
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
-public abstract class TypeParser<T> {
+public abstract class TypeParser<M, T> implements ParserListener<M> {
     protected final Map<T, Type> typesCache = FinalMap.createHashMap();
-    protected final Map<T, Type> structCache = FinalMap.createHashMap();
+    private final Map<T, Type> structCache = FinalMap.createHashMap();
 
     public abstract Type parse(T type);
 
@@ -93,11 +93,17 @@ public abstract class TypeParser<T> {
         return new FunctionType(returnType, paramsType);
     }
 
+    @Override
+    public void onModuleFinished(M module) {
+        structCache.clear();
+        typesCache.clear();
+    }
+
     private static class StructType implements Type {
         private final List<Type> fieldTypes;
         private final String name;
 
-        public StructType(List<Type> fieldTypes, String name) {
+        StructType(List<Type> fieldTypes, String name) {
             this.fieldTypes = fieldTypes;
             this.name = name;
         }
@@ -130,7 +136,7 @@ public abstract class TypeParser<T> {
         private final Type returnType;
         private final Type[] paramsType;
 
-        public FunctionType(Type returnType, Type[] paramsType) {
+        FunctionType(Type returnType, Type[] paramsType) {
             this.returnType = returnType;
             this.paramsType = paramsType;
         }

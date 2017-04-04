@@ -8,8 +8,8 @@ import java.util.Map;
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
-public abstract class CfgBuildingCtx<T, V, I, B, Ctx/*todo?*/ extends CfgBuildingCtx<T, V, I, B, Ctx>> {
-    protected final ParsersFacade<T, V, I, B, Ctx> parsers;
+public abstract class CfgBuildingCtx<M, T, V, I, B, Ctx/*todo?*/ extends CfgBuildingCtx<M, T, V, I, B, Ctx>> {
+    protected final ParsersFacade<M, T, V, I, B, Ctx> parsers;
 
     protected Map<V, RValue> params = FinalMap.createHashMap();
     private Map<I, LValue> tmpVars = FinalMap.createHashMap();
@@ -17,7 +17,7 @@ public abstract class CfgBuildingCtx<T, V, I, B, Ctx/*todo?*/ extends CfgBuildin
     protected B block;
     protected CfgBuilder builder;
 
-    protected CfgBuildingCtx(ParsersFacade<T, V, I, B, Ctx> parsers) {
+    protected CfgBuildingCtx(ParsersFacade<M, T, V, I, B, Ctx> parsers) {
         this.parsers = parsers;
     }
 
@@ -39,6 +39,10 @@ public abstract class CfgBuildingCtx<T, V, I, B, Ctx/*todo?*/ extends CfgBuildin
 
     public void append(Cfe cfe) {
         builder.append(cfe);
+    }
+
+    public RValue getParam(V value) {
+        return params.get(value);
     }
 
     public LValue getTmpVar(I instruction) {
