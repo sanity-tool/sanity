@@ -23,6 +23,7 @@ public abstract class AbstractBytecodeParser<M, T, V, I, B, Ctx extends CfgBuild
     @Autowired
     ParserListener<M>[] listeners;
     @Autowired
+    protected
     ConstCache constants;
 
     protected abstract Iterable<? extends V> getGlobals(M module);

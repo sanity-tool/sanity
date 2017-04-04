@@ -2,9 +2,7 @@ package ru.urururu.sanity.cpp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.urururu.sanity.CfgUtils;
 import ru.urururu.sanity.api.AbstractBytecodeParser;
-import ru.urururu.sanity.api.ParserListener;
 import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.sanity.cpp.llvm.*;
 import ru.urururu.util.Iterables;
@@ -19,17 +17,7 @@ public class NativeBytecodeParser extends AbstractBytecodeParser<SWIGTYPE_p_LLVM
         SWIGTYPE_p_LLVMOpaqueType, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue,
         SWIGTYPE_p_LLVMOpaqueBasicBlock, NativeCfgBuildingCtx> {
     @Autowired
-    CfgUtils cfgUtils;
-    @Autowired
     NativeParsersFacade parsers;
-    @Autowired
-    NativeTypeParser typeParser;
-    @Autowired
-    NativeValueParser valueParser;
-    @Autowired
-    ParserListener[] listeners;
-    @Autowired
-    ConstCache constants;
 
     @Override
     protected Iterable<SWIGTYPE_p_LLVMOpaqueValue> getGlobals(SWIGTYPE_p_LLVMOpaqueModule module) {
@@ -41,18 +29,18 @@ public class NativeBytecodeParser extends AbstractBytecodeParser<SWIGTYPE_p_LLVM
             int n = bitreader.LLVMGetNumOperands(initializer);
             while (n-- > 0) {
                 SWIGTYPE_p_LLVMOpaqueValue fieldInit = bitreader.LLVMGetOperand(initializer, n);
-                RValue rValue = valueParser.parseRValue(null, fieldInit);
+                RValue rValue = parsers.parseRValue(null, fieldInit);
                 builder.append(new Assignment(new Indirection(new GetFieldPointer(globalToInitialize, n)), rValue, null));
             }
         } else if (bitreader.LLVMIsAConstantArray(initializer) != null) {
             int n = bitreader.LLVMGetNumOperands(initializer);
             while (n-- > 0) {
                 SWIGTYPE_p_LLVMOpaqueValue elementInit = bitreader.LLVMGetOperand(initializer, n);
-                RValue rValue = valueParser.parseRValue(null, elementInit);
-                builder.append(new Assignment(new Indirection(new GetElementPointer(globalToInitialize, constants.get(n, typeParser.parse(bitreader.LLVMIntType(32))))), rValue, null));
+                RValue rValue = parsers.parseRValue(null, elementInit);
+                builder.append(new Assignment(new Indirection(new GetElementPointer(globalToInitialize, constants.get(n, parsers.parse(bitreader.LLVMIntType(32))))), rValue, null));
             }
         } else if (bitreader.LLVMIsAConstantDataArray(initializer) != null) {
-            Type type = typeParser.parse(bitreader.LLVMTypeOf(initializer));
+            Type type = parsers.parse(bitreader.LLVMTypeOf(initializer));
             String s = bitreader.GetDataArrayString(initializer);
             if (s != null) {
                 builder.append(new Assignment(globalToInitialize, constants.get(s, type), null));
