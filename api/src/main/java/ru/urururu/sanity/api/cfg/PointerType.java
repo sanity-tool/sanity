@@ -16,6 +16,11 @@ public class PointerType implements Type {
     }
 
     @Override
+    public boolean isPointer() {
+        return true;
+    }
+
+    @Override
     public Type getFieldType(int index) {
         return null;
     }

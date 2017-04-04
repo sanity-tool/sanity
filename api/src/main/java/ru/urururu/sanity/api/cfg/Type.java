@@ -17,4 +17,16 @@ public interface Type {
     default boolean isVoid() {
         return false;
     }
+
+    default boolean isInteger() {
+        return false;
+    }
+
+    default boolean isFloatingPoint() {
+        return false;
+    }
+
+    default boolean isPointer() {
+        return false;
+    }
 }
