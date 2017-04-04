@@ -3,7 +3,6 @@ package ru.urururu.sanity.api.cfg;
 import ru.urururu.sanity.api.CfgBuildingCtx;
 import ru.urururu.sanity.cpp.NativeParsersFacade;
 import ru.urururu.sanity.cpp.llvm.*;
-import ru.urururu.util.Iterables;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>

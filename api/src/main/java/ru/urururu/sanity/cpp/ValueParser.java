@@ -12,8 +12,7 @@ import ru.urururu.sanity.api.cfg.RValue;
  */
 public abstract class ValueParser<M, T, V, I, B, Ctx extends CfgBuildingCtx<M, T, V, I, B, Ctx>> {
     @Autowired
-    protected
-    ParsersFacade<M, T, V, I, B, Ctx> parsers;
+    protected ParsersFacade<M, T, V, I, B, Ctx> parsers;
     @Autowired
     protected
     GlobalVariableCache globals;

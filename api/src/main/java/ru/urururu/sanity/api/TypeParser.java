@@ -29,19 +29,33 @@ public abstract class TypeParser<M, T> implements ParserListener<M> {
     }
 
     protected static Type createInt(long width) {
-        return new Primitive("int" + width);
+        return new Primitive("int" + width) {
+            @Override
+            public boolean isInteger() {
+                return true;
+            }
+        };
+    }
+
+    private static Primitive createFloat(String name) {
+        return new Primitive(name) {
+            @Override
+            public boolean isFloatingPoint() {
+                return true;
+            }
+        };
     }
 
     protected static Type createFloat() {
-        return createPrimitive("float");
+        return createFloat("float");
     }
 
     protected static Primitive createDouble() {
-        return createPrimitive("double");
+        return createFloat("double");
     }
 
     protected static Primitive createLongDouble() {
-        return createPrimitive("long double");
+        return createFloat("long double");
     }
 
     protected static Type createMetadata() {
