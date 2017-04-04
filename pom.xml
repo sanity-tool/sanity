@@ -12,21 +12,17 @@
         <module>api</module>
         <module>core</module>
         <module>tests</module>
+
+        <module>parser-native</module>
+
+        <module>llvm-bitreader</module>
+        <module>parser-pure</module>
     </modules>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-
-    <profiles>
-        <profile>
-            <id>parser-native</id>
-            <modules>
-                <module>parser-native</module>
-            </modules>
-        </profile>
-    </profiles>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
