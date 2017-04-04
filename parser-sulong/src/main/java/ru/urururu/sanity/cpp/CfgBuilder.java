@@ -5,18 +5,14 @@ import com.oracle.truffle.llvm.parser.model.functions.FunctionDefinition;
 import com.oracle.truffle.llvm.parser.model.globals.GlobalVariable;
 import com.oracle.truffle.llvm.parser.model.symbols.constants.aggregate.ArrayConstant;
 import com.oracle.truffle.llvm.parser.model.symbols.constants.aggregate.StructureConstant;
-import com.oracle.truffle.llvm.parser.model.symbols.instructions.*;
 import com.oracle.truffle.llvm.parser.model.visitors.FunctionVisitor;
 import com.oracle.truffle.llvm.parser.model.visitors.ModelVisitor;
 import com.oracle.truffle.llvm.runtime.types.IntegerType;
-import com.oracle.truffle.llvm.runtime.types.Type;
 import com.oracle.truffle.llvm.runtime.types.symbols.Symbol;
 import ru.urururu.sanity.CfgUtils;
 import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.api.cfg.*;
-import ru.urururu.util.Iterators;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -132,23 +128,7 @@ public class CfgBuilder implements ModelVisitor {
     }
 
     private Cfe processBlock(SuCfgBuildingCtx ctx, InstructionBlock entryBlock) {
-        ctx.beginSubCfg(entryBlock);
-
-        Cfe first = null;
-        Cfe last = null;
-
-        Iterator<Instruction> instructions = Iterators.indexed(entryBlock::getInstruction, entryBlock::getInstructionCount);
-        while (instructions.hasNext()) {
-            Cfe cfe = parsers.parse(ctx, instructions.next());
-            if (first == null) {
-                first = last = cfe;
-            } else if (cfe != null) {
-                last.setNext(cfe);
-                last = last.getNext();
-            }
-        }
-
-        return first;
+        return parsers.parseBlock(ctx, entryBlock);
     }
 
     private String fixName(String name) {

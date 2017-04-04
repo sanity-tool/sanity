@@ -7,6 +7,7 @@ import com.oracle.truffle.llvm.runtime.types.symbols.Symbol;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.api.BlockParser;
 import ru.urururu.sanity.api.cfg.Cfe;
+import ru.urururu.util.Iterables;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
@@ -16,6 +17,7 @@ public class SulongBlockParser extends BlockParser<ModelModule, com.oracle.truff
         Instruction, InstructionBlock, SuCfgBuildingCtx> {
     @Override
     protected Cfe processBlock(SuCfgBuildingCtx ctx, InstructionBlock block) {
-        return null;
+        ctx.beginSubCfg(block);
+        return processBlock(ctx, Iterables.indexed(block::getInstruction, block.getInstructionCount()));
     }
 }
