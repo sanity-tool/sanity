@@ -103,10 +103,8 @@ public class SulongInstructionParser extends InstructionParser<ModelModule, com.
 
             @Override
             public void visit(ConditionalBranchInstruction branch) {
-                RValue condition = parsers.parseRValue(ctx, branch.getCondition());
-                Cfe thenElement = ctx.getLabel(branch.getTrueSuccessor());
-                Cfe elseElement = ctx.getLabel(branch.getFalseSuccessor());
-                result.set(new IfCondition(condition, thenElement, elseElement, parsers.getSourceRange(instruction)));
+                result.set(createIf(ctx, branch, branch.getCondition(), branch.getTrueSuccessor(),
+                        branch.getFalseSuccessor()));
             }
 
             @Override
