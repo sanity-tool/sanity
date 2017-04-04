@@ -7,6 +7,10 @@ public class Indirection implements LValue {
     private final RValue pointer;
 
     public Indirection(RValue pointer) {
+        if (pointer == null) {
+            throw new IllegalArgumentException("pointer: " + pointer);
+        }
+
         this.pointer = pointer;
     }
 

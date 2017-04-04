@@ -2,15 +2,13 @@ package ru.urururu.sanity.api.cfg;
 
 import ru.urururu.sanity.api.CfgBuildingCtx;
 import ru.urururu.sanity.cpp.NativeParsersFacade;
-import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueBasicBlock;
-import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueType;
-import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
-import ru.urururu.sanity.cpp.llvm.bitreader;
+import ru.urururu.sanity.cpp.llvm.*;
+import ru.urururu.util.Iterables;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
-public class NativeCfgBuildingCtx extends CfgBuildingCtx<SWIGTYPE_p_LLVMOpaqueType,
+public class NativeCfgBuildingCtx extends CfgBuildingCtx<SWIGTYPE_p_LLVMOpaqueModule, SWIGTYPE_p_LLVMOpaqueType,
         SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueBasicBlock, NativeCfgBuildingCtx> {
 
     public NativeCfgBuildingCtx(NativeParsersFacade parsers, SWIGTYPE_p_LLVMOpaqueValue function) {
@@ -25,10 +23,6 @@ public class NativeCfgBuildingCtx extends CfgBuildingCtx<SWIGTYPE_p_LLVMOpaqueTy
 
     public LValue getOrCreateTmpVar(SWIGTYPE_p_LLVMOpaqueValue instruction) {
         return getOrCreateTmpVar(instruction, bitreader.LLVMTypeOf(instruction));
-    }
-
-    public RValue getParam(SWIGTYPE_p_LLVMOpaqueValue value) {
-        return params.get(value);
     }
 
     public Cfe getLabel(SWIGTYPE_p_LLVMOpaqueValue label) {

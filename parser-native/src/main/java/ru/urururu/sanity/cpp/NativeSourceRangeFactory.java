@@ -3,6 +3,7 @@ package ru.urururu.sanity.cpp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import ru.urururu.sanity.api.ParserListener;
 import ru.urururu.sanity.api.SourceRangeFactory;
 import ru.urururu.sanity.api.cfg.SourceRange;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;
@@ -15,7 +16,8 @@ import java.io.File;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class NativeSourceRangeFactory extends SourceRangeFactory<SWIGTYPE_p_LLVMOpaqueValue> implements ParserListener {
+public class NativeSourceRangeFactory extends SourceRangeFactory<SWIGTYPE_p_LLVMOpaqueValue>
+        implements ParserListener<SWIGTYPE_p_LLVMOpaqueModule> {
     private static final Logger LOGGER = LoggerFactory.getLogger(NativeSourceRangeFactory.class);
 
     private static final int DW_TAG_lexical_block = 786443;
