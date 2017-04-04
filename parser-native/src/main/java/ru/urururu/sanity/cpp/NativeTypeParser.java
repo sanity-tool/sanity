@@ -14,7 +14,7 @@ import java.util.function.Function;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class NativeTypeParser extends TypeParser<SWIGTYPE_p_LLVMOpaqueType> implements ParserListener {
+public class NativeTypeParser extends TypeParser<SWIGTYPE_p_LLVMOpaqueModule, SWIGTYPE_p_LLVMOpaqueType> {
     private final Map<LLVMTypeKind, Function<SWIGTYPE_p_LLVMOpaqueType, Type>> parsers = FinalMap.createHashMap();
 
     public NativeTypeParser() {
@@ -44,7 +44,7 @@ public class NativeTypeParser extends TypeParser<SWIGTYPE_p_LLVMOpaqueType> impl
             try {
                 bitreader.LLVMGetParamTypes(type, paramsBuff);
                 return createFunction(bitreader.LLVMGetReturnType(type),
-                        Iterables.indexed(i -> bitreader.getType(paramsBuff, i), () -> params));
+                        Iterables.indexed(i -> bitreader.getType(paramsBuff, i), params));
             } finally {
                 bitreader.free_LLVMTypeRef(paramsBuff);
             }
@@ -58,7 +58,8 @@ public class NativeTypeParser extends TypeParser<SWIGTYPE_p_LLVMOpaqueType> impl
         SWIGTYPE_p_p_LLVMOpaqueType fieldsBuff = bitreader.calloc_LLVMTypeRef(fields, bitreaderConstants.sizeof_LLVMTypeRef);
         try {
             bitreader.LLVMGetStructElementTypes(type, fieldsBuff);
-            return createStruct(type, bitreader.LLVMGetStructName(type), Iterables.indexed(i -> bitreader.getType(fieldsBuff, i), () -> fields));
+            return createStruct(type, bitreader.LLVMGetStructName(type),
+                    Iterables.indexed(i -> bitreader.getType(fieldsBuff, i), fields));
         } finally {
             bitreader.free_LLVMTypeRef(fieldsBuff);
         }
@@ -67,11 +68,5 @@ public class NativeTypeParser extends TypeParser<SWIGTYPE_p_LLVMOpaqueType> impl
     private Type parseUnknown(SWIGTYPE_p_LLVMOpaqueType type) {
         LLVMTypeKind typeKind = bitreader.LLVMGetTypeKind(type);
         throw new IllegalStateException("Can't parse " + typeKind);
-    }
-
-    @Override
-    public void onModuleFinished(SWIGTYPE_p_LLVMOpaqueModule module) {
-        structCache.clear();
-        typesCache.clear();
     }
 }

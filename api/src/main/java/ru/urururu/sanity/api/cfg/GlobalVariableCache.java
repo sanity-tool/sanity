@@ -2,8 +2,7 @@ package ru.urururu.sanity.api.cfg;
 
 import javafx.util.Pair;
 import org.springframework.stereotype.Component;
-import ru.urururu.sanity.cpp.ParserListener;
-import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;
+import ru.urururu.sanity.api.ParserListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,9 +11,9 @@ import java.util.Map;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class GlobalVariableCache implements ParserListener {
-    Map<Pair<String, Type>, GlobalVar> cache = new HashMap<>();
-    int count;
+public class GlobalVariableCache<M> implements ParserListener<M> {
+    private Map<Pair<String, Type>, GlobalVar> cache = new HashMap<>();
+    private int count;
 
     public RValue get(String name, Type type) {
         if (name.isEmpty()) {
@@ -24,11 +23,7 @@ public class GlobalVariableCache implements ParserListener {
     }
 
     @Override
-    public void onModuleStarted(SWIGTYPE_p_LLVMOpaqueModule module) {
+    public void onModuleStarted(M module) {
         count = 0;
-    }
-
-    @Override
-    public void onModuleFinished(SWIGTYPE_p_LLVMOpaqueModule module) {
     }
 }

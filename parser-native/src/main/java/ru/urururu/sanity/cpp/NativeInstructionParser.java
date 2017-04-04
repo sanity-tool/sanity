@@ -15,7 +15,7 @@ import java.util.*;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOpaqueType,
+public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOpaqueModule, SWIGTYPE_p_LLVMOpaqueType,
         SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueBasicBlock, NativeCfgBuildingCtx> {
     @Autowired
     ConstCache constants;
@@ -188,8 +188,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
             int operandsCount = bitreader.LLVMGetNumOperands(instruction);
 
             return getPointer(ctx, bitreader.LLVMGetOperand(instruction, 0), Iterables.indexed(
-                    i -> bitreader.LLVMGetOperand(instruction, i + 1),
-                    () -> operandsCount - 1));
+                    i -> bitreader.LLVMGetOperand(instruction, i + 1), operandsCount - 1));
         }
 
         @Override
@@ -244,7 +243,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
             int argLen = bitreader.LLVMGetNumOperands(instruction) - 1;
 
             return createCall(ctx, instruction, bitreader.LLVMGetOperand(instruction, argLen),
-                    Iterables.indexed(i -> bitreader.LLVMGetOperand(instruction, i), () -> argLen));
+                    Iterables.indexed(i -> bitreader.LLVMGetOperand(instruction, i), argLen));
         }
 
         @Override

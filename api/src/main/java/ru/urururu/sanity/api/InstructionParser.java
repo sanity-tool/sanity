@@ -12,9 +12,9 @@ import java.util.Map;
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
-public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T, V, I, B, Ctx>> {
+public abstract class InstructionParser<M, T, V, I, B, Ctx extends CfgBuildingCtx<M, T, V, I, B, Ctx>> {
     @Autowired
-    protected ParsersFacade<T, V, I, B, Ctx> parsers;
+    protected ParsersFacade<M, T, V, I, B, Ctx> parsers;
 
     public Cfe parse(Ctx ctx, I instruction) {
         try {
