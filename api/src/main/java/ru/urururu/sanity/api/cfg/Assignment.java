@@ -9,6 +9,14 @@ public class Assignment extends Cfe {
 
     public Assignment(LValue left, RValue right, SourceRange sourceRange) {
         super(sourceRange);
+
+        if (left == null) {
+            throw new IllegalArgumentException("left: " + left);
+        }
+        if (right == null) {
+            throw new IllegalArgumentException("right: " + right);
+        }
+
         this.left = left;
         this.right = right;
     }

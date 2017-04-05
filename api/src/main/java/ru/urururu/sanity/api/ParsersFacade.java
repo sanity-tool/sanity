@@ -43,7 +43,7 @@ public abstract class ParsersFacade<M, T, V, I, B, Ctx extends CfgBuildingCtx<M,
         return instructionParser.parseValue(ctx, instruction);
     }
 
-    public RValue parseInstructionConst(Ctx ctx, I instruction) {
+    public RValue parseInstructionConst(Ctx ctx, V instruction) {
         return instructionParser.parseConst(ctx, instruction);
     }
 

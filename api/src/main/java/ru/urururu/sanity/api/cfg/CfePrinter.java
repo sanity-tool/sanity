@@ -157,6 +157,10 @@ public class CfePrinter implements CfeVisitor {
     }
 
     private void print(RValue value) {
+        if (value == null) {
+            throw new IllegalArgumentException("value: " + value);
+        }
+
         if (value instanceof TemporaryVar) {
             Integer number = getOrCreateId(value, tmpVars);
             sb.append("tmp").append(number);
@@ -216,7 +220,7 @@ public class CfePrinter implements CfeVisitor {
             sb.append(((GlobalVar) value).getName());
             return;
         }
-        sb.append(value.toString());
+        sb.append(value);
     }
 
     private String getId(Cfe cfe) {

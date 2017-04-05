@@ -466,7 +466,7 @@ public class SulongInstructionParser extends InstructionParser<ModelModule, com.
     }
 
     @Override
-    public RValue parseConst(SuCfgBuildingCtx ctx, Instruction value) {
+    public RValue parseConst(SuCfgBuildingCtx ctx, Symbol value) {
         FinalReference<RValue> result = new FinalReference<>("Constant");
 
         ((Constant)value).accept(new ConstantVisitor() {
