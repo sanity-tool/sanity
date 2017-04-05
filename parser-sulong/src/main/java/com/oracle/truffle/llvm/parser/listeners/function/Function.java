@@ -67,6 +67,7 @@ public abstract class Function implements ParserListener {
     private final int mode;
 
     protected InstructionBlock code;
+    protected InstructionBlock lastCode;
 
     private MetadataDebugLocation lastLoc;
 
@@ -135,6 +136,8 @@ public abstract class Function implements ParserListener {
             if (code != null) {
                 code.attachDebugLocation(loc);
                 lastLoc = loc;
+            } else {
+                lastCode.attachDebugLocation(loc);
             }
             return;
         }
@@ -142,6 +145,8 @@ public abstract class Function implements ParserListener {
         if (record == FunctionRecord.DEBUG_LOC_AGAIN) {
             if (code != null) {
                 code.attachDebugLocation(lastLoc);
+            } else {
+                lastCode.attachDebugLocation(lastLoc);
             }
             return;
         }
@@ -302,6 +307,11 @@ public abstract class Function implements ParserListener {
             code.createBranch(getIndex(args[2]), (int) args[0], (int) args[1]);
         }
 
+        finalizeCode();
+    }
+
+    void finalizeCode() {
+        lastCode = code;
         code = null;
     }
 
@@ -416,7 +426,7 @@ public abstract class Function implements ParserListener {
 
         code.createIndirectBranch(address, successors);
 
-        code = null;
+        finalizeCode();
     }
 
     private void createInsertElement(long[] args) {
@@ -470,7 +480,7 @@ public abstract class Function implements ParserListener {
             code.createReturn(getIndex(args[0]));
         }
 
-        code = null;
+        finalizeCode();
     }
 
     private void createSelect(long[] args) {
@@ -541,7 +551,7 @@ public abstract class Function implements ParserListener {
     private void createUnreachable(@SuppressWarnings("unused") long[] args) {
         code.createUnreachable();
 
-        code = null;
+        finalizeCode();
     }
 
     protected int getAlign(long argument) {
