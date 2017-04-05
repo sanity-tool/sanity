@@ -1,0 +1,18 @@
+CFG: _ZL14testNonVirtualv
+#0000:	 assign: *GPFOO = null
+objects.cpp:8 GPFOO = 0;
+#0001:	 call: _ZN3Foo3barEv(*GPFOO) <exit>
+objects.cpp:9 GPFOO->bar();
+
+CFG: _ZL11testVirtualv
+#0000:	 assign: *GPFOO = null
+objects.cpp:13 GPFOO = 0;
+#0001:	 assign: tmp0 = *GPFOO
+objects.cpp:14 GPFOO->baz();
+#0002:	 call: **tmp0(*GPFOO) <exit>
+objects.cpp:14 GPFOO->baz();
+
+CFG: <module init>
+#0000:	 assign: *GPFOO = null <exit>
+ - no source -
+
