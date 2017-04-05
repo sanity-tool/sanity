@@ -2,6 +2,7 @@ package ru.urururu.sanity.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.urururu.sanity.api.cfg.*;
+import ru.urururu.sanity.cpp.UnsupportedInstructionException;
 import ru.urururu.util.FinalMap;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public abstract class InstructionParser<M, T, V, I, B, Ctx extends CfgBuildingCt
     public Cfe parse(Ctx ctx, I instruction) {
         try {
             return doParse(ctx, instruction);
-        } catch (Exception e) {
+        } catch (UnsupportedInstructionException e) {
             return new UnprocessedElement(e.getMessage() == null ? e.getClass().getName() : e.getMessage(), parsers.getSourceRange(instruction));
         }
     }
