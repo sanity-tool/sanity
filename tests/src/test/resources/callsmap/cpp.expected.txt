@@ -2,7 +2,7 @@ CFG: _Z18abstractMethodCallP3Foo
 #0000:	 call: _Z18abstractMethodCallP3Foo((bar.field0)) <exit>
 methodCalls.cpp:25 abstractMethodCall(&bar);
 
-Type: void (struct.Foo.1*)
+Type: void (struct.Foo*)
 #0000:	 call: **tmp0(*tmp1) <exit>
 methodCalls.cpp:16 p->abstractMethod();
 

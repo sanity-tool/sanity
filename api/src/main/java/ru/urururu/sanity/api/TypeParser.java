@@ -1,6 +1,8 @@
 package ru.urururu.sanity.api;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.urururu.sanity.api.cfg.ArrayType;
 import ru.urururu.sanity.api.cfg.PointerType;
 import ru.urururu.sanity.api.cfg.Primitive;
@@ -10,12 +12,15 @@ import ru.urururu.util.FinalMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.StreamSupport;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public abstract class TypeParser<M, T> implements ParserListener<M> {
+    Logger logger = LoggerFactory.getLogger(getClass());
     protected final Map<T, Type> typesCache = FinalMap.createHashMap();
     private final Map<T, Type> structCache = FinalMap.createHashMap();
 
@@ -109,8 +114,20 @@ public abstract class TypeParser<M, T> implements ParserListener<M> {
     }
 
     String fixName(String name) {
+        if (StringUtils.isEmpty(name)) {
+            return name;
+        }
+
+        Pattern pattern = Pattern.compile("\\.[0-9]+");
+        Matcher matcher = pattern.matcher(name);
+
+        if (matcher.find()) {
+            String fix = matcher.replaceAll("");
+            logger.warn("Fixing type name {} to {}", name, fix);
+            return fix;
+        }
+
         return name;
-        //if (StringUtils.)
     }
 
     @Override
