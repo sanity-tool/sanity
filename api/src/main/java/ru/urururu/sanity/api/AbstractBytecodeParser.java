@@ -55,6 +55,10 @@ public abstract class AbstractBytecodeParser<M, T, V, I, B, Ctx extends CfgBuild
 
     protected abstract void parseGlobalInitializer(CfgBuilder builder, V initializer, LValue globalToInitialize);
 
+    protected void addSimpleInitializer(CfgBuilder builder, V initializer, LValue globalToInitialize) {
+        builder.append(new Assignment(globalToInitialize, parsers.parseRValue(null, initializer), null));
+    }
+
     protected abstract V getInitializer(V global);
 
     protected abstract M parseModule(String absolute) throws IOException;
