@@ -1,6 +1,5 @@
 package ru.urururu.sanity.cpp;
 
-import com.oracle.truffle.api.source.MissingNameException;
 import com.oracle.truffle.api.source.Source;
 import com.oracle.truffle.llvm.parser.BitcodeParserResult;
 import com.oracle.truffle.llvm.parser.model.ModelModule;
@@ -14,7 +13,6 @@ import com.oracle.truffle.llvm.runtime.types.symbols.Symbol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.api.AbstractBytecodeParser;
-import ru.urururu.sanity.api.cfg.Assignment;
 import ru.urururu.sanity.api.cfg.CfgBuilder;
 import ru.urururu.sanity.api.cfg.LValue;
 
@@ -48,7 +46,7 @@ public class SulongParser extends AbstractBytecodeParser<ModelModule, com.oracle
 
     @Override
     protected void parseGlobalInitializer(CfgBuilder builder, Symbol initializer, LValue globalToInitialize) {
-        builder.append(new Assignment(globalToInitialize, parsers.parseRValue(null, initializer), null));
+        addSimpleInitializer(builder, initializer, globalToInitialize);
     }
 
     @Override

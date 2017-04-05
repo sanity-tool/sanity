@@ -46,7 +46,7 @@ public class NativeBytecodeParser extends AbstractBytecodeParser<SWIGTYPE_p_LLVM
                 builder.append(new Assignment(globalToInitialize, constants.get(s, type), null));
             }
         } else {
-            builder.append(new Assignment(globalToInitialize, parsers.parseRValue(null, initializer), null));
+            addSimpleInitializer(builder, initializer, globalToInitialize);
         }
     }
 
