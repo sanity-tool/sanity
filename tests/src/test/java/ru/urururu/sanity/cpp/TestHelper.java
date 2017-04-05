@@ -28,6 +28,7 @@ abstract class TestHelper {
     static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 
     static final String BASE = System.getProperty("TEST_RESOURCES_ROOT");
+    private static Path TESTS_PATH = Paths.get(BASE);
     private static String FAILURES_DIR = System.getProperty("TEST_FAILURES_ROOT");
     private static String DEBUG_DIR = System.getProperty("TEST_DEBUG_ROOT");
     private static final BidiMap<Language, String> languageDirs = new DualHashBidiMap<>();
@@ -134,16 +135,17 @@ abstract class TestHelper {
             Assert.assertEquals(expected, actual);
         } catch (ComparisonFailure e) {
             if (FAILURES_DIR != null) {
+                Path resultSubPath = TESTS_PATH.relativize(pathToExpected);
                 Path failuresPath = Paths.get(FAILURES_DIR);
 
                 Path expectedDir = failuresPath.resolve("expected");
-                expectedDir.toFile().mkdirs();
-                Path pathToExpected2 = expectedDir.resolve(pathToExpected.getFileName().toString());
+                Path pathToExpected2 = expectedDir.resolve(resultSubPath);
+                pathToExpected2.getParent().toFile().mkdirs();
                 Files.copy(pathToExpected, pathToExpected2, StandardCopyOption.REPLACE_EXISTING);
 
                 Path actualDir = failuresPath.resolve("actual");
-                actualDir.toFile().mkdirs();
-                Path pathToActual = actualDir.resolve(pathToExpected.getFileName().toString());
+                Path pathToActual = actualDir.resolve(resultSubPath);
+                pathToActual.getParent().toFile().mkdirs();
                 Files.write(pathToActual, actual.getBytes());
             }
 
