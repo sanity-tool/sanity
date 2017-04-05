@@ -1,5 +1,6 @@
 package ru.urururu.sanity.api;
 
+import org.apache.commons.lang3.StringUtils;
 import ru.urururu.sanity.api.cfg.ArrayType;
 import ru.urururu.sanity.api.cfg.PointerType;
 import ru.urururu.sanity.api.cfg.Primitive;
@@ -91,7 +92,7 @@ public abstract class TypeParser<M, T> implements ParserListener<M> {
 
         final List<Type> fieldTypes = new ArrayList<>();
 
-        Type struct = new StructType(fieldTypes, name);
+        Type struct = new StructType(fieldTypes, fixName(name));
 
         cache(originalType, struct);
 
@@ -105,6 +106,11 @@ public abstract class TypeParser<M, T> implements ParserListener<M> {
         final Type[] paramsType = StreamSupport.stream(originalParamTypes.spliterator(), false).map(this::parse).toArray(Type[]::new);
 
         return new FunctionType(returnType, paramsType);
+    }
+
+    String fixName(String name) {
+        return name;
+        //if (StringUtils.)
     }
 
     @Override
@@ -167,11 +173,6 @@ public abstract class TypeParser<M, T> implements ParserListener<M> {
 
         @Override
         public Type getFieldType(int index) {
-            return null;
-        }
-
-        @Override
-        public String getFieldName(int index) {
             return null;
         }
 

@@ -8,7 +8,9 @@ public interface Type {
 
     Type getFieldType(int index);
 
-    String getFieldName(int index);
+    default String getFieldName(int index) {
+        throw new IllegalStateException("not a structure, but a " + getClass().getSimpleName());
+    }
 
     default Type getReturnType() {
         throw new IllegalStateException("not a function, but a " + getClass().getSimpleName());
