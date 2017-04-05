@@ -1,0 +1,26 @@
+CFG: testSimple
+#0000:	 assign: *GLOBAL = null
+globals.c:4 GLOBAL = 0;
+#0001:	 assign: **GLOBAL = 1 <exit>
+globals.c:5 *GLOBAL = 1;
+
+CFG: testSwitch
+#0000:	 assign: *GLOBAL = null
+globals.c:9 GLOBAL = 0;
+#0001:	 switch: **GLOBAL default <exit
+globals.c:10 switch (*GLOBAL) {
+
+CFG: testCondition
+#0000:	 assign: *GLOBAL = null
+globals.c:15 GLOBAL = 0;
+#0001:	 assign: tmp0 = **GLOBAL != 0
+globals.c:16 if (*GLOBAL);
+#0002:	 if: tmp0 then #0003:	 else #0003:
+globals.c:16 if (*GLOBAL);
+#0003:	 noop <exit>
+ - no source -
+
+CFG: <module init>
+#0000:	 assign: *GLOBAL = null <exit>
+ - no source -
+
