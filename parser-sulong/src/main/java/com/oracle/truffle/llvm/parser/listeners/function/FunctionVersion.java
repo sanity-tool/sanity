@@ -124,7 +124,7 @@ public final class FunctionVersion {
 
             code.createSwitch(condition, defaultBlock, caseValues, caseBlocks);
 
-            finalizing = true;
+            code = null;
         }
 
     }
@@ -227,7 +227,7 @@ public final class FunctionVersion {
 
             code.createSwitchOld(condition, defaultBlock, caseConstants, caseBlocks);
 
-            finalizing = true;
+            code = null;
         }
     }
 }
