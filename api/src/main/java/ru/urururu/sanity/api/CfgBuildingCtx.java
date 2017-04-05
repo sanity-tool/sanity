@@ -27,7 +27,11 @@ public abstract class CfgBuildingCtx<M, T, V, I, B, Ctx/*todo?*/ extends CfgBuil
 
     public abstract LValue getOrCreateTmpVar(I instruction);
 
-    public abstract Cfe getLabel(V label);
+    public final Cfe getBlockEntrance(B block) {
+        return labels.computeIfAbsent(block, k -> new NoOp(null));
+    }
+
+    public abstract Cfe getLabel(V label); // todo change to B block?
 
     public Cfe endSubCfg() {
         try {

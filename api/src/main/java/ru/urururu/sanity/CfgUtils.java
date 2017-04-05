@@ -84,6 +84,7 @@ public class CfgUtils {
                         Cfe caseLabel = caseDef.getValue();
                         if (isRemovable(usages, cfe, caseLabel)) {
                             caseDef.setValue(caseLabel.getNext());
+                            modified = true;
                         }
                     }
                 } else {

@@ -59,6 +59,8 @@ public class SuCfgBuildingCtx extends CfgBuildingCtx<ModelModule, com.oracle.tru
                     return phiAssignment;
                 }
             }
+
+            throw new IllegalStateException();
         }
 
         return result;

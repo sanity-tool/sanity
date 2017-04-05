@@ -27,7 +27,7 @@ public class NativeCfgBuildingCtx extends CfgBuildingCtx<SWIGTYPE_p_LLVMOpaqueMo
     public Cfe getLabel(SWIGTYPE_p_LLVMOpaqueValue label) {
         SWIGTYPE_p_LLVMOpaqueBasicBlock block = bitreader.LLVMValueAsBasicBlock(label);
 
-        Cfe result = labels.computeIfAbsent(block, k -> new NoOp(null));
+        Cfe result = getBlockEntrance(block);
 
         SWIGTYPE_p_LLVMOpaqueValue instruction = bitreader.LLVMGetFirstInstruction(block);
         if (bitreader.LLVMIsAPHINode(instruction) != null) {
@@ -44,6 +44,8 @@ public class NativeCfgBuildingCtx extends CfgBuildingCtx<SWIGTYPE_p_LLVMOpaqueMo
                     return phiAssignment;
                 }
             }
+
+            throw new IllegalStateException("Can't match incoming block: " + bitreader.LLVMPrintValueToString(bitreader.LLVMBasicBlockAsValue(this.block)) + " to one of ");
         }
 
         return result;
