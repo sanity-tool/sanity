@@ -151,7 +151,7 @@ public abstract class InstructionParser<M, T, V, I, B, Ctx extends CfgBuildingCt
 
     public abstract RValue parseValue(Ctx ctx, I value);
 
-    public abstract RValue parseConst(Ctx ctx, I value);
+    public abstract RValue parseConst(Ctx ctx, V value);
 
     public RValue createLoad(Ctx ctx, V value) {
         return new Indirection(parsers.parseRValue(ctx, value));

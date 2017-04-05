@@ -3,6 +3,7 @@ package ru.urururu.sanity.cpp;
 import com.oracle.truffle.llvm.parser.model.ModelModule;
 import com.oracle.truffle.llvm.parser.model.blocks.InstructionBlock;
 import com.oracle.truffle.llvm.parser.model.functions.FunctionParameter;
+import com.oracle.truffle.llvm.parser.model.globals.GlobalValueSymbol;
 import com.oracle.truffle.llvm.parser.model.globals.GlobalVariable;
 import com.oracle.truffle.llvm.parser.model.symbols.constants.Constant;
 import com.oracle.truffle.llvm.parser.model.symbols.constants.NullConstant;
@@ -23,8 +24,8 @@ public class SulongValueParser extends ValueParser<ModelModule, com.oracle.truff
         Instruction, InstructionBlock, SuCfgBuildingCtx> {
     @Override
     public RValue parseLValue(SuCfgBuildingCtx ctx, Symbol value) {
-        if (value instanceof GlobalVariable) {
-            return globals.get(fixName(((GlobalVariable) value).getName()), parsers.parse(value.getType()));
+        if (value instanceof GlobalValueSymbol) {
+            return globals.get(fixName(((GlobalValueSymbol) value).getName()), parsers.parse(value.getType()));
         }
         if (value instanceof FunctionParameter) {
             return ctx.getParam(value);
@@ -68,7 +69,7 @@ public class SulongValueParser extends ValueParser<ModelModule, com.oracle.truff
             return constants.getFunction(fixName(((FunctionType) value).getName()), parsers.parse(value.getType()));
         }
         if (value instanceof Constant) {
-            return parsers.parseInstructionConst(ctx, (Instruction) value);
+            return parsers.parseInstructionConst(ctx, value);
         }
 
         return parseLValue(ctx, value);
