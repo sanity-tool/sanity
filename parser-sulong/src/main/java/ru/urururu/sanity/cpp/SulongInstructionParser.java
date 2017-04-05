@@ -25,13 +25,11 @@ import ru.urururu.sanity.api.InstructionParser;
 import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.sanity.api.cfg.Call;
 import ru.urururu.sanity.api.cfg.Type;
-import ru.urururu.util.FinalMap;
 import ru.urururu.util.FinalReference;
 import ru.urururu.util.Iterables;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
@@ -64,7 +62,7 @@ public class SulongInstructionParser extends InstructionParser<ModelModule, com.
 
             @Override
             public void visit(BranchInstruction branch) {
-                result.set(ctx.getLabel(branch.getSuccessor()));
+                result.set(createGoto(ctx, branch, branch.getSuccessor()));
             }
 
             @Override
@@ -176,16 +174,9 @@ public class SulongInstructionParser extends InstructionParser<ModelModule, com.
 
             @Override
             public void visit(SwitchInstruction select) {
-                RValue controlValue = parsers.parseRValue(ctx, select.getCondition());
-                Cfe defaultCase = ctx.getLabel(select.getDefaultBlock());
-
-                Map<RValue, Cfe> cases = FinalMap.createLinkedHashMap();
-
-                for (int i = 0; i < select.getCaseCount(); i++) {
-                    cases.put(parsers.parseRValue(ctx, select.getCaseValue(i)), ctx.getLabel(select.getCaseBlock(i)));
-                }
-
-                result.set(new Switch(controlValue, defaultCase, cases, parsers.getSourceRange(instruction)));
+                result.set(createSwitch(ctx, select, select.getCondition(), select.getDefaultBlock(),
+                        Iterables.indexed(select::getCaseValue, select.getCaseCount()),
+                        Iterables.indexed(select::getCaseBlock, select.getCaseCount())));
             }
 
             @Override

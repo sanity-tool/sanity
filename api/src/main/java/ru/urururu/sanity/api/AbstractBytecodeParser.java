@@ -63,7 +63,7 @@ public abstract class AbstractBytecodeParser<M, T, V, I, B, Ctx extends CfgBuild
 
     @Override
     public List<Cfg> parse(File file) {
-        M m = null;
+        M m;
         try {
             m = parseModule(file.getAbsolutePath());
         } catch (IOException e) {
@@ -90,7 +90,7 @@ public abstract class AbstractBytecodeParser<M, T, V, I, B, Ctx extends CfgBuild
                         while (blocks.hasNext()) {
                             B block = blocks.next();
                             Cfe blockEntry = parsers.parseBlock(ctx, block);
-                            Cfe label = ctx.getLabel(toValue(block));
+                            Cfe label = ctx.getBlockEntrance(block);
 
                             label.setNext(blockEntry);
                         }

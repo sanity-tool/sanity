@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import ru.urururu.sanity.api.AbstractBytecodeParser;
 import ru.urururu.sanity.api.cfg.LValue;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,12 +56,7 @@ public class SulongParser extends AbstractBytecodeParser<ModelModule, com.oracle
 
     @Override
     protected ModelModule parseModule(String absolute) throws IOException {
-        Source source;
-        try {
-            source = Source.newBuilder(absolute).mimeType(LLVMLanguage.LLVM_BITCODE_MIME_TYPE).build();
-        } catch (MissingNameException e) {
-            throw new IllegalStateException(e);
-        }
+        Source source = Source.newBuilder(new File(absolute)).mimeType(LLVMLanguage.LLVM_BITCODE_MIME_TYPE).build();
         BitcodeParserResult bitcodeParserResult = BitcodeParserResult.getFromSource(source);
 
         return bitcodeParserResult.getModel();

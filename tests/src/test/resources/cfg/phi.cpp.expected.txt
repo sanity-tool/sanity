@@ -1,0 +1,24 @@
+CFG: _ZL10testBoolOrv
+#0000:	 if: *B0 then #0001:	 else #0002:
+phi.cpp:4 BR = B0 || B1;
+#0001:	 assign: tmp0 = -1
+ - no source -
+#0003:	 noop
+ - no source -
+#0004:	 assign: *BR = tmp0 <exit>
+phi.cpp:4 BR = B0 || B1;
+#0002:	 assign: tmp0 = *B1 next: #0003:
+ - no source -
+
+CFG: _ZL11testBoolAndv
+#0000:	 if: *B0 then #0001:	 else #0002:
+phi.cpp:8 BR = B0 && B1;
+#0001:	 assign: tmp0 = *B1
+ - no source -
+#0003:	 noop
+ - no source -
+#0004:	 assign: *BR = tmp0 <exit>
+phi.cpp:8 BR = B0 && B1;
+#0002:	 assign: tmp0 = 0 next: #0003:
+ - no source -
+

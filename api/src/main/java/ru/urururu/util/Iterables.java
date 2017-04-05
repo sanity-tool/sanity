@@ -12,7 +12,7 @@ public class Iterables {
     }
 
     public static <E> Iterable<E> indexed(Function<Integer, E> getter, int length) {
-        return () -> Iterators.indexed(getter, () -> length);
+        return () -> Iterators.indexed(getter, length);
     }
 
     public static <T> Iterable<T> linked(Supplier<T> first, Function<T, T> next) {
@@ -20,6 +20,6 @@ public class Iterables {
     }
 
     public static <T> Iterable<T> linked(T first, Function<T, T> next) {
-        return () -> Iterators.linked(() -> first, next);
+        return () -> Iterators.linked(first, next);
     }
 }

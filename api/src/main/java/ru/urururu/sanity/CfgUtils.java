@@ -84,6 +84,7 @@ public class CfgUtils {
                         Cfe caseLabel = caseDef.getValue();
                         if (isSingleUsedNoOp(usages, caseLabel)) {
                             caseDef.setValue(caseLabel.getNext());
+                            modified = true;
                         }
                     }
                 } else {
@@ -100,7 +101,7 @@ public class CfgUtils {
 
     }
 
-    protected boolean isSingleUsedNoOp(Map<Cfe, Integer> usages, Cfe cfe) {
+    private boolean isSingleUsedNoOp(Map<Cfe, Integer> usages, Cfe cfe) {
         // todo think about source range comparison. if different - it's better to have tmp var assignment to preserve source reference.
         return usages.getOrDefault(cfe, 1) == 1 && cfe instanceof NoOp;
     }
