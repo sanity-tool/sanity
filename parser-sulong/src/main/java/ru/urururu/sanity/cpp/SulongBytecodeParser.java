@@ -25,7 +25,7 @@ import java.util.List;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class SulongParser extends AbstractBytecodeParser<ModelModule, com.oracle.truffle.llvm.runtime.types.Type,
+public class SulongBytecodeParser extends AbstractBytecodeParser<ModelModule, com.oracle.truffle.llvm.runtime.types.Type,
         Symbol, Instruction, InstructionBlock, SuCfgBuildingCtx> {
     @Autowired
     SulongParsersFacade parsers;
