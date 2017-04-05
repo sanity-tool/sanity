@@ -10,6 +10,7 @@ import com.oracle.truffle.llvm.runtime.types.symbols.Symbol;
 import ru.urururu.sanity.api.CfgBuildingCtx;
 import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.sanity.api.cfg.Type;
+import ru.urururu.util.Iterables;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
@@ -42,28 +43,21 @@ public class SuCfgBuildingCtx extends CfgBuildingCtx<ModelModule, com.oracle.tru
     public Cfe getLabel(Symbol label) {
         InstructionBlock block = getValueAsBasicBlock(label);
 
-        Cfe result = labels.computeIfAbsent(block, k -> new NoOp(null));
+        Cfe result = getBlockEntrance(block);
 
         if (block.getInstructionCount() != 0 && block.getInstruction(0) instanceof PhiInstruction) {
             PhiInstruction phi = (PhiInstruction) block.getInstruction(0);
-            long n = phi.getSize();
-            for (int i = 0; i < n; i++) {
-                if (this.block.equals(phi.getBlock(i))) {
-                    Assignment phiAssignment = new Assignment(
-                            getOrCreateTmpVar(phi),
-                            parsers.parseRValue(this, phi.getValue(i)),
-                            parsers.getSourceRange(phi)
-                    );
-                    phiAssignment.setNext(result);
 
-                    return phiAssignment;
-                }
-            }
-
-            throw new IllegalStateException();
+            int n = phi.getSize();
+            return prependPhiAssignment(phi, result, Iterables.indexed(phi::getBlock, n), Iterables.indexed(phi::getValue, n));
         }
 
         return result;
+    }
+
+    @Override
+    protected String blockToString(InstructionBlock block) {
+        return block.toString();
     }
 
     @Override

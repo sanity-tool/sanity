@@ -3,7 +3,11 @@ package ru.urururu.sanity.api;
 import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.util.FinalMap;
 
+import java.util.Iterator;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
@@ -32,6 +36,38 @@ public abstract class CfgBuildingCtx<M, T, V, I, B, Ctx/*todo?*/ extends CfgBuil
     }
 
     public abstract Cfe getLabel(V label); // todo change to B block?
+
+    protected final Cfe prependPhiAssignment(I phi, Cfe blockEntrance, Iterable<B> incomingBlocks, Iterable<V> incomingValues) {
+        Iterator<B> blocksIterator = incomingBlocks.iterator();
+        Iterator<V> valuesIterator = incomingValues.iterator();
+
+        while (blocksIterator.hasNext()) {
+            B incomingBlock = blocksIterator.next();
+            V incomingValue = valuesIterator.next();
+
+            if (this.block.equals(incomingBlock)) {
+                Assignment phiAssignment = new Assignment(
+                        getOrCreateTmpVar(phi),
+                        parsers.parseRValue((Ctx) this, incomingValue),
+                        parsers.getSourceRange(phi)
+                );
+                phiAssignment.setNext(blockEntrance);
+
+                return phiAssignment;
+            }
+
+        }
+
+        if (valuesIterator.hasNext()) {
+            throw new IllegalStateException("Out of blocks, but have more values");
+        }
+
+        Stream<B> stream = StreamSupport.stream(incomingBlocks.spliterator(), false);
+        throw new IllegalStateException("Can't match incoming block: " + blockToString(this.block) + " to one of "
+                + stream.map(this::blockToString).collect(Collectors.joining()));
+    }
+
+    protected abstract String blockToString(B block);
 
     public Cfe endSubCfg() {
         try {
