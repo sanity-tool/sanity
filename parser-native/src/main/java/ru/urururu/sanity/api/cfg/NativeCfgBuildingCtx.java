@@ -3,6 +3,7 @@ package ru.urururu.sanity.api.cfg;
 import ru.urururu.sanity.api.CfgBuildingCtx;
 import ru.urururu.sanity.cpp.NativeParsersFacade;
 import ru.urururu.sanity.cpp.llvm.*;
+import ru.urururu.util.Iterables;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
@@ -31,23 +32,17 @@ public class NativeCfgBuildingCtx extends CfgBuildingCtx<SWIGTYPE_p_LLVMOpaqueMo
 
         SWIGTYPE_p_LLVMOpaqueValue instruction = bitreader.LLVMGetFirstInstruction(block);
         if (bitreader.LLVMIsAPHINode(instruction) != null) {
-            long n = bitreader.LLVMCountIncoming(instruction);
-            for (int i = 0; i < n; i++) {
-                if (this.block.equals(bitreader.LLVMGetIncomingBlock(instruction, i))) {
-                    Assignment phiAssignment = new Assignment(
-                            getOrCreateTmpVar(instruction),
-                            parsers.parseRValue(this, bitreader.LLVMGetIncomingValue(instruction, i)),
-                            parsers.getSourceRange(instruction)
-                    );
-                    phiAssignment.setNext(result);
-
-                    return phiAssignment;
-                }
-            }
-
-            throw new IllegalStateException("Can't match incoming block: " + bitreader.LLVMPrintValueToString(bitreader.LLVMBasicBlockAsValue(this.block)) + " to one of ");
+            int n = Math.toIntExact(bitreader.LLVMCountIncoming(instruction));
+            return prependPhiAssignment(instruction, result,
+                    Iterables.indexed(i -> bitreader.LLVMGetIncomingBlock(instruction, i), n),
+                    Iterables.indexed(i -> bitreader.LLVMGetIncomingValue(instruction, i), n));
         }
 
         return result;
+    }
+
+    @Override
+    protected String blockToString(SWIGTYPE_p_LLVMOpaqueBasicBlock block) {
+        return bitreader.LLVMPrintValueToString(bitreader.LLVMBasicBlockAsValue(block));
     }
 }
