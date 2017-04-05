@@ -14,6 +14,8 @@ import com.oracle.truffle.llvm.runtime.types.symbols.Symbol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.api.AbstractBytecodeParser;
+import ru.urururu.sanity.api.cfg.Assignment;
+import ru.urururu.sanity.api.cfg.CfgBuilder;
 import ru.urururu.sanity.api.cfg.LValue;
 
 import java.io.File;
@@ -45,13 +47,14 @@ public class SulongParser extends AbstractBytecodeParser<ModelModule, com.oracle
     }
 
     @Override
-    protected void parseGlobalInitializer(ru.urururu.sanity.api.cfg.CfgBuilder builder, Symbol initializer, LValue globalToInitialize) {
-
+    protected void parseGlobalInitializer(CfgBuilder builder, Symbol initializer, LValue globalToInitialize) {
+        builder.append(new Assignment(globalToInitialize, parsers.parseRValue(null, initializer), null));
     }
 
     @Override
     protected Symbol getInitializer(Symbol global) {
-        return null;
+        GlobalVariable variable = (GlobalVariable) global;
+        return variable.getValue();
     }
 
     @Override
