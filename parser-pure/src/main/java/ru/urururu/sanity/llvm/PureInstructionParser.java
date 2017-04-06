@@ -208,7 +208,7 @@ public class PureInstructionParser extends InstructionParser<Module, Type, Value
     }
 
     @Override
-    public RValue parseConst(PureCfgBuildingCtx ctx, Instruction value) {
-        throw new NotImplementedException(value.getCode().name());
+    public RValue parseConst(PureCfgBuildingCtx ctx, Value value) {
+        throw new NotImplementedException(value.toString());
     }
 }

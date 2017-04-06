@@ -28,4 +28,9 @@ public class PureCfgBuildingCtx extends CfgBuildingCtx<Module, Type, Value, Inst
     public Cfe getLabel(Value label) {
         return null;
     }
+
+    @Override
+    protected String blockToString(Block block) {
+        return block.toString();
+    }
 }
