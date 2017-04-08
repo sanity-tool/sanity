@@ -9,7 +9,7 @@ case `uname` in
         cat /proc/meminfo | grep "MemTotal"
     
         # TODO: get rid of this
-        if [[ ! -f "cmake-3.4.3-Linux-x86_64/bin/cmake" ]]; then wget --no-check-certificate http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz && tar -xvf cmake-3.4.3-Linux-x86_64.tar.gz; fi
+        if [[ ! -f "cmake-3.4.3-Linux-x86_64/bin/cmake" ]]; then wget --no-check-certificate http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz && tar -xf cmake-3.4.3-Linux-x86_64.tar.gz; fi
         CMAKE=`pwd`/cmake-3.4.3-Linux-x86_64/bin/cmake
         CC=gcc-4.9
         export CXX=g++-4.9
