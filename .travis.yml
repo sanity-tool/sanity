@@ -198,3 +198,8 @@ after_failure:
 notifications:
   email: false
   slack: staticanalyzers:8CXJTuMbcNHE7COl24xZuz9G
+  
+
+cache:
+  directories:
+    - $HOME/.m2/repository/
