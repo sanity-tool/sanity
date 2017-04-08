@@ -46,7 +46,7 @@ LLVM_HOME="target/llvm"
 LLVM_INSTALL_DIR="target/llvm-bin"
 LLVM_CONFIG=$LLVM_INSTALL_DIR/bin/llvm-config
 
-if [ ! -d "$LLVM_INSTALL_DIR" ] ; then
+if [[ ! -d "$LLVM_INSTALL_DIR/bin" ]]; then
     OLD_DIR=`pwd`
 
     git clone -b saving-debug --depth 1 https://github.com/okutane/llvm.git $LLVM_HOME
