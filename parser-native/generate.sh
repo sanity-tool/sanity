@@ -53,19 +53,11 @@ if [[ ! -d "$LLVM_INSTALL_DIR/bin" ]]; then
     cd $LLVM_HOME
 
     mkdir build && cd build
-    $CMAKE -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$LLVM_INSTALL_DIR ..
-    # subdependencies for my library
-    make -j$(nproc) LLVMCore LLVMAsmParser LLVMBitReader LLVMProfileData LLVMMC LLVMMCParser LLVMObject LLVMAnalysis
-    # dependencies for my library
-    make -j$(nproc) LLVMIRReader LLVMTransformUtils
-    # to build my library
-    make -j$(nproc) llvm-config
-    # to check strip-debug-info
-    make -j$(nproc) llvm-dis
+    $CMAKE -G "Unix Makefiles" \
+        -DCMAKE_INSTALL_PREFIX=$LLVM_INSTALL_DIR \
+        -DLLVM_TARGETS_TO_BUILD=LLVMCore;LLVMAsmParser;LLVMBitReader;LLVMProfileData;LLVMMC;LLVMMCParser;LLVMObject;LLVMAnalysis;LLVMIRReader;LLVMTransformUtils;llvm-config;llvm-dis ..
     
-    make -j$(nproc) install
-
-    LLVM_CONFIG=$LLVM_INSTALL_DIR/bin/llvm-config
+    make -j2 install
 
     cd $OLD_DIR
 fi
