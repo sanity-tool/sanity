@@ -3,6 +3,8 @@
 # Exit on failure
 set -e
 
+cat /proc/cpuinfo | grep "model name"
+
 case `uname` in
     Linux)
         if [[ ! -f "cmake-3.4.3-Linux-x86_64/bin/cmake" ]]; then wget --no-check-certificate http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz && tar -xvf cmake-3.4.3-Linux-x86_64.tar.gz; fi
@@ -39,6 +41,7 @@ case `uname` in
 esac
 
 LLVM_HOME="target/llvm"
+LLVM_INSTALL_DIR="target/llvm-bin"
 LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
 
 if [ ! -d "$LLVM_HOME" ] ; then
@@ -48,17 +51,19 @@ if [ ! -d "$LLVM_HOME" ] ; then
     cd $LLVM_HOME
 
     mkdir build && cd build
-    $CMAKE -G "Unix Makefiles" ..
+    $CMAKE -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$LLVM_INSTALL_DIR ..
     # subdependencies for my library
-    make LLVMCore LLVMAsmParser LLVMBitReader LLVMProfileData LLVMMC LLVMMCParser LLVMObject LLVMAnalysis
+    make -j$(nproc) LLVMCore LLVMAsmParser LLVMBitReader LLVMProfileData LLVMMC LLVMMCParser LLVMObject LLVMAnalysis
     # dependencies for my library
-    make LLVMIRReader LLVMTransformUtils
+    make -j$(nproc) LLVMIRReader LLVMTransformUtils
     # to build my library
-    make llvm-config
+    make -j$(nproc) llvm-config
     # to check strip-debug-info
-    make llvm-dis
+    make -j$(nproc) llvm-dis
+    
+    make -j$(nproc) install
 
-    LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
+    LLVM_CONFIG=$LLVM_INSTALL_DIR/bin/llvm-config
 
     cd $OLD_DIR
 fi
