@@ -3,8 +3,6 @@
 # Exit on failure
 set -e
 
-[[ -d target/llvm-bin ]] && exit
-
 cat /proc/cpuinfo | grep "model name"
 
 case `uname` in
@@ -44,9 +42,9 @@ esac
 
 LLVM_HOME="target/llvm"
 LLVM_INSTALL_DIR="target/llvm-bin"
-LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
+LLVM_CONFIG=$LLVM_INSTALL_DIR/bin/llvm-config
 
-if [ ! -d "$LLVM_HOME" ] ; then
+if [[ ! -d "$LLVM_INSTALL_DIR" ]]; then
     OLD_DIR=`pwd`
 
     git clone -b saving-debug --depth 1 https://github.com/okutane/llvm.git $LLVM_HOME
