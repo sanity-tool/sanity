@@ -3,6 +3,8 @@
 # Exit on failure
 set -e
 
+[[ -d target/llvm-bin ]] && exit
+
 cat /proc/cpuinfo | grep "model name"
 
 case `uname` in
