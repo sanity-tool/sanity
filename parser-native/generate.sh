@@ -53,9 +53,7 @@ if [[ ! -d "$LLVM_INSTALL_DIR/bin" ]]; then
     cd $LLVM_HOME
 
     mkdir build && cd build
-    $CMAKE -G "Unix Makefiles" \
-        -DCMAKE_INSTALL_PREFIX=$LLVM_INSTALL_DIR \
-        -DLLVM_TARGETS_TO_BUILD=LLVMCore;LLVMAsmParser;LLVMBitReader;LLVMProfileData;LLVMMC;LLVMMCParser;LLVMObject;LLVMAnalysis;LLVMIRReader;LLVMTransformUtils;llvm-config;llvm-dis ..
+    $CMAKE -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=$LLVM_INSTALL_DIR -DLLVM_TARGETS_TO_BUILD=LLVMCore;LLVMAsmParser;LLVMBitReader;LLVMProfileData;LLVMMC;LLVMMCParser;LLVMObject;LLVMAnalysis;LLVMIRReader;LLVMTransformUtils;llvm-config;llvm-dis ..
     
     make -j2 install
 
