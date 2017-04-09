@@ -43,10 +43,10 @@ case `uname` in
 esac
 
 LLVM_HOME="target/llvm"
-LLVM_INSTALL_DIR="target/llvm-bin"
-LLVM_CONFIG=$LLVM_INSTALL_DIR/bin/llvm-config
+LLVM_CCACHE="$(pwd)/target/llvm-ccache"
+LLVM_CONFIG=$LLVM_HOME/bin/llvm-config
 
-if [[ ! -d "$LLVM_INSTALL_DIR/bin" ]]; then
+if [[ ! -d "$LLVM_HOME" ]]; then
     OLD_DIR=`pwd`
 
     git clone -b saving-debug --depth 1 https://github.com/okutane/llvm.git $LLVM_HOME
@@ -54,12 +54,14 @@ if [[ ! -d "$LLVM_INSTALL_DIR/bin" ]]; then
 
     mkdir build && cd build
     $CMAKE -G "Unix Makefiles" \
-        -DCMAKE_INSTALL_PREFIX=$LLVM_INSTALL_DIR \
-        -DLLVM_TARGETS_TO_BUILD=x86_64 \
-        -DLLVM_ENABLE_PROJECTS="LLVMCore;LLVMAsmParser;LLVMBitReader;LLVMProfileData;LLVMMC;LLVMMCParser;LLVMObject;LLVMAnalysis;LLVMIRReader;LLVMTransformUtils;llvm-config;llvm-dis" \
+        -DLLVM_CCACHE_BUILD=ON \
+        -DLLVM_CCACHE_SIZE=4G \
+        -DLLVM_CCACHE_DIR=$LLVM_CCACHE \
+        -DLLVM_TARGETS_TO_BUILD=X86 \
         ..
-    
-    make -j2 install
+        
+    make -j2 LLVMCore LLVMAsmParser LLVMBitReader LLVMProfileData LLVMMC LLVMMCParser LLVMObject LLVMAnalysis LLVMIRReader LLVMTransformUtils
+    make -j2 llvm-config llvm-dis
 
     cd $OLD_DIR
 fi
