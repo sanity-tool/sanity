@@ -10,6 +10,7 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     brew install llvm # main dependency
     brew install cmake || brew upgrade cmake || echo warning ^
     brew install swig # wrappers generator
+    brew install ccache
 
     [ -z $EXTRA_BREW ] || brew install $EXTRA_BREW
 fi
