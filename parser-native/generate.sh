@@ -43,7 +43,7 @@ case `uname` in
 esac
 
 LLVM_HOME="target/llvm"
-LLVM_CCACHE="$(pwd)/target/llvm-ccache"
+LLVM_CCACHE="$HOME/.ccache"
 LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
 
 if [[ ! -d "$LLVM_HOME" ]]; then
