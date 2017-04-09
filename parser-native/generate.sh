@@ -11,9 +11,9 @@ case `uname` in
         # TODO: get rid of this
         if [[ ! -f "cmake-3.4.3-Linux-x86_64/bin/cmake" ]]; then wget --no-check-certificate http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz && tar -xf cmake-3.4.3-Linux-x86_64.tar.gz; fi
         CMAKE=`pwd`/cmake-3.4.3-Linux-x86_64/bin/cmake
-        CC=gcc-4.9
+        export CC=gcc-4.9
         export CXX=g++-4.9
-        LD=g++-4.9
+        export LD=g++-4.9
 
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
 
