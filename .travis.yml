@@ -204,4 +204,4 @@ notifications:
 cache:
   directories:
     - $HOME/.m2/repository/
-    - parser-native/target/llvm-ccache
+    - $HOME/.ccache
