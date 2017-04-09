@@ -44,7 +44,7 @@ esac
 
 LLVM_HOME="target/llvm"
 LLVM_CCACHE="$(pwd)/target/llvm-ccache"
-LLVM_CONFIG=$LLVM_HOME/bin/llvm-config
+LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
 
 if [[ ! -d "$LLVM_HOME" ]]; then
     OLD_DIR=`pwd`
