@@ -16,6 +16,7 @@ addons:
       - llvm-3.8
       - llvm-3.8-dev
       - llvm-3.8-runtime
+      - ccache
 
 matrix:
   include:
@@ -198,3 +199,9 @@ after_failure:
 notifications:
   email: false
   slack: staticanalyzers:8CXJTuMbcNHE7COl24xZuz9G
+  
+
+cache:
+  directories:
+    - $HOME/.m2/repository/
+    - $HOME/.ccache

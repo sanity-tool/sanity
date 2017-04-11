@@ -5,16 +5,14 @@ set -e
 
 case `uname` in
     Linux)
-        if [[ ! -f "cmake-3.4.3-Linux-x86_64/bin/cmake" ]]; then wget --no-check-certificate http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz && tar -xvf cmake-3.4.3-Linux-x86_64.tar.gz; fi
+        if [[ ! -f "cmake-3.4.3-Linux-x86_64/bin/cmake" ]]; then wget --no-check-certificate http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz && tar -xf cmake-3.4.3-Linux-x86_64.tar.gz; fi
         CMAKE=`pwd`/cmake-3.4.3-Linux-x86_64/bin/cmake
-        CC=gcc-4.9
+        export CC=gcc-4.9
         export CXX=g++-4.9
-        LD=g++-4.9
+        export LD=g++-4.9
 
         JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/linux/"
-
         DLL_NAME=libirreader.so
-
         LDFLAGS="-lpthread -ltermcap"
 
         # todo nice to have
@@ -39,26 +37,25 @@ case `uname` in
 esac
 
 LLVM_HOME="target/llvm"
+LLVM_CCACHE="$HOME/.ccache"
 LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
 
-if [ ! -d "$LLVM_HOME" ] ; then
+if [[ ! -d "$LLVM_HOME" ]]; then
     OLD_DIR=`pwd`
 
     git clone -b saving-debug --depth 1 https://github.com/okutane/llvm.git $LLVM_HOME
     cd $LLVM_HOME
 
     mkdir build && cd build
-    $CMAKE -G "Unix Makefiles" ..
-    # subdependencies for my library
-    make LLVMCore LLVMAsmParser LLVMBitReader LLVMProfileData LLVMMC LLVMMCParser LLVMObject LLVMAnalysis
-    # dependencies for my library
-    make LLVMIRReader LLVMTransformUtils
-    # to build my library
-    make llvm-config
-    # to check strip-debug-info
-    make llvm-dis
-
-    LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
+    $CMAKE -G "Unix Makefiles" \
+        -DLLVM_CCACHE_BUILD=ON \
+        -DLLVM_CCACHE_SIZE=4G \
+        -DLLVM_CCACHE_DIR=$LLVM_CCACHE \
+        -DLLVM_TARGETS_TO_BUILD=X86 \
+        ..
+        
+    make -j2 LLVMCore LLVMAsmParser LLVMBitReader LLVMProfileData LLVMMC LLVMMCParser LLVMObject LLVMAnalysis LLVMIRReader LLVMTransformUtils
+    make -j2 llvm-config llvm-dis
 
     cd $OLD_DIR
 fi
