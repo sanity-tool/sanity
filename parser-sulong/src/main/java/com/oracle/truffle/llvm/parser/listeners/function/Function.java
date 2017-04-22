@@ -67,7 +67,7 @@ public abstract class Function implements ParserListener {
     private final int mode;
 
     protected InstructionBlock code;
-    protected InstructionBlock lastCode;
+    private InstructionBlock lastCode;
 
     private MetadataDebugLocation lastLoc;
 
