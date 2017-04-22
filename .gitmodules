@@ -1,0 +1,3 @@
+[submodule "parser-sulong/sulong"]
+	path = parser-sulong/sulong
+	url = https://github.com/okutane/sulong
