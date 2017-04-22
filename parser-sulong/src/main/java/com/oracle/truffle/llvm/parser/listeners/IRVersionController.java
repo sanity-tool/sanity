@@ -80,7 +80,7 @@ public final class IRVersionController {
     private enum IRVersion {
         DEFAULT(ModuleV32::new, FunctionV32::new, ConstantsV32::new, MetadataV32::new, "3.2", "3.3"),
         LLVM_32(ModuleV32::new, FunctionV32::new, ConstantsV32::new, MetadataV32::new, "3.2", "3.3"),
-        LLVM_38(ModuleV38::new, FunctionV38::new, ConstantsV38::new, MetadataV38::new, "3.8", "3.8", "APPLE_1_800.0.42.1_0");
+        LLVM_38(ModuleV38::new, FunctionV38::new, ConstantsV38::new, MetadataV38::new, "3.8", "3.8", "APPLE_1_80");
 
         private final String[] versionInformation;
         private final FunctionParser function;
