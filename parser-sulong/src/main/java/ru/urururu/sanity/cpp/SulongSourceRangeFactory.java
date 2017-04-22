@@ -61,11 +61,11 @@ public class SulongSourceRangeFactory extends SourceRangeFactory<Instruction> {
                 alias.getFile().get().accept(this);
             }
 
-            @Override
-            public void visit(MetadataDebugLocation alias) {
-                line[0] = Math.toIntExact(alias.getLine());
-                alias.getScope().accept(this);
-            }
+//            @Override
+//            public void visit(MetadataDebugLocation alias) {
+//                line[0] = Math.toIntExact(alias.getLine());
+//                alias.getScope().accept(this);
+//            }
         });
 
         if (file[0] == null) {

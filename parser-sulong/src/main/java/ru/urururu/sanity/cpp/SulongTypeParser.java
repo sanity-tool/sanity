@@ -27,28 +27,13 @@ public class SulongTypeParser extends TypeParser<ModelModule, Type> {
 
         type.accept(new TypeVisitor() {
             @Override
-            public void visit(BigIntegerConstantType bigIntegerConstantType) {
-                throw new NotImplementedException();
-            }
-
-            @Override
-            public void visit(FloatingPointType floatingPointType) {
-                result.set(createFloat());
-            }
-
-            @Override
             public void visit(FunctionType functionType) {
                 result.set(createFunction(functionType.getReturnType(), Arrays.asList(functionType.getArgumentTypes())));
             }
 
             @Override
-            public void visit(IntegerConstantType integerConstantType) {
+            public void visit(PrimitiveType primitiveType) {
                 throw new NotImplementedException();
-            }
-
-            @Override
-            public void visit(IntegerType integerType) {
-                result.set(createInt(integerType.getBits()));
             }
 
             @Override
@@ -63,11 +48,6 @@ public class SulongTypeParser extends TypeParser<ModelModule, Type> {
 
             @Override
             public void visit(MetaType metaType) {
-                if (metaType == MetaType.VOID) {
-                    result.set(createVoid());
-                    return;
-                }
-
                 if (metaType == MetaType.OPAQUE) {
                     result.set(createStruct(type, "", Collections.emptyList()));
                     return; // is this correct?
@@ -83,12 +63,12 @@ public class SulongTypeParser extends TypeParser<ModelModule, Type> {
 
             @Override
             public void visit(ArrayType arrayType) {
-                result.set(createArray(arrayType.getElementType(), arrayType.getLength()));
+                result.set(createArray(arrayType.getElementType(), arrayType.getNumberOfElements()));
             }
 
             @Override
             public void visit(StructureType structureType) {
-                Type[] fieldTypes = new Type[structureType.getLength()];
+                Type[] fieldTypes = new Type[structureType.getNumberOfElements()];
                 for (int i = 0; i < fieldTypes.length; i++) {
                     fieldTypes[i] = structureType.getElementType(i);
                 }
@@ -99,6 +79,16 @@ public class SulongTypeParser extends TypeParser<ModelModule, Type> {
             @Override
             public void visit(VectorType vectorType) {
                 throw new NotImplementedException();
+            }
+
+            @Override
+            public void visit(VariableBitWidthType vectorType) {
+                throw new NotImplementedException();
+            }
+
+            @Override
+            public void visit(VoidType vectorType) {
+                result.set(createVoid());
             }
         });
 

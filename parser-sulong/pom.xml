@@ -26,6 +26,7 @@
                         </goals>
                         <configuration>
                             <sources>
+                                <source>sulong/projects/com.oracle.truffle.llvm.option/src</source>
                                 <source>sulong/projects/com.oracle.truffle.llvm.parser/src</source>
                                 <source>sulong/projects/com.oracle.truffle.llvm.runtime/src</source>
                             </sources>
@@ -40,7 +41,7 @@
         <dependency>
             <groupId>com.oracle.truffle</groupId>
             <artifactId>truffle-api</artifactId>
-            <version>0.24</version>
+            <version>0.25</version>
         </dependency>
         <dependency>
             <groupId>ru.urururu</groupId>

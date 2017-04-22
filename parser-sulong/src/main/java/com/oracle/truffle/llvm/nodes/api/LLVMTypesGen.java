@@ -6,6 +6,7 @@ import com.oracle.truffle.api.interop.TruffleObject;
 import com.oracle.truffle.api.nodes.UnexpectedResultException;
 import com.oracle.truffle.llvm.runtime.*;
 import com.oracle.truffle.llvm.runtime.floating.LLVM80BitFloat;
+import com.oracle.truffle.llvm.runtime.nodes.api.LLVMTypes;
 import com.oracle.truffle.llvm.runtime.vector.*;
 
 @GeneratedBy(LLVMTypes.class)
