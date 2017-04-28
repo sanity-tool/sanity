@@ -5,8 +5,6 @@ import com.oracle.truffle.llvm.runtime.types.*;
 import com.oracle.truffle.llvm.runtime.types.ArrayType;
 import com.oracle.truffle.llvm.runtime.types.PointerType;
 import com.oracle.truffle.llvm.runtime.types.Type;
-import com.oracle.truffle.llvm.runtime.types.metadata.MetadataConstantPointerType;
-import com.oracle.truffle.llvm.runtime.types.metadata.MetadataConstantType;
 import com.oracle.truffle.llvm.runtime.types.visitors.TypeVisitor;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.api.TypeParser;
@@ -33,16 +31,6 @@ public class SulongTypeParser extends TypeParser<ModelModule, Type> {
 
             @Override
             public void visit(PrimitiveType primitiveType) {
-                throw new NotImplementedException();
-            }
-
-            @Override
-            public void visit(MetadataConstantType metadataConstantType) {
-                throw new NotImplementedException();
-            }
-
-            @Override
-            public void visit(MetadataConstantPointerType metadataConstantPointerType) {
                 throw new NotImplementedException();
             }
 

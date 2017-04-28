@@ -137,6 +137,31 @@ public class SulongInstructionParser extends InstructionParser<ModelModule, com.
             }
 
             @Override
+            public void visit(CompareExchangeInstruction compareExchangeInstruction) {
+
+            }
+
+            @Override
+            public void visit(InvokeInstruction invokeInstruction) {
+
+            }
+
+            @Override
+            public void visit(ResumeInstruction resumeInstruction) {
+
+            }
+
+            @Override
+            public void visit(LandingpadInstruction landingpadInstruction) {
+
+            }
+
+            @Override
+            public void visit(VoidInvokeInstruction voidInvokeInstruction) {
+
+            }
+
+            @Override
             public void visit(LoadInstruction load) {
                 result.set(null);
             }
@@ -410,6 +435,31 @@ public class SulongInstructionParser extends InstructionParser<ModelModule, com.
             @Override
             public void visit(LoadInstruction load) {
                 result.set(new Indirection(parsers.parseRValue(ctx, load.getSource())));
+            }
+
+            @Override
+            public void visit(InvokeInstruction invokeInstruction) {
+
+            }
+
+            @Override
+            public void visit(ResumeInstruction resumeInstruction) {
+
+            }
+
+            @Override
+            public void visit(LandingpadInstruction landingpadInstruction) {
+
+            }
+
+            @Override
+            public void visit(VoidInvokeInstruction voidInvokeInstruction) {
+
+            }
+
+            @Override
+            public void visit(CompareExchangeInstruction compareExchangeInstruction) {
+
             }
 
             @Override

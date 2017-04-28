@@ -10,7 +10,6 @@ import com.oracle.truffle.llvm.parser.model.symbols.constants.StringConstant;
 import com.oracle.truffle.llvm.parser.model.symbols.constants.floatingpoint.FloatConstant;
 import com.oracle.truffle.llvm.parser.model.symbols.constants.integer.IntegerConstant;
 import com.oracle.truffle.llvm.parser.model.symbols.instructions.Instruction;
-import com.oracle.truffle.llvm.runtime.types.FunctionType;
 import com.oracle.truffle.llvm.runtime.types.symbols.Symbol;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.api.cfg.RValue;
@@ -64,9 +63,9 @@ public class SulongValueParser extends ValueParser<ModelModule, com.oracle.truff
         if (value instanceof StringConstant) {
             return constants.get(((StringConstant) value).getString(), parsers.parse(value.getType()));
         }
-        if (value instanceof FunctionType) {
-            return constants.getFunction(fixName(((FunctionType) value).getName()), parsers.parse(value.getType()));
-        }
+//        if (value instanceof FunctionType) {
+//            return constants.getFunction(fixName(((FunctionType) value).getName()), parsers.parse(value.getType()));
+//        }
         if (value instanceof Constant) {
             return parsers.parseInstructionConst(ctx, value);
         }

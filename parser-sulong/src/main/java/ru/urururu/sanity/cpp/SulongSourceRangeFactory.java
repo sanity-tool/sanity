@@ -1,8 +1,9 @@
 package ru.urururu.sanity.cpp;
 
+import com.oracle.truffle.llvm.parser.metadata.MDBaseNode;
+import com.oracle.truffle.llvm.parser.metadata.MDLocation;
+import com.oracle.truffle.llvm.parser.metadata.MetadataVisitor;
 import com.oracle.truffle.llvm.parser.model.symbols.instructions.Instruction;
-import com.oracle.truffle.llvm.runtime.types.MetadataVisitor;
-import com.oracle.truffle.llvm.runtime.types.metadata.*;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.api.SourceRangeFactory;
 import ru.urururu.sanity.api.cfg.SourceRange;
@@ -17,7 +18,7 @@ public class SulongSourceRangeFactory extends SourceRangeFactory<Instruction> {
         return getSourceRange(instruction.getDebugLocation());
     }
 
-    private SourceRange getSourceRange(MetadataBaseNode debugLocation) {
+    private SourceRange getSourceRange(MDLocation debugLocation) {
         if (debugLocation == null) {
             return null;
         }
@@ -27,45 +28,9 @@ public class SulongSourceRangeFactory extends SourceRangeFactory<Instruction> {
 
         debugLocation.accept(new MetadataVisitor() {
             @Override
-            public void ifVisitNotOverwritten(MetadataBaseNode alias) {
-                throw new IllegalStateException();
+            public void ifVisitNotOverwritten(MDBaseNode alias) {
+                throw new IllegalStateException(alias.getClass().getSimpleName());
             }
-
-            @Override
-            public void visit(MetadataSubprogram alias) {
-                alias.getFile().get().accept(this);
-            }
-
-            @Override
-            public void visit(MetadataCompileUnit alias) {
-                alias.getFile().get().accept(this);
-            }
-
-            @Override
-            public void visit(MetadataFile alias) {
-                alias.getFile().get().accept(this);
-            }
-
-            @Override
-            public void visit(MetadataString alias) {
-                file[0] = alias.getString();
-            }
-
-            @Override
-            public void visit(MetadataLexicalBlock alias) {
-                alias.getFile().get().accept(this);
-            }
-
-            @Override
-            public void visit(MetadataCompositeType alias) {
-                alias.getFile().get().accept(this);
-            }
-
-//            @Override
-//            public void visit(MetadataDebugLocation alias) {
-//                line[0] = Math.toIntExact(alias.getLine());
-//                alias.getScope().accept(this);
-//            }
         });
 
         if (file[0] == null) {

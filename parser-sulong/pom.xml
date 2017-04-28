@@ -13,29 +13,12 @@
     <artifactId>sanity-parser-sulong</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>sulong/projects/com.oracle.truffle.llvm.option/src</source>
-                                <source>sulong/projects/com.oracle.truffle.llvm.parser/src</source>
-                                <source>sulong/projects/com.oracle.truffle.llvm.runtime/src</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -47,6 +30,18 @@
             <groupId>ru.urururu</groupId>
             <artifactId>sanity-api</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.okutane.sulong</groupId>
+            <artifactId>sulong</artifactId>
+            <version>jitpack-hack-bd946b8d04-1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.okutane.sulong</groupId>
+            <artifactId>sulong-options</artifactId>
+            <version>jitpack-hack-bd946b8d04-1</version>
         </dependency>
     </dependencies>
 </project>
