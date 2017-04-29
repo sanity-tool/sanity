@@ -297,33 +297,33 @@ matrix:
     - os: osx
       env:
       - LANG=C
-      - EXTRA_BREW=llvm39
+      - EXTRA_BREW=llvm@3.9
       - CLANG_BIN=/usr/local/opt/llvm\@3.9/bin/clang-3.9
     - os: osx
       env:
       - LANG=Cpp
-      - EXTRA_BREW=llvm39
+      - EXTRA_BREW=llvm@3.9
       - CLANG_BIN=/usr/local/opt/llvm\@3.9/bin/clang-3.9
     - os: osx
       env:
       - LANG=ObjectiveC
-      - EXTRA_BREW=llvm39
+      - EXTRA_BREW=llvm@3.9
       - CLANG_BIN=/usr/local/opt/llvm\@3.9/bin/clang-3.9
 
     - os: osx
       env:
       - LANG=C
-      - EXTRA_BREW=llvm40
+      - EXTRA_BREW=llvm@4.0
       - CLANG_BIN=/usr/local/opt/llvm\@4.0/bin/clang-4.0
     - os: osx
       env:
       - LANG=Cpp
-      - EXTRA_BREW=llvm40
+      - EXTRA_BREW=llvm@4.0
       - CLANG_BIN=/usr/local/opt/llvm\@4.0/bin/clang-4.0
     - os: osx
       env:
       - LANG=ObjectiveC
-      - EXTRA_BREW=llvm40
+      - EXTRA_BREW=llvm@4.0
       - CLANG_BIN=/usr/local/opt/llvm\@4.0/bin/clang-4.0
 
 language: java
