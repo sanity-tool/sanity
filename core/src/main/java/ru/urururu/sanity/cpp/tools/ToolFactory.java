@@ -14,11 +14,15 @@ public class ToolFactory {
     private final Map<Language, Tool> byLanguages = new EnumMap<>(Language.class);
 
     public ToolFactory() throws InterruptedException {
-        Tool.tryCreate(System.getProperty("sanity.clang", "clang"), Clang::new).ifPresent(this::addTool);
-        Tool.tryCreate(System.getProperty("sanity.swiftc", "swiftc"), Swift::new).ifPresent(this::addTool);
-        Tool.tryCreate(System.getProperty("sanity.rustc", "rustc"), Rust::new).ifPresent(this::addTool);
+        Tool.tryCreate("sanity.clang", "clang", Clang::new).ifPresent(this::addTool);
+        Tool.tryCreate("sanity.swiftc", "swiftc", Swift::new).ifPresent(this::addTool);
+        Tool.tryCreate("sanity.rustc", "rustc", Rust::new).ifPresent(this::addTool);
 
-        Tool.tryCreate(System.getProperty("sanity.llvm-as", "llvm-as"), LlvmAs::new).ifPresent(this::addTool);
+        Tool.tryCreate("sanity.llvm-as", "llvm-as", LlvmAs::new).ifPresent(this::addTool);
+
+        if (tools.isEmpty()) {
+            throw new IllegalStateException("No tools found");
+        }
     }
 
     private void addTool(Tool tool) {

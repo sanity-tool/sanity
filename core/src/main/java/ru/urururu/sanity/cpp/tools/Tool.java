@@ -32,23 +32,33 @@ public abstract class Tool {
 
     abstract Set<Language> getLanguages();
 
-    static Optional<Tool> tryCreate(String executable, BiFunction<String, String, Tool> factory) throws InterruptedException {
-        String version;
-
-        ProcessBuilder pb = new ProcessBuilder(executable, "--version");
-        try {
-            Process process = pb.start();
-
-            try (BufferedReader reader =
-                         new BufferedReader(new InputStreamReader(process.getInputStream()))){
-                version = reader.readLine();
+    static Optional<Tool> tryCreate(String key, String def, BiFunction<String, String, Tool> factory) throws InterruptedException {
+        String executable = System.getProperty(key);
+        if (executable != null) {
+            try {
+                return create(executable, factory);
+            } catch (IOException e) {
+                throw new IllegalStateException("Explicitly specified tool creation failed", e);
             }
+        }
 
-            pb.start().waitFor();
+        try {
+            return create(def, factory);
         } catch (IOException e) {
             return Optional.empty();
         }
+    }
 
+    private static Optional<Tool> create(String executable, BiFunction<String, String, Tool> factory) throws IOException, InterruptedException {
+        String version;
+        ProcessBuilder pb = new ProcessBuilder(executable, "--version");
+        Process process = pb.start();
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+            version = reader.readLine();
+        }
+
+        pb.start().waitFor();
         return Optional.of(factory.apply(executable, version));
     }
 
