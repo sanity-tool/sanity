@@ -1,6 +1,7 @@
 package ru.urururu.sanity.cpp.tools;
 
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -24,5 +25,10 @@ class Rust extends Tool {
     @Override
     public String[] createDebugParameters(String filename, String debugFile) {
         return new String[]{executable, "--crate-type=lib", "-g", "-A", "dead_code", "--emit=llvm-ir", "-o", debugFile, filename};
+    }
+
+    @Override
+    List<String> evaluateVersionIds(String version) {
+        return createVersionsFamily("rustc", version.substring("rustc".length()).trim());
     }
 }

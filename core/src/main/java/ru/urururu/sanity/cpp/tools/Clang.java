@@ -45,18 +45,4 @@ class Clang extends Tool {
 
         return super.evaluateVersionIds(version);
     }
-
-    private List<String> createVersionsFamily(String prefix, String version) {
-        String[] versionParts = version.split("\\.");
-
-        String[] result = new String[versionParts.length];
-
-        StringBuilder sb = new StringBuilder(prefix);
-        for (int i = 0; i < versionParts.length; i++) {
-            sb.append(versionParts[i]);
-            result[result.length - 1 - i] = sb.toString();
-        }
-
-        return Collections.unmodifiableList(Arrays.asList(result));
-    }
 }

@@ -3,7 +3,6 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
-      - llvm-toolchain-precise-3.8
     packages:
       - oracle-java8-installer
       - libstdc++6
@@ -11,140 +10,144 @@ addons:
       - gcc-4.9
       - g++-4.9
       - swig
-      - clang-3.8
-      - libllvm3.8
-      - llvm-3.8
-      - llvm-3.8-dev
-      - llvm-3.8-runtime
       - ccache
 
 matrix:
   include:
     - os: linux
       jdk: oraclejdk8
-      apt:
-        sources:
-          - llvm-toolchain-precise-3.8
-        packages:
-          - clang-3.8
-          - libllvm3.8
-          - llvm-3.8
-          - llvm-3.8-dev
-          - llvm-3.8-runtime
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-precise-3.8
+          packages:
+            - clang-3.8
+            - libllvm3.8
+            - llvm-3.8
+            - llvm-3.8-dev
+            - llvm-3.8-runtime
       env:
       - LANG=C
       - CLANG_BIN=clang-3.8
     - os: linux
       jdk: oraclejdk8
-      apt:
-        sources:
-          - llvm-toolchain-precise-3.8
-        packages:
-          - clang-3.8
-          - libllvm3.8
-          - llvm-3.8
-          - llvm-3.8-dev
-          - llvm-3.8-runtime
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-precise-3.8
+          packages:
+            - clang-3.8
+            - libllvm3.8
+            - llvm-3.8
+            - llvm-3.8-dev
+            - llvm-3.8-runtime
       env:
       - LANG=Cpp
       - CLANG_BIN=clang-3.8
     - os: linux
       jdk: oraclejdk8
-      apt:
-        sources:
-          - llvm-toolchain-precise-3.8
-        packages:
-          - clang-3.8
-          - libllvm3.8
-          - llvm-3.8
-          - llvm-3.8-dev
-          - llvm-3.8-runtime
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-precise-3.8
+          packages:
+            - clang-3.8
+            - libllvm3.8
+            - llvm-3.8
+            - llvm-3.8-dev
+            - llvm-3.8-runtime
       env:
       - LANG=IR
       - LLVM_AS_BIN=llvm-as-3.8
 
     - os: linux
       jdk: oraclejdk8
-      apt:
-        sources:
-          - llvm-toolchain-precise-3.9
-        packages:
-          - clang-3.9
-          - libllvm3.9
-          - llvm-3.9
-          - llvm-3.9-dev
-          - llvm-3.9-runtime
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-precise-3.9
+          packages:
+            - clang-3.9
+            - libllvm3.9
+            - llvm-3.9
+            - llvm-3.9-dev
+            - llvm-3.9-runtime
       env:
       - LANG=C
       - CLANG_BIN=clang-3.9
     - os: linux
       jdk: oraclejdk8
-      apt:
-        sources:
-          - llvm-toolchain-precise-3.9
-        packages:
-          - clang-3.9
-          - libllvm3.9
-          - llvm-3.9
-          - llvm-3.9-dev
-          - llvm-3.9-runtime
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-precise-3.9
+          packages:
+            - clang-3.9
+            - libllvm3.9
+            - llvm-3.9
+            - llvm-3.9-dev
+            - llvm-3.9-runtime
       env:
       - LANG=Cpp
       - CLANG_BIN=clang-3.9
     - os: linux
       jdk: oraclejdk8
-      apt:
-        sources:
-          - llvm-toolchain-precise-3.9
-        packages:
-          - clang-3.9
-          - libllvm3.9
-          - llvm-3.9
-          - llvm-3.9-dev
-          - llvm-3.9-runtime
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-precise-3.9
+          packages:
+            - clang-3.9
+            - libllvm3.9
+            - llvm-3.9
+            - llvm-3.9-dev
+            - llvm-3.9-runtime
       env:
       - LANG=IR
       - LLVM_AS_BIN=llvm-as-3.9
       
     - os: linux
       jdk: oraclejdk8
-      apt:
-        sources:
-          - llvm-toolchain-precise-4.0
-        packages:
-          - clang-4.0
-          - libllvm4.0
-          - llvm-4.0
-          - llvm-4.0-dev
-          - llvm-4.0-runtime
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-precise-4.0
+          packages:
+            - clang-4.0
+            - libllvm4.0
+            - llvm-4.0
+            - llvm-4.0-dev
+            - llvm-4.0-runtime
       env:
       - LANG=C
       - CLANG_BIN=clang-4.0
     - os: linux
       jdk: oraclejdk8
-      apt:
-        sources:
-          - llvm-toolchain-precise-4.0
-        packages:
-          - clang-4.0
-          - libllvm4.0
-          - llvm-4.0
-          - llvm-4.0-dev
-          - llvm-4.0-runtime
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-precise-4.0
+          packages:
+            - clang-4.0
+            - libllvm4.0
+            - llvm-4.0
+            - llvm-4.0-dev
+            - llvm-4.0-runtime
       env:
       - LANG=Cpp
       - CLANG_BIN=clang-4.0
     - os: linux
       jdk: oraclejdk8
-      apt:
-        sources:
-          - llvm-toolchain-precise-4.0
-        packages:
-          - clang-4.0
-          - libllvm4.0
-          - llvm-4.0
-          - llvm-4.0-dev
-          - llvm-4.0-runtime
+      addons:
+        apt:
+          sources:
+            - llvm-toolchain-precise-4.0
+          packages:
+            - clang-4.0
+            - libllvm4.0
+            - llvm-4.0
+            - llvm-4.0-dev
+            - llvm-4.0-runtime
       env:
       - LANG=IR
       - LLVM_AS_BIN=llvm-as-4.0
@@ -325,6 +328,11 @@ matrix:
       - LANG=ObjectiveC
       - EXTRA_BREW=llvm@4.0
       - CLANG_BIN=/usr/local/opt/llvm\@4.0/bin/clang-4.0
+
+    - os: osx
+      env:
+      - LANG=Rust
+      - EXTRA_BREW=rust
 
 language: java
 
