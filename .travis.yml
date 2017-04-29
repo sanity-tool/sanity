@@ -180,6 +180,38 @@ matrix:
       - EXTRA_BREW=llvm38
       - CLANG_BIN=clang-3.8
 
+    - os: osx
+      env:
+      - LANG=C
+      - EXTRA_BREW=llvm39
+      - CLANG_BIN=/usr/local/opt/llvm\@3.9/bin/clang-3.9
+    - os: osx
+      env:
+      - LANG=Cpp
+      - EXTRA_BREW=llvm39
+      - CLANG_BIN=/usr/local/opt/llvm\@3.9/bin/clang-3.9
+    - os: osx
+      env:
+      - LANG=ObjectiveC
+      - EXTRA_BREW=llvm39
+      - CLANG_BIN=/usr/local/opt/llvm\@3.9/bin/clang-3.9
+
+    - os: osx
+      env:
+      - LANG=C
+      - EXTRA_BREW=llvm40
+      - CLANG_BIN=/usr/local/opt/llvm\@4.0/bin/clang-4.0
+    - os: osx
+      env:
+      - LANG=Cpp
+      - EXTRA_BREW=llvm40
+      - CLANG_BIN=/usr/local/opt/llvm\@4.0/bin/clang-4.0
+    - os: osx
+      env:
+      - LANG=ObjectiveC
+      - EXTRA_BREW=llvm40
+      - CLANG_BIN=/usr/local/opt/llvm\@4.0/bin/clang-4.0
+
 language: java
 
 install:
