@@ -104,6 +104,9 @@ public abstract class AbstractBytecodeParser<M, T, V, I, B, Ctx extends CfgBuild
                         result.add(new Cfg((FunctionAddress) parsers.parseRValue(null, function), entry));
                     }
                 } catch (Exception e) {
+                    if (true) {
+                        throw new IllegalStateException("Can't parse function: " + toDebugString(function), e);
+                    }
                     System.err.println("Can't parse function: " + toDebugString(function));
                     e.printStackTrace(System.err);
                 }

@@ -9,9 +9,9 @@ import java.io.File;
  */
 public class SourceRange {
     private final String filename;
-    private final int line;
+    private final long line;
 
-    public SourceRange(String filename, int line) {
+    public SourceRange(String filename, long line) {
         this.filename = filename;
         this.line = line;
     }
@@ -20,7 +20,7 @@ public class SourceRange {
         return filename;
     }
 
-    public int getLine() {
+    public long getLine() {
         return line;
     }
 

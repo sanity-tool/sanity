@@ -1,8 +1,6 @@
 package ru.urururu.sanity.cpp;
 
-import com.oracle.truffle.llvm.parser.metadata.MDBaseNode;
-import com.oracle.truffle.llvm.parser.metadata.MDLocation;
-import com.oracle.truffle.llvm.parser.metadata.MetadataVisitor;
+import com.oracle.truffle.llvm.parser.metadata.*;
 import com.oracle.truffle.llvm.parser.model.symbols.instructions.Instruction;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.api.SourceRangeFactory;
@@ -23,13 +21,40 @@ public class SulongSourceRangeFactory extends SourceRangeFactory<Instruction> {
             return null;
         }
 
-        int[] line = new int[1];
+        long[] line = new long[1];
         String[] file = new String[1];
 
         debugLocation.accept(new MetadataVisitor() {
             @Override
             public void ifVisitNotOverwritten(MDBaseNode alias) {
                 throw new IllegalStateException(alias.getClass().getSimpleName());
+            }
+
+            @Override
+            public void visit(MDReference alias) {
+                alias.get().accept(this);
+            }
+
+            @Override
+            public void visit(MDLocation alias) {
+                line[0] = alias.getLine();
+                alias.getScope().accept(this);
+            }
+
+            @Override
+            public void visit(MDSubprogram alias) {
+                alias.getFile().accept(this);
+            }
+
+            @Override
+            public void visit(MDLexicalBlock alias) {
+                line[0] = alias.getLine(); // todo correct?
+                alias.getFile().accept(this);
+            }
+
+            @Override
+            public void visit(MDFile alias) {
+                file[0] = alias.asFile().getAbsolutePath();
             }
         });
 

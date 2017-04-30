@@ -31,7 +31,28 @@ public class SulongTypeParser extends TypeParser<ModelModule, Type> {
 
             @Override
             public void visit(PrimitiveType primitiveType) {
-                throw new NotImplementedException();
+                switch (primitiveType.getPrimitiveKind()) {
+                    case I1:
+                    case I8:
+                    case I16:
+                    case I32:
+                    case I64:
+                        result.set(createInt(primitiveType.getBitSize()));
+                        return;
+                    case HALF:
+                        break;
+                    case FLOAT:
+                        break;
+                    case DOUBLE:
+                        break;
+                    case F128:
+                        break;
+                    case X86_FP80:
+                        break;
+                    case PPC_FP128:
+                        break;
+                }
+                throw new IllegalStateException(primitiveType.getPrimitiveKind().name());
             }
 
             @Override

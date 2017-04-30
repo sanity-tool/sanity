@@ -16,10 +16,10 @@ import java.util.Map;
  */
 @Component
 public class LineUtils implements DisposableBean {
-    private static final Map<Pair<File, Integer>, String> CACHE = new HashMap<>();
+    private static final Map<Pair<File, Long>, String> CACHE = new HashMap<>();
 
-    public static String dumpLine(File file, int lineNumber) {
-        return CACHE.computeIfAbsent(new Pair(file, lineNumber), key -> {
+    public static String dumpLine(File file, long lineNumber) {
+        return CACHE.computeIfAbsent(new Pair<>(file, lineNumber), key -> {
             try (FileReader in = new FileReader(file);
                  LineNumberReader reader = new LineNumberReader(in)) {
                 String line;
