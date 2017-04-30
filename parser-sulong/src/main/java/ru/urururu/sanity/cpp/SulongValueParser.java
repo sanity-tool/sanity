@@ -2,6 +2,8 @@ package ru.urururu.sanity.cpp;
 
 import com.oracle.truffle.llvm.parser.model.ModelModule;
 import com.oracle.truffle.llvm.parser.model.blocks.InstructionBlock;
+import com.oracle.truffle.llvm.parser.model.functions.FunctionDeclaration;
+import com.oracle.truffle.llvm.parser.model.functions.FunctionDefinition;
 import com.oracle.truffle.llvm.parser.model.functions.FunctionParameter;
 import com.oracle.truffle.llvm.parser.model.globals.GlobalValueSymbol;
 import com.oracle.truffle.llvm.parser.model.symbols.constants.Constant;
@@ -63,9 +65,12 @@ public class SulongValueParser extends ValueParser<ModelModule, com.oracle.truff
         if (value instanceof StringConstant) {
             return constants.get(((StringConstant) value).getString(), parsers.parse(value.getType()));
         }
-//        if (value instanceof FunctionType) {
-//            return constants.getFunction(fixName(((FunctionType) value).getName()), parsers.parse(value.getType()));
-//        }
+        if (value instanceof FunctionDeclaration) {
+            return constants.getFunction(fixName(((FunctionDeclaration) value).getName()), parsers.parse(value.getType()));
+        }
+        if (value instanceof FunctionDefinition) {
+            return constants.getFunction(fixName(((FunctionDefinition) value).getName()), parsers.parse(value.getType()));
+        }
         if (value instanceof Constant) {
             return parsers.parseInstructionConst(ctx, value);
         }
