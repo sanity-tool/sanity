@@ -1,40 +1,109 @@
 sudo: false
 addons:
   apt:
-    sources:
+    sources: &common_sources
       - ubuntu-toolchain-r-test
-      - llvm-toolchain-precise-3.8
-    packages:
+    packages: &common_packages
       - oracle-java8-installer
       - libstdc++6
       - libstdc++6-4.7-dev
       - gcc-4.9
       - g++-4.9
       - swig
-      - clang-3.8
-      - libllvm3.8
-      - llvm-3.8
-      - llvm-3.8-dev
-      - llvm-3.8-runtime
       - ccache
 
 matrix:
   include:
     - os: linux
       jdk: oraclejdk8
+      addons: &llvm38
+        apt:
+          sources:
+            - *common_sources
+            - llvm-toolchain-precise-3.8
+          packages:
+            - *common_packages
+            - clang-3.8
+            - libllvm3.8
+            - llvm-3.8
+            - llvm-3.8-dev
+            - llvm-3.8-runtime
       env:
       - LANG=C
       - CLANG_BIN=clang-3.8
     - os: linux
       jdk: oraclejdk8
+      addons: *llvm38
       env:
       - LANG=Cpp
       - CLANG_BIN=clang-3.8
     - os: linux
       jdk: oraclejdk8
+      addons: *llvm38
       env:
       - LANG=IR
       - LLVM_AS_BIN=llvm-as-3.8
+
+    - os: linux
+      jdk: oraclejdk8
+      addons: &llvm39
+        apt:
+          sources:
+            - *common_sources
+            - llvm-toolchain-precise-3.9
+          packages:
+            - *common_packages
+            - clang-3.9
+            - libllvm3.9
+            - llvm-3.9
+            - llvm-3.9-dev
+            - llvm-3.9-runtime
+      env:
+      - LANG=C
+      - CLANG_BIN=clang-3.9
+    - os: linux
+      jdk: oraclejdk8
+      addons: *llvm39
+      env:
+      - LANG=Cpp
+      - CLANG_BIN=clang-3.9
+    - os: linux
+      jdk: oraclejdk8
+      addons: *llvm39
+      env:
+      - LANG=IR
+      - LLVM_AS_BIN=llvm-as-3.9
+      
+    - os: linux
+      jdk: oraclejdk8
+      addons: &llvm40
+        apt:
+          sources:
+            - *common_sources
+            - llvm-toolchain-trusty-4.0
+          packages:
+            - *common_packages
+            - clang-4.0
+            - libllvm4.0
+            - llvm-4.0
+            - llvm-4.0-dev
+            - llvm-4.0-runtime
+      env:
+      - LANG=C
+      - CLANG_BIN=clang-4.0
+    - os: linux
+      jdk: oraclejdk8
+      addons: *llvm40
+      env:
+      - LANG=Cpp
+      - CLANG_BIN=clang-4.0
+    - os: linux
+      jdk: oraclejdk8
+      addons: *llvm40
+      env:
+      - LANG=IR
+      - LLVM_AS_BIN=llvm-as-4.0
+
     - os: linux
       jdk: oraclejdk8
       env:
@@ -179,6 +248,43 @@ matrix:
       - LANG=ObjectiveC
       - EXTRA_BREW=llvm38
       - CLANG_BIN=clang-3.8
+
+    - os: osx
+      env:
+      - LANG=C
+      - EXTRA_BREW=llvm@3.9
+      - CLANG_BIN=/usr/local/opt/llvm\@3.9/bin/clang-3.9
+    - os: osx
+      env:
+      - LANG=Cpp
+      - EXTRA_BREW=llvm@3.9
+      - CLANG_BIN=/usr/local/opt/llvm\@3.9/bin/clang-3.9
+    - os: osx
+      env:
+      - LANG=ObjectiveC
+      - EXTRA_BREW=llvm@3.9
+      - CLANG_BIN=/usr/local/opt/llvm\@3.9/bin/clang-3.9
+
+    - os: osx
+      env:
+      - LANG=C
+      - EXTRA_BREW=llvm@4
+      - CLANG_BIN=/usr/local/opt/llvm/bin/clang-4.0
+    - os: osx
+      env:
+      - LANG=Cpp
+      - EXTRA_BREW=llvm@4
+      - CLANG_BIN=/usr/local/opt/llvm/bin/clang-4.0
+    - os: osx
+      env:
+      - LANG=ObjectiveC
+      - EXTRA_BREW=llvm@4
+      - CLANG_BIN=/usr/local/opt/llvm/bin/clang-4.0
+
+    - os: osx
+      env:
+      - LANG=Rust
+      - EXTRA_BREW=rust
 
 language: java
 

@@ -6,10 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.function.BiFunction;
 
 /**
@@ -32,23 +29,33 @@ public abstract class Tool {
 
     abstract Set<Language> getLanguages();
 
-    static Optional<Tool> tryCreate(String executable, BiFunction<String, String, Tool> factory) throws InterruptedException {
-        String version;
-
-        ProcessBuilder pb = new ProcessBuilder(executable, "--version");
-        try {
-            Process process = pb.start();
-
-            try (BufferedReader reader =
-                         new BufferedReader(new InputStreamReader(process.getInputStream()))){
-                version = reader.readLine();
+    static Optional<Tool> tryCreate(String key, String def, BiFunction<String, String, Tool> factory) throws InterruptedException {
+        String executable = System.getProperty(key);
+        if (executable != null) {
+            try {
+                return create(executable, factory);
+            } catch (IOException e) {
+                throw new IllegalStateException("Explicitly specified tool creation failed", e);
             }
+        }
 
-            pb.start().waitFor();
+        try {
+            return create(def, factory);
         } catch (IOException e) {
             return Optional.empty();
         }
+    }
 
+    private static Optional<Tool> create(String executable, BiFunction<String, String, Tool> factory) throws IOException, InterruptedException {
+        String version;
+        ProcessBuilder pb = new ProcessBuilder(executable, "--version");
+        Process process = pb.start();
+
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+            version = reader.readLine();
+        }
+
+        pb.start().waitFor();
         return Optional.of(factory.apply(executable, version));
     }
 
@@ -68,5 +75,19 @@ public abstract class Tool {
     List<String> evaluateVersionIds(String version) {
         LOGGER.warn("unknown version = {}", version);
         return Collections.singletonList("unknown");
+    }
+
+    protected List<String> createVersionsFamily(String prefix, String version) {
+        String[] versionParts = version.split("\\.");
+
+        String[] result = new String[versionParts.length];
+
+        StringBuilder sb = new StringBuilder(prefix);
+        for (int i = 0; i < versionParts.length; i++) {
+            sb.append(versionParts[i]);
+            result[result.length - 1 - i] = sb.toString();
+        }
+
+        return Collections.unmodifiableList(Arrays.asList(result));
     }
 }
