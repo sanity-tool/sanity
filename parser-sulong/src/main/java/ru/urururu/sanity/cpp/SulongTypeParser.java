@@ -42,13 +42,16 @@ public class SulongTypeParser extends TypeParser<ModelModule, Type> {
                     case HALF:
                         break;
                     case FLOAT:
-                        break;
+                        result.set(createFloat());
+                        return;
                     case DOUBLE:
-                        break;
+                        result.set(createDouble());
+                        return;
                     case F128:
                         break;
                     case X86_FP80:
-                        break;
+                        result.set(createLongDouble());
+                        return;
                     case PPC_FP128:
                         break;
                 }

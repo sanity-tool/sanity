@@ -48,7 +48,6 @@ public class SulongSourceRangeFactory extends SourceRangeFactory<Instruction> {
 
             @Override
             public void visit(MDLexicalBlock alias) {
-                line[0] = alias.getLine(); // todo correct?
                 alias.getFile().accept(this);
             }
 
