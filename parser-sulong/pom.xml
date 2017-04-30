@@ -35,13 +35,13 @@
         <dependency>
             <groupId>com.github.okutane.sulong</groupId>
             <artifactId>sulong</artifactId>
-            <version>jitpack-hack-bd946b8d04-1</version>
+            <version>jitpack-hack-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>com.github.okutane.sulong</groupId>
             <artifactId>sulong-options</artifactId>
-            <version>jitpack-hack-bd946b8d04-1</version>
+            <version>jitpack-hack-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
