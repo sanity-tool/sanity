@@ -21,6 +21,7 @@ matrix:
           sources:
             - llvm-toolchain-precise-3.8
           packages:
+            - *default_packages
             - clang-3.8
             - libllvm3.8
             - llvm-3.8
@@ -36,6 +37,7 @@ matrix:
           sources:
             - llvm-toolchain-precise-3.8
           packages:
+            - *default_packages
             - clang-3.8
             - libllvm3.8
             - llvm-3.8
@@ -51,6 +53,7 @@ matrix:
           sources:
             - llvm-toolchain-precise-3.8
           packages:
+            - *default_packages
             - clang-3.8
             - libllvm3.8
             - llvm-3.8
@@ -67,6 +70,7 @@ matrix:
           sources:
             - llvm-toolchain-precise-3.9
           packages:
+            - *default_packages
             - clang-3.9
             - libllvm3.9
             - llvm-3.9
@@ -82,6 +86,7 @@ matrix:
           sources:
             - llvm-toolchain-precise-3.9
           packages:
+            - *default_packages
             - clang-3.9
             - libllvm3.9
             - llvm-3.9
@@ -97,6 +102,7 @@ matrix:
           sources:
             - llvm-toolchain-precise-3.9
           packages:
+            - *default_packages
             - clang-3.9
             - libllvm3.9
             - llvm-3.9
@@ -113,6 +119,7 @@ matrix:
           sources:
             - llvm-toolchain-precise-4.0
           packages:
+            - *default_packages
             - clang-4.0
             - libllvm4.0
             - llvm-4.0
@@ -128,6 +135,7 @@ matrix:
           sources:
             - llvm-toolchain-precise-4.0
           packages:
+            - *default_packages
             - clang-4.0
             - libllvm4.0
             - llvm-4.0
@@ -143,6 +151,7 @@ matrix:
           sources:
             - llvm-toolchain-precise-4.0
           packages:
+            - *default_packages
             - clang-4.0
             - libllvm4.0
             - llvm-4.0
