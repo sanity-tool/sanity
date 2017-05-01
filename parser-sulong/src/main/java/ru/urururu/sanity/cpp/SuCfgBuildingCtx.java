@@ -25,8 +25,9 @@ public class SuCfgBuildingCtx extends CfgBuildingCtx<ModelModule, com.oracle.tru
     }
 
     private String defaultName(String name) {
+        System.out.println("name = [" + name + "]");
         if (name.startsWith("%")) {
-            return "";
+            return name.substring(1);
         }
         return name;
     }
