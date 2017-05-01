@@ -285,11 +285,12 @@ matrix:
       env:
       - LANG=Rust
       - EXTRA_BREW=rust
+  allow_failures: env: SANITY_PROFILE=parser-sulong
 
 language: java
 
 install:
- - export SANITY_PROFILE=parser-sulong
+ - export SANITY_PROFILE=parser-native
  - ./install.sh
 
 script: mvn -P $SANITY_PROFILE test -B
