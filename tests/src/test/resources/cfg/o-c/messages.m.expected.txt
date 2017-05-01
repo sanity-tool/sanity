@@ -1,7 +1,7 @@
 CFG: -[MyObject useSelf]
-#0000:	 assign: *tmp0 = <param 0>
+#0000:	 assign: *tmp0 = self
  - no source -
-#0001:	 assign: *tmp1 = <param 1>
+#0001:	 assign: *tmp1 = _cmd
  - no source -
 #0002:	 assign: tmp2 = *tmp0
 messages.m:8 [self foo];
@@ -9,9 +9,9 @@ messages.m:8 [self foo];
 messages.m:8 [self foo];
 
 CFG: -[MyChild foo]
-#0000:	 assign: *tmp0 = <param 0>
+#0000:	 assign: *tmp0 = self
  - no source -
-#0001:	 assign: *tmp1 = <param 1>
+#0001:	 assign: *tmp1 = _cmd
  - no source -
 #0002:	 assign: tmp2 = *tmp0
 messages.m:17 [super foo];

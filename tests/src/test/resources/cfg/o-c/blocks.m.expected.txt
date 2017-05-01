@@ -3,9 +3,9 @@ CFG: defineBlock
 blocks.m:6 SIMPLE = ^{
 
 CFG: __defineBlock_block_invoke
-#0000:	 assign: *tmp0 = <param 0>
+#0000:	 assign: *tmp0 = .block_descriptor
  - no source -
-#0001:	 assign: tmp1 = <param 0>
+#0001:	 assign: tmp1 = .block_descriptor
 blocks.m:6 SIMPLE = ^{
 #0002:	 assign: *tmp2 = tmp1
  - no source -
@@ -57,9 +57,9 @@ blocks.m:20 }
 blocks.m:20 }
 
 CFG: __testBlockVars_block_invoke
-#0000:	 assign: *tmp0 = <param 0>
+#0000:	 assign: *tmp0 = .block_descriptor
  - no source -
-#0001:	 assign: tmp1 = <param 0>
+#0001:	 assign: tmp1 = .block_descriptor
 blocks.m:17 SIMPLE = ^{
 #0002:	 assign: *tmp2 = tmp1
  - no source -
