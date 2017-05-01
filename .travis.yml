@@ -296,7 +296,6 @@ script: mvn -P $SANITY_PROFILE test -B
 
 after_success:
   - ./check.sh
-  - bash <(curl -s https://codecov.io/bash) -F $LANG
 
 after_failure:
   - diff tests/target/failures/expected tests/target/failures/actual
