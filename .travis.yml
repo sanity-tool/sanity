@@ -47,20 +47,8 @@ matrix:
             - llvm-3.9-dev
             - llvm-3.9-runtime
       env:
-      - LANG=C
+      - LANGS="C Cpp IR"
       - CLANG_BIN=clang-3.9
-    - os: linux
-      jdk: oraclejdk8
-      addons: *llvm39
-      env:
-      - LANG=Cpp
-      - CLANG_BIN=clang-3.9
-    - os: linux
-      jdk: oraclejdk8
-      addons: *llvm39
-      env:
-      - LANG=IR
-      - LLVM_AS_BIN=llvm-as-3.9
       
     - os: linux
       jdk: oraclejdk8
@@ -77,46 +65,22 @@ matrix:
             - llvm-4.0-dev
             - llvm-4.0-runtime
       env:
-      - LANG=C
+      - LANGS="C Cpp IR"
       - CLANG_BIN=clang-4.0
-    - os: linux
-      jdk: oraclejdk8
-      addons: *llvm40
-      env:
-      - LANG=Cpp
-      - CLANG_BIN=clang-4.0
-    - os: linux
-      jdk: oraclejdk8
-      addons: *llvm40
-      env:
-      - LANG=IR
-      - LLVM_AS_BIN=llvm-as-4.0
 
     - os: linux
       jdk: oraclejdk8
       env:
-      - LANG=Rust
+      - LANGS=Rust
       - RUST_BIN=$HOME/.cargo/bin/rustc
 
     - os: osx
       osx_image: xcode8
-      env: LANG=C
-    - os: osx
-      osx_image: xcode8
-      env: LANG=Cpp
-    - os: osx
-      osx_image: xcode8
-      env: LANG=ObjectiveC
+      env: LANGS="C Cpp ObjectiveC"
 
     - os: osx
       osx_image: xcode7.3
-      env: LANG=C
-    - os: osx
-      osx_image: xcode7.3
-      env: LANG=Cpp
-    - os: osx
-      osx_image: xcode7.3
-      env: LANG=ObjectiveC
+      env: LANGS="C Cpp ObjectiveC"
 
 # travis uses 7.3 for those below:
 #    - os: osx
@@ -128,13 +92,7 @@ matrix:
 
     - os: osx
       osx_image: xcode6.4
-      env: LANG=C
-    - os: osx
-      osx_image: xcode6.4
-      env: LANG=Cpp
-    - os: osx
-      osx_image: xcode6.4
-      env: LANG=ObjectiveC
+      env: LANGS="C Cpp ObjectiveC"
 
 # travis uses 6.4 for those below:
 #    - os: osx
@@ -170,17 +128,7 @@ matrix:
     - os: osx
       osx_image: xcode7.3
       env:
-      - LANG=C
-      - CLANG_BIN=/usr/local/opt/llvm/bin/clang
-    - os: osx
-      osx_image: xcode7.3
-      env:
-      - LANG=Cpp
-      - CLANG_BIN=/usr/local/opt/llvm/bin/clang
-    - os: osx
-      osx_image: xcode7.3
-      env:
-      - LANG=ObjectiveC
+      - LANGS="C Cpp ObjectiveC"
       - CLANG_BIN=/usr/local/opt/llvm/bin/clang
 
 # brew don't have those below:
@@ -207,71 +155,31 @@ matrix:
 
     - os: osx
       env:
-      - LANG=C
-      - EXTRA_BREW=llvm37
-      - CLANG_BIN=clang-3.7
-    - os: osx
-      env:
-      - LANG=Cpp
-      - EXTRA_BREW=llvm37
-      - CLANG_BIN=clang-3.7
-    - os: osx
-      env:
-      - LANG=ObjectiveC
+      - LANGS="C Cpp ObjectiveC"
       - EXTRA_BREW=llvm37
       - CLANG_BIN=clang-3.7
 
     - os: osx
       env:
-      - LANG=C
-      - EXTRA_BREW=llvm38
-      - CLANG_BIN=clang-3.8
-    - os: osx
-      env:
-      - LANG=Cpp
-      - EXTRA_BREW=llvm38
-      - CLANG_BIN=clang-3.8
-    - os: osx
-      env:
-      - LANG=ObjectiveC
+      - LANGS="C Cpp ObjectiveC"
       - EXTRA_BREW=llvm38
       - CLANG_BIN=clang-3.8
 
     - os: osx
       env:
-      - LANG=C
-      - EXTRA_BREW=llvm@3.9
-      - CLANG_BIN=/usr/local/opt/llvm\@3.9/bin/clang-3.9
-    - os: osx
-      env:
-      - LANG=Cpp
-      - EXTRA_BREW=llvm@3.9
-      - CLANG_BIN=/usr/local/opt/llvm\@3.9/bin/clang-3.9
-    - os: osx
-      env:
-      - LANG=ObjectiveC
+      - LANGS="C Cpp ObjectiveC"
       - EXTRA_BREW=llvm@3.9
       - CLANG_BIN=/usr/local/opt/llvm\@3.9/bin/clang-3.9
 
     - os: osx
       env:
-      - LANGS=C
-      - EXTRA_BREW=llvm@4
-      - CLANG_BIN=/usr/local/opt/llvm/bin/clang-4.0
-    - os: osx
-      env:
-      - LANG=Cpp
-      - EXTRA_BREW=llvm@4
-      - CLANG_BIN=/usr/local/opt/llvm/bin/clang-4.0
-    - os: osx
-      env:
-      - LANG=ObjectiveC
+      - LANGS="C Cpp ObjectiveC"
       - EXTRA_BREW=llvm@4
       - CLANG_BIN=/usr/local/opt/llvm/bin/clang-4.0
 
     - os: osx
       env:
-      - LANG=Rust
+      - LANGS=Rust
       - EXTRA_BREW=rust
 
 language: java
