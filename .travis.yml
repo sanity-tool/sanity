@@ -283,7 +283,7 @@ install:
 script: mvn -P $SANITY_PROFILE test -B
 
 after_success:
-  - ./check.sh
+  - bash check.sh
 
 after_failure:
   - diff tests/target/failures/expected tests/target/failures/actual
