@@ -29,20 +29,8 @@ matrix:
             - llvm-3.8-dev
             - llvm-3.8-runtime
       env:
-      - LANG=C
+      - LANGS=C Cpp IR
       - CLANG_BIN=clang-3.8
-    - os: linux
-      jdk: oraclejdk8
-      addons: *llvm38
-      env:
-      - LANG=Cpp
-      - CLANG_BIN=clang-3.8
-    - os: linux
-      jdk: oraclejdk8
-      addons: *llvm38
-      env:
-      - LANG=IR
-      - LLVM_AS_BIN=llvm-as-3.8
 
     - os: linux
       jdk: oraclejdk8
@@ -267,7 +255,7 @@ matrix:
 
     - os: osx
       env:
-      - LANG=C
+      - LANGS=C
       - EXTRA_BREW=llvm@4
       - CLANG_BIN=/usr/local/opt/llvm/bin/clang-4.0
     - os: osx
