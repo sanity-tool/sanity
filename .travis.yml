@@ -280,7 +280,7 @@ install:
  - export SANITY_PROFILE=parser-native
  - ./install.sh
 
-script: mvn -P $SANITY_PROFILE test -B
+script: bash travis_script.sh
 
 after_success:
   - bash check.sh
