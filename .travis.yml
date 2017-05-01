@@ -285,7 +285,9 @@ matrix:
       env:
       - LANG=Rust
       - EXTRA_BREW=rust
-  allow_failures: env: SANITY_PROFILE=parser-sulong
+      
+  allow_failures:
+    - env: SANITY_PROFILE=parser-sulong
 
 language: java
 
