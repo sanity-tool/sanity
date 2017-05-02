@@ -36,14 +36,13 @@ case `uname` in
     ;;
 esac
 
-LLVM_HOME="target/llvm"
+LLVM_HOME="llvm"
 LLVM_CCACHE="$HOME/.ccache"
 LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
 
-if [[ ! -d "$LLVM_HOME" ]]; then
+if [[ ! -d "$LLVM_HOME/build" ]]; then
     OLD_DIR=`pwd`
 
-    git clone -b saving-debug --depth 1 https://github.com/okutane/llvm.git $LLVM_HOME
     cd $LLVM_HOME
 
     mkdir build && cd build
