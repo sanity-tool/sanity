@@ -40,6 +40,8 @@ class FlowAnalyzer {
     var toUpdate = Set(cfg.getEntry)
 
     while (toUpdate.nonEmpty) {
+      println(toUpdate)
+      
       var cfe = toUpdate.head
       toUpdate = toUpdate - cfe
 
