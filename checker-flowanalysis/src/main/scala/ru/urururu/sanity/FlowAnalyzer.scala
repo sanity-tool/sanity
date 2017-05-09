@@ -2,7 +2,7 @@ package ru.urururu.sanity
 
 import org.springframework.stereotype.Component
 import ru.urururu.sanity.api.Cfg
-import ru.urururu.sanity.api.cfg.{Assignment, Cfe}
+import ru.urururu.sanity.api.cfg._
 
 /**
   * @author Dmitry Matveev
@@ -14,9 +14,17 @@ class FlowAnalyzer {
     Map[Cfe, MultiState](assignment.getNext -> state)
   }
 
+  def evalIfCondition(ifCondition: IfCondition, state: MultiState): _root_.scala.Predef.Map[_root_.ru.urururu.sanity.api.cfg.Cfe, _root_.ru.urururu.sanity.MultiState] = ???
+
+  def evalSwitch(switch: Switch, state: MultiState): _root_.scala.Predef.Map[_root_.ru.urururu.sanity.api.cfg.Cfe, _root_.ru.urururu.sanity.MultiState] = ???
+
+  def evalDefault(default: Cfe, state: MultiState): _root_.scala.Predef.Map[_root_.ru.urururu.sanity.api.cfg.Cfe, _root_.ru.urururu.sanity.MultiState] = ???
+
   def eval(cfe: Cfe, state: MultiState): Map[Cfe, MultiState] = {
     cfe match {
-      case assignment: Assignment => evalAssign(assignment, state)
+      case ifCondition: IfCondition => evalIfCondition(ifCondition, state)
+      case switch: Switch => evalSwitch(switch, state)
+      case default => evalDefault(default, state)
     }
   }
 
