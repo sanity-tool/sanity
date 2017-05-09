@@ -10,15 +10,22 @@ import ru.urururu.sanity.api.cfg._
 @Component
 class FlowAnalyzer {
 
-  def evalAssign(assignment: Assignment, state: MultiState): Map[Cfe, MultiState] = {
-    Map[Cfe, MultiState](assignment.getNext -> state)
+  def evalAssign(assignment: Assignment, state: MultiState): MultiState = state
+
+  def evalCall(call: Call, state: MultiState): MultiState = state
+
+  def evalDefaultState(cfe: Cfe, state: MultiState): MultiState = {
+    cfe match {
+      case assignment: Assignment => evalAssign(assignment, state)
+      case call:Call => evalCall(call, state)
+    }
   }
 
-  def evalIfCondition(ifCondition: IfCondition, state: MultiState): _root_.scala.Predef.Map[_root_.ru.urururu.sanity.api.cfg.Cfe, _root_.ru.urururu.sanity.MultiState] = ???
+  def evalDefault(cfe: Cfe, state: MultiState): Map[Cfe, MultiState] = Map[Cfe, MultiState](cfe.getNext -> evalDefaultState(cfe, state))
 
-  def evalSwitch(switch: Switch, state: MultiState): _root_.scala.Predef.Map[_root_.ru.urururu.sanity.api.cfg.Cfe, _root_.ru.urururu.sanity.MultiState] = ???
+  def evalIfCondition(ifCondition: IfCondition, state: MultiState): Map[Cfe, MultiState] = ???
 
-  def evalDefault(default: Cfe, state: MultiState): _root_.scala.Predef.Map[_root_.ru.urururu.sanity.api.cfg.Cfe, _root_.ru.urururu.sanity.MultiState] = ???
+  def evalSwitch(switch: Switch, state: MultiState): Map[Cfe, MultiState] = ???
 
   def eval(cfe: Cfe, state: MultiState): Map[Cfe, MultiState] = {
     cfe match {
@@ -56,5 +63,5 @@ class PersistentState {
 }
 
 class MultiState(val states: Set[PersistentState]) {
-  def in(that:MultiState):Boolean = states.subsetOf(that.states) && states.size < that.states.size
+  def in(that: MultiState): Boolean = states.subsetOf(that.states) && states.size < that.states.size
 }
