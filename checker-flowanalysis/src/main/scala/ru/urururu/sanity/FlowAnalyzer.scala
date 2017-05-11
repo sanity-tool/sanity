@@ -10,6 +10,8 @@ import ru.urururu.sanity.api.cfg._
 @Component
 class FlowAnalyzer {
 
+  def onError(cfe: Cfe, e: Throwable): Unit = {}
+
   def evalAssign(assignment: Assignment, state: MultiState): MultiState = {
     // todo eval actual
     state.evalAssign(assignment.getLeft, assignment.getRight)
@@ -33,7 +35,7 @@ class FlowAnalyzer {
   }
 
   def evalIfCondition(ifCondition: IfCondition, state: MultiState): Map[Cfe, MultiState] = {
-    // todo go to single branch if value is known
+    // todo go to single branch if value is known, update state when some direction is taken
     Map[Cfe, MultiState](ifCondition.getElseElement -> state, ifCondition.getThenElement -> state)
   }
 
@@ -75,29 +77,54 @@ trait State[S] {
   def evalAssign(lValue: LValue, rValue: RValue): S
 }
 
-class PersistentState(symbols: Map[Value, Value], memory: Map[Value, Value]) extends State[PersistentState] {
+class PersistentState(symbols: Map[RValue, Value], memory: Map[Value, Value]) extends State[PersistentState] {
   def this() = this(Map.empty, Map.empty)
 
-  def getValue(rValue: RValue): Value = {
+  private def withSymbols(newSymbols: Map[RValue, Value]) = new PersistentState(newSymbols, memory)
+
+  private def withMemory(newMemory: Map[Value, Value]) = new PersistentState(symbols, newMemory)
+
+  def tryGetValue(rValue: RValue): Option[Value] = {
     rValue match {
-      case value: Value => value
+      case value: Value => Some(value)
+      case global: GlobalVar => symbols.get(global)
     }
   }
 
+  def getValue(rValue: RValue): Value = {
+    tryGetValue(rValue).get
+  }
+
   private def initializeReference(pointer: Value) = {
-    symbols.get(pointer) match {
+    memory.get(pointer) match {
       case some: Some[Value] => (this, some)
       case None =>
-        val reference = new Reference(symbols.size)
-        (new PersistentState(symbols + (pointer -> reference), memory), reference)
+        val reference = new Reference("U_" + symbols.size)
+        (withMemory(memory + (pointer -> reference)), reference)
+    }
+  }
+
+  private def createUnknownValue(rValue: RValue):(PersistentState, Value)={
+    rValue match {
+      case global: GlobalVar =>
+        val value = new UnknownValue("U_" + symbols.size)
+        (withSymbols(symbols + (rValue -> value)), value)
+    }
+  }
+
+  private def getOrCreateValue(rValue: RValue): (PersistentState, Value) = {
+    tryGetValue(rValue) match {
+      case some: Some[Value] => (this, some.get)
+      case None => createUnknownValue(rValue)
     }
   }
 
   private def putReferenceTarget(reference: Value, value: Value) = new PersistentState(symbols, memory + (reference -> value))
 
   def putIntoIndirection(indirection: Indirection, value: Value): PersistentState = {
-    val (newState: PersistentState, reference: Value) = initializeReference(getValue(indirection.getPointer))
-    newState.putReferenceTarget(reference, value)
+    var (newState: PersistentState, pointer: Value) = getOrCreateValue(indirection.getPointer)
+    val (newState2: PersistentState, reference: Value) = newState.initializeReference(pointer)
+    newState2.putReferenceTarget(reference, value)
   }
 
   def putValue(lValue: LValue, value: Value): PersistentState = {
@@ -117,6 +144,9 @@ class MultiState(val states: Set[PersistentState]) extends State[MultiState] {
   override def evalAssign(lValue: LValue, rValue: RValue): MultiState = new MultiState(states.map(p => p.evalAssign(lValue, rValue)))
 }
 
-class Reference(id: Int) extends Value {
+class Reference(id: String) extends UnknownValue(id) {
+}
+
+class UnknownValue(id: String) extends Value {
 
 }
