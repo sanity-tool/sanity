@@ -77,17 +77,31 @@ trait State[S] {
   def evalAssign(lValue: LValue, rValue: RValue): S
 }
 
-class PersistentState(symbols: Map[RValue, Value], memory: Map[Value, Value]) extends State[PersistentState] {
-  def this() = this(Map.empty, Map.empty)
+class PersistentState(symbols: Map[RValue, Value], memory: Map[Value, Value], expressions: Map[Formula, Value]) extends State[PersistentState] {
+  def this() = this(Map.empty, Map.empty, Map.empty)
 
-  private def withSymbols(newSymbols: Map[RValue, Value]) = new PersistentState(newSymbols, memory)
+  private def withSymbols(newSymbols: Map[RValue, Value]) = new PersistentState(newSymbols, memory, expressions)
 
-  private def withMemory(newMemory: Map[Value, Value]) = new PersistentState(symbols, newMemory)
+  private def withMemory(newMemory: Map[Value, Value]) = new PersistentState(symbols, newMemory, expressions)
+
+  private def withExpressions(newExpressions: Map[Formula, Value]) = new PersistentState(symbols, memory, newExpressions)
 
   def tryGetValue(rValue: RValue): Option[Value] = {
     rValue match {
       case value: Value => Some(value)
+
+      case parameter: Parameter => symbols.get(parameter)
       case global: GlobalVar => symbols.get(global)
+      case temporary: TemporaryVar => symbols.get(temporary)
+
+      case indirection: Indirection =>
+        val pointer = tryGetValue(indirection.getPointer)
+        if (pointer.isEmpty) None else memory.get(pointer.get)
+
+      case binaryExpression: BinaryExpression =>
+        val leftVal = tryGetValue(binaryExpression.getLeft)
+        val rightVal = tryGetValue(binaryExpression.getRight)
+        if (leftVal.isEmpty || rightVal.isEmpty) None else expressions.get(BinaryFormula(leftVal.get, binaryExpression.getOperator, rightVal.get))
     }
   }
 
@@ -104,11 +118,22 @@ class PersistentState(symbols: Map[RValue, Value], memory: Map[Value, Value]) ex
     }
   }
 
-  private def createUnknownValue(rValue: RValue):(PersistentState, Value)={
+  private def createUnknownValue(rValue: RValue): (PersistentState, Value) = {
+    val value = new UnknownValue("U_" + symbols.size)
+
     rValue match {
-      case global: GlobalVar =>
-        val value = new UnknownValue("U_" + symbols.size)
-        (withSymbols(symbols + (rValue -> value)), value)
+      case parameter: Parameter => (withSymbols(symbols + (parameter -> value)), value)
+      case global: GlobalVar => (withSymbols(symbols + (global -> value)), value)
+      case temporary: TemporaryVar => (withSymbols(symbols + (temporary -> value)), value)
+
+      case indirection: Indirection =>
+        var (newState: PersistentState, pointer: Value) = getOrCreateValue(indirection.getPointer)
+        (newState.withMemory(memory + (pointer -> value)), value)
+      case binaryExpression: BinaryExpression =>
+        val (newState1: PersistentState, left: Value) = getOrCreateValue(binaryExpression.getLeft)
+        val (newState2: PersistentState, right: Value) = newState1.getOrCreateValue(binaryExpression.getRight)
+        val expression = BinaryFormula(left, binaryExpression.getOperator, right)
+        (newState2.withExpressions(expressions + (expression -> value)), value)
     }
   }
 
@@ -119,7 +144,7 @@ class PersistentState(symbols: Map[RValue, Value], memory: Map[Value, Value]) ex
     }
   }
 
-  private def putReferenceTarget(reference: Value, value: Value) = new PersistentState(symbols, memory + (reference -> value))
+  private def putReferenceTarget(reference: Value, value: Value) = withMemory(memory + (reference -> value))
 
   def putIntoIndirection(indirection: Indirection, value: Value): PersistentState = {
     var (newState: PersistentState, pointer: Value) = getOrCreateValue(indirection.getPointer)
@@ -130,10 +155,14 @@ class PersistentState(symbols: Map[RValue, Value], memory: Map[Value, Value]) ex
   def putValue(lValue: LValue, value: Value): PersistentState = {
     lValue match {
       case indirection: Indirection => putIntoIndirection(indirection, value)
+      case temporary: TemporaryVar => withSymbols(symbols + (temporary -> value))
     }
   }
 
-  override def evalAssign(lValue: LValue, rValue: RValue): PersistentState = putValue(lValue, getValue(rValue))
+  override def evalAssign(lValue: LValue, rValue: RValue): PersistentState = {
+    var (newState: PersistentState, value: Value) = getOrCreateValue(rValue)
+    newState.putValue(lValue, value)
+  }
 }
 
 class MultiState(val states: Set[PersistentState]) extends State[MultiState] {
@@ -150,3 +179,7 @@ class Reference(id: String) extends UnknownValue(id) {
 class UnknownValue(id: String) extends Value {
 
 }
+
+class Formula {}
+
+case class BinaryFormula(left: Value, operator: BinaryExpression.Operator, right: Value) extends Formula {}
