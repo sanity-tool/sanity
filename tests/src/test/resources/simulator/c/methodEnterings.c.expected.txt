@@ -1,0 +1,14 @@
+CFG: dumper
+#0000:	 call: tmp0 = dump() <exit>
+methodEnterings.c:2 dump();
+ru.urururu.sanity.MultiState@4c24c40a[
+  states=Set(symbols:Map(), memory:Map(), expressions:Map())
+]
+
+CFG: testCallAnother
+#0000:	 call: dumper() <exit>
+methodEnterings.c:6 dumper();
+ru.urururu.sanity.MultiState@3e18e693[
+  states=Set(symbols:Map(), memory:Map(), expressions:Map())
+]
+

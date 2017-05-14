@@ -163,12 +163,14 @@ class PersistentState(symbols: Map[RValue, Value], memory: Map[Value, Value], ex
     var (newState: PersistentState, value: Value) = getOrCreateValue(rValue)
     newState.putValue(lValue, value)
   }
+
+  override def toString: String = "symbols:" + symbols + ", memory:" + memory + ", expressions:" + expressions
 }
 
 class MultiState(val states: Set[PersistentState]) extends State[MultiState] {
   def in(that: MultiState): Boolean = states.subsetOf(that.states) && states.size < that.states.size
 
-  override def toString: String = states.toString
+  override def toString: String = StatePrinter.toString(this)
 
   override def evalAssign(lValue: LValue, rValue: RValue): MultiState = new MultiState(states.map(p => p.evalAssign(lValue, rValue)))
 }

@@ -1,0 +1,56 @@
+CFG: testGlobal
+#0000:	 assign: tmp0 = *I != 0
+conditions.c:4 if (I);
+ru.urururu.sanity.MultiState@56193e3a[
+  states=Set(symbols:Map(), memory:Map(), expressions:Map())
+]
+#0001:	 if: tmp0 then #0002:	 else #0002:
+conditions.c:4 if (I);
+ru.urururu.sanity.MultiState@2e785b28[
+  states=Set(symbols:Map(I -> ru.urururu.sanity.UnknownValue@4a3516fd, ru.urururu.sanity.api.cfg.TemporaryVar@b2e1df3 -> ru.urururu.sanity.UnknownValue@3ba96967), memory:Map(ru.urururu.sanity.UnknownValue@4a3516fd -> ru.urururu.sanity.UnknownValue@5764d421), expressions:Map(BinaryFormula(ru.urururu.sanity.UnknownValue@5764d421,!=,0) -> ru.urururu.sanity.UnknownValue@3ba96967))
+]
+#0002:	 noop
+ - no source -
+ru.urururu.sanity.MultiState@2e785b28[
+  states=Set(symbols:Map(I -> ru.urururu.sanity.UnknownValue@4a3516fd, ru.urururu.sanity.api.cfg.TemporaryVar@b2e1df3 -> ru.urururu.sanity.UnknownValue@3ba96967), memory:Map(ru.urururu.sanity.UnknownValue@4a3516fd -> ru.urururu.sanity.UnknownValue@5764d421), expressions:Map(BinaryFormula(ru.urururu.sanity.UnknownValue@5764d421,!=,0) -> ru.urururu.sanity.UnknownValue@3ba96967))
+]
+#0003:	 call: tmp1 = dump() <exit>
+conditions.c:5 dump();
+ru.urururu.sanity.MultiState@2e785b28[
+  states=Set(symbols:Map(I -> ru.urururu.sanity.UnknownValue@4a3516fd, ru.urururu.sanity.api.cfg.TemporaryVar@b2e1df3 -> ru.urururu.sanity.UnknownValue@3ba96967), memory:Map(ru.urururu.sanity.UnknownValue@4a3516fd -> ru.urururu.sanity.UnknownValue@5764d421), expressions:Map(BinaryFormula(ru.urururu.sanity.UnknownValue@5764d421,!=,0) -> ru.urururu.sanity.UnknownValue@3ba96967))
+]
+
+CFG: testPtrParam
+#0000:	 if: tmp0 then #0001:	 else #0001:
+conditions.c:9 if (p);
+ru.urururu.sanity.MultiState@64186f60[
+  states=Set(symbols:Map(<param 0> -> ru.urururu.sanity.UnknownValue@61b76a7d, ru.urururu.sanity.api.cfg.TemporaryVar@57f89680 -> ru.urururu.sanity.UnknownValue@70bc9070, ru.urururu.sanity.api.cfg.TemporaryVar@2ab39942 -> ru.urururu.sanity.UnknownValue@5d202dc4), memory:Map(ru.urururu.sanity.UnknownValue@70bc9070 -> ru.urururu.sanity.Reference@71e409f, ru.urururu.sanity.Reference@71e409f -> ru.urururu.sanity.UnknownValue@61b76a7d), expressions:Map(BinaryFormula(ru.urururu.sanity.Reference@71e409f,!=,ru.urururu.sanity.api.cfg.NullPtr@14c18a6a) -> ru.urururu.sanity.UnknownValue@5d202dc4))
+]
+#0002:	 assign: tmp0 = *tmp1 != null next: #0000:
+conditions.c:9 if (p);
+ru.urururu.sanity.MultiState@6aa792[
+  states=Set(symbols:Map(<param 0> -> ru.urururu.sanity.UnknownValue@61b76a7d, ru.urururu.sanity.api.cfg.TemporaryVar@57f89680 -> ru.urururu.sanity.UnknownValue@70bc9070), memory:Map(ru.urururu.sanity.UnknownValue@70bc9070 -> ru.urururu.sanity.Reference@71e409f, ru.urururu.sanity.Reference@71e409f -> ru.urururu.sanity.UnknownValue@61b76a7d), expressions:Map())
+]
+#0001:	 noop
+ - no source -
+ru.urururu.sanity.MultiState@64186f60[
+  states=Set(symbols:Map(<param 0> -> ru.urururu.sanity.UnknownValue@61b76a7d, ru.urururu.sanity.api.cfg.TemporaryVar@57f89680 -> ru.urururu.sanity.UnknownValue@70bc9070, ru.urururu.sanity.api.cfg.TemporaryVar@2ab39942 -> ru.urururu.sanity.UnknownValue@5d202dc4), memory:Map(ru.urururu.sanity.UnknownValue@70bc9070 -> ru.urururu.sanity.Reference@71e409f, ru.urururu.sanity.Reference@71e409f -> ru.urururu.sanity.UnknownValue@61b76a7d), expressions:Map(BinaryFormula(ru.urururu.sanity.Reference@71e409f,!=,ru.urururu.sanity.api.cfg.NullPtr@14c18a6a) -> ru.urururu.sanity.UnknownValue@5d202dc4))
+]
+#0003:	 assign: *tmp1 = <param 0> next: #0002:
+ - no source -
+ru.urururu.sanity.MultiState@29174dfe[
+  states=Set(symbols:Map(), memory:Map(), expressions:Map())
+]
+#0004:	 call: tmp2 = dump() <exit>
+conditions.c:10 dump();
+ru.urururu.sanity.MultiState@64186f60[
+  states=Set(symbols:Map(<param 0> -> ru.urururu.sanity.UnknownValue@61b76a7d, ru.urururu.sanity.api.cfg.TemporaryVar@57f89680 -> ru.urururu.sanity.UnknownValue@70bc9070, ru.urururu.sanity.api.cfg.TemporaryVar@2ab39942 -> ru.urururu.sanity.UnknownValue@5d202dc4), memory:Map(ru.urururu.sanity.UnknownValue@70bc9070 -> ru.urururu.sanity.Reference@71e409f, ru.urururu.sanity.Reference@71e409f -> ru.urururu.sanity.UnknownValue@61b76a7d), expressions:Map(BinaryFormula(ru.urururu.sanity.Reference@71e409f,!=,ru.urururu.sanity.api.cfg.NullPtr@14c18a6a) -> ru.urururu.sanity.UnknownValue@5d202dc4))
+]
+
+CFG: <module init>
+#0000:	 assign: *I = 0 <exit>
+ - no source -
+ru.urururu.sanity.MultiState@6cb43fd3[
+  states=Set(symbols:Map(), memory:Map(), expressions:Map())
+]
+
