@@ -56,7 +56,9 @@ public class ToolFactory {
     }
 
     public Tool get(String extension) {
-        return byExtensions.get(extension);
+        return byExtensions.computeIfAbsent(extension, key -> {
+            throw new IllegalArgumentException("No tool for " + key);
+        });
     }
 
     public Tool get(Language language) {

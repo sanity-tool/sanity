@@ -5,7 +5,7 @@ import ru.urururu.sanity.api.Cfg
 import ru.urururu.sanity.api.cfg._
 
 /**
-  * @author Dmitry Matveev
+  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
   */
 @Component
 class FlowAnalyzer {
@@ -13,7 +13,6 @@ class FlowAnalyzer {
   def onError(cfe: Cfe, e: Throwable): Unit = {}
 
   def evalAssign(assignment: Assignment, state: MultiState): MultiState = {
-    // todo eval actual
     state.evalAssign(assignment.getLeft, assignment.getRight)
   }
 
@@ -77,14 +76,14 @@ trait State[S] {
   def evalAssign(lValue: LValue, rValue: RValue): S
 }
 
-class PersistentState(symbols: Map[RValue, Value], memory: Map[Value, Value], expressions: Map[Formula, Value]) extends State[PersistentState] {
-  def this() = this(Map.empty, Map.empty, Map.empty)
+class PersistentState(val symbols: Map[RValue, Value], val memory: Map[Value, Value], val expressions: Map[Formula, Value], modCount: Int) extends State[PersistentState] {
+  def this() = this(Map.empty, Map.empty, Map.empty, 0)
 
-  private def withSymbols(newSymbols: Map[RValue, Value]) = new PersistentState(newSymbols, memory, expressions)
+  private def withSymbols(newSymbols: Map[RValue, Value]) = new PersistentState(newSymbols, memory, expressions, modCount + 1)
 
-  private def withMemory(newMemory: Map[Value, Value]) = new PersistentState(symbols, newMemory, expressions)
+  private def withMemory(newMemory: Map[Value, Value]) = new PersistentState(symbols, newMemory, expressions, modCount + 1)
 
-  private def withExpressions(newExpressions: Map[Formula, Value]) = new PersistentState(symbols, memory, newExpressions)
+  private def withExpressions(newExpressions: Map[Formula, Value]) = new PersistentState(symbols, memory, newExpressions, modCount + 1)
 
   def tryGetValue(rValue: RValue): Option[Value] = {
     rValue match {
@@ -119,7 +118,7 @@ class PersistentState(symbols: Map[RValue, Value], memory: Map[Value, Value], ex
   }
 
   private def createUnknownValue(rValue: RValue): (PersistentState, Value) = {
-    val value = new UnknownValue("U_" + symbols.size)
+    val value = new UnknownValue("U_" + modCount)
 
     rValue match {
       case parameter: Parameter => (withSymbols(symbols + (parameter -> value)), value)
@@ -179,7 +178,7 @@ class Reference(id: String) extends UnknownValue(id) {
 }
 
 class UnknownValue(id: String) extends Value {
-
+  override def toString: String = id
 }
 
 class Formula {}

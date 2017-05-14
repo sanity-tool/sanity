@@ -1,6 +1,7 @@
 package ru.urururu.sanity.cpp;
 
 import junit.framework.TestSuite;
+import ru.urururu.sanity.CfgUtils;
 import ru.urururu.sanity.FlowAnalyzer;
 import ru.urururu.sanity.MultiState;
 import ru.urururu.sanity.api.Cfg;
@@ -54,7 +55,7 @@ public class FlowAnalyzerTests extends TestHelper {
             };
 
             ps.println("CFG: " + cfg.getId());
-            printer.visitAll(JavaConverters.asJavaIterableConverter(stateMap.keySet()).asJava());
+            printer.visitAll(CfgUtils.getAllCfes(cfg.getEntry()));
             ps.println(printer);
             ps.println();
         }

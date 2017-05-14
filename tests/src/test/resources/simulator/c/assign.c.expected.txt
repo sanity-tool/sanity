@@ -1,19 +1,31 @@
 CFG: testInt
 #0000:	 assign: *I = 0
 assign.c:4 I = 0;
-ru.urururu.sanity.MultiState@2b506a79[
-  states=Set(symbols:Map(), memory:Map(), expressions:Map())
-]
+Possible states:
+State 0
+  Symbols:
+  Memory:
+  Expressions:
+
 #0001:	 call: tmp0 = dump() <exit>
 assign.c:5 dump();
-ru.urururu.sanity.MultiState@2c846d55[
-  states=Set(symbols:Map(I -> ru.urururu.sanity.UnknownValue@1bf52f10), memory:Map(ru.urururu.sanity.UnknownValue@1bf52f10 -> ru.urururu.sanity.Reference@6148827c, ru.urururu.sanity.Reference@6148827c -> 0), expressions:Map())
-]
+Possible states:
+State 0
+  Symbols:
+    I -> U0
+  Memory:
+    U0 -> U1
+    U1 -> 0
+  Expressions:
+
 
 CFG: <module init>
 #0000:	 assign: *I = 0 <exit>
  - no source -
-ru.urururu.sanity.MultiState@66048c9e[
-  states=Set(symbols:Map(), memory:Map(), expressions:Map())
-]
+Possible states:
+State 0
+  Symbols:
+  Memory:
+  Expressions:
+
 

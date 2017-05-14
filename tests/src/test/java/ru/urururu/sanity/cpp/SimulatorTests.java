@@ -34,7 +34,7 @@ public class SimulatorTests extends TestHelper {
     }
 
     void parseAll(Parser parser, File directory, List<Cfg> allCfgs) throws Exception {
-        for (File file : directory.listFiles()) {
+        for (File file : directory.listFiles(f -> !f.getName().endsWith("txt"))) {
             if (file.isDirectory()) {
                 parseAll(parser, file, allCfgs);
             } else {

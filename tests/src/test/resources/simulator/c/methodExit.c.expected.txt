@@ -1,19 +1,28 @@
 CFG: testExitToUnknown
 #0000:	 call: tmp0 = dump() <exit>
 methodExit.c:2 dump();
-ru.urururu.sanity.MultiState@345540f9[
-  states=Set(symbols:Map(), memory:Map(), expressions:Map())
-]
+Possible states:
+State 0
+  Symbols:
+  Memory:
+  Expressions:
+
 
 CFG: dumper
 #0000:	 call: testExitToUnknown()
 methodExit.c:6 testExitToUnknown();
-ru.urururu.sanity.MultiState@44a98a23[
-  states=Set(symbols:Map(), memory:Map(), expressions:Map())
-]
+Possible states:
+State 0
+  Symbols:
+  Memory:
+  Expressions:
+
 #0001:	 call: tmp0 = dump() <exit>
 methodExit.c:7 dump();
-ru.urururu.sanity.MultiState@44a98a23[
-  states=Set(symbols:Map(), memory:Map(), expressions:Map())
-]
+Possible states:
+State 0
+  Symbols:
+  Memory:
+  Expressions:
+
 
