@@ -33,7 +33,7 @@ public class Coverage {
                 public void run() {
                     for (Map.Entry<File, List<Integer>> fileEntry : coverage.entrySet()) {
                         String absolutePath = fileEntry.getKey().getAbsolutePath();
-                        try (FileWriter writer = new FileWriter(absolutePath.substring(0, absolutePath.lastIndexOf('.')) + ".lst")) {
+                        try (FileWriter writer = new FileWriter(absolutePath + ".lst")) {
                             List<Integer> coverageInfo = fileEntry.getValue();
 
                             int max = coverageInfo.stream().filter(Objects::nonNull).mapToInt(Integer::intValue).max().orElse(0);
