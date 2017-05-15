@@ -3,6 +3,7 @@ package ru.urururu.sanity;
 import javafx.util.Pair;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.stereotype.Component;
+import ru.urururu.util.Coverage;
 
 import java.io.File;
 import java.io.FileReader;
@@ -26,6 +27,7 @@ public class LineUtils implements DisposableBean {
                 do {
                     line = reader.readLine();
                 } while (reader.getLineNumber() < lineNumber);
+                Coverage.hit(file, lineNumber);
                 return line.trim();
             } catch (IOException e) {
                 throw new IllegalStateException("couldn't dump " + lineNumber + " line of " + file, e);

@@ -8,6 +8,7 @@ import ru.urururu.sanity.api.cfg.SourceRange;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
 import ru.urururu.sanity.cpp.llvm.bitreader;
+import ru.urururu.util.Coverage;
 
 import java.io.File;
 
@@ -61,6 +62,7 @@ public class NativeSourceRangeFactory extends SourceRangeFactory<SWIGTYPE_p_LLVM
             return null;
         }
 
+        Coverage.markAsCode(filename, line);
         return new SourceRange(filename, line);
     }
 
