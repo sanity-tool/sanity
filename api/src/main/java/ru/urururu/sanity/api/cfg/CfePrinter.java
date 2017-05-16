@@ -42,6 +42,10 @@ public class CfePrinter {
         return printer.toString();
     }
 
+    protected String printSourceRange(SourceRange sourceRange) {
+        return sourceRange.toString();
+    }
+
     private class PrinterState implements CfeVisitor {
         final StringBuilder sb = new StringBuilder();
         final Map<RValue, Integer> tmpVars = new HashMap<>();
@@ -80,7 +84,7 @@ public class CfePrinter {
             if (sourceRange == null) {
                 sb.append("\n - no source -");
             } else {
-                sb.append('\n').append(sourceRange);
+                sb.append('\n').append(printSourceRange(sourceRange));
             }
 
             return this;

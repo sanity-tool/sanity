@@ -20,10 +20,6 @@ public class SourceRange {
         return file;
     }
 
-    public String getFilename() {
-        return file.getAbsolutePath();
-    }
-
     public int getLine() {
         return line;
     }
