@@ -17,13 +17,7 @@ public abstract class SourceRangeFactory<I> {
             return null;
         }
 
-        Coverage.markAsCode(file, line); // todo move to tests
-        return new SourceRange(filename, line) {
-            @Override
-            public String toString() {
-                Coverage.hit(file, line);
-                return super.toString();
-            }
-        };
+        Coverage.markAsCode(file, line - 1);
+        return new SourceRange(file, line);
     }
 }

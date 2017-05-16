@@ -3,6 +3,7 @@ package ru.urururu.sanity;
 import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.sanity.simulation.SimulationException;
+import ru.urururu.util.Coverage;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -70,6 +71,10 @@ public class Simulator {
             paths = Collections.emptyList();
             Cfe position = getPosition();
             try {
+                SourceRange sourceRange = position.getSourceRange();
+                if (sourceRange != null) {
+                    Coverage.hit(sourceRange.getFile(), sourceRange.getLine() - 1);
+                }
                 position.accept(this);
                 return paths;
             } catch (Throwable e) {

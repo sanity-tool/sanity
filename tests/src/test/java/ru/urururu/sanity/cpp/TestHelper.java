@@ -14,6 +14,7 @@ import ru.urururu.sanity.cpp.tools.Tool;
 import ru.urururu.sanity.cpp.tools.ToolFactory;
 import ru.urururu.sanity.utils.FileWrapper;
 import ru.urururu.sanity.utils.TempFileWrapper;
+import ru.urururu.util.Coverage;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +45,8 @@ abstract class TestHelper {
         languageDirs.put(Language.C, "c");
         languageDirs.put(Language.Cpp, "cpp");
         languageDirs.put(Language.ObjectiveC, "o-c");
+
+        Runtime.getRuntime().addShutdownHook(new Thread(Coverage::dumpAllAsLst));
     }
 
     void fillWithTests(TestSuite suite, String path) {

@@ -8,16 +8,20 @@ import java.io.File;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class SourceRange {
-    private final String filename;
+    private final File file;
     private final int line;
 
-    public SourceRange(String filename, int line) {
-        this.filename = filename;
+    public SourceRange(File file, int line) {
+        this.file = file;
         this.line = line;
     }
 
+    public File getFile() {
+        return file;
+    }
+
     public String getFilename() {
-        return filename;
+        return file.getAbsolutePath();
     }
 
     public int getLine() {
@@ -26,7 +30,6 @@ public class SourceRange {
 
     @Override
     public String toString() {
-        File sourceFile = new File(filename);
-        return sourceFile.getName() + ':' + line + ' ' + LineUtils.dumpLine(sourceFile, line);
+        return file.getName() + ':' + line + ' ' + LineUtils.dumpLine(file, line);
     }
 }
