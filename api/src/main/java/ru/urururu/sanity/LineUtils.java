@@ -20,6 +20,8 @@ public class LineUtils implements DisposableBean {
     private static final Map<Pair<File, Integer>, String> CACHE = new HashMap<>();
 
     public static String dumpLine(File file, int lineNumber) {
+        Coverage.hit(file, lineNumber);
+
         return CACHE.computeIfAbsent(new Pair(file, lineNumber), key -> {
             try (FileReader in = new FileReader(file);
                  LineNumberReader reader = new LineNumberReader(in)) {
@@ -27,7 +29,6 @@ public class LineUtils implements DisposableBean {
                 do {
                     line = reader.readLine();
                 } while (reader.getLineNumber() < lineNumber);
-                Coverage.hit(file, lineNumber);
                 return line.trim();
             } catch (IOException e) {
                 throw new IllegalStateException("couldn't dump " + lineNumber + " line of " + file, e);
