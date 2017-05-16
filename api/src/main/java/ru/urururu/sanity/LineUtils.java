@@ -3,7 +3,6 @@ package ru.urururu.sanity;
 import javafx.util.Pair;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.stereotype.Component;
-import ru.urururu.util.Coverage;
 
 import java.io.File;
 import java.io.FileReader;
@@ -20,8 +19,6 @@ public class LineUtils implements DisposableBean {
     private static final Map<Pair<File, Integer>, String> CACHE = new HashMap<>();
 
     public static String dumpLine(File file, int lineNumber) {
-        Coverage.hit(file, lineNumber);
-
         return CACHE.computeIfAbsent(new Pair(file, lineNumber), key -> {
             try (FileReader in = new FileReader(file);
                  LineNumberReader reader = new LineNumberReader(in)) {

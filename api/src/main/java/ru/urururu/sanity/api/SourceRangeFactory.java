@@ -12,11 +12,18 @@ public abstract class SourceRangeFactory<I> {
     public abstract SourceRange getSourceRange(I instruction);
 
     protected SourceRange getSourceRange(String filename, int line) {
-        if (!new File(filename).exists()) {
+        File file = new File(filename);
+        if (!file.exists()) {
             return null;
         }
 
-        Coverage.markAsCode(filename, line);
-        return new SourceRange(filename, line);
+        Coverage.markAsCode(file, line); // todo move to tests
+        return new SourceRange(filename, line) {
+            @Override
+            public String toString() {
+                Coverage.hit(file, line);
+                return super.toString();
+            }
+        };
     }
 }

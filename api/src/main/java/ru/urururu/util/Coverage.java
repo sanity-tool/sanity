@@ -13,10 +13,10 @@ import java.util.*;
 public class Coverage {
     private static Map<File, List<Integer>> coverage;
 
-    public static void markAsCode(String filename, int line) {
+    public static void markAsCode(File file, int line) {
         line--;
         ensureMapCreated();
-        List<Integer> coverageInfo = coverage.computeIfAbsent(new File(filename), __ -> new ArrayList<>());
+        List<Integer> coverageInfo = coverage.computeIfAbsent(file, __ -> new ArrayList<>());
         while (coverageInfo.size() < line + 1) {
             coverageInfo.add(null);
         }
