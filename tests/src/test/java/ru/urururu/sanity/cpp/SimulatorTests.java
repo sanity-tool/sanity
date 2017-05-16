@@ -61,7 +61,7 @@ public class SimulatorTests extends TestHelper {
                 continue;
             }
 
-            Simulator simulator = new Simulator(cfg, callsMap) {
+            Simulator simulator = new Simulator(cfg) {
                 @Override
                 protected MachineState createState() {
                     return new MachineState() {
@@ -79,7 +79,7 @@ public class SimulatorTests extends TestHelper {
 
                 @Override
                 protected void onError(Cfe cfe, Throwable e) {
-                    ps.println(CfePrinter.print(cfe));
+                    ps.println(cfe);
                     ps.println(e);
                     ps.println();
                 }

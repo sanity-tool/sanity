@@ -40,6 +40,11 @@ public class ParserTests extends TestHelper {
     @Override
     public void runTest(String unit, Path pathToExpected) throws Exception {
         Parser parser = context.getBean(Parser.class);
+
+        CfePrinter printer = new CfePrinter() {
+
+        };
+
         List<Cfg> testResult = parser.parse(unit, (prefix, suffix) -> getDebugPath(unit, prefix, suffix), true);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -47,7 +52,7 @@ public class ParserTests extends TestHelper {
 
         for (Cfg cfg : testResult) {
             ps.println("CFG: " + cfg.getId());
-            ps.println(CfePrinter.print(cfg));
+            ps.println(printer.print(cfg));
             ps.println();
         }
 

@@ -27,6 +27,6 @@ public abstract class Cfe {
 
     @Override
     public String toString() {
-        return CfePrinter.print(this);
+        return CfePrinter.DEFAULT.print(this);
     }
 }

@@ -107,7 +107,7 @@ public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T
                 return new GetFieldPointer(basePointer, intIndex);
             }
         }
-        throw new IllegalStateException("can't index " + CfePrinter.printValue(basePointer) + " by " + index);
+        throw new IllegalStateException("can't index " + CfePrinter.DEFAULT.printValue(basePointer) + " by " + index);
     }
 
     protected Cfe createSwitch(Ctx ctx, I instruction, V controlValue, V defaultCase, Iterable<V> values, Iterable<V> labels) {

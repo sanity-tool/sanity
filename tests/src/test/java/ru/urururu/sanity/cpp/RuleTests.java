@@ -62,7 +62,7 @@ public class RuleTests extends TestHelper {
 
             @Override
             protected void onError(Cfe cfe, Throwable e) {
-                ps.println(CfePrinter.print(cfe));
+                ps.println(cfe);
                 ps.println(e);
                 ps.println();
             }
