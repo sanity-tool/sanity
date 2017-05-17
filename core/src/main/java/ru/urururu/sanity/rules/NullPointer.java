@@ -12,7 +12,7 @@ import java.util.Collection;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class NullPointer {
-    public void enforce(Cfg cfg, CallsMap callsMap) {
+    public void enforce(Cfg cfg) {
         Simulator simulator = new Simulator(cfg) {
             @Override
             protected MachineState createState() {

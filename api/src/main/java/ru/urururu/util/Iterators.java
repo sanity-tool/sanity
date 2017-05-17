@@ -20,6 +20,10 @@ public class Iterators {
 
             @Override
             public E next() {
+                if (i >= lengthSupplier.get()) {
+                    throw new NoSuchElementException();
+                }
+
                 return getter.apply(i++);
             }
         };

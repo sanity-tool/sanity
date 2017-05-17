@@ -13,7 +13,11 @@ import java.util.*;
 public class Coverage {
     private static final Map<File, List<Integer>> coverage = new HashMap<>();
 
-    public synchronized static void markAsCode(File file, int line) {
+    private Coverage() {
+        // prevent creation
+    }
+
+    public static synchronized void markAsCode(File file, int line) {
         List<Integer> coverageInfo = coverage.computeIfAbsent(file, __ -> new ArrayList<>());
         while (coverageInfo.size() < line + 1) {
             coverageInfo.add(null);
@@ -23,12 +27,12 @@ public class Coverage {
         coverageInfo.set(line, oldInfo == null ? 0 : oldInfo);
     }
 
-    public synchronized static void hit(File file, int line) {
+    public static synchronized void hit(File file, int line) {
         List<Integer> coverageInfo = coverage.get(file);
         coverageInfo.set(line, coverageInfo.get(line) + 1);
     }
 
-    public synchronized static void dumpAllAsLst() {
+    public static synchronized void dumpAllAsLst() {
         for (Map.Entry<File, List<Integer>> fileEntry : coverage.entrySet()) {
             String absolutePath = fileEntry.getKey().getAbsolutePath();
             try (FileWriter writer = new FileWriter(absolutePath + ".lst")) {
@@ -43,7 +47,7 @@ public class Coverage {
 
                 writer.append(fileEntry.getKey().getName()).append(String.valueOf(' ')).append("is 100% covered");
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new IllegalStateException(e);
             }
         }
 
