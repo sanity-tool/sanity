@@ -3,6 +3,7 @@ package ru.urururu.sanity;
 import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.sanity.simulation.SimulationException;
+import ru.urururu.util.Coverage;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -12,15 +13,13 @@ import java.util.*;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class Simulator {
-    List<MachineState> states = new ArrayList<>();
-    CallsMap callsMap;
+    private List<MachineState> states = new ArrayList<>();
 
-    public Simulator(Cfg cfg, CallsMap callsMap) {
+    protected Simulator(Cfg cfg) {
         Cfe entry = cfg.getEntry();
         if (entry != null) {
             states.add(createState().init(entry));
         }
-        this.callsMap = callsMap;
     }
 
     public boolean hasUnfinished() {
@@ -54,22 +53,26 @@ public class Simulator {
             return this;
         }
 
-        public Memory getMemory() {
+        protected Memory getMemory() {
             return memory;
         }
 
-        public Deque<Cfe> getPath() {
+        protected Deque<Cfe> getPath() {
             return path;
         }
 
-        public Cfe getPosition() {
+        Cfe getPosition() {
             return path.getLast();
         }
 
-        public List<MachineState> advance() {
+        List<MachineState> advance() {
             paths = Collections.emptyList();
             Cfe position = getPosition();
             try {
+                SourceRange sourceRange = position.getSourceRange();
+                if (sourceRange != null) {
+                    Coverage.hit(sourceRange.getFile(), sourceRange.getLine() - 1);
+                }
                 position.accept(this);
                 return paths;
             } catch (Throwable e) {
@@ -78,7 +81,7 @@ public class Simulator {
             }
         }
 
-        public void visitSimple(Cfe element) {
+        void visitSimple(Cfe element) {
             if (memory == null) {
                 // memory has been corrupted.
                 paths = Collections.emptyList();
@@ -144,10 +147,10 @@ public class Simulator {
             visitSimple(noOp);
         }
 
-        public void dump(PrintStream stream) {
+        protected void dump(PrintStream stream) {
             memory.dump(stream);
             stream.println("Path:");
-            stream.println(CfePrinter.printAll(path));
+            stream.println(CfePrinter.DEFAULT.printAll(path));
         }
 
         @Override

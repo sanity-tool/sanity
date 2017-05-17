@@ -1,10 +1,8 @@
 package ru.urururu.sanity.cpp;
 
 import junit.framework.TestSuite;
-import ru.urururu.sanity.CallsMap;
 import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.api.cfg.Cfe;
-import ru.urururu.sanity.api.cfg.CfePrinter;
 import ru.urururu.sanity.rules.NullPointer;
 
 import java.io.ByteArrayOutputStream;
@@ -27,7 +25,7 @@ public class RuleTests extends TestHelper {
         return suite;
     }
 
-    void parseAll(Parser parser, File file, List<Cfg> allCfgs) throws Exception {
+    private void parseAll(Parser parser, File file, List<Cfg> allCfgs) throws Exception {
         if (file.isDirectory()) {
             for (File child : file.listFiles()) {
                 parseAll(parser, child, allCfgs);
@@ -44,9 +42,6 @@ public class RuleTests extends TestHelper {
         List<Cfg> allCfgs = new ArrayList<>();
         parseAll(parser, directory, allCfgs);
 
-        CallsMap callsMap = context.getBean(CallsMap.class);
-        callsMap.init(allCfgs);
-
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final PrintStream ps = new PrintStream(baos);
 
@@ -62,14 +57,14 @@ public class RuleTests extends TestHelper {
 
             @Override
             protected void onError(Cfe cfe, Throwable e) {
-                ps.println(CfePrinter.print(cfe));
+                ps.println(cfe);
                 ps.println(e);
                 ps.println();
             }
         };
 
         for (Cfg cfg : allCfgs) {
-            rule.enforce(cfg, callsMap);
+            rule.enforce(cfg);
         }
 
         String actual = baos.toString();

@@ -4,7 +4,6 @@ import junit.framework.TestSuite;
 import ru.urururu.sanity.CallsMap;
 import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.api.cfg.Cfe;
-import ru.urururu.sanity.api.cfg.CfePrinter;
 import ru.urururu.sanity.api.cfg.Type;
 
 import java.io.ByteArrayOutputStream;
@@ -32,7 +31,7 @@ public class CallsMapTests extends TestHelper {
         return isDirectorySupported(file);
     }
 
-    void parseAll(Parser parser, File directory, List<Cfg> allCfgs) throws Exception {
+    private void parseAll(Parser parser, File directory, List<Cfg> allCfgs) throws Exception {
         for (File file : directory.listFiles()) {
             if (file.isDirectory()) {
                 parseAll(parser, file, allCfgs);
@@ -58,7 +57,7 @@ public class CallsMapTests extends TestHelper {
         for (Map.Entry<String, List<Cfe>> entry : callsMap.getStaticCalls().entrySet()) {
             ps.println("CFG: " + entry.getKey());
             for (Cfe cfe : entry.getValue()) {
-                ps.println(CfePrinter.print(cfe));
+                ps.println(cfe);
             }
             ps.println();
         }
@@ -66,7 +65,7 @@ public class CallsMapTests extends TestHelper {
         for (Map.Entry<Type, List<Cfe>> entry : callsMap.getCompatibleCalls().entrySet()) {
             ps.println("Type: " + entry.getKey());
             for (Cfe cfe : entry.getValue()) {
-                ps.println(CfePrinter.print(cfe));
+                ps.println(cfe);
             }
             ps.println();
         }

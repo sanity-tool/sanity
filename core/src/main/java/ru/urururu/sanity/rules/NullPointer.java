@@ -12,8 +12,8 @@ import java.util.Collection;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class NullPointer {
-    public void enforce(Cfg cfg, CallsMap callsMap) {
-        Simulator simulator = new Simulator(cfg, callsMap) {
+    public void enforce(Cfg cfg) {
+        Simulator simulator = new Simulator(cfg) {
             @Override
             protected MachineState createState() {
                 return new MachineState() {
@@ -66,7 +66,7 @@ public class NullPointer {
                     private boolean checkForNull(RValue pointer) {
                         try {
                             if (getMemory().getValue(pointer) instanceof NullPtr) {
-                                reportViolation(CfePrinter.printValue(pointer) + " is null", getPath());
+                                reportViolation(CfePrinter.DEFAULT.printValue(pointer) + " is null", getPath());
                                 return true;
                             }
                         } catch (SimulationException e) {

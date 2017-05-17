@@ -3,6 +3,8 @@ package ru.urururu.sanity.cpp;
 import junit.framework.TestSuite;
 import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.api.cfg.CfePrinter;
+import ru.urururu.sanity.api.cfg.SourceRange;
+import ru.urururu.util.Coverage;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -40,6 +42,15 @@ public class ParserTests extends TestHelper {
     @Override
     public void runTest(String unit, Path pathToExpected) throws Exception {
         Parser parser = context.getBean(Parser.class);
+
+        CfePrinter printer = new CfePrinter() {
+            @Override
+            protected String printSourceRange(SourceRange sourceRange) {
+                Coverage.hit(sourceRange.getFile(), sourceRange.getLine() - 1);
+                return super.printSourceRange(sourceRange);
+            }
+        };
+
         List<Cfg> testResult = parser.parse(unit, (prefix, suffix) -> getDebugPath(unit, prefix, suffix), true);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -47,7 +58,7 @@ public class ParserTests extends TestHelper {
 
         for (Cfg cfg : testResult) {
             ps.println("CFG: " + cfg.getId());
-            ps.println(CfePrinter.print(cfg));
+            ps.println(printer.print(cfg));
             ps.println();
         }
 

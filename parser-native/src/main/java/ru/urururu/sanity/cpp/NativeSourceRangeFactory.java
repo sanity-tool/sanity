@@ -56,14 +56,6 @@ public class NativeSourceRangeFactory extends SourceRangeFactory<SWIGTYPE_p_LLVM
         return null;
     }
 
-    private SourceRange getSourceRange(String filename, int line) {
-        if (!new File(filename).exists()) {
-            return null;
-        }
-
-        return new SourceRange(filename, line);
-    }
-
     private SWIGTYPE_p_LLVMOpaqueValue getPair(SWIGTYPE_p_LLVMOpaqueValue node) {
         int count = bitreader.LLVMGetNumOperands(node);
         if (count == 1) {
