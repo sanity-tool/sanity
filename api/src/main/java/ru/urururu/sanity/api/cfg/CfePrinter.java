@@ -42,12 +42,38 @@ public class CfePrinter {
         return printer.toString();
     }
 
+    protected void appendCfe(Cfe cfe, PrinterState state) {
+        Set<Cfe> printed = state.printed;
+        StringBuilder sb = state.sb;
+
+        printed.add(cfe);
+        sb.append(state.getId(cfe)).append(' ');
+
+        cfe.accept(state);
+
+        if (!(cfe instanceof IfCondition || cfe instanceof Switch)) {
+            if (cfe.getNext() == null) {
+                sb.append(" <exit>");
+            }
+            if (printed.contains(cfe.getNext())) {
+                sb.append(" next: ").append(state.getId(cfe.getNext()).trim());
+            }
+        }
+
+        SourceRange sourceRange = cfe.getSourceRange();
+        if (sourceRange == null) {
+            sb.append("\n - no source -");
+        } else {
+            sb.append('\n').append(printSourceRange(sourceRange));
+        }
+    }
+
     protected String printSourceRange(SourceRange sourceRange) {
         return sourceRange.toString();
     }
 
-    private class PrinterState implements CfeVisitor {
-        final StringBuilder sb = new StringBuilder();
+    protected class PrinterState implements CfeVisitor {
+        public final StringBuilder sb = new StringBuilder();
         final Map<RValue, Integer> tmpVars = new HashMap<>();
         final Map<Cfe, Integer> cfeIds = new HashMap<>();
         final Set<Cfe> printed = new HashSet<>();
@@ -66,27 +92,7 @@ public class CfePrinter {
         }
 
         private PrinterState print0(Cfe cfe) {
-            sb.append(getId(cfe)).append(' ');
-            printed.add(cfe);
-
-            cfe.accept(this);
-
-            if (!(cfe instanceof IfCondition || cfe instanceof Switch)) {
-                if (cfe.getNext() == null) {
-                    sb.append(" <exit>");
-                }
-                if (printed.contains(cfe.getNext())) {
-                    sb.append(" next: ").append(getId(cfe.getNext()).trim());
-                }
-            }
-
-            SourceRange sourceRange = cfe.getSourceRange();
-            if (sourceRange == null) {
-                sb.append("\n - no source -");
-            } else {
-                sb.append('\n').append(printSourceRange(sourceRange));
-            }
-
+            appendCfe(cfe, this);
             return this;
         }
 

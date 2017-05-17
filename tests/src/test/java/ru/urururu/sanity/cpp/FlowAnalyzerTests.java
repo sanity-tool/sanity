@@ -7,7 +7,6 @@ import ru.urururu.sanity.MultiState;
 import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.api.cfg.Cfe;
 import ru.urururu.sanity.api.cfg.CfePrinter;
-import scala.collection.JavaConverters;
 import scala.collection.immutable.Map;
 
 import java.io.ByteArrayOutputStream;
@@ -41,22 +40,19 @@ public class FlowAnalyzerTests extends TestHelper {
 
             CfePrinter printer = new CfePrinter() {
                 @Override
-                public CfePrinter print0(Cfe cfe) {
-                    super.print0(cfe);
+                protected void appendCfe(Cfe cfe, CfePrinter.PrinterState state) {
+                    super.appendCfe(cfe, state);
 
-                    printLine();
+                    state.printLine();
 
-                    sb.append("Possible states:");
-                    printLine();
-                    sb.append(stateMap.get(cfe).get());
-
-                    return this;
+                    state.sb.append("Possible states:");
+                    state.printLine();
+                    state.sb.append(stateMap.get(cfe).get());
                 }
             };
 
             ps.println("CFG: " + cfg.getId());
-            printer.visitAll(CfgUtils.getAllCfes(cfg.getEntry()));
-            ps.println(printer);
+            ps.println(printer.printAll(CfgUtils.getAllCfes(cfg.getEntry())));
             ps.println();
         }
 
