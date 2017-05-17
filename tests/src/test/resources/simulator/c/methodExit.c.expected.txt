@@ -1,0 +1,28 @@
+CFG: testExitToUnknown
+#0000:	 call: tmp0 = dump() <exit>
+methodExit.c:2 dump();
+Possible states:
+State 0
+  Symbols:
+  Memory:
+  Expressions:
+
+
+CFG: dumper
+#0000:	 call: testExitToUnknown()
+methodExit.c:6 testExitToUnknown();
+Possible states:
+State 0
+  Symbols:
+  Memory:
+  Expressions:
+
+#0001:	 call: tmp0 = dump() <exit>
+methodExit.c:7 dump();
+Possible states:
+State 0
+  Symbols:
+  Memory:
+  Expressions:
+
+

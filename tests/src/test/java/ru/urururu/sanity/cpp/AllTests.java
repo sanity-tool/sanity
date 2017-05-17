@@ -11,6 +11,7 @@ public class AllTests {
 
         suite.addTest(ParserTests.suite());
         suite.addTest(CallsMapTests.suite());
+        suite.addTest(FlowAnalyzerTests.suite());
         suite.addTest(SimulatorTests.suite());
         suite.addTest(RuleTests.suite());
 

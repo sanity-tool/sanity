@@ -1,0 +1,20 @@
+CFG: dumper
+#0000:	 call: tmp0 = dump() <exit>
+methodEnterings.c:2 dump();
+Possible states:
+State 0
+  Symbols:
+  Memory:
+  Expressions:
+
+
+CFG: testCallAnother
+#0000:	 call: dumper() <exit>
+methodEnterings.c:6 dumper();
+Possible states:
+State 0
+  Symbols:
+  Memory:
+  Expressions:
+
+
