@@ -9,7 +9,7 @@ import java.util.*;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class CfePrinter {
-    public static CfePrinter DEFAULT = new CfePrinter();
+    public static final CfePrinter DEFAULT = new CfePrinter();
 
     public String print(Cfe cfe) {
         return new PrinterState().print0(cfe).toString();
