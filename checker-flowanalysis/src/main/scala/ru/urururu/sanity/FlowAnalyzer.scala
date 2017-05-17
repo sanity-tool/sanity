@@ -3,6 +3,7 @@ package ru.urururu.sanity
 import org.springframework.stereotype.Component
 import ru.urururu.sanity.api.Cfg
 import ru.urururu.sanity.api.cfg._
+import ru.urururu.util.Coverage
 
 /**
   * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
@@ -41,6 +42,8 @@ class FlowAnalyzer {
   def evalSwitch(switch: Switch, state: MultiState): Map[Cfe, MultiState] = ???
 
   def eval(cfe: Cfe, state: MultiState): Map[Cfe, MultiState] = {
+    if (cfe.getSourceRange != null) Coverage.hit(cfe.getSourceRange.getFile, cfe.getSourceRange.getLine)
+
     cfe match {
       case ifCondition: IfCondition => evalIfCondition(ifCondition, state)
       case switch: Switch => evalSwitch(switch, state)
