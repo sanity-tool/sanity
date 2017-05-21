@@ -9,6 +9,7 @@ import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.cpp.tools.Language;
 import ru.urururu.sanity.cpp.tools.Tool;
 import ru.urururu.sanity.cpp.tools.ToolFactory;
@@ -20,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -159,7 +161,7 @@ abstract class TestHelper {
         }
     }
 
-    public FileWrapper getDebugPath(String unit, String prefix, String suffix) {
+    FileWrapper getDebugPath(String unit, String prefix, String suffix) {
         if (DEBUG_DIR != null) {
             Path debugPath = Paths.get(DEBUG_DIR);
 
@@ -179,5 +181,29 @@ abstract class TestHelper {
         }
 
         return new TempFileWrapper(prefix, suffix);
+    }
+
+    List<Cfg> parseAll(Parser parser, File directory, Language language) throws Exception {
+        List<Cfg> allCfgs = new ArrayList<>();
+
+        for (File file : directory.listFiles()) {
+            if (file.isDirectory()) {
+                allCfgs.addAll(parseAll(parser, file, language));
+            } else if (language.getExtensions().contains(FilenameUtils.getExtension(file.getName()))) {
+                allCfgs.addAll(parser.parse(file.getAbsolutePath(), (prefix, suffix) -> getDebugPath(file.getAbsolutePath(), prefix, suffix), true));
+            }
+        }
+
+        return allCfgs;
+    }
+
+    Language getDirectoryLanguage(File directory) {
+        Language result = languageDirs.getKey(directory.getName());
+
+        if (result == null) {
+            throw new IllegalArgumentException("Can't find language for " + directory);
+        }
+
+        return result;
     }
 }
