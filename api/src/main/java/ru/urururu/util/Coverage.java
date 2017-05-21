@@ -36,7 +36,7 @@ public class Coverage {
         if (coverageInfo.size() <= line) {
             LOGGER.warn("Line: " + line + ", Size: " + coverageInfo.size());
             LOGGER.info("Coverage: " + coverageInfo);
-            return;//throw new IndexOutOfBoundsException("Line: " + line + ", Size: " + coverageInfo.size());
+            throw new IndexOutOfBoundsException("Line: " + line + ", Size: " + coverageInfo.size());
         }
 
         Integer integer = coverageInfo.get(line);
@@ -44,7 +44,7 @@ public class Coverage {
         if (integer == null) {
             LOGGER.warn("Line: " + line + ", Size: " + coverageInfo.size());
             LOGGER.info("Coverage: " + coverageInfo);
-            return;//throw new IllegalStateException("Not marked as code. " + "Line: " + line + ", Size: " + coverageInfo.size());
+            throw new IllegalStateException("Not marked as code. " + "Line: " + line + ", Size: " + coverageInfo.size());
         }
 
         coverageInfo.set(line, integer + 1);
