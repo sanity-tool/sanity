@@ -3,6 +3,7 @@ package ru.urururu.util;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.urururu.sanity.api.cfg.SourceRange;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -20,7 +21,15 @@ public class Coverage {
         // prevent creation
     }
 
-    public static synchronized void markAsCode(File file, int line) {
+    public static void markAsCode(SourceRange sourceRange) {
+        markAsCode(sourceRange.getFile(), sourceRange.getLine() - 1);
+    }
+
+    public static void hit(SourceRange sourceRange) {
+        hit(sourceRange.getFile(), sourceRange.getLine() - 1);
+    }
+
+    private static synchronized void markAsCode(File file, int line) {
         List<Integer> coverageInfo = coverage.computeIfAbsent(file, __ -> new ArrayList<>());
         while (coverageInfo.size() < line + 1) {
             coverageInfo.add(null);
@@ -30,7 +39,7 @@ public class Coverage {
         coverageInfo.set(line, oldInfo == null ? 0 : oldInfo);
     }
 
-    public static synchronized void hit(File file, int line) {
+    private static synchronized void hit(File file, int line) {
         List<Integer> coverageInfo = coverage.get(file);
 
         if (coverageInfo.size() <= line) {

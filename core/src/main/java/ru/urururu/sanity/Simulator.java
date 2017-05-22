@@ -71,7 +71,7 @@ public class Simulator {
             try {
                 SourceRange sourceRange = position.getSourceRange();
                 if (sourceRange != null) {
-                    Coverage.hit(sourceRange.getFile(), sourceRange.getLine() - 1);
+                    Coverage.hit(sourceRange);
                 }
                 position.accept(this);
                 return paths;

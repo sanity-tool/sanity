@@ -43,7 +43,7 @@ class FlowAnalyzer {
 
   def eval(cfe: Cfe, state: MultiState): Map[Cfe, MultiState] = {
     try {
-      if (cfe.getSourceRange != null) Coverage.hit(cfe.getSourceRange.getFile, cfe.getSourceRange.getLine)
+      if (cfe.getSourceRange != null) Coverage.hit(cfe.getSourceRange)
 
       cfe match {
         case ifCondition: IfCondition => evalIfCondition(ifCondition, state)
