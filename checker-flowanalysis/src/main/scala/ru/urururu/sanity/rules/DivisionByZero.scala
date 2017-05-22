@@ -18,14 +18,8 @@ class DivisionByZero {
     states.foreach { case (cfe, state) => cfe match {
       case assign: Assignment => assign.getRight match {
         case expression: BinaryExpression => expression.getOperator match {
-          case Operator.Div | Operator.Rem =>
-            println(s"Have to check: ${expression.getRight}")
-            val possibles = state.getPossibleValues(expression.getRight)
-            println(s"Possibles: $possibles")
-
-            state.getPossibleValues(expression.getRight).foreach {
-              case const: Const => println(const)
-                if (const.getValue == 0) consumer.accept(new Violation {
+          case Operator.Div | Operator.Rem => state.getPossibleValues(expression.getRight).foreach {
+              case const: Const => if (const.getValue == 0) consumer.accept(new Violation {
                   override def getPoint: Cfe = cfe
 
                   override def getValue: RValue = expression.getRight
@@ -41,5 +35,4 @@ class DivisionByZero {
     case _ =>
     }
   }
-
 }
