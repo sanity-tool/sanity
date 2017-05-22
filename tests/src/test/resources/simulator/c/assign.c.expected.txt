@@ -14,8 +14,7 @@ State 0
   Symbols:
     I -> U0
   Memory:
-    U0 -> U1
-    U1 -> 0
+    U0 -> 0
   Expressions:
 
 
