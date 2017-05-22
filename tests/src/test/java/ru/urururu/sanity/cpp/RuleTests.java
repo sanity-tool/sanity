@@ -22,6 +22,8 @@ public class RuleTests extends TestHelper {
 
         new RuleTests().fillWithTests(suite, "rules/NP");
 
+        suite.addTest(DivisionByZeroTests.suite());
+
         return suite;
     }
 
