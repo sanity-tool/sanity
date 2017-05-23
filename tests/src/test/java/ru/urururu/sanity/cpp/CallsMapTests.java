@@ -5,12 +5,12 @@ import ru.urururu.sanity.CallsMap;
 import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.api.cfg.Cfe;
 import ru.urururu.sanity.api.cfg.Type;
+import ru.urururu.sanity.cpp.tools.Language;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,22 +31,11 @@ public class CallsMapTests extends TestHelper {
         return isDirectorySupported(file);
     }
 
-    private void parseAll(Parser parser, File directory, List<Cfg> allCfgs) throws Exception {
-        for (File file : directory.listFiles()) {
-            if (file.isDirectory()) {
-                parseAll(parser, file, allCfgs);
-            } else {
-                allCfgs.addAll(parser.parse(file.getAbsolutePath(), (prefix, suffix) -> getDebugPath(file.getAbsolutePath(), prefix, suffix), true));
-            }
-        }
-    }
-
     @Override
     public void runTest(String unit, Path pathToExpected) throws Exception {
         File directory = new File(unit);
         Parser parser = context.getBean(Parser.class);
-        List<Cfg> allCfgs = new ArrayList<>();
-        parseAll(parser, directory, allCfgs);
+        List<Cfg> allCfgs = parseAll(parser, directory, getDirectoryLanguage(directory));
 
         CallsMap callsMap = context.getBean(CallsMap.class);
         callsMap.init(allCfgs);

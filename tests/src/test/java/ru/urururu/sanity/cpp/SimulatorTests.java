@@ -6,14 +6,12 @@ import ru.urururu.sanity.Simulator;
 import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.api.cfg.Call;
 import ru.urururu.sanity.api.cfg.Cfe;
-import ru.urururu.sanity.api.cfg.CfePrinter;
 import ru.urururu.sanity.api.cfg.RValue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,22 +31,11 @@ public class SimulatorTests extends TestHelper {
         return isDirectorySupported(file);
     }
 
-    void parseAll(Parser parser, File directory, List<Cfg> allCfgs) throws Exception {
-        for (File file : directory.listFiles(f -> !f.getName().endsWith("txt"))) {
-            if (file.isDirectory()) {
-                parseAll(parser, file, allCfgs);
-            } else {
-                allCfgs.addAll(parser.parse(file.getAbsolutePath()));
-            }
-        }
-    }
-
     @Override
     public void runTest(String unit, Path pathToExpected) throws Exception {
         File directory = new File(unit);
         Parser parser = context.getBean(Parser.class);
-        List<Cfg> allCfgs = new ArrayList<>();
-        parseAll(parser, directory, allCfgs);
+        List<Cfg> allCfgs = parseAll(parser, directory, getDirectoryLanguage(directory));
 
         CallsMap callsMap = context.getBean(CallsMap.class);
         callsMap.init(allCfgs);

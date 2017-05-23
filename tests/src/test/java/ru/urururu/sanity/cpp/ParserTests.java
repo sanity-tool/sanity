@@ -46,7 +46,7 @@ public class ParserTests extends TestHelper {
         CfePrinter printer = new CfePrinter() {
             @Override
             protected String printSourceRange(SourceRange sourceRange) {
-                Coverage.hit(sourceRange.getFile(), sourceRange.getLine() - 1);
+                Coverage.hit(sourceRange);
                 return super.printSourceRange(sourceRange);
             }
         };

@@ -4,6 +4,7 @@
 target/
 
 *.gcov
+*.lst
 
 # os specific
 .DS_Store

@@ -17,7 +17,9 @@ public abstract class SourceRangeFactory<I> {
             return null;
         }
 
-        Coverage.markAsCode(file, line - 1);
-        return new SourceRange(file, line);
+        SourceRange result = new SourceRange(file, line);
+        Coverage.markAsCode(result);
+
+        return result;
     }
 }

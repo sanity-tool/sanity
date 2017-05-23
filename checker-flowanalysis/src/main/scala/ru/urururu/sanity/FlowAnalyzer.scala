@@ -42,12 +42,16 @@ class FlowAnalyzer {
   def evalSwitch(switch: Switch, state: MultiState): Map[Cfe, MultiState] = ???
 
   def eval(cfe: Cfe, state: MultiState): Map[Cfe, MultiState] = {
-    if (cfe.getSourceRange != null) Coverage.hit(cfe.getSourceRange.getFile, cfe.getSourceRange.getLine)
+    try {
+      if (cfe.getSourceRange != null) Coverage.hit(cfe.getSourceRange)
 
-    cfe match {
-      case ifCondition: IfCondition => evalIfCondition(ifCondition, state)
-      case switch: Switch => evalSwitch(switch, state)
-      case default => evalDefault(default, state)
+      cfe match {
+        case ifCondition: IfCondition => evalIfCondition(ifCondition, state)
+        case switch: Switch => evalSwitch(switch, state)
+        case default => evalDefault(default, state)
+      }
+    } catch {
+      case e: Exception => throw EvaluationException(cfe, e);
     }
   }
 
