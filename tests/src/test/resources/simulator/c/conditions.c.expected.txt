@@ -61,8 +61,7 @@ State 0
     <param 0> -> U0
     tmp0 -> U1
   Memory:
-    U1 -> U2
-    U2 -> U0
+    U1 -> U0
   Expressions:
 
 #0002:	 if: tmp1 then #0003:	 else #0003:
@@ -74,10 +73,9 @@ State 0
     tmp0 -> U1
     tmp1 -> U2
   Memory:
-    U1 -> U3
-    U3 -> U0
+    U1 -> U0
   Expressions:
-    U3 != null -> U2
+    U0 != null -> U2
 
 #0003:	 noop
  - no source -
@@ -88,10 +86,9 @@ State 0
     tmp0 -> U1
     tmp1 -> U2
   Memory:
-    U1 -> U3
-    U3 -> U0
+    U1 -> U0
   Expressions:
-    U3 != null -> U2
+    U0 != null -> U2
 
 #0004:	 call: tmp2 = dump() <exit>
 conditions.c:10 dump();
@@ -102,10 +99,9 @@ State 0
     tmp0 -> U1
     tmp1 -> U2
   Memory:
-    U1 -> U3
-    U3 -> U0
+    U1 -> U0
   Expressions:
-    U3 != null -> U2
+    U0 != null -> U2
 
 
 CFG: <module init>

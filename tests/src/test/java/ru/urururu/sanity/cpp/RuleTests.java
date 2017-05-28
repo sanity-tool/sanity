@@ -22,6 +22,8 @@ public class RuleTests extends TestHelper {
 
         new RuleTests().fillWithTests(suite, "rules/NP");
 
+        suite.addTest(DivisionByZeroTests.suite());
+
         return suite;
     }
 
@@ -47,7 +49,7 @@ public class RuleTests extends TestHelper {
 
         NullPointer rule = new NullPointer() {
             @Override
-            protected  void reportViolation(String rValue, Collection<Cfe> path) {
+            protected void reportViolation(String rValue, Collection<Cfe> path) {
                 ps.println("Violation: " + rValue);
                 for (Cfe cfe : path) {
                     ps.println(cfe.getSourceRange());

@@ -81,6 +81,8 @@ class FlowAnalyzer {
 
 trait State[S] {
   def evalAssign(lValue: LValue, rValue: RValue): S
+
+  def getPossibleValues(rValue: RValue): Set[Value]
 }
 
 class PersistentState(val symbols: Map[RValue, Value], val memory: Map[Value, Value], val expressions: Map[Formula, Value], modCount: Int) extends State[PersistentState] {
@@ -154,8 +156,7 @@ class PersistentState(val symbols: Map[RValue, Value], val memory: Map[Value, Va
 
   def putIntoIndirection(indirection: Indirection, value: Value): PersistentState = {
     var (newState: PersistentState, pointer: Value) = getOrCreateValue(indirection.getPointer)
-    val (newState2: PersistentState, reference: Value) = newState.initializeReference(pointer)
-    newState2.putReferenceTarget(reference, value)
+    newState.putReferenceTarget(pointer, value)
   }
 
   def putValue(lValue: LValue, value: Value): PersistentState = {
@@ -170,6 +171,8 @@ class PersistentState(val symbols: Map[RValue, Value], val memory: Map[Value, Va
     newState.putValue(lValue, value)
   }
 
+  override def getPossibleValues(rValue: RValue): Set[Value] = Set(tryGetValue(rValue).getOrElse(new UnknownValue("unknown")))
+
   override def toString: String = "symbols:" + symbols + ", memory:" + memory + ", expressions:" + expressions
 }
 
@@ -179,6 +182,8 @@ class MultiState(val states: Set[PersistentState]) extends State[MultiState] {
   override def toString: String = StatePrinter.toString(this)
 
   override def evalAssign(lValue: LValue, rValue: RValue): MultiState = new MultiState(states.map(p => p.evalAssign(lValue, rValue)))
+
+  override def getPossibleValues(rValue: RValue): Set[Value] = states.flatMap(p => p.getPossibleValues(rValue))
 }
 
 class Reference(id: String) extends UnknownValue(id) {
