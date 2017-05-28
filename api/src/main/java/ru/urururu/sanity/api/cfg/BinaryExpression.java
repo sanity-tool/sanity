@@ -1,5 +1,8 @@
 package ru.urururu.sanity.api.cfg;
 
+import scala.Option;
+import scala.Tuple3;
+
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
@@ -24,6 +27,15 @@ public class BinaryExpression implements RValue {
 
     public RValue getRight() {
         return right;
+    }
+
+    public static Option<Tuple3<RValue, Operator, RValue>> unapply(RValue rValue) {
+        if (rValue instanceof BinaryExpression) {
+            BinaryExpression expression = (BinaryExpression) rValue;
+            return Option.apply(Tuple3.apply(expression.getLeft(), expression.getOperator(), expression.getRight()));
+        }
+
+        return Option.empty();
     }
 
     @Override

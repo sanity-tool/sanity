@@ -12,7 +12,7 @@
     <artifactId>sanity-flowanalysis</artifactId>
 
     <properties>
-        <scala.version>2.11.5</scala.version>
+        <scala.version>2.12.2</scala.version>
         <scala.compat.version>2.11</scala.compat.version>
     </properties>
 

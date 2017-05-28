@@ -1,5 +1,7 @@
 package ru.urururu.sanity.api.cfg;
 
+import scala.*;
+
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
@@ -24,5 +26,13 @@ public class Assignment extends Cfe {
 
     public RValue getRight() {
         return right;
+    }
+
+    public static Option<Tuple2<LValue, RValue>> unapply(Cfe cfe) {
+        if (cfe instanceof Assignment) {
+            Assignment assign = (Assignment) cfe;
+            return Option.apply(Tuple2.apply(assign.getLeft(), assign.getRight()));
+        }
+        return Option.empty();
     }
 }
