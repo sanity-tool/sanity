@@ -156,8 +156,6 @@ class PersistentState(val symbols: Map[RValue, Value], val memory: Map[Value, Va
 
   def putIntoIndirection(indirection: Indirection, value: Value): PersistentState = {
     var (newState: PersistentState, pointer: Value) = getOrCreateValue(indirection.getPointer)
-    //val (newState2: PersistentState, reference: Value) = newState.initializeReference(pointer)
-    //newState2.putReferenceTarget(reference, value)
     newState.putReferenceTarget(pointer, value)
   }
 
