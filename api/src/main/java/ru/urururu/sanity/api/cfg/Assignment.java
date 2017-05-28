@@ -33,6 +33,7 @@ public class Assignment extends Cfe {
             Assignment assign = (Assignment) cfe;
             return Option.apply(Tuple2.apply(assign.getLeft(), assign.getRight()));
         }
+        
         return Option.empty();
     }
 }
