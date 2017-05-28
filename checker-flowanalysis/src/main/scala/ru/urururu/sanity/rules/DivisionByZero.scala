@@ -19,20 +19,19 @@ class DivisionByZero {
       case assign: Assignment => assign.getRight match {
         case expression: BinaryExpression => expression.getOperator match {
           case Operator.Div | Operator.Rem => state.getPossibleValues(expression.getRight).foreach {
-              case const: Const => if (const.getValue == 0) consumer.accept(new Violation {
-                  override def getPoint: Cfe = cfe
+            case const: Const => if (const.getValue == 0) consumer.accept(new Violation {
+              override def getPoint: Cfe = cfe
 
-                  override def getValue: RValue = expression.getRight
-                })
-              case _ =>
-            }
-          case _ =>
+              override def getValue: RValue = expression.getRight
+            })
+            case _ => // ignore other values
+          }
+          case _ => // ignore other operators
         }
-        case _ =>
+        case _ => // ignore other assignment types
       }
-      case _ =>
+      case _ => // ignore other cfe types
     }
-    case _ =>
     }
   }
 }
