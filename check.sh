@@ -3,7 +3,7 @@
 set -e
 
 if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
-    # run normal analysis
+    # run normal analysisvcjckjbhkjh
     mvn -P $SANITY_PROFILE \
         package sonar:sonar \
 		-Dsonar.host.url=$SONAR_HOST_URL \
