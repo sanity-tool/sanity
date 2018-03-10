@@ -15,6 +15,6 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     [ -z $EXTRA_BREW ] || brew install $EXTRA_BREW
 fi
 
-if [[ "$LANG" == "Rust" ]]; then
+if [[ "$TESTED_LANG" == "Rust" ]]; then
     curl https://sh.rustup.rs -sSf | sh -s -- -y
 fi

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-for LANG in $LANGS; do
+for TESTED_LANG in $TESTED_LANGS; do
   mvn -P $SANITY_PROFILE clean test -B
-  bash <(curl -s https://codecov.io/bash) -c -F $LANG
+  bash <(curl -s https://codecov.io/bash) -c -F $TESTED_LANG
 done

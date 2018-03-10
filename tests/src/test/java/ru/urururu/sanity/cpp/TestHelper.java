@@ -35,7 +35,7 @@ abstract class TestHelper {
     private static String FAILURES_DIR = System.getProperty("TEST_FAILURES_ROOT");
     private static String DEBUG_DIR = System.getProperty("TEST_DEBUG_ROOT");
     private static final BidiMap<Language, String> languageDirs = new DualHashBidiMap<>();
-    private static final String LANG = System.getProperty("LANG");
+    private static final String LANG = System.getProperty("TESTED_LANG");
 
     private static ToolFactory toolFactory;
 
