@@ -32,6 +32,16 @@ case `uname` in
 
         LDFLAGS="-ltermcap -L/usr/local/opt/libffi/lib"
     ;;
+    MINGW64_NT-10.0)
+        CMAKE=cmake
+        CC=cl
+        CXX=cl
+        LD=clang++
+
+        JAVA_INCLUDES="-I$JAVA_HOME/include/ -I$JAVA_HOME/include/win32/"
+
+        DLL_NAME=irreader.dll
+    ;;
     *)
         echo Unknown environment: `uname`
         exit 1

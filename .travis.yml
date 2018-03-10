@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 addons:
   apt:
     sources: &common_sources
@@ -11,6 +11,9 @@ addons:
       - g++-4.9
       - swig
       - ccache
+
+services:
+- docker
 
 matrix:
   include:
@@ -66,8 +69,13 @@ matrix:
 
 language: java
 
+before_install:
+ - docker pull sanitytool/bitreader-service
+ - docker run -d -p 127.0.0.1:80:4567 sanitytool/bitreader-service
+ - docker ps -a
+
 install:
- - export SANITY_PROFILE=parser-native
+ - export SANITY_PROFILE=parser-remote
  - ./install.sh
 
 script: bash travis_script.sh

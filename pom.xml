@@ -27,6 +27,12 @@
                 <module>parser-native</module>
             </modules>
         </profile>
+        <profile>
+            <id>parser-remote</id>
+            <modules>
+                <module>parser-remote</module>
+            </modules>
+        </profile>
     </profiles>
 
     <dependencies>
