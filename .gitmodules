@@ -1,4 +1,0 @@
-[submodule "parser-native/llvm"]
-	path = parser-native/llvm
-	url = https://github.com/okutane/llvm.git
-        branch = saving-debug
