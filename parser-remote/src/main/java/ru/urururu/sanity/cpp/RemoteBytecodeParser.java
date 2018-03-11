@@ -13,14 +13,13 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
-import java.util.Collections;
 import java.util.List;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class NativeBytecodeParser implements BytecodeParser {
+public class RemoteBytecodeParser implements BytecodeParser {
     @Autowired
     CfgUtils cfgUtils;
     @Autowired
@@ -29,7 +28,7 @@ public class NativeBytecodeParser implements BytecodeParser {
     @Override
     public List<Cfg> parse(File file) {
         try {
-            URL url = new URL("http://10.0.75.2:32768/parse");
+            URL url = new URL("http://10.0.75.2:32769/parse");
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
             urlConnection.addRequestProperty("Content-Type", "application/octet-stream");
