@@ -170,18 +170,17 @@ matrix:
 #      env:
 #      - EXTRA_BREW=llvm36
 #      - CLANG_BIN=clang-3.6
+#    - os: osx
+#      env:
+#      - TESTED_LANGS="C Cpp ObjectiveC"
+#      - EXTRA_BREW=llvm38
+#      - CLANG_BIN=clang-3.8
 
     - os: osx
       env:
       - TESTED_LANGS="C Cpp ObjectiveC"
       - EXTRA_BREW=llvm37
       - CLANG_BIN=clang-3.7
-
-    - os: osx
-      env:
-      - TESTED_LANGS="C Cpp ObjectiveC"
-      - EXTRA_BREW=llvm38
-      - CLANG_BIN=clang-3.8
 
     - os: osx
       env:
@@ -194,6 +193,18 @@ matrix:
       - TESTED_LANGS="C Cpp ObjectiveC"
       - EXTRA_BREW=llvm@4
       - CLANG_BIN=/usr/local/opt/llvm/bin/clang-4.0
+      
+    - os: osx
+      env:
+      - TESTED_LANGS="C Cpp ObjectiveC"
+      - EXTRA_BREW=llvm@5
+      - CLANG_BIN=/usr/local/opt/llvm/bin/clang-5.0
+      
+    - os: osx
+      env:
+      - TESTED_LANGS="C Cpp ObjectiveC"
+      - EXTRA_BREW=llvm@6
+      - CLANG_BIN=/usr/local/opt/llvm/bin/clang-6.0
 
     - os: osx
       env:
