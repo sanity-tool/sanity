@@ -206,3 +206,4 @@ cache:
   directories:
     - $HOME/.m2/repository/
     - $HOME/.ccache
+    - $HOME/Library/Caches/Homebrew
