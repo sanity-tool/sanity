@@ -14,41 +14,41 @@ addons:
 
 matrix:
   include:
-    - os: linux
-      jdk: oraclejdk8
-      addons: &llvm38
-        apt:
-          sources:
-            - *common_sources
-            - llvm-toolchain-precise-3.8
-          packages:
-            - *common_packages
-            - clang-3.8
-            - libllvm3.8
-            - llvm-3.8
-            - llvm-3.8-dev
-            - llvm-3.8-runtime
-      env:
-      - TESTED_LANGS="C Cpp IR"
-      - CLANG_BIN=clang-3.8
+#    - os: linux
+#      jdk: oraclejdk8
+#      addons: &llvm38
+#        apt:
+#          sources:
+#            - *common_sources
+#            - llvm-toolchain-precise-3.8
+#          packages:
+#            - *common_packages
+#            - clang-3.8
+#            - libllvm3.8
+#            - llvm-3.8
+#            - llvm-3.8-dev
+#            - llvm-3.8-runtime
+#      env:
+#      - TESTED_LANGS="C Cpp IR"
+#      - CLANG_BIN=clang-3.8
 
-    - os: linux
-      jdk: oraclejdk8
-      addons: &llvm39
-        apt:
-          sources:
-            - *common_sources
-            - llvm-toolchain-precise-3.9
-          packages:
-            - *common_packages
-            - clang-3.9
-            - libllvm3.9
-            - llvm-3.9
-            - llvm-3.9-dev
-            - llvm-3.9-runtime
-      env:
-      - TESTED_LANGS="C Cpp IR"
-      - CLANG_BIN=clang-3.9
+#    - os: linux
+#      jdk: oraclejdk8
+#      addons: &llvm39
+#        apt:
+#          sources:
+#            - *common_sources
+#            - llvm-toolchain-precise-3.9
+#          packages:
+#            - *common_packages
+#            - clang-3.9
+#            - libllvm3.9
+#            - llvm-3.9
+#            - llvm-3.9-dev
+#            - llvm-3.9-runtime
+#      env:
+#      - TESTED_LANGS="C Cpp IR"
+#      - CLANG_BIN=clang-3.9
       
     - os: linux
       jdk: oraclejdk8
@@ -67,6 +67,24 @@ matrix:
       env:
       - TESTED_LANGS="C Cpp IR"
       - CLANG_BIN=clang-4.0
+
+    - os: linux
+      jdk: oraclejdk8
+      addons: &llvm50
+        apt:
+          sources:
+            - *common_sources
+            - llvm-toolchain-trusty-5.0
+          packages:
+            - *common_packages
+            - clang-5.0
+            - libllvm5.0
+            - llvm-5.0
+            - llvm-5.0-dev
+            - llvm-5.0-runtime
+      env:
+      - TESTED_LANGS="C Cpp IR"
+      - CLANG_BIN=clang-5.0
 
     - os: linux
       jdk: oraclejdk8
