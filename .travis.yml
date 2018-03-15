@@ -109,6 +109,41 @@ matrix:
 #      osx_image: xcode7
 
     - os: osx
+      osx_image: xcode6.4
+      env: TESTED_LANGS="C Cpp ObjectiveC"
+
+# travis uses 6.4 for those below:
+#    - os: osx
+#      osx_image: beta-xcode6.3
+#      env: LANG=C
+#    - os: osx
+#      osx_image: beta-xcode6.3
+#      env: LANG=Cpp
+#    - os: osx
+#      osx_image: beta-xcode6.3
+#      env: LANG=ObjectiveC
+#
+#    - os: osx
+#      osx_image: beta-xcode6.2
+#      env: LANG=C
+#    - os: osx
+#      osx_image: beta-xcode6.2
+#      env: LANG=Cpp
+#    - os: osx
+#      osx_image: beta-xcode6.2
+#      env: LANG=ObjectiveC
+#
+#    - os: osx
+#      osx_image: beta-xcode6.1
+#      env: LANG=C
+#    - os: osx
+#      osx_image: beta-xcode6.1
+#      env: LANG=Cpp
+#    - os: osx
+#      osx_image: beta-xcode6.1
+#      env: LANG=ObjectiveC
+
+    - os: osx
       osx_image: xcode7.3
       env:
       - TESTED_LANGS="C Cpp ObjectiveC"
@@ -158,13 +193,13 @@ matrix:
       - TESTED_LANGS="C Cpp ObjectiveC"
       - EXTRA_BREW=llvm@4
       - CLANG_BIN=/usr/local/opt/llvm/bin/clang-4.0
-      
+
     - os: osx
       env:
       - TESTED_LANGS="C Cpp ObjectiveC"
       - EXTRA_BREW=llvm@5
       - CLANG_BIN=/usr/local/opt/llvm/bin/clang-5.0
-      
+
     - os: osx
       env:
       - TESTED_LANGS="C Cpp ObjectiveC"
@@ -175,41 +210,9 @@ matrix:
       env:
       - TESTED_LANGS=Rust
       - EXTRA_BREW=rust
-  allow_failures:
-    - os: osx
-      osx_image: xcode6.4
-      env: TESTED_LANGS="C Cpp ObjectiveC"
 
-    # travis uses 6.4 for those below:
-    #    - os: osx
-    #      osx_image: beta-xcode6.3
-    #      env: LANG=C
-    #    - os: osx
-    #      osx_image: beta-xcode6.3
-    #      env: LANG=Cpp
-    #    - os: osx
-    #      osx_image: beta-xcode6.3
-    #      env: LANG=ObjectiveC
-    #
-    #    - os: osx
-    #      osx_image: beta-xcode6.2
-    #      env: LANG=C
-    #    - os: osx
-    #      osx_image: beta-xcode6.2
-    #      env: LANG=Cpp
-    #    - os: osx
-    #      osx_image: beta-xcode6.2
-    #      env: LANG=ObjectiveC
-    #
-    #    - os: osx
-    #      osx_image: beta-xcode6.1
-    #      env: LANG=C
-    #    - os: osx
-    #      osx_image: beta-xcode6.1
-    #      env: LANG=Cpp
-    #    - os: osx
-    #      osx_image: beta-xcode6.1
-    #      env: LANG=ObjectiveC
+  allow_failures:
+    osx_image: xcode6.4
 
 language: java
 
