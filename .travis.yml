@@ -212,7 +212,9 @@ matrix:
       - EXTRA_BREW=rust
 
   allow_failures:
-    osx_image: xcode6.4
+    - os: osx
+      osx_image: xcode6.4
+      env: TESTED_LANGS="C Cpp ObjectiveC"
 
 language: java
 
