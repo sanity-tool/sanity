@@ -1,6 +1,7 @@
 package ru.urururu.sanity.cpp;
 
 import io.swagger.client.model.BlockDto;
+import io.swagger.client.model.InstructionDto;
 import io.swagger.client.model.TypeDto;
 import io.swagger.client.model.ValueDto;
 import org.springframework.stereotype.Component;
@@ -15,5 +16,5 @@ import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
  */
 @Component
 public class RemoteParsersFacade extends ParsersFacade<TypeDto,
-        ValueDto, ValueDto, BlockDto, RemoteCfgBuildingCtx> {
+        ValueDto, InstructionDto, BlockDto, RemoteCfgBuildingCtx> {
 }

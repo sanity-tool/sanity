@@ -1,6 +1,7 @@
 package ru.urururu.sanity.cpp;
 
 import io.swagger.client.model.BlockDto;
+import io.swagger.client.model.InstructionDto;
 import io.swagger.client.model.TypeDto;
 import io.swagger.client.model.ValueDto;
 import ru.urururu.sanity.api.CfgBuildingCtx;
@@ -15,19 +16,19 @@ import ru.urururu.sanity.cpp.llvm.bitreader;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class RemoteCfgBuildingCtx extends CfgBuildingCtx<TypeDto,
-        ValueDto, ValueDto, BlockDto, RemoteCfgBuildingCtx> {
+        ValueDto, InstructionDto, BlockDto, RemoteCfgBuildingCtx> {
 
     public RemoteCfgBuildingCtx(RemoteParsersFacade parsers, ValueDto function) {
         super(parsers);
 
-        SWIGTYPE_p_LLVMOpaqueValue param = bitreader.LLVMGetFirstParam(function);
+        ValueDto param = bitreader.LLVMGetFirstParam(function);
         while (param != null) {
             params.put(param, new Parameter(params.size(), bitreader.LLVMGetValueName(param), parsers.parse(bitreader.LLVMTypeOf(param))));
             param = bitreader.LLVMGetNextParam(param);
         }
     }
 
-    public LValue getOrCreateTmpVar(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+    public LValue getOrCreateTmpVar(InstructionDto instruction) {
         return getOrCreateTmpVar(instruction, bitreader.LLVMTypeOf(instruction));
     }
 
@@ -35,10 +36,14 @@ public class RemoteCfgBuildingCtx extends CfgBuildingCtx<TypeDto,
         return params.get(value);
     }
 
-    public Cfe getLabel(SWIGTYPE_p_LLVMOpaqueValue label) {
-        SWIGTYPE_p_LLVMOpaqueBasicBlock block = bitreader.LLVMValueAsBasicBlock(label);
+    public Cfe getLabel(ValueDto label) {
+        BlockDto block = bitreader.LLVMValueAsBasicBlock(label);
 
         Cfe result = labels.computeIfAbsent(block, k -> new NoOp(null));
+
+        for (InstructionDto instruction : block.getInstructions()) {
+
+        }
 
         SWIGTYPE_p_LLVMOpaqueValue instruction = bitreader.LLVMGetFirstInstruction(block);
         if (bitreader.LLVMIsAPHINode(instruction) != null) {

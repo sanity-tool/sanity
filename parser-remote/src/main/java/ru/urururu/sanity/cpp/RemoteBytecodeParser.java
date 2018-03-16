@@ -47,12 +47,6 @@ public class RemoteBytecodeParser implements BytecodeParser {
         ModuleDto m;
         try {
             ParserControllerApi parserApi = new ParserControllerApi(new ApiClient());
-            URL url = new URL("http://10.0.75.2:32769/parse");
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("POST");
-            urlConnection.addRequestProperty("Content-Type", "application/octet-stream");
-            urlConnection.setDoOutput(true);
-            OutputStream os = urlConnection.getOutputStream();
             byte[] bytes = Files.readAllBytes(file.toPath());
             m = parserApi.parseUsingPOST(bytes);
         } catch (IOException | ApiException e) {
