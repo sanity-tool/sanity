@@ -34,7 +34,8 @@ public class RemoteBytecodeParser implements BytecodeParser {
             urlConnection.addRequestProperty("Content-Type", "application/octet-stream");
             urlConnection.setDoOutput(true);
             OutputStream os = urlConnection.getOutputStream();
-            os.write(Files.readAllBytes(file.toPath()));
+            byte[] bytes = Files.readAllBytes(file.toPath());
+            os.write(bytes);
             os.flush();
             os.close();
 
