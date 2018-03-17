@@ -1,9 +1,6 @@
 package ru.urururu.sanity.cpp;
 
-import io.swagger.client.model.BlockDto;
-import io.swagger.client.model.InstructionDto;
-import io.swagger.client.model.TypeDto;
-import io.swagger.client.model.ValueDto;
+import io.swagger.client.model.*;
 import ru.urururu.sanity.api.CfgBuildingCtx;
 import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.sanity.cpp.NativeParsersFacade;
@@ -15,52 +12,52 @@ import ru.urururu.sanity.cpp.llvm.bitreader;
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
-public class RemoteCfgBuildingCtx extends CfgBuildingCtx<TypeDto,
-        ValueDto, InstructionDto, BlockDto, RemoteCfgBuildingCtx> {
+public class RemoteCfgBuildingCtx extends CfgBuildingCtx<Integer,
+        ValueRefDto, ValueRefDto, BlockDto, RemoteCfgBuildingCtx> {
 
-    public RemoteCfgBuildingCtx(RemoteParsersFacade parsers, ValueDto function) {
+    public RemoteCfgBuildingCtx(RemoteParsersFacade parsers, FunctionDto function) {
         super(parsers);
 
-        ValueDto param = bitreader.LLVMGetFirstParam(function);
-        while (param != null) {
-            params.put(param, new Parameter(params.size(), bitreader.LLVMGetValueName(param), parsers.parse(bitreader.LLVMTypeOf(param))));
-            param = bitreader.LLVMGetNextParam(param);
+        int i = 0;
+        for (ValueDto param : function.getParams()) {
+            ValueRefDto paramREf = new ValueRefDto();
+            paramREf.setKind(ValueRefDto.KindEnum.ARGUMENT);
+            paramREf.setIndex(i);
+
+            params.put(paramREf, new Parameter(params.size(), param.getName(), parsers.parse(param.getTypeId())));
+            i++;
         }
     }
 
-    public LValue getOrCreateTmpVar(InstructionDto instruction) {
-        return getOrCreateTmpVar(instruction, bitreader.LLVMTypeOf(instruction));
+    public LValue getOrCreateTmpVar(ValueRefDto instruction) {
+        return getOrCreateTmpVar(instruction, 0/*todo*/);
     }
 
     public RValue getParam(ValueDto value) {
         return params.get(value);
     }
 
-    public Cfe getLabel(ValueDto label) {
+    public Cfe getLabel(ValueRefDto label) {
         BlockDto block = bitreader.LLVMValueAsBasicBlock(label);
 
         Cfe result = labels.computeIfAbsent(block, k -> new NoOp(null));
 
-        for (InstructionDto instruction : block.getInstructions()) {
-
-        }
-
-        SWIGTYPE_p_LLVMOpaqueValue instruction = bitreader.LLVMGetFirstInstruction(block);
-        if (bitreader.LLVMIsAPHINode(instruction) != null) {
-            long n = bitreader.LLVMCountIncoming(instruction);
-            for (int i = 0; i < n; i++) {
-                if (this.block.equals(bitreader.LLVMGetIncomingBlock(instruction, i))) {
-                    Assignment phiAssignment = new Assignment(
-                            getOrCreateTmpVar(instruction),
-                            parsers.parseRValue(this, bitreader.LLVMGetIncomingValue(instruction, i)),
-                            parsers.getSourceRange(instruction)
-                    );
-                    phiAssignment.setNext(result);
-
-                    return phiAssignment;
-                }
-            }
-        }
+        InstructionDto instruction = block.getInstructions().iterator().next();
+//        if (instruction.getKind().equals("Phi")) { // todo
+//            long n = bitreader.LLVMCountIncoming(instruction);
+//            for (int i = 0; i < n; i++) {
+//                if (this.block.equals(bitreader.LLVMGetIncomingBlock(instruction, i))) {
+//                    Assignment phiAssignment = new Assignment(
+//                            getOrCreateTmpVar(instruction),
+//                            parsers.parseRValue(this, bitreader.LLVMGetIncomingValue(instruction, i)),
+//                            parsers.getSourceRange(instruction)
+//                    );
+//                    phiAssignment.setNext(result);
+//
+//                    return phiAssignment;
+//                }
+//            }
+//        }
 
         return result;
     }
