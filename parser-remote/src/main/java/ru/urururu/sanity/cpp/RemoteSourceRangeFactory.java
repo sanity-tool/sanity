@@ -1,5 +1,7 @@
 package ru.urururu.sanity.cpp;
 
+import io.swagger.client.model.ModuleDto;
+import io.swagger.client.model.ValueRefDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -15,16 +17,16 @@ import java.io.File;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class RemoteSourceRangeFactory extends SourceRangeFactory<SWIGTYPE_p_LLVMOpaqueValue> implements ParserListener {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RemoteSourceRangeFactory.class);
+public class RemoteSourceRangeFactory extends SourceRangeFactory<ValueRefDto> implements ParserListener {
+    private ModuleDto currentModule;
 
-    private static final int DW_TAG_file_type = 786473;
-    private static final int DW_TAG_lexical_block = 786443;
+    public SourceRange getSourceRange(ValueRefDto instruction) {
+        if (instruction.getKind() != ValueRefDto.KindEnum.INSTRUCTION) {
+            return null;
+        }
 
-    private Long debugVersion;
-    private Byte versionByte;
+        
 
-    public SourceRange getSourceRange(SWIGTYPE_p_LLVMOpaqueValue instruction) {
         int line = bitreader.SAGetInstructionDebugLocLine(instruction);
         if (versionByte == 3) {
             if (line != -1) {
@@ -56,31 +58,8 @@ public class RemoteSourceRangeFactory extends SourceRangeFactory<SWIGTYPE_p_LLVM
         return null;
     }
 
-    private SWIGTYPE_p_LLVMOpaqueValue getPair(SWIGTYPE_p_LLVMOpaqueValue node) {
-        int count = bitreader.LLVMGetNumOperands(node);
-        if (count == 1) {
-            return getPair(bitreader.LLVMGetOperand(node, 0));
-        }
-
-        if (LlvmUtils.checkTag(node, "0x29", DW_TAG_file_type, DW_TAG_lexical_block)) {
-            return bitreader.LLVMGetOperand(node, 1);
-        } else {
-            return getPair(bitreader.LLVMGetOperand(node, 2));
-        }
-    }
-
     @Override
-    public void onModuleStarted(SWIGTYPE_p_LLVMOpaqueModule module) {
-        debugVersion = bitreader.SAGetDebugMetadataVersionFromModule(module);
-        versionByte = debugVersion.byteValue();
-
-        LOGGER.info("debugVersion = {}", Long.toHexString(debugVersion));
-        LOGGER.info("versionByte = {}", versionByte);
-    }
-
-    @Override
-    public void onModuleFinished(SWIGTYPE_p_LLVMOpaqueModule module) {
-        debugVersion = null;
-        versionByte = null;
+    public void onModuleStarted(ModuleDto module) {
+        this.currentModule = module;
     }
 }

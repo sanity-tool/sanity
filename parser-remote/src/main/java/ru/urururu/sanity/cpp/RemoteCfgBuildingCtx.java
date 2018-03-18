@@ -33,12 +33,17 @@ public class RemoteCfgBuildingCtx extends CfgBuildingCtx<Integer,
         return getOrCreateTmpVar(instruction, 0/*todo*/);
     }
 
-    public RValue getParam(ValueDto value) {
+    public RValue getParam(ValueRefDto value) {
         return params.get(value);
     }
 
     public Cfe getLabel(ValueRefDto label) {
-        BlockDto block = bitreader.LLVMValueAsBasicBlock(label);
+        if (label.getKind() != ValueRefDto.KindEnum.BLOCK) {
+            throw new IllegalArgumentException(label.toString());
+        }
+
+        Integer blockId = label.getIndex();
+        //BlockDto block = bitreader.LLVMValueAsBasicBlock(label);
 
         Cfe result = labels.computeIfAbsent(block, k -> new NoOp(null));
 
