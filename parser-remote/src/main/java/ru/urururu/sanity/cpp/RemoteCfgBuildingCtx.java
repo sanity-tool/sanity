@@ -15,11 +15,11 @@ public class RemoteCfgBuildingCtx extends CfgBuildingCtx<Integer,
 
         int i = 0;
         for (ValueDto param : function.getParams()) {
-            ValueRefDto paramREf = new ValueRefDto();
-            paramREf.setKind(ValueRefDto.KindEnum.ARGUMENT);
-            paramREf.setIndex(i);
+            ValueRefDto paramRef = new ValueRefDto();
+            paramRef.setKind(ValueRefDto.KindEnum.ARGUMENT);
+            paramRef.setIndex(i);
 
-            params.put(paramREf, new Parameter(params.size(), param.getName(), parsers.parse(param.getTypeId())));
+            params.put(paramRef, new Parameter(params.size(), param.getName(), parsers.parse(param.getTypeId())));
             i++;
         }
     }
@@ -38,7 +38,7 @@ public class RemoteCfgBuildingCtx extends CfgBuildingCtx<Integer,
         }
 
         Integer blockId = label.getIndex();
-        //BlockDto block = bitreader.LLVMValueAsBasicBlock(label);
+        //todo BlockDto block = bitreader.LLVMValueAsBasicBlock(label);
 
         Cfe result = labels.computeIfAbsent(block, k -> new NoOp(null));
 
