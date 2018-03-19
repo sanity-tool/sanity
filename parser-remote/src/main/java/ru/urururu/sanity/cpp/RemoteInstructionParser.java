@@ -20,7 +20,7 @@ import java.util.*;
 public class RemoteInstructionParser extends InstructionParser<Integer,
         ValueRefDto, InstructionDto, BlockDto, RemoteCfgBuildingCtx> {
     @Autowired
-    ConstCache constants;
+    private ConstCache constants;
 
     private Map<String, OpcodeParser> opcodeParsers;
 
@@ -53,7 +53,7 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         parsersOtu.add(new FCmpParser());
 
         for (OpcodeParser parser : parsersOtu) {
-            for (LLVMOpcode opcode : parser.getOpcodes()) {
+            for (String opcode : parser.getOpcodes()) {
                 opcodeParsers.put(opcode, parser);
             }
         }
@@ -181,12 +181,12 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         }
 
         @Override
-        public Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return null;
         }
 
         @Override
-        public RValue parseValue(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             int operandsCount = bitreader.LLVMGetNumOperands(instruction);
 
             return getPointer(ctx, bitreader.LLVMGetOperand(instruction, 0), Iterables.indexed(
@@ -195,24 +195,24 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         }
 
         @Override
-        public RValue parseConst(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
+        public RValue parseConst(RemoteCfgBuildingCtx ctx, InstructionDto constant) {
             return parseValue(ctx, constant);
         }
     }
 
     private class ExtractValueParser extends AbstractParser {
         @Override
-        public LLVMOpcode getOpcode() {
-            return LLVMOpcode.LLVMExtractValue;
+        public String getOpcode() {
+            return "LLVMExtractValue";
         }
 
         @Override
-        public Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return null;
         }
 
         @Override
-        public RValue parseValue(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             // todo wtf? tests?
             RValue pointer = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
 
@@ -230,19 +230,19 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         }
 
         @Override
-        public RValue parseConst(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
+        public RValue parseConst(RemoteCfgBuildingCtx ctx, InstructionDto constant) {
             return parseValue(ctx, constant);
         }
     }
 
     private class CallParser extends AbstractParser {
         @Override
-        public LLVMOpcode getOpcode() {
-            return LLVMOpcode.LLVMCall;
+        public String getOpcode() {
+            return "LLVMCall";
         }
 
         @Override
-        public Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             int argLen = bitreader.LLVMGetNumOperands(instruction) - 1;
 
             return createCall(ctx, instruction, bitreader.LLVMGetOperand(instruction, argLen),
@@ -250,36 +250,36 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         }
 
         @Override
-        public RValue parseValue(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return ctx.getTmpVar(instruction);
         }
     }
 
     private class PhiParser extends AbstractParser {
         @Override
-        public LLVMOpcode getOpcode() {
-            return LLVMOpcode.LLVMPHI;
+        public String getOpcode() {
+            return "LLVMPHI";
         }
 
         @Override
-        public Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return null;
         }
 
         @Override
-        public RValue parseValue(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return ctx.getTmpVar(instruction);
         }
     }
 
     private class BrParser extends AbstractParser {
         @Override
-        public LLVMOpcode getOpcode() {
-            return LLVMOpcode.LLVMBr;
+        public String getOpcode() {
+            return "LLVMBr";
         }
 
         @Override
-        public Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             if (bitreader.LLVMGetNumOperands(instruction) == 1) {
                 return createGoto(ctx, instruction, bitreader.LLVMGetOperand(instruction, 0));
             }
@@ -290,8 +290,8 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
 
     private class SwitchParser extends AbstractParser {
         @Override
-        public LLVMOpcode getOpcode() {
-            return LLVMOpcode.LLVMSwitch;
+        public String getOpcode() {
+            return "LLVMSwitch";
         }
 
         @Override
@@ -310,44 +310,44 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
     }
 
     private class BinaryOperationParser extends AbstractParser {
-        private final Map<LLVMOpcode, BinaryExpression.Operator> opcodeOperatorMap;
+        private final Map<String, BinaryExpression.Operator> opcodeOperatorMap;
 
         BinaryOperationParser() {
             opcodeOperatorMap = FinalMap.createHashMap();
-            opcodeOperatorMap.put(LLVMOpcode.LLVMAdd, BinaryExpression.Operator.Add);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMFAdd, BinaryExpression.Operator.Add);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMSub, BinaryExpression.Operator.Sub);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMFSub, BinaryExpression.Operator.Sub);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMMul, BinaryExpression.Operator.Mul);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMFMul, BinaryExpression.Operator.Mul);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMUDiv, BinaryExpression.Operator.Div);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMSDiv, BinaryExpression.Operator.Div);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMFDiv, BinaryExpression.Operator.Div);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMURem, BinaryExpression.Operator.Rem);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMSRem, BinaryExpression.Operator.Rem);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMFRem, BinaryExpression.Operator.Rem);
+            opcodeOperatorMap.put("LLVMAdd", BinaryExpression.Operator.Add);
+            opcodeOperatorMap.put("LLVMFAdd", BinaryExpression.Operator.Add);
+            opcodeOperatorMap.put("LLVMSub", BinaryExpression.Operator.Sub);
+            opcodeOperatorMap.put("LLVMFSub", BinaryExpression.Operator.Sub);
+            opcodeOperatorMap.put("LLVMMul", BinaryExpression.Operator.Mul);
+            opcodeOperatorMap.put("LLVMFMul", BinaryExpression.Operator.Mul);
+            opcodeOperatorMap.put("LLVMUDiv", BinaryExpression.Operator.Div);
+            opcodeOperatorMap.put("LLVMSDiv", BinaryExpression.Operator.Div);
+            opcodeOperatorMap.put("LLVMFDiv", BinaryExpression.Operator.Div);
+            opcodeOperatorMap.put("LLVMURem", BinaryExpression.Operator.Rem);
+            opcodeOperatorMap.put("LLVMSRem", BinaryExpression.Operator.Rem);
+            opcodeOperatorMap.put("LLVMFRem", BinaryExpression.Operator.Rem);
 
-            opcodeOperatorMap.put(LLVMOpcode.LLVMAnd, BinaryExpression.Operator.And);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMOr, BinaryExpression.Operator.Or);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMXor, BinaryExpression.Operator.Xor);
+            opcodeOperatorMap.put("LLVMAnd", BinaryExpression.Operator.And);
+            opcodeOperatorMap.put("LLVMOr", BinaryExpression.Operator.Or);
+            opcodeOperatorMap.put("LLVMXor", BinaryExpression.Operator.Xor);
 
-            opcodeOperatorMap.put(LLVMOpcode.LLVMShl, BinaryExpression.Operator.ShiftLeft);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMLShr, BinaryExpression.Operator.ShiftRight);
-            opcodeOperatorMap.put(LLVMOpcode.LLVMAShr, BinaryExpression.Operator.ShiftRight);
+            opcodeOperatorMap.put("LLVMShl", BinaryExpression.Operator.ShiftLeft);
+            opcodeOperatorMap.put("LLVMLShr", BinaryExpression.Operator.ShiftRight);
+            opcodeOperatorMap.put("LLVMAShr", BinaryExpression.Operator.ShiftRight);
         }
 
         @Deprecated
-        public BinaryOperationParser(LLVMOpcode opcode, BinaryExpression.Operator operator) {
+        public BinaryOperationParser(String opcode, BinaryExpression.Operator operator) {
             opcodeOperatorMap = Collections.singletonMap(opcode, operator);
         }
 
         @Override
-        public Set<LLVMOpcode> getOpcodes() {
+        public Set<String> getOpcodes() {
             return opcodeOperatorMap.keySet();
         }
 
         @Override
-        public Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return createBinaryAssignment(ctx, instruction,
                     bitreader.LLVMGetOperand(instruction, 0),
                     opcodeOperatorMap.get(bitreader.LLVMGetInstructionOpcode(instruction)),
@@ -355,77 +355,77 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         }
 
         @Override
-        public RValue parseValue(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return ctx.getTmpVar(instruction);
         }
     }
 
     private class BitCastParser extends AbstractParser {
         @Override
-        public LLVMOpcode getOpcode() {
-            return LLVMOpcode.LLVMBitCast;
+        public String getOpcode() {
+            return "LLVMBitCast";
         }
 
         @Override
-        public Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return createBitCast(ctx, instruction, bitreader.LLVMGetOperand(instruction, 0));
         }
 
         @Override
-        public RValue parseValue(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return ctx.getTmpVar(instruction);
         }
 
         @Override
-        public RValue parseConst(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
+        public RValue parseConst(RemoteCfgBuildingCtx ctx, InstructionDto constant) {
             return parsers.parseRValue(ctx, bitreader.LLVMGetOperand(constant, 0));
         }
     }
 
     private class CastParser extends AbstractParser {
         @Override
-        public Set<LLVMOpcode> getOpcodes() {
-            return new HashSet<>(Arrays.asList(LLVMOpcode.LLVMSExt, LLVMOpcode.LLVMZExt, LLVMOpcode.LLVMTrunc, LLVMOpcode.LLVMSIToFP));
+        public Set<String> getOpcodes() {
+            return new HashSet<>(Arrays.asList("LLVMSExt", "LLVMZExt", "LLVMTrunc", "LLVMSIToFP"));
         }
 
         @Override
-        public Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             // todo think about source range comparison. if different - it's better to have tmp var assignment to preserve source reference.
             return null;
         }
 
         @Override
-        public RValue parseValue(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             // just return it's operand, it's smaller, so it will fit.
             return parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
         }
     }
 
     private class ICmpParser extends AbstractParser {
-        Map<LLVMIntPredicate, BinaryExpression.Operator> predicateOperatorMap = FinalMap.createHashMap();
+        Map<String, BinaryExpression.Operator> predicateOperatorMap = FinalMap.createHashMap();
 
         ICmpParser() {
-            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntSLT, BinaryExpression.Operator.Lt);
-            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntSLE, BinaryExpression.Operator.Le);
-            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntSGT, BinaryExpression.Operator.Gt);
-            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntSGE, BinaryExpression.Operator.Ge);
+            predicateOperatorMap.put("LLVMIntSLT", BinaryExpression.Operator.Lt);
+            predicateOperatorMap.put("LLVMIntSLE", BinaryExpression.Operator.Le);
+            predicateOperatorMap.put("LLVMIntSGT", BinaryExpression.Operator.Gt);
+            predicateOperatorMap.put("LLVMIntSGE", BinaryExpression.Operator.Ge);
 
-            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntULT, BinaryExpression.Operator.Lt);
-            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntULE, BinaryExpression.Operator.Le);
-            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntUGT, BinaryExpression.Operator.Gt);
-            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntUGE, BinaryExpression.Operator.Ge);
+            predicateOperatorMap.put("LLVMIntULT", BinaryExpression.Operator.Lt);
+            predicateOperatorMap.put("LLVMIntULE", BinaryExpression.Operator.Le);
+            predicateOperatorMap.put("LLVMIntUGT", BinaryExpression.Operator.Gt);
+            predicateOperatorMap.put("LLVMIntUGE", BinaryExpression.Operator.Ge);
 
-            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntEQ, BinaryExpression.Operator.Eq);
-            predicateOperatorMap.put(LLVMIntPredicate.LLVMIntNE, BinaryExpression.Operator.Ne);
+            predicateOperatorMap.put("LLVMIntEQ", BinaryExpression.Operator.Eq);
+            predicateOperatorMap.put("LLVMIntNE", BinaryExpression.Operator.Ne);
         }
 
         @Override
         public LLVMOpcode getOpcode() {
-            return LLVMOpcode.LLVMICmp;
+            return "LLVMICmp";
         }
 
         @Override
-        public Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return createBinaryAssignment(ctx, instruction,
                     bitreader.LLVMGetOperand(instruction, 0),
                     predicateOperatorMap.get(bitreader.LLVMGetICmpPredicate(instruction)),
@@ -433,7 +433,7 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         }
 
         @Override
-        public RValue parseValue(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return ctx.getTmpVar(instruction);
         }
     }
@@ -465,7 +465,7 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         }
 
         @Override
-        public Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return createBinaryAssignment(ctx, instruction,
                     bitreader.LLVMGetOperand(instruction, 0),
                     predicateOperatorMap.get(bitreader.GetFCmpPredicate(instruction)),
@@ -473,7 +473,7 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         }
 
         @Override
-        public RValue parseValue(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return ctx.getTmpVar(instruction);
         }
     }
