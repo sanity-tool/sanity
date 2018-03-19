@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import ru.urururu.sanity.api.InstructionParser;
 import ru.urururu.sanity.api.cfg.*;
 import ru.urururu.util.FinalMap;
-import ru.urururu.util.Iterables;
 
 import java.util.*;
 
@@ -60,18 +59,18 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
     }
 
     protected Cfe doParse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
-        OpcodeParser parser = opcodeParsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
+        OpcodeParser parser = opcodeParsers.getOrDefault(instruction.getKind(), defaultParser);
 
         return parser.parse(ctx, instruction);
     }
 
     public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
-        OpcodeParser parser = opcodeParsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
+        OpcodeParser parser = opcodeParsers.getOrDefault(instruction.getKind(), defaultParser);
         return parser.parseValue(ctx, instruction);
     }
 
     public RValue parseConst(RemoteCfgBuildingCtx ctx, InstructionDto constant) {
-        OpcodeParser parser = opcodeParsers.getOrDefault(bitreader.LLVMGetConstOpcode(constant), defaultParser);
+        OpcodeParser parser = opcodeParsers.getOrDefault(constant.getKind()/*todo bitreader.LLVMGetConstOpcode(constant)*/, defaultParser);
         return parser.parseConst(ctx, constant);
     }
 
@@ -120,7 +119,7 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         @Override
         public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return createStore(ctx, instruction,
-                    bitreader.LLVMGetOperand(instruction, 0), bitreader.LLVMGetOperand(instruction, 1));
+                    instruction.getOperands().get(0), instruction.getOperands().get(1));
         }
     }
 
@@ -137,30 +136,30 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
 
         @Override
         public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
-            return createLoad(ctx, bitreader.LLVMGetOperand(instruction, 0));
+            return createLoad(ctx, instruction.getOperands().get(0));
         }
     }
 
     private class RetParser extends AbstractParser {
         @Override
-        public LLVMOpcode getOpcode() {
-            return LLVMOpcode.LLVMRet;
+        public String getOpcode() {
+            return "LLVMRet";
         }
 
         @Override
         public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
-            if (bitreader.LLVMGetNumOperands(instruction) == 0) {
+            if (instruction.getOperands().size() == 0) {
                 return createReturn(ctx, instruction);
             }
 
-            return createReturn(ctx, instruction, bitreader.LLVMGetOperand(instruction, 0));
+            return createReturn(ctx, instruction, instruction.getOperands().get(0));
         }
     }
 
     private static class AllocaParser extends AbstractParser {
         @Override
-        public LLVMOpcode getOpcode() {
-            return LLVMOpcode.LLVMAlloca;
+        public String getOpcode() {
+            return "LLVMAlloca";
         }
 
         @Override
@@ -187,11 +186,8 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
 
         @Override
         public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
-            int operandsCount = bitreader.LLVMGetNumOperands(instruction);
-
-            return getPointer(ctx, bitreader.LLVMGetOperand(instruction, 0), Iterables.indexed(
-                    i -> bitreader.LLVMGetOperand(instruction, i + 1),
-                    () -> operandsCount - 1));
+            return getPointer(ctx, instruction.getOperands().get(0),
+                    instruction.getOperands().subList(1, instruction.getOperands().size()));
         }
 
         @Override
@@ -214,15 +210,15 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         @Override
         public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             // todo wtf? tests?
-            RValue pointer = parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
+            RValue pointer = parsers.parseRValue(ctx, instruction.getOperands().get(0));
 
             pointer = getPointer(pointer, constants.get(0, null));
 
-            int operandsCount = bitreader.LLVMGetNumOperands(instruction);
+            int operandsCount = instruction.getOperands().size();
 
             int i = 1;
             while (i < operandsCount) {
-                pointer = getPointer(pointer, parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, i)));
+                pointer = getPointer(pointer, parsers.parseRValue(ctx, instruction.getOperands().get(i)));
                 i++;
             }
 
@@ -243,10 +239,8 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
 
         @Override
         public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
-            int argLen = bitreader.LLVMGetNumOperands(instruction) - 1;
-
-            return createCall(ctx, instruction, bitreader.LLVMGetOperand(instruction, argLen),
-                    Iterables.indexed(i -> bitreader.LLVMGetOperand(instruction, i), () -> argLen));
+            return createCall(ctx, instruction, instruction.getOperands().get(instruction.getOperands().size() - 1),
+                    instruction.getOperands().subList(0, instruction.getOperands().size() - 1));
         }
 
         @Override
@@ -280,11 +274,11 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
 
         @Override
         public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
-            if (bitreader.LLVMGetNumOperands(instruction) == 1) {
-                return createGoto(ctx, instruction, bitreader.LLVMGetOperand(instruction, 0));
+            if (instruction.getOperands().size() == 1) {
+                return createGoto(ctx, instruction, instruction.getOperands().get(0));
             }
-            return createIf(ctx, instruction, bitreader.LLVMGetOperand(instruction, 0),
-                    bitreader.LLVMGetOperand(instruction, 2), bitreader.LLVMGetOperand(instruction, 1));
+            return createIf(ctx, instruction, instruction.getOperands().get(0),
+                    instruction.getOperands().get(2), instruction.getOperands().get(1));
         }
     }
 
@@ -295,17 +289,17 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         }
 
         @Override
-        public Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            List<SWIGTYPE_p_LLVMOpaqueValue> values = new ArrayList<>();
-            List<SWIGTYPE_p_LLVMOpaqueValue> labels = new ArrayList<>();
+        public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
+            List<ValueRefDto> values = new ArrayList<>();
+            List<ValueRefDto> labels = new ArrayList<>();
 
             int i = 2;
-            while (i + 1 < bitreader.LLVMGetNumOperands(instruction)) {
-                values.add(bitreader.LLVMGetOperand(instruction, i++));
-                labels.add(bitreader.LLVMGetOperand(instruction, i++));
+            while (i + 1 < instruction.getOperands().size()) {
+                values.add(instruction.getOperands().get(i++));
+                labels.add(instruction.getOperands().get(i++));
             }
 
-            return createSwitch(ctx, instruction, bitreader.LLVMGetOperand(instruction, 0), bitreader.LLVMGetOperand(instruction, 1), values, labels);
+            return createSwitch(ctx, instruction, instruction.getOperands().get(0), instruction.getOperands().get(1), values, labels);
         }
     }
 
@@ -349,9 +343,9 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         @Override
         public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return createBinaryAssignment(ctx, instruction,
-                    bitreader.LLVMGetOperand(instruction, 0),
-                    opcodeOperatorMap.get(bitreader.LLVMGetInstructionOpcode(instruction)),
-                    bitreader.LLVMGetOperand(instruction, 1));
+                    instruction.getOperands().get(0),
+                    opcodeOperatorMap.get(instruction.getKind()),
+                    instruction.getOperands().get(1));
         }
 
         @Override
@@ -368,7 +362,7 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
 
         @Override
         public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
-            return createBitCast(ctx, instruction, bitreader.LLVMGetOperand(instruction, 0));
+            return createBitCast(ctx, instruction, instruction.getOperands().get(0));
         }
 
         @Override
@@ -378,7 +372,7 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
 
         @Override
         public RValue parseConst(RemoteCfgBuildingCtx ctx, InstructionDto constant) {
-            return parsers.parseRValue(ctx, bitreader.LLVMGetOperand(constant, 0));
+            return parsers.parseRValue(ctx, constant.getOperands().get(0));
         }
     }
 
@@ -397,7 +391,7 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         @Override
         public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             // just return it's operand, it's smaller, so it will fit.
-            return parsers.parseRValue(ctx, bitreader.LLVMGetOperand(instruction, 0));
+            return parsers.parseRValue(ctx, instruction.getOperands().get(0));
         }
     }
 
@@ -420,16 +414,16 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         }
 
         @Override
-        public LLVMOpcode getOpcode() {
+        public String getOpcode() {
             return "LLVMICmp";
         }
 
         @Override
         public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return createBinaryAssignment(ctx, instruction,
-                    bitreader.LLVMGetOperand(instruction, 0),
+                    instruction.getOperands().get(0),
                     predicateOperatorMap.get(bitreader.LLVMGetICmpPredicate(instruction)),
-                    bitreader.LLVMGetOperand(instruction, 1));
+                    instruction.getOperands().get(1));
         }
 
         @Override
@@ -439,37 +433,37 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
     }
 
     private class FCmpParser extends AbstractParser {
-        Map<LLVMRealPredicate, BinaryExpression.Operator> predicateOperatorMap = FinalMap.createHashMap();
+        Map<String, BinaryExpression.Operator> predicateOperatorMap = FinalMap.createHashMap();
 
         FCmpParser() {
-            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOLT, BinaryExpression.Operator.Lt);
-            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOLE, BinaryExpression.Operator.Le);
-            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOGT, BinaryExpression.Operator.Gt);
-            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOGE, BinaryExpression.Operator.Ge);
+            predicateOperatorMap.put("LLVMRealOLT", BinaryExpression.Operator.Lt);
+            predicateOperatorMap.put("LLVMRealOLE", BinaryExpression.Operator.Le);
+            predicateOperatorMap.put("LLVMRealOGT", BinaryExpression.Operator.Gt);
+            predicateOperatorMap.put("LLVMRealOGE", BinaryExpression.Operator.Ge);
 
-            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealULT, BinaryExpression.Operator.Lt);
-            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealULE, BinaryExpression.Operator.Le);
-            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealUGT, BinaryExpression.Operator.Gt);
-            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealUGE, BinaryExpression.Operator.Ge);
+            predicateOperatorMap.put("LLVMRealULT", BinaryExpression.Operator.Lt);
+            predicateOperatorMap.put("LLVMRealULE", BinaryExpression.Operator.Le);
+            predicateOperatorMap.put("LLVMRealUGT", BinaryExpression.Operator.Gt);
+            predicateOperatorMap.put("LLVMRealUGE", BinaryExpression.Operator.Ge);
 
-            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealOEQ, BinaryExpression.Operator.Eq);
-            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealONE, BinaryExpression.Operator.Ne);
+            predicateOperatorMap.put("LLVMRealOEQ", BinaryExpression.Operator.Eq);
+            predicateOperatorMap.put("LLVMRealONE", BinaryExpression.Operator.Ne);
 
-            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealUEQ, BinaryExpression.Operator.Eq);
-            predicateOperatorMap.put(LLVMRealPredicate.LLVMRealUNE, BinaryExpression.Operator.Ne);
+            predicateOperatorMap.put("LLVMRealUEQ", BinaryExpression.Operator.Eq);
+            predicateOperatorMap.put("LLVMRealUNE", BinaryExpression.Operator.Ne);
         }
 
         @Override
-        public LLVMOpcode getOpcode() {
-            return LLVMOpcode.LLVMFCmp;
+        public String getOpcode() {
+            return "LLVMFCmp";
         }
 
         @Override
         public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return createBinaryAssignment(ctx, instruction,
-                    bitreader.LLVMGetOperand(instruction, 0),
+                    instruction.getOperands().get(0),
                     predicateOperatorMap.get(bitreader.GetFCmpPredicate(instruction)),
-                    bitreader.LLVMGetOperand(instruction, 1));
+                    instruction.getOperands().get(1));
         }
 
         @Override

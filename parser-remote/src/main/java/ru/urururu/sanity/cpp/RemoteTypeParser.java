@@ -58,6 +58,11 @@ public class RemoteTypeParser extends TypeParser<Integer> implements ParserListe
 
     @Override
     public void onModuleStarted(ModuleDto module) {
-        this.currentModule = module;
+        currentModule = module;
+    }
+
+    @Override
+    public void onModuleFinished(ModuleDto module) {
+        currentModule = null;
     }
 }

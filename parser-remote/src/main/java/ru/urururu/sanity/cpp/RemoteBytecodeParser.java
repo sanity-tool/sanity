@@ -13,6 +13,7 @@ import ru.urururu.sanity.api.BytecodeParser;
 import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.api.cfg.Cfe;
 import ru.urururu.sanity.api.cfg.ConstCache;
+import ru.urururu.sanity.api.cfg.FunctionAddress;
 
 import java.io.File;
 import java.io.IOException;
@@ -60,27 +61,18 @@ public class RemoteBytecodeParser implements BytecodeParser {
         ArrayList<Cfg> result = new ArrayList<>();
 
         for (FunctionDto function : m.getFunctions()) {
-            if (bitreader.LLVMGetFirstBasicBlock(function) != null) {
+            if (!function.getBlocks().isEmpty()) {
                 RemoteCfgBuildingCtx ctx = new RemoteCfgBuildingCtx(parsers, function);
 
-                SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock = bitreader.LLVMGetEntryBasicBlock(function);
+                BlockDto entryBlock = function.getBlocks().get(function.getEntryBlockIndex());
 
                 Cfe entry = parsers.parseBlock(ctx, entryBlock);
 
-                SWIGTYPE_p_LLVMOpaqueBasicBlock block = bitreader.LLVMGetFirstBasicBlock(function);
-                block = bitreader.LLVMGetNextBasicBlock(block);
-
                 for (BlockDto block : function.getBlocks()) {
-
-                }
-
-                while (block != null) {
                     Cfe blockEntry = parsers.parseBlock(ctx, block);
-                    Cfe label = ctx.getLabel(bitreader.LLVMBasicBlockAsValue(block));
+                    Cfe label = ctx.getLabel(block);
 
                     label.setNext(blockEntry);
-
-                    block = bitreader.LLVMGetNextBasicBlock(block);
                 }
 
                 entry = cfgUtils.removeNoOps(entry);
