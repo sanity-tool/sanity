@@ -1,10 +1,12 @@
 package ru.urururu.sanity.cpp;
 
+import io.swagger.client.model.BlockDto;
+import io.swagger.client.model.InstructionDto;
+import io.swagger.client.model.ValueRefDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.api.InstructionParser;
 import ru.urururu.sanity.api.cfg.*;
-import ru.urururu.sanity.cpp.llvm.*;
 import ru.urururu.util.FinalMap;
 import ru.urururu.util.Iterables;
 
@@ -15,16 +17,16 @@ import java.util.*;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 @Component
-public class RemoteInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOpaqueType,
-        SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueBasicBlock, RemoteCfgBuildingCtx> {
+public class RemoteInstructionParser extends InstructionParser<Integer,
+        ValueRefDto, InstructionDto, BlockDto, RemoteCfgBuildingCtx> {
     @Autowired
     ConstCache constants;
 
-    private Map<LLVMOpcode, OpcodeParser> opcodeParsers;
+    private Map<String, OpcodeParser> opcodeParsers;
 
     private OpcodeParser defaultParser = new AbstractParser() {
         @Override
-        public Set<LLVMOpcode> getOpcodes() {
+        public Set<String> getOpcodes() {
             return Collections.emptySet();
         }
     };
@@ -57,66 +59,66 @@ public class RemoteInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
     }
 
-    protected Cfe doParse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+    protected Cfe doParse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
         OpcodeParser parser = opcodeParsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
 
         return parser.parse(ctx, instruction);
     }
 
-    public RValue parseValue(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+    public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
         OpcodeParser parser = opcodeParsers.getOrDefault(bitreader.LLVMGetInstructionOpcode(instruction), defaultParser);
         return parser.parseValue(ctx, instruction);
     }
 
-    public RValue parseConst(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
+    public RValue parseConst(RemoteCfgBuildingCtx ctx, InstructionDto constant) {
         OpcodeParser parser = opcodeParsers.getOrDefault(bitreader.LLVMGetConstOpcode(constant), defaultParser);
         return parser.parseConst(ctx, constant);
     }
 
     private interface OpcodeParser {
-        Set<LLVMOpcode> getOpcodes();
+        Set<String> getOpcodes();
 
-        Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction);
+        Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction);
 
-        RValue parseValue(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction);
+        RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction);
 
-        RValue parseConst(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant);
+        RValue parseConst(RemoteCfgBuildingCtx ctx, InstructionDto constant);
     }
 
     private static abstract class AbstractParser implements OpcodeParser {
         @Override
-        public Set<LLVMOpcode> getOpcodes() {
+        public Set<String> getOpcodes() {
             return Collections.singleton(getOpcode());
         }
 
-        public LLVMOpcode getOpcode() {
+        public String getOpcode() {
             return null;
         }
 
         @Override
-        public Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            throw new IllegalStateException("opcode '" + bitreader.LLVMGetInstructionOpcode(instruction) + "' not supported");
+        public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
+            throw new IllegalStateException("opcode '" + instruction.getKind() + "' not supported");
         }
 
         @Override
-        public RValue parseValue(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            throw new IllegalStateException("opcode '" + bitreader.LLVMGetInstructionOpcode(instruction) + "' not supported");
+        public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
+            throw new IllegalStateException("opcode '" + instruction.getKind() + "' not supported");
         }
 
         @Override
-        public RValue parseConst(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
-            throw new IllegalStateException("opcode '" + bitreader.LLVMGetConstOpcode(constant) + "' not supported");
+        public RValue parseConst(RemoteCfgBuildingCtx ctx, InstructionDto constant) {
+            throw new IllegalStateException("opcode '" + constant.getKind() + "' not supported");
         }
     }
 
     private class StoreParser extends AbstractParser {
         @Override
-        public LLVMOpcode getOpcode() {
-            return LLVMOpcode.LLVMStore;
+        public String getOpcode() {
+            return "LLVMStore";
         }
 
         @Override
-        public Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return createStore(ctx, instruction,
                     bitreader.LLVMGetOperand(instruction, 0), bitreader.LLVMGetOperand(instruction, 1));
         }
@@ -124,17 +126,17 @@ public class RemoteInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
 
     private class LoadParser extends AbstractParser {
         @Override
-        public LLVMOpcode getOpcode() {
-            return LLVMOpcode.LLVMLoad;
+        public String getOpcode() {
+            return "LLVMLoad";
         }
 
         @Override
-        public Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return null;
         }
 
         @Override
-        public RValue parseValue(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return createLoad(ctx, bitreader.LLVMGetOperand(instruction, 0));
         }
     }
@@ -146,7 +148,7 @@ public class RemoteInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             if (bitreader.LLVMGetNumOperands(instruction) == 0) {
                 return createReturn(ctx, instruction);
             }
@@ -162,20 +164,20 @@ public class RemoteInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
 
         @Override
-        public Cfe parse(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return null;
         }
 
         @Override
-        public RValue parseValue(RemoteCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        public RValue parseValue(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return ctx.getOrCreateTmpVar(instruction);
         }
     }
 
     private class GetElementPtrParser extends AbstractParser {
         @Override
-        public LLVMOpcode getOpcode() {
-            return LLVMOpcode.LLVMGetElementPtr;
+        public String getOpcode() {
+            return "LLVMGetElementPtr";
         }
 
         @Override

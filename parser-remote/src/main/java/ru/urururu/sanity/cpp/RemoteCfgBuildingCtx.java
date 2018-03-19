@@ -3,17 +3,12 @@ package ru.urururu.sanity.cpp;
 import io.swagger.client.model.*;
 import ru.urururu.sanity.api.CfgBuildingCtx;
 import ru.urururu.sanity.api.cfg.*;
-import ru.urururu.sanity.cpp.NativeParsersFacade;
-import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueBasicBlock;
-import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueType;
-import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueValue;
-import ru.urururu.sanity.cpp.llvm.bitreader;
 
 /**
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 public class RemoteCfgBuildingCtx extends CfgBuildingCtx<Integer,
-        ValueRefDto, ValueRefDto, BlockDto, RemoteCfgBuildingCtx> {
+        ValueRefDto, InstructionDto, BlockDto, RemoteCfgBuildingCtx> {
 
     public RemoteCfgBuildingCtx(RemoteParsersFacade parsers, FunctionDto function) {
         super(parsers);
@@ -29,7 +24,7 @@ public class RemoteCfgBuildingCtx extends CfgBuildingCtx<Integer,
         }
     }
 
-    public LValue getOrCreateTmpVar(ValueRefDto instruction) {
+    public LValue getOrCreateTmpVar(InstructionDto instruction) {
         return getOrCreateTmpVar(instruction, 0/*todo*/);
     }
 

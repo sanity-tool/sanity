@@ -9,5 +9,5 @@ import ru.urururu.sanity.api.ParsersFacade;
  */
 @Component
 public class RemoteParsersFacade extends ParsersFacade<Integer,
-        ValueRefDto, ValueRefDto, BlockDto, RemoteCfgBuildingCtx> {
+        ValueRefDto, InstructionDto, BlockDto, RemoteCfgBuildingCtx> {
 }

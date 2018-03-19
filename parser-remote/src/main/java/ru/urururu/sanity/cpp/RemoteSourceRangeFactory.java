@@ -25,35 +25,7 @@ public class RemoteSourceRangeFactory extends SourceRangeFactory<ValueRefDto> im
             return null;
         }
 
-        
-
-        int line = bitreader.SAGetInstructionDebugLocLine(instruction);
-        if (versionByte == 3) {
-            if (line != -1) {
-                String filename = bitreader.SAGetInstructionDebugLocScopeFile(instruction);
-                return getSourceRange(filename, line);
-            }
-
-            return null;
-        }
-
-        long id = bitreader.LLVMGetMDKindID("dbg", 3);
-        SWIGTYPE_p_LLVMOpaqueValue node = bitreader.LLVMGetMetadata(instruction, id);
-
-        if (node != null) {
-            //deepDump(node);
-
-            SWIGTYPE_p_LLVMOpaqueValue pair = getPair(node);
-
-            if (pair != null) {
-                String filename = bitreader.getMDString(bitreader.LLVMGetOperand(pair, 0));
-                String directory = bitreader.getMDString(bitreader.LLVMGetOperand(pair, 1));
-                if (new File(filename).isAbsolute()) {
-                    return getSourceRange(filename, line);
-                }
-                return getSourceRange(new File(directory, filename).getAbsolutePath(), line);
-            }
-        }
+        // todo?
 
         return null;
     }
