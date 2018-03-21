@@ -19,7 +19,7 @@ public class RemoteSourceRangeFactory extends SourceRangeFactory<InstructionDto>
 
         if (sourceRef != null) {
             SourceRefDto sourceRefDto = currentModule.getSourceRefs().get(sourceRef);
-            return getSourceRange(sourceRefDto.getFile().getAbsolutePath(), sourceRefDto.getLine());
+            return getSourceRange(sourceRefDto.getFile(), sourceRefDto.getLine());
         }
 
         return null;
