@@ -24,6 +24,9 @@ public class RemoteValueParser extends ValueParser<Integer,
     private ModuleDto currentModule;
 
     public RValue parseLValue(RemoteCfgBuildingCtx ctx, ValueRefDto value) {
+        if (value.getKind() == ValueRefDto.KindEnum.INSTRUCTION) {
+            return parsers.parseInstructionValue(ctx, ctx.block.getInstructions().get(value.getIndex()));
+        }
         if (value.getKind() == ValueRefDto.KindEnum.GLOBAL) {
             ValueDto valueDto = currentModule.getGlobals().get(value.getIndex());
             if (valueDto.getKind().equals("LLVMGlobalVariableValueKind")) {
@@ -48,7 +51,7 @@ public class RemoteValueParser extends ValueParser<Integer,
             if (valueDto.getKind().equals("LLVMConstantFPValueKind")) {
                 return constants.get(valueDto.getFpValue(), parsers.parse(valueDto.getTypeId()));
             }
-            if (valueDto.getKind().equals("LLVMConstantFPValueKind")) {
+            if (valueDto.getKind().equals("LLVMConstantPointerNullValueKind")) {
                 return constants.getNull(parsers.parse(valueDto.getTypeId()));
             }
         }
