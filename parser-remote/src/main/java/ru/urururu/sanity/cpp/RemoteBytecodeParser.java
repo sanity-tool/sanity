@@ -45,7 +45,10 @@ public class RemoteBytecodeParser implements BytecodeParser {
     public List<Cfg> parse(File file) {
         ModuleDto m;
         try {
-            ParserControllerApi parserApi = new ParserControllerApi(new ApiClient());
+            ApiClient apiClient = new ApiClient();
+            apiClient.setBasePath("http://localhost:8080");
+
+            ParserControllerApi parserApi = new ParserControllerApi(apiClient);
             byte[] bytes = Files.readAllBytes(file.toPath());
             m = parserApi.parseUsingPOST(bytes);
         } catch (IOException | ApiException e) {
@@ -56,34 +59,44 @@ public class RemoteBytecodeParser implements BytecodeParser {
             return Collections.emptyList();
         }
 
-        ArrayList<Cfg> result = new ArrayList<>();
-
-        for (FunctionDto function : m.getFunctions()) {
-            if (!function.getBlocks().isEmpty()) {
-                RemoteCfgBuildingCtx ctx = new RemoteCfgBuildingCtx(parsers, function);
-
-                BlockDto entryBlock = function.getBlocks().get(function.getEntryBlockIndex());
-
-                Cfe entry = parsers.parseBlock(ctx, entryBlock);
-
-                int i = 0;
-                for (BlockDto block : function.getBlocks()) {
-                    ValueRefDto valueRefDto = new ValueRefDto();
-                    valueRefDto.setKind(ValueRefDto.KindEnum.BLOCK);
-                    valueRefDto.setIndex(i++);
-
-                    Cfe blockEntry = parsers.parseBlock(ctx, block);
-                    Cfe label = ctx.getLabel(valueRefDto);
-
-                    label.setNext(blockEntry);
-                }
-
-                entry = cfgUtils.removeNoOps(entry);
-
-                result.add(new Cfg((FunctionAddress) valueParser.parseRValue(null, function.getRef()), entry));
-            }
+        for (ParserListener listener : listeners) {
+            listener.onModuleStarted(m);
         }
 
-        return result;
+        try {
+            ArrayList<Cfg> result = new ArrayList<>();
+
+            for (FunctionDto function : m.getFunctions()) {
+                if (!function.getBlocks().isEmpty()) {
+                    RemoteCfgBuildingCtx ctx = new RemoteCfgBuildingCtx(parsers, function);
+
+                    BlockDto entryBlock = function.getBlocks().get(function.getEntryBlockIndex());
+
+                    Cfe entry = parsers.parseBlock(ctx, entryBlock);
+
+                    int i = 0;
+                    for (BlockDto block : function.getBlocks()) {
+                        ValueRefDto valueRefDto = new ValueRefDto();
+                        valueRefDto.setKind(ValueRefDto.KindEnum.BLOCK);
+                        valueRefDto.setIndex(i++);
+
+                        Cfe blockEntry = parsers.parseBlock(ctx, block);
+                        Cfe label = ctx.getLabel(valueRefDto);
+
+                        label.setNext(blockEntry);
+                    }
+
+                    entry = cfgUtils.removeNoOps(entry);
+
+                    result.add(new Cfg((FunctionAddress) valueParser.parseRValue(null, function.getRef()), entry));
+                }
+            }
+
+            return result;
+        } finally {
+            for (ParserListener listener : listeners) {
+                listener.onModuleFinished(m);
+            }
+        }
     }
 }
