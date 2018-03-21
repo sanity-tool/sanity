@@ -6,6 +6,7 @@ import io.swagger.client.api.ParserControllerApi;
 import io.swagger.client.model.BlockDto;
 import io.swagger.client.model.FunctionDto;
 import io.swagger.client.model.ModuleDto;
+import io.swagger.client.model.ValueRefDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.CfgUtils;
@@ -17,9 +18,6 @@ import ru.urururu.sanity.api.cfg.FunctionAddress;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -68,16 +66,21 @@ public class RemoteBytecodeParser implements BytecodeParser {
 
                 Cfe entry = parsers.parseBlock(ctx, entryBlock);
 
+                int i = 0;
                 for (BlockDto block : function.getBlocks()) {
+                    ValueRefDto valueRefDto = new ValueRefDto();
+                    valueRefDto.setKind(ValueRefDto.KindEnum.BLOCK);
+                    valueRefDto.setIndex(i++);
+
                     Cfe blockEntry = parsers.parseBlock(ctx, block);
-                    Cfe label = ctx.getLabel(block);
+                    Cfe label = ctx.getLabel(valueRefDto);
 
                     label.setNext(blockEntry);
                 }
 
                 entry = cfgUtils.removeNoOps(entry);
 
-                result.add(new Cfg((FunctionAddress) valueParser.parseRValue(null, function), entry));
+                result.add(new Cfg((FunctionAddress) valueParser.parseRValue(null, function.getRef()), entry));
             }
         }
 
