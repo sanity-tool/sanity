@@ -1,6 +1,5 @@
 package ru.urururu.sanity.api.cfg;
 
-import javafx.util.Pair;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.cpp.ParserListener;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;

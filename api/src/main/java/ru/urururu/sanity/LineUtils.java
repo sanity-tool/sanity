@@ -1,6 +1,7 @@
 package ru.urururu.sanity;
 
-import javafx.util.Pair;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class LineUtils implements DisposableBean {
     private static final Map<Pair<File, Integer>, String> CACHE = new HashMap<>();
 
     public static String dumpLine(File file, int lineNumber) {
-        return CACHE.computeIfAbsent(new Pair(file, lineNumber), key -> {
+        return CACHE.computeIfAbsent(new ImmutablePair<>(file, lineNumber), key -> {
             try (FileReader in = new FileReader(file);
                  LineNumberReader reader = new LineNumberReader(in)) {
                 String line;
