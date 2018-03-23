@@ -1,0 +1,9 @@
+version: 1.0.{build}
+image: Ubuntu
+install:
+- ps: >-
+    # appveyor DownloadFile http://llvm.org/releases/3.8.1/LLVM-3.8.1-win64.exe
+
+    # LLVM-3.8.1-win64.exe /S /D=c:\llvm
+build_script:
+- ps: mvn clean test
