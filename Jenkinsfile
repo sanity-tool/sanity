@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage ('Build') {
             steps {
-                sh 'mvn clean test'
+                bat 'mvn clean test'
             }
             post {
                 success {
