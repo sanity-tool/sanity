@@ -3,18 +3,14 @@ package ru.urururu.sanity.cpp;
 import io.swagger.client.ApiClient;
 import io.swagger.client.ApiException;
 import io.swagger.client.api.ParserControllerApi;
-import io.swagger.client.model.BlockDto;
-import io.swagger.client.model.FunctionDto;
-import io.swagger.client.model.ModuleDto;
-import io.swagger.client.model.ValueRefDto;
+import io.swagger.client.model.*;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.CfgUtils;
 import ru.urururu.sanity.api.BytecodeParser;
 import ru.urururu.sanity.api.Cfg;
-import ru.urururu.sanity.api.cfg.Cfe;
-import ru.urururu.sanity.api.cfg.ConstCache;
-import ru.urururu.sanity.api.cfg.FunctionAddress;
+import ru.urururu.sanity.api.cfg.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +36,58 @@ public class RemoteBytecodeParser implements BytecodeParser {
     ParserListener[] listeners;
     @Autowired
     ConstCache constants;
+
+    private Cfe parseGlobalInitializers(ModuleDto module) {
+        CfgBuilder builder = new CfgBuilder();
+
+        int globalIndex = 0;
+        for (ValueDto global : module.getGlobals()) {
+            ValueRefDto globalRef = new ValueRefDto();
+            globalRef.setIndex(globalIndex++);
+            globalRef.setKind(ValueRefDto.KindEnum.GLOBAL);
+
+            try {
+                List<ValueRefDto> initializer = global.getOperands();
+                if (CollectionUtils.isNotEmpty(initializer)) {
+                    GlobalVar pointerToGlobal = (GlobalVar) valueParser.parseLValue(null, globalRef);
+
+                    if (pointerToGlobal.getName().contains("rustc_debug")) {
+                        continue;
+                    }
+
+                    LValue globalToInitialize = new Indirection(pointerToGlobal);
+//                    if (bitreader.LLVMIsAConstantStruct(initializer) != null) {
+//                        int n = bitreader.LLVMGetNumOperands(initializer);
+//                        while (n-- > 0) {
+//                            SWIGTYPE_p_LLVMOpaqueValue fieldInit = bitreader.LLVMGetOperand(initializer, n);
+//                            RValue rValue = valueParser.parseRValue(null, fieldInit);
+//                            builder.append(new Assignment(new Indirection(new GetFieldPointer(globalToInitialize, n)), rValue, null));
+//                        }
+//                    } else if (bitreader.LLVMIsAConstantArray(initializer) != null) {
+//                        int n = bitreader.LLVMGetNumOperands(initializer);
+//                        while (n-- > 0) {
+//                            SWIGTYPE_p_LLVMOpaqueValue elementInit = bitreader.LLVMGetOperand(initializer, n);
+//                            RValue rValue = valueParser.parseRValue(null, elementInit);
+//                            builder.append(new Assignment(new Indirection(new GetElementPointer(globalToInitialize, constants.get(n, typeParser.parse(bitreader.LLVMIntType(32))))), rValue, null));
+//                        }
+//                    } else if (bitreader.LLVMIsAConstantDataArray(initializer) != null) {
+//                        Type type = typeParser.parse(bitreader.LLVMTypeOf(initializer));
+//                        String s = bitreader.GetDataArrayString(initializer);
+//                        if (s != null) {
+//                            builder.append(new Assignment(globalToInitialize, constants.get(s, type), null));
+//                        }
+//                    } else {
+                        builder.append(new Assignment(globalToInitialize, valueParser.parseRValue(null, initializer.get(0)), null));
+//                    }
+                }
+            } catch (Exception e) {
+                System.err.println("Can't parse global: " + global.getName());
+                e.printStackTrace(System.err);
+            }
+        }
+
+        return builder.getResult();
+    }
 
     @Override
     public List<Cfg> parse(File file) {
@@ -90,6 +138,11 @@ public class RemoteBytecodeParser implements BytecodeParser {
 
                     result.add(new Cfg((FunctionAddress) valueParser.parseRValue(null, function.getRef()), entry));
                 }
+            }
+
+            Cfe entry = parseGlobalInitializers(m);
+            if (entry != null) {
+                result.add(new Cfg("<module init>", entry));
             }
 
             return result;
