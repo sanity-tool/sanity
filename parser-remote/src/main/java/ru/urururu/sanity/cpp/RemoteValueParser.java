@@ -35,6 +35,9 @@ public class RemoteValueParser extends ValueParser<Integer,
 
             throw new IllegalStateException("Can't parse LValue: " + valueDto);
         }
+        if (value.getKind() == ValueRefDto.KindEnum.ARGUMENT) {
+            return ctx.getParam(value);
+        }
 
         throw new IllegalStateException("Can't parse LValue: " + value);
     }

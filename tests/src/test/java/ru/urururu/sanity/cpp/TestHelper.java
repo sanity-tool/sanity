@@ -139,6 +139,9 @@ abstract class TestHelper {
             byte[] bytes = Files.readAllBytes(pathToExpected);
             String expected = new String(bytes, Charset.defaultCharset());
 
+            expected = expected.replaceAll("\r\n", "\n"); // todo think of better crossplatform comparison
+            actual = actual.replaceAll("\r\n", "\n");
+
             Assert.assertEquals(expected, actual);
         } catch (ComparisonFailure e) {
             if (FAILURES_DIR != null) {

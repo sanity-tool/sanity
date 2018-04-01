@@ -9,9 +9,11 @@ import ru.urururu.sanity.api.cfg.*;
  */
 public class RemoteCfgBuildingCtx extends CfgBuildingCtx<Integer,
         ValueRefDto, InstructionDto, BlockDto, RemoteCfgBuildingCtx> {
+    private final FunctionDto function;
 
     public RemoteCfgBuildingCtx(RemoteParsersFacade parsers, FunctionDto function) {
         super(parsers);
+        this.function = function;
 
         int i = 0;
         for (ValueDto param : function.getParams()) {
@@ -25,7 +27,7 @@ public class RemoteCfgBuildingCtx extends CfgBuildingCtx<Integer,
     }
 
     public LValue getOrCreateTmpVar(InstructionDto instruction) {
-        return getOrCreateTmpVar(instruction, 0/*todo*/);
+        return getOrCreateTmpVar(instruction, instruction.getTypeId());
     }
 
     public RValue getParam(ValueRefDto value) {
@@ -38,26 +40,26 @@ public class RemoteCfgBuildingCtx extends CfgBuildingCtx<Integer,
         }
 
         Integer blockId = label.getIndex();
-        //todo BlockDto block = bitreader.LLVMValueAsBasicBlock(label);
+        BlockDto block = function.getBlocks().get(blockId);
 
         Cfe result = labels.computeIfAbsent(block, k -> new NoOp(null));
 
         InstructionDto instruction = block.getInstructions().iterator().next();
-//        if (instruction.getKind().equals("Phi")) { // todo
-//            long n = bitreader.LLVMCountIncoming(instruction);
-//            for (int i = 0; i < n; i++) {
-//                if (this.block.equals(bitreader.LLVMGetIncomingBlock(instruction, i))) {
-//                    Assignment phiAssignment = new Assignment(
-//                            getOrCreateTmpVar(instruction),
-//                            parsers.parseRValue(this, bitreader.LLVMGetIncomingValue(instruction, i)),
-//                            parsers.getSourceRange(instruction)
-//                    );
-//                    phiAssignment.setNext(result);
-//
-//                    return phiAssignment;
-//                }
-//            }
-//        }
+        if (instruction.getKind().equals("LLVMPHI")) {
+            long n = instruction.getIncomingBlocks().size();
+            for (int i = 0; i < n; i++) {
+                if (this.block.equals(function.getBlocks().get(instruction.getIncomingBlocks().get(i).getIndex()))) {
+                    Assignment phiAssignment = new Assignment(
+                            getOrCreateTmpVar(instruction),
+                            parsers.parseRValue(this, instruction.getIncomingValues().get(i)),
+                            parsers.getSourceRange(instruction)
+                    );
+                    phiAssignment.setNext(result);
+
+                    return phiAssignment;
+                }
+            }
+        }
 
         return result;
     }

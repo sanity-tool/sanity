@@ -64,5 +64,7 @@ public class RemoteTypeParser extends TypeParser<Integer> implements ParserListe
     @Override
     public void onModuleFinished(ModuleDto module) {
         currentModule = null;
+        typesCache.clear();
+        structCache.clear();
     }
 }
