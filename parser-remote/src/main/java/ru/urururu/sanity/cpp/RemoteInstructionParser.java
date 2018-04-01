@@ -422,7 +422,7 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return createBinaryAssignment(ctx, instruction,
                     instruction.getOperands().get(0),
-                    predicateOperatorMap.get("LLVMIntUGT"),
+                    predicateOperatorMap.get(instruction.getPredicate()),
                     instruction.getOperands().get(1));
         }
 
@@ -462,7 +462,7 @@ public class RemoteInstructionParser extends InstructionParser<Integer,
         public Cfe parse(RemoteCfgBuildingCtx ctx, InstructionDto instruction) {
             return createBinaryAssignment(ctx, instruction,
                     instruction.getOperands().get(0),
-                    predicateOperatorMap.get("LLVMRealOLT"),
+                    predicateOperatorMap.get(instruction.getPredicate()),
                     instruction.getOperands().get(1));
         }
 
