@@ -24,9 +24,6 @@ public class RemoteValueParser extends ValueParser<Integer,
     private ModuleDto currentModule;
 
     public RValue parseLValue(RemoteCfgBuildingCtx ctx, ValueRefDto value) {
-        if (value.getKind() == ValueRefDto.KindEnum.INSTRUCTION) {
-            return parsers.parseInstructionValue(ctx, ctx.block.getInstructions().get(value.getIndex()));
-        }
         if (value.getKind() == ValueRefDto.KindEnum.GLOBAL) {
             ValueDto valueDto = currentModule.getGlobals().get(value.getIndex());
             if (valueDto.getKind().equals("LLVMGlobalVariableValueKind")) {
@@ -43,8 +40,19 @@ public class RemoteValueParser extends ValueParser<Integer,
     }
 
     public RValue parseRValue(RemoteCfgBuildingCtx ctx, ValueRefDto value) {
+        if (value.getKind() == ValueRefDto.KindEnum.INSTRUCTION) {
+            return parsers.parseInstructionValue(ctx, ctx.function.getBlocks().get(value.getBlockIndex()).getInstructions().get(value.getIndex()));
+        }
         if (value.getKind() == ValueRefDto.KindEnum.GLOBAL) {
             ValueDto valueDto = currentModule.getGlobals().get(value.getIndex());
+            if (valueDto.getKind().equals("LLVMConstantExprValueKind")) {
+                InstructionDto fakeInstruction = new InstructionDto();
+                fakeInstruction.setKind(valueDto.getOpcode());
+                fakeInstruction.setOperands(valueDto.getOperands());
+                fakeInstruction.setTypeId(valueDto.getTypeId());
+
+                return parsers.parseInstructionConst(ctx, fakeInstruction);
+            }
             if (valueDto.getKind().equals("LLVMFunctionValueKind")) {
                 return constants.getFunction(valueDto.getName(), parsers.parse(valueDto.getTypeId()));
             }

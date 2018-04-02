@@ -1,6 +1,7 @@
 package ru.urururu.sanity.cpp;
 
-import javafx.util.Pair;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.api.cfg.GlobalVar;
 import ru.urururu.sanity.api.cfg.RValue;
@@ -21,6 +22,6 @@ public class GlobalVariableCache {
         if (name.isEmpty()) {
             name = "global" + count++;
         }
-        return cache.computeIfAbsent(new Pair<>(name, type), p -> new GlobalVar(p.getKey(), p.getValue()));
+        return cache.computeIfAbsent(new ImmutablePair<>(name, type), p -> new GlobalVar(p.getKey(), p.getValue()));
     }
 }

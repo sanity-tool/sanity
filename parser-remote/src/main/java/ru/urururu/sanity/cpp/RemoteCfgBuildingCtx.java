@@ -9,7 +9,7 @@ import ru.urururu.sanity.api.cfg.*;
  */
 public class RemoteCfgBuildingCtx extends CfgBuildingCtx<Integer,
         ValueRefDto, InstructionDto, BlockDto, RemoteCfgBuildingCtx> {
-    private final FunctionDto function;
+    final FunctionDto function;
 
     public RemoteCfgBuildingCtx(RemoteParsersFacade parsers, FunctionDto function) {
         super(parsers);
