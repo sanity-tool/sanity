@@ -6,7 +6,7 @@ environment:
   CLANG_BIN: clang-5.0
 build_script:
 - sh: wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
-- sh: sudo apt-get install clang-5.0 lldb-5.0
+- sh: sudo apt-get install -y clang-5.0 lldb-5.0
 - sh: curl https://sh.rustup.rs -sSf | sh -s -- -y
 - ps: >-
     docker run -d -p 8080:8080 sanitytool/bitreader-service
