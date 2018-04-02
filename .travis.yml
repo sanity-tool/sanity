@@ -70,9 +70,7 @@ matrix:
 language: java
 
 before_install:
- - docker pull sanitytool/bitreader-service
- - docker run -d -p 127.0.0.1:80:4567 sanitytool/bitreader-service
- - docker ps -a
+ - docker run -d -p 8080:8080 sanitytool/bitreader-service
 
 install:
  - export SANITY_PROFILE=parser-remote
