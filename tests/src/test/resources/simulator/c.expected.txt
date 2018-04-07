@@ -1,11 +1,3 @@
-#0000:	 assign: tmp0 = *I != 0
-conditions.c:4 if (I);
-java.lang.IllegalStateException: Don't know how to get value from BinaryExpression
-
-#0000:	 assign: tmp0 = *tmp1 != null
-conditions.c:9 if (p);
-java.lang.IllegalStateException: Don't know how to get value from BinaryExpression
-
 Globals:
 I -> G_0
 Heap:
@@ -15,6 +7,14 @@ Path:
 assign.c:4 I = 0;
 #0001:	 call: tmp0 = dump() <exit>
 assign.c:5 dump();
+
+#0000:	 assign: tmp0 = *I != 0
+conditions.c:4 if (I);
+java.lang.IllegalStateException: Don't know how to get value from BinaryExpression
+
+#0000:	 assign: tmp0 = *tmp1 != null
+conditions.c:9 if (p);
+java.lang.IllegalStateException: Don't know how to get value from BinaryExpression
 
 Path:
 #0000:	 call: tmp0 = dump() <exit>

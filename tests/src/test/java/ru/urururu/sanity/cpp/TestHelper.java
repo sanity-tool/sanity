@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -186,7 +187,9 @@ abstract class TestHelper {
     List<Cfg> parseAll(Parser parser, File directory, Language language) throws Exception {
         List<Cfg> allCfgs = new ArrayList<>();
 
-        for (File file : directory.listFiles()) {
+        File[] files = directory.listFiles();
+        Arrays.sort(files);
+        for (File file : files) {
             if (file.isDirectory()) {
                 allCfgs.addAll(parseAll(parser, file, language));
             } else if (language.getExtensions().contains(FilenameUtils.getExtension(file.getName()))) {
