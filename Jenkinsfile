@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'osx' }
     tools {
         maven 'Maven 3.3.9'
         jdk '1.8'
@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage ('Build') {
             steps {
-                bat 'mvn clean test'
+                sh 'mvn clean test'
             }
             post {
                 success {
