@@ -4,7 +4,7 @@ pipeline {
     }
     stages {
         stage('Build') {
-            parallel {
+            //parallel {
                 stage('clang (default)') {
                     steps {
                         sh 'CLANG_BIN=clang mvn test -P parser-native'
@@ -85,7 +85,7 @@ pipeline {
                         }
                     }
                 }
-            }
+            //}
         }
     }
     tools {
