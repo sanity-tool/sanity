@@ -6,8 +6,8 @@ pipeline {
     }
     stages {
         stage ('Build') {
-            timestamps {
-                steps {
+            steps {
+                timestamps {
                     sh 'cmake'
                     sh 'mvn clean test -P parser-native'
                 }
