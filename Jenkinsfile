@@ -6,8 +6,10 @@ pipeline {
     }
     stages {
         stage ('Build') {
-            steps {
-                sh 'mvn clean test -P parser-native'
+            timestamps {
+                steps {
+                    sh 'mvn clean test -P parser-native'
+                }
             }
             post {
                 success {
