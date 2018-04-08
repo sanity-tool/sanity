@@ -7,7 +7,7 @@ pipeline {
                     agent {
                         label 'osx'
                     }
-                    stages {
+                    steps {
                         testClang('clang')
                         testClang('/usr/local/opt/llvm/bin/clang')
                         testClang('clang-3.3')
@@ -28,7 +28,7 @@ pipeline {
 }
 
 def testClang(clangBin) {
-    stage('clangBin') {
+    stage(clangBin) {
         steps {
             sh "CLANG_BIN=$clangBin mvn test -P parser-native"
         }
