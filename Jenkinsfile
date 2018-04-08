@@ -8,7 +8,8 @@ pipeline {
         stage ('Build') {
             steps {
                 timestamps {
-                    sh 'mvn clean test -P parser-native'
+                    sh 'scripts/test_all_osx.sh'
+                    //sh 'mvn clean test -P parser-native'
                 }
             }
             post {
