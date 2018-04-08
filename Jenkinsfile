@@ -3,7 +3,7 @@ pipeline {
         label 'osx'
     }
     stages {
-        stage('Build') {
+        //stage('Build') {
             //parallel {
                 stage('clang (default)') {
                     steps {
@@ -86,7 +86,7 @@ pipeline {
                     }
                 }
             //}
-        }
+        //}
     }
     tools {
         maven 'Maven 3.3.9'
