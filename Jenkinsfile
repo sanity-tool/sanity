@@ -17,6 +17,11 @@ pipeline {
                         testClang('/usr/local/opt/llvm@4/bin/clang-4.0')
                         testClang('/usr/local/opt/llvm@5/bin/clang-5.0')
                     }
+                    post {
+                        always {
+                            junit 'tests/target/surefire-reports/**/*.xml'
+                        }
+                    }
                 }
             }
         }
@@ -28,14 +33,5 @@ pipeline {
 }
 
 def testClang(clangBin) {
-    stage(clangBin) {
-        steps {
-            sh "CLANG_BIN=$clangBin mvn test -P parser-native"
-        }
-        post {
-            success {
-                junit 'tests/target/surefire-reports/**/*.xml'
-            }
-        }
-    }
+    sh "CLANG_BIN=$clangBin mvn test -P parser-native"
 }
