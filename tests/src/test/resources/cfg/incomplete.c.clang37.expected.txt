@@ -1,0 +1,4 @@
+CFG: acceptConstStructRef
+#0000:	 assign: *tmp0 = p <exit>
+ - no source -
+
