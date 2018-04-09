@@ -9,7 +9,7 @@ pipeline {
                     }
                     steps {
                         testOsx('parser-native')
-                        docker.image('sanitytool/bitreader-service').withRun('-p 8080:8080') {
+                        docker.image('sanitytool/bitreader-service').withRun('-p 8080:8080') { c ->
                             testOsx('parser-remote')
                         }                        
                     }
@@ -27,7 +27,7 @@ pipeline {
                         label 'win32'
                     }
                     steps {
-                        docker.image('sanitytool/bitreader-service').withRun('-p 8080:8080') {
+                        docker.image('sanitytool/bitreader-service').withRun('-p 8080:8080') { c->
                             testWin32('parser-remote')
                         }                        
                     }
