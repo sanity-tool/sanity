@@ -40,14 +40,5 @@ def testClang(clangBin) {
 }
 
 def testRust(rustBin) {
-    stage('clangBin') {
-        steps {
-            sh "CLANG_BIN=$clangBin mvn test -P parser-native"
-        }
-        post {
-            success {
-                junit 'tests/target/surefire-reports/**/*.xml'
-            }
-        }
-    }
+    sh "RUST_BIN=$rustBin mvn test -P parser-native"
 }
