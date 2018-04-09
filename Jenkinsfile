@@ -9,9 +9,13 @@ pipeline {
                     }
                     steps {
                         testOsx('parser-native')
-                        docker.image('sanitytool/bitreader-service').withRun('-p 8080:8080') { c ->
+                        
+                        containerId = sh(returnStdout: true, script: 'docker run -d -p 8080:8080 sanitytool/bitreader-service').trim()
+                        try {
                             testOsx('parser-remote')
-                        }                        
+                        } finally {
+                            sh "docker stop $containerId"
+                        }
                     }
                     post {
                         always {
@@ -27,9 +31,12 @@ pipeline {
                         label 'win32'
                     }
                     steps {
-                        docker.image('sanitytool/bitreader-service').withRun('-p 8080:8080') { c->
+                        containerId = sh(returnStdout: true, script: 'docker run -d -p 8080:8080 sanitytool/bitreader-service').trim()
+                        try {
                             testWin32('parser-remote')
-                        }                        
+                        } finally {
+                            sh "docker stop $containerId"
+                        }                    
                     }
                     post {
                         always {
