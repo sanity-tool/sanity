@@ -9,7 +9,9 @@ pipeline {
                     }
                     steps {
                         testOsx('parser-native')
-                        testOsx('parser-remote')
+                        docker.image('mysql:5').withRun('-p 8080:8080') {
+                            testOsx('parser-remote')
+                        }                        
                     }
                     post {
                         always {
