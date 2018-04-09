@@ -234,7 +234,10 @@ after_failure:
 notifications:
   email: false
   slack: staticanalyzers:8CXJTuMbcNHE7COl24xZuz9G
-  
+
+branches:
+  only:
+  - master
 
 cache:
   directories:
