@@ -1,0 +1,96 @@
+CFG: _ZL7testNewv
+#0000:	 call: tmp0 = _Znwm(4)
+memory.cpp:4 P = new int;
+#0001:	 assign: tmp1 = tmp0
+memory.cpp:4 P = new int;
+#0002:	 assign: *P = tmp1
+memory.cpp:4 P = new int;
+#0003:	 call: tmp2 = _Znam(20)
+memory.cpp:5 P2 = new int[5];
+#0004:	 assign: tmp3 = tmp2
+memory.cpp:5 P2 = new int[5];
+#0005:	 assign: *P2 = tmp3
+memory.cpp:5 P2 = new int[5];
+#0006:	 call: tmp4 = _Znwm(4)
+memory.cpp:6 P3 = new int(5);
+#0007:	 assign: tmp5 = tmp4
+memory.cpp:6 P3 = new int(5);
+#0008:	 assign: *tmp5 = 5
+memory.cpp:6 P3 = new int(5);
+#0009:	 assign: *P3 = tmp5 <exit>
+memory.cpp:6 P3 = new int(5);
+
+CFG: _ZL10testDeletev
+#0000:	 assign: tmp0 = *P == null
+memory.cpp:10 delete P;
+#0001:	 if: tmp0 then #0002:	 else #0003:
+memory.cpp:10 delete P;
+#0002:	 noop
+ - no source -
+#0004:	 assign: tmp1 = *P2 == null
+memory.cpp:11 delete[] P2;
+#0005:	 if: tmp1 then #0006:	 else #0007:
+memory.cpp:11 delete[] P2;
+#0006:	 noop <exit>
+ - no source -
+#0007:	 assign: tmp2 = *P2
+memory.cpp:11 delete[] P2;
+#0008:	 call: _ZdaPv(tmp2) next: #0006:
+memory.cpp:11 delete[] P2;
+#0003:	 assign: tmp3 = *P
+memory.cpp:10 delete P;
+#0009:	 call: _ZdlPv(tmp3) next: #0002:
+memory.cpp:10 delete P;
+
+CFG: _ZL13testNewStructv
+#0000:	 call: tmp0 = _Znwm(1)
+memory.cpp:20 PSTRUCT = new Foo();
+#0001:	 assign: tmp1 = tmp0
+memory.cpp:20 PSTRUCT = new Foo();
+#0002:	 noop: opcode 'LLVMInvoke' not supported <exit>
+memory.cpp:20 PSTRUCT = new Foo();
+
+CFG: _ZL16testDeleteStructv
+#0000:	 assign: tmp0 = *PSTRUCT == null
+memory.cpp:25 delete PSTRUCT;
+#0001:	 if: tmp0 then #0002:	 else #0003:
+memory.cpp:25 delete PSTRUCT;
+#0002:	 noop
+ - no source -
+#0004:	 assign: tmp1 = *PSTRUCT2 == null
+memory.cpp:26 delete[] PSTRUCT2;
+#0005:	 if: tmp1 then #0006:	 else #0007:
+memory.cpp:26 delete[] PSTRUCT2;
+#0006:	 noop <exit>
+ - no source -
+#0007:	 assign: tmp2 = *PSTRUCT2
+memory.cpp:26 delete[] PSTRUCT2;
+#0008:	 assign: tmp3 = (tmp2+-8)
+memory.cpp:26 delete[] PSTRUCT2;
+#0009:	 assign: tmp4 = *PSTRUCT2 == (*PSTRUCT2+*tmp3)
+memory.cpp:26 delete[] PSTRUCT2;
+#0010:	 if: tmp4 then #0011:	 else #0012:
+memory.cpp:26 delete[] PSTRUCT2;
+#0011:	 call: _ZdaPv((tmp2+-8)) next: #0006:
+memory.cpp:26 delete[] PSTRUCT2;
+#0012:	 assign: tmp5 = (*PSTRUCT2+*tmp3) <exit>
+memory.cpp:26 delete[] PSTRUCT2;
+#0003:	 call: _ZN3FooD1Ev(*PSTRUCT)
+memory.cpp:25 delete PSTRUCT;
+#0013:	 assign: tmp6 = *PSTRUCT
+memory.cpp:25 delete PSTRUCT;
+#0014:	 call: _ZdlPv(tmp6) next: #0002:
+memory.cpp:25 delete PSTRUCT;
+
+CFG: <module init>
+#0000:	 assign: *P = null
+ - no source -
+#0001:	 assign: *P2 = null
+ - no source -
+#0002:	 assign: *P3 = null
+ - no source -
+#0003:	 assign: *PSTRUCT = null
+ - no source -
+#0004:	 assign: *PSTRUCT2 = null <exit>
+ - no source -
+
