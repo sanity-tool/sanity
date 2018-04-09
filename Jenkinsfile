@@ -8,12 +8,8 @@ pipeline {
                         label 'osx'
                     }
                     steps {
-                        testClang('clang-3.3')
-                        testClang('clang-3.6')
-                        testClang('clang-3.7')
-                        testClang('clang-3.8')
-                        testClang('/usr/local/opt/llvm@4/bin/clang-4.0')
-                        testClang('/usr/local/opt/llvm@5/bin/clang-5.0')
+                        testOsx('parser-native')
+                        testOsx('parser-remote')
                     }
                     post {
                         always {
@@ -33,10 +29,24 @@ pipeline {
     }
 }
 
-def testClang(clangBin) {
-    sh "CLANG_BIN=$clangBin mvn test -P parser-native"
+def testOsx(profile) {
+    testClang('clang', profile)
+    testClang('/usr/local/opt/llvm/bin/clang', profile)
+    testClang('clang-3.3', profile)
+    testClang('clang-3.6', profile)
+    testClang('clang-3.7', profile)
+    testClang('clang-3.8', profile)
+    testClang('/usr/local/opt/llvm@4/bin/clang-4.0', profile)
+    testClang('/usr/local/opt/llvm@5/bin/clang-5.0', profile)
+
+    testRust('rustc', profile)
+    testRust("$env.HOME/.cargo/bin/rustc", profile)
 }
 
-def testRust(rustBin) {
-    sh "RUST_BIN=$rustBin mvn test -P parser-native"
+def testClang(clangBin, profile) {
+    sh "CLANG_BIN=$clangBin mvn test -P $profile"
+}
+
+def testRust(rustBin, profile) {
+    sh "RUST_BIN=$rustBin mvn test -P $profile"
 }
