@@ -16,6 +16,9 @@ pipeline {
                         testClang('clang-3.8')
                         testClang('/usr/local/opt/llvm@4/bin/clang-4.0')
                         testClang('/usr/local/opt/llvm@5/bin/clang-5.0')
+
+                        testRust('rustc')
+                        testRust("$env.HOME/.cargo/bin/rustc")
                     }
                     post {
                         always {
@@ -34,4 +37,17 @@ pipeline {
 
 def testClang(clangBin) {
     sh "CLANG_BIN=$clangBin mvn test -P parser-native"
+}
+
+def testRust(rustBin) {
+    stage('clangBin') {
+        steps {
+            sh "CLANG_BIN=$clangBin mvn test -P parser-native"
+        }
+        post {
+            success {
+                junit 'tests/target/surefire-reports/**/*.xml'
+            }
+        }
+    }
 }
