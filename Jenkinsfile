@@ -9,7 +9,7 @@ pipeline {
                     }
                     steps {
                         testOsx('parser-native')
-                        docker.image('mysql:5').withRun('-p 8080:8080') {
+                        docker.image('sanitytool/bitreader-service').withRun('-p 8080:8080') {
                             testOsx('parser-remote')
                         }                        
                     }
@@ -19,6 +19,21 @@ pipeline {
                         }
                         cleanup {
                             cleanWs()
+                        }
+                    }
+                }
+                stage('Test on Win32') {
+                    agent {
+                        label 'win32'
+                    }
+                    steps {
+                        docker.image('sanitytool/bitreader-service').withRun('-p 8080:8080') {
+                            testWin32('parser-remote')
+                        }                        
+                    }
+                    post {
+                        always {
+                            junit 'tests/target/surefire-reports/**/*.xml'
                         }
                     }
                 }
@@ -43,6 +58,10 @@ def testOsx(profile) {
 
     testRust('rustc', profile)
     testRust("$env.HOME/.cargo/bin/rustc", profile)
+}
+
+def testWin32(profile) {
+    testClang('C:\\Program Files\\LLVM\\bin\\clang.exe', profile)
 }
 
 def testClang(clangBin, profile) {
