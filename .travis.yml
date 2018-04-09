@@ -192,13 +192,13 @@ matrix:
       env:
       - TESTED_LANGS="C Cpp ObjectiveC"
       - EXTRA_BREW=llvm@4
-      - CLANG_BIN=/usr/local/opt/llvm/bin/clang-4.0
+      - CLANG_BIN=/usr/local/opt/llvm@4/bin/clang-4.0
 
     - os: osx
       env:
       - TESTED_LANGS="C Cpp ObjectiveC"
       - EXTRA_BREW=llvm@5
-      - CLANG_BIN=/usr/local/opt/llvm/bin/clang-5.0
+      - CLANG_BIN=/usr/local/opt/llvm@5/bin/clang-5.0
 
     - os: osx
       env:
