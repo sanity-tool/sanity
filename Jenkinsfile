@@ -12,11 +12,11 @@ pipeline {
                         
                         script {
                             containerId = sh(returnStdout: true, script: 'docker run -d -p 8080:8080 sanitytool/bitreader-service').trim()
-                            try {
+                            //try {
                                 testOsx('parser-remote')
-                            finally {
+                            //finally {
                                 sh "docker stop $containerId"
-                            }
+                            //}
                         }
                     }
                     post {
@@ -35,11 +35,11 @@ pipeline {
                     steps {
                         script {
                             containerId = powershell returnStdout: true, script: 'docker run -d -p 8080:8080 sanitytool/bitreader-service'
-                            try {
+                            //try {
                                 testWin32('parser-remote')
-                            } finally {
+                            //} finally {
                                 powershell "docker stop $containerId"
-                            }
+                            //}
                         }
                     }
                     post {
