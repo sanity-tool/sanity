@@ -11,11 +11,8 @@ pipeline {
                         testOsx('parser-native')
                         
                         containerId = sh(returnStdout: true, script: 'docker run -d -p 8080:8080 sanitytool/bitreader-service').trim()
-                        try {
-                            testOsx('parser-remote')
-                        } finally {
-                            sh "docker stop $containerId"
-                        }
+                        testOsx('parser-remote')
+                        sh "docker stop $containerId"
                     }
                     post {
                         always {
@@ -31,12 +28,9 @@ pipeline {
                         label 'win32'
                     }
                     steps {
-                        containerId = sh(returnStdout: true, script: 'docker run -d -p 8080:8080 sanitytool/bitreader-service').trim()
-                        try {
-                            testWin32('parser-remote')
-                        } finally {
-                            sh "docker stop $containerId"
-                        }                    
+                        containerId = powershell returnStdout: true, script: 'docker run -d -p 8080:8080 sanitytool/bitreader-service'
+                        testWin32('parser-remote')
+                        powershell "docker stop $containerId"
                     }
                     post {
                         always {
