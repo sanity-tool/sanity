@@ -1,3 +1,3 @@
 # sanity
-[![Build Status](https://travis-ci.org/okutane/sanity.svg?branch=master)](https://travis-ci.org/okutane/sanity)
-[![codecov](https://codecov.io/gh/okutane/sanity/branch/master/graph/badge.svg)](https://codecov.io/gh/okutane/sanity)
+[![Build Status](https://travis-ci.org/sanity-tool/sanity.svg?branch=master)](https://travis-ci.org/sanity-tool/sanity)
+[![codecov](https://codecov.io/gh/sanity-tool/sanity/branch/master/graph/badge.svg)](https://codecov.io/gh/sanity-tool/sanity)
