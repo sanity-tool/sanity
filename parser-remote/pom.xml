@@ -25,7 +25,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>http://localhost:8080/v2/api-docs</inputSpec>
+                            <inputSpec>${env.BITREADER_URL}/v2/api-docs</inputSpec>
                             <language>java</language>
                             <configOptions>
                                 <sourceFolder>src/gen/java/main</sourceFolder>

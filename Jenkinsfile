@@ -1,5 +1,10 @@
 pipeline {
     agent none
+
+    environment {
+        BITREADER_URL = 'http://192.168.1.2:8080'
+    }
+
     stages {
         stage('Test') {
             parallel {
@@ -9,15 +14,7 @@ pipeline {
                     }
                     steps {
                         testOsx('parser-native')
-                        
-                        script {
-                            containerId = sh(returnStdout: true, script: 'docker run -d -p 8080:8080 sanitytool/bitreader-service').trim()
-                            //try {
-                                testOsx('parser-remote')
-                            //finally {
-                                sh "docker stop $containerId"
-                            //}
-                        }
+                        testOsx('parser-remote')
                     }
                     post {
                         always {
@@ -33,14 +30,7 @@ pipeline {
                         label 'win32'
                     }
                     steps {
-                        script {
-                            containerId = powershell returnStdout: true, script: 'docker run -d -p 8080:8080 sanitytool/bitreader-service'
-                            //try {
-                                testWin32('parser-remote')
-                            //} finally {
-                                powershell "docker stop $containerId"
-                            //}
-                        }
+                        testWin32('parser-remote')
                     }
                     post {
                         always {

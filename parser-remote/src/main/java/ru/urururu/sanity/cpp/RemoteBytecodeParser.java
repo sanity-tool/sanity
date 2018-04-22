@@ -94,7 +94,7 @@ public class RemoteBytecodeParser implements BytecodeParser {
         ModuleDto m;
         try {
             ApiClient apiClient = new ApiClient();
-            apiClient.setBasePath("http://localhost:8080");
+            apiClient.setBasePath(System.getenv("BITREADER_URL"));
 
             ParserControllerApi parserApi = new ParserControllerApi(apiClient);
             byte[] bytes = Files.readAllBytes(file.toPath());
