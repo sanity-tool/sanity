@@ -25,7 +25,7 @@ pipeline {
                         }
                     }
                 }
-                stage('Test on Win32') {
+                /*stage('Test on Win32') {
                     agent {
                         label 'win32'
                     }
@@ -37,7 +37,7 @@ pipeline {
                             junit 'tests/target/surefire-reports/**/*.xml'
                         }
                     }
-                }
+                }*/
             }
         }
     }
