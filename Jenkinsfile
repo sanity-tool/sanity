@@ -25,19 +25,6 @@ pipeline {
                         }
                     }
                 }
-                /*stage('Test on Win32') {
-                    agent {
-                        label 'win32'
-                    }
-                    steps {
-                        testWin32('parser-remote')
-                    }
-                    post {
-                        always {
-                            junit 'tests/target/surefire-reports/**/*.xml'
-                        }
-                    }
-                }*/
             }
         }
     }
