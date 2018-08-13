@@ -7,7 +7,8 @@ import ru.urururu.sanity.cpp.llvm.*;
 import ru.urururu.util.FinalMap;
 import ru.urururu.util.Iterables;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.Map;
 import java.util.function.Function;
 
 /**
@@ -34,7 +35,15 @@ public class NativeTypeParser extends TypeParser<SWIGTYPE_p_LLVMOpaqueType> impl
 
     public Type parse(SWIGTYPE_p_LLVMOpaqueType type) {
         LLVMTypeKind typeKind = bitreader.LLVMGetTypeKind(type);
-        return typesCache.computeIfAbsent(type, key -> parsers.getOrDefault(typeKind, this::parseUnknown).apply(type));
+        Type cached = typesCache.getOrDefault(type, null);
+
+        if (cached == null) {
+            Function<SWIGTYPE_p_LLVMOpaqueType, Type> parser = parsers.getOrDefault(typeKind, this::parseUnknown);
+            cached = parser.apply(type);
+            cached = typesCache.merge(type, cached, (older, newer) -> older);
+        }
+
+        return cached;
     }
 
     private Type parseFunction(SWIGTYPE_p_LLVMOpaqueType type) {
