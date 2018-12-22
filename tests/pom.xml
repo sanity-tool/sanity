@@ -62,7 +62,31 @@
                     <groupId>ru.urururu</groupId>
                     <artifactId>sanity-parser-native</artifactId>
                     <version>1.0-SNAPSHOT</version>
-                    <!--<scope>runtime</scope> todo jacoco only adds test and compile scopes -->
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <argLine>${argLine} -Djava.library.path=${basedir}/../parser-native/target/native/shared</argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>parser-remote</id>
+            <dependencies>
+                <dependency>
+                    <groupId>ru.urururu</groupId>
+                    <artifactId>sanity-parser-remote</artifactId>
+                    <version>1.0-SNAPSHOT</version>
+                    <scope>runtime</scope>
                 </dependency>
             </dependencies>
 
@@ -141,6 +165,29 @@
                         <configuration>
                             <systemPropertyVariables>
                                 <sanity.rustc>${env.RUST_BIN}</sanity.rustc>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>platform-windows</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <systemPropertyVariables>
+                                <sanity.clang>C:\Program Files\LLVM\bin\clang.exe</sanity.clang>
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>
