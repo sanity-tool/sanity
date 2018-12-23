@@ -1,5 +1,7 @@
 package ru.urururu.sanity.cpp;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.CfgUtils;
@@ -20,17 +22,24 @@ import java.util.List;
 @Component
 public class NativeBytecodeParser implements BytecodeParser {
     @Autowired
-    CfgUtils cfgUtils;
+    private CfgUtils cfgUtils;
+
     @Autowired
-    NativeParsersFacade parsers;
+    private NativeParsersFacade parsers;
+
     @Autowired
-    NativeTypeParser typeParser;
+    private NativeTypeParser typeParser;
+
     @Autowired
-    NativeValueParser valueParser;
+    private NativeValueParser valueParser;
+
     @Autowired
-    ParserListener[] listeners;
+    private ParserListener[] listeners;
+
     @Autowired
-    ConstCache constants;
+    private ConstCache constants;
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(NativeBytecodeParser.class);
 
     private Cfe parseGlobalInitializers(SWIGTYPE_p_LLVMOpaqueModule module) {
         CfgBuilder builder = new CfgBuilder();
@@ -41,6 +50,8 @@ public class NativeBytecodeParser implements BytecodeParser {
             try {
                 SWIGTYPE_p_LLVMOpaqueValue initializer = bitreader.LLVMGetInitializer(global);
                 if (initializer != null) {
+                    LOGGER.info("Parsing initializer for " + bitreader.LLVMGetValueName(global));
+
                     GlobalVar pointerToGlobal = (GlobalVar) valueParser.parseLValue(null, global);
 
                     if (pointerToGlobal.getName().contains("rustc_debug")) {
@@ -73,8 +84,7 @@ public class NativeBytecodeParser implements BytecodeParser {
                     }
                 }
             } catch (Exception e) {
-                System.err.println("Can't parse global: " + bitreader.LLVMGetValueName(global));
-                e.printStackTrace(System.err);
+                LOGGER.warn("Can't parse global: " + bitreader.LLVMGetValueName(global), e);
             }
         }
 
@@ -101,6 +111,8 @@ public class NativeBytecodeParser implements BytecodeParser {
             while (function != null) {
                 try {
                     if (bitreader.LLVMGetFirstBasicBlock(function) != null) {
+                        LOGGER.info("Parsing  " + bitreader.LLVMGetValueName(function));
+
                         NativeCfgBuildingCtx ctx = new NativeCfgBuildingCtx(parsers, function);
 
                         SWIGTYPE_p_LLVMOpaqueBasicBlock entryBlock = bitreader.LLVMGetEntryBasicBlock(function);
@@ -123,8 +135,7 @@ public class NativeBytecodeParser implements BytecodeParser {
                         result.add(new Cfg((FunctionAddress) valueParser.parseRValue(null, function), entry));
                     }
                 } catch (Exception e) {
-                    System.err.println("Can't parse function: " + bitreader.LLVMGetValueName(function));
-                    e.printStackTrace(System.err);
+                    LOGGER.warn("Can't parse function: " + bitreader.LLVMGetValueName(function), e);
                 }
 
                 function = bitreader.LLVMGetNextFunction(function);
