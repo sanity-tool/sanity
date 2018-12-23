@@ -1,6 +1,6 @@
 package ru.urururu.sanity.cpp;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import junit.framework.ComparisonFailure;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -37,6 +37,7 @@ abstract class TestHelper {
     private static String DEBUG_DIR = System.getProperty("TEST_DEBUG_ROOT");
     private static final BidiMap<Language, String> languageDirs = new DualHashBidiMap<>();
     private static final String LANG = System.getProperty("TESTED_LANG");
+    private static final String FILTER = System.getProperty("TEST_FILTER", "");
 
     private static ToolFactory toolFactory;
 
@@ -106,7 +107,7 @@ abstract class TestHelper {
     }
 
     protected boolean matches(File file) {
-        return isSupportedByExtension(file);
+        return file.getName().contains(FILTER) && isSupportedByExtension(file);
     }
 
     private boolean isSupportedByExtension(File file) {

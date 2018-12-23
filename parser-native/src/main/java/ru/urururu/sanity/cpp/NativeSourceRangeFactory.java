@@ -18,8 +18,11 @@ import java.io.File;
 public class NativeSourceRangeFactory extends SourceRangeFactory<SWIGTYPE_p_LLVMOpaqueValue> implements ParserListener {
     private static final Logger LOGGER = LoggerFactory.getLogger(NativeSourceRangeFactory.class);
 
-    private static final int DW_TAG_file_type = 786473;
     private static final int DW_TAG_lexical_block = 786443;
+    private static final int DW_TAG_compile_unit = 786449;
+    private static final int DW_TAG_file_type = 786473;
+    private static final int DW_TAG_namespace = 786489;
+    private static final int DW_TAG_subprogram = 786478;
 
     private Long debugVersion;
     private Byte versionByte;
@@ -39,8 +42,6 @@ public class NativeSourceRangeFactory extends SourceRangeFactory<SWIGTYPE_p_LLVM
         SWIGTYPE_p_LLVMOpaqueValue node = bitreader.LLVMGetMetadata(instruction, id);
 
         if (node != null) {
-            //deepDump(node);
-
             SWIGTYPE_p_LLVMOpaqueValue pair = getPair(node);
 
             if (pair != null) {
@@ -57,12 +58,25 @@ public class NativeSourceRangeFactory extends SourceRangeFactory<SWIGTYPE_p_LLVM
     }
 
     private SWIGTYPE_p_LLVMOpaqueValue getPair(SWIGTYPE_p_LLVMOpaqueValue node) {
+        if (bitreader.LLVMIsAMDNode(node) == null) {
+            return null;
+        }
+
         int count = bitreader.LLVMGetNumOperands(node);
+
+        Long dwTag = null;
+        if (count > 0) {
+            SWIGTYPE_p_LLVMOpaqueValue maybeTag = bitreader.LLVMGetOperand(node, 0);
+            if (bitreader.LLVMIsAConstantInt(maybeTag) != null) {
+                dwTag = bitreader.LLVMConstIntGetSExtValue(maybeTag);
+            }
+        }
+
         if (count == 1) {
             return getPair(bitreader.LLVMGetOperand(node, 0));
         }
 
-        if (LlvmUtils.checkTag(node, "0x29", DW_TAG_file_type, DW_TAG_lexical_block)) {
+        if (LlvmUtils.checkTag(node, "0x29", DW_TAG_file_type, DW_TAG_lexical_block, DW_TAG_compile_unit, DW_TAG_namespace, DW_TAG_subprogram)) {
             return bitreader.LLVMGetOperand(node, 1);
         } else {
             return getPair(bitreader.LLVMGetOperand(node, 2));
