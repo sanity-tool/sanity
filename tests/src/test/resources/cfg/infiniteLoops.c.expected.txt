@@ -1,0 +1,18 @@
+CFG: labelBeforeGoTo
+#0000:	 noop next: #0000:
+ - no source -
+
+CFG: conditionalBreak
+#0000:	 assign: *tmp0 = 0
+infiniteLoops.c:7 for (int i = 0; ; ++i) {
+#0001:	 noop
+ - no source -
+#0002:	 assign: tmp1 = *tmp0 >= 10
+infiniteLoops.c:8 if (i >= 10) {
+#0003:	 if: tmp1 then <exit> else #0004:
+infiniteLoops.c:8 if (i >= 10) {
+#0004:	 assign: tmp2 = *tmp0 + 1
+infiniteLoops.c:7 for (int i = 0; ; ++i) {
+#0005:	 assign: *tmp0 = tmp2 next: #0001:
+infiniteLoops.c:7 for (int i = 0; ; ++i) {
+
