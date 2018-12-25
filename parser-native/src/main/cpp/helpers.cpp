@@ -31,7 +31,9 @@ const char *GetDataArrayString(LLVMValueRef Val) {
     Value *V = unwrap(Val);
 
     if (ConstantDataSequential *CDS = dyn_cast<ConstantDataSequential>(V)) {
-        return CDS->getAsString().data();
+        if (CDS->isString()) {
+            return CDS->getAsString().data();
+        }
     }
     return 0;
 }

@@ -1,0 +1,6 @@
+CFG: autoSize
+#0000:	 assign: tmp0 = tmp1
+arrays.c:2 int a[] = { 1, 2, 3 };
+#0001:	 call: llvm.memcpy.p0i8.p0i8.i64(tmp0, autoSize.a, 12, 4, 0) <exit>
+arrays.c:2 int a[] = { 1, 2, 3 };
+
