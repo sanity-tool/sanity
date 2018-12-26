@@ -8,8 +8,6 @@ pipeline {
                         label 'osx'
                     }
                     steps {
-                        testClang('clang')
-                        testClang('/usr/local/opt/llvm/bin/clang')
                         testClang('clang-3.3')
                         testClang('clang-3.6')
                         testClang('clang-3.7')
