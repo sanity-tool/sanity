@@ -23,6 +23,8 @@ pipeline {
                     post {
                         always {
                             junit 'tests/target/surefire-reports/**/*.xml'
+                        }
+                        cleanup {
                             cleanWs()
                         }
                     }
