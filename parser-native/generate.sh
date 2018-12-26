@@ -19,7 +19,7 @@ case `uname` in
         #LDFLAGS="$LDFLAGS -Wl,-z,defs"
     ;;
     Darwin)
-        CMAKE=cmake
+        CMAKE=${CMAKE:-cmake}
         CC=clang
         CXX=clang++
         LD=clang++
