@@ -7,6 +7,7 @@ case `uname` in
     Linux)
         if [[ ! -f "cmake-3.4.3-Linux-x86_64/bin/cmake" ]]; then wget --no-check-certificate http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz && tar -xf cmake-3.4.3-Linux-x86_64.tar.gz; fi
         CMAKE=`pwd`/cmake-3.4.3-Linux-x86_64/bin/cmake
+        SWIG=${SWIG:-swig}
         export CC=gcc-4.9
         export CXX=g++-4.9
         export LD=g++-4.9
@@ -19,7 +20,8 @@ case `uname` in
         #LDFLAGS="$LDFLAGS -Wl,-z,defs"
     ;;
     Darwin)
-        CMAKE=cmake
+        CMAKE=${CMAKE:-cmake}
+        SWIG=${SWIG:-swig}
         CC=clang
         CXX=clang++
         LD=clang++
@@ -90,7 +92,7 @@ mkdir -p $OBJ_DIR
 SOBJ_DIR="target/native/shared"
 mkdir -p $SOBJ_DIR
 
-swig $CPPFLAGS -java -outdir $JAVA_OUT -package ru.urururu.sanity.cpp.llvm -o $CPP_OUT/bitreader_wrap.c -v $SRC_DIR/bitreader.i
+$SWIG $CPPFLAGS -java -outdir $JAVA_OUT -package ru.urururu.sanity.cpp.llvm -o $CPP_OUT/bitreader_wrap.c -v $SRC_DIR/bitreader.i
 
 $CC -c $CPP_OUT/bitreader_wrap.c $JAVA_INCLUDES $CFLAGS $COMMONFLAGS -o $OBJ_DIR/wrappers.o
 
