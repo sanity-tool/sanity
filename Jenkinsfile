@@ -14,9 +14,6 @@ pipeline {
                         testClang('clang-3.8')
                         testClang('/usr/local/opt/llvm@4/bin/clang-4.0')
                         testClang('/usr/local/opt/llvm@5/bin/clang-5.0')
-
-                        testRust('rustc')
-                        testRust("$env.HOME/.cargo/bin/rustc")
                     }
                     post {
                         always {
