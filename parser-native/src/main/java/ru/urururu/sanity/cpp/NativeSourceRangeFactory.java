@@ -76,11 +76,34 @@ public class NativeSourceRangeFactory extends SourceRangeFactory<SWIGTYPE_p_LLVM
             return getPair(bitreader.LLVMGetOperand(node, 0));
         }
 
+        SWIGTYPE_p_LLVMOpaqueValue pair = getPairOptimistic(node);
+        if (pair != null) {
+            return pair;
+        }
+
         if (LlvmUtils.checkTag(node, "0x29", DW_TAG_file_type, DW_TAG_lexical_block, DW_TAG_compile_unit, DW_TAG_namespace, DW_TAG_subprogram)) {
             return bitreader.LLVMGetOperand(node, 1);
         } else {
             return getPair(bitreader.LLVMGetOperand(node, 2));
         }
+    }
+
+    private SWIGTYPE_p_LLVMOpaqueValue getPairOptimistic(SWIGTYPE_p_LLVMOpaqueValue node) {
+        if (bitreader.LLVMIsAMDNode(node) == null) {
+            return null;
+        }
+
+        int count = bitreader.LLVMGetNumOperands(node);
+
+        if (count == 2) {
+            return node;
+        }
+
+        if (count < 2) {
+            return null;
+        }
+
+        return getPairOptimistic(bitreader.LLVMGetOperand(node, 1));
     }
 
     @Override
