@@ -5,14 +5,16 @@ loops.c:6 I = 0;
  - no source -
 #0002:	 assign: tmp0 = *I < 5
 loops.c:7 while(I < 5) {
-#0003:	 if: tmp0 then #0004:	 else <exit>
+#0003:	 if: tmp0 then #0004:	 else #0005:
 loops.c:7 while(I < 5) {
 #0004:	 call: foo()
 loops.c:8 foo();
-#0005:	 assign: tmp1 = *I + 1
+#0006:	 assign: tmp1 = *I + 1
 loops.c:9 I++;
-#0006:	 assign: *I = tmp1 next: #0001:
+#0007:	 assign: *I = tmp1 next: #0001:
 loops.c:9 I++;
+#0005:	 return <exit>
+loops.c:11 }
 
 CFG: testDoWhile
 #0000:	 assign: *I = 0
@@ -31,8 +33,10 @@ loops.c:18 } while (I++);
 loops.c:18 } while (I++);
 #0007:	 assign: tmp2 = *I != 0
 loops.c:18 } while (I++);
-#0008:	 if: tmp2 then #0001:	 else <exit>
+#0008:	 if: tmp2 then #0001:	 else #0009:
 loops.c:18 } while (I++);
+#0009:	 return <exit>
+loops.c:19 }
 
 CFG: testFor
 #0000:	 assign: *I = 0
@@ -41,14 +45,16 @@ loops.c:22 for (I = 0; I < 5; I++) {
  - no source -
 #0002:	 assign: tmp0 = *I < 5
 loops.c:22 for (I = 0; I < 5; I++) {
-#0003:	 if: tmp0 then #0004:	 else <exit>
+#0003:	 if: tmp0 then #0004:	 else #0005:
 loops.c:22 for (I = 0; I < 5; I++) {
 #0004:	 call: foo()
 loops.c:23 foo();
-#0005:	 assign: tmp1 = *I + 1
+#0006:	 assign: tmp1 = *I + 1
 loops.c:22 for (I = 0; I < 5; I++) {
-#0006:	 assign: *I = tmp1 next: #0001:
+#0007:	 assign: *I = tmp1 next: #0001:
 loops.c:22 for (I = 0; I < 5; I++) {
+#0005:	 return <exit>
+loops.c:25 }
 
 CFG: <module init>
 #0000:	 assign: *I = 0 <exit>

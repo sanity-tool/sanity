@@ -5,8 +5,10 @@ conditions.c:7 if (I) {
 conditions.c:7 if (I) {
 #0002:	 call: foo()
 conditions.c:8 foo();
-#0003:	 noop <exit>
+#0003:	 noop
  - no source -
+#0004:	 return <exit>
+conditions.c:10 }
 
 CFG: testImplicitIfElse
 #0000:	 assign: tmp0 = *I != 0
@@ -15,8 +17,10 @@ conditions.c:13 if (I) {
 conditions.c:13 if (I) {
 #0002:	 call: foo()
 conditions.c:14 foo();
-#0004:	 noop <exit>
+#0004:	 noop
  - no source -
+#0005:	 return <exit>
+conditions.c:18 }
 #0003:	 call: bar() next: #0004:
 conditions.c:16 bar();
 
@@ -27,8 +31,10 @@ conditions.c:21 if (I != 0) {
 conditions.c:21 if (I != 0) {
 #0002:	 call: foo()
 conditions.c:22 foo();
-#0003:	 noop <exit>
+#0003:	 noop
  - no source -
+#0004:	 return <exit>
+conditions.c:24 }
 
 CFG: <module init>
 #0000:	 assign: *I = 0

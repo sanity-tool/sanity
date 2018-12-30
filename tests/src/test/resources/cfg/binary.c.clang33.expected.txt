@@ -37,7 +37,9 @@ binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0018:	 assign: tmp9 = *C0 >> *C1
 binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
-#0019:	 assign: *CR = tmp9 <exit>
+#0019:	 assign: *CR = tmp9
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
+#0020:	 return <exit>
 binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 
 CFG: testCharCmp
@@ -63,7 +65,9 @@ binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0010:	 assign: tmp5 = *C0 != *C1
 binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
-#0011:	 assign: *CR = tmp5 <exit>
+#0011:	 assign: *CR = tmp5
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
+#0012:	 return <exit>
 binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 
 CFG: testCharLogical
@@ -87,11 +91,13 @@ binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
  - no source -
 #0011:	 noop
  - no source -
-#0012:	 assign: *CR = tmp4 <exit>
+#0012:	 assign: *CR = tmp4
+binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
+#0013:	 return <exit>
 binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
 #0010:	 assign: tmp5 = *C1 != 0
 binary.c:32 MAKE_ALL_INTEGER_TESTS(char, Char, C)
-#0013:	 assign: tmp4 = tmp5 next: #0011:
+#0014:	 assign: tmp4 = tmp5 next: #0011:
  - no source -
 #0003:	 assign: tmp2 = 0 next: #0005:
  - no source -
@@ -135,7 +141,9 @@ binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0018:	 assign: tmp9 = *UC0 >> *UC1
 binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
-#0019:	 assign: *UCR = tmp9 <exit>
+#0019:	 assign: *UCR = tmp9
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
+#0020:	 return <exit>
 binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 
 CFG: testUCharCmp
@@ -161,7 +169,9 @@ binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0010:	 assign: tmp5 = *UC0 != *UC1
 binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
-#0011:	 assign: *UCR = tmp5 <exit>
+#0011:	 assign: *UCR = tmp5
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
+#0012:	 return <exit>
 binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 
 CFG: testUCharLogical
@@ -185,11 +195,13 @@ binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
  - no source -
 #0011:	 noop
  - no source -
-#0012:	 assign: *UCR = tmp4 <exit>
+#0012:	 assign: *UCR = tmp4
+binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
+#0013:	 return <exit>
 binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
 #0010:	 assign: tmp5 = *UC1 != 0
 binary.c:33 MAKE_ALL_INTEGER_TESTS(unsigned char, UChar, UC)
-#0013:	 assign: tmp4 = tmp5 next: #0011:
+#0014:	 assign: tmp4 = tmp5 next: #0011:
  - no source -
 #0003:	 assign: tmp2 = 0 next: #0005:
  - no source -
@@ -233,7 +245,9 @@ binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0018:	 assign: tmp9 = *S0 >> *S1
 binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
-#0019:	 assign: *SR = tmp9 <exit>
+#0019:	 assign: *SR = tmp9
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
+#0020:	 return <exit>
 binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 
 CFG: testShortCmp
@@ -259,7 +273,9 @@ binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0010:	 assign: tmp5 = *S0 != *S1
 binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
-#0011:	 assign: *SR = tmp5 <exit>
+#0011:	 assign: *SR = tmp5
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
+#0012:	 return <exit>
 binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 
 CFG: testShortLogical
@@ -283,11 +299,13 @@ binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
  - no source -
 #0011:	 noop
  - no source -
-#0012:	 assign: *SR = tmp4 <exit>
+#0012:	 assign: *SR = tmp4
+binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
+#0013:	 return <exit>
 binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
 #0010:	 assign: tmp5 = *S1 != 0
 binary.c:34 MAKE_ALL_INTEGER_TESTS(short, Short, S)
-#0013:	 assign: tmp4 = tmp5 next: #0011:
+#0014:	 assign: tmp4 = tmp5 next: #0011:
  - no source -
 #0003:	 assign: tmp2 = 0 next: #0005:
  - no source -
@@ -331,7 +349,9 @@ binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0018:	 assign: tmp9 = *US0 >> *US1
 binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
-#0019:	 assign: *USR = tmp9 <exit>
+#0019:	 assign: *USR = tmp9
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
+#0020:	 return <exit>
 binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 
 CFG: testUShortCmp
@@ -357,7 +377,9 @@ binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0010:	 assign: tmp5 = *US0 != *US1
 binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
-#0011:	 assign: *USR = tmp5 <exit>
+#0011:	 assign: *USR = tmp5
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
+#0012:	 return <exit>
 binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 
 CFG: testUShortLogical
@@ -381,11 +403,13 @@ binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
  - no source -
 #0011:	 noop
  - no source -
-#0012:	 assign: *USR = tmp4 <exit>
+#0012:	 assign: *USR = tmp4
+binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
+#0013:	 return <exit>
 binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
 #0010:	 assign: tmp5 = *US1 != 0
 binary.c:35 MAKE_ALL_INTEGER_TESTS(unsigned short, UShort, US)
-#0013:	 assign: tmp4 = tmp5 next: #0011:
+#0014:	 assign: tmp4 = tmp5 next: #0011:
  - no source -
 #0003:	 assign: tmp2 = 0 next: #0005:
  - no source -
@@ -429,7 +453,9 @@ binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0018:	 assign: tmp9 = *I0 >> *I1
 binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
-#0019:	 assign: *IR = tmp9 <exit>
+#0019:	 assign: *IR = tmp9
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
+#0020:	 return <exit>
 binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 
 CFG: testIntCmp
@@ -455,7 +481,9 @@ binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0010:	 assign: tmp5 = *I0 != *I1
 binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
-#0011:	 assign: *IR = tmp5 <exit>
+#0011:	 assign: *IR = tmp5
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
+#0012:	 return <exit>
 binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 
 CFG: testIntLogical
@@ -479,11 +507,13 @@ binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
  - no source -
 #0011:	 noop
  - no source -
-#0012:	 assign: *IR = tmp4 <exit>
+#0012:	 assign: *IR = tmp4
+binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
+#0013:	 return <exit>
 binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
 #0010:	 assign: tmp5 = *I1 != 0
 binary.c:36 MAKE_ALL_INTEGER_TESTS(int, Int, I)
-#0013:	 assign: tmp4 = tmp5 next: #0011:
+#0014:	 assign: tmp4 = tmp5 next: #0011:
  - no source -
 #0003:	 assign: tmp2 = 0 next: #0005:
  - no source -
@@ -527,7 +557,9 @@ binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0018:	 assign: tmp9 = *UI0 >> *UI1
 binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
-#0019:	 assign: *UIR = tmp9 <exit>
+#0019:	 assign: *UIR = tmp9
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
+#0020:	 return <exit>
 binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 
 CFG: testUIntCmp
@@ -553,7 +585,9 @@ binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0010:	 assign: tmp5 = *UI0 != *UI1
 binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
-#0011:	 assign: *UIR = tmp5 <exit>
+#0011:	 assign: *UIR = tmp5
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
+#0012:	 return <exit>
 binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 
 CFG: testUIntLogical
@@ -577,11 +611,13 @@ binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
  - no source -
 #0011:	 noop
  - no source -
-#0012:	 assign: *UIR = tmp4 <exit>
+#0012:	 assign: *UIR = tmp4
+binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
+#0013:	 return <exit>
 binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
 #0010:	 assign: tmp5 = *UI1 != 0
 binary.c:37 MAKE_ALL_INTEGER_TESTS(unsigned int, UInt, UI)
-#0013:	 assign: tmp4 = tmp5 next: #0011:
+#0014:	 assign: tmp4 = tmp5 next: #0011:
  - no source -
 #0003:	 assign: tmp2 = 0 next: #0005:
  - no source -
@@ -625,7 +661,9 @@ binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0018:	 assign: tmp9 = *L0 >> *L1
 binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
-#0019:	 assign: *LR = tmp9 <exit>
+#0019:	 assign: *LR = tmp9
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
+#0020:	 return <exit>
 binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 
 CFG: testLongCmp
@@ -651,7 +689,9 @@ binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0010:	 assign: tmp5 = *L0 != *L1
 binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
-#0011:	 assign: *LR = tmp5 <exit>
+#0011:	 assign: *LR = tmp5
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
+#0012:	 return <exit>
 binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 
 CFG: testLongLogical
@@ -675,11 +715,13 @@ binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
  - no source -
 #0011:	 noop
  - no source -
-#0012:	 assign: *LR = tmp4 <exit>
+#0012:	 assign: *LR = tmp4
+binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
+#0013:	 return <exit>
 binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
 #0010:	 assign: tmp5 = *L1 != 0
 binary.c:38 MAKE_ALL_INTEGER_TESTS(long, Long, L)
-#0013:	 assign: tmp4 = tmp5 next: #0011:
+#0014:	 assign: tmp4 = tmp5 next: #0011:
  - no source -
 #0003:	 assign: tmp2 = 0 next: #0005:
  - no source -
@@ -723,7 +765,9 @@ binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0018:	 assign: tmp9 = *UL0 >> *UL1
 binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
-#0019:	 assign: *ULR = tmp9 <exit>
+#0019:	 assign: *ULR = tmp9
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
+#0020:	 return <exit>
 binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 
 CFG: testULongCmp
@@ -749,7 +793,9 @@ binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0010:	 assign: tmp5 = *UL0 != *UL1
 binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
-#0011:	 assign: *ULR = tmp5 <exit>
+#0011:	 assign: *ULR = tmp5
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
+#0012:	 return <exit>
 binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 
 CFG: testULongLogical
@@ -773,11 +819,13 @@ binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
  - no source -
 #0011:	 noop
  - no source -
-#0012:	 assign: *ULR = tmp4 <exit>
+#0012:	 assign: *ULR = tmp4
+binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
+#0013:	 return <exit>
 binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
 #0010:	 assign: tmp5 = *UL1 != 0
 binary.c:39 MAKE_ALL_INTEGER_TESTS(unsigned long, ULong, UL)
-#0013:	 assign: tmp4 = tmp5 next: #0011:
+#0014:	 assign: tmp4 = tmp5 next: #0011:
  - no source -
 #0003:	 assign: tmp2 = 0 next: #0005:
  - no source -
@@ -797,7 +845,9 @@ binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0006:	 assign: tmp3 = *F0 / *F1
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0007:	 assign: *FR = tmp3 <exit>
+#0007:	 assign: *FR = tmp3
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
+#0008:	 return <exit>
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 
 CFG: testFloatCmp
@@ -823,7 +873,9 @@ binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0010:	 assign: tmp5 = *F0 != *F1
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0011:	 assign: *FR = tmp5 <exit>
+#0011:	 assign: *FR = tmp5
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
+#0012:	 return <exit>
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 
 CFG: testFloatLogical
@@ -847,11 +899,13 @@ binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
  - no source -
 #0011:	 noop
  - no source -
-#0012:	 assign: *FR = tmp4 <exit>
+#0012:	 assign: *FR = tmp4
+binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
+#0013:	 return <exit>
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
 #0010:	 assign: tmp5 = *F1 != 0.0
 binary.c:66 MAKE_ALL_FLOAT_TESTS(float, Float, F)
-#0013:	 assign: tmp4 = tmp5 next: #0011:
+#0014:	 assign: tmp4 = tmp5 next: #0011:
  - no source -
 #0003:	 assign: tmp2 = 0 next: #0005:
  - no source -
@@ -871,7 +925,9 @@ binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0006:	 assign: tmp3 = *D0 / *D1
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0007:	 assign: *DR = tmp3 <exit>
+#0007:	 assign: *DR = tmp3
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
+#0008:	 return <exit>
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 
 CFG: testDoubleCmp
@@ -897,7 +953,9 @@ binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0010:	 assign: tmp5 = *D0 != *D1
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0011:	 assign: *DR = tmp5 <exit>
+#0011:	 assign: *DR = tmp5
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
+#0012:	 return <exit>
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 
 CFG: testDoubleLogical
@@ -921,11 +979,13 @@ binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
  - no source -
 #0011:	 noop
  - no source -
-#0012:	 assign: *DR = tmp4 <exit>
+#0012:	 assign: *DR = tmp4
+binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
+#0013:	 return <exit>
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
 #0010:	 assign: tmp5 = *D1 != 0.0
 binary.c:67 MAKE_ALL_FLOAT_TESTS(double, Double, D)
-#0013:	 assign: tmp4 = tmp5 next: #0011:
+#0014:	 assign: tmp4 = tmp5 next: #0011:
  - no source -
 #0003:	 assign: tmp2 = 0 next: #0005:
  - no source -
@@ -945,7 +1005,9 @@ binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0006:	 assign: tmp3 = *LD0 / *LD1
 binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
-#0007:	 assign: *LDR = tmp3 <exit>
+#0007:	 assign: *LDR = tmp3
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0008:	 return <exit>
 binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 
 CFG: testLongDoubleCmp
@@ -971,7 +1033,9 @@ binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0010:	 assign: tmp5 = *LD0 != *LD1
 binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
-#0011:	 assign: *LDR = tmp5 <exit>
+#0011:	 assign: *LDR = tmp5
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0012:	 return <exit>
 binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 
 CFG: testLongDoubleLogical
@@ -995,11 +1059,13 @@ binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
  - no source -
 #0011:	 noop
  - no source -
-#0012:	 assign: *LDR = tmp4 <exit>
+#0012:	 assign: *LDR = tmp4
+binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
+#0013:	 return <exit>
 binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
 #0010:	 assign: tmp5 = *LD1 != 0.0
 binary.c:68 MAKE_ALL_FLOAT_TESTS(long double, LongDouble, LD)
-#0013:	 assign: tmp4 = tmp5 next: #0011:
+#0014:	 assign: tmp4 = tmp5 next: #0011:
  - no source -
 #0003:	 assign: tmp2 = 0 next: #0005:
  - no source -

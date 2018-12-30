@@ -17,8 +17,10 @@ memory.cpp:6 P3 = new int(5);
 memory.cpp:6 P3 = new int(5);
 #0008:	 assign: *tmp5 = 5
 memory.cpp:6 P3 = new int(5);
-#0009:	 assign: *P3 = tmp5 <exit>
+#0009:	 assign: *P3 = tmp5
 memory.cpp:6 P3 = new int(5);
+#0010:	 return <exit>
+memory.cpp:7 }
 
 CFG: _ZL10testDeletev
 #0000:	 assign: tmp0 = *P == null
@@ -31,15 +33,17 @@ memory.cpp:10 delete P;
 memory.cpp:11 delete[] P2;
 #0005:	 if: tmp1 then #0006:	 else #0007:
 memory.cpp:11 delete[] P2;
-#0006:	 noop <exit>
+#0006:	 noop
  - no source -
+#0008:	 return <exit>
+memory.cpp:12 }
 #0007:	 assign: tmp2 = *P2
 memory.cpp:11 delete[] P2;
-#0008:	 call: _ZdaPv(tmp2) next: #0006:
+#0009:	 call: _ZdaPv(tmp2) next: #0006:
 memory.cpp:11 delete[] P2;
 #0003:	 assign: tmp3 = *P
 memory.cpp:10 delete P;
-#0009:	 call: _ZdlPv(tmp3) next: #0002:
+#0010:	 call: _ZdlPv(tmp3) next: #0002:
 memory.cpp:10 delete P;
 
 CFG: _ZL13testNewStructv
@@ -67,21 +71,23 @@ memory.cpp:25 delete PSTRUCT;
 memory.cpp:26 delete[] PSTRUCT2;
 #0004:	 if: tmp1 then #0005:	 else #0006:
 memory.cpp:26 delete[] PSTRUCT2;
-#0005:	 noop <exit>
+#0005:	 noop
  - no source -
+#0007:	 return <exit>
+memory.cpp:27 }
 #0006:	 assign: tmp2 = *PSTRUCT2
 memory.cpp:26 delete[] PSTRUCT2;
-#0007:	 assign: tmp3 = (tmp2+-8)
+#0008:	 assign: tmp3 = (tmp2+-8)
 memory.cpp:26 delete[] PSTRUCT2;
-#0008:	 assign: tmp4 = *PSTRUCT2 == (*PSTRUCT2+*tmp3)
+#0009:	 assign: tmp4 = *PSTRUCT2 == (*PSTRUCT2+*tmp3)
 memory.cpp:26 delete[] PSTRUCT2;
-#0009:	 if: tmp4 then #0010:	 else #0011:
+#0010:	 if: tmp4 then #0011:	 else #0012:
 memory.cpp:26 delete[] PSTRUCT2;
-#0010:	 call: _ZdaPv((tmp2+-8)) next: #0005:
+#0011:	 call: _ZdaPv((tmp2+-8)) next: #0005:
 memory.cpp:26 delete[] PSTRUCT2;
-#0011:	 assign: tmp5 = (*PSTRUCT2+*tmp3)
+#0012:	 assign: tmp5 = (*PSTRUCT2+*tmp3)
 memory.cpp:26 delete[] PSTRUCT2;
-#0012:	 noop: opcode 'LLVMInvoke' not supported <exit>
+#0013:	 noop: opcode 'LLVMInvoke' not supported <exit>
 memory.cpp:26 delete[] PSTRUCT2;
 #0003:	 noop: opcode 'LLVMInvoke' not supported <exit>
 memory.cpp:25 delete PSTRUCT;

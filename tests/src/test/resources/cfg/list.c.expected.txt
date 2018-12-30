@@ -1,6 +1,8 @@
 CFG: switchToNext
-#0000:	 assign: *PLIST = *(*PLIST.field0) <exit>
+#0000:	 assign: *PLIST = *(*PLIST.field0)
 list.c:6 PLIST = PLIST->next;
+#0001:	 return <exit>
+list.c:7 }
 
 CFG: <module init>
 #0000:	 assign: *PLIST = null <exit>

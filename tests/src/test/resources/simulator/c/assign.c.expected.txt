@@ -7,8 +7,18 @@ State 0
   Memory:
   Expressions:
 
-#0001:	 call: tmp0 = dump() <exit>
+#0001:	 call: tmp0 = dump()
 assign.c:5 dump();
+Possible states:
+State 0
+  Symbols:
+    I -> U0
+  Memory:
+    U0 -> 0
+  Expressions:
+
+#0002:	 return <exit>
+assign.c:6 }
 Possible states:
 State 0
   Symbols:

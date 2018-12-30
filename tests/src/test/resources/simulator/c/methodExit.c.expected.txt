@@ -1,6 +1,14 @@
 CFG: testExitToUnknown
-#0000:	 call: tmp0 = dump() <exit>
+#0000:	 call: tmp0 = dump()
 methodExit.c:2 dump();
+Possible states:
+State 0
+  Symbols:
+  Memory:
+  Expressions:
+
+#0001:	 return <exit>
+methodExit.c:3 }
 Possible states:
 State 0
   Symbols:
@@ -17,8 +25,16 @@ State 0
   Memory:
   Expressions:
 
-#0001:	 call: tmp0 = dump() <exit>
+#0001:	 call: tmp0 = dump()
 methodExit.c:7 dump();
+Possible states:
+State 0
+  Symbols:
+  Memory:
+  Expressions:
+
+#0002:	 return <exit>
+methodExit.c:8 }
 Possible states:
 State 0
   Symbols:

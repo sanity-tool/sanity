@@ -27,7 +27,7 @@ public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T
     protected abstract Cfe doParse(Ctx ctx, I instruction);
 
     protected Cfe createReturn(Ctx ctx, I instruction) {
-        return null;
+        return new Return(null, parsers.getSourceRange(instruction));
     }
 
     protected Cfe createReturn(Ctx ctx, I instruction, V value) {

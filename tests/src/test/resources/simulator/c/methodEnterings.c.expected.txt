@@ -1,6 +1,14 @@
 CFG: dumper
-#0000:	 call: tmp0 = dump() <exit>
+#0000:	 call: tmp0 = dump()
 methodEnterings.c:2 dump();
+Possible states:
+State 0
+  Symbols:
+  Memory:
+  Expressions:
+
+#0001:	 return <exit>
+methodEnterings.c:3 }
 Possible states:
 State 0
   Symbols:
@@ -9,8 +17,16 @@ State 0
 
 
 CFG: testCallAnother
-#0000:	 call: dumper() <exit>
+#0000:	 call: dumper()
 methodEnterings.c:6 dumper();
+Possible states:
+State 0
+  Symbols:
+  Memory:
+  Expressions:
+
+#0001:	 return <exit>
+methodEnterings.c:7 }
 Possible states:
 State 0
   Symbols:

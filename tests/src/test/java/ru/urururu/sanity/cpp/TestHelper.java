@@ -1,13 +1,15 @@
 package ru.urururu.sanity.cpp;
 
-import org.junit.Assert;
-import junit.framework.ComparisonFailure;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import org.junit.Assert;
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.ComparisonFailure;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.cpp.tools.Language;
@@ -29,7 +31,7 @@ import java.util.List;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 abstract class TestHelper {
-    static ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+    static ApplicationContext context = new AnnotationConfigApplicationContext("ru.urururu.sanity");
 
     static final String BASE = System.getProperty("TEST_RESOURCES_ROOT");
     private static Path TESTS_PATH = Paths.get(BASE);
@@ -38,12 +40,11 @@ abstract class TestHelper {
     private static final BidiMap<Language, String> languageDirs = new DualHashBidiMap<>();
     private static final String LANG = System.getProperty("TESTED_LANG");
     private static final String FILTER = System.getProperty("TEST_FILTER", "");
+    private static final boolean UPDATE = Boolean.getBoolean("UPDATE_TESTS");
 
     private static ToolFactory toolFactory;
 
     static {
-        context.refresh();
-
         toolFactory = context.getBean(ToolFactory.class);
 
         languageDirs.put(Language.C, "c");
@@ -134,14 +135,16 @@ abstract class TestHelper {
 
     public abstract void runTest(String unit, Path pathToExpected) throws Exception;
 
-    void check(Path pathToExpected, String actual) throws IOException, InterruptedException {
+    void check(Path pathToExpected, String actual) throws IOException {
         try {
             byte[] bytes = Files.readAllBytes(pathToExpected);
             String expected = new String(bytes, Charset.defaultCharset());
 
             Assert.assertEquals(expected, actual);
         } catch (ComparisonFailure e) {
-            if (FAILURES_DIR != null) {
+            if (UPDATE) {
+                Files.write(pathToExpected, actual.getBytes());
+            } else if (FAILURES_DIR != null) {
                 Path resultSubPath = TESTS_PATH.relativize(pathToExpected);
                 Path failuresPath = Paths.get(FAILURES_DIR);
 

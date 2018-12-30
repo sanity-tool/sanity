@@ -13,8 +13,10 @@ boolean.cpp:5 BR = B0 || B1;
  - no source -
 #0008:	 noop
  - no source -
-#0009:	 assign: *_ZL2BR = tmp1 <exit>
+#0009:	 assign: *_ZL2BR = tmp1
 boolean.cpp:5 BR = B0 || B1;
+#0010:	 return <exit>
+boolean.cpp:6 }
 #0007:	 assign: tmp1 = *_ZL2B1 next: #0008:
  - no source -
 #0002:	 assign: tmp0 = 0 next: #0003:

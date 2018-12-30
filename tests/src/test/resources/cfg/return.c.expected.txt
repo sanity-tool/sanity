@@ -1,0 +1,4 @@
+CFG: test
+#0000:	 return <exit>
+return.c:2 return;
+

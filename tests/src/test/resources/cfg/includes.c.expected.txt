@@ -1,0 +1,10 @@
+CFG: libraryFunction
+#0000:	 return 5 <exit>
+includes.h:2 return 5;
+
+CFG: callLibraryFunction
+#0000:	 call: tmp0 = libraryFunction()
+includes.c:4 libraryFunction();
+#0001:	 return <exit>
+includes.c:5 }
+
