@@ -120,7 +120,7 @@ conditions.c:11 }
 Possible states:
 State 0
   Symbols:
-    p -> U0
+    <param 0> -> U0
     tmp0 -> U1
     tmp1 -> U2
   Memory:
