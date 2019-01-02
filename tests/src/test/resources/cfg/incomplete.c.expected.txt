@@ -1,4 +1,6 @@
 CFG: acceptConstStructRef
-#0000:	 assign: *tmp0 = <param 0> <exit>
+#0000:	 assign: *tmp0 = <param 0>
  - no source -
+#0001:	 return <exit>
+incomplete.c:4 }
 

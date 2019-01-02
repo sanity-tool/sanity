@@ -31,8 +31,20 @@ State 0
   Expressions:
     U2 != 0 -> U1
 
-#0003:	 call: tmp1 = dump() <exit>
+#0003:	 call: tmp1 = dump()
 conditions.c:5 dump();
+Possible states:
+State 0
+  Symbols:
+    I -> U0
+    tmp0 -> U1
+  Memory:
+    U0 -> U2
+  Expressions:
+    U2 != 0 -> U1
+
+#0004:	 return <exit>
+conditions.c:6 }
 Possible states:
 State 0
   Symbols:
@@ -90,12 +102,25 @@ State 0
   Expressions:
     U0 != null -> U2
 
-#0004:	 call: tmp2 = dump() <exit>
+#0004:	 call: tmp2 = dump()
 conditions.c:10 dump();
 Possible states:
 State 0
   Symbols:
     <param 0> -> U0
+    tmp0 -> U1
+    tmp1 -> U2
+  Memory:
+    U1 -> U0
+  Expressions:
+    U0 != null -> U2
+
+#0005:	 return <exit>
+conditions.c:11 }
+Possible states:
+State 0
+  Symbols:
+    p -> U0
     tmp0 -> U1
     tmp1 -> U2
   Memory:
