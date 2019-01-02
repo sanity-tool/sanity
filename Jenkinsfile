@@ -2,7 +2,7 @@ pipeline {
     agent none
 
     environment {
-        BITREADER_URL = 'http://192.168.1.2:8080'
+        BITREADER_URL = 'http://localhost:8080'
     }
 
     stages {
@@ -14,7 +14,12 @@ pipeline {
                     }
                     steps {
                         testOsx('parser-native')
-                        testOsx('parser-remote')
+                        docker.image('sanitytool/bitreader-service') { c ->
+                            /* Wait until mysql service is up 
+                                sh 'while ! mysqladmin ping -h0.0.0.0 --silent; do sleep 1; done'
+                                Run some tests which require MySQL */
+                            testOsx('parser-remote')
+                        }
                     }
                     post {
                         always {
