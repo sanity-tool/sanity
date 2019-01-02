@@ -2,7 +2,7 @@ pipeline {
     agent none
 
     environment {
-        BITREADER_URL = 'http://localhost:8080'
+        BITREADER_URL = 'https://bitreader.herokuapp.com/v2/api-docs'
     }
 
     stages {
@@ -14,14 +14,7 @@ pipeline {
                     }
                     steps {
                         testOsx('parser-native')
-                        script {
-                        docker.image('sanitytool/bitreader-service') { c ->
-                            /* Wait until mysql service is up 
-                                sh 'while ! mysqladmin ping -h0.0.0.0 --silent; do sleep 1; done'
-                                Run some tests which require MySQL */
-                            testOsx('parser-remote')
-                        }
-                        }
+                        testOsx('parser-remote')
                     }
                     post {
                         always {
@@ -38,14 +31,7 @@ pipeline {
                     }
                     steps {
                         //todo testWin32('parser-native')
-                        script {
-                        docker.image('sanitytool/bitreader-service') { c ->
-                            /* Wait until mysql service is up 
-                                sh 'while ! mysqladmin ping -h0.0.0.0 --silent; do sleep 1; done'
-                                Run some tests which require MySQL */
-                            testOsx('parser-remote')
-                        }
-                        }
+                        testOsx('parser-remote')
                     }
                     post {
                         always {
