@@ -116,6 +116,11 @@ public class CfePrinter {
 
         @Override
         public void visit(Return returnStatement) {
+            if (returnStatement.getValue() == null) {
+                sb.append("return");
+                return;
+            }
+
             sb.append("return ");
             print(returnStatement.getValue());
         }

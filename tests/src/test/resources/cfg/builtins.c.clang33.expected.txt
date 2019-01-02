@@ -15,8 +15,10 @@ builtins.c:7 DR = __builtin_fmod(D0,D1);
 builtins.c:7 DR = __builtin_fmod(D0,D1);
 #0007:	 call: tmp1 = fmodl(*LD0, *LD1)
 builtins.c:8 LDR = __builtin_fmodl(LD0,LD1);
-#0008:	 assign: *LDR = tmp1 <exit>
+#0008:	 assign: *LDR = tmp1
 builtins.c:8 LDR = __builtin_fmodl(LD0,LD1);
+#0009:	 return <exit>
+builtins.c:9 }
 
 CFG: <module init>
 #0000:	 assign: *F0 = 0.0

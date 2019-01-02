@@ -1,4 +1,4 @@
 Type: void ()*
-#0000:	 call: *FPTR() <exit>
+#0000:	 call: *FPTR()
 functionPointers.c:11 FPTR();
 

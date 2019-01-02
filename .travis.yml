@@ -76,7 +76,7 @@ after_success:
   - bash check.sh
 
 after_failure:
-  - diff tests/target/failures/expected tests/target/failures/actual
+  - diff -r tests/target/failures/expected tests/target/failures/actual
   - cat hs_err*.log 
 
 notifications:

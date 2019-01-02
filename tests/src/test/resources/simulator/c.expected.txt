@@ -5,7 +5,7 @@ G_0 -> 0
 Path:
 #0000:	 assign: *I = 0
 assign.c:4 I = 0;
-#0001:	 call: tmp0 = dump() <exit>
+#0001:	 call: tmp0 = dump()
 assign.c:5 dump();
 
 #0000:	 assign: tmp0 = *I != 0
@@ -17,6 +17,6 @@ conditions.c:9 if (p);
 java.lang.IllegalStateException: Don't know how to get value from BinaryExpression
 
 Path:
-#0000:	 call: tmp0 = dump() <exit>
+#0000:	 call: tmp0 = dump()
 methodExit.c:2 dump();
 
