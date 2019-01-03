@@ -66,7 +66,9 @@ def testOsx(profile) {
 }
 
 def testWin32(profile) {
-    bat "CLANG_BIN=C:\\Program Files\\LLVM\\bin\\clang.exe mvn test -P $profile"
+    withEnv(['CLANG_BIN=C:\\Program Files\\LLVM\\bin\\clang.exe']) {
+        bat "mvn test -P $profile"
+    }
 }
 
 def testClang(clangBin, profile) {
