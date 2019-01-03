@@ -31,7 +31,7 @@ pipeline {
                     }
                     steps {
                         //todo testWin32('parser-native')
-                        testOsx('parser-remote')
+                        testWin32('parser-remote')
                     }
                     post {
                         always {
@@ -66,7 +66,7 @@ def testOsx(profile) {
 }
 
 def testWin32(profile) {
-    testClang('C:\\Program Files\\LLVM\\bin\\clang.exe', profile)
+    bat "CLANG_BIN=C:\\Program Files\\LLVM\\bin\\clang.exe mvn test -P $profile"
 }
 
 def testClang(clangBin, profile) {
