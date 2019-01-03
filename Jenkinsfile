@@ -2,7 +2,7 @@ pipeline {
     agent none
 
     environment {
-        BITREADER_URL = 'https://bitreader.herokuapp.com/v2/api-docs'
+        BITREADER_URL = 'https://bitreader.herokuapp.com'
     }
 
     stages {
