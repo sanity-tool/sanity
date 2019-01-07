@@ -56,6 +56,10 @@ public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T
                 I arg0 = (I) iterator.next();
                 LocalVar local = ctx.getOrCreateLocalVar(arg0);
 
+                if (iterator.hasNext()) {
+                    I arg1 = iterator.next();
+                }
+
                 local.setAllocationRange(parsers.getSourceRange(instruction));
 
                 return null;
