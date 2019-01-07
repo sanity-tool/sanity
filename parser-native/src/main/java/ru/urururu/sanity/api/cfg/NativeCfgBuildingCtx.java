@@ -28,7 +28,7 @@ public class NativeCfgBuildingCtx extends CfgBuildingCtx<SWIGTYPE_p_LLVMOpaqueTy
             value = bitreader.LLVMGetOperand(value, 0);
         }
 
-        return getOrCreateLocalVar(value, bitreader.LLVMGetValueName(value), bitreader.LLVMTypeOf(value));
+        return getOrCreateLocalVar(value, parsers.settings.maskLocal(bitreader.LLVMGetValueName(value)), bitreader.LLVMTypeOf(value));
     }
 
     public LValue getOrCreateTmpVar(SWIGTYPE_p_LLVMOpaqueValue instruction) {

@@ -18,6 +18,9 @@ public abstract class ParsersFacade<T, V, I, B, Ctx extends CfgBuildingCtx<T, V,
     ValueParser<T, V, I, B, Ctx> valueParser;
     @Autowired
     BlockParser<T, V, I, B, Ctx> blockParser;
+    @Autowired
+    public
+    ParserSettings settings;
 
     public RValue parseRValue(Ctx ctx, V value) {
         return valueParser.parseRValue(ctx, value);

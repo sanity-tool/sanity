@@ -19,9 +19,11 @@ public class LocalVar extends TypedValue {
     }
 
     public void setName(String name) {
-        if (StringUtils.isNotEmpty(name)) {
-            this.name = name;
+        if (StringUtils.isEmpty(name)) {
+            throw new IllegalArgumentException("name");
         }
+
+        this.name = name;
     }
 
     @Override
