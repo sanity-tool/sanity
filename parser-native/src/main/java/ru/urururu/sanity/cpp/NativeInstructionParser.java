@@ -18,7 +18,7 @@ import java.util.*;
 public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOpaqueType,
         SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueBasicBlock, NativeCfgBuildingCtx> {
     @Autowired
-    ConstCache constants;
+    private ConstCache constants;
 
     private Map<LLVMOpcode, OpcodeParser> opcodeParsers;
 
@@ -155,7 +155,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
     }
 
-    private static class AllocaParser extends AbstractParser {
+    private class AllocaParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
             return LLVMOpcode.LLVMAlloca;
@@ -163,12 +163,12 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
 
         @Override
         public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            return null;
+            return createAllocation(ctx, ctx.getOrCreateLocalVar(instruction), instruction);
         }
 
         @Override
         public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            return ctx.getOrCreateTmpVar(instruction);
+            return ctx.getOrCreateLocalVar(instruction);
         }
     }
 

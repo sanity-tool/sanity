@@ -23,6 +23,10 @@ public class NativeCfgBuildingCtx extends CfgBuildingCtx<SWIGTYPE_p_LLVMOpaqueTy
         }
     }
 
+    public LocalVar getOrCreateLocalVar(SWIGTYPE_p_LLVMOpaqueValue instruction) {
+        return getOrCreateLocalVar(instruction, bitreader.LLVMGetValueName(instruction), bitreader.LLVMTypeOf(instruction));
+    }
+
     public LValue getOrCreateTmpVar(SWIGTYPE_p_LLVMOpaqueValue instruction) {
         return getOrCreateTmpVar(instruction, bitreader.LLVMTypeOf(instruction));
     }

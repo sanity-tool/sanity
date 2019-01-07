@@ -102,6 +102,12 @@ public class CfePrinter {
         }
 
         @Override
+        public void visit(Allocation allocation) {
+            sb.append("alloc: ");
+            print(allocation.getLocal());
+        }
+
+        @Override
         public void visit(NoOp noOp) {
             sb.append("noop");
         }

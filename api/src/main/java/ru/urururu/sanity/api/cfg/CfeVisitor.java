@@ -6,6 +6,8 @@ package ru.urururu.sanity.api.cfg;
 public interface CfeVisitor {
     void visit(UnprocessedElement element);
 
+    void visit(Allocation allocation);
+
     void visit(Assignment assignment);
 
     void visit(Call call);

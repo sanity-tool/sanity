@@ -49,6 +49,11 @@ public class CallsMap implements CfeVisitor {
     }
 
     @Override
+    public void visit(Allocation allocation) {
+
+    }
+
+    @Override
     public void visit(Assignment assignment) {
         if (assignment.getRight() instanceof FunctionAddress) {
             tookPointers.add(((FunctionAddress) assignment.getRight()).getName());

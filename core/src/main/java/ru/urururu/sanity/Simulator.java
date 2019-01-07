@@ -103,6 +103,11 @@ public class Simulator {
         }
 
         @Override
+        public void visit(Allocation allocation) {
+            visitSimple(allocation);
+        }
+
+        @Override
         public void visit(Assignment assignment) {
             try {
                 memory = memory.putValue(assignment.getLeft(), memory.getValue(assignment.getRight()));

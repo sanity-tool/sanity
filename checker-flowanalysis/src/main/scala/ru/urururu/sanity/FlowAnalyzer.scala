@@ -98,7 +98,7 @@ class PersistentState(val symbols: Map[RValue, Value], val memory: Map[Value, Va
     rValue match {
       case value: Value => Some(value)
 
-      case parameter: Parameter => symbols.get(parameter)
+      case local: LocalVar => symbols.get(local)
       case global: GlobalVar => symbols.get(global)
       case temporary: TemporaryVar => symbols.get(temporary)
 

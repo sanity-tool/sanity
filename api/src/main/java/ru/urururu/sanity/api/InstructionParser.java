@@ -26,6 +26,10 @@ public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T
 
     protected abstract Cfe doParse(Ctx ctx, I instruction);
 
+    protected Cfe createAllocation(Ctx ctx, LocalVar local, I instruction) {
+        return new Allocation(local, parsers.getSourceRange(instruction));
+    }
+
     protected Cfe createReturn(Ctx ctx, I instruction) {
         return new Return(null, parsers.getSourceRange(instruction));
     }
@@ -47,6 +51,10 @@ public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T
 
         if (target instanceof FunctionAddress) {
             String name = ((FunctionAddress) target).getName();
+            if (name.equals("llvm.dbg.declare")) {
+                LocalVar local = ctx.getOrCreateLocalVar((I) parameters.iterator().next());
+                local.setAllocationRange(parsers.getSourceRange(instruction));
+            }
             if (name.startsWith("llvm.dbg")) {
                 return null;
             }
