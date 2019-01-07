@@ -47,9 +47,9 @@ memory.cpp:10 delete P;
 memory.cpp:10 delete P;
 
 CFG: _ZL13testNewStructv
-#0000:	 alloc:
+#0000:	 alloc: <unnamed>
  - no source -
-#0001:	 alloc:
+#0001:	 alloc: <unnamed>
  - no source -
 #0002:	 call: tmp0 = _Znwm(1)
 memory.cpp:20 PSTRUCT = new Foo();
@@ -67,9 +67,9 @@ CFG: __clang_call_terminate
  - no source -
 
 CFG: _ZL16testDeleteStructv
-#0000:	 alloc:
+#0000:	 alloc: <unnamed>
  - no source -
-#0001:	 alloc:
+#0001:	 alloc: <unnamed>
  - no source -
 #0002:	 assign: tmp0 = *PSTRUCT == null
 memory.cpp:25 delete PSTRUCT;

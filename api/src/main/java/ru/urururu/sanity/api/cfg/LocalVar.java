@@ -15,7 +15,7 @@ public class LocalVar extends TypedValue {
     }
 
     public String getName() {
-        return name;
+        return StringUtils.defaultIfEmpty(name, getDefaultName());
     }
 
     public void setName(String name) {
@@ -28,7 +28,7 @@ public class LocalVar extends TypedValue {
 
     @Override
     public String toString() {
-        return name;
+        return getName();
     }
 
     public SourceRange getAllocationRange() {
@@ -37,5 +37,9 @@ public class LocalVar extends TypedValue {
 
     public void setAllocationRange(SourceRange sourceRange) {
         this.allocationRange = sourceRange;
+    }
+
+    protected String getDefaultName() {
+        return "<unnamed>";
     }
 }
