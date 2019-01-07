@@ -1,12 +1,12 @@
 CFG: localUndefined
 #0000:	 alloc: i
- - no source -
+locals.c:2 int i;
 #0001:	 return <exit>
 locals.c:3 }
 
 CFG: localLateDefinition
 #0000:	 alloc: i
- - no source -
+locals.c:6 int i;
 #0001:	 assign: *i = 1
 locals.c:7 i = 1;
 #0002:	 return <exit>
@@ -14,7 +14,7 @@ locals.c:8 }
 
 CFG: localInstaDefinition
 #0000:	 alloc: i
- - no source -
+locals.c:11 int i = 1;
 #0001:	 assign: *i = 1
 locals.c:11 int i = 1;
 #0002:	 return <exit>
@@ -22,9 +22,9 @@ locals.c:12 }
 
 CFG: addressOf
 #0000:	 alloc: i
- - no source -
+locals.c:15 int i;
 #0001:	 alloc: pi
- - no source -
+locals.c:16 int *pi = &i;
 #0002:	 assign: *pi = i
 locals.c:16 int *pi = &i;
 #0003:	 return <exit>

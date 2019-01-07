@@ -47,11 +47,15 @@ memory.cpp:10 delete P;
 memory.cpp:10 delete P;
 
 CFG: _ZL13testNewStructv
-#0000:	 call: tmp0 = _Znwm(1)
+#0000:	 alloc: exn.slot
+ - no source -
+#0001:	 alloc: ehselector.slot
+ - no source -
+#0002:	 call: tmp0 = _Znwm(1)
 memory.cpp:20 PSTRUCT = new Foo();
-#0001:	 assign: tmp1 = tmp0
+#0003:	 assign: tmp1 = tmp0
 memory.cpp:20 PSTRUCT = new Foo();
-#0002:	 noop: opcode 'LLVMInvoke' not supported <exit>
+#0004:	 noop: opcode 'LLVMInvoke' not supported <exit>
 memory.cpp:20 PSTRUCT = new Foo();
 
 CFG: __clang_call_terminate
@@ -63,33 +67,37 @@ CFG: __clang_call_terminate
  - no source -
 
 CFG: _ZL16testDeleteStructv
-#0000:	 assign: tmp0 = *PSTRUCT == null
-memory.cpp:25 delete PSTRUCT;
-#0001:	 if: tmp0 then #0002:	 else #0003:
-memory.cpp:25 delete PSTRUCT;
-#0002:	 assign: tmp1 = *PSTRUCT2 == null
-memory.cpp:26 delete[] PSTRUCT2;
-#0004:	 if: tmp1 then #0005:	 else #0006:
-memory.cpp:26 delete[] PSTRUCT2;
-#0005:	 noop
+#0000:	 alloc: exn.slot
  - no source -
-#0007:	 return <exit>
+#0001:	 alloc: ehselector.slot
+ - no source -
+#0002:	 assign: tmp0 = *PSTRUCT == null
+memory.cpp:25 delete PSTRUCT;
+#0003:	 if: tmp0 then #0004:	 else #0005:
+memory.cpp:25 delete PSTRUCT;
+#0004:	 assign: tmp1 = *PSTRUCT2 == null
+memory.cpp:26 delete[] PSTRUCT2;
+#0006:	 if: tmp1 then #0007:	 else #0008:
+memory.cpp:26 delete[] PSTRUCT2;
+#0007:	 noop
+ - no source -
+#0009:	 return <exit>
 memory.cpp:27 }
-#0006:	 assign: tmp2 = *PSTRUCT2
+#0008:	 assign: tmp2 = *PSTRUCT2
 memory.cpp:26 delete[] PSTRUCT2;
-#0008:	 assign: tmp3 = (tmp2+-8)
+#0010:	 assign: tmp3 = (tmp2+-8)
 memory.cpp:26 delete[] PSTRUCT2;
-#0009:	 assign: tmp4 = *PSTRUCT2 == (*PSTRUCT2+*tmp3)
+#0011:	 assign: tmp4 = *PSTRUCT2 == (*PSTRUCT2+*tmp3)
 memory.cpp:26 delete[] PSTRUCT2;
-#0010:	 if: tmp4 then #0011:	 else #0012:
+#0012:	 if: tmp4 then #0013:	 else #0014:
 memory.cpp:26 delete[] PSTRUCT2;
-#0011:	 call: _ZdaPv((tmp2+-8)) next: #0005:
+#0013:	 call: _ZdaPv((tmp2+-8)) next: #0007:
 memory.cpp:26 delete[] PSTRUCT2;
-#0012:	 assign: tmp5 = (*PSTRUCT2+*tmp3)
+#0014:	 assign: tmp5 = (*PSTRUCT2+*tmp3)
 memory.cpp:26 delete[] PSTRUCT2;
-#0013:	 noop: opcode 'LLVMInvoke' not supported <exit>
+#0015:	 noop: opcode 'LLVMInvoke' not supported <exit>
 memory.cpp:26 delete[] PSTRUCT2;
-#0003:	 noop: opcode 'LLVMInvoke' not supported <exit>
+#0005:	 noop: opcode 'LLVMInvoke' not supported <exit>
 memory.cpp:25 delete PSTRUCT;
 
 CFG: <module init>

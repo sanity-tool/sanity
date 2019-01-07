@@ -3,6 +3,6 @@ CFG: _Z18abstractMethodCallP3Foo
 methodCalls.cpp:25 abstractMethodCall(&bar);
 
 Type: void (struct.Foo.1*)
-#0000:	 call: **tmp0(*tmp1)
+#0000:	 call: **tmp0(*p.addr)
 methodCalls.cpp:16 p->abstractMethod();
 

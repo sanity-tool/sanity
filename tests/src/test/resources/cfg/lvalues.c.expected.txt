@@ -1,7 +1,9 @@
 CFG: localAuto
-#0000:	 assign: *tmp0 = 1
+#0000:	 alloc: a
 lvalues.c:2 int a = 1;
-#0001:	 return <exit>
+#0001:	 assign: *a = 1
+lvalues.c:2 int a = 1;
+#0002:	 return <exit>
 lvalues.c:3 }
 
 CFG: localStatic

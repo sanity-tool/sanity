@@ -52,8 +52,13 @@ public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T
         if (target instanceof FunctionAddress) {
             String name = ((FunctionAddress) target).getName();
             if (name.equals("llvm.dbg.declare")) {
-                LocalVar local = ctx.getOrCreateLocalVar((I) parameters.iterator().next());
+                Iterator<V> iterator = parameters.iterator();
+                I arg0 = (I) iterator.next();
+                LocalVar local = ctx.getOrCreateLocalVar(arg0);
+
                 local.setAllocationRange(parsers.getSourceRange(instruction));
+
+                return null;
             }
             if (name.startsWith("llvm.dbg")) {
                 return null;
