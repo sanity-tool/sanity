@@ -57,7 +57,9 @@ public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T
                 LocalVar local = ctx.getOrCreateLocalVar(arg0);
 
                 if (iterator.hasNext()) {
-                    I arg1 = (I) iterator.next();
+                    V arg1 = iterator.next();
+                    String localName = getVariableName(arg1);
+                    local.setName(localName);
                 }
 
                 local.setAllocationRange(parsers.getSourceRange(instruction));
@@ -168,6 +170,8 @@ public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T
     public abstract RValue parseValue(Ctx ctx, I value);
 
     public abstract RValue parseConst(Ctx ctx, I value);
+
+    protected abstract String getVariableName(V value);
 
     public RValue createLoad(Ctx ctx, V value) {
         return new Indirection(parsers.parseRValue(ctx, value));

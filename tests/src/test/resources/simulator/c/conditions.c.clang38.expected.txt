@@ -57,7 +57,7 @@ State 0
 
 
 CFG: testPtrParam
-#0000:	 alloc: p.addr
+#0000:	 alloc: p
 conditions.c:8 static void testPtrParam(int *p) {
 Possible states:
 State 0
@@ -65,7 +65,7 @@ State 0
   Memory:
   Expressions:
 
-#0001:	 assign: *p.addr = p
+#0001:	 assign: *p = p
  - no source -
 Possible states:
 State 0
@@ -73,13 +73,13 @@ State 0
   Memory:
   Expressions:
 
-#0002:	 assign: tmp0 = *p.addr != null
+#0002:	 assign: tmp0 = *p != null
 conditions.c:9 if (p);
 Possible states:
 State 0
   Symbols:
     p -> U0
-    p.addr -> U1
+    p -> U1
   Memory:
     U1 -> U0
   Expressions:
@@ -90,7 +90,7 @@ Possible states:
 State 0
   Symbols:
     p -> U0
-    p.addr -> U1
+    p -> U1
     tmp0 -> U2
   Memory:
     U1 -> U0
@@ -103,7 +103,7 @@ Possible states:
 State 0
   Symbols:
     p -> U0
-    p.addr -> U1
+    p -> U1
     tmp0 -> U2
   Memory:
     U1 -> U0
@@ -116,7 +116,7 @@ Possible states:
 State 0
   Symbols:
     p -> U0
-    p.addr -> U1
+    p -> U1
     tmp0 -> U2
   Memory:
     U1 -> U0
@@ -129,7 +129,7 @@ Possible states:
 State 0
   Symbols:
     p -> U0
-    p.addr -> U1
+    p -> U1
     tmp0 -> U2
   Memory:
     U1 -> U0

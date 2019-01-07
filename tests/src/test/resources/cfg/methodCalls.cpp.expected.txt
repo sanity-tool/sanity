@@ -1,9 +1,11 @@
 CFG: _Z18instanceMethodCallP3Foo
-#0000:	 assign: *tmp0 = <param 0>
+#0000:	 alloc: p
+methodCalls.cpp:7 void instanceMethodCall(Foo *p) {
+#0001:	 assign: *p = <param 0>
  - no source -
-#0001:	 call: _ZN3Foo14instanceMethodEv(*tmp0)
+#0002:	 call: _ZN3Foo14instanceMethodEv(*p)
 methodCalls.cpp:8 p->instanceMethod();
-#0002:	 return <exit>
+#0003:	 return <exit>
 methodCalls.cpp:9 }
 
 CFG: _Z16staticMethodCallv
@@ -13,13 +15,15 @@ methodCalls.cpp:12 Foo::staticMethod();
 methodCalls.cpp:13 }
 
 CFG: _Z18abstractMethodCallP3Foo
-#0000:	 assign: *tmp0 = <param 0>
+#0000:	 alloc: p
+methodCalls.cpp:15 void abstractMethodCall(Foo *p) {
+#0001:	 assign: *p = <param 0>
  - no source -
-#0001:	 assign: tmp1 = *tmp0
+#0002:	 assign: tmp0 = *p
 methodCalls.cpp:16 p->abstractMethod();
-#0002:	 call: **tmp1(*tmp0)
+#0003:	 call: **tmp0(*p)
 methodCalls.cpp:16 p->abstractMethod();
-#0003:	 return <exit>
+#0004:	 return <exit>
 methodCalls.cpp:17 }
 
 CFG: _Z7testBarv

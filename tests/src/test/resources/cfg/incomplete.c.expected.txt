@@ -1,6 +1,8 @@
 CFG: acceptConstStructRef
-#0000:	 assign: *tmp0 = <param 0>
+#0000:	 alloc: str
+incomplete.c:3 static void acceptConstStructRef(ConstStructRef str) {
+#0001:	 assign: *str = <param 0>
  - no source -
-#0001:	 return <exit>
+#0002:	 return <exit>
 incomplete.c:4 }
 

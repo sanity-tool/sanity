@@ -73,6 +73,21 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         return parser.parseConst(ctx, constant);
     }
 
+    @Override
+    protected String getVariableName(SWIGTYPE_p_LLVMOpaqueValue value) {
+        if (bitreader.LLVMGetMDNodeNumOperands(value) < 2) {
+            return null;
+        }
+
+        SWIGTYPE_p_LLVMOpaqueValue nameNode = bitreader.LLVMGetOperand(value, 1);
+
+        if (bitreader.LLVMIsAMDString(nameNode) == null) {
+            return null;
+        }
+
+        return bitreader.getMDString(nameNode);
+    }
+
     private interface OpcodeParser {
         Set<LLVMOpcode> getOpcodes();
 
