@@ -22,6 +22,7 @@ class FlowAnalyzer {
   def evalDefaultState(cfe: Cfe, state: MultiState): MultiState = {
     cfe match {
       case noop: NoOp => state
+      case unprocessed: UnprocessedElement => state
       case alloc: Allocation => state
       case assignment: Assignment => evalAssign(assignment, state)
       case call: Call => evalCall(call, state)

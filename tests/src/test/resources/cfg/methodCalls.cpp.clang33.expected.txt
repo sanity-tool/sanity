@@ -1,9 +1,9 @@
 CFG: _Z18instanceMethodCallP3Foo
-#0000:	 alloc: p.addr
+#0000:	 alloc: p
 methodCalls.cpp:7 void instanceMethodCall(Foo *p) {
-#0001:	 assign: *p.addr = p
+#0001:	 assign: *p = p
  - no source -
-#0002:	 call: _ZN3Foo14instanceMethodEv(*p.addr)
+#0002:	 call: _ZN3Foo14instanceMethodEv(*p)
 methodCalls.cpp:8 p->instanceMethod();
 #0003:	 return <exit>
 methodCalls.cpp:9 }
@@ -15,13 +15,13 @@ methodCalls.cpp:12 Foo::staticMethod();
 methodCalls.cpp:13 }
 
 CFG: _Z18abstractMethodCallP3Foo
-#0000:	 alloc: p.addr
+#0000:	 alloc: p
 methodCalls.cpp:15 void abstractMethodCall(Foo *p) {
-#0001:	 assign: *p.addr = p
+#0001:	 assign: *p = p
  - no source -
-#0002:	 assign: tmp0 = *p.addr
+#0002:	 assign: tmp0 = *p
 methodCalls.cpp:16 p->abstractMethod();
-#0003:	 call: **tmp0(*p.addr)
+#0003:	 call: **tmp0(*p)
 methodCalls.cpp:16 p->abstractMethod();
 #0004:	 return <exit>
 methodCalls.cpp:17 }

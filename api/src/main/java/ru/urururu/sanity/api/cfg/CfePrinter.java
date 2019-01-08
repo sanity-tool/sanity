@@ -98,7 +98,7 @@ public class CfePrinter {
 
         @Override
         public void visit(UnprocessedElement element) {
-            sb.append("noop: ").append(element.getMessage());
+            sb.append("noop: ").append(element.getMessage()); // todo should print as "error:"
         }
 
         @Override

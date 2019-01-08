@@ -12,6 +12,7 @@ pipeline {
                         testClang('clang-3.6')
                         testClang('clang-3.7')
                         testClang('clang-3.8')
+                        testClang('/usr/local/opt/llvm@3.9/bin/clang-3.9')
                         testClang('/usr/local/opt/llvm@4/bin/clang-4.0')
                         testClang('/usr/local/opt/llvm@5/bin/clang-5.0')
                     }

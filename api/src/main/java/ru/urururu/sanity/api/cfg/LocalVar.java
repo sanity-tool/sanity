@@ -20,7 +20,7 @@ public class LocalVar extends TypedValue {
 
     public void setName(String name) {
         if (StringUtils.isEmpty(name)) {
-            throw new IllegalArgumentException("name");
+            return; // ignoring, we probably already have better name (older clang)
         }
 
         this.name = name;

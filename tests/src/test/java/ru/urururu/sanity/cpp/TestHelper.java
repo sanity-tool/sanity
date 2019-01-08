@@ -223,8 +223,19 @@ abstract class TestHelper {
             return new ParserSettings() {
                 @Override
                 public String maskLocal(String localName) {
-                    // since clang 4 special locals like "exn.slot" and "ehselector.slot" are losing their names.
-                    return "";
+                    switch (localName) {
+                        case "exn.slot":
+                        case "ehselector.slot":
+                            // since clang 4 special locals like "exn.slot" and "ehselector.slot" are losing their names.
+                            return "";
+                    }
+
+                    if (localName.endsWith(".addr")) {
+                        // older clang (e.g. 3.3) name some variables with that suffix
+                        return localName.substring(0, localName.length() - ".addr".length());
+                    }
+
+                    return super.maskLocal(localName);
                 }
             };
         }

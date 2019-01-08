@@ -1,7 +1,7 @@
 CFG: acceptConstStructRef
-#0000:	 alloc: str.addr
+#0000:	 alloc: str
 incomplete.c:3 static void acceptConstStructRef(ConstStructRef str) {
-#0001:	 assign: *str.addr = str
+#0001:	 assign: *str = str
  - no source -
 #0002:	 return <exit>
 incomplete.c:4 }
