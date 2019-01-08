@@ -12,6 +12,7 @@ public abstract class CfgBuildingCtx<T, V, I, B, Ctx/*todo?*/ extends CfgBuildin
     protected final ParsersFacade<T, V, I, B, Ctx> parsers;
 
     protected Map<V, RValue> params = FinalMap.createHashMap();
+    private Map<I, LocalVar> localVars = FinalMap.createHashMap();
     private Map<I, LValue> tmpVars = FinalMap.createHashMap();
     protected Map<B, Cfe> labels = FinalMap.createHashMap();
     protected B block;
@@ -20,6 +21,12 @@ public abstract class CfgBuildingCtx<T, V, I, B, Ctx/*todo?*/ extends CfgBuildin
     protected CfgBuildingCtx(ParsersFacade<T, V, I, B, Ctx> parsers) {
         this.parsers = parsers;
     }
+
+    protected LocalVar getOrCreateLocalVar(I instruction, String name, T type) {
+        return localVars.computeIfAbsent(instruction, k -> new LocalVar(name, parsers.parse(type)));
+    }
+
+    public abstract LocalVar getOrCreateLocalVar(I instruction);
 
     protected LValue getOrCreateTmpVar(I instruction, T type) {
         return tmpVars.computeIfAbsent(instruction, k -> new TemporaryVar(parsers.parse(type)));

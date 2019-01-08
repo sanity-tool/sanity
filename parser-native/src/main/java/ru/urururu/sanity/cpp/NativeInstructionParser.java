@@ -18,7 +18,7 @@ import java.util.*;
 public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOpaqueType,
         SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueValue, SWIGTYPE_p_LLVMOpaqueBasicBlock, NativeCfgBuildingCtx> {
     @Autowired
-    ConstCache constants;
+    private ConstCache constants;
 
     private Map<LLVMOpcode, OpcodeParser> opcodeParsers;
 
@@ -71,6 +71,21 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
     public RValue parseConst(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
         OpcodeParser parser = opcodeParsers.getOrDefault(bitreader.LLVMGetConstOpcode(constant), defaultParser);
         return parser.parseConst(ctx, constant);
+    }
+
+    @Override
+    protected String getVariableName(SWIGTYPE_p_LLVMOpaqueValue value) {
+        if (bitreader.LLVMGetMDNodeNumOperands(value) < 2) {
+            return null;
+        }
+
+        SWIGTYPE_p_LLVMOpaqueValue nameNode = bitreader.LLVMGetOperand(value, 1);
+
+        if (bitreader.LLVMIsAMDString(nameNode) == null) {
+            return null;
+        }
+
+        return bitreader.getMDString(nameNode);
     }
 
     private interface OpcodeParser {
@@ -155,7 +170,7 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
         }
     }
 
-    private static class AllocaParser extends AbstractParser {
+    private class AllocaParser extends AbstractParser {
         @Override
         public LLVMOpcode getOpcode() {
             return LLVMOpcode.LLVMAlloca;
@@ -163,12 +178,12 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
 
         @Override
         public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            return null;
+            return createAllocation(ctx, ctx.getOrCreateLocalVar(instruction), instruction);
         }
 
         @Override
         public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            return ctx.getOrCreateTmpVar(instruction);
+            return ctx.getOrCreateLocalVar(instruction);
         }
     }
 

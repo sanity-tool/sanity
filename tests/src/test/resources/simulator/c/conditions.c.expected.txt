@@ -57,7 +57,15 @@ State 0
 
 
 CFG: testPtrParam
-#0000:	 assign: *tmp0 = <param 0>
+#0000:	 alloc: p
+conditions.c:8 static void testPtrParam(int *p) {
+Possible states:
+State 0
+  Symbols:
+  Memory:
+  Expressions:
+
+#0001:	 assign: *p = <param 0>
  - no source -
 Possible states:
 State 0
@@ -65,64 +73,64 @@ State 0
   Memory:
   Expressions:
 
-#0001:	 assign: tmp1 = *tmp0 != null
+#0002:	 assign: tmp0 = *p != null
 conditions.c:9 if (p);
 Possible states:
 State 0
   Symbols:
     <param 0> -> U0
-    tmp0 -> U1
+    p -> U1
   Memory:
     U1 -> U0
   Expressions:
 
-#0002:	 if: tmp1 then #0003:	 else #0003:
+#0003:	 if: tmp0 then #0004:	 else #0004:
 conditions.c:9 if (p);
 Possible states:
 State 0
   Symbols:
     <param 0> -> U0
-    tmp0 -> U1
-    tmp1 -> U2
+    p -> U1
+    tmp0 -> U2
   Memory:
     U1 -> U0
   Expressions:
     U0 != null -> U2
 
-#0003:	 noop
+#0004:	 noop
  - no source -
 Possible states:
 State 0
   Symbols:
     <param 0> -> U0
-    tmp0 -> U1
-    tmp1 -> U2
+    p -> U1
+    tmp0 -> U2
   Memory:
     U1 -> U0
   Expressions:
     U0 != null -> U2
 
-#0004:	 call: tmp2 = dump()
+#0005:	 call: tmp1 = dump()
 conditions.c:10 dump();
 Possible states:
 State 0
   Symbols:
     <param 0> -> U0
-    tmp0 -> U1
-    tmp1 -> U2
+    p -> U1
+    tmp0 -> U2
   Memory:
     U1 -> U0
   Expressions:
     U0 != null -> U2
 
-#0005:	 return <exit>
+#0006:	 return <exit>
 conditions.c:11 }
 Possible states:
 State 0
   Symbols:
     <param 0> -> U0
-    tmp0 -> U1
-    tmp1 -> U2
+    p -> U1
+    tmp0 -> U2
   Memory:
     U1 -> U0
   Expressions:

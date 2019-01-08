@@ -22,6 +22,8 @@ class FlowAnalyzer {
   def evalDefaultState(cfe: Cfe, state: MultiState): MultiState = {
     cfe match {
       case noop: NoOp => state
+      case unprocessed: UnprocessedElement => state
+      case alloc: Allocation => state
       case assignment: Assignment => evalAssign(assignment, state)
       case call: Call => evalCall(call, state)
     }
@@ -98,7 +100,7 @@ class PersistentState(val symbols: Map[RValue, Value], val memory: Map[Value, Va
     rValue match {
       case value: Value => Some(value)
 
-      case parameter: Parameter => symbols.get(parameter)
+      case local: LocalVar => symbols.get(local)
       case global: GlobalVar => symbols.get(global)
       case temporary: TemporaryVar => symbols.get(temporary)
 
@@ -130,7 +132,7 @@ class PersistentState(val symbols: Map[RValue, Value], val memory: Map[Value, Va
     val value = new UnknownValue("U_" + modCount)
 
     rValue match {
-      case parameter: Parameter => (withSymbols(symbols + (parameter -> value)), value)
+      case local: LocalVar => (withSymbols(symbols + (local -> value)), value)
       case global: GlobalVar => (withSymbols(symbols + (global -> value)), value)
       case temporary: TemporaryVar => (withSymbols(symbols + (temporary -> value)), value)
 

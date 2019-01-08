@@ -1,8 +1,9 @@
-Violation: *tmp0 is null
+Violation: *p is null
+basic.c:2 int *p = 0;
 basic.c:2 int *p = 0;
 basic.c:3 *p = 1;
 
-#0000:	 assign: tmp0 = *tmp1 != null
+#0000:	 assign: tmp0 = *p != null
 basic.c:7 if (p);
 java.lang.IllegalStateException: Don't know how to get value from BinaryExpression
 

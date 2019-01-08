@@ -9,9 +9,9 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.ComparisonFailure;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.*;
 import ru.urururu.sanity.api.Cfg;
+import ru.urururu.sanity.api.ParserSettings;
 import ru.urururu.sanity.cpp.tools.Language;
 import ru.urururu.sanity.cpp.tools.Tool;
 import ru.urururu.sanity.cpp.tools.ToolFactory;
@@ -31,7 +31,7 @@ import java.util.List;
  * @author <a href="mailto:dmitriy.g.matveev@gmail.com">Dmitry Matveev</a>
  */
 abstract class TestHelper {
-    static ApplicationContext context = new AnnotationConfigApplicationContext("ru.urururu.sanity");
+    static ApplicationContext context = new AnnotationConfigApplicationContext(TestsConfiguration.class);
 
     static final String BASE = System.getProperty("TEST_RESOURCES_ROOT");
     private static Path TESTS_PATH = Paths.get(BASE);
@@ -212,5 +212,32 @@ abstract class TestHelper {
         }
 
         return result;
+    }
+
+    @ComponentScan("ru.urururu.sanity")
+    @Configuration
+    public static class TestsConfiguration {
+        @Bean
+        @Primary
+        ParserSettings parserSettings() {
+            return new ParserSettings() {
+                @Override
+                public String maskLocal(String localName) {
+                    switch (localName) {
+                        case "exn.slot":
+                        case "ehselector.slot":
+                            // since clang 4 special locals like "exn.slot" and "ehselector.slot" are losing their names.
+                            return "";
+                    }
+
+                    if (localName.endsWith(".addr")) {
+                        // older clang (e.g. 3.3) name some variables with that suffix
+                        return localName.substring(0, localName.length() - ".addr".length());
+                    }
+
+                    return super.maskLocal(localName);
+                }
+            };
+        }
     }
 }

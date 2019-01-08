@@ -73,7 +73,7 @@ public class Memory implements Cloneable {
         if (rValue instanceof GlobalVar) {
             return globalVars.computeIfAbsent((GlobalVar) rValue, globalVar -> new UnknownValue("G_" + globalVars.size()));
         }
-        if (rValue instanceof Parameter || rValue instanceof TemporaryVar) {
+        if (rValue instanceof LocalVar || rValue instanceof TemporaryVar) {
             return stackVars.computeIfAbsent(rValue, unused -> new UnknownValue("U_" + unknownValues++));
         }
         throw new IllegalStateException("Don't know how to get value from " + rValue.getClass().getSimpleName());
