@@ -1,0 +1,4 @@
+CFG: _ZN12_GLOBAL__N_17trivialEv
+#0000:	 return 1 <exit>
+anonymousNamespace.cpp:4 return 1;
+
