@@ -38,28 +38,30 @@ case `uname` in
     ;;
 esac
 
-LLVM_HOME="llvm"
-LLVM_CCACHE="$HOME/.ccache"
-LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
+if [ -z "$LLVM_CONFIG" ]; then
+    LLVM_HOME="llvm"
+    LLVM_CCACHE="$HOME/.ccache"
+    LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
 
-if [[ ! -d "$LLVM_HOME/build" ]]; then
-    OLD_DIR=`pwd`
+    if [[ ! -d "$LLVM_HOME/build" ]]; then
+        OLD_DIR=`pwd`
 
-    git clone -b saving-debug --depth 1 --progress --verbose https://github.com/okutane/llvm.git $LLVM_HOME
-    cd $LLVM_HOME
+        git clone -b saving-debug --depth 1 --progress --verbose https://github.com/okutane/llvm.git $LLVM_HOME
+        cd $LLVM_HOME
 
-    mkdir build && cd build
-    $CMAKE -G "Unix Makefiles" \
-        -DLLVM_CCACHE_BUILD=ON \
-        -DLLVM_CCACHE_SIZE=4G \
-        -DLLVM_CCACHE_DIR=$LLVM_CCACHE \
-        -DLLVM_TARGETS_TO_BUILD=X86 \
-        ..
-        
-    make -j2 LLVMCore LLVMAsmParser LLVMBitReader LLVMProfileData LLVMMC LLVMMCParser LLVMObject LLVMAnalysis LLVMIRReader LLVMTransformUtils
-    make -j2 llvm-config llvm-dis
+        mkdir build && cd build
+        $CMAKE -G "Unix Makefiles" \
+            -DLLVM_CCACHE_BUILD=ON \
+            -DLLVM_CCACHE_SIZE=4G \
+            -DLLVM_CCACHE_DIR=$LLVM_CCACHE \
+            -DLLVM_TARGETS_TO_BUILD=X86 \
+            ..
 
-    cd $OLD_DIR
+        make -j2 LLVMCore LLVMAsmParser LLVMBitReader LLVMProfileData LLVMMC LLVMMCParser LLVMObject LLVMAnalysis LLVMIRReader LLVMTransformUtils
+        make -j2 llvm-config llvm-dis
+
+        cd $OLD_DIR
+    fi
 fi
 
 echo `$LLVM_CONFIG --version`

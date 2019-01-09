@@ -16,6 +16,9 @@ pipeline {
                         testClang('/usr/local/opt/llvm@3.9/bin/clang-3.9')
                         testClang('/usr/local/opt/llvm@4/bin/clang-4.0')
                         testClang('/usr/local/opt/llvm@5/bin/clang-5.0')
+                        withEnv('LLVM_CONFIG=/usr/local/opt/llvm/bin/llvm-config']) {
+                            testClang('/usr/local/opt/llvm/bin/clang')
+                        }
                     }
                     post {
                         always {
