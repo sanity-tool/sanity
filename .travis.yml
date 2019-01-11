@@ -57,6 +57,11 @@ matrix:
       - RUST_BIN=$HOME/.cargo/bin/rustc
 
     - os: osx
+      osx_image: xcode10.1
+      jdk: oraclejdk8
+      env: TESTED_LANGS="C Cpp ObjectiveC"
+
+    - os: osx
       osx_image: xcode8
       env: TESTED_LANGS="C Cpp ObjectiveC"
 

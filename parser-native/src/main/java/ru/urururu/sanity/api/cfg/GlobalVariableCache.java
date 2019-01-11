@@ -1,6 +1,7 @@
 package ru.urururu.sanity.api.cfg;
 
-import javafx.util.Pair;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.stereotype.Component;
 import ru.urururu.sanity.cpp.ParserListener;
 import ru.urururu.sanity.cpp.llvm.SWIGTYPE_p_LLVMOpaqueModule;
@@ -20,7 +21,7 @@ public class GlobalVariableCache implements ParserListener {
         if (name.isEmpty()) {
             name = "global" + count++;
         }
-        return cache.computeIfAbsent(new Pair<>(name, type), p -> new GlobalVar(p.getKey(), p.getValue()));
+        return cache.computeIfAbsent(new ImmutablePair<>(name, type),p -> new GlobalVar(p.getKey(), p.getValue()));
     }
 
     @Override
