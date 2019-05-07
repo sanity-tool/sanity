@@ -3,6 +3,8 @@
 # Exit on failure
 set -e
 
+# todo next time you want to fix something here introduce llvm-wrappers project instead and publish artifacts on bintray
+
 case `uname` in
     Linux)
         if [[ ! -f "cmake-3.4.3-Linux-x86_64/bin/cmake" ]]; then wget --no-check-certificate http://cmake.org/files/v3.4/cmake-3.4.3-Linux-x86_64.tar.gz && tar -xf cmake-3.4.3-Linux-x86_64.tar.gz; fi
@@ -45,19 +47,8 @@ LLVM_CONFIG=$LLVM_HOME/build/bin/llvm-config
 if [[ ! -d "$LLVM_HOME/build" ]]; then
     OLD_DIR=`pwd`
 
-    git clone -b saving-debug --depth 1 --progress --verbose https://github.com/okutane/llvm.git $LLVM_HOME
-    cd $LLVM_HOME
-
-    mkdir build && cd build
-    $CMAKE -G "Unix Makefiles" \
-        -DLLVM_CCACHE_BUILD=ON \
-        -DLLVM_CCACHE_SIZE=4G \
-        -DLLVM_CCACHE_DIR=$LLVM_CCACHE \
-        -DLLVM_TARGETS_TO_BUILD=X86 \
-        ..
-        
-    make -j2 LLVMCore LLVMAsmParser LLVMBitReader LLVMProfileData LLVMMC LLVMMCParser LLVMObject LLVMAnalysis LLVMIRReader LLVMTransformUtils
-    make -j2 llvm-config llvm-dis
+    git clone -b saving-debug-80 --depth 1 --progress --verbose https://github.com/okutane/llvm.git $LLVM_HOME
+    cd $LLVM_HOME && ./build.sh
 
     cd $OLD_DIR
 fi
