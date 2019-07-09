@@ -1,13 +1,13 @@
 package ru.urururu.sanity.cpp;
 
 import org.junit.Assert;
-import junit.framework.ComparisonFailure;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.ComparisonFailure;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.cpp.tools.Language;
