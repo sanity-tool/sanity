@@ -47,7 +47,8 @@ public class RemoteTypeParser extends TypeParser<Integer> implements ParserListe
 
     private Type parseStruct(Integer type) {
         TypeDto typeDto = currentModule.getTypes().get(type);
-        return createStruct(type, typeDto.getName(), typeDto.getTypes());
+        String name = parsers.getSettings().maskTypename(typeDto.getName());
+        return createStruct(type, name, typeDto.getTypes());
     }
 
     private Type parseUnknown(Integer type) {

@@ -10,14 +10,21 @@ import ru.urururu.sanity.cpp.ValueParser;
 public abstract class ParsersFacade<T, V, I, B, Ctx extends CfgBuildingCtx<T, V, I, B, Ctx>> {
     @Autowired
     InstructionParser<T, V, I, B, Ctx> instructionParser;
+
     @Autowired
     TypeParser<T> typeParser;
+
     @Autowired
     SourceRangeFactory<I> sourceRangeFactory;
+
     @Autowired
     ValueParser<T, V, I, B, Ctx> valueParser;
+
     @Autowired
     BlockParser<T, V, I, B, Ctx> blockParser;
+
+    @Autowired
+    private ParserSettings settings;
 
     public RValue parseRValue(Ctx ctx, V value) {
         return valueParser.parseRValue(ctx, value);
@@ -45,5 +52,9 @@ public abstract class ParsersFacade<T, V, I, B, Ctx extends CfgBuildingCtx<T, V,
 
     public SourceRange getSourceRange(I instruction) {
         return sourceRangeFactory.getSourceRange(instruction);
+    }
+
+    public ParserSettings getSettings() {
+        return settings;
     }
 }
