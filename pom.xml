@@ -27,6 +27,12 @@
                 <module>parser-native</module>
             </modules>
         </profile>
+        <profile>
+            <id>parser-libclang</id>
+            <modules>
+                <module>parser-libclang</module>
+            </modules>
+        </profile>
     </profiles>
 
     <dependencies>
