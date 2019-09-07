@@ -32,7 +32,7 @@ public class DivisionByZeroTests extends TestHelper {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         final PrintStream ps = new PrintStream(baos);
 
-        DivisionByZero rule = new DivisionByZero() ;
+        DivisionByZero rule = new DivisionByZero();
 
         for (Cfg cfg : cfgs) {
             rule.findAll(cfg, new Consumer<Violation>() {
