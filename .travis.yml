@@ -4,7 +4,6 @@ addons:
     sources: &common_sources
       - ubuntu-toolchain-r-test
     packages: &common_packages
-      - oracle-java8-installer
       - libstdc++6
       - libstdc++6-4.7-dev
       - gcc-4.9
@@ -15,7 +14,7 @@ addons:
 matrix:
   include:
     - os: linux
-      jdk: oraclejdk8
+      jdk: openjdk8
       addons: &llvm40
         apt:
           sources:
@@ -33,7 +32,7 @@ matrix:
       - CLANG_BIN=clang-4.0
 
     - os: linux
-      jdk: oraclejdk8
+      jdk: openjdk8
       addons: &llvm50
         apt:
           sources:
@@ -51,7 +50,7 @@ matrix:
       - CLANG_BIN=clang-5.0
 
     - os: linux
-      jdk: oraclejdk8
+      jdk: openjdk8
       env:
       - TESTED_LANGS=Rust
       - RUST_BIN=$HOME/.cargo/bin/rustc

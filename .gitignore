@@ -1,6 +1,13 @@
+# idea
 *.iml
 .idea/
 
+# jdt
+.classpath
+.project
+.settings
+
+# maven
 target/
 
 *.gcov
