@@ -1,20 +1,26 @@
 package ru.urururu.sanity.cpp;
 
+import com.codahale.metrics.Timer;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-import org.junit.Assert;
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.junit.Assert;
 import org.junit.ComparisonFailure;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import ru.urururu.sanity.api.Cfg;
 import ru.urururu.sanity.api.ParserSettings;
 import ru.urururu.sanity.cpp.tools.Language;
 import ru.urururu.sanity.cpp.tools.Tool;
 import ru.urururu.sanity.cpp.tools.ToolFactory;
+import ru.urururu.sanity.cpp.util.Metrics;
 import ru.urururu.sanity.utils.FileWrapper;
 import ru.urururu.sanity.utils.TempFileWrapper;
 import ru.urururu.util.Coverage;
@@ -22,7 +28,11 @@ import ru.urururu.util.Coverage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,7 +65,9 @@ abstract class TestHelper {
     }
 
     void fillWithTests(TestSuite suite, String path) {
-        fillWithTests(suite, new File(BASE, path));
+        try (Timer.Context ctx = Metrics.time(TestHelper.class, "fillWithTests")) {
+            fillWithTests(suite, new File(BASE, path));
+        }
     }
 
     private void fillWithTests(TestSuite suite, File file) {
@@ -82,7 +94,9 @@ abstract class TestHelper {
                 suite.addTest(new TestCase(f.getName()) {
                     @Override
                     protected void runTest() throws Throwable {
-                        TestHelper.this.runTest(absolutePath, pathToExpected);
+                        try (Timer.Context ctx = Metrics.time(TestHelper.this.getClass(), "runTest")) {
+                            TestHelper.this.runTest(absolutePath, pathToExpected);
+                        }
                     }
                 });
             } else if (f.isDirectory()) {
@@ -136,33 +150,35 @@ abstract class TestHelper {
     public abstract void runTest(String unit, Path pathToExpected) throws Exception;
 
     void check(Path pathToExpected, String actual) throws IOException {
-        try {
-            byte[] bytes = Files.readAllBytes(pathToExpected);
-            String expected = new String(bytes, Charset.defaultCharset());
+        try (Timer.Context ctx = Metrics.time(getClass(), "check")) {
+            try {
+                byte[] bytes = Files.readAllBytes(pathToExpected);
+                String expected = new String(bytes, Charset.defaultCharset());
 
-            Assert.assertEquals(expected, actual);
-        } catch (ComparisonFailure e) {
-            if (UPDATE) {
+                Assert.assertEquals(expected, actual);
+            } catch (ComparisonFailure e) {
+                if (UPDATE) {
+                    Files.write(pathToExpected, actual.getBytes());
+                } else if (FAILURES_DIR != null) {
+                    Path resultSubPath = TESTS_PATH.relativize(pathToExpected);
+                    Path failuresPath = Paths.get(FAILURES_DIR);
+
+                    Path expectedDir = failuresPath.resolve("expected");
+                    Path pathToExpected2 = expectedDir.resolve(resultSubPath);
+                    pathToExpected2.getParent().toFile().mkdirs();
+                    Files.copy(pathToExpected, pathToExpected2, StandardCopyOption.REPLACE_EXISTING);
+
+                    Path actualDir = failuresPath.resolve("actual");
+                    Path pathToActual = actualDir.resolve(resultSubPath);
+                    pathToActual.getParent().toFile().mkdirs();
+                    Files.write(pathToActual, actual.getBytes());
+                }
+
+                throw e;
+            } catch (NoSuchFileException e) {
                 Files.write(pathToExpected, actual.getBytes());
-            } else if (FAILURES_DIR != null) {
-                Path resultSubPath = TESTS_PATH.relativize(pathToExpected);
-                Path failuresPath = Paths.get(FAILURES_DIR);
-
-                Path expectedDir = failuresPath.resolve("expected");
-                Path pathToExpected2 = expectedDir.resolve(resultSubPath);
-                pathToExpected2.getParent().toFile().mkdirs();
-                Files.copy(pathToExpected, pathToExpected2, StandardCopyOption.REPLACE_EXISTING);
-
-                Path actualDir = failuresPath.resolve("actual");
-                Path pathToActual = actualDir.resolve(resultSubPath);
-                pathToActual.getParent().toFile().mkdirs();
-                Files.write(pathToActual, actual.getBytes());
+                Assert.fail("File " + pathToExpected + " not found, but I've created it for you anyways.");
             }
-
-            throw e;
-        } catch (NoSuchFileException e) {
-            Files.write(pathToExpected, actual.getBytes());
-            Assert.fail("File " + pathToExpected + " not found, but I've created it for you anyways.");
         }
     }
 
