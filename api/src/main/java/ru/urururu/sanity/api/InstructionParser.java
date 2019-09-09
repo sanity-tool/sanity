@@ -2,6 +2,7 @@ package ru.urururu.sanity.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.urururu.sanity.api.cfg.*;
+import ru.urururu.sanity.cpp.RecoverableException;
 import ru.urururu.util.FinalMap;
 
 import java.util.ArrayList;
@@ -19,8 +20,10 @@ public abstract class InstructionParser<T, V, I, B, Ctx extends CfgBuildingCtx<T
     public Cfe parse(Ctx ctx, I instruction) {
         try {
             return doParse(ctx, instruction);
-        } catch (Exception e) {
+        } catch (RecoverableException e) {
             return new UnprocessedElement(e.getMessage() == null ? e.getClass().getName() : e.getMessage(), parsers.getSourceRange(instruction));
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
         }
     }
 

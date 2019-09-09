@@ -110,17 +110,17 @@ public class NativeInstructionParser extends InstructionParser<SWIGTYPE_p_LLVMOp
 
         @Override
         public Cfe parse(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            throw new IllegalStateException("opcode '" + bitreader.LLVMGetInstructionOpcode(instruction) + "' not supported");
+            throw new RecoverableException("opcode '" + bitreader.LLVMGetInstructionOpcode(instruction) + "' not supported");
         }
 
         @Override
         public RValue parseValue(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue instruction) {
-            throw new IllegalStateException("opcode '" + bitreader.LLVMGetInstructionOpcode(instruction) + "' not supported");
+            throw new RecoverableException("opcode '" + bitreader.LLVMGetInstructionOpcode(instruction) + "' not supported");
         }
 
         @Override
         public RValue parseConst(NativeCfgBuildingCtx ctx, SWIGTYPE_p_LLVMOpaqueValue constant) {
-            throw new IllegalStateException("opcode '" + bitreader.LLVMGetConstOpcode(constant) + "' not supported");
+            throw new RecoverableException("opcode '" + bitreader.LLVMGetConstOpcode(constant) + "' not supported");
         }
     }
 
