@@ -15,7 +15,7 @@ public abstract class CfgBuildingCtx<T, V, I, B, Ctx/*todo?*/ extends CfgBuildin
     private Map<I, LocalVar> localVars = FinalMap.createHashMap();
     private Map<I, LValue> tmpVars = FinalMap.createHashMap();
     protected Map<B, Cfe> labels = FinalMap.createHashMap();
-    protected B block;
+    public B block;
     protected CfgBuilder builder;
 
     protected CfgBuildingCtx(ParsersFacade<T, V, I, B, Ctx> parsers) {
