@@ -32,7 +32,7 @@ matrix:
       - CLANG_BIN=clang-4.0
 
     - os: linux
-      jdk: oraclejdk8
+      jdk: openjdk8
       addons: &llvm50
         apt:
           sources:
@@ -50,7 +50,7 @@ matrix:
       - CLANG_BIN=clang-5.0
 
     - os: linux
-      jdk: oraclejdk8
+      jdk: openjdk8
       env:
       - TESTED_LANGS=Rust
       - RUST_BIN=$HOME/.cargo/bin/rustc
